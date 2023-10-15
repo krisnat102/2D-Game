@@ -1,0 +1,31 @@
+﻿using UnityEngine;
+
+public class ItemPickup : MonoBehaviour
+{
+    public Item Item;
+
+    private bool isPickedUp = false;
+
+    void Pickup()
+    {
+        if (!isPickedUp)
+        {
+            InventoryManager.Instance.Add(Item);
+
+            Destroy(gameObject);
+
+            isPickedUp = true;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D hitInfo)
+    {
+        if (hitInfo.tag == "Player")
+        {
+            if (Input.GetButtonDown("Interact"))
+            {
+                Pickup();
+            }
+        }
+    }
+}
