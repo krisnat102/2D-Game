@@ -19,13 +19,21 @@ public class PlayerMovement : MonoBehaviour
 	private float dodgeCost = 20f;
 	private bool dodgeDirection = true;
 
+	[SerializeField]
+	private float climbSpeed = 200f;
+	private bool ableClimb = false;
+	float verticalMove = 0f;
+
+	bool grassSound = true;
 
 	void Update()
 	{
 
 		horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+		verticalMove = Input.GetAxisRaw("Vertical") * climbSpeed;
 
 		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+		animator.SetFloat("ClimbSpeed", Mathf.Abs(verticalMove));
 
 		if (Input.GetButtonDown("Jump"))
 		{
@@ -55,6 +63,17 @@ public class PlayerMovement : MonoBehaviour
 		{
 			dodgeDirection = false;
 		}
+		if (ableClimb == true && Input.GetButton("Vertical"))
+		{
+
+			rb.velocity = new Vector2(horizontalMove, verticalMove) * Time.fixedDeltaTime;
+		}
+
+		if(horizontalMove != 0 && grassSound == true && CharacterController2D.m_Grounded == true && verticalMove == 0)
+        {
+			grassSound = false;
+			Invoke("GrassRunningSound", 0.2f);
+        }
 	}
 
 	public void OnLanding()
@@ -71,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		// move our character
 		controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
+
 		jump = false;
 	}
 
@@ -91,4 +111,25 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
     }
+
+	void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.tag == "Climbable")
+		{
+			ableClimb = true;
+		}
+	}
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+		if (collision.tag == "Climbable")
+		{
+			ableClimb = false;
+		}
+	}
+
+	private void GrassRunningSound()
+    {
+		grassSound = true;
+		FindObjectOfType<AudioManager>().Play("GrassRunning");
+	}
 }

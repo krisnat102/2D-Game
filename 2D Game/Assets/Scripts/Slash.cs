@@ -12,7 +12,6 @@ public class Slash : MonoBehaviour
             if (enemy == true)
             {
                 enemy.TakeDamage(slashDmg);
-                Debug.Log(hitInfo.name);
             }
 
         }
