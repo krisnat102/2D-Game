@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c662f382e836a45bb83c6a13508d95, type: 3}
+  m_Name: Firebolt
+  m_EditorClassIdentifier: 
+  id: 0
+  SpellName: Firebolt
+  spell: 1
+  cost: 10
+  value: 60
+  speed: 20
+  cooldown: 1.5
+  range: 5
+  icon: {fileID: 21300000, guid: 8fbf6296af6ef374285945df4137c006, type: 3}
+  spellEffect: {fileID: 201917306390933128, guid: 17ac2749f03f6f74fa9ee9e5516d0da1,
+    type: 3}

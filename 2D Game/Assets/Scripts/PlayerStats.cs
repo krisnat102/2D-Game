@@ -9,6 +9,10 @@ public class PlayerStats : MonoBehaviour
 
     public static float stam = 100f;
     public static float maxStam;
+
+    public static float mana = 100f;
+    public static float maxMana;
+
     private bool stamRegenCooldown = false;
     [SerializeField] private float stamRegenSpeed = 0.20f;
 
@@ -19,6 +23,8 @@ public class PlayerStats : MonoBehaviour
     public GameObject gun;
     public GameObject sword;
 
+    public int level = 1;
+
     private void Awake()
     {
         Instance = this;
@@ -28,6 +34,7 @@ public class PlayerStats : MonoBehaviour
     {
         maxHP = hp;
         maxStam = stam;
+        maxMana = mana;
     }
 
     void Update()
@@ -67,6 +74,18 @@ public class PlayerStats : MonoBehaviour
             if (hp > maxHP)
             {
                 hp = maxHP;
+            }
+        }
+    }
+
+    public void HealMana(int value)
+    {
+        if (mana < maxMana)
+        {
+            hp += value;
+            if (mana > maxMana)
+            {
+                mana = maxMana;
             }
         }
     }

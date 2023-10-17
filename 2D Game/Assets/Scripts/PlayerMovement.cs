@@ -13,14 +13,13 @@ public class PlayerMovement : MonoBehaviour
 	bool jump = false;
 	bool crouch = false;
 
-	[SerializeField]
-	private float dodgePower = 200f;
-	[SerializeField]
-	private float dodgeCost = 20f;
+	[SerializeField] private float dodgePower = 200f;
+	[SerializeField] private float dodgeCost = 20f;
+	[SerializeField] private float dodgeCooldown = 1f;
+	private bool dodgeCool = false;
 	private bool dodgeDirection = true;
 
-	[SerializeField]
-	private float climbSpeed = 200f;
+	[SerializeField] private float climbSpeed = 200f;
 	private bool ableClimb = false;
 	float verticalMove = 0f;
 
@@ -97,19 +96,29 @@ public class PlayerMovement : MonoBehaviour
 	private void Dodge()
     {
 		Vector2 dodge = new Vector2(dodgePower, 0);
-		if (PlayerStats.stam > 20)
+
+		if (PlayerStats.stam > 20 && dodgeCool == false)
 		{
 			if (dodgeDirection == true)
 			{
 				rb.AddForce(dodge);
+
 				PlayerStats.stam -= dodgeCost;
 			}
 			else
 			{
 				rb.AddForce(-dodge);
+
 				PlayerStats.stam -= dodgeCost;
 			}
+			dodgeCool = true;
+			Invoke("DodgeCooldown", dodgeCooldown);
 		}
+    }
+
+	private void DodgeCooldown()
+    {
+		dodgeCool = false;
     }
 
 	void OnTriggerEnter2D(Collider2D collision)
