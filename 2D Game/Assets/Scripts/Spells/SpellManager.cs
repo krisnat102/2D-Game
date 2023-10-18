@@ -15,6 +15,9 @@ public class SpellManager : MonoBehaviour
     public GameObject SpellInventory;
     public GameObject Inventory;
 
+    public static List<Spell> SpellsBar = new List<Spell>();
+    public Transform SpellContentBar;
+
     private void Awake()
     {
         Instance = this;
@@ -29,7 +32,7 @@ public class SpellManager : MonoBehaviour
         Spells.Remove(spell);
     }
 
-    public void ListItems()
+    public void ListSpells()
     {
         //clears the inventory before opening so that items dont duplicate
         foreach (Transform spell in SpellContent)
@@ -51,7 +54,6 @@ public class SpellManager : MonoBehaviour
                 spellIcon.sprite = spell.icon;
             }
         }
-
         SetInventorySpells();
     }
 
@@ -76,7 +78,7 @@ public class SpellManager : MonoBehaviour
             {
                 SpellInventory.SetActive(true);
 
-                ListItems();
+                ListSpells();
 
                 Weapon.canFire = false;
             }
@@ -88,5 +90,29 @@ public class SpellManager : MonoBehaviour
                 Weapon.canFire = true;
             }
         }
+    }
+    public void ListActiveSpells()
+    {
+        //clears the inventory before opening so that items dont duplicate
+        foreach (Transform spell in SpellContentBar)
+        {
+            Destroy(spell.gameObject);
+        }
+
+        //adds the items to the inventory
+        foreach (var spell in SpellsBar)
+        {
+            GameObject obj = Instantiate(InventorySpell, SpellContentBar);
+            var spellName = obj.transform.Find("SpellName").GetComponent<Text>();
+            var spellIcon = obj.transform.Find("SpellIcon").GetComponent<Image>();
+            var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
+
+            if (spellName != null || spellIcon != null || removeButton != null)
+            {
+                spellName.text = spell.SpellName;
+                spellIcon.sprite = spell.icon;
+            }
+        }
+        SetInventorySpells();
     }
 }

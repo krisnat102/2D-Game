@@ -227,6 +227,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RemoveButton: {fileID: 3413055914764169345}
+  ActiveSpellsMax: 7
+  Firebolt: {fileID: 11400000, guid: 501bed144e7729e43abb8a680cc27cbc, type: 2}
 --- !u!1 &3997007240885805985
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,9 +348,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InventoryItemController, Assembly-CSharp
-        m_MethodName: RemoveItem
+      - m_Target: {fileID: -6548344268668641725}
+        m_TargetAssemblyTypeName: InventorySpellController, Assembly-CSharp
+        m_MethodName: RemoveSpell
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -6,6 +6,10 @@ public class InventorySpellController : MonoBehaviour
     Spell spell;
 
     public Button RemoveButton;
+
+    [SerializeField] private int ActiveSpellsMax = 8;
+
+    public Spell Firebolt;
     public void RemoveSpell()
     {
         SpellManager.Instance.Remove(spell);
@@ -20,11 +24,16 @@ public class InventorySpellController : MonoBehaviour
 
     public void UseItem()
     {
-            switch (spell.spellType)
+        switch (spell.spellType)
+        {
+        case Spell.SpellType.Firebolt:
+            if (SpellManager.SpellsBar.Count < ActiveSpellsMax && !SpellManager.SpellsBar.Contains(Firebolt))
             {
-            case Spell.SpellType.Firebolt:
-                    
-                break;
+                RemoveButton.IsActive();
+                SpellManager.SpellsBar.Add(Firebolt);
+                SpellManager.Instance.ListActiveSpells();
+            }
+        break;
         }
     }
 }
