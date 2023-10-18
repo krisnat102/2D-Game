@@ -15,6 +15,7 @@ public class InventoryManager : MonoBehaviour
     public InventoryItemController[] InventoryItems;
 
     public GameObject Inventory;
+    public GameObject SpellInventory;
 
     private void Awake()
     {
@@ -91,7 +92,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Inventory"))
         {
-            if (!Inventory.activeInHierarchy)
+            if (!Inventory.activeInHierarchy && !SpellInventory.activeInHierarchy)
             {
                 Inventory.SetActive(true);
 
@@ -102,6 +103,7 @@ public class InventoryManager : MonoBehaviour
             else
             {
                 Inventory.SetActive(false);
+                SpellInventory.SetActive(false);
 
                 Weapon.canFire = true;
             }

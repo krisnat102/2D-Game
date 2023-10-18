@@ -16,10 +16,11 @@ MonoBehaviour:
   SpellName: Firebolt
   spell: 1
   cost: 10
-  value: 60
+  value: 40
   speed: 20
   cooldown: 1.5
   range: 5
   icon: {fileID: 21300000, guid: 8fbf6296af6ef374285945df4137c006, type: 3}
   spellEffect: {fileID: 201917306390933128, guid: 17ac2749f03f6f74fa9ee9e5516d0da1,
     type: 3}
+  spellType: 0

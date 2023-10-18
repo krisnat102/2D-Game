@@ -14,4 +14,10 @@ public class Spell : ScriptableObject
     public float range;
     public Sprite icon;
     public GameObject spellEffect;
+    public SpellType spellType;
+
+    public enum SpellType
+    {
+        Firebolt,
+    }
 }
