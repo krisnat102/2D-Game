@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 4138782925485695886}
   - component: {fileID: -6548344268668641725}
   m_Layer: 5
-  m_Name: Spell
+  m_Name: ActiveSpell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -204,7 +204,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: -6548344268668641725}
         m_TargetAssemblyTypeName: InventorySpellController, Assembly-CSharp
-        m_MethodName: UseSpell
+        m_MethodName: RemoveActiveSpell
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

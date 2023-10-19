@@ -17,6 +17,7 @@ public class SpellManager : MonoBehaviour
 
     public static List<Spell> SpellsBar = new List<Spell>();
     public Transform SpellContentBar;
+    public GameObject ActiveSpell;
 
     private void Awake()
     {
@@ -102,7 +103,7 @@ public class SpellManager : MonoBehaviour
         //adds the items to the inventory
         foreach (var spell in SpellsBar)
         {
-            GameObject obj = Instantiate(InventorySpell, SpellContentBar);
+            GameObject obj = Instantiate(ActiveSpell, SpellContentBar);
             var spellName = obj.transform.Find("SpellName").GetComponent<Text>();
             var spellIcon = obj.transform.Find("SpellIcon").GetComponent<Image>();
             var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();

@@ -22,18 +22,28 @@ public class InventorySpellController : MonoBehaviour
         spell = newSpell;
     }
 
-    public void UseItem()
+    public void UseSpell()
     {
         switch (spell.spellType)
         {
         case Spell.SpellType.Firebolt:
             if (SpellManager.SpellsBar.Count < ActiveSpellsMax && !SpellManager.SpellsBar.Contains(Firebolt))
             {
-                RemoveButton.IsActive();
                 SpellManager.SpellsBar.Add(Firebolt);
                 SpellManager.Instance.ListActiveSpells();
             }
+                else
+                {
+                    Debug.Log("already there");
+                }
         break;
         }
+    }
+
+    public void RemoveActiveSpell()
+    {
+        SpellManager.SpellsBar.Remove(spell);
+
+        Destroy(gameObject);
     }
 }
