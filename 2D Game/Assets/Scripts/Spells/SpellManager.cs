@@ -110,6 +110,7 @@ public class SpellManager : MonoBehaviour
 
             if (spellName != null || spellIcon != null || removeButton != null)
             {
+                Debug.Log(SpellsBar);
                 spellName.text = spell.SpellName;
                 spellIcon.sprite = spell.icon;
             }

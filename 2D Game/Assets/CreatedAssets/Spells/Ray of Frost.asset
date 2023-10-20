@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81c662f382e836a45bb83c6a13508d95, type: 3}
-  m_Name: Firebolt
+  m_Name: Ray of Frost
   m_EditorClassIdentifier: 
-  id: 0
-  SpellName: Firebolt
+  id: 1
+  SpellName: RayofFrost
   spell: 1
   cost: 10
-  value: 40
-  speed: 20
+  value: 30
+  speed: 60
   cooldown: 1.5
-  range: 15
-  icon: {fileID: 21300000, guid: 1d0551bd3e5e9aa4a8d7e589c71c01cf, type: 3}
-  spellEffect: {fileID: 201917306390933128, guid: 17ac2749f03f6f74fa9ee9e5516d0da1,
+  range: 50
+  icon: {fileID: 21300000, guid: 35ef040aaf756494899d494f2513b950, type: 3}
+  spellEffect: {fileID: 201917306390933128, guid: 7ea330b59b4a20b4998230122fb4be02,
     type: 3}
-  spellType: 0
+  spellType: 1
