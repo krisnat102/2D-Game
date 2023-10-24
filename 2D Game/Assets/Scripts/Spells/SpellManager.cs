@@ -73,25 +73,29 @@ public class SpellManager : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetButtonDown("SpellInventory"))
+        if (GameManager.gamePaused == false)
         {
-            if (!Inventory.activeInHierarchy && !SpellInventory.activeInHierarchy)
+            if (Input.GetButtonDown("SpellInventory"))
             {
-                SpellInventory.SetActive(true);
+                if (!Inventory.activeInHierarchy && !SpellInventory.activeInHierarchy)
+                {
+                    SpellInventory.SetActive(true);
 
-                ListSpells();
+                    ListSpells();
 
-                Weapon.canFire = false;
-            }
-            else
-            {
-                Inventory.SetActive(false);
-                SpellInventory.SetActive(false);
+                    Weapon.canFire = false;
+                }
+                else
+                {
+                    Inventory.SetActive(false);
+                    SpellInventory.SetActive(false);
 
-                Weapon.canFire = true;
+                    Weapon.canFire = true;
+                }
             }
         }
     }
+
     public void ListActiveSpells()
     {
         //clears the inventory before opening so that items dont duplicate
@@ -105,16 +109,18 @@ public class SpellManager : MonoBehaviour
         {
             GameObject obj = Instantiate(ActiveSpell, SpellContentBar);
             var spellName = obj.transform.Find("SpellName").GetComponent<Text>();
+            //var spellName = obj.GetComponentInChildren<Text>();
             var spellIcon = obj.transform.Find("SpellIcon").GetComponent<Image>();
+            //var spellIcon = obj.GetComponentInChildren<Image>();
             var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
+            //var removeButton = obj.GetComponentInChildren<Button>();
 
-            if (spellName != null || spellIcon != null || removeButton != null)
+            if (spellName != null && spellIcon != null && removeButton != null)
             {
                 Debug.Log(SpellsBar);
                 spellName.text = spell.SpellName;
                 spellIcon.sprite = spell.icon;
             }
         }
-        SetInventorySpells();
     }
 }

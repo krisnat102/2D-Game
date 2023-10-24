@@ -22,9 +22,12 @@ public class MeleeWeapon : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (GameManager.gamePaused == false)
         {
-            Attack();
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Attack();
+            }
         }
     }
     

@@ -17,12 +17,15 @@ public class SpellHitbox : MonoBehaviour
 
     private void Update()
     {
-        Vector3 range = new Vector3(spell.range, spell.range, 0);
-        if (Math.Abs(Abilities.castPoint.x) + range.x < Math.Abs(transform.position.x) || Math.Abs(Abilities.castPoint.y) + range.y > Math.Abs(transform.position.y)) 
+        if (GameManager.gamePaused == false)
         {
-            Invoke("DestroyObject", 0.5f);
+            Vector3 range = new Vector3(spell.range, spell.range, 0);
+            if (Math.Abs(Abilities.castPoint.x) + range.x < Math.Abs(transform.position.x) || Math.Abs(Abilities.castPoint.y) + range.y > Math.Abs(transform.position.y))
+            {
+                Invoke("DestroyObject", 0.5f);
 
-            anim.SetBool("End", true);
+                anim.SetBool("End", true);
+            }
         }
     }
 

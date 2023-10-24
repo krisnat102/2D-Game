@@ -34,11 +34,14 @@ public class Weapon : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButton("Fire1") && canFire == true)
+        if (GameManager.gamePaused == false)
         {
-            Shoot();
+            if (Input.GetButton("Fire1") && canFire == true)
+            {
+                Shoot();
+            }
+            Reload();
         }
-        Reload();
     }
     void Shoot()
     {

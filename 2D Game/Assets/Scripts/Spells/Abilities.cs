@@ -20,14 +20,17 @@ public class Abilities : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetButtonDown("Spell") && PlayerStats.mana >= spell.cost && spellCooldown == false)
+        if (GameManager.gamePaused == false)
         {
-            Spell();
-        }
+            if (Input.GetButtonDown("Spell") && PlayerStats.mana >= spell.cost && spellCooldown == false)
+            {
+                Spell();
+            }
 
-        if (Input.GetButtonDown("Ability") && PlayerStats.stam >= ability.cost && abilityCooldown == false)
-        {
-            Ability();
+            if (Input.GetButtonDown("Ability") && PlayerStats.stam >= ability.cost && abilityCooldown == false)
+            {
+                Ability();
+            }
         }
     }
 

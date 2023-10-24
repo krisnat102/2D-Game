@@ -20,19 +20,22 @@ public class FollowMouse : MonoBehaviour
 
     void Update()
     {
-        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-
-        if (Input.GetKeyDown("a"))
+        if (GameManager.gamePaused == false)
         {
-            side = false;
-        }
+            mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
-        if (Input.GetKeyDown("d"))
-        {
-            side = true;
+            movement.x = Input.GetAxisRaw("Horizontal");
+            movement.y = Input.GetAxisRaw("Vertical");
+
+            if (Input.GetKeyDown("a"))
+            {
+                side = false;
+            }
+
+            if (Input.GetKeyDown("d"))
+            {
+                side = true;
+            }
         }
     }
 

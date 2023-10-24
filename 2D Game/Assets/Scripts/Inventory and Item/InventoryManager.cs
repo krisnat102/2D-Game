@@ -90,22 +90,25 @@ public class InventoryManager : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetButtonDown("Inventory"))
+        if (GameManager.gamePaused == false)
         {
-            if (!Inventory.activeInHierarchy && !SpellInventory.activeInHierarchy)
+            if (Input.GetButtonDown("Inventory"))
             {
-                Inventory.SetActive(true);
+                if (!Inventory.activeInHierarchy && !SpellInventory.activeInHierarchy)
+                {
+                    Inventory.SetActive(true);
 
-                ListItems();
+                    ListItems();
 
-                Weapon.canFire = false;
-            }
-            else
-            {
-                Inventory.SetActive(false);
-                SpellInventory.SetActive(false);
+                    Weapon.canFire = false;
+                }
+                else
+                {
+                    Inventory.SetActive(false);
+                    SpellInventory.SetActive(false);
 
-                Weapon.canFire = true;
+                    Weapon.canFire = true;
+                }
             }
         }
     }

@@ -39,24 +39,27 @@ public class PlayerStats : MonoBehaviour
 
     void Update()
     {
-        if (hp <= 0)
+        if (GameManager.gamePaused == false)
         {
-            Die();
-        }
+            if (hp <= 0)
+            {
+                Die();
+            }
 
-        if (Input.GetButtonDown("Gun"))
-        {
-            gun.SetActive(true);
-            sword.SetActive(false);
-        }
+            if (Input.GetButtonDown("Gun"))
+            {
+                gun.SetActive(true);
+                sword.SetActive(false);
+            }
 
-        if (Input.GetButtonDown("Sword"))
-        {
-            gun.SetActive(false);
-            sword.SetActive(true);
-        }
+            if (Input.GetButtonDown("Sword"))
+            {
+                gun.SetActive(false);
+                sword.SetActive(true);
+            }
 
-        StamRegen();
+            StamRegen();
+        }
     }
 
     void Die()

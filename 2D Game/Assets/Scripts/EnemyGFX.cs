@@ -9,16 +9,18 @@ public class EnemyGFX : MonoBehaviour
     [SerializeField] private float sizeX = 1f;
     [SerializeField] private float sizeY = 1f;
 
-    // Update is called once per frame
     void Update()
     {
-        if(aiPath.desiredVelocity.x >= 0.01f)
+        if (GameManager.gamePaused == false)
         {
-            transform.localScale = new Vector3(-sizeX, sizeY, 1f);
-        }
-        else if(aiPath.desiredVelocity.x <= 0.01f)
-        {
-            transform.localScale = new Vector3(sizeX, sizeY, 1f);
+            if (aiPath.desiredVelocity.x >= 0.01f)
+            {
+                transform.localScale = new Vector3(-sizeX, sizeY, 1f);
+            }
+            else if (aiPath.desiredVelocity.x <= 0.01f)
+            {
+                transform.localScale = new Vector3(sizeX, sizeY, 1f);
+            }
         }
     }
 }

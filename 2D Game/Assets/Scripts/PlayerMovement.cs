@@ -27,52 +27,54 @@ public class PlayerMovement : MonoBehaviour
 
 	void Update()
 	{
-
-		horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-		verticalMove = Input.GetAxisRaw("Vertical") * climbSpeed;
-
-		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-		animator.SetFloat("ClimbSpeed", Mathf.Abs(verticalMove));
-
-		if (Input.GetButtonDown("Jump"))
+		if (GameManager.gamePaused == false)
 		{
-			jump = true;
+			horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+			verticalMove = Input.GetAxisRaw("Vertical") * climbSpeed;
 
-			animator.SetBool("IsJumping", true);
-		}
+			animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+			animator.SetFloat("ClimbSpeed", Mathf.Abs(verticalMove));
 
-		if (Input.GetButtonDown("Crouch"))
-		{
-			crouch = true;
-		}
-		else if (Input.GetButtonUp("Crouch"))
-		{
-			crouch = false;
-		}
-        if (Input.GetButtonDown("Dodge"))
-        {
-			Dodge();
-        }
+			if (Input.GetButtonDown("Jump"))
+			{
+				jump = true;
 
-		if (horizontalMove > 0)
-		{
-			dodgeDirection = true;
-		}
-		else if (horizontalMove < 0)
-		{
-			dodgeDirection = false;
-		}
-		if (ableClimb == true && Input.GetButton("Vertical"))
-		{
+				animator.SetBool("IsJumping", true);
+			}
 
-			rb.velocity = new Vector2(horizontalMove, verticalMove) * Time.fixedDeltaTime;
-		}
+			if (Input.GetButtonDown("Crouch"))
+			{
+				crouch = true;
+			}
+			else if (Input.GetButtonUp("Crouch"))
+			{
+				crouch = false;
+			}
+			if (Input.GetButtonDown("Dodge"))
+			{
+				Dodge();
+			}
 
-		if(horizontalMove != 0 && grassSound == true && CharacterController2D.m_Grounded == true && verticalMove == 0)
-        {
-			grassSound = false;
-			Invoke("GrassRunningSound", 0.2f);
-        }
+			if (horizontalMove > 0)
+			{
+				dodgeDirection = true;
+			}
+			else if (horizontalMove < 0)
+			{
+				dodgeDirection = false;
+			}
+			if (ableClimb == true && Input.GetButton("Vertical"))
+			{
+
+				rb.velocity = new Vector2(horizontalMove, verticalMove) * Time.fixedDeltaTime;
+			}
+
+			if (horizontalMove != 0 && grassSound == true && CharacterController2D.m_Grounded == true && verticalMove == 0)
+			{
+				grassSound = false;
+				Invoke("GrassRunningSound", 0.2f);
+			}
+		}
 	}
 
 	public void OnLanding()
