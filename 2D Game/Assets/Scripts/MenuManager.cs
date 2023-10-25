@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Rendering;
 
 public class MenuManager : MonoBehaviour
 {
@@ -17,8 +18,6 @@ public class MenuManager : MonoBehaviour
             else
             {
                 Menu.SetActive(true);
-
-                Weapon.canFire = false;
 
                 GameManager.gamePaused = true;
                 PauseGame();
