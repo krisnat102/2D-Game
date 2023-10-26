@@ -8,6 +8,8 @@ public class AudioManager : MonoBehaviour
     public Sound[] sounds;
 
     public Toggle Mute;
+    public Slider Music;
+    public Slider SFX;
 
     void Awake()
     {
@@ -31,6 +33,33 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume * muteVolume;
         }
     }
+
+    public void MusicAudio()
+    {
+        float musicAudio = Music.value;
+
+        foreach (Sound s in sounds)
+        {
+            if (s.name.Contains("Theme"))
+            {
+                s.source.volume = s.volume * musicAudio;
+            }
+        }
+    }
+    public void SFXAudio()
+    {
+        float sfxAudio = SFX.value;
+
+        foreach (Sound s in sounds)
+        {
+            if (!s.name.Contains("Theme"))
+            {
+                s.source.volume = s.volume * sfxAudio;
+            }
+        }
+    }
+
+
 
     private void Start()
     {

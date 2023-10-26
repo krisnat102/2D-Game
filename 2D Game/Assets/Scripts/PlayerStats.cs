@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class PlayerStats : MonoBehaviour
     public static float mana = 100f;
     public static float maxMana;
 
+    bool immune = false;
+
     private bool stamRegenCooldown = false;
     [SerializeField] private float stamRegenSpeed = 0.20f;
 
@@ -22,6 +25,10 @@ public class PlayerStats : MonoBehaviour
 
     public GameObject gun;
     public GameObject sword;
+
+    [SerializeField] private Slider HpBar;
+    [SerializeField] private Slider ManaBar;
+    [SerializeField] private Slider StamBar;
 
     public int level = 1;
 
@@ -35,12 +42,20 @@ public class PlayerStats : MonoBehaviour
         maxHP = hp;
         maxStam = stam;
         maxMana = mana;
+
+        HpBar.maxValue = maxHP;
+        ManaBar.maxValue = maxMana;
+        StamBar.maxValue = maxStam;
     }
 
     void Update()
     {
         if (GameManager.gamePaused == false)
         {
+            HpBar.value = hp;
+            ManaBar.value = mana;
+            StamBar.value = stam;
+
             if (hp <= 0)
             {
                 Die();
@@ -60,6 +75,27 @@ public class PlayerStats : MonoBehaviour
 
             StamRegen();
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        if (immune == false)
+        {
+            hp -= damage;
+
+            immune = true;
+
+            Invoke("StopImmune", 0.2f);
+        }
+        if (hp <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void StopImmune()
+    {
+        immune = false;
     }
 
     void Die()

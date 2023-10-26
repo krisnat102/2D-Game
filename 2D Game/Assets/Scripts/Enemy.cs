@@ -2,7 +2,7 @@
 
 public class Enemy : MonoBehaviour
 {
-    public int hp = 100;
+    [SerializeField] private float hp = 100f;
 
     public GameObject deathEffect;
 
@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     bool immune = false;
 
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         if(immune == false)
         {
@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
         {
             Die();
         }
-   }
+    }
 
     void Die()
     {

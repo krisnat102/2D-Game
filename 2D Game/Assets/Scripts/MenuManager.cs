@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Rendering;
 
 public class MenuManager : MonoBehaviour
 {
@@ -51,12 +50,12 @@ public class MenuManager : MonoBehaviour
 
     public void MainMenu()
     {
-
+        Debug.Log("menu");
     }
 
     public void Credits()
     {
-
+        Debug.Log("credits");
     }
 
     public void ExitGame()

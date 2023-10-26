@@ -21,7 +21,7 @@ public class Parallaxing : MonoBehaviour
 
         parallaxScale = new float[backgrounds.Length];
 
-        for(int i = 0; i < backgrounds.Length; i++)
+        for (int i = 0; i < backgrounds.Length; i++)
         {
             parallaxScale[i] = backgrounds[i].position.z * -1;
         }
@@ -43,4 +43,3 @@ public class Parallaxing : MonoBehaviour
         previousCamPos = cam.position;
     }
 }
-

@@ -2,7 +2,7 @@
 
 public class Slash : MonoBehaviour
 {
-    [SerializeField] private int slashDmg = 30;
+    [SerializeField] private float slashDmg = 30f;
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {

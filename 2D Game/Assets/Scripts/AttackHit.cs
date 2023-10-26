@@ -16,7 +16,9 @@ public class AttackHit : MonoBehaviour
     {
         if (hitInfo.tag == "Player")
         {
-            PlayerStats.hp -= attackDmg;
+            PlayerStats player = hitInfo.GetComponent<PlayerStats>();
+
+            player.TakeDamage(attackDmg);
 
             Debug.Log("it hit");
 

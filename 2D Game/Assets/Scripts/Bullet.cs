@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
 
     public Rigidbody2D rb;
 
-    [SerializeField] private int bulletDmg = 20;
+    [SerializeField] private float bulletDmg = 20f;
 
     public GameObject impactEffect;
 
