@@ -110,16 +110,23 @@ public class SpellManager : MonoBehaviour
             GameObject obj = Instantiate(ActiveSpell, SpellContentBar);
             var spellName = obj.transform.Find("SpellName").GetComponent<Text>();
             //var spellName = obj.GetComponentInChildren<Text>();
+            if(spellName == null)
+            {
+                Debug.Log("spellname empty");
+            }
             var spellIcon = obj.transform.Find("SpellIcon").GetComponent<Image>();
             //var spellIcon = obj.GetComponentInChildren<Image>();
-            var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
-            //var removeButton = obj.GetComponentInChildren<Button>();
+            if (spellIcon == null)
+            {
+                Debug.Log("spellicon empty");
+            }
 
-            if (spellName != null && spellIcon != null && removeButton != null)
+            if (spellName != null && spellIcon != null)
             {
                 Debug.Log(SpellsBar);
-                spellName.text = spell.SpellName;
-                spellIcon.sprite = spell.icon;
+                //Debug.Log(spell.SpellName);
+                //spellName.text = spell.SpellName;
+                //spellIcon.sprite = spell.icon;
             }
         }
     }

@@ -58,5 +58,7 @@ public class InventorySpellController : MonoBehaviour
     public void RemoveActiveSpell()
     {
         Destroy(gameObject);
+
+        SpellManager.SpellsBar.Remove(spell);
     }
 }

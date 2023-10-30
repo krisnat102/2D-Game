@@ -7,10 +7,6 @@ public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
 
-    public Toggle Mute;
-    public Slider Music;
-    public Slider SFX;
-
     void Awake()
     {
         foreach(Sound s in sounds)
@@ -24,9 +20,9 @@ public class AudioManager : MonoBehaviour
         }  
     }
 
-    public void MuteAudio()
+    public void MuteAudio(bool mute)
     {
-        int muteVolume = Mute.isOn ? 1 : 0; //if the toggle is off the value is 0 if its on its 1
+        int muteVolume = mute.Equals(true) ? 1 : 0; //if the toggle is off the value is 0 if its on its 1
 
         foreach (Sound s in sounds)
         {
@@ -34,9 +30,9 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void MusicAudio()
+    public void MusicAudio(float volume)
     {
-        float musicAudio = Music.value;
+        float musicAudio = volume;
 
         foreach (Sound s in sounds)
         {
@@ -46,9 +42,9 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
-    public void SFXAudio()
+    public void SFXAudio(float volume)
     {
-        float sfxAudio = SFX.value;
+        float sfxAudio = volume;
 
         foreach (Sound s in sounds)
         {
