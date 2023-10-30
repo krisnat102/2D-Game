@@ -1,10 +1,43 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class MenuManager : MonoBehaviour
 {
     public GameObject Menu;
 
     public GameObject Settings;
+
+    public Dropdown resolutionDropdown;
+
+    Resolution[] resolutions;
+
+    private void Start()
+    {
+        resolutions = Screen.resolutions;
+
+        resolutionDropdown.ClearOptions();
+
+        List<string> resolutionsList = new List<string>();
+
+        int currentResolutionIndex = 0;
+
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            string resolution = resolutions[i].width + " x " + resolutions[i].height;
+
+            resolutionsList.Add(resolution);
+
+            if(resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+            {
+                currentResolutionIndex = i;
+            }
+        }
+
+        resolutionDropdown.AddOptions(resolutionsList);
+        resolutionDropdown.value = currentResolutionIndex;
+        resolutionDropdown.RefreshShownValue();
+    }
 
     void Update()
     {
@@ -13,7 +46,7 @@ public class MenuManager : MonoBehaviour
             if (Menu.activeSelf)
             {
                 UnpauseGame();
-            }
+            } 
             else
             {
                 Menu.SetActive(true);
@@ -34,13 +67,54 @@ public class MenuManager : MonoBehaviour
             Time.timeScale = 1;
         }
     }
-
     public void UnpauseGame()
     {
         Menu.SetActive(false);
 
         GameManager.gamePaused = false;
         PauseGame();
+    }
+
+    public void SetQuality (int qualityIndex)
+    {
+        QualitySettings.SetQualityLevel(qualityIndex);
+    }
+    public void SetResolution (int resoulutionIndex)
+    {
+        Resolution resolution = resolutions[resoulutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
+    public void SetMaxFramerate(int fpsIndex)
+    {
+        QualitySettings.vSyncCount = 0;
+
+        int targetFrameRate;
+
+        switch (fpsIndex)
+        {
+            case 1:
+                Application.targetFrameRate = 60;
+                break;
+            case 2:
+                Application.targetFrameRate = 75;
+                break;
+            case 3:
+                Application.targetFrameRate = 120;
+                break;
+            case 4:
+                Application.targetFrameRate = 144;
+                break;
+            case 5:
+                Application.targetFrameRate = 169;
+                break;
+            case 6:
+                Application.targetFrameRate = int.MaxValue;
+                break;
+        }
+    }
+    public void SetFullscreen (bool isFullscreen)
+    {
+        Screen.fullScreen = isFullscreen;
     }
 
     public void StartSettings()
