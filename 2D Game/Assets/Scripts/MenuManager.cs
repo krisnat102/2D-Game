@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class MenuManager : MonoBehaviour
 
     public GameObject Settings;
 
-    public Dropdown resolutionDropdown;
+    public TMP_Dropdown resolutionDropdown;
 
     Resolution[] resolutions;
 
