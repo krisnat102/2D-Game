@@ -7,9 +7,17 @@ public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
 
+    public static float music = 1f;
+    public static float sfx = 1f;
+    public static int audioMute = 1;
+
+    public Slider Music;
+    public Slider SFX;
+    public Toggle Mute;
+
     void Awake()
     {
-        foreach(Sound s in sounds)
+        foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
 
@@ -17,12 +25,27 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
-        }  
+
+            if (s.name.Contains("Theme"))
+            {
+                s.source.volume = s.volume * music * audioMute;
+            }
+            else
+            {
+                s.source.volume = s.volume * sfx * audioMute;
+            }
+
+            //Music.value = music;
+            //SFX.value = sfx;
+            //Mute.isOn = (audioMute == 0); //will set to true if audioMute is 0 and to false otherwise
+        }
+        
     }
 
     public void MuteAudio(bool mute)
     {
-        int muteVolume = mute.Equals(true) ? 1 : 0; //if the toggle is off the value is 0 if its on its 1
+        int muteVolume = mute.Equals(true) ? 0 : 1; //if the toggle is off the value is 1 if its on its 0
+        audioMute = muteVolume;
 
         foreach (Sound s in sounds)
         {
@@ -33,6 +56,7 @@ public class AudioManager : MonoBehaviour
     public void MusicAudio(float volume)
     {
         float musicAudio = volume;
+        music = volume;
 
         foreach (Sound s in sounds)
         {
@@ -45,6 +69,7 @@ public class AudioManager : MonoBehaviour
     public void SFXAudio(float volume)
     {
         float sfxAudio = volume;
+        sfx = volume;
 
         foreach (Sound s in sounds)
         {
@@ -69,5 +94,7 @@ public class AudioManager : MonoBehaviour
         if (s == null) return;
 
         s.source.Play();
+
+        Debug.Log("theme");
     }
 }

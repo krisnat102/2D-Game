@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
@@ -57,6 +58,7 @@ public class MenuManager : MonoBehaviour
             }
         }
     }
+
     void PauseGame()
     {
         if (GameManager.gamePaused)
@@ -68,14 +70,16 @@ public class MenuManager : MonoBehaviour
             Time.timeScale = 1;
         }
     }
+
     public void UnpauseGame()
     {
         Menu.SetActive(false);
 
         GameManager.gamePaused = false;
         PauseGame();
-    }
 
+        Debug.Log("menu");
+    }
     public void SetQuality (int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
@@ -117,26 +121,36 @@ public class MenuManager : MonoBehaviour
     {
         Screen.fullScreen = isFullscreen;
     }
-
     public void StartSettings()
     {
         Settings.SetActive(true);
     }
-
+    public void StartSettings2()
+    {
+        Settings.SetActive(true);
+        Menu.SetActive(false);
+    }
     public void MainMenu()
     {
-        Debug.Log("menu");
+        SceneManager.LoadScene(0);
     }
-
     public void Credits()
     {
         Debug.Log("credits");
     }
-
     public void ExitGame()
     {
         Application.Quit();
 
         Debug.Log("exit"); 
+    }
+    public void Back()
+    {
+        Settings.SetActive(false);
+        Menu.SetActive(true);
+    }
+    public void Play()
+    {
+        SceneManager.LoadScene(1);
     }
 }
