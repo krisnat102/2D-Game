@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    public GameObject Menu;
-
-    public GameObject Settings;
+    public GameObject menu;
+    public GameObject miniMenu;
+    public GameObject settings;
 
     public TMP_Dropdown resolutionDropdown;
 
@@ -45,13 +45,13 @@ public class MenuManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Menu"))
         {
-            if (Menu.activeSelf)
+            if (menu.activeSelf)
             {
-                UnpauseGame();
+                Unpause();
             } 
             else
             {
-                Menu.SetActive(true);
+                menu.SetActive(true);
 
                 GameManager.gamePaused = true;
                 PauseGame();
@@ -69,16 +69,6 @@ public class MenuManager : MonoBehaviour
         {
             Time.timeScale = 1;
         }
-    }
-
-    public void UnpauseGame()
-    {
-        Menu.SetActive(false);
-
-        GameManager.gamePaused = false;
-        PauseGame();
-
-        Debug.Log("menu");
     }
     public void SetQuality (int qualityIndex)
     {
@@ -123,12 +113,8 @@ public class MenuManager : MonoBehaviour
     }
     public void StartSettings()
     {
-        Settings.SetActive(true);
-    }
-    public void StartSettings2()
-    {
-        Settings.SetActive(true);
-        Menu.SetActive(false);
+        settings.SetActive(true);
+        miniMenu.SetActive(false);
     }
     public void MainMenu()
     {
@@ -146,11 +132,19 @@ public class MenuManager : MonoBehaviour
     }
     public void Back()
     {
-        Settings.SetActive(false);
-        Menu.SetActive(true);
+        settings.SetActive(false);
+        menu.SetActive(true);
+        miniMenu.SetActive(true);
     }
     public void Play()
     {
         SceneManager.LoadScene(1);
+    }
+    public void Unpause()
+    {
+        menu.SetActive(false);
+
+        GameManager.gamePaused = false;
+        PauseGame();
     }
 }

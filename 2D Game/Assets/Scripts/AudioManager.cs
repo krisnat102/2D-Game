@@ -35,9 +35,9 @@ public class AudioManager : MonoBehaviour
                 s.source.volume = s.volume * sfx * audioMute;
             }
 
-            //Music.value = music;
-            //SFX.value = sfx;
-            //Mute.isOn = (audioMute == 0); //will set to true if audioMute is 0 and to false otherwise
+            Music.value = music;
+            SFX.value = sfx;
+            Mute.isOn = (audioMute == 0); //will set to true if audioMute is 0 and to false otherwise
         }
         
     }
@@ -55,27 +55,25 @@ public class AudioManager : MonoBehaviour
 
     public void MusicAudio(float volume)
     {
-        float musicAudio = volume;
         music = volume;
 
         foreach (Sound s in sounds)
         {
             if (s.name.Contains("Theme"))
             {
-                s.source.volume = s.volume * musicAudio;
+                s.source.volume = s.volume * volume;
             }
         }
     }
     public void SFXAudio(float volume)
     {
-        float sfxAudio = volume;
         sfx = volume;
 
         foreach (Sound s in sounds)
         {
             if (!s.name.Contains("Theme"))
             {
-                s.source.volume = s.volume * sfxAudio;
+                s.source.volume = s.volume * volume;
             }
         }
     }
@@ -94,7 +92,5 @@ public class AudioManager : MonoBehaviour
         if (s == null) return;
 
         s.source.Play();
-
-        Debug.Log("theme");
     }
 }
