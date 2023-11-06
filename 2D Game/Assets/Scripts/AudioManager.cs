@@ -5,17 +5,70 @@ using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
-    public Sound[] sounds;
+    public AudioMixer musicMixer;
+    public AudioMixer sfxMixer;
+    public AudioMixer mainMixer;
 
-    public static float music = 1f;
+    //public Sound[] sounds;
+
+    /*public static float music = 1f;
     public static float sfx = 1f;
-    public static int audioMute = 1;
+    public static int audioMute = 1;*/
 
     public Slider Music;
     public Slider SFX;
     public Toggle Mute;
 
-    void Awake()
+    float musicValue;
+    float sfxValue;
+
+    private void Start()
+    {
+        if (musicMixer.GetFloat("volume", out musicValue))
+        {
+            Music.value = (musicValue + 80)/100;
+
+            Debug.Log(musicValue);
+        }
+        if (sfxMixer.GetFloat("volume", out sfxValue))
+        {
+            SFX.value = (sfxValue + 80) / 100;
+
+            Debug.Log(sfxValue);
+        }
+
+        LoadAudioSettings();
+    }
+
+    public void SaveAudioSettings()
+    {
+        PlayerPrefs.SetFloat("MusicVolume", Music.value);
+        PlayerPrefs.SetFloat("SFXVolume", SFX.value);
+        PlayerPrefs.SetInt("Mute", Mute.isOn ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    public void LoadAudioSettings()
+    {
+        if (PlayerPrefs.HasKey("MusicVolume"))
+        {
+            Music.value = PlayerPrefs.GetFloat("MusicVolume");
+            musicMixer.SetFloat("volume", Mathf.Log10(Music.value) * 20);
+        }
+
+        if (PlayerPrefs.HasKey("SFXVolume"))
+        {
+            SFX.value = PlayerPrefs.GetFloat("SFXVolume");
+            sfxMixer.SetFloat("volume", Mathf.Log10(SFX.value) * 20);
+        }
+
+        if (PlayerPrefs.HasKey("Mute"))
+        {
+            Mute.isOn = PlayerPrefs.GetInt("Mute") == 1;
+        }
+    }
+
+    /*void Awake()
     {
         foreach (Sound s in sounds)
         {
@@ -40,47 +93,40 @@ public class AudioManager : MonoBehaviour
             Mute.isOn = (audioMute == 0); //will set to true if audioMute is 0 and to false otherwise
         }
         
-    }
+    }*/
 
     public void MuteAudio(bool mute)
     {
         int muteVolume = mute.Equals(true) ? 0 : 1; //if the toggle is off the value is 1 if its on its 0
-        audioMute = muteVolume;
+        Mute.isOn = mute;
 
-        foreach (Sound s in sounds)
+        SaveAudioSettings();
+        //audioMute = muteVolume;
+
+        /*foreach (Sound s in sounds)
         {
             s.source.volume = s.volume * muteVolume;
-        }
+        }*/
     }
 
     public void MusicAudio(float volume)
     {
-        music = volume;
+        //music = volume;
 
-        foreach (Sound s in sounds)
-        {
-            if (s.name.Contains("Theme"))
-            {
-                s.source.volume = s.volume * volume;
-            }
-        }
+        musicMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
+
+        SaveAudioSettings();
     }
     public void SFXAudio(float volume)
     {
-        sfx = volume;
+        //sfx = volume;
 
-        foreach (Sound s in sounds)
-        {
-            if (!s.name.Contains("Theme"))
-            {
-                s.source.volume = s.volume * volume;
-            }
-        }
+        sfxMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
+
+        SaveAudioSettings();
     }
 
-
-
-    private void Start()
+    /*private void Start()
     {
         Play("Theme");
     }
@@ -92,5 +138,5 @@ public class AudioManager : MonoBehaviour
         if (s == null) return;
 
         s.source.Play();
-    }
+    }*/
 }

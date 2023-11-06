@@ -1,0 +1,179 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!244 &-7388610657568545302
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 8e60eb961c4f01a45a47f3900155f8fc
+  m_EffectName: Pitch Shifter
+  m_MixLevel: 421e2c3cc587bf547aba6569aa798c03
+  m_Parameters:
+  - m_ParameterName: Pitch
+    m_GUID: 29f914aa94925ad40b431992a7ab5c2b
+  - m_ParameterName: FFT size
+    m_GUID: f92293f1a89f6da4a940368ff5969780
+  - m_ParameterName: Overlap
+    m_GUID: 40ee293172f8d434d84889905fae6ff3
+  - m_ParameterName: Max channels
+    m_GUID: 5f455191794b68d458e42afb13c46a19
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &-7130275629405167053
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 8afe26b18badcf74d98c793662b4649f
+  m_EffectName: Pitch Shifter
+  m_MixLevel: 9b794fa546c46b244bdc21a5b90f785b
+  m_Parameters:
+  - m_ParameterName: Pitch
+    m_GUID: 0ff15383ae7e21a4498eb526f7916f3b
+  - m_ParameterName: FFT size
+    m_GUID: c05d5c5274e9d974c938608ef4f309da
+  - m_ParameterName: Overlap
+    m_GUID: 91a37d5223fb5ed4aac5ea3a85c5338b
+  - m_ParameterName: Max channels
+    m_GUID: 8475ff968d4697544b594453cd4ed9a5
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!241 &24100000
+AudioMixerController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SFXMixer
+  m_OutputGroup: {fileID: 0}
+  m_MasterGroup: {fileID: 24300002}
+  m_Snapshots:
+  - {fileID: 24500006}
+  m_StartSnapshot: {fileID: 24500006}
+  m_SuspendThreshold: 20
+  m_EnableSuspend: 1
+  m_UpdateMode: 0
+  m_ExposedParameters:
+  - guid: c55264b0bb7ff4a4884630b8f3393140
+    name: volume
+  m_AudioMixerGroupViews:
+  - guids:
+    - 3b42e220f89688f4396807fb22bf4f3a
+    name: View
+  m_CurrentViewIndex: 0
+  m_TargetSnapshot: {fileID: 24500006}
+--- !u!243 &24300002
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Master
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 3b42e220f89688f4396807fb22bf4f3a
+  m_Children: []
+  m_Volume: c55264b0bb7ff4a4884630b8f3393140
+  m_Pitch: f04f530fe6d15b54f851787f0e4e4713
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 24400004}
+  - {fileID: -7388610657568545302}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &24400004
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 9c258a65a1baa8841aebd0cec0638ea3
+  m_EffectName: Attenuation
+  m_MixLevel: e1a940b9c5cd2a8468b1e4cf8dae38de
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!245 &24500006
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Snapshot
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: fbc235826d1d7f346912887c21d835a4
+  m_FloatValues: {}
+  m_TransitionOverrides: {}
+--- !u!244 &2040179983937611968
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 4cddd5db7ddd1c144bf17c1a5024ddda
+  m_EffectName: Pitch Shifter
+  m_MixLevel: 41b6e6f230f3ca6429ea2a9cec817bd1
+  m_Parameters:
+  - m_ParameterName: Pitch
+    m_GUID: 81b6e7f2caff85647951b6aa2e1f9af7
+  - m_ParameterName: FFT size
+    m_GUID: 4df12fe9efa619e419474438a78825c2
+  - m_ParameterName: Overlap
+    m_GUID: 125a7bbf3d6ef3546b42230c3054832f
+  - m_ParameterName: Max channels
+    m_GUID: 145877e5e243d3540b14a19a73e463ba
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &2193488664607800153
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: d5dd40f26d2f20d45a0b9f9d483c0579
+  m_EffectName: ParamEQ
+  m_MixLevel: c28f8d9f357fd3f4c89aef663ba053eb
+  m_Parameters:
+  - m_ParameterName: Center freq
+    m_GUID: 47e41ef7ab5e4524ca80c7403500a1cf
+  - m_ParameterName: Octave range
+    m_GUID: 9375219108b461f48aa2ee4b1548c37d
+  - m_ParameterName: Frequency gain
+    m_GUID: 30fa8dca3b504dc49b5a3979e575f8fc
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &7164719780749080303
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 54541136be87db04ba2ae24faeaeb739
+  m_EffectName: Pitch Shifter
+  m_MixLevel: 1dc94d3dddb9c2144aac2872b3ad5180
+  m_Parameters:
+  - m_ParameterName: Pitch
+    m_GUID: ee31472346cbc04478dc35695dcd4014
+  - m_ParameterName: FFT size
+    m_GUID: 3fcc2242a36352b43b88fb13ee617040
+  - m_ParameterName: Overlap
+    m_GUID: 54fc42f8a2de6114d8bb6871a60a0594
+  - m_ParameterName: Max channels
+    m_GUID: bf2b3a0d8780b4444a0d291d5a906a3d
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0

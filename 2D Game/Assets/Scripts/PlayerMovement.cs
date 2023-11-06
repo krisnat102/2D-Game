@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -24,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
 	float verticalMove = 0f;
 
 	bool grassSound = true;
+
+	public AudioSource walking;
 
 	void Update()
 	{
@@ -141,6 +145,9 @@ public class PlayerMovement : MonoBehaviour
 	private void GrassRunningSound()
     {
 		grassSound = true;
-		FindObjectOfType<AudioManager>().Play("GrassRunning");
+
+		walking.Play();
+
+		//FindObjectOfType<AudioManager>().Play("GrassRunning");
 	}
 }

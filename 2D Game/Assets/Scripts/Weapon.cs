@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 
 public class Weapon : MonoBehaviour
 {
+    public AudioSource reload;
 
     public Transform firePoint;
     public GameObject bullet;
@@ -58,7 +60,7 @@ public class Weapon : MonoBehaviour
 
             gunAnimator.SetTrigger("ShootTrigger");
 
-            FindObjectOfType<AudioManager>().Play("GunFire");
+            //FindObjectOfType<AudioManager>().Play("GunFire");
             }
         }
     }
@@ -73,7 +75,9 @@ public class Weapon : MonoBehaviour
 
             gunAnimator.SetTrigger("ReloadTrigger");
 
-            FindObjectOfType<AudioManager>().Play("GunReload");
+            //FindObjectOfType<AudioManager>().Play("GunReload");
+
+            reload.Play();
         }
     }
 

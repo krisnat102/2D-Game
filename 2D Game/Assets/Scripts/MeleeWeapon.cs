@@ -37,7 +37,7 @@ public class MeleeWeapon : MonoBehaviour
         {
             nextAttackTime = Time.time + 1.0f / attackSpeed;
 
-            FindObjectOfType<AudioManager>().Play("SwordAttack");
+            //FindObjectOfType<AudioManager>().Play("SwordAttack");
 
             if (MeleeWeaponSprite.side == true)
             {
