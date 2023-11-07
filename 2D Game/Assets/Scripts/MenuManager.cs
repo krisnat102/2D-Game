@@ -11,6 +11,8 @@ public class MenuManager : MonoBehaviour
     public GameObject settings;
 
     public TMP_Dropdown resolutionDropdown;
+    public TMP_Dropdown qualityDropdown;
+    public TMP_Dropdown fpsDropdown;
 
     Resolution[] resolutions;
 
@@ -37,18 +39,24 @@ public class MenuManager : MonoBehaviour
         }
 
         resolutionDropdown.AddOptions(resolutionsList);
-        resolutionDropdown.value = currentResolutionIndex;
-        resolutionDropdown.RefreshShownValue();
+
+        if (!PlayerPrefs.HasKey("Resolution"))
+        {
+            resolutionDropdown.value = currentResolutionIndex;
+            resolutionDropdown.RefreshShownValue();
+        }
+
+        LoadVideoSettings();
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Menu"))
+        if (Input.GetButtonDown("Menu") && SceneManager.GetActiveScene().name != "MainMenu")
         {
             if (menu.activeSelf)
             {
                 Unpause();
-            } 
+            }
             else
             {
                 menu.SetActive(true);
@@ -56,6 +64,24 @@ public class MenuManager : MonoBehaviour
                 GameManager.gamePaused = true;
                 PauseGame();
             }
+        }
+    }
+
+    public void LoadVideoSettings()
+    {
+        if (PlayerPrefs.HasKey("Quality"))
+        {
+            qualityDropdown.SetValueWithoutNotify(PlayerPrefs.GetInt("Quality"));
+        }
+        
+        if (PlayerPrefs.HasKey("Resolution"))
+        {
+            resolutionDropdown.SetValueWithoutNotify(PlayerPrefs.GetInt("Resolution"));
+        }
+
+        if (PlayerPrefs.HasKey("Fps"))
+        {
+            fpsDropdown.SetValueWithoutNotify(PlayerPrefs.GetInt("Fps"));
         }
     }
 
@@ -73,17 +99,21 @@ public class MenuManager : MonoBehaviour
     public void SetQuality (int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
+
+        PlayerPrefs.SetInt("Quality", qualityIndex);
+        PlayerPrefs.Save();
     }
     public void SetResolution (int resoulutionIndex)
     {
         Resolution resolution = resolutions[resoulutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+
+        PlayerPrefs.SetInt("Resolution", resoulutionIndex);
+        PlayerPrefs.Save();
     }
     public void SetMaxFramerate(int fpsIndex)
     {
         QualitySettings.vSyncCount = 0;
-
-        int targetFrameRate;
 
         switch (fpsIndex)
         {
@@ -100,12 +130,15 @@ public class MenuManager : MonoBehaviour
                 Application.targetFrameRate = 144;
                 break;
             case 5:
-                Application.targetFrameRate = 169;
+                Application.targetFrameRate = 165;
                 break;
             case 6:
                 Application.targetFrameRate = int.MaxValue;
                 break;
         }
+
+        PlayerPrefs.SetInt("Fps", fpsIndex);
+        PlayerPrefs.Save();
     }
     public void SetFullscreen (bool isFullscreen)
     {
@@ -118,7 +151,7 @@ public class MenuManager : MonoBehaviour
     }
     public void MainMenu()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("MainMenu");
     }
     public void Credits()
     {

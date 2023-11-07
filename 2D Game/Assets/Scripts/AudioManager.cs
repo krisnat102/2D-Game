@@ -7,7 +7,6 @@ public class AudioManager : MonoBehaviour
 {
     public AudioMixer musicMixer;
     public AudioMixer sfxMixer;
-    public AudioMixer mainMixer;
 
     //public Sound[] sounds;
 
@@ -19,22 +18,18 @@ public class AudioManager : MonoBehaviour
     public Slider SFX;
     public Toggle Mute;
 
-    float musicValue;
-    float sfxValue;
+    public static float musicSave = 0;
+    public static float sfxSave = 0;
 
     private void Start()
     {
-        if (musicMixer.GetFloat("volume", out musicValue))
+        if(musicSave != 0)
         {
-            Music.value = (musicValue + 80)/100;
-
-            Debug.Log(musicValue);
+            Music.value = musicSave;
         }
-        if (sfxMixer.GetFloat("volume", out sfxValue))
+        if (sfxSave != 0)
         {
-            SFX.value = (sfxValue + 80) / 100;
-
-            Debug.Log(sfxValue);
+            SFX.value = sfxSave;
         }
 
         LoadAudioSettings();
@@ -52,13 +47,13 @@ public class AudioManager : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("MusicVolume"))
         {
-            Music.value = PlayerPrefs.GetFloat("MusicVolume");
+            Music.value = Mathf.InverseLerp(0.0001f, 1f, PlayerPrefs.GetFloat("MusicVolume"));
             musicMixer.SetFloat("volume", Mathf.Log10(Music.value) * 20);
         }
 
         if (PlayerPrefs.HasKey("SFXVolume"))
         {
-            SFX.value = PlayerPrefs.GetFloat("SFXVolume");
+            SFX.value = Mathf.InverseLerp(0.0001f, 1f, PlayerPrefs.GetFloat("SFXVolume"));
             sfxMixer.SetFloat("volume", Mathf.Log10(SFX.value) * 20);
         }
 
@@ -97,8 +92,17 @@ public class AudioManager : MonoBehaviour
 
     public void MuteAudio(bool mute)
     {
-        int muteVolume = mute.Equals(true) ? 0 : 1; //if the toggle is off the value is 1 if its on its 0
         Mute.isOn = mute;
+        if (mute == true)
+        {
+            musicMixer.SetFloat("volume",-80);
+            sfxMixer.SetFloat("volume", -80);
+        }
+        else
+        {
+            musicMixer.SetFloat("volume", musicSave);
+            sfxMixer.SetFloat("volume", sfxSave);
+        }
 
         SaveAudioSettings();
         //audioMute = muteVolume;
@@ -115,6 +119,8 @@ public class AudioManager : MonoBehaviour
 
         musicMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
 
+        musicSave = volume;
+
         SaveAudioSettings();
     }
     public void SFXAudio(float volume)
@@ -122,6 +128,8 @@ public class AudioManager : MonoBehaviour
         //sfx = volume;
 
         sfxMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
+
+        sfxSave = volume;
 
         SaveAudioSettings();
     }

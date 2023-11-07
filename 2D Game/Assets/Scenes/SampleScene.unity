@@ -1486,7 +1486,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicMixer: {fileID: 24100000, guid: 3233f6a7061631d45a0382399ba55a7e, type: 2}
   sfxMixer: {fileID: 24100000, guid: b0fc275326f5c7f479bc0b065bb3870f, type: 2}
-  mainMixer: {fileID: 24100000, guid: 2ed6c6a1bfe72c644bfc6d998746bb47, type: 2}
   Music: {fileID: 787748109}
   SFX: {fileID: 516609501}
   Mute: {fileID: 1483321926}
@@ -10429,6 +10428,16 @@ PrefabInstance:
       propertyPath: settings
       value: 
       objectReference: {fileID: 1552557800}
+    - target: {fileID: 6684929901192448983, guid: 8ca25b3807d5df8439b2cac892605be7,
+        type: 3}
+      propertyPath: qualityDropdown
+      value: 
+      objectReference: {fileID: 201779011}
+    - target: {fileID: 6684929901192448983, guid: 8ca25b3807d5df8439b2cac892605be7,
+        type: 3}
+      propertyPath: fpsDropdown
+      value: 
+      objectReference: {fileID: 431185313}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ca25b3807d5df8439b2cac892605be7, type: 3}
 --- !u!1001 &6974382459758173183
