@@ -2,8 +2,8 @@
 
 public class Abilities : MonoBehaviour
 {
-    public Spell spell;
-    public Spell ability;
+    [SerializeField] private Spell spell;
+    [SerializeField] private Spell ability;
 
     [SerializeField] private float OffsetX;
     [SerializeField] private float OffsetY;
@@ -16,7 +16,7 @@ public class Abilities : MonoBehaviour
 
     public static Vector3 castPoint = new Vector3();
 
-    public Transform castingPoint;
+    [SerializeField] private Transform castingPoint;
 
     private void Update()
     {

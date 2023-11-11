@@ -2,7 +2,7 @@
 
 public class ItemPickup : MonoBehaviour
 {
-    public Item Item;
+    [SerializeField] private Item Item;
 
     private bool isPickedUp = false;
 

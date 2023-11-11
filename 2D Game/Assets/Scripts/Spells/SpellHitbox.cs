@@ -3,13 +3,13 @@ using System;
 
 public class SpellHitbox : MonoBehaviour
 {
-    public Spell spell;
+    [SerializeField] private Spell spell;
 
-    public Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
 
-    public GameObject impactEffect;
+    [SerializeField] private GameObject impactEffect;
 
-    public Animator anim;
+    [SerializeField] private Animator anim;
     void Start()
     {
         rb.velocity = transform.right * spell.speed;

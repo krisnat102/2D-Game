@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
-    public AudioMixer musicMixer;
-    public AudioMixer sfxMixer;
+    [SerializeField] private AudioMixer musicMixer;
+    [SerializeField] private AudioMixer sfxMixer;
 
     //public Sound[] sounds;
 
@@ -14,9 +14,9 @@ public class AudioManager : MonoBehaviour
     public static float sfx = 1f;
     public static int audioMute = 1;*/
 
-    public Slider Music;
-    public Slider SFX;
-    public Toggle Mute;
+    [SerializeField] private Slider Music;
+    [SerializeField] private Slider SFX;
+    [SerializeField] private Toggle Mute;
 
     public static float musicSave = 0;
     public static float sfxSave = 0;

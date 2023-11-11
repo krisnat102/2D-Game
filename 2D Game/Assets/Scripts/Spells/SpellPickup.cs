@@ -2,7 +2,7 @@
 
 public class SpellPickup : MonoBehaviour
 {
-    public Spell Spell;
+    [SerializeField] private Spell Spell;
 
     private bool isPickedUp = false;
 

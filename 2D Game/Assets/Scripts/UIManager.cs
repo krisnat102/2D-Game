@@ -3,11 +3,12 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private Weapon weapon;
 
-    public Text ammoText;
+    [SerializeField] private Text ammoText;
 
     void Update()
     {
-        ammoText.text = Weapon.currentMagCapacity.ToString() + " / " + Weapon.maxMagCapacity;
+        ammoText.text = weapon.GetCurrentCapacity().ToString() +  "/"  + weapon.GetMaxCapacity().ToString();
     }
 }

@@ -5,17 +5,17 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
-    public List<Item> Items = new List<Item>();
+    [SerializeField] private List<Item> Items = new List<Item>();
 
-    public Transform ItemContent;
-    public GameObject InventoryItem;
+    [SerializeField] private Transform ItemContent;
+    [SerializeField] private GameObject InventoryItem;
 
-    public Toggle EnableRemove;
+    [SerializeField] private Toggle EnableRemove;
 
-    public InventoryItemController[] InventoryItems;
+    [SerializeField] private InventoryItemController[] InventoryItems;
 
-    public GameObject Inventory;
-    public GameObject SpellInventory;
+    [SerializeField] private GameObject Inventory;
+    [SerializeField] private GameObject SpellInventory;
 
     private void Awake()
     {
@@ -66,7 +66,7 @@ public class InventoryManager : MonoBehaviour
         {
             foreach (Transform item in ItemContent)
             {
-                item.Find("RemoveButton").gameObject.SetActive(true);
+                item.transform.Find("RemoveButton").GetComponent<Button>().gameObject.SetActive(true);
             }
         }
         else
@@ -76,6 +76,8 @@ public class InventoryManager : MonoBehaviour
                 item.Find("RemoveButton").gameObject.SetActive(false);
             }
         }
+        ListItems();
+        SetInventoryItems();
     }
 
     public void SetInventoryItems()

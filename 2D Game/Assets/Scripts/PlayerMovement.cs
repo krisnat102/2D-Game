@@ -3,9 +3,9 @@
 public class PlayerMovement : MonoBehaviour
 {
 
-	public CharacterController2D controller;
-	public Animator animator;
-	public Rigidbody2D rb;
+	[SerializeField] private CharacterController2D controller;
+	[SerializeField] private Animator animator;
+	[SerializeField] private Rigidbody2D rb;
 
 	public float runSpeed = 40f;
 
@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
 	bool grassSound = true;
 
-	public AudioSource walking;
+	[SerializeField] private AudioSource walking;
 
 	void Update()
 	{

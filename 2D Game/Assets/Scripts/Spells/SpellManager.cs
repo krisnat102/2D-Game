@@ -5,19 +5,19 @@ using UnityEngine.UI;
 public class SpellManager : MonoBehaviour
 {
     public static SpellManager Instance;
-    public List<Spell> Spells = new List<Spell>();
+    [SerializeField] private List<Spell> Spells = new List<Spell>();
 
-    public Transform SpellContent;
-    public GameObject InventorySpell;
+    [SerializeField] private Transform SpellContent;
+    [SerializeField] private GameObject InventorySpell;
 
-    public InventorySpellController[] InventorySpells;
+    [SerializeField] private InventorySpellController[] InventorySpells;
 
-    public GameObject SpellInventory;
-    public GameObject Inventory;
+    [SerializeField] private GameObject SpellInventory;
+    [SerializeField] private GameObject Inventory;
 
     public static List<Spell> SpellsBar = new List<Spell>();
-    public Transform SpellContentBar;
-    public GameObject ActiveSpell;
+    [SerializeField] private Transform SpellContentBar;
+    [SerializeField] private GameObject ActiveSpell;
 
     private void Awake()
     {

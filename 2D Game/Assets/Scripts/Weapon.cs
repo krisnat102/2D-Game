@@ -3,33 +3,28 @@ using UnityEngine.Audio;
 
 public class Weapon : MonoBehaviour
 {
-    public AudioSource reload;
+    [SerializeField] private AudioSource reload;
+    [SerializeField] private AudioSource shoot;
 
-    public Transform firePoint;
-    public GameObject bullet;
+    [SerializeField] Transform firePoint;
+    [SerializeField] GameObject bullet;
 
     [SerializeField] private float fireRate = 2.0f;
     private float nextFireTime = 0.0f;
-    [SerializeField] private int magCapacity = 8;
+    [SerializeField] private int maxMagCapacity = 8;
     [SerializeField] private int bulletsPerShot = 1;
     [SerializeField] private float reloadSpeed = 2f;
 
     private Animator gunAnimator;
 
-    public static int currentMagCapacity;
-    public static int maxMagCapacity;
+    private int magCapacity = 8;
     bool reloading = false;
 
     public static bool canFire = true;
 
-    void FixedUpdate()
-    {
-        currentMagCapacity = magCapacity;
-    }
-
     void Start()
     {
-        maxMagCapacity = magCapacity;
+        magCapacity = maxMagCapacity;
 
         gunAnimator = GetComponent<Animator>();
     }
@@ -60,7 +55,7 @@ public class Weapon : MonoBehaviour
 
             gunAnimator.SetTrigger("ShootTrigger");
 
-            //FindObjectOfType<AudioManager>().Play("GunFire");
+            shoot.Play();
             }
         }
     }
@@ -86,5 +81,14 @@ public class Weapon : MonoBehaviour
         magCapacity = maxMagCapacity;
 
         reloading = false;
+    }
+
+    public int GetCurrentCapacity()
+    {
+        return magCapacity;
+    }
+    public int GetMaxCapacity()
+    {
+        return maxMagCapacity;
     }
 }

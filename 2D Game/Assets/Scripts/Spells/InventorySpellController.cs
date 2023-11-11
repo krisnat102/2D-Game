@@ -5,12 +5,12 @@ public class InventorySpellController : MonoBehaviour
 {
     Spell spell;
 
-    public Button RemoveButton;
+    [SerializeField] private Button RemoveButton;
 
     [SerializeField] private int ActiveSpellsMax = 8;
 
-    public Spell Firebolt;
-    public Spell RayOfFrost;
+    [SerializeField] private Spell Firebolt;
+    [SerializeField] private Spell RayOfFrost;
 
     public void RemoveSpell()
     {

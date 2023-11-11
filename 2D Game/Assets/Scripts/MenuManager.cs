@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    public GameObject menu;
-    public GameObject miniMenu;
-    public GameObject settings;
+    [SerializeField] private GameObject menu;
+    [SerializeField] private GameObject miniMenu;
+    [SerializeField] private GameObject settings;
 
-    public TMP_Dropdown resolutionDropdown;
-    public TMP_Dropdown qualityDropdown;
-    public TMP_Dropdown fpsDropdown;
+    [SerializeField] private TMP_Dropdown resolutionDropdown;
+    [SerializeField] private TMP_Dropdown qualityDropdown;
+    [SerializeField] private TMP_Dropdown fpsDropdown;
 
     Resolution[] resolutions;
 

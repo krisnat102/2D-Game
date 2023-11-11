@@ -19,12 +19,13 @@ public class PlayerStats : MonoBehaviour
     private bool stamRegenCooldown = false;
     [SerializeField] private float stamRegenSpeed = 0.20f;
 
-    public GameObject deathEffect;
+    [SerializeField] private GameObject deathEffect;
+    public static bool death = false;
 
-    new Transform transform;
+    [SerializeField] private Transform transform;
 
-    public GameObject gun;
-    public GameObject sword;
+    [SerializeField] private GameObject gun;
+    [SerializeField] private GameObject sword;
 
     [SerializeField] private Slider HpBar;
     [SerializeField] private Slider ManaBar;
@@ -35,6 +36,8 @@ public class PlayerStats : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        death = false;
     }
 
     void Start()
@@ -100,9 +103,9 @@ public class PlayerStats : MonoBehaviour
 
     void Die()
     {
-        Instantiate(deathEffect, transform.position, Quaternion.identity);
+        GameObject Death = GameObject.Instantiate(deathEffect, transform.position, transform.rotation);
 
-        Destroy(this.gameObject);
+        death = true;
     }
 
     public void Heal(int value)
