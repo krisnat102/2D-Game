@@ -3,21 +3,25 @@
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float hp = 100f;
+    [SerializeField] private float attackSpeed = 1f;
 
-    public GameObject deathEffect;
+    [SerializeField] private GameObject deathEffect;
 
-    public GameObject attack;
+    [SerializeField] private GameObject attack;
 
     [SerializeField] private float offsetX = 1.2f;
     [SerializeField] private float offsetY = -1f;
 
+    [SerializeField] private float attackAnimLength = 0.3f;
+
     [SerializeField] private Animator animator;
 
-    public static float offsetXStatic;
-    public static float offsetYStatic;
+    private bool immune = false;
+    private bool attackCooldown = false;
 
-    bool immune = false;
+    [SerializeField] private EnemyAttackAI enemyAttackAI;
 
+    [SerializeField] private AudioSource attackSound;
 
     public void TakeDamage(float damage)
     {
@@ -37,7 +41,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Die()
+    private void Die()
     {
         Instantiate(deathEffect, transform.position, Quaternion.identity);
 
@@ -46,23 +50,38 @@ public class Enemy : MonoBehaviour
 
     public void Attack()
     {
-        Vector3 offsetAttack = new Vector3(offsetX, offsetY, 0f);
+        Debug.Log(attackCooldown);
+        if (attackCooldown == false)
+        {
+            animator.SetTrigger("Attack");
 
-        Instantiate(attack, transform.position - offsetAttack, Quaternion.identity);
-
-        animator.SetTrigger("Attack");
-    }
-
-    private void Start()
-    {
-        offsetXStatic = offsetX;
-        offsetYStatic = offsetY;
-
-        Invoke("Attack", 2f);
+            attackCooldown = true;
+            Invoke("AttackCooldown", attackSpeed);
+            Invoke("AttackSpawn", attackAnimLength);
+        }
+        else Debug.Log("cooldown");
     }
 
     private void StopImmune()
     { 
         immune = false;
+    }
+    private void AttackCooldown()
+    {
+        attackCooldown = false;
+    }
+
+    private void AttackSpawn()
+    {
+        Vector3 offsetAttack = new Vector3(offsetX, offsetY, 0f);
+
+        Instantiate(attack, transform.position - offsetAttack, Quaternion.identity);
+
+        attackSound.Play();
+    }
+
+    private void Update()
+    {
+        if (enemyAttackAI.PlayerInRange()) Invoke("Attack", 0.2f);
     }
 }
