@@ -167,11 +167,14 @@ MonoBehaviour:
     type: 3}
   attack: {fileID: 5461576477917390187, guid: 63ce19bcfd5d3a24ea3457dde2d02c77, type: 3}
   offsetX: 1.2
+  offsetX2: 1.2
   offsetY: -1
   attackAnimLength: 0.3
   animator: {fileID: 167738637749498191}
   enemyAttackAI: {fileID: 7992715458322413631}
   attackSound: {fileID: 4727940582570106995}
+  playerTrans: {fileID: 0}
+  enemyTrans: {fileID: 0}
 --- !u!82 &4727940582570106995
 AudioSource:
   m_ObjectHideFlags: 0
@@ -313,7 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d8c6340d3651a44b3c5eda576c86f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
+  enemy: {fileID: 167738637749498186}
 --- !u!61 &2258637695107148282
 BoxCollider2D:
   m_ObjectHideFlags: 0

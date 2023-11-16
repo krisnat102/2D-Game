@@ -81,11 +81,19 @@ public class Enemy : MonoBehaviour
     {
         if (enemyAttackAI.PlayerInRange()) Invoke("Attack", 0.2f);
 
-        if (enemyTrans.position.x < playerTrans.position.x)
+        if (enemyTrans != null && playerTrans != null)
         {
-            offsetX = -offsetX2;
+            if (enemyTrans.position.x < playerTrans.position.x)
+            {
+                offsetX = -offsetX2;
+                animator.SetBool("Flip", true);
+            }
+            else
+            {
+                offsetX = offsetXSave;
+                animator.SetBool("Flip", false);
+            }
         }
-        else offsetX = offsetXSave;
     }
 
     private void AttackSpawn()
