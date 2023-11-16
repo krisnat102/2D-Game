@@ -602,6 +602,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!4 &169171164 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 167738637749498185, guid: 056196fb9136d8f42a99f8d1570a6361,
+    type: 3}
+  m_PrefabInstance: {fileID: 167738637366261764}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &190986736
 GameObject:
   m_ObjectHideFlags: 0
@@ -5103,6 +5109,26 @@ PrefabInstance:
       propertyPath: attackSound
       value: 
       objectReference: {fileID: 53082687}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1745411682}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 1551474978}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: enemyTrans
+      value: 
+      objectReference: {fileID: 1551474978}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: playerTrans
+      value: 
+      objectReference: {fileID: 1745411682}
     - target: {fileID: 3037006255712068260, guid: a3f6384058c673846ba368a8e2c51dba,
         type: 3}
       propertyPath: m_IsTrigger
@@ -7653,6 +7679,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1518485116}
   m_CullTransparentMesh: 0
+--- !u!4 &1551474978 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1620560478860096211, guid: a3f6384058c673846ba368a8e2c51dba,
+    type: 3}
+  m_PrefabInstance: {fileID: 947751913}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1552557800
 GameObject:
   m_ObjectHideFlags: 0
@@ -10562,6 +10594,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 167738637749498186, guid: 056196fb9136d8f42a99f8d1570a6361,
+        type: 3}
+      propertyPath: enemyTrans
+      value: 
+      objectReference: {fileID: 169171164}
+    - target: {fileID: 167738637749498186, guid: 056196fb9136d8f42a99f8d1570a6361,
+        type: 3}
+      propertyPath: playerTrans
+      value: 
+      objectReference: {fileID: 1745411682}
     - target: {fileID: 167738637749498187, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
       propertyPath: m_IsTrigger
@@ -10576,6 +10618,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 167738637749498190, guid: 056196fb9136d8f42a99f8d1570a6361,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 167738637749498196, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
@@ -11252,6 +11299,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 76648772342980793, guid: d50db331ba403b54a961879a9514ab7e,
+        type: 3}
+      propertyPath: SpellContent
+      value: 
+      objectReference: {fileID: 403527072}
+    - target: {fileID: 76648772342980793, guid: d50db331ba403b54a961879a9514ab7e,
+        type: 3}
+      propertyPath: SpellInventory
+      value: 
+      objectReference: {fileID: 792276697}
+    - target: {fileID: 76648772342980793, guid: d50db331ba403b54a961879a9514ab7e,
+        type: 3}
+      propertyPath: Inventory
+      value: 
+      objectReference: {fileID: 29370414}
+    - target: {fileID: 76648772342980793, guid: d50db331ba403b54a961879a9514ab7e,
+        type: 3}
+      propertyPath: SpellContentBar
+      value: 
+      objectReference: {fileID: 1663043246}
     - target: {fileID: 6974382459076998430, guid: d50db331ba403b54a961879a9514ab7e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11345,41 +11412,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d50db331ba403b54a961879a9514ab7e, type: 3}
---- !u!1 &6974382459758173184 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6974382459076998432, guid: d50db331ba403b54a961879a9514ab7e,
-    type: 3}
-  m_PrefabInstance: {fileID: 6974382459758173183}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6974382459758173185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6974382459758173184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fc54cbc733e32840ad5d93ec53572ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Spells: []
-  SpellContent: {fileID: 403527072}
-  InventorySpell: {fileID: 2074373540294830318, guid: 0c4eb4dbd6df63346bd34712bf0ed197,
-    type: 3}
-  InventorySpells: []
-  SpellInventory: {fileID: 792276697}
-  Inventory: {fileID: 29370414}
-  SpellContentBar: {fileID: 1663043246}
-  ActiveSpell: {fileID: 2074373540294830318, guid: 6375c4f527dc72c43832b34579b4b78c,
-    type: 3}
 --- !u!114 &6974382459758173186 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
     type: 3}
   m_PrefabInstance: {fileID: 6974382459758173183}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6974382459758173184}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac46fc44cc9a4dd43b1bd864bfb330ce, type: 3}

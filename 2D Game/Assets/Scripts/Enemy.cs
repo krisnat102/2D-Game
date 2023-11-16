@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject attack;
 
     [SerializeField] private float offsetX = 1.2f;
+    [SerializeField] private float offsetX2 = 1.2f;
     [SerializeField] private float offsetY = -1f;
 
     [SerializeField] private float attackAnimLength = 0.3f;
@@ -23,9 +24,14 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private AudioSource attackSound;
 
+    [SerializeField] private Transform playerTrans;
+    [SerializeField] private Transform enemyTrans;
+
+    private float offsetXSave;
+
     public void TakeDamage(float damage)
     {
-        if(immune == false)
+        if (immune == false)
         {
             hp -= damage;
 
@@ -33,7 +39,7 @@ public class Enemy : MonoBehaviour
 
             immune = true;
 
-            Invoke("StopImmune", 0.2f);
+            Invoke("StopImmune", 0.1f);
         }
         if (hp <= 0)
         {
@@ -63,12 +69,23 @@ public class Enemy : MonoBehaviour
     }
 
     private void StopImmune()
-    { 
+    {
         immune = false;
     }
     private void AttackCooldown()
     {
         attackCooldown = false;
+    }
+
+    private void Update()
+    {
+        if (enemyAttackAI.PlayerInRange()) Invoke("Attack", 0.2f);
+
+        if (enemyTrans.position.x < playerTrans.position.x)
+        {
+            offsetX = -offsetX2;
+        }
+        else offsetX = offsetXSave;
     }
 
     private void AttackSpawn()
@@ -80,8 +97,8 @@ public class Enemy : MonoBehaviour
         attackSound.Play();
     }
 
-    private void Update()
+    private void Start()
     {
-        if (enemyAttackAI.PlayerInRange()) Invoke("Attack", 0.2f);
+        offsetXSave = offsetX;
     }
 }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6974382459076998430}
   - component: {fileID: 6974382459076998431}
+  - component: {fileID: 76648772342980793}
   m_Layer: 0
   m_Name: InventoryManager
   m_TagString: Untagged
@@ -44,3 +45,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Items: []
+  ItemContent: {fileID: 0}
+  InventoryItem: {fileID: 0}
+  EnableRemove: {fileID: 0}
+  InventoryItems: []
+  Inventory: {fileID: 0}
+  SpellInventory: {fileID: 0}
+--- !u!114 &76648772342980793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6974382459076998432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc54cbc733e32840ad5d93ec53572ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spells: []
+  SpellContent: {fileID: 0}
+  InventorySpell: {fileID: 2074373540294830318, guid: 0c4eb4dbd6df63346bd34712bf0ed197,
+    type: 3}
+  InventorySpells: []
+  SpellInventory: {fileID: 0}
+  Inventory: {fileID: 0}
+  SpellContentBar: {fileID: 0}
+  ActiveSpell: {fileID: 2074373540294830318, guid: 6375c4f527dc72c43832b34579b4b78c,
+    type: 3}
