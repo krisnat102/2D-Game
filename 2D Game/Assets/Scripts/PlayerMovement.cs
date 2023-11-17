@@ -6,26 +6,24 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private CharacterController2D controller;
 	[SerializeField] private Animator animator;
 	[SerializeField] private Rigidbody2D rb;
+	[SerializeField] private AudioSource walking;
 
-	public float runSpeed = 40f;
+	private float horizontalMove = 0f;
+	private float verticalMove = 0f;
 
-	float horizontalMove = 0f;
-	bool jump = false;
-	bool crouch = false;
-
-	[SerializeField] private float dodgePower = 200f;
-	[SerializeField] private float dodgeCost = 20f;
-	[SerializeField] private float dodgeCooldown = 1f;
+	private bool jump = false;
+	private bool crouch = false;
+	private bool grassSound = true;
+	private bool ableClimb = false;
 	private bool dodgeCool = false;
 	private bool dodgeDirection = true;
 
+	[SerializeField] private float runSpeed = 40f;
+	[SerializeField] private float dodgePower = 200f;
+	[SerializeField] private float dodgeCost = 20f;
+	[SerializeField] private float dodgeCooldown = 1f;
 	[SerializeField] private float climbSpeed = 200f;
-	private bool ableClimb = false;
-	float verticalMove = 0f;
 
-	bool grassSound = true;
-
-	[SerializeField] private AudioSource walking;
 
 	void Update()
 	{

@@ -29,6 +29,10 @@ public class Enemy : MonoBehaviour
 
     private float offsetXSave;
 
+    private Rigidbody2D rb;
+
+    private bool flip;
+
     public void TakeDamage(float damage)
     {
         if (immune == false)
@@ -81,7 +85,7 @@ public class Enemy : MonoBehaviour
     {
         if (enemyAttackAI.PlayerInRange()) Invoke("Attack", 0.2f);
 
-        if (enemyTrans != null && playerTrans != null)
+        if (enemyTrans != null && playerTrans != null && flip)
         {
             if (enemyTrans.position.x < playerTrans.position.x)
             {
@@ -95,6 +99,7 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+    
 
     private void AttackSpawn()
     {
@@ -108,5 +113,18 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         offsetXSave = offsetX;
+
+        rb = GetComponent<Rigidbody2D>();
+
+        flip = ContainsParam(animator, "Flip");
+    }
+
+    private bool ContainsParam(Animator _Anim, string _ParamName)
+    {
+        foreach (AnimatorControllerParameter param in _Anim.parameters)
+        {
+            if (param.name == _ParamName) return true;
+        }
+        return false;
     }
 }

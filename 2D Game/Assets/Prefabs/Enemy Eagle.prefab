@@ -154,10 +154,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1620560478860096211}
+  - component: {fileID: 1620560478860096215}
   - component: {fileID: 1620560478860096210}
   - component: {fileID: 1620560478860096209}
   - component: {fileID: 1620560478860096208}
-  - component: {fileID: 1620560478860096215}
   - component: {fileID: 1620560478860096214}
   - component: {fileID: 8435544955756322061}
   m_Layer: 0
@@ -183,6 +183,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1620560478860096215
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620560478860096213}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.8019229
 --- !u!114 &1620560478860096210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,22 +284,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
---- !u!58 &1620560478860096215
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1620560478860096213}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.8019229
 --- !u!114 &1620560478860096214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,11 +302,14 @@ MonoBehaviour:
     type: 3}
   attack: {fileID: 5461576477917390187, guid: d0b601e9d9d98f14cb92691a2748969e, type: 3}
   offsetX: 1.2
+  offsetX2: 1.2
   offsetY: 1
   attackAnimLength: 0.3
   animator: {fileID: 1620560478625217050}
   enemyAttackAI: {fileID: 0}
   attackSound: {fileID: 0}
+  playerTrans: {fileID: 0}
+  enemyTrans: {fileID: 0}
 --- !u!82 &8435544955756322061
 AudioSource:
   m_ObjectHideFlags: 0
