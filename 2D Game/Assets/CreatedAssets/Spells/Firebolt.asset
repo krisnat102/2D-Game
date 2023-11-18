@@ -19,8 +19,10 @@ MonoBehaviour:
   value: 40
   speed: 20
   cooldown: 1.5
-  range: 15
+  range: 60
   icon: {fileID: 21300000, guid: 1d0551bd3e5e9aa4a8d7e589c71c01cf, type: 3}
   spellEffect: {fileID: 201917306390933128, guid: 17ac2749f03f6f74fa9ee9e5516d0da1,
+    type: 3}
+  spellDeath: {fileID: 9018320000383621700, guid: f688d8fbbd48e5b4f98da503f5bded33,
     type: 3}
   spellType: 0

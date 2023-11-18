@@ -14,6 +14,7 @@ public class Spell : ScriptableObject
     public float range;
     public Sprite icon;
     public GameObject spellEffect;
+    public GameObject spellDeath;
     public SpellType spellType;
 
     public enum SpellType

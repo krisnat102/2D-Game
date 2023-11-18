@@ -7,8 +7,6 @@ public class SpellHitbox : MonoBehaviour
 
     [SerializeField] private Rigidbody2D rb;
 
-    [SerializeField] private GameObject impactEffect;
-
     [SerializeField] private Animator anim;
     void Start()
     {
@@ -24,21 +22,22 @@ public class SpellHitbox : MonoBehaviour
             {
                 Invoke("DestroyObject", 0.5f);
 
-                anim.SetBool("End", true);
+                if(ContainsParam(anim, "End")) anim.SetBool("End", true);
             }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.tag != "Player" && hitInfo.tag != "Item")
+        if (hitInfo.tag != "Player" && hitInfo.tag != "Item" && hitInfo.tag != "Climbable" && hitInfo.tag != "AttackRange" && hitInfo.tag != "BackgroundObject")
         {
             Enemy enemy = hitInfo.GetComponent<Enemy>();
             if (enemy == true)
             {
                 enemy.TakeDamage(spell.value);
             }
-            Instantiate(impactEffect, transform.position, transform.rotation);
+
+            if (spell.spellDeath != null) Instantiate(spell.spellDeath, transform.position, Quaternion.identity);
 
             DestroyObject();
         }
@@ -46,5 +45,14 @@ public class SpellHitbox : MonoBehaviour
     private void DestroyObject()
     {
         Destroy(gameObject);
+    }
+
+    private bool ContainsParam(Animator _Anim, string _ParamName)
+    {
+        foreach (AnimatorControllerParameter param in _Anim.parameters)
+        {
+            if (param.name == _ParamName) return true;
+        }
+        return false;
     }
 }

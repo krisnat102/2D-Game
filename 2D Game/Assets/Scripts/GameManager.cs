@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
 
     public void TryAgain()
     {
+  
         Application.LoadLevel(Application.loadedLevel);
 
         PlayerStats.death = false;

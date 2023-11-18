@@ -22,7 +22,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private GameObject deathEffect;
     public static bool death = false;
 
-    [SerializeField] private Transform transform;
+    private Transform transform;
 
     [SerializeField] private GameObject gun;
     [SerializeField] private GameObject sword;
@@ -49,6 +49,8 @@ public class PlayerStats : MonoBehaviour
         HpBar.maxValue = maxHP;
         ManaBar.maxValue = maxMana;
         StamBar.maxValue = maxStam;
+
+        transform = FindObjectOfType<Transform>();
     }
 
     void Update()
