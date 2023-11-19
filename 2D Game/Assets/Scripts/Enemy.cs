@@ -2,36 +2,39 @@
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Stats")]
     [SerializeField] private float hp = 100f;
     [SerializeField] private float attackSpeed = 1f;
 
-    [SerializeField] private GameObject deathEffect;
-
-    [SerializeField] private GameObject attack;
-
+    [Header("Offsets")]
     [SerializeField] private float offsetX = 1.2f;
     [SerializeField] private float offsetX2 = 1.2f;
     [SerializeField] private float offsetY = -1f;
-
-    [SerializeField] private float attackAnimLength = 0.3f;
-
-    [SerializeField] private Animator animator;
-
-    private bool immune = false;
-    private bool attackCooldown = false;
-
-    [SerializeField] private EnemyAttackAI enemyAttackAI;
-
-    [SerializeField] private AudioSource attackSound;
-
-    [SerializeField] private Transform playerTrans;
-    [SerializeField] private Transform enemyTrans;
-
     private float offsetXSave;
 
-    private Rigidbody2D rb;
+    [Header("Ranged")]
+    [SerializeField] private bool ranged = false;
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private GameObject projectile;
 
+    [Header("Attack")]
+    [SerializeField] private EnemyAttackAI enemyAttackAI;
+    [SerializeField] private GameObject attack;
+    [SerializeField] private AudioSource attackSound;
+    [SerializeField] private float attackAnimLength = 0.3f;
+
+    [Header("Other")]
+    [SerializeField] private Transform playerTrans;
+    [SerializeField] private GameObject deathEffect;
+
+    [Header("Customiseable")]
+    [SerializeField] private bool lookAtPlayer;
+
+    private Animator animator;
+    private bool immune = false;
+    private bool attackCooldown = false;
     private bool flip;
+    private bool facingSide;
 
     public void TakeDamage(float damage)
     {
@@ -60,8 +63,7 @@ public class Enemy : MonoBehaviour
 
     public void Attack()
     {
-        Debug.Log(attackCooldown);
-        if (attackCooldown == false)
+        if (attackCooldown == false && ranged == false && attack != null)
         {
             animator.SetTrigger("Attack");
 
@@ -69,7 +71,14 @@ public class Enemy : MonoBehaviour
             Invoke("AttackCooldown", attackSpeed);
             Invoke("AttackSpawn", attackAnimLength);
         }
-        else Debug.Log("cooldown");
+        else if(attackCooldown == false && ranged && enemyAttackAI.PlayerInSight())
+        {
+            animator.SetTrigger("Attack");
+            Invoke("AttackSpawn", attackAnimLength);
+
+            attackCooldown = true;
+            Invoke("AttackCooldown", attackSpeed);
+        }
     }
 
     private void StopImmune()
@@ -85,9 +94,9 @@ public class Enemy : MonoBehaviour
     {
         if (enemyAttackAI.PlayerInRange()) Invoke("Attack", 0.2f);
 
-        if (enemyTrans != null && playerTrans != null && flip)
+        if (transform != null && playerTrans != null && flip)
         {
-            if (enemyTrans.position.x < playerTrans.position.x)
+            if (transform.position.x < playerTrans.position.x)
             {
                 offsetX = -offsetX2;
                 animator.SetBool("Flip", true);
@@ -98,33 +107,85 @@ public class Enemy : MonoBehaviour
                 animator.SetBool("Flip", false);
             }
         }
+
+        if (lookAtPlayer && enemyAttackAI.PlayerInSight())
+        {
+            if (facingSide)
+            {
+                if (playerTrans.position.x < transform.position.x + 0.5f)
+                {
+                    transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                }
+                else if (playerTrans.position.x > transform.position.x - 0.5f)
+                {
+                    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                }
+            }
+            else
+            {
+                if (playerTrans.position.x < transform.position.x + 0.5f)
+                {
+                    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                }
+                else if (playerTrans.position.x > transform.position.x - 0.5f)
+                {
+                    transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+
+                }
+            }
+        }
     }
     
 
     private void AttackSpawn()
     {
-        Vector3 offsetAttack = new Vector3(offsetX, offsetY, 0f);
+        if(ranged == false)
+        {
+            Vector3 offsetAttack = new Vector3(offsetX, offsetY, 0f);
 
-        Instantiate(attack, transform.position - offsetAttack, Quaternion.identity);
+            Instantiate(attack, transform.position - offsetAttack, Quaternion.identity);
 
-        attackSound.Play();
+            attackSound.Play();
+        }
+        else
+        {
+            GameObject attackProjectile = Instantiate(projectile, firePoint);
+            if (attackProjectile.activeInHierarchy == false)
+            {
+                attackProjectile.SetActive(true);
+            }
+        }
     }
 
     private void Start()
     {
         offsetXSave = offsetX;
 
-        rb = GetComponent<Rigidbody2D>();
-
         flip = ContainsParam(animator, "Flip");
+
+        animator = GetComponent<Animator>();
+
+        if (transform.rotation.y == 0)
+        {
+            facingSide = true;
+        }
+        else facingSide = false;
     }
 
     private bool ContainsParam(Animator _Anim, string _ParamName)
     {
-        foreach (AnimatorControllerParameter param in _Anim.parameters)
+        if(_Anim != null)
         {
-            if (param.name == _ParamName) return true;
+            foreach (AnimatorControllerParameter param in _Anim.parameters)
+            {
+                if (param.name == _ParamName) return true;
+            }
         }
         return false;
+    }
+
+    public bool Ranged()
+    {
+        return ranged;
     }
 }

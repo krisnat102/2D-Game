@@ -3,15 +3,19 @@
 public class EnemyAttackAI : MonoBehaviour
 {
     [SerializeField] private Enemy enemy;
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private Transform playerTrans;
 
-    private bool inRange;
+    [SerializeField] private LayerMask IgnoreMe;
+
+    private bool inRange = false;
+    private bool inSight = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
             inRange = true;
-            Debug.Log("3");
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -19,12 +23,34 @@ public class EnemyAttackAI : MonoBehaviour
         if (collision.tag == "Player")
         {
             inRange = false;
-            Debug.Log("4");
         }
     }
 
     public bool PlayerInRange()
     {
         return inRange;
+    }
+    public bool PlayerInSight()
+    {
+        return inSight;
+    }
+
+    private void Update()
+    {
+        if(inRange && enemy.Ranged())
+        {
+            RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, playerTrans.position - firePoint.position, Mathf.Infinity, ~IgnoreMe); //shoots a ray from the firepoint to the player
+
+            if (hitInfo)
+            {
+                PlayerStats player = hitInfo.transform.GetComponent<PlayerStats>(); //checks if it hit the player
+                if (player != null)
+                {
+                    inSight = true;
+                }
+                else inSight = false;
+                //Debug.Log("player not seen");
+            }
+        }
     }
 }

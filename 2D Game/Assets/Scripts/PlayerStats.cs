@@ -94,6 +94,7 @@ public class PlayerStats : MonoBehaviour
         }
         if (hp <= 0)
         {
+
             Die();
         }
     }
@@ -105,7 +106,7 @@ public class PlayerStats : MonoBehaviour
 
     void Die()
     {
-        GameObject Death = GameObject.Instantiate(deathEffect, transform.position, transform.rotation);
+        GameObject Death = Instantiate(deathEffect, transform.position, transform.rotation);
 
         death = true;
     }

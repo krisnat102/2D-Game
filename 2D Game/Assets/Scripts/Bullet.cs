@@ -4,15 +4,15 @@ public class Bullet : MonoBehaviour
 {
 
     [SerializeField] private float speed = 20f;
-
-    public Rigidbody2D rb;
-
     [SerializeField] private float bulletDmg = 20f;
 
-    public GameObject impactEffect;
+    [SerializeField] private GameObject impactEffect;
+    private Rigidbody2D rb;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
+
         rb.velocity = transform.right * speed;
     }
 

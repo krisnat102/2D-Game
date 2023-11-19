@@ -9,6 +9,9 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        ammoText.text = weapon.GetCurrentCapacity().ToString() +  "/"  + weapon.GetMaxCapacity().ToString();
+        if(weapon != null)
+        {
+            ammoText.text = weapon.GetCurrentCapacity().ToString() + "/" + weapon.GetMaxCapacity().ToString();
+        }
     }
 }
