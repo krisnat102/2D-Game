@@ -7,31 +7,37 @@ public class PlayerStats : MonoBehaviour
 
     public static float hp = 100f;
     public static float maxHP;
-
     public static float stam = 100f;
     public static float maxStam;
-
     public static float mana = 100f;
     public static float maxMana;
 
-    bool immune = false;
-
-    private bool stamRegenCooldown = false;
-    [SerializeField] private float stamRegenSpeed = 0.20f;
-
-    [SerializeField] private GameObject deathEffect;
     public static bool death = false;
+
+    private bool immune = false;
+    private bool stamRegenCooldown = false;
 
     private Transform transform;
 
+    [Header("Stats")]
+
+    [SerializeField] private float stamRegenSpeed = 0.20f;
+    [SerializeField] private int level = 1;
+
+    [Header("Weapons")]
+
     [SerializeField] private GameObject gun;
     [SerializeField] private GameObject sword;
+
+    [Header("UI")]
 
     [SerializeField] private Slider HpBar;
     [SerializeField] private Slider ManaBar;
     [SerializeField] private Slider StamBar;
 
-    public int level = 1;
+    [Header("Other")]
+
+    [SerializeField] private GameObject deathEffect;
 
     private void Awake()
     {

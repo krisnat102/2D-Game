@@ -10,6 +10,7 @@ public class Item : ScriptableObject
     public bool usable;
     public Sprite icon;
     public ItemType itemType;
+    public string itemDescription;
 
     public enum ItemType
     {

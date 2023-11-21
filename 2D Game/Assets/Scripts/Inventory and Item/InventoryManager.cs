@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -17,9 +18,28 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private GameObject Inventory;
     [SerializeField] private GameObject SpellInventory;
 
+    [Header("Item Description")]
+    [SerializeField] private Button useButton;
+    [SerializeField] private Image itemImage;
+    [SerializeField] private TMP_Text itemName, itemDescription, itemValue, itemPrice;
+    [SerializeField] private GameObject description;
+
+    public static Button useButton1;
+    public static Image itemImage1;
+    public static TMP_Text itemName1, itemDescription1, itemValue1, itemPrice1;
+    public static GameObject description1;
+
     private void Awake()
     {
         Instance = this;
+
+        useButton1 = useButton;
+        itemImage1 = itemImage;
+        itemName1 = itemName;
+        itemDescription1 = itemDescription;
+        itemValue1 = itemValue;
+        itemPrice1 = itemPrice;
+        description1 = description;
     }
 
     public void Add(Item item)
@@ -34,6 +54,8 @@ public class InventoryManager : MonoBehaviour
 
     public void ListItems()
     {
+        ItemController itemController;
+
         //clears the inventory before opening so that items dont duplicate
         foreach (Transform item in ItemContent)
         {
@@ -44,6 +66,10 @@ public class InventoryManager : MonoBehaviour
         foreach (var item in Items)
         {
             GameObject obj = Instantiate(InventoryItem, ItemContent);
+
+            itemController = obj.GetComponent<ItemController>();
+            itemController.Item = item;
+
             var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
             var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
             var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();

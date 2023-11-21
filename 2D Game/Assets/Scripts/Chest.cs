@@ -12,8 +12,6 @@ public class Chest : MonoBehaviour
     {
         if(collision.tag == "Player" && Input.GetButton("Interact"))
         {
-            Debug.Log("chest");
-
             OpenChest();
 
             openned = true;
@@ -32,6 +30,6 @@ public class Chest : MonoBehaviour
 
     private void Start()
     {
-        animator = FindObjectOfType<Animator>();
+        animator = GetComponent<Animator>();
     }
 }

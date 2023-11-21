@@ -124,9 +124,9 @@ public class SpellManager : MonoBehaviour
             if (spellName != null && spellIcon != null)
             {
                 Debug.Log(SpellsBar);
-                //Debug.Log(spell.SpellName);
-                //spellName.text = spell.SpellName;
-                //spellIcon.sprite = spell.icon;
+                Debug.Log(spell.SpellName);
+                spellName.text = spell.SpellName;
+                spellIcon.sprite = spell.icon;
             }
         }
     }

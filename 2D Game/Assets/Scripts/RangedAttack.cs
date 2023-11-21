@@ -6,7 +6,6 @@ public class RangedAttack : MonoBehaviour
     [SerializeField] private float speed = 20f;
 
     [SerializeField] private GameObject impactEffect;
-
     [SerializeField] private Transform player;
     private Rigidbody2D rb;
 

@@ -2,11 +2,10 @@
 
 public class PlayerMovement : MonoBehaviour
 {
-
-	[SerializeField] private CharacterController2D controller;
-	[SerializeField] private Animator animator;
-	[SerializeField] private Rigidbody2D rb;
 	[SerializeField] private AudioSource walking;
+	private CharacterController2D controller;
+	private Animator animator;
+	private Rigidbody2D rb;
 
 	private float horizontalMove = 0f;
 	private float verticalMove = 0f;
@@ -18,14 +17,22 @@ public class PlayerMovement : MonoBehaviour
 	private bool dodgeCool = false;
 	private bool dodgeDirection = true;
 
+	[Header("Stats")]
+
 	[SerializeField] private float runSpeed = 40f;
 	[SerializeField] private float dodgePower = 200f;
 	[SerializeField] private float dodgeCost = 20f;
 	[SerializeField] private float dodgeCooldown = 1f;
 	[SerializeField] private float climbSpeed = 200f;
 
+    private void Start()
+    {
+		controller = GetComponent<CharacterController2D>();
+		animator = GetComponent<Animator>();
+		rb = GetComponent<Rigidbody2D>();
+    }
 
-	void Update()
+	private void Update()
 	{
 		if (GameManager.gamePaused == false)
 		{
