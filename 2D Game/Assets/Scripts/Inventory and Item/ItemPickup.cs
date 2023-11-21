@@ -2,7 +2,7 @@
 
 public class ItemPickup : MonoBehaviour
 {
-    [SerializeField] private Item Item;
+    [SerializeField] private Item item;
 
     private bool isPickedUp = false;
 
@@ -10,7 +10,7 @@ public class ItemPickup : MonoBehaviour
     {
         if (!isPickedUp)
         {
-            InventoryManager.Instance.Add(Item);
+            InventoryManager.Instance.Add(item);
 
             Destroy(gameObject);
 

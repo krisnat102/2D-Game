@@ -4,16 +4,21 @@ public class RangedAttack : MonoBehaviour
 {
     [SerializeField] private float damage = 15f;
     [SerializeField] private float speed = 20f;
+    [SerializeField] private int distanceOffset = 5;
+
 
     [SerializeField] private GameObject impactEffect;
     [SerializeField] private Transform player;
     private Rigidbody2D rb;
+    Vector2 direction;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
-        Vector2 direction = (player.position - transform.position).normalized;
+        float offset = Mathf.Abs(player.position.x - transform.position.x) / distanceOffset;
+
+        Vector2 direction = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y + offset).normalized;
         rb.velocity = direction * speed;
     }
 
@@ -30,5 +35,18 @@ public class RangedAttack : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+
+    private void Update()
+    {
+        TrackMovement();
+    }
+
+    private void TrackMovement()
+    {
+        Vector2 direction = rb.velocity;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 }

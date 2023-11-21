@@ -94,7 +94,7 @@ public class Enemy : MonoBehaviour
     {
         if (enemyAttackAI.PlayerInRange()) Invoke("Attack", 0.2f);
 
-        if (transform != null && playerTrans != null && flip)
+        if (transform != null && playerTrans != null && flip && PlayerStats.death == false)
         {
             if (transform.position.x < playerTrans.position.x)
             {

@@ -228,8 +228,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeButton: {fileID: 3413055914764169345}
-  inventoryManager: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
-    type: 3}
 --- !u!114 &8170417135543206314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25abad67f5bc78e4f84924f53cecbe9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Item: {fileID: 0}
+  item: {fileID: 0}
 --- !u!1 &3997007240885805985
 GameObject:
   m_ObjectHideFlags: 0
