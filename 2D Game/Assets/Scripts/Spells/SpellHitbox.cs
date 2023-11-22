@@ -5,11 +5,15 @@ public class SpellHitbox : MonoBehaviour
 {
     [SerializeField] private Spell spell;
 
-    [SerializeField] private Rigidbody2D rb;
+    private Rigidbody2D rb;
+    private Animator anim;
 
-    [SerializeField] private Animator anim;
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+
+
         rb.velocity = transform.right * spell.speed;
     }
 

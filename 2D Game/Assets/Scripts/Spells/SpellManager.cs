@@ -45,6 +45,9 @@ public class SpellManager : MonoBehaviour
         foreach (var spell in Spells)
         {
             GameObject obj = Instantiate(InventorySpell, SpellContent);
+            SpellController spellController = obj.GetComponent<SpellController>();
+            spellController.spell = spell;
+
             var spellName = obj.transform.Find("SpellName").GetComponent<Text>();
             var spellIcon = obj.transform.Find("SpellIcon").GetComponent<Image>();
             var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
@@ -108,23 +111,17 @@ public class SpellManager : MonoBehaviour
         foreach (var spell in SpellsBar)
         {
             GameObject obj = Instantiate(ActiveSpell, SpellContentBar);
+            SpellController spellController = obj.GetComponent<SpellController>();
+            spellController.spell = spell;
+
             var spellName = obj.transform.Find("SpellName").GetComponent<Text>();
             //var spellName = obj.GetComponentInChildren<Text>();
-            if(spellName == null)
-            {
-                Debug.Log("spellname empty");
-            }
+
             var spellIcon = obj.transform.Find("SpellIcon").GetComponent<Image>();
             //var spellIcon = obj.GetComponentInChildren<Image>();
-            if (spellIcon == null)
-            {
-                Debug.Log("spellicon empty");
-            }
 
             if (spellName != null && spellIcon != null)
             {
-                Debug.Log(SpellsBar);
-                Debug.Log(spell.SpellName);
                 spellName.text = spell.SpellName;
                 spellIcon.sprite = spell.icon;
             }

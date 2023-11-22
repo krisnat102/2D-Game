@@ -3,7 +3,10 @@ guid: 2af9dd996ac8c604b9461f13511c7c89
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - RemoveButton: {instanceID: 0}
+  - Firebolt: {fileID: 11400000, guid: 501bed144e7729e43abb8a680cc27cbc, type: 2}
+  - RayOfFrost: {fileID: 11400000, guid: 11e017910ec90e14db8e07b7d2bcbe41, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

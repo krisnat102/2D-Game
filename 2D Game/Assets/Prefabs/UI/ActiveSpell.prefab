@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 5031718958720051901}
   - component: {fileID: 4138782925485695886}
   - component: {fileID: -6548344268668641725}
+  - component: {fileID: -3628428208617568605}
   m_Layer: 5
   m_Name: ActiveSpell
   m_TagString: Untagged
@@ -230,6 +231,19 @@ MonoBehaviour:
   ActiveSpellsMax: 7
   Firebolt: {fileID: 11400000, guid: 501bed144e7729e43abb8a680cc27cbc, type: 2}
   RayOfFrost: {fileID: 11400000, guid: 11e017910ec90e14db8e07b7d2bcbe41, type: 2}
+--- !u!114 &-3628428208617568605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074373540294830318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: accfda512faa54c4b8c01feed1f4b4a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spell: {fileID: 0}
 --- !u!1 &3997007240885805985
 GameObject:
   m_ObjectHideFlags: 0

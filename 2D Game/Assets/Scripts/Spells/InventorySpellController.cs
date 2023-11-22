@@ -9,9 +9,6 @@ public class InventorySpellController : MonoBehaviour
 
     [SerializeField] private int ActiveSpellsMax = 8;
 
-    [SerializeField] private Spell Firebolt;
-    [SerializeField] private Spell RayOfFrost;
-
     public void RemoveSpell()
     {
         SpellManager.Instance.Remove(spell);
@@ -26,39 +23,26 @@ public class InventorySpellController : MonoBehaviour
 
     public void UseSpell()
     {
-        switch (spell.spellType)
+        GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        SpellController spellController = button.GetComponent<SpellController>();
+        Spell spell = spellController.spell;
+
+        if (SpellManager.SpellsBar.Count < ActiveSpellsMax && !SpellManager.SpellsBar.Contains(spell))
         {
-            case Spell.SpellType.Firebolt:
-                    if (SpellManager.SpellsBar.Count < ActiveSpellsMax && !SpellManager.SpellsBar.Contains(Firebolt))
-                {
-                    SpellManager.SpellsBar.Add(Firebolt);
-                    SpellManager.Instance.ListActiveSpells();
-                    //SpellManager.SpellsBar.Remove(Firebolt);
-                }
-                    else
-                    {
-                        Debug.Log("already there");
-                    }
-        break;
-            case Spell.SpellType.RayOfFrost:
-                if (SpellManager.SpellsBar.Count < ActiveSpellsMax && !SpellManager.SpellsBar.Contains(RayOfFrost))
-                {
-                    SpellManager.SpellsBar.Add(RayOfFrost);
-                    SpellManager.Instance.ListActiveSpells();
-                    //SpellManager.SpellsBar.Remove(RayOfFrost);
-                }
-                else
-                {
-                    Debug.Log("already there");
-                }
-                break;
+            SpellManager.SpellsBar.Add(spell);
+            SpellManager.Instance.ListActiveSpells();
         }
+        else Debug.Log("already there");
     }
 
     public void RemoveActiveSpell()
     {
+        GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        SpellController spellController = button.GetComponent<SpellController>();
+
         Destroy(gameObject);
 
-        SpellManager.SpellsBar.Remove(spell);
+        SpellManager.SpellsBar.Remove(spellController.spell);
+        Debug.Log(spellController.spell.name);
     }
 }

@@ -15,12 +15,14 @@ MonoBehaviour:
   id: 1
   SpellName: RayofFrost
   spell: 1
-  cost: 10
+  cost: 8
   value: 30
-  speed: 60
+  speed: 45
   cooldown: 1.5
-  range: 50
+  range: 100
   icon: {fileID: 21300000, guid: 35ef040aaf756494899d494f2513b950, type: 3}
-  spellEffect: {fileID: 201917306390933128, guid: 7ea330b59b4a20b4998230122fb4be02,
+  spellEffect: {fileID: 7122031244096216671, guid: edc24a8b282e3db46bff3851bdc8e488,
+    type: 3}
+  spellDeath: {fileID: 5496392243636567719, guid: 48c565086564714488da3cf481ff809c,
     type: 3}
   spellType: 1
