@@ -2,7 +2,7 @@
 
 public class SpellPickup : MonoBehaviour
 {
-    [SerializeField] private Spell Spell;
+    [SerializeField] private Spell spell;
 
     private bool isPickedUp = false;
 
@@ -10,7 +10,7 @@ public class SpellPickup : MonoBehaviour
     {
         if (!isPickedUp)
         {
-            SpellManager.Instance.Add(Spell);
+            SpellManager.Instance.Add(spell);
 
             Destroy(gameObject);
 
@@ -20,12 +20,6 @@ public class SpellPickup : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D hitInfo)
     {
-        if (hitInfo.tag == "Player")
-        {
-            if (Input.GetButtonDown("Interact"))
-            {
-                Pickup();
-            }
-        }
+        if (hitInfo.tag == "PickupRange" && Input.GetButtonDown("Interact")) Pickup();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,9 +20,28 @@ public class SpellManager : MonoBehaviour
     [SerializeField] private Transform SpellContentBar;
     [SerializeField] private GameObject ActiveSpell;
 
+    [Header("Item Description")]
+    [SerializeField] private Button useButton;
+    [SerializeField] private Image spellImage;
+    [SerializeField] private TMP_Text spellName, spellDescription, spellValue, spellPrice;
+    [SerializeField] private GameObject description;
+
+    public static Button useButton1;
+    public static Image spellImage1;
+    public static TMP_Text spellName1, spellDescription1, spellValue1, spellPrice1;
+    public static GameObject description1;
+
     private void Awake()
     {
         Instance = this;
+
+        useButton1 = useButton;
+        spellImage1 = spellImage;
+        spellName1 = spellName;
+        spellDescription1 = spellDescription;
+        spellValue1 = spellValue;
+        spellPrice1 = spellPrice;
+        description1 = description;
     }
 
     public void Add(Spell spell)

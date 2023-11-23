@@ -1,13 +1,17 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class InventorySpellController : MonoBehaviour
 {
     Spell spell;
 
-    [SerializeField] private Button RemoveButton;
-
     [SerializeField] private int ActiveSpellsMax = 8;
+
+    private Button useButton;
+    private Image spellImage;
+    private TMP_Text spellName, spellPrice, spellValue, spellDescription;
+    private GameObject description;
 
     public void RemoveSpell()
     {
@@ -44,5 +48,34 @@ public class InventorySpellController : MonoBehaviour
 
         SpellManager.SpellsBar.Remove(spellController.spell);
         Debug.Log(spellController.spell.name);
+    }
+
+    public void Description()
+    {
+        GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        SpellController spellController = button.GetComponent<SpellController>();
+
+        description = SpellManager.description1;
+        description.SetActive(true);
+
+        spellImage = SpellManager.spellImage1;
+        spellName = SpellManager.spellName1;
+        spellDescription = SpellManager.spellDescription1;
+        spellValue = SpellManager.spellValue1;
+        spellPrice = SpellManager.spellPrice1;
+
+        spellImage.sprite = spellController.spell.icon;
+        spellName.text = spellController.spell.SpellName.ToUpper();
+        spellDescription.text = spellController.spell.description;
+        if (spellController.spell.value != 0)
+        {
+            spellValue.text = "DMG - " + spellController.spell.value.ToString();
+        }
+        else spellValue.text = null;
+        spellPrice.text = "COST - " + spellController.spell.cost.ToString();
+
+        useButton = SpellManager.useButton1;
+        SpellController useButtonSpellController = useButton.GetComponent<SpellController>();
+        useButtonSpellController.spell = spellController.spell;
     }
 }

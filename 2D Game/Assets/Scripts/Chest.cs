@@ -10,7 +10,7 @@ public class Chest : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.tag == "Player" && Input.GetButton("Interact"))
+        if(collision.tag == "PickupRange" && Input.GetButton("Interact"))
         {
             OpenChest();
 

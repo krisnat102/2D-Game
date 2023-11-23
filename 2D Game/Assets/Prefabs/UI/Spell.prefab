@@ -205,7 +205,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: -6548344268668641725}
         m_TargetAssemblyTypeName: InventorySpellController, Assembly-CSharp
-        m_MethodName: UseSpell
+        m_MethodName: Description
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -227,10 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af9dd996ac8c604b9461f13511c7c89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RemoveButton: {fileID: 3413055914764169345}
   ActiveSpellsMax: 7
-  Firebolt: {fileID: 11400000, guid: 501bed144e7729e43abb8a680cc27cbc, type: 2}
-  RayOfFrost: {fileID: 11400000, guid: 11e017910ec90e14db8e07b7d2bcbe41, type: 2}
 --- !u!114 &8043705172818970956
 MonoBehaviour:
   m_ObjectHideFlags: 0
