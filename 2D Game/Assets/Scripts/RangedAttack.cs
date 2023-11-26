@@ -2,13 +2,15 @@
 
 public class RangedAttack : MonoBehaviour
 {
+    [Header("Stats")]
     [SerializeField] private float damage = 15f;
     [SerializeField] private float speed = 20f;
     [SerializeField] private int distanceOffset = 5;
 
-
+    [Header("Other")]
     [SerializeField] private GameObject impactEffect;
     [SerializeField] private Transform player;
+
     private Rigidbody2D rb;
     Vector2 direction;
 
@@ -24,7 +26,7 @@ public class RangedAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.tag != "Enemy" && hitInfo.tag != "Item" && hitInfo.tag != "Climbable" && hitInfo.tag != "AttackRange" && hitInfo.tag != "BackgroundObject")
+        if (hitInfo.tag != "Enemy" && hitInfo.tag != "Item" && hitInfo.tag != "Climbable" && hitInfo.tag != "AttackRange" && hitInfo.tag != "BackgroundObject" && hitInfo.tag != "PickupRange")
         {
             PlayerStats player = hitInfo.GetComponent<PlayerStats>();
             if (player == true)

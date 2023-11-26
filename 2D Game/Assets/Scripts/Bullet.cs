@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D (Collider2D hitInfo)
     {
-        if (hitInfo.tag != "Player" && hitInfo.tag != "Item" && hitInfo.tag != "Climbable" && hitInfo.tag != "AttackRange" && hitInfo.tag != "BackgroundObject")
+        if (hitInfo.tag != "Player" && hitInfo.tag != "Item" && hitInfo.tag != "Climbable" && hitInfo.tag != "AttackRange" && hitInfo.tag != "BackgroundObject" && hitInfo.tag != "PickupRange")
         {
             Enemy enemy = hitInfo.GetComponent<Enemy>();
             if(enemy == true)

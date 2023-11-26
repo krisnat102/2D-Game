@@ -40,25 +40,17 @@ public class InventoryItemController : MonoBehaviour
         GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
         ItemController itemController = button.GetComponent<ItemController>();
 
-        if (itemController.item.usable)
+        if (itemController.GetItem().usable)
         {
-            switch (itemController.item.itemType)
+            switch (itemController.GetItem().consumableType)
             {
-                case Item.ItemType.Potion:
+                case Item.ConsumableType.Heal:
                     if (PlayerStats.maxHP != PlayerStats.hp)
                     {
-                        RemoveItem2(itemController.item);
+                        RemoveItem2(itemController.GetItem());
                     }
 
-                    PlayerStats.Instance.Heal(itemController.item.value);
-                    break;
-                case Item.ItemType.Food:
-                    if (PlayerStats.maxHP != PlayerStats.hp)
-                    {
-                        RemoveItem2(itemController.item);
-                    }
-
-                    PlayerStats.Instance.Heal(itemController.item.value);
+                    PlayerStats.Instance.Heal(itemController.GetItem().value);
                     break;
             }
         }
@@ -78,21 +70,21 @@ public class InventoryItemController : MonoBehaviour
         itemValue = InventoryManager.itemValue1;
         itemPrice = InventoryManager.itemPrice1;
 
-        itemImage.sprite = itemController.item.icon;
-        itemName.text = itemController.item.ItemName.ToUpper();
-        itemDescription.text = itemController.item.itemDescription;
-        if(itemController.item.value != 0)
+        itemImage.sprite = itemController.GetItem().icon;
+        itemName.text = itemController.GetItem().ItemName.ToUpper();
+        itemDescription.text = itemController.GetItem().itemDescription;
+        if(itemController.GetItem().value != 0)
         {
-            itemValue.text = "VALUE - " + itemController.item.value.ToString();
+            itemValue.text = "VALUE - " + itemController.GetItem().value.ToString();
         }
         else itemValue.text = null;
-        itemPrice.text = "PRICE - "  + itemController.item.cost.ToString();
+        itemPrice.text = "PRICE - "  + itemController.GetItem().cost.ToString();
 
         useButton = InventoryManager.useButton1;
         ItemController useButtonItemController = useButton.GetComponent<ItemController>();
-        useButtonItemController.item = itemController.item;
+        useButtonItemController.SetItem(itemController.GetItem());
 
-        if (itemController.item.usable)
+        if (itemController.GetItem().usable)
         {
             useButton.gameObject.SetActive(true);
         }

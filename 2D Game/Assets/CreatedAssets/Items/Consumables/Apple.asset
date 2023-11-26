@@ -10,13 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b860ad291538dac4f9496d8a9a1d7c60, type: 3}
-  m_Name: RedPotion
+  m_Name: Apple
   m_EditorClassIdentifier: 
-  id: 3
-  ItemName: Red Potion
-  value: 25
-  cost: 20
+  id: 1
+  ItemName: Apple
+  value: 5
+  cost: 3
   usable: 1
-  icon: {fileID: 21300000, guid: 18b381ee30ca4f14095276e007590b7d, type: 3}
-  itemType: 0
-  itemDescription: Potion of healing that heals 20 HP. An essetial item for any adventurer
+  icon: {fileID: 21300000, guid: 2e6d6c9c5dbaafc46a6ec0e88d08e844, type: 3}
+  itemClass: 0
+  itemDescription: A tasty looking apple that heals 5 HP
+  equipment: 0
+  armor: 0
+  weight: 0
+  physicalRes: 0
+  magicRes: 0
+  equipmentType: 0
+  consumable: 1
+  consumableType: 1

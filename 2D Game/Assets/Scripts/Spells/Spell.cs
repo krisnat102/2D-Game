@@ -16,6 +16,7 @@ public class Spell : ScriptableObject
     public GameObject spellEffect;
     public GameObject spellDeath;
     public SpellType spellType;
+    [TextArea]
     public string description;
 
     public enum SpellType

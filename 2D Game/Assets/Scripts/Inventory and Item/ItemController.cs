@@ -3,6 +3,16 @@
 public class ItemController : MonoBehaviour
 {
 
-    public Item item;
+    private Item item;
+
+    public Item GetItem()
+    {
+        return this.item;
+    }
+
+    public void SetItem(Item item)
+    {
+        this.item = item;
+    }
 
 }

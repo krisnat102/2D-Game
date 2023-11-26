@@ -28,6 +28,17 @@ public class InventoryManager : MonoBehaviour
     public static Image itemImage1;
     public static TMP_Text itemName1, itemDescription1, itemValue1, itemPrice1;
     public static GameObject description1;
+    
+    private Filter filter = default;
+
+    private enum Filter
+    {
+        ConsumableInv,
+        MaterialInv,
+        EquimpentInv,
+        QuestInv,
+        MisctInv
+    };
 
     private void Awake()
     {
@@ -52,7 +63,7 @@ public class InventoryManager : MonoBehaviour
         Items.Remove(item);
     }
 
-    public void ListItems()
+    private void ListItems()
     {
         ItemController itemController;
 
@@ -65,13 +76,152 @@ public class InventoryManager : MonoBehaviour
         //adds the items to the inventory
         foreach (var item in Items)
         {
+            /*
+            if (filter == Filter.ConsumableInv)
+                if (item.itemClass == Item.ItemClass.Consumable)
+                {
+                    GameObject obj = Instantiate(InventoryItem, ItemContent);
+
+                    obj.SetActive(true);
+                    obj.name = item.name;
+
+                    itemController = obj.GetComponent<ItemController>();
+                    itemController.SetItem(item);
+
+                    var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
+                    var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
+                    var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
+
+                    itemName.text = item.ItemName;
+                    itemIcon.sprite = item.icon;
+
+                    if (EnableRemove.isOn)
+                    {
+                        removeButton.gameObject.SetActive(true);
+                    }
+                }
+            else if (filter == Filter.MaterialInv)
+                    if (item.itemClass == Item.ItemClass.Material)
+                    {
+                        GameObject obj = Instantiate(InventoryItem, ItemContent);
+
+                        obj.SetActive(true);
+                        obj.name = item.name;
+
+                        itemController = obj.GetComponent<ItemController>();
+                        itemController.SetItem(item);
+
+                        var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
+                        var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
+                        var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
+
+                        itemName.text = item.ItemName;
+                        itemIcon.sprite = item.icon;
+
+                        if (EnableRemove.isOn)
+                        {
+                            removeButton.gameObject.SetActive(true);
+                        }
+                    }
+            else if (filter == Filter.EquimpentInv)
+                        if (item.itemClass == Item.ItemClass.Equipment)
+                        {
+                            GameObject obj = Instantiate(InventoryItem, ItemContent);
+
+                            obj.SetActive(true);
+                            obj.name = item.name;
+
+                            itemController = obj.GetComponent<ItemController>();
+                            itemController.SetItem(item);
+
+                            var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
+                            var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
+                            var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
+
+                            itemName.text = item.ItemName;
+                            itemIcon.sprite = item.icon;
+
+                            if (EnableRemove.isOn)
+                            {
+                                removeButton.gameObject.SetActive(true);
+                            }
+                        }
+            else if (filter == Filter.QuestInv)
+                            if (item.itemClass == Item.ItemClass.Quest)
+                            {
+                                GameObject obj = Instantiate(InventoryItem, ItemContent);
+
+                                obj.SetActive(true);
+                                obj.name = item.name;
+
+                                itemController = obj.GetComponent<ItemController>();
+                                itemController.SetItem(item);
+
+                                var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
+                                var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
+                                var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
+
+                                itemName.text = item.ItemName;
+                                itemIcon.sprite = item.icon;
+
+                                if (EnableRemove.isOn)
+                                {
+                                    removeButton.gameObject.SetActive(true);
+                                }
+                            }
+            else if (filter == Filter.MisctInv)
+                                if (item.itemClass == Item.ItemClass.Misc)
+                                {
+                                    GameObject obj = Instantiate(InventoryItem, ItemContent);
+
+                                    obj.SetActive(true);
+                                    obj.name = item.name;
+
+                                    itemController = obj.GetComponent<ItemController>();
+                                    itemController.SetItem(item);
+
+                                    var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
+                                    var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
+                                    var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
+
+                                    itemName.text = item.ItemName;
+                                    itemIcon.sprite = item.icon;
+
+                                    if (EnableRemove.isOn)
+                                    {
+                                        removeButton.gameObject.SetActive(true);
+                                    }
+                                }
+            else if (filter == default)
+                                {
+                                    GameObject obj = Instantiate(InventoryItem, ItemContent);
+
+                                    obj.SetActive(true);
+                                    obj.name = item.name;
+
+                                    itemController = obj.GetComponent<ItemController>();
+                                    itemController.SetItem(item);
+
+                                    var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
+                                    var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
+                                    var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
+
+                                    itemName.text = item.ItemName;
+                                    itemIcon.sprite = item.icon;
+
+                                    if (EnableRemove.isOn)
+                                    {
+                                        removeButton.gameObject.SetActive(true);
+                                    }
+                                }
+            */
             GameObject obj = Instantiate(InventoryItem, ItemContent);
 
             obj.SetActive(true);
             obj.name = item.name;
 
             itemController = obj.GetComponent<ItemController>();
-            itemController.item = item;
+            itemController.SetItem(item);
 
             var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
             var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
@@ -89,7 +239,7 @@ public class InventoryManager : MonoBehaviour
         SetInventoryItems();
     }
 
-    public void EnableItemRemove()
+    private void EnableItemRemove()
     {
         if (EnableRemove.isOn)
         {
@@ -109,7 +259,7 @@ public class InventoryManager : MonoBehaviour
         SetInventoryItems();
     }
 
-    public void SetInventoryItems()
+    private void SetInventoryItems()
     {
         InventoryItems = ItemContent.GetComponentsInChildren<InventoryItemController>();
         System.Array.Resize(ref InventoryItems, Items.Count);
@@ -143,5 +293,47 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
+        if (Input.GetButtonDown("Menu"))
+        {
+            if (Inventory.activeInHierarchy || SpellInventory.activeInHierarchy)
+            {
+                Inventory.SetActive(false);
+                SpellInventory.SetActive(false);
+
+                Weapon.canFire = true;
+            }
+        }
+    }
+
+    private void ConsumableInv()
+    {
+        filter = Filter.ConsumableInv;
+
+        ListItems();
+    }
+    private void MaterialInv()
+    {
+        filter = Filter.MaterialInv;
+
+        ListItems();
+    }
+    private void EquipmentInv()
+    {
+        filter = Filter.EquimpentInv;
+
+        ListItems();
+        
+    }
+    private void QuestInv()
+    {
+        filter = Filter.QuestInv;
+
+        ListItems();
+    }
+    private void MiscInv()
+    {
+        filter = Filter.MisctInv;
+
+        ListItems();
     }
 }
