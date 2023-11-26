@@ -35,8 +35,6 @@ public class Item : ScriptableObject
     [HideInInspector]
     public float weight;
     [HideInInspector]
-    public float physicalRes;
-    [HideInInspector]
     public float magicRes;
     [HideInInspector]
     public EquipmentType equipmentType;
@@ -77,7 +75,6 @@ public class Item_Editor : Editor
         {
             script.armor = EditorGUILayout.FloatField("Armor", script.armor);
             script.weight = EditorGUILayout.FloatField("Weight", script.weight);
-            script.physicalRes = EditorGUILayout.FloatField("Physical Resistance", script.physicalRes);
             script.magicRes = EditorGUILayout.FloatField("Magic Resistance", script.magicRes);
             script.equipmentType = (Item.EquipmentType)EditorGUILayout.EnumPopup("Type", script.equipmentType);
         }

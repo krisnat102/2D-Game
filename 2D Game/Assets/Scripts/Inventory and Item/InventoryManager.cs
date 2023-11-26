@@ -21,18 +21,19 @@ public class InventoryManager : MonoBehaviour
     [Header("Item Description")]
     [SerializeField] private Button useButton;
     [SerializeField] private Image itemImage;
-    [SerializeField] private TMP_Text itemName, itemDescription, itemValue, itemPrice;
+    [SerializeField] private TMP_Text itemName, itemDescription, itemValue, itemPrice, itemWeight, itemArmor, itemMagicRes;
     [SerializeField] private GameObject description;
 
     public static Button useButton1;
     public static Image itemImage1;
-    public static TMP_Text itemName1, itemDescription1, itemValue1, itemPrice1;
+    public static TMP_Text itemName1, itemDescription1, itemValue1, itemPrice1, itemWeight1, itemArmor1, itemMagicRes1;
     public static GameObject description1;
     
     private Filter filter = default;
 
     private enum Filter
     {
+        Default,
         ConsumableInv,
         MaterialInv,
         EquimpentInv,
@@ -51,6 +52,9 @@ public class InventoryManager : MonoBehaviour
         itemValue1 = itemValue;
         itemPrice1 = itemPrice;
         description1 = description;
+        itemWeight1 = itemWeight;
+        itemArmor1 = itemArmor;
+        itemMagicRes1 = itemMagicRes;
     }
 
     public void Add(Item item)
@@ -70,151 +74,13 @@ public class InventoryManager : MonoBehaviour
         //clears the inventory before opening so that items dont duplicate
         foreach (Transform item in ItemContent)
         {
+            item.gameObject.SetActive(true);
             Destroy(item.gameObject);
         }
 
         //adds the items to the inventory
         foreach (var item in Items)
         {
-            /*
-            if (filter == Filter.ConsumableInv)
-                if (item.itemClass == Item.ItemClass.Consumable)
-                {
-                    GameObject obj = Instantiate(InventoryItem, ItemContent);
-
-                    obj.SetActive(true);
-                    obj.name = item.name;
-
-                    itemController = obj.GetComponent<ItemController>();
-                    itemController.SetItem(item);
-
-                    var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
-                    var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
-                    var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
-
-                    itemName.text = item.ItemName;
-                    itemIcon.sprite = item.icon;
-
-                    if (EnableRemove.isOn)
-                    {
-                        removeButton.gameObject.SetActive(true);
-                    }
-                }
-            else if (filter == Filter.MaterialInv)
-                    if (item.itemClass == Item.ItemClass.Material)
-                    {
-                        GameObject obj = Instantiate(InventoryItem, ItemContent);
-
-                        obj.SetActive(true);
-                        obj.name = item.name;
-
-                        itemController = obj.GetComponent<ItemController>();
-                        itemController.SetItem(item);
-
-                        var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
-                        var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
-                        var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
-
-                        itemName.text = item.ItemName;
-                        itemIcon.sprite = item.icon;
-
-                        if (EnableRemove.isOn)
-                        {
-                            removeButton.gameObject.SetActive(true);
-                        }
-                    }
-            else if (filter == Filter.EquimpentInv)
-                        if (item.itemClass == Item.ItemClass.Equipment)
-                        {
-                            GameObject obj = Instantiate(InventoryItem, ItemContent);
-
-                            obj.SetActive(true);
-                            obj.name = item.name;
-
-                            itemController = obj.GetComponent<ItemController>();
-                            itemController.SetItem(item);
-
-                            var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
-                            var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
-                            var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
-
-                            itemName.text = item.ItemName;
-                            itemIcon.sprite = item.icon;
-
-                            if (EnableRemove.isOn)
-                            {
-                                removeButton.gameObject.SetActive(true);
-                            }
-                        }
-            else if (filter == Filter.QuestInv)
-                            if (item.itemClass == Item.ItemClass.Quest)
-                            {
-                                GameObject obj = Instantiate(InventoryItem, ItemContent);
-
-                                obj.SetActive(true);
-                                obj.name = item.name;
-
-                                itemController = obj.GetComponent<ItemController>();
-                                itemController.SetItem(item);
-
-                                var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
-                                var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
-                                var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
-
-                                itemName.text = item.ItemName;
-                                itemIcon.sprite = item.icon;
-
-                                if (EnableRemove.isOn)
-                                {
-                                    removeButton.gameObject.SetActive(true);
-                                }
-                            }
-            else if (filter == Filter.MisctInv)
-                                if (item.itemClass == Item.ItemClass.Misc)
-                                {
-                                    GameObject obj = Instantiate(InventoryItem, ItemContent);
-
-                                    obj.SetActive(true);
-                                    obj.name = item.name;
-
-                                    itemController = obj.GetComponent<ItemController>();
-                                    itemController.SetItem(item);
-
-                                    var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
-                                    var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
-                                    var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
-
-                                    itemName.text = item.ItemName;
-                                    itemIcon.sprite = item.icon;
-
-                                    if (EnableRemove.isOn)
-                                    {
-                                        removeButton.gameObject.SetActive(true);
-                                    }
-                                }
-            else if (filter == default)
-                                {
-                                    GameObject obj = Instantiate(InventoryItem, ItemContent);
-
-                                    obj.SetActive(true);
-                                    obj.name = item.name;
-
-                                    itemController = obj.GetComponent<ItemController>();
-                                    itemController.SetItem(item);
-
-                                    var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
-                                    var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
-                                    var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
-
-                                    itemName.text = item.ItemName;
-                                    itemIcon.sprite = item.icon;
-
-                                    if (EnableRemove.isOn)
-                                    {
-                                        removeButton.gameObject.SetActive(true);
-                                    }
-                                }
-            */
             GameObject obj = Instantiate(InventoryItem, ItemContent);
 
             obj.SetActive(true);
@@ -229,6 +95,32 @@ public class InventoryManager : MonoBehaviour
 
             itemName.text = item.ItemName;
             itemIcon.sprite = item.icon;
+
+            if (filter == Filter.ConsumableInv)
+                if (item.itemClass != Item.ItemClass.Consumable)
+                {
+                    obj.SetActive(false);
+                }
+            if (filter == Filter.MaterialInv)
+                if (item.itemClass != Item.ItemClass.Material)
+                {
+                    obj.SetActive(false);
+                }
+            if (filter == Filter.EquimpentInv)
+                if (item.itemClass != Item.ItemClass.Equipment)
+                {
+                    obj.SetActive(false);
+                }
+            if (filter == Filter.QuestInv)
+                if (item.itemClass != Item.ItemClass.Quest)
+                {
+                    obj.SetActive(false);
+                }
+            if (filter == Filter.MisctInv)
+                if (item.itemClass != Item.ItemClass.Misc)
+                {
+                    obj.SetActive(false);
+                }
 
             if (EnableRemove.isOn)
             {

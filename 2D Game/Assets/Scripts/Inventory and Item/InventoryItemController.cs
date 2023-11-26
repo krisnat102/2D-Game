@@ -10,7 +10,7 @@ public class InventoryItemController : MonoBehaviour
     
     private Button useButton;
     private Image itemImage;
-    private TMP_Text itemName, itemPrice, itemValue, itemDescription;
+    private TMP_Text itemName, itemPrice, itemValue, itemWeight, itemArmor, itemMagicRes, itemDescription;
     private GameObject description;
 
     public void RemoveItem()
@@ -40,7 +40,7 @@ public class InventoryItemController : MonoBehaviour
         GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
         ItemController itemController = button.GetComponent<ItemController>();
 
-        if (itemController.GetItem().usable)
+        if (itemController.GetItem().consumable)
         {
             switch (itemController.GetItem().consumableType)
             {
@@ -51,6 +51,24 @@ public class InventoryItemController : MonoBehaviour
                     }
 
                     PlayerStats.Instance.Heal(itemController.GetItem().value);
+                    break;
+            }
+        }
+        if (itemController.GetItem().equipment)
+        {
+            switch (itemController.GetItem().equipmentType)
+            {
+                case Item.EquipmentType.Helmet:
+                    Debug.Log("Helmet");
+                    break;
+                case Item.EquipmentType.Chestplate:
+                    Debug.Log("Chestplate");
+                    break;
+                case Item.EquipmentType.Leggings:
+                    Debug.Log("Leggings");
+                    break;
+                case Item.EquipmentType.Gloves:
+                    Debug.Log("Gloves");
                     break;
             }
         }
@@ -69,15 +87,19 @@ public class InventoryItemController : MonoBehaviour
         itemDescription = InventoryManager.itemDescription1;
         itemValue = InventoryManager.itemValue1;
         itemPrice = InventoryManager.itemPrice1;
+        itemWeight = InventoryManager.itemWeight1;
+        itemArmor = InventoryManager.itemArmor1;
+        itemMagicRes = InventoryManager.itemMagicRes1;
 
         itemImage.sprite = itemController.GetItem().icon;
         itemName.text = itemController.GetItem().ItemName.ToUpper();
         itemDescription.text = itemController.GetItem().itemDescription;
         if(itemController.GetItem().value != 0)
         {
+            itemValue.gameObject.SetActive(true);
             itemValue.text = "VALUE - " + itemController.GetItem().value.ToString();
         }
-        else itemValue.text = null;
+        else itemValue.gameObject.SetActive(false);
         itemPrice.text = "PRICE - "  + itemController.GetItem().cost.ToString();
 
         useButton = InventoryManager.useButton1;
@@ -85,9 +107,25 @@ public class InventoryItemController : MonoBehaviour
         useButtonItemController.SetItem(itemController.GetItem());
 
         if (itemController.GetItem().usable)
-        {
             useButton.gameObject.SetActive(true);
-        }
         else useButton.gameObject.SetActive(false);
+
+        if (itemController.GetItem().consumable)
+        {
+            useButton.GetComponentInChildren<Text>().text = "Use";
+        }
+
+        if (itemController.GetItem().equipment)
+        {
+            itemWeight.gameObject.SetActive(true);
+            itemArmor.gameObject.SetActive(true);
+            itemMagicRes.gameObject.SetActive(true);
+
+            itemWeight.text = "WEIGHT - " + itemController.GetItem().weight.ToString();
+            itemArmor.text = "ARMOR - " + itemController.GetItem().armor.ToString();
+            itemMagicRes.text = "MAGIC RES - " + itemController.GetItem().magicRes.ToString();
+
+            useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Equip";
+        }
     }
 }
