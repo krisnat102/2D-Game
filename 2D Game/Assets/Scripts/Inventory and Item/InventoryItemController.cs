@@ -54,7 +54,7 @@ public class InventoryItemController : MonoBehaviour
                     break;
             }
         }
-        if (itemController.GetItem().equipment)
+        else if (itemController.GetItem().equipment)
         {
             switch (itemController.GetItem().equipmentType)
             {
@@ -112,7 +112,7 @@ public class InventoryItemController : MonoBehaviour
 
         if (itemController.GetItem().consumable)
         {
-            useButton.GetComponentInChildren<Text>().text = "Use";
+            useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Use";
         }
 
         if (itemController.GetItem().equipment)
@@ -126,6 +126,12 @@ public class InventoryItemController : MonoBehaviour
             itemMagicRes.text = "MAGIC RES - " + itemController.GetItem().magicRes.ToString();
 
             useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Equip";
+        }
+        else
+        {
+            itemWeight.gameObject.SetActive(false);
+            itemArmor.gameObject.SetActive(false);
+            itemMagicRes.gameObject.SetActive(false);
         }
     }
 }
