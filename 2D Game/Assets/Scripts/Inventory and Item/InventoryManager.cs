@@ -18,6 +18,9 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private GameObject Inventory;
     [SerializeField] private GameObject SpellInventory;
 
+    [SerializeField] private Animator equipmentMenuAnimator;
+    [SerializeField] private GameObject equipmentMenu;
+
     [Header("Item Description")]
     [SerializeField] private Button useButton;
     [SerializeField] private Image itemImage;
@@ -84,6 +87,7 @@ public class InventoryManager : MonoBehaviour
             GameObject obj = Instantiate(InventoryItem, ItemContent);
 
             obj.SetActive(true);
+
             obj.name = item.name;
 
             itemController = obj.GetComponent<ItemController>();
@@ -148,7 +152,6 @@ public class InventoryManager : MonoBehaviour
             }
         }
         ListItems();
-        SetInventoryItems();
     }
 
     private void SetInventoryItems()
@@ -227,5 +230,14 @@ public class InventoryManager : MonoBehaviour
         filter = Filter.MisctInv;
 
         ListItems();
+    }
+
+    public Animator GetEquipmentMenuAnimator()
+    {
+        return equipmentMenuAnimator;
+    }
+    public GameObject GetEquipmentMenu()
+    {
+        return equipmentMenu;
     }
 }

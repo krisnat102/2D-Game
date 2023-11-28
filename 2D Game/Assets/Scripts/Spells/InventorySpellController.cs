@@ -65,7 +65,7 @@ public class InventorySpellController : MonoBehaviour
         spellPrice = SpellManager.spellPrice1;
 
         spellImage.sprite = spellController.spell.icon;
-        spellName.text = spellController.spell.SpellName.ToUpper();
+        spellName.text = spellController.spell.spellName.ToUpper();
         spellDescription.text = spellController.spell.description;
         if (spellController.spell.value != 0)
         {

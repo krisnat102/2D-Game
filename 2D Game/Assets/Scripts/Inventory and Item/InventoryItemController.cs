@@ -7,6 +7,7 @@ public class InventoryItemController : MonoBehaviour
     Item item;
 
     [SerializeField] private Button removeButton;
+    [SerializeField] private InventoryManager inventoryManager;
     
     private Button useButton;
     private Image itemImage;
@@ -15,6 +16,11 @@ public class InventoryItemController : MonoBehaviour
 
     public void RemoveItem()
     {
+        GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+
+        ItemController itemController = button.GetComponentInParent<ItemController>();
+        Item item = itemController.GetItem();
+
         InventoryManager.Instance.Remove(item);
 
         Destroy(gameObject);
@@ -56,6 +62,7 @@ public class InventoryItemController : MonoBehaviour
         }
         else if (itemController.GetItem().equipment)
         {
+            GameObject equipmentMenu = inventoryManager.GetEquipmentMenu();
             switch (itemController.GetItem().equipmentType)
             {
                 case Item.EquipmentType.Helmet:
@@ -94,13 +101,13 @@ public class InventoryItemController : MonoBehaviour
         itemImage.sprite = itemController.GetItem().icon;
         itemName.text = itemController.GetItem().ItemName.ToUpper();
         itemDescription.text = itemController.GetItem().itemDescription;
-        if(itemController.GetItem().value != 0)
+        if (itemController.GetItem().value != 0)
         {
             itemValue.gameObject.SetActive(true);
             itemValue.text = "VALUE - " + itemController.GetItem().value.ToString();
         }
         else itemValue.gameObject.SetActive(false);
-        itemPrice.text = "PRICE - "  + itemController.GetItem().cost.ToString();
+        itemPrice.text = "PRICE - " + itemController.GetItem().cost.ToString();
 
         useButton = InventoryManager.useButton1;
         ItemController useButtonItemController = useButton.GetComponent<ItemController>();

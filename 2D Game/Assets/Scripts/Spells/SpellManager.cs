@@ -74,7 +74,7 @@ public class SpellManager : MonoBehaviour
 
             if (spellName != null || spellIcon != null || removeButton != null)
             {
-                spellName.text = spell.SpellName;
+                spellName.text = spell.spellName;
                 spellIcon.sprite = spell.icon;
             }
         }
@@ -142,7 +142,7 @@ public class SpellManager : MonoBehaviour
 
             if (spellName != null && spellIcon != null)
             {
-                spellName.text = spell.SpellName;
+                spellName.text = spell.spellName;
                 spellIcon.sprite = spell.icon;
             }
         }

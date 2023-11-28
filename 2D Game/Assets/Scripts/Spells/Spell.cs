@@ -5,7 +5,7 @@
 public class Spell : ScriptableObject
 {
     public int id;
-    public string SpellName;
+    public string spellName;
     public bool spell;
     public int cost;
     public int value;
