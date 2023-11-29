@@ -7,8 +7,8 @@ public class InventoryItemController : MonoBehaviour
     Item item;
 
     [SerializeField] private Button removeButton;
-    [SerializeField] private InventoryManager inventoryManager;
-    
+    [SerializeField] private float equipmentCloseTime;
+
     private Button useButton;
     private Image itemImage;
     private TMP_Text itemName, itemPrice, itemValue, itemWeight, itemArmor, itemMagicRes, itemDescription;
@@ -62,7 +62,7 @@ public class InventoryItemController : MonoBehaviour
         }
         else if (itemController.GetItem().equipment)
         {
-            GameObject equipmentMenu = inventoryManager.GetEquipmentMenu();
+            GameObject equipmentMenu = InventoryManager.Instance.GetEquipmentMenu();
             switch (itemController.GetItem().equipmentType)
             {
                 case Item.EquipmentType.Helmet:
@@ -85,6 +85,9 @@ public class InventoryItemController : MonoBehaviour
     {
         GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
         ItemController itemController = button.GetComponent<ItemController>();
+
+        GameObject descriptionExtension = InventoryManager.Instance.GetEquipmentMenu();
+        Animator descriptionAnimator = InventoryManager.Instance.GetEquipmentMenuAnimator();
 
         description = InventoryManager.description1;
         description.SetActive(true);
@@ -133,12 +136,28 @@ public class InventoryItemController : MonoBehaviour
             itemMagicRes.text = "MAGIC RES - " + itemController.GetItem().magicRes.ToString();
 
             useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Equip";
+
+            descriptionExtension.SetActive(true);
+            descriptionAnimator.SetTrigger("Open");
+            descriptionExtension.GetComponent<Image>().sprite = InventoryManager.Instance.GetEquipmentOpenSprite();
         }
         else
         {
             itemWeight.gameObject.SetActive(false);
             itemArmor.gameObject.SetActive(false);
             itemMagicRes.gameObject.SetActive(false);
+
+            descriptionAnimator.SetTrigger("Close");
+            Invoke("CloseEquipmentExtension", equipmentCloseTime);
         }
+    }
+    
+    private void CloseEquipmentExtension()
+    {
+        Debug.Log("Close");
+
+        GameObject descriptionExtension = InventoryManager.Instance.GetEquipmentMenu();
+        descriptionExtension.GetComponent<Image>().sprite = InventoryManager.Instance.GetEquipmentCloseSprite();
+        descriptionExtension.SetActive(false);
     }
 }

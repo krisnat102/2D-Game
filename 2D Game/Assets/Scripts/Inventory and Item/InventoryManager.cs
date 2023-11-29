@@ -18,8 +18,11 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private GameObject Inventory;
     [SerializeField] private GameObject SpellInventory;
 
+    [Header("Equipment MiniMenu")]
     [SerializeField] private Animator equipmentMenuAnimator;
     [SerializeField] private GameObject equipmentMenu;
+    [SerializeField] private Sprite equipmentOpenSprite;
+    [SerializeField] private Sprite equipmentClosedSprite;
 
     [Header("Item Description")]
     [SerializeField] private Button useButton;
@@ -239,5 +242,13 @@ public class InventoryManager : MonoBehaviour
     public GameObject GetEquipmentMenu()
     {
         return equipmentMenu;
+    }
+    public Sprite GetEquipmentOpenSprite()
+    {
+        return equipmentOpenSprite;
+    }
+    public Sprite GetEquipmentCloseSprite()
+    {
+        return equipmentClosedSprite;
     }
 }

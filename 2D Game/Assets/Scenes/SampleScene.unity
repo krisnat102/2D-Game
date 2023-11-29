@@ -217,12 +217,12 @@ GameObject:
   - component: {fileID: 77539152}
   - component: {fileID: 77539154}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: DescriptionAnimation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &77539151
 RectTransform:
   m_ObjectHideFlags: 0
@@ -262,7 +262,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a6a7f1135f249bf44ab3b4c8d7373b00, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 975f956fc10d83549a649b6e060abcdf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2142,7 +2142,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -643.4, y: 305}
+  m_AnchoredPosition: {x: -643, y: 305}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &348233923
@@ -18979,6 +18979,28 @@ PrefabInstance:
       propertyPath: itemWeight
       value: 
       objectReference: {fileID: 1382623849}
+    - target: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
+        type: 3}
+      propertyPath: equipmentMenu
+      value: 
+      objectReference: {fileID: 77539150}
+    - target: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
+        type: 3}
+      propertyPath: equipmentMenuAnimator
+      value: 
+      objectReference: {fileID: 77539154}
+    - target: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
+        type: 3}
+      propertyPath: equipmentOpenSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9ae724354d580354c900d4fd10f1b3ff,
+        type: 3}
+    - target: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
+        type: 3}
+      propertyPath: equipmentClosedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 975f956fc10d83549a649b6e060abcdf,
+        type: 3}
     - target: {fileID: 6974382459076998432, guid: d50db331ba403b54a961879a9514ab7e,
         type: 3}
       propertyPath: m_Name
