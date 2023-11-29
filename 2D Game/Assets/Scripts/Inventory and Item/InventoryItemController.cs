@@ -139,7 +139,9 @@ public class InventoryItemController : MonoBehaviour
 
             descriptionExtension.SetActive(true);
             descriptionAnimator.SetTrigger("Open");
-            descriptionExtension.GetComponent<Image>().sprite = InventoryManager.Instance.GetEquipmentOpenSprite();
+            descriptionAnimator.SetFloat("OpenClose", 1);
+            //descriptionExtension.GetComponent<Image>().sprite = InventoryManager.Instance.GetEquipmentOpenSprite();
+            Debug.Log("open");
         }
         else
         {
@@ -148,16 +150,16 @@ public class InventoryItemController : MonoBehaviour
             itemMagicRes.gameObject.SetActive(false);
 
             descriptionAnimator.SetTrigger("Close");
+            descriptionAnimator.SetFloat("OpenClose", -1);
             Invoke("CloseEquipmentExtension", equipmentCloseTime);
+            Debug.Log("close ");
         }
     }
     
     private void CloseEquipmentExtension()
     {
-        Debug.Log("Close");
-
         GameObject descriptionExtension = InventoryManager.Instance.GetEquipmentMenu();
-        descriptionExtension.GetComponent<Image>().sprite = InventoryManager.Instance.GetEquipmentCloseSprite();
+        //descriptionExtension.GetComponent<Image>().sprite = InventoryManager.Instance.GetEquipmentCloseSprite();
         descriptionExtension.SetActive(false);
     }
 }
