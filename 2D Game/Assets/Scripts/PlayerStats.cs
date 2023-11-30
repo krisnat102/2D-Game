@@ -39,6 +39,10 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] private GameObject deathEffect;
 
+    private float armor = 0f;
+    private float magicRes = 0f;
+    private float weight = 0f;
+
     private void Awake()
     {
         Instance = this;
@@ -156,5 +160,38 @@ public class PlayerStats : MonoBehaviour
     private void StamRegenCooldown()
     {
         stamRegenCooldown = false;
+    }
+
+    public void RefreshStats()
+    {
+        if (InventoryManager.Instance.HelmetBn.GetComponent<ItemController>().GetItem() != null)
+        {
+            armor += InventoryManager.Instance.HelmetBn.GetComponent<ItemController>().GetItem().armor;
+            magicRes += InventoryManager.Instance.HelmetBn.GetComponent<ItemController>().GetItem().magicRes;
+            weight += InventoryManager.Instance.HelmetBn.GetComponent<ItemController>().GetItem().weight;
+        }
+
+        if (InventoryManager.Instance.ChestplateBn.GetComponent<ItemController>().GetItem() != null)
+        {
+            armor += InventoryManager.Instance.ChestplateBn.GetComponent<ItemController>().GetItem().armor;
+            magicRes += InventoryManager.Instance.ChestplateBn.GetComponent<ItemController>().GetItem().magicRes;
+            weight += InventoryManager.Instance.ChestplateBn.GetComponent<ItemController>().GetItem().weight;
+        }
+
+        if (InventoryManager.Instance.GlovesBn.GetComponent<ItemController>().GetItem() != null)
+        {
+            armor += InventoryManager.Instance.GlovesBn.GetComponent<ItemController>().GetItem().armor;
+            magicRes += InventoryManager.Instance.GlovesBn.GetComponent<ItemController>().GetItem().magicRes;
+            weight += InventoryManager.Instance.GlovesBn.GetComponent<ItemController>().GetItem().weight;
+        }
+        if (InventoryManager.Instance.BootsBn.GetComponent<ItemController>().GetItem() != null)
+        {
+            armor += InventoryManager.Instance.BootsBn.GetComponent<ItemController>().GetItem().armor;
+            magicRes += InventoryManager.Instance.BootsBn.GetComponent<ItemController>().GetItem().magicRes;
+            weight += InventoryManager.Instance.BootsBn.GetComponent<ItemController>().GetItem().weight;
+        }
+        Debug.Log("armor " + armor);
+        Debug.Log("magicRes " + magicRes);
+        Debug.Log("weight " + weight);
     }
 }

@@ -14,6 +14,8 @@ public class InventoryItemController : MonoBehaviour
     private TMP_Text itemName, itemPrice, itemValue, itemWeight, itemArmor, itemMagicRes, itemDescription;
     private GameObject description;
 
+    private bool equipmentMenuActive = false;
+
     public void RemoveItem()
     {
         GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
@@ -63,20 +65,93 @@ public class InventoryItemController : MonoBehaviour
         else if (itemController.GetItem().equipment)
         {
             GameObject equipmentMenu = InventoryManager.Instance.GetEquipmentMenu();
+
+            PlayerStats.Instance.RefreshStats();
+
             switch (itemController.GetItem().equipmentType)
             {
                 case Item.EquipmentType.Helmet:
-                    Debug.Log("Helmet");
+                    foreach (Transform transform in InventoryManager.Instance.HelmetBn.transform)
+                    {
+                        transform.GetComponent<Image>().gameObject.SetActive(true);
+                        transform.GetComponent<Image>().sprite = itemController.GetItem().icon;
+                    }
+                    InventoryManager.Instance.HelmetBn.GetComponent<ItemController>().SetItem(itemController.GetItem());
                     break;
+
                 case Item.EquipmentType.Chestplate:
-                    Debug.Log("Chestplate");
+                    foreach (Transform transform in InventoryManager.Instance.ChestplateBn.transform)
+                    {
+                        transform.GetComponent<Image>().gameObject.SetActive(true);
+                        transform.GetComponent<Image>().sprite = itemController.GetItem().icon;
+                    }
+                    InventoryManager.Instance.ChestplateBn.GetComponent<ItemController>().SetItem(itemController.GetItem());
                     break;
+
                 case Item.EquipmentType.Leggings:
-                    Debug.Log("Leggings");
+                    foreach (Transform transform in InventoryManager.Instance.BootsBn.transform)
+                    {
+                        transform.GetComponent<Image>().gameObject.SetActive(true);
+                        transform.GetComponent<Image>().sprite = itemController.GetItem().icon;
+                    }
+                    InventoryManager.Instance.BootsBn.GetComponent<ItemController>().SetItem(itemController.GetItem());
                     break;
+
                 case Item.EquipmentType.Gloves:
-                    Debug.Log("Gloves");
+                    foreach (Transform transform in InventoryManager.Instance.GlovesBn.transform)
+                    {
+                        transform.GetComponent<Image>().gameObject.SetActive(true);
+                        transform.GetComponent<Image>().sprite = itemController.GetItem().icon;
+                    }
+                    InventoryManager.Instance.GlovesBn.GetComponent<ItemController>().SetItem(itemController.GetItem());
                     break;
+            }
+            if (button.GetComponentInChildren<TextMeshProUGUI>().text == "Unequip")
+            {
+                description = InventoryManager.description1;
+
+                switch (button.GetComponent<ItemController>().GetItem().equipmentType)
+                {
+                    case Item.EquipmentType.Helmet:
+                        foreach (Transform transform in InventoryManager.Instance.HelmetBn.transform)
+                        {
+                            transform.GetComponent<Image>().gameObject.SetActive(false);
+                            transform.GetComponent<Image>().sprite = null;
+                        }
+                        InventoryManager.Instance.HelmetBn.GetComponent<ItemController>().SetItem(null);
+                        description.SetActive(false);
+                        break;
+
+                    case Item.EquipmentType.Chestplate:
+                        foreach (Transform transform in InventoryManager.Instance.ChestplateBn.transform)
+                        {
+                            transform.GetComponent<Image>().gameObject.SetActive(false);
+                            transform.GetComponent<Image>().sprite = null;
+                        }
+                        InventoryManager.Instance.ChestplateBn.GetComponent<ItemController>().SetItem(null);
+                        description.SetActive(false);
+                        break;
+
+                    case Item.EquipmentType.Leggings:
+                        foreach (Transform transform in InventoryManager.Instance.BootsBn.transform)
+                        {
+                            transform.GetComponent<Image>().gameObject.SetActive(false);
+                            transform.GetComponent<Image>().sprite = null;
+                        }
+                        InventoryManager.Instance.BootsBn.GetComponent<ItemController>().SetItem(null);
+                        description.SetActive(false);
+                        break;
+
+                    case Item.EquipmentType.Gloves:
+                        foreach (Transform transform in InventoryManager.Instance.GlovesBn.transform)
+                        {
+                            transform.GetComponent<Image>().gameObject.SetActive(false);
+                            transform.GetComponent<Image>().sprite = null;
+                        }
+                        InventoryManager.Instance.GlovesBn.GetComponent<ItemController>().SetItem(null);
+                        description.SetActive(false);
+                        break;
+                }
             }
         }
     }
@@ -138,10 +213,13 @@ public class InventoryItemController : MonoBehaviour
             useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Equip";
 
             descriptionExtension.SetActive(true);
-            descriptionAnimator.SetTrigger("Open");
-            descriptionAnimator.SetFloat("OpenClose", 1);
-            //descriptionExtension.GetComponent<Image>().sprite = InventoryManager.Instance.GetEquipmentOpenSprite();
-            Debug.Log("open");
+            if(equipmentMenuActive == false)
+            {
+                descriptionAnimator.SetTrigger("Open");
+                descriptionAnimator.SetBool("OpenClose", true);
+                Debug.Log("open");
+                equipmentMenuActive = true;
+            }
         }
         else
         {
@@ -150,16 +228,15 @@ public class InventoryItemController : MonoBehaviour
             itemMagicRes.gameObject.SetActive(false);
 
             descriptionAnimator.SetTrigger("Close");
-            descriptionAnimator.SetFloat("OpenClose", -1);
-            Invoke("CloseEquipmentExtension", equipmentCloseTime);
-            Debug.Log("close ");
+            descriptionAnimator.SetBool("OpenClose", false);
+            Debug.Log("close");
+            Invoke("CloseEquipmentMenu", equipmentCloseTime);
+            equipmentMenuActive = false;
         }
     }
-    
-    private void CloseEquipmentExtension()
+    private void CloseEquipmentMenu()
     {
         GameObject descriptionExtension = InventoryManager.Instance.GetEquipmentMenu();
-        //descriptionExtension.GetComponent<Image>().sprite = InventoryManager.Instance.GetEquipmentCloseSprite();
         descriptionExtension.SetActive(false);
     }
 }

@@ -21,8 +21,10 @@ public class InventoryManager : MonoBehaviour
     [Header("Equipment MiniMenu")]
     [SerializeField] private Animator equipmentMenuAnimator;
     [SerializeField] private GameObject equipmentMenu;
-    [SerializeField] private Sprite equipmentOpenSprite;
-    [SerializeField] private Sprite equipmentClosedSprite;
+    [SerializeField] private Button helmetBn;
+    [SerializeField] private Button chestplateBn;
+    [SerializeField] private Button glovesBn;
+    [SerializeField] private Button bootsBn;
 
     [Header("Item Description")]
     [SerializeField] private Button useButton;
@@ -34,8 +36,13 @@ public class InventoryManager : MonoBehaviour
     public static Image itemImage1;
     public static TMP_Text itemName1, itemDescription1, itemValue1, itemPrice1, itemWeight1, itemArmor1, itemMagicRes1;
     public static GameObject description1;
-    
+
     private Filter filter = default;
+
+    public Button HelmetBn { get => helmetBn; set => helmetBn = value; }
+    public Button ChestplateBn { get => chestplateBn; set => chestplateBn = value; }
+    public Button GlovesBn { get => glovesBn; set => glovesBn = value; }
+    public Button BootsBn { get => bootsBn; set => bootsBn = value; }
 
     private enum Filter
     {
@@ -168,6 +175,14 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    public void EquipedEquipmentBn()
+    {
+        //GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        //button.GetComponent<ItemController>().GetItem()
+
+        useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Unequip";
+    }
+
     public void Update()
     {
         if (GameManager.gamePaused == false)
@@ -220,7 +235,7 @@ public class InventoryManager : MonoBehaviour
         filter = Filter.EquimpentInv;
 
         ListItems();
-        
+
     }
     private void QuestInv()
     {
@@ -242,13 +257,5 @@ public class InventoryManager : MonoBehaviour
     public GameObject GetEquipmentMenu()
     {
         return equipmentMenu;
-    }
-    public Sprite GetEquipmentOpenSprite()
-    {
-        return equipmentOpenSprite;
-    }
-    public Sprite GetEquipmentCloseSprite()
-    {
-        return equipmentClosedSprite;
     }
 }
