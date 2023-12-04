@@ -177,9 +177,6 @@ public class InventoryManager : MonoBehaviour
 
     public void EquipedEquipmentBn()
     {
-        //GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
-        //button.GetComponent<ItemController>().GetItem()
-
         useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Unequip";
     }
 

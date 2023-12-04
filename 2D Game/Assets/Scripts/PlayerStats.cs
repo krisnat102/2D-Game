@@ -43,6 +43,8 @@ public class PlayerStats : MonoBehaviour
     private float magicRes = 0f;
     private float weight = 0f;
 
+    public bool Immune { get => immune; set => immune = value; }
+
     private void Awake()
     {
         Instance = this;
@@ -94,11 +96,11 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (immune == false)
+        if (Immune == false)
         {
             hp -= damage;
 
-            immune = true;
+            Immune = true;
 
             Invoke("StopImmune", 0.2f);
         }
@@ -111,7 +113,7 @@ public class PlayerStats : MonoBehaviour
 
     private void StopImmune()
     {
-        immune = false;
+        Immune = false;
     }
 
     void Die()

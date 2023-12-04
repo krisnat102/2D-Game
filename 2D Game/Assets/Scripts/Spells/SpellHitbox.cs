@@ -48,6 +48,8 @@ public class SpellHitbox : MonoBehaviour
     }
     private void DestroyObject()
     {
+        Instantiate(spell.spellDeath, transform.position, Quaternion.identity);
+
         Destroy(gameObject);
     }
 

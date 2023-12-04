@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Firebolt
   m_EditorClassIdentifier: 
   id: 0
-  SpellName: Firebolt
+  spellName: Firebolt
   spell: 1
   cost: 10
   value: 40
   speed: 20
   cooldown: 1.5
-  range: 60
+  range: 70
   icon: {fileID: 21300000, guid: 1d0551bd3e5e9aa4a8d7e589c71c01cf, type: 3}
   spellEffect: {fileID: 201917306390933128, guid: 17ac2749f03f6f74fa9ee9e5516d0da1,
     type: 3}

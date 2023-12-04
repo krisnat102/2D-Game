@@ -2,7 +2,8 @@
 
 public class Chest : MonoBehaviour
 {
-    [SerializeField] private Item Item;
+    [SerializeField] private Item item;
+    [SerializeField] private Spell spell;
 
     private Animator animator;
 
@@ -20,9 +21,15 @@ public class Chest : MonoBehaviour
 
     private void OpenChest()
     {
-        if(openned == false)
+        if(openned == false && item != null)
         {
-            InventoryManager.Instance.Add(Item);
+            InventoryManager.Instance.Add(item);
+
+            animator.SetTrigger("Open");
+        }
+        else if (openned == false && spell != null)
+        {
+            SpellManager.Instance.Add(spell);
 
             animator.SetTrigger("Open");
         }

@@ -29,7 +29,7 @@ public class InventorySpellController : MonoBehaviour
     {
         GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
         SpellController spellController = button.GetComponent<SpellController>();
-        Spell spell = spellController.spell;
+        Spell spell = spellController.GetSpell();
 
         if (SpellManager.SpellsBar.Count < ActiveSpellsMax && !SpellManager.SpellsBar.Contains(spell))
         {
@@ -46,8 +46,8 @@ public class InventorySpellController : MonoBehaviour
 
         Destroy(gameObject);
 
-        SpellManager.SpellsBar.Remove(spellController.spell);
-        Debug.Log(spellController.spell.name);
+        SpellManager.SpellsBar.Remove(spellController.GetSpell());
+        Debug.Log(spellController.GetSpell().name);
     }
 
     public void Description()
@@ -64,18 +64,18 @@ public class InventorySpellController : MonoBehaviour
         spellValue = SpellManager.spellValue1;
         spellPrice = SpellManager.spellPrice1;
 
-        spellImage.sprite = spellController.spell.icon;
-        spellName.text = spellController.spell.spellName.ToUpper();
-        spellDescription.text = spellController.spell.description;
-        if (spellController.spell.value != 0)
+        spellImage.sprite = spellController.GetSpell().icon;
+        spellName.text = spellController.GetSpell().spellName.ToUpper();
+        spellDescription.text = spellController.GetSpell().description;
+        if (spellController.GetSpell().value != 0)
         {
-            spellValue.text = "DMG - " + spellController.spell.value.ToString();
+            spellValue.text = "DMG - " + spellController.GetSpell().value.ToString();
         }
         else spellValue.text = null;
-        spellPrice.text = "COST - " + spellController.spell.cost.ToString();
+        spellPrice.text = "COST - " + spellController.GetSpell().cost.ToString();
 
         useButton = SpellManager.useButton1;
         SpellController useButtonSpellController = useButton.GetComponent<SpellController>();
-        useButtonSpellController.spell = spellController.spell;
+        useButtonSpellController.SetSpell(spellController.GetSpell());
     }
 }

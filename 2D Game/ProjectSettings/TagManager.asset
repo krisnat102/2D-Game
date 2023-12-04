@@ -12,6 +12,7 @@ TagManager:
   - AttackRange
   - BackgroundObject
   - PickupRange
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -31,7 +32,7 @@ TagManager:
   - 
   - 
   - Background
-  - 
+  - RealBackground
   - 
   - Layer 1
   - Layer 2

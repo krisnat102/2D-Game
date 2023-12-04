@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
 	private bool ableClimb = false;
 	private bool dodgeCool = false;
 	private bool dodgeDirection = true;
+	private float speed;
+	private Vector3 oldPosition;
 
 	[Header("Stats")]
 
@@ -82,6 +84,12 @@ public class PlayerMovement : MonoBehaviour
 				Invoke("GrassRunningSound", 0.2f);
 			}
 		}
+		speed = Vector3.Distance(oldPosition, transform.position) * 100f;
+		oldPosition = transform.position;
+
+		if (speed > 30) PlayerStats.Instance.Immune = true;
+
+		else PlayerStats.Instance.Immune = false;
 	}
 
 	public void OnLanding()
@@ -104,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Dodge()
     {
+
 		Vector2 dodge = new Vector2(dodgePower, 0);
 
 		if (PlayerStats.stam > 20 && dodgeCool == false)
@@ -123,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
 			dodgeCool = true;
 			Invoke("DodgeCooldown", dodgeCooldown);
 		}
-    }
+	}
 
 	private void DodgeCooldown()
     {

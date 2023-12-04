@@ -90,7 +90,7 @@ public class Abilities : MonoBehaviour
         }
     }
 
-        void Spell()
+    void Spell()
     {
         if (SpellManager.SpellsBar[activeSpell] != null)
         {

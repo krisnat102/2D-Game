@@ -2,5 +2,14 @@
 
 public class SpellController : MonoBehaviour
 {
-    public Spell spell;
+    private Spell spell;
+
+    public void SetSpell(Spell spell)
+    {
+        this.spell = spell;
+    }
+    public Spell GetSpell()
+    {
+        return spell;
+    }
 }
