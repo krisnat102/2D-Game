@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 5604515879359011021}
   - component: {fileID: 8996486665773634701}
   - component: {fileID: 6956784789200225505}
+  - component: {fileID: 1480941329878658896}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -422,6 +423,25 @@ MonoBehaviour:
   StamBar: {fileID: 0}
   deathEffect: {fileID: 489641561373093210, guid: e9a354cca3f52d34b9d2c19d23109be9,
     type: 3}
+--- !u!114 &1480941329878658896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5604515879359011061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fd709c3c49f4c544bc957e0614cb230, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ropeMaterial: {fileID: 2100000, guid: 2eebc5ab7b669524d826b10093ca69f2, type: 2}
+  ropeWidth: 0.2
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 7734327
+  range: 3000
+  firePoint: {fileID: 3005130160096351493}
 --- !u!1 &5604515879753381603
 GameObject:
   m_ObjectHideFlags: 0

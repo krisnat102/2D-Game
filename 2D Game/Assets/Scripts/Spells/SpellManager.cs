@@ -8,17 +8,18 @@ public class SpellManager : MonoBehaviour
     public static SpellManager Instance;
     [SerializeField] private List<Spell> Spells = new List<Spell>();
 
-    [SerializeField] private Transform SpellContent;
-    [SerializeField] private GameObject InventorySpell;
+    [SerializeField] private Transform spellContent;
+    [SerializeField] private GameObject inventorySpell;
 
-    [SerializeField] private InventorySpellController[] InventorySpells;
+    //[SerializeField] private InventorySpellController[] InventorySpells;
 
     [SerializeField] private GameObject spellInventory;
     [SerializeField] private GameObject inventory;
 
     public static List<Spell> SpellsBar = new List<Spell>();
-    [SerializeField] private Transform SpellContentBar;
-    [SerializeField] private GameObject ActiveSpell;
+    public static List<Spell> AbilitiesBar = new List<Spell>();
+    [SerializeField] private Transform spellContentBar;
+    [SerializeField] private GameObject activeSpell;
 
     [Header("Item Description")]
     [SerializeField] private Button useButton;
@@ -62,7 +63,7 @@ public class SpellManager : MonoBehaviour
         SpellController spellController;
 
         //clears the inventory before opening so that items dont duplicate
-        foreach (Transform spell in SpellContent)
+        foreach (Transform spell in spellContent)
         {
             Destroy(spell.gameObject);
         }
@@ -70,44 +71,11 @@ public class SpellManager : MonoBehaviour
         //adds the items to the inventory
         foreach (var spell in Spells)
         {
-            /*GameObject obj = Instantiate(InventorySpell, SpellContent);
-            obj.SetActive(true);
-
-            SpellController spellController = obj.GetComponent<SpellController>();
-            spellController.spell = spell;
-
-            var spellName = obj.transform.Find("SpellName").GetComponent<Text>();
-            var spellIcon = obj.transform.Find("SpellIcon").GetComponent<Image>();
-            var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
-
-            if (spellName != null || spellIcon != null || removeButton != null)
-            {
-                spellName.text = spell.spellName;
-                spellIcon.sprite = spell.icon;
-            }
-            if (spellAbilityTab)
-            {
-                if (!spell.spell)
-                {
-                    obj.SetActive(false);
-                }
-            }
-            else
-            {
-                if (spell.spell)
-                {
-                    obj.SetActive(false);
-                }
-            }
-        }
-        SetInventorySpells();
-            */
-
-            GameObject obj = Instantiate(InventorySpell, SpellContent);
+            GameObject obj = Instantiate(inventorySpell, spellContent);
 
             obj.SetActive(true);
 
-            InventorySpells = SpellContent.GetComponentsInChildren<InventorySpellController>();
+            //InventorySpells = spellContent.GetComponentsInChildren<InventorySpellController>();
 
             obj.name = spell.name;
 
@@ -132,14 +100,12 @@ public class SpellManager : MonoBehaviour
                 }
         }
 
-        SetInventorySpells();
+        //SetInventorySpells();
     }
 
-    public void SetInventorySpells()
+    /*public void SetInventorySpells()
     {
-        //if (SpellContent.GetComponentsInChildren<InventorySpellController>().Length < Spells.Count)
         {
-            //InventorySpells = SpellContent.GetComponentsInChildren<InventorySpellController>();
             System.Array.Resize(ref InventorySpells, Spells.Count);
 
             for (int i = 0; i < Spells.Count; i++)
@@ -147,7 +113,7 @@ public class SpellManager : MonoBehaviour
                 InventorySpells[i].AddSpell(Spells[i]);
             }
         }
-    }
+    }*/
 
     public void Update()
     {
@@ -177,28 +143,61 @@ public class SpellManager : MonoBehaviour
     public void ListActiveSpells()
     {
         //clears the inventory before opening so that items dont duplicate
-        foreach (Transform spell in SpellContentBar)
+        foreach (Transform spell in spellContentBar)
         {
             Destroy(spell.gameObject);
         }
-
-        //adds the items to the inventory
-        foreach (var spell in SpellsBar)
+        if (spellAbilityTab)
         {
-            GameObject obj = Instantiate(ActiveSpell, SpellContentBar);
-            SpellController spellController = obj.GetComponent<SpellController>();
-            spellController.SetSpell(spell);
-
-            var spellName = obj.transform.Find("SpellName").GetComponent<Text>();
-            //var spellName = obj.GetComponentInChildren<Text>();
-
-            var spellIcon = obj.transform.Find("SpellIcon").GetComponent<Image>();
-            //var spellIcon = obj.GetComponentInChildren<Image>();
-
-            if (spellName != null && spellIcon != null)
+            //adds the items to the inventory
+            foreach (var spell in SpellsBar)
             {
-                spellName.text = spell.spellName;
-                spellIcon.sprite = spell.icon;
+                GameObject obj = Instantiate(activeSpell, spellContentBar);
+
+                obj.SetActive(true);
+
+                SpellController spellController = obj.GetComponent<SpellController>();
+                spellController.SetSpell(spell);
+
+                var spellName = obj.transform.Find("SpellName").GetComponent<Text>();
+                var spellIcon = obj.transform.Find("SpellIcon").GetComponent<Image>();
+
+                if (spellName != null && spellIcon != null)
+                {
+                    spellName.text = spell.spellName;
+                    spellIcon.sprite = spell.icon;
+                }
+
+                if (!spell.spell)
+                {
+                    obj.SetActive(false);
+                }
+            }
+        }
+        else if (!spellAbilityTab)
+        {
+            foreach (var spell in AbilitiesBar)
+            {
+                GameObject obj = Instantiate(activeSpell, spellContentBar);
+
+                obj.SetActive(true);
+
+                SpellController spellController = obj.GetComponent<SpellController>();
+                spellController.SetSpell(spell);
+
+                var spellName = obj.transform.Find("SpellName").GetComponent<Text>();
+                var spellIcon = obj.transform.Find("SpellIcon").GetComponent<Image>();
+
+                if (spellName != null && spellIcon != null)
+                {
+                    spellName.text = spell.spellName;
+                    spellIcon.sprite = spell.icon;
+                }
+
+                if (spell.spell)
+                {
+                    obj.SetActive(false);
+                }
             }
         }
     }
@@ -207,10 +206,12 @@ public class SpellManager : MonoBehaviour
     {
         spellAbilityTab = true;
         ListSpells();
+        ListActiveSpells();
     }
     public void AbilitiesTabBn()
     {
         spellAbilityTab = false;
         ListSpells();
+        ListActiveSpells();
     }
 }

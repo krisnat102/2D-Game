@@ -31,9 +31,16 @@ public class InventorySpellController : MonoBehaviour
         SpellController spellController = button.GetComponent<SpellController>();
         Spell spell = spellController.GetSpell();
 
-        if (SpellManager.SpellsBar.Count < ActiveSpellsMax && !SpellManager.SpellsBar.Contains(spell))
+        if (SpellManager.SpellsBar.Count < ActiveSpellsMax && !SpellManager.SpellsBar.Contains(spell) && spell.spell)
         {
             SpellManager.SpellsBar.Add(spell);
+            SpellManager.Instance.ListActiveSpells();
+        }
+        else Debug.Log("already there");
+
+        if (SpellManager.AbilitiesBar.Count < ActiveSpellsMax && !SpellManager.AbilitiesBar.Contains(spell) && !spell.spell)
+        {
+            SpellManager.AbilitiesBar.Add(spell);
             SpellManager.Instance.ListActiveSpells();
         }
         else Debug.Log("already there");

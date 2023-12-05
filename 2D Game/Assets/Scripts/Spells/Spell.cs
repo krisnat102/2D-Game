@@ -21,6 +21,7 @@ public class Spell : ScriptableObject
 
     public enum SpellType
     {
+        None,
         Firebolt,
         RayOfFrost,
     }

@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
     [Header("Stats")]
-    [SerializeField] private float hp = 100f;
+    [SerializeField] private float maxHP = 100f;
     [SerializeField] private float attackSpeed = 1f;
 
     [Header("Offsets")]
@@ -23,6 +24,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private AudioSource attackSound;
     [SerializeField] private float attackAnimLength = 0.3f;
 
+    [Header("Hp Bar")]
+    [SerializeField] private Slider hpBar;
+    [SerializeField] private Gradient gradient;
+    [SerializeField] private Image fill;
+
     [Header("Other")]
     [SerializeField] private Transform playerTrans;
     [SerializeField] private GameObject deathEffect;
@@ -35,18 +41,24 @@ public class Enemy : MonoBehaviour
     private bool attackCooldown = false;
     private bool flip;
     private bool facingSide;
+    private float hp;
 
     public void TakeDamage(float damage)
     {
         if (immune == false)
         {
             hp -= damage;
+            hpBar.value = hp;
+            fill.color = gradient.Evaluate(hpBar.normalizedValue);
 
-            animator.SetTrigger("Hurt");
+            if (damage > 0)
+            {
+                animator.SetTrigger("Hurt");
 
-            immune = true;
+                immune = true;
 
-            Invoke("StopImmune", 0.1f);
+                Invoke("StopImmune", 0.1f);
+            }
         }
         if (hp <= 0)
         {
@@ -71,7 +83,7 @@ public class Enemy : MonoBehaviour
             Invoke("AttackCooldown", attackSpeed);
             Invoke("AttackSpawn", attackAnimLength);
         }
-        else if(attackCooldown == false && ranged && enemyAttackAI.PlayerInSight())
+        else if (attackCooldown == false && ranged && enemyAttackAI.PlayerInSight())
         {
             animator.SetTrigger("Attack");
             Invoke("AttackSpawn", attackAnimLength);
@@ -139,7 +151,7 @@ public class Enemy : MonoBehaviour
 
     private void AttackSpawn()
     {
-        if(ranged == false)
+        if (ranged == false)
         {
             Vector3 offsetAttack = new Vector3(offsetX, offsetY, 0f);
 
@@ -164,6 +176,14 @@ public class Enemy : MonoBehaviour
         flip = ContainsParam(animator, "Flip");
 
         animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            animator = GetComponentInChildren<Animator>();
+        }
+
+        hp = maxHP;
+        hpBar.maxValue = maxHP;
+        TakeDamage(0);
 
         if (transform.rotation.y == 0)
         {
@@ -172,9 +192,10 @@ public class Enemy : MonoBehaviour
         else facingSide = false;
     }
 
+    //checks if a parameter exists in the animator, found here https://discussions.unity.com/t/is-there-a-way-to-check-if-an-animatorcontroller-has-a-parameter/86194
     private bool ContainsParam(Animator _Anim, string _ParamName)
     {
-        if(_Anim != null)
+        if (_Anim != null)
         {
             foreach (AnimatorControllerParameter param in _Anim.parameters)
             {
