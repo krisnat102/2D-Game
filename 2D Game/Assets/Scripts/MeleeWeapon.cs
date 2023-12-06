@@ -1,24 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MeleeWeapon : MonoBehaviour
 {
 
-    public GameObject hitbox;
+    [SerializeField] private GameObject hitbox;
+    [SerializeField] private MeleeWeaponSprite meleeWeaponSprite;
+    [SerializeField] private Transform player;
 
-    public Transform trans;
-
+    [Header("Stats")]
     [SerializeField] private float attackSpeed = 1.3f;
-    private float nextAttackTime = 0.0f;
+
+    [Header("Offsets")]
     [SerializeField] private float offsetX = 0.3f;
     [SerializeField] private float offsetY = 0f;
 
+    private float nextAttackTime = 0.0f;
+    private bool positionUpDown = true;
 
-    void Start()
-    {
-        
-    }
+    public bool PositionUpDown { get => positionUpDown; set => positionUpDown = value; }
 
     void Update()
     {
@@ -39,19 +38,21 @@ public class MeleeWeapon : MonoBehaviour
 
             //FindObjectOfType<AudioManager>().Play("SwordAttack");
 
-            if (MeleeWeaponSprite.side == true)
+            if (meleeWeaponSprite.Side == true)
             {
                 Vector3 offset = new Vector3(offsetX, offsetY, 0);
 
-                Instantiate(hitbox, trans.position + offset, trans.rotation);
+                Instantiate(hitbox, player.position + offset, player.rotation);
             }
             else
             {
                 Vector3 offset = new Vector3(-offsetX, offsetY, 0);
 
-                Instantiate(hitbox, trans.position + offset, trans.rotation);
+                Instantiate(hitbox, player.position + offset, player.rotation);
             }
-        }
 
+        }
+        if (PositionUpDown) PositionUpDown = false;
+        else PositionUpDown = true;
     }
 }

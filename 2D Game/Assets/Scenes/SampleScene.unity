@@ -1282,7 +1282,7 @@ MonoBehaviour:
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &192928213
@@ -4038,7 +4038,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.3700004, y: -1.7200007, z: -10}
+  m_LocalPosition: {x: -3.3700001, y: -1.7200007, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5600,6 +5600,18 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 5604515880834827946}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &655741076 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8996486665773634701, guid: 04cc9accfdc77de4f8d1d27e41b83da8,
+    type: 3}
+  m_PrefabInstance: {fileID: 5604515880834827946}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655741070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dccea7ef3f0cfde47879b8b8e07e6a6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &664377558
 GameObject:
   m_ObjectHideFlags: 0
@@ -6375,7 +6387,7 @@ MonoBehaviour:
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &759424418
@@ -8137,7 +8149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953718989}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.3700004, y: -1.7200007, z: -10}
+  m_LocalPosition: {x: -3.3700001, y: -1.7200007, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1182185657}
@@ -8530,6 +8542,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3737956094552250571}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1044788357 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3737956093977766978, guid: 835ee5984c772204581e18e8219479d7,
+    type: 3}
+  m_PrefabInstance: {fileID: 3737956094552250571}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044788355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bb752e50c492724aa509dd5c327f302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1044788358 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3737956093977766990, guid: 835ee5984c772204581e18e8219479d7,
+    type: 3}
+  m_PrefabInstance: {fileID: 3737956094552250571}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044788355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4af127e70b252bb4eb7efac52b1ac809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1065081055 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5604515879320606634, guid: 04cc9accfdc77de4f8d1d27e41b83da8,
@@ -17787,6 +17823,21 @@ PrefabInstance:
       propertyPath: attackSpeed
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3737956093977766978, guid: 835ee5984c772204581e18e8219479d7,
+        type: 3}
+      propertyPath: meleeWeaponSprite
+      value: 
+      objectReference: {fileID: 1044788358}
+    - target: {fileID: 3737956093977766978, guid: 835ee5984c772204581e18e8219479d7,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1745411682}
+    - target: {fileID: 3737956093977766978, guid: 835ee5984c772204581e18e8219479d7,
+        type: 3}
+      propertyPath: offsetY
+      value: -0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 3737956093977766984, guid: 835ee5984c772204581e18e8219479d7,
         type: 3}
       propertyPath: m_Name
@@ -17811,6 +17862,56 @@ PrefabInstance:
         type: 3}
       propertyPath: playerWidth
       value: -1.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737956093977766990, guid: 835ee5984c772204581e18e8219479d7,
+        type: 3}
+      propertyPath: swordPositionOffsetY
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737956093977766990, guid: 835ee5984c772204581e18e8219479d7,
+        type: 3}
+      propertyPath: upRotation
+      value: 128.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737956093977766990, guid: 835ee5984c772204581e18e8219479d7,
+        type: 3}
+      propertyPath: swordPositionOffsetX
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737956093977766990, guid: 835ee5984c772204581e18e8219479d7,
+        type: 3}
+      propertyPath: upRotationLeft
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737956093977766990, guid: 835ee5984c772204581e18e8219479d7,
+        type: 3}
+      propertyPath: upRotationRight
+      value: 105
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737956093977766990, guid: 835ee5984c772204581e18e8219479d7,
+        type: 3}
+      propertyPath: meleeWeapon
+      value: 
+      objectReference: {fileID: 1044788357}
+    - target: {fileID: 3737956093977766990, guid: 835ee5984c772204581e18e8219479d7,
+        type: 3}
+      propertyPath: swordPositionOffsetYUp
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737956093977766990, guid: 835ee5984c772204581e18e8219479d7,
+        type: 3}
+      propertyPath: swordPositionOffsetYDown
+      value: -1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737956093977766990, guid: 835ee5984c772204581e18e8219479d7,
+        type: 3}
+      propertyPath: downRotationRight
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737956093977766990, guid: 835ee5984c772204581e18e8219479d7,
+        type: 3}
+      propertyPath: downRotationLeft
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3737956093977766991, guid: 835ee5984c772204581e18e8219479d7,
         type: 3}
@@ -17982,7 +18083,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spell
       value: 
-      objectReference: {fileID: 11400000, guid: 6f525ded9423e364494ac2c6370a1dcd,
+      objectReference: {fileID: 11400000, guid: a3b34572ef11e8a4c8b5b7ab0fd879e9,
         type: 2}
     - target: {fileID: 4418657037509415997, guid: a5bf0b0578739fd4fac2b905a63217aa,
         type: 3}
@@ -18191,7 +18292,7 @@ PrefabInstance:
     - target: {fileID: 4715727150763637724, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4715727151536337906, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
@@ -18211,12 +18312,12 @@ PrefabInstance:
     - target: {fileID: 8652173126370724597, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8652173126370724597, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 822b92523f445d349a5be30b83a06b59, type: 3}
@@ -21079,6 +21180,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 6f525ded9423e364494ac2c6370a1dcd,
         type: 2}
+    - target: {fileID: 1480941329878658896, guid: 04cc9accfdc77de4f8d1d27e41b83da8,
+        type: 3}
+      propertyPath: abilities
+      value: 
+      objectReference: {fileID: 655741076}
     - target: {fileID: 3385146531555605758, guid: 04cc9accfdc77de4f8d1d27e41b83da8,
         type: 3}
       propertyPath: m_IsTrigger
@@ -21370,6 +21476,16 @@ PrefabInstance:
       propertyPath: sideAbility2
       value: 
       objectReference: {fileID: 1662857723}
+    - target: {fileID: 8996486665773634701, guid: 04cc9accfdc77de4f8d1d27e41b83da8,
+        type: 3}
+      propertyPath: spellCooldownImg
+      value: 
+      objectReference: {fileID: 759424417}
+    - target: {fileID: 8996486665773634701, guid: 04cc9accfdc77de4f8d1d27e41b83da8,
+        type: 3}
+      propertyPath: abilityCooldownImg
+      value: 
+      objectReference: {fileID: 192928212}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04cc9accfdc77de4f8d1d27e41b83da8, type: 3}
 --- !u!224 &5609812273748863692

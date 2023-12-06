@@ -11,7 +11,7 @@ public class Grappler : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private Transform firePoint;
     [SerializeField] private Spell grapplingHook;
-
+    [SerializeField] private Abilities abilities;
 
     private DistanceJoint2D rope;
     private LineRenderer lineRenderer;
@@ -20,8 +20,6 @@ public class Grappler : MonoBehaviour
     private RaycastHit2D hitInfo;
 
     private bool checker;
-    private bool cooldown = false;
-
 
     void Start()
     {
@@ -60,7 +58,7 @@ public class Grappler : MonoBehaviour
         // Shot rope on mouse position
         if (hitInfo)
         {
-            if (Input.GetButton("Ability") && checker == true && hitInfo.collider.gameObject.tag == "Ground" && cooldown == false && PlayerStats.stam >= grapplingHook.cost)
+            if (Input.GetButton("Ability") && checker == true && hitInfo.collider.gameObject.tag == "Ground" && PlayerStats.stam >= grapplingHook.cost && abilities.AbilityCooldown1 == false)
             {
                 PlayerStats.stam -= grapplingHook.cost;
 
@@ -75,15 +73,7 @@ public class Grappler : MonoBehaviour
                 lineRenderer.material = ropeMaterial;
                 lineRenderer.startWidth = ropeWidth;
                 lineRenderer.SetPosition(1, mousePos);
-
-                cooldown = true;
-                Invoke("ResetCooldown", grapplingHook.cooldown);
             }
         }
-    }
-
-    private void ResetCooldown()
-    {
-        cooldown = false;
     }
 }

@@ -4,6 +4,7 @@ using System;
 public class SpellHitbox : MonoBehaviour
 {
     [SerializeField] private Spell spell;
+    [SerializeField] private float rotationSpeed = 0.1f;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -22,11 +23,17 @@ public class SpellHitbox : MonoBehaviour
         if (GameManager.gamePaused == false)
         {
             Vector3 range = new Vector3(spell.range, spell.range, 0);
-            if (Math.Abs(Abilities.castPoint.x) + range.x < Math.Abs(transform.position.x) || Math.Abs(Abilities.castPoint.y) + range.y > Math.Abs(transform.position.y))
+            /*if (Math.Abs(Abilities.castPoint.x) + range.x < Math.Abs(transform.position.x) || Math.Abs(Abilities.castPoint.y) + range.y > Math.Abs(transform.position.y))
             {
                 Invoke("DestroyObject", 0.5f);
 
-                if(ContainsParam(anim, "End")) anim.SetBool("End", true);
+                if(anim != null)
+                    if(ContainsParam(anim, "End")) anim.SetBool("End", true);
+            }*/
+            
+            if(spell.name == "Shuriken")
+            {
+                transform.Rotate(0f, 0f, rotationSpeed, Space.Self);
             }
         }
     }
@@ -40,15 +47,25 @@ public class SpellHitbox : MonoBehaviour
             {
                 enemy.TakeDamage(spell.value);
             }
-
-            if (spell.spellDeath != null) Instantiate(spell.spellDeath, transform.position, Quaternion.identity);
-
-            DestroyObject();
+            if (spell.name != "Shuriken")
+            {
+                DestroyObject();
+            }
+            else if (hitInfo.tag == "Ground")
+            {
+                rb.simulated = false;
+                Invoke("DestroyObject", 0.8f);
+            }
+            else
+            {
+                DestroyObject();
+            }
         }
     }
     private void DestroyObject()
     {
-        Instantiate(spell.spellDeath, transform.position, Quaternion.identity);
+        if (spell.spellDeath != null)
+            Instantiate(spell.spellDeath, transform.position, Quaternion.identity);
 
         Destroy(gameObject);
     }

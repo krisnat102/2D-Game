@@ -15,19 +15,22 @@ public class Abilities : MonoBehaviour
     [SerializeField] private Image mainSpell;
     [SerializeField] private Image sideSpell1;
     [SerializeField] private Image sideSpell2;
+    [SerializeField] private Image spellCooldownImg;
 
     [Header("Active Ability Holders")]
     [SerializeField] private Image mainAbility;
     [SerializeField] private Image sideAbility1;
     [SerializeField] private Image sideAbility2;
+    [SerializeField] private Image abilityCooldownImg;
 
     private bool spellCooldown = false;
     private bool abilityCooldown = false;
     private int activeSpell = 0;
     private int activeAbility = 0;
-    Image abilityCooldownImg;
 
     public static Vector3 castPoint = new Vector3();
+
+    public bool AbilityCooldown1 { get => abilityCooldown; set => abilityCooldown = value; }
 
     private void Update()
     {
@@ -57,7 +60,7 @@ public class Abilities : MonoBehaviour
 
             #region Abilites
             if (SpellManager.AbilitiesBar.Count >= activeAbility)
-                if (Input.GetButtonDown("Ability") && PlayerStats.stam >= SpellManager.AbilitiesBar[activeAbility].cost && abilityCooldown == false)
+                if (Input.GetButtonDown("Ability") && PlayerStats.stam >= SpellManager.AbilitiesBar[activeAbility].cost && AbilityCooldown1 == false)
                     Ability();
 
             if (Input.GetButtonDown("ChangeAbility2"))
@@ -151,9 +154,13 @@ public class Abilities : MonoBehaviour
         }
         #endregion
 
-        if (abilityCooldownImg.gameObject.active)
+        if (abilityCooldownImg.gameObject.activeSelf && abilityCooldownImg.fillAmount > 0)
         {
-            abilityCooldownImg.fillAmount =+ Time.deltaTime;
+            abilityCooldownImg.fillAmount -= Time.deltaTime/ SpellManager.AbilitiesBar[activeSpell].cooldown;
+        }
+        if (spellCooldownImg.gameObject.activeSelf && spellCooldownImg.fillAmount > 0)
+        {
+            spellCooldownImg.fillAmount -= Time.deltaTime / SpellManager.SpellsBar[activeSpell].cooldown;
         }
     }
 
@@ -171,6 +178,8 @@ public class Abilities : MonoBehaviour
 
             spellCooldown = true;
             Invoke("SpellCooldown", SpellManager.SpellsBar[activeSpell].cooldown);
+            spellCooldownImg.gameObject.SetActive(true);
+            spellCooldownImg.fillAmount = 1;
         }
     }
 
@@ -180,9 +189,14 @@ public class Abilities : MonoBehaviour
 
         if (SpellManager.AbilitiesBar[activeAbility] != null)
         {
-            if (SpellManager.AbilitiesBar[activeAbility].id == 2)
+            if (SpellManager.AbilitiesBar[activeAbility].name == "grappling hook")
             {
                 grappler.enabled = true;
+
+                AbilityCooldown1 = true;
+                Invoke("AbilityCooldown", SpellManager.AbilitiesBar[activeAbility].cooldown);
+                abilityCooldownImg.gameObject.SetActive(true);
+                abilityCooldownImg.fillAmount = 1;
             }
             else
             {
@@ -192,9 +206,10 @@ public class Abilities : MonoBehaviour
 
                 PlayerStats.stam -= SpellManager.AbilitiesBar[activeAbility].cost;
 
-                abilityCooldown = true;
+                AbilityCooldown1 = true;
                 Invoke("AbilityCooldown", SpellManager.AbilitiesBar[activeAbility].cooldown);
                 abilityCooldownImg.gameObject.SetActive(true);
+                abilityCooldownImg.fillAmount = 1;
 
                 grappler.enabled = false;
             }
@@ -207,7 +222,7 @@ public class Abilities : MonoBehaviour
     }
     private void AbilityCooldown()
     {
-        abilityCooldown = false;
+        AbilityCooldown1 = false;
         abilityCooldownImg.gameObject.SetActive(false);
     }
 
@@ -228,11 +243,6 @@ public class Abilities : MonoBehaviour
         mainAbility.gameObject.SetActive(false);
         sideAbility1.gameObject.SetActive(false);
         sideAbility2.gameObject.SetActive(false);
-    }
-
-    private void Start()
-    {
-        abilityCooldownImg = mainAbility.gameObject.transform.GetChild(0).gameObject.GetComponent<Image>();
     }
 }
     
