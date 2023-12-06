@@ -20,10 +20,12 @@ public class Abilities : MonoBehaviour
     [SerializeField] private Image mainAbility;
     [SerializeField] private Image sideAbility1;
     [SerializeField] private Image sideAbility2;
+
     private bool spellCooldown = false;
     private bool abilityCooldown = false;
     private int activeSpell = 0;
     private int activeAbility = 0;
+    Image abilityCooldownImg;
 
     public static Vector3 castPoint = new Vector3();
 
@@ -148,6 +150,11 @@ public class Abilities : MonoBehaviour
             sideAbility2.gameObject.SetActive(true);
         }
         #endregion
+
+        if (abilityCooldownImg.gameObject.active)
+        {
+            abilityCooldownImg.fillAmount =+ Time.deltaTime;
+        }
     }
 
     void Spell()
@@ -187,6 +194,7 @@ public class Abilities : MonoBehaviour
 
                 abilityCooldown = true;
                 Invoke("AbilityCooldown", SpellManager.AbilitiesBar[activeAbility].cooldown);
+                abilityCooldownImg.gameObject.SetActive(true);
 
                 grappler.enabled = false;
             }
@@ -200,6 +208,7 @@ public class Abilities : MonoBehaviour
     private void AbilityCooldown()
     {
         abilityCooldown = false;
+        abilityCooldownImg.gameObject.SetActive(false);
     }
 
     void ClearSprites()
@@ -219,6 +228,11 @@ public class Abilities : MonoBehaviour
         mainAbility.gameObject.SetActive(false);
         sideAbility1.gameObject.SetActive(false);
         sideAbility2.gameObject.SetActive(false);
+    }
+
+    private void Start()
+    {
+        abilityCooldownImg = mainAbility.gameObject.transform.GetChild(0).gameObject.GetComponent<Image>();
     }
 }
     

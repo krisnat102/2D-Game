@@ -393,7 +393,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dccea7ef3f0cfde47879b8b8e07e6a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ability: {fileID: 11400000, guid: 501bed144e7729e43abb8a680cc27cbc, type: 2}
   castingPoint: {fileID: 3005130160096351493}
   OffsetX: 2
   OffsetY: 2
@@ -402,6 +401,9 @@ MonoBehaviour:
   mainSpell: {fileID: 0}
   sideSpell1: {fileID: 0}
   sideSpell2: {fileID: 0}
+  mainAbility: {fileID: 0}
+  sideAbility1: {fileID: 0}
+  sideAbility2: {fileID: 0}
 --- !u!114 &6956784789200225505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,8 +442,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 7734327
-  range: 3000
   firePoint: {fileID: 3005130160096351493}
+  grapplingHook: {fileID: 0}
 --- !u!1 &5604515879753381603
 GameObject:
   m_ObjectHideFlags: 0

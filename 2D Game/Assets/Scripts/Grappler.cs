@@ -56,7 +56,6 @@ public class Grappler : MonoBehaviour
 
         Debug.DrawRay(firePoint.position, distance);
 
-        //RaycastHit2D hitInfo = Physics2D.Raycast(camera.position, mousePos - playerPos, Mathf.Infinity);
         hitInfo = Physics2D.Raycast(firePoint.position, distance, grapplingHook.range, ~layerMask);
         // Shot rope on mouse position
         if (hitInfo)
