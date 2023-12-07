@@ -2,11 +2,12 @@
 
 public class Bullet : MonoBehaviour
 {
+    [SerializeField] private GameObject impactEffect;
 
+    [Header("Stats")]
     [SerializeField] private float speed = 20f;
     [SerializeField] private float bulletDmg = 20f;
 
-    [SerializeField] private GameObject impactEffect;
     private Rigidbody2D rb;
 
     void Start()
@@ -24,9 +25,15 @@ public class Bullet : MonoBehaviour
             if(enemy == true)
             {
                 enemy.TakeDamage(bulletDmg);
+
+                Instantiate(enemy.BloodEffect, transform.position, Quaternion.identity);
             }
             Instantiate(impactEffect, transform.position, transform.rotation);
+            /*impactEffect.SetActive(true);
+            impactEffect.transform.position = transform.position;
+            impactEffect.transform.rotation = transform.rotation;*/
 
+            //gameObject.SetActive(false);
             Destroy(gameObject);
         }
     }

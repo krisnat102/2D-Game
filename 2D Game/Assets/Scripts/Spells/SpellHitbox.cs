@@ -4,17 +4,19 @@ using System;
 public class SpellHitbox : MonoBehaviour
 {
     [SerializeField] private Spell spell;
+
+    [Header("Srukine")]
     [SerializeField] private float rotationSpeed = 0.1f;
     [SerializeField] private float stuckTime = 1f;
+    [SerializeField] private float fadeTimer = 1f;
 
     private Rigidbody2D rb;
-    private Animator anim;
+    private bool stuckShuriken = false;
+    private float transparency = 1f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-
 
         rb.velocity = transform.right * spell.speed;
     }
@@ -35,6 +37,16 @@ public class SpellHitbox : MonoBehaviour
             if(spell.name == "Shuriken")
             {
                 transform.Rotate(0f, 0f, rotationSpeed, Space.Self);
+                SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+                if (stuckShuriken)
+                {
+                    transparency -= Time.deltaTime * fadeTimer;
+                    sprite.color = new Color(sprite.color.r, sprite.color.b, sprite.color.g, transparency);
+                }
+                if (sprite.color.a <= 0)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }
@@ -47,6 +59,10 @@ public class SpellHitbox : MonoBehaviour
             if (enemy == true)
             {
                 enemy.TakeDamage(spell.value);
+                if(spell.name == "Shuriken")
+                {
+                    Instantiate(enemy.BloodEffect, transform.position, Quaternion.identity);
+                }
             }
             if (spell.name != "Shuriken")
             {
@@ -57,7 +73,6 @@ public class SpellHitbox : MonoBehaviour
                 rb.simulated = false;
                 rotationSpeed = 0;
                 Invoke("DestroyObject", stuckTime);
-
             }
             else
             {
@@ -69,16 +84,20 @@ public class SpellHitbox : MonoBehaviour
     {
         if (spell.spellDeath != null)
             Instantiate(spell.spellDeath, transform.position, Quaternion.identity);
+        stuckShuriken = true;
+        if (spell.name != "Shuriken")
+        {
+            Destroy(gameObject);
 
-        Destroy(gameObject);
+        }
     }
 
-    private bool ContainsParam(Animator _Anim, string _ParamName)
+    /*private bool ContainsParam(Animator _Anim, string _ParamName)
     {
         foreach (AnimatorControllerParameter param in _Anim.parameters)
         {
             if (param.name == _ParamName) return true;
         }
         return false;
-    }
+    } checks if a parameter exists in the animator controller*/
 }

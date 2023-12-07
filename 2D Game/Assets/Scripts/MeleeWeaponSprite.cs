@@ -26,12 +26,6 @@ public class MeleeWeaponSprite : MonoBehaviour
 
     public bool Side { get => side; set => side = value; }
 
-    void Start()
-    {
-        gameObject.SetActive(false);
-    }
-
-
     void Update()
     {
         if (Side == true)

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6684929901192448981}
   - component: {fileID: 6684929901192448980}
   - component: {fileID: 6684929901192448983}
+  - component: {fileID: 4595806039137018734}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -44,6 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f75632e8d76a294a921e7b235a998b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  weapon1: {fileID: 0}
+  weapon2: {fileID: 0}
+  deathScreen: {fileID: 0}
 --- !u!114 &6684929901192448983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56,7 +61,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b149b2637e3714b97dc2898e149db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Menu: {fileID: 0}
-  MiniMenu: {fileID: 0}
-  Settings: {fileID: 0}
+  menu: {fileID: 0}
+  miniMenu: {fileID: 0}
+  settings: {fileID: 0}
   resolutionDropdown: {fileID: 0}
+  qualityDropdown: {fileID: 0}
+  fpsDropdown: {fileID: 0}
+--- !u!114 &4595806039137018734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6684929901192448982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be7d4c15f40f5e444b3021f307890c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  objectToPool: {fileID: 0}
+  amountToPool: 0

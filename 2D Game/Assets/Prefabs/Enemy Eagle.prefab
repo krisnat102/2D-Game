@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 1620560478860096208}
   - component: {fileID: 1620560478860096214}
   - component: {fileID: 8435544955756322061}
+  - component: {fileID: 4504001269733524521}
   m_Layer: 0
   m_Name: Enemy Eagle
   m_TagString: Enemy
@@ -540,6 +541,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!50 &4504001269733524521
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620560478860096213}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &1886618334557321951
 GameObject:
   m_ObjectHideFlags: 0

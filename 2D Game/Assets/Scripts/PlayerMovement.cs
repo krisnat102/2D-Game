@@ -3,29 +3,27 @@
 public class PlayerMovement : MonoBehaviour
 {
 	[SerializeField] private AudioSource walking;
+
+	[Header("Stats")]
+	[SerializeField] private float runSpeed = 40f;
+	[SerializeField] private float dodgePower = 200f;
+	[SerializeField] private float dodgeCost = 20f;
+	[SerializeField] private float dodgeCooldown = 1f;
+	[SerializeField] private float climbSpeed = 200f;
+
 	private CharacterController2D controller;
 	private Animator animator;
 	private Rigidbody2D rb;
-
 	private float horizontalMove = 0f;
 	private float verticalMove = 0f;
-
+	private float speed;
 	private bool jump = false;
 	private bool crouch = false;
 	private bool grassSound = true;
 	private bool ableClimb = false;
 	private bool dodgeCool = false;
 	private bool dodgeDirection = true;
-	private float speed;
 	private Vector3 oldPosition;
-
-	[Header("Stats")]
-
-	[SerializeField] private float runSpeed = 40f;
-	[SerializeField] private float dodgePower = 200f;
-	[SerializeField] private float dodgeCost = 20f;
-	[SerializeField] private float dodgeCooldown = 1f;
-	[SerializeField] private float climbSpeed = 200f;
 
     private void Start()
     {

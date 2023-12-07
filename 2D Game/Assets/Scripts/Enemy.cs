@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject attack;
     [SerializeField] private AudioSource attackSound;
     [SerializeField] private float attackAnimLength = 0.3f;
-
+    
     [Header("Hp Bar")]
     [SerializeField] private Slider hpBar;
     [SerializeField] private Gradient gradient;
@@ -32,16 +32,21 @@ public class Enemy : MonoBehaviour
     [Header("Other")]
     [SerializeField] private Transform playerTrans;
     [SerializeField] private GameObject deathEffect;
+    [SerializeField] private GameObject bloodEffect;
 
     [Header("Customiseable")]
     [SerializeField] private bool lookAtPlayer;
+    [SerializeField] private float knockbackModifier = 5f;
 
+    private Rigidbody2D rb;
     private Animator animator;
     private bool immune = false;
     private bool attackCooldown = false;
     private bool flip;
     private bool facingSide;
     private float hp;
+
+    public GameObject BloodEffect { get => bloodEffect; set => bloodEffect = value; }
 
     public void TakeDamage(float damage)
     {
@@ -58,6 +63,8 @@ public class Enemy : MonoBehaviour
                 immune = true;
 
                 Invoke("StopImmune", 0.1f);
+
+                TakeKnockback(damage);
             }
         }
         if (hp <= 0)
@@ -71,6 +78,22 @@ public class Enemy : MonoBehaviour
         Instantiate(deathEffect, transform.position, Quaternion.identity);
 
         Destroy(gameObject);
+    }
+
+    private void TakeKnockback(float damage)
+    {
+        float knockback = damage * knockbackModifier;
+
+        if (playerTrans.position.x < transform.position.x + 0.5f)
+        {
+            rb.AddForce(transform.up * knockback / 2, ForceMode2D.Force);
+            rb.AddForce(transform.right * knockback, ForceMode2D.Force);
+        }
+        else
+        {
+            rb.AddForce(transform.up * knockback, ForceMode2D.Force);
+            rb.AddForce(transform.right * -knockback, ForceMode2D.Force);
+        }
     }
 
     public void Attack()
@@ -171,6 +194,8 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
+
         offsetXSave = offsetX;
 
         flip = ContainsParam(animator, "Flip");

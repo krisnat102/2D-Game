@@ -6,8 +6,10 @@ public class MeleeWeapon : MonoBehaviour
     [SerializeField] private GameObject hitbox;
     [SerializeField] private MeleeWeaponSprite meleeWeaponSprite;
     [SerializeField] private Transform player;
+    [SerializeField] private Rigidbody2D rb;
 
     [Header("Stats")]
+    [SerializeField] private bool mainWeapon = true;
     [SerializeField] private float attackSpeed = 1.3f;
 
     [Header("Offsets")]
@@ -18,6 +20,11 @@ public class MeleeWeapon : MonoBehaviour
     private bool positionUpDown = true;
 
     public bool PositionUpDown { get => positionUpDown; set => positionUpDown = value; }
+
+    private void Start()
+    {
+        gameObject.SetActive(mainWeapon);
+    }
 
     void Update()
     {
@@ -38,7 +45,7 @@ public class MeleeWeapon : MonoBehaviour
 
             //FindObjectOfType<AudioManager>().Play("SwordAttack");
 
-            if (meleeWeaponSprite.Side == true)
+            if (meleeWeaponSprite.Side)
             {
                 Vector3 offset = new Vector3(offsetX, offsetY, 0);
 
@@ -51,8 +58,14 @@ public class MeleeWeapon : MonoBehaviour
                 Instantiate(hitbox, player.position + offset, player.rotation);
             }
 
+            if (PositionUpDown)
+            {
+                PositionUpDown = false;
+            }
+            else
+            {
+                PositionUpDown = true;
+            }
         }
-        if (PositionUpDown) PositionUpDown = false;
-        else PositionUpDown = true;
     }
 }

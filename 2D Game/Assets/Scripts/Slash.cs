@@ -38,6 +38,8 @@ public class Slash : MonoBehaviour
             if (enemy == true)
             {
                 enemy.TakeDamage(slashDmg);
+
+                Instantiate(enemy.BloodEffect, transform.position, Quaternion.identity);
             }
 
         }

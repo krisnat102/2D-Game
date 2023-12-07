@@ -120,6 +120,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spell: {fileID: 11400000, guid: a3b34572ef11e8a4c8b5b7ab0fd879e9, type: 2}
   rotationSpeed: 100
+  stuckTime: 1
+  fadeTimer: 1
 --- !u!60 &1320125040784398651
 PolygonCollider2D:
   m_ObjectHideFlags: 0

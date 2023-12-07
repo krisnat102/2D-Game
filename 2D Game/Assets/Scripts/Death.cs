@@ -13,6 +13,7 @@ public class Death : MonoBehaviour
 
     public void DeathAnimation()
     {
+        //gameObject.SetActive(true);
         Destroy(gameObject);
     }
 
