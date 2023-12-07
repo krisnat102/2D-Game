@@ -5,6 +5,7 @@ public class SpellHitbox : MonoBehaviour
 {
     [SerializeField] private Spell spell;
     [SerializeField] private float rotationSpeed = 0.1f;
+    [SerializeField] private float stuckTime = 1f;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -54,7 +55,9 @@ public class SpellHitbox : MonoBehaviour
             else if (hitInfo.tag == "Ground")
             {
                 rb.simulated = false;
-                Invoke("DestroyObject", 0.8f);
+                rotationSpeed = 0;
+                Invoke("DestroyObject", stuckTime);
+
             }
             else
             {

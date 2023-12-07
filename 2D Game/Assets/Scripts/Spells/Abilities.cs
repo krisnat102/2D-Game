@@ -162,6 +162,16 @@ public class Abilities : MonoBehaviour
         {
             spellCooldownImg.fillAmount -= Time.deltaTime / SpellManager.SpellsBar[activeSpell].cooldown;
         }
+
+        /*if (SpellManager.SpellsBar[activeSpell] == null)
+        {
+            spellCooldownImg.fillAmount = 0;
+        }
+        if (SpellManager.AbilitiesBar[activeSpell] == null)
+        {
+            abilityCooldownImg.gameObject.SetActive(false);
+        }*/
+
     }
 
     void Spell()

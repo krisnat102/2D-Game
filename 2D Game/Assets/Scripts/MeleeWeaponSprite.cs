@@ -74,6 +74,8 @@ public class MeleeWeaponSprite : MonoBehaviour
 
             Side = true;
         }
+
+
     }
 }
 
