@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Death : MonoBehaviour
 {
@@ -13,7 +11,7 @@ public class Death : MonoBehaviour
 
     public void DeathAnimation()
     {
-        //gameObject.SetActive(true);
+        //gameObject.SetActive(false);
         Destroy(gameObject);
     }
 
