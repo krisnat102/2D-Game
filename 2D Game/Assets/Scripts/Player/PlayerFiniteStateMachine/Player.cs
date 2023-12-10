@@ -9,6 +9,10 @@ public class Player : MonoBehaviour
     public PlayerLandState LandState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }
     public PlayerInAirState InAirState { get; private set; }
+    public PlayerWallSlideState WallSlideState { get; private set; }
+    public PlayerWallGrabState WallGrabState { get; private set; }
+    public PlayerWallClimbState WallClimbState { get; private set; }
+    public PlayerWallJumpState WallJumpState { get; private set; }
 
     [SerializeField] private PlayerData playerData;
     #endregion
@@ -25,14 +29,17 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Other Variables
+
+    public int FacingDirection { get; private set; }
+
     public Vector2 CurrentVelocity { get; private set; }
-    private Vector2 workspace;
+
     #endregion
 
     #region Check Variables
-    public int FacingDirection { get; private set; }
 
     [SerializeField] private Transform groundCheck;
+    [SerializeField] private Transform wallCheck;
     #endregion
 
     #region Unity Callback Functions
@@ -45,6 +52,10 @@ public class Player : MonoBehaviour
         JumpState = new PlayerJumpState(this, StateMachine, playerData, "inAir");
         InAirState = new PlayerInAirState(this, StateMachine, playerData, "inAir");
         LandState = new PlayerLandState(this, StateMachine, playerData, "land");
+        WallClimbState = new PlayerWallClimbState(this, StateMachine, playerData, "wallClimb");
+        WallSlideState = new PlayerWallSlideState(this, StateMachine, playerData, "wallSlide");
+        WallGrabState = new PlayerWallGrabState(this, StateMachine, playerData, "wallGrab");
+        WallJumpState = new PlayerWallJumpState(this, StateMachine, playerData, "inAir");
     }
 
     private void Start()
@@ -52,6 +63,7 @@ public class Player : MonoBehaviour
         StateMachine.Initialize(IdleState);
 
         FacingDirection = 1;
+
 
         //InputHandler = gameObject.GetComponent<PlayerInputHandler>();
         //Animator = gameObject.GetComponent<Animator>();
@@ -74,21 +86,14 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Set Functions
-    public void SetVelocityX(float velocity)
+    public void SetVelocity(float velocity, Vector2 angle, int direction)
     {
-        workspace.Set(velocity, CurrentVelocity.y);
-        SetFinalVelocity();
+        angle.Normalize();
+        RB.AddForce(new Vector2(angle.x * velocity * direction, angle.y * velocity), ForceMode2D.Impulse);
     }
-    public void SetVelocityY(float velocity)
-    {
-        workspace.Set(CurrentVelocity.x, velocity);
-        SetFinalVelocity();
-    }
-    private void SetFinalVelocity()
-    {
-        RB.velocity = workspace;
-        CurrentVelocity = workspace;
-    }
+
+    public void SetVelocityX(float velocity) => RB.position += new Vector2(velocity, 0f) * Time.fixedDeltaTime;  // RB.velocity = new Vector2(velocity, rb.velocity.y);
+    public void SetVelocityY(float velocity) => RB.AddForce(new Vector2(0f, velocity), ForceMode2D.Impulse);
     #endregion
 
     #region Check Functions
@@ -103,6 +108,15 @@ public class Player : MonoBehaviour
     public bool CheckIfGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.whatIsGround);
+    }
+
+    public bool CheckIfTouchingWall()
+    {
+        return Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
+    }
+    public bool CheckIfTouchingWallBack()
+    {
+        return Physics2D.Raycast(wallCheck.position, Vector2.right * -FacingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
     }
     #endregion
 
