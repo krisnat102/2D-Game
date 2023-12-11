@@ -38,7 +38,7 @@ public class Weapon : MonoBehaviour
     {
         if (GameManager.gamePaused == false)
         {
-            if (Input.GetButton("Fire1") && canFire == true)
+            if (InputManager.Instance.AttackInput && canFire == true)
             {
                 Shoot();
             }
@@ -74,7 +74,7 @@ public class Weapon : MonoBehaviour
     
     void Reload()
     {
-        if (maxMagCapacity != magCapacity && Input.GetButtonDown("Reload"))
+        if (maxMagCapacity != magCapacity && InputManager.Instance.ReloadInput)
         {
             reloading = true;
 

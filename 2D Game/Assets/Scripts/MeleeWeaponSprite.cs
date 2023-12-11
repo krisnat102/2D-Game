@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 
-public class MeleeWeaponSprite : MonoBehaviour
+public class MeleeWeaponSprite : MeleeWeapon
 {
     [Header("Other")]
-    [SerializeField] private Rigidbody2D rb, playerRb;
+    [SerializeField] private Rigidbody2D playerRb;
     [SerializeField] private SpriteRenderer sprite;
-    [SerializeField] private MeleeWeapon meleeWeapon;
 
     [Header("Offsets")]
     [SerializeField] private float swordPositionOffsetX = 0f;
@@ -22,47 +21,45 @@ public class MeleeWeaponSprite : MonoBehaviour
 
     const float PLAYER_WIDTH = -0.8f;
 
-    private bool side = true;
-
-    public bool Side { get => side; set => side = value; }
+    public bool Side { get; private set; }
 
     void Update()
     {
         if (Side == true)
         {
-            if (meleeWeapon.PositionUpDown)
+            if (PositionUpDown)
             {
-                rb.position = new Vector2(playerRb.position.x + swordPositionOffsetX, playerRb.position.y + swordPositionOffsetYUp);
-                rb.SetRotation(upRotationRight);
+                RB.position = new Vector2(playerRb.position.x + swordPositionOffsetX, playerRb.position.y + swordPositionOffsetYUp);
+                RB.SetRotation(upRotationRight);
             }
             else
             {
-                rb.position = new Vector2(playerRb.position.x + swordPositionOffsetX, playerRb.position.y + swordPositionOffsetYDown);
-                rb.SetRotation(downRotationRight);
+                RB.position = new Vector2(playerRb.position.x + swordPositionOffsetX, playerRb.position.y + swordPositionOffsetYDown);
+                RB.SetRotation(downRotationRight);
             }
         }
         else
         {
-            if (meleeWeapon.PositionUpDown)
+            if (PositionUpDown)
             {
-                rb.position = new Vector2(playerRb.position.x + swordPositionOffsetX + PLAYER_WIDTH, playerRb.position.y + swordPositionOffsetYUp);
-                rb.SetRotation(upRotationLeft);
+                RB.position = new Vector2(playerRb.position.x + swordPositionOffsetX + PLAYER_WIDTH, playerRb.position.y + swordPositionOffsetYUp);
+                RB.SetRotation(upRotationLeft);
             }
             else
             {
-                rb.position = new Vector2(playerRb.position.x + swordPositionOffsetX + PLAYER_WIDTH, playerRb.position.y + swordPositionOffsetYDown);
-                rb.SetRotation(downRotationLeft);
+                RB.position = new Vector2(playerRb.position.x + swordPositionOffsetX + PLAYER_WIDTH, playerRb.position.y + swordPositionOffsetYDown);
+                RB.SetRotation(downRotationLeft);
             }
         }
 
-        if (Input.GetKeyDown("a"))
+        if (InputManager.Instance.NormInputX < 0)
         {
             sprite.flipX = true;
 
             Side = false;
         }
 
-        if (Input.GetKeyDown("d"))
+        if (InputManager.Instance.NormInputX > 0)
         {
             sprite.flipX = false;
 

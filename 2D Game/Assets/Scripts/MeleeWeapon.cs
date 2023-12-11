@@ -5,7 +5,7 @@ public class MeleeWeapon : MonoBehaviour
 
     [SerializeField] private GameObject hitbox;
     [SerializeField] private MeleeWeaponSprite meleeWeaponSprite;
-    [SerializeField] private Transform player;
+    [SerializeField] private Transform playerTransform;
     [SerializeField] private Rigidbody2D rb;
 
     [Header("Stats")]
@@ -17,9 +17,9 @@ public class MeleeWeapon : MonoBehaviour
     [SerializeField] private float offsetY = 0f;
 
     private float nextAttackTime = 0.0f;
-    private bool positionUpDown = true;
 
-    public bool PositionUpDown { get => positionUpDown; set => positionUpDown = value; }
+    public bool PositionUpDown { get; private set; }
+    public Rigidbody2D RB { get => rb; private set => rb = value; }
 
     private void Start()
     {
@@ -30,7 +30,7 @@ public class MeleeWeapon : MonoBehaviour
     {
         if (GameManager.gamePaused == false)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (InputManager.Instance.AttackInput)
             {
                 Attack();
             }
@@ -49,13 +49,13 @@ public class MeleeWeapon : MonoBehaviour
             {
                 Vector3 offset = new Vector3(offsetX, offsetY, 0);
 
-                Instantiate(hitbox, player.position + offset, player.rotation);
+                Instantiate(hitbox, playerTransform.position + offset, playerTransform.rotation);
             }
             else
             {
                 Vector3 offset = new Vector3(-offsetX, offsetY, 0);
 
-                Instantiate(hitbox, player.position + offset, player.rotation);
+                Instantiate(hitbox, playerTransform.position + offset, playerTransform.rotation);
             }
 
             if (PositionUpDown)

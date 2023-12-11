@@ -17,8 +17,6 @@ public class PlayerStats : MonoBehaviour
     private bool immune = false;
     private bool stamRegenCooldown = false;
 
-    private Transform transform;
-
     [Header("Stats")]
 
     [SerializeField] private float stamRegenSpeed = 0.20f;
@@ -61,8 +59,6 @@ public class PlayerStats : MonoBehaviour
         HpBar.maxValue = maxHP;
         ManaBar.maxValue = maxMana;
         StamBar.maxValue = maxStam;
-
-        transform = FindObjectOfType<Transform>();
     }
 
     void Update()
@@ -78,13 +74,13 @@ public class PlayerStats : MonoBehaviour
                 Die();
             }
 
-            if (Input.GetButtonDown("Gun"))
+            if (InputManager.Instance.GunInput)
             {
                 gun.SetActive(true);
                 sword.SetActive(false);
             }
 
-            if (Input.GetButtonDown("Sword"))
+            if (InputManager.Instance.SwordInput)
             {
                 gun.SetActive(false);
                 sword.SetActive(true);

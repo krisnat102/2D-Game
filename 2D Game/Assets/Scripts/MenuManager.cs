@@ -51,7 +51,7 @@ public class MenuManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Menu") && SceneManager.GetActiveScene().name != "MainMenu")
+        if (InputManager.Instance.MenuInput && SceneManager.GetActiveScene().name != "MainMenu")
         {
             if (menu.activeSelf)
             {

@@ -20,6 +20,6 @@ public class ItemPickup : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D hitInfo)
     {
-        if (hitInfo.tag == "PickupRange" && Input.GetButtonDown("Interact")) Pickup();
+        if (hitInfo.tag == "PickupRange" && InputManager.Instance.UseInput) Pickup();
     }
 }

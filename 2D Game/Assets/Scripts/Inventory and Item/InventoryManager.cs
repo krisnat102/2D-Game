@@ -184,7 +184,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (GameManager.gamePaused == false)
         {
-            if (Input.GetButtonDown("Inventory"))
+            if (InputManager.Instance.InventoryInput)
             {
                 if (!Inventory.activeInHierarchy && !SpellInventory.activeInHierarchy)
                 {
@@ -203,7 +203,7 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
-        if (Input.GetButtonDown("Menu"))
+        if (InputManager.Instance.MenuInput)
         {
             if (Inventory.activeInHierarchy || SpellInventory.activeInHierarchy)
             {

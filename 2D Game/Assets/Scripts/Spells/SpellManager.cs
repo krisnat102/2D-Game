@@ -119,7 +119,7 @@ public class SpellManager : MonoBehaviour
     {
         if (GameManager.gamePaused == false)
         {
-            if (Input.GetButtonDown("SpellInventory"))
+            if (InputManager.Instance.SpellInventoryInput)
             {
                 if (!inventory.activeInHierarchy && !spellInventory.activeInHierarchy)
                 {

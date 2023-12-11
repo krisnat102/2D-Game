@@ -38,10 +38,10 @@ public class Abilities : MonoBehaviour
         {
             #region Spells
             if (SpellManager.SpellsBar.Count >= activeSpell)
-                if (Input.GetButtonDown("Spell") && PlayerStats.mana >= SpellManager.SpellsBar[activeSpell].cost && spellCooldown == false)
+                if (InputManager.Instance.SpellInput && PlayerStats.mana >= SpellManager.SpellsBar[activeSpell].cost && spellCooldown == false)
                     Spell();
 
-            if (Input.GetButtonDown("ChangeSpell2"))
+            if (InputManager.Instance.SwitchSpell1Input)
                 if (activeSpell != 0)
                 {
                     activeSpell--;
@@ -49,7 +49,7 @@ public class Abilities : MonoBehaviour
                 else activeSpell = 7;
                 ClearSprites();
 
-            if (Input.GetButtonDown("ChangeSpell1"))
+            if (InputManager.Instance.SwitchSpell2Input)
                 if (activeSpell != 7)
                 {
                     activeSpell++;
@@ -60,10 +60,10 @@ public class Abilities : MonoBehaviour
 
             #region Abilites
             if (SpellManager.AbilitiesBar.Count >= activeAbility)
-                if (Input.GetButtonDown("Ability") && PlayerStats.stam >= SpellManager.AbilitiesBar[activeAbility].cost && AbilityCooldown1 == false)
+                if (InputManager.Instance.AbilityInput && PlayerStats.stam >= SpellManager.AbilitiesBar[activeAbility].cost && AbilityCooldown1 == false)
                     Ability();
 
-            if (Input.GetButtonDown("ChangeAbility2"))
+            if (InputManager.Instance.SwitchAbility1Input)
                 if (activeAbility != 0)
                 {
                     activeAbility--;
@@ -71,7 +71,7 @@ public class Abilities : MonoBehaviour
                 else activeAbility = 7;
             ClearSprites();
 
-            if (Input.GetButtonDown("ChangeAbility1"))
+            if (InputManager.Instance.SwitchAbility2Input)
                 if (activeAbility != 7)
                 {
                     activeAbility++;

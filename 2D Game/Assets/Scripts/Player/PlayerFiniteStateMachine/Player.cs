@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
         RB.AddForce(new Vector2(angle.x * velocity * direction, angle.y * velocity), ForceMode2D.Impulse);
     }
 
-    public void SetVelocityX(float velocity) => RB.position += new Vector2(velocity, 0f) * Time.fixedDeltaTime;  // RB.velocity = new Vector2(velocity, rb.velocity.y);
+    public void SetVelocityX(float velocity) => RB.velocity = new Vector2(velocity, RB.velocity.y); //RB.AddForce(new Vector2(velocity, 0), ForceMode2D.Force); //RB.position += new Vector2(velocity, 0f) * Time.fixedDeltaTime;
     public void SetVelocityY(float velocity) => RB.AddForce(new Vector2(0f, velocity), ForceMode2D.Impulse);
     #endregion
 

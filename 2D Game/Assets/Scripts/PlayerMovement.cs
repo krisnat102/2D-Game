@@ -3,13 +3,16 @@
 public class PlayerMovement : MonoBehaviour
 {
 	[SerializeField] private AudioSource walking;
+	[Header("Move")]
+	public float runSpeed = 40f;
 
-	[Header("Stats")]
-	[SerializeField] private float runSpeed = 40f;
-	[SerializeField] private float dodgePower = 200f;
-	[SerializeField] private float dodgeCost = 20f;
-	[SerializeField] private float dodgeCooldown = 1f;
-	[SerializeField] private float climbSpeed = 200f;
+	[Header("Dodge")]
+	public float dodgePower = 200f;
+	public float dodgeCost = 20f;
+	public float dodgeCooldown = 1f;
+
+	[Header("Climb")]
+	public float climbSpeed = 200f;
 
 	private CharacterController2D controller;
 	private Animator animator;
@@ -18,7 +21,6 @@ public class PlayerMovement : MonoBehaviour
 	private float verticalMove = 0f;
 	private float speed;
 	private bool jump = false;
-	private bool crouch = false;
 	private bool grassSound = true;
 	private bool ableClimb = false;
 	private bool dodgeCool = false;
@@ -36,28 +38,33 @@ public class PlayerMovement : MonoBehaviour
 	{
 		if (GameManager.gamePaused == false)
 		{
-			horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-			verticalMove = Input.GetAxisRaw("Vertical") * climbSpeed;
+			horizontalMove = InputManager.Instance.NormInputX * runSpeed;
+			verticalMove = InputManager.Instance.NormInputY * climbSpeed;
+            if (InputManager.Instance.JumpInput)
+            {
+				Debug.Log(1);
+			}
 
 			animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 			animator.SetFloat("ClimbSpeed", Mathf.Abs(verticalMove));
 
-			if (Input.GetButtonDown("Jump"))
+			if (InputManager.Instance.JumpInput)
 			{
 				jump = true;
+				InputManager.Instance.UseJumpInput();
 
 				animator.SetBool("IsJumping", true);
 			}
 
-			if (Input.GetButtonDown("Crouch"))
+			/*if (inputManager.CrouchInput)
 			{
 				crouch = true;
 			}
 			else if (Input.GetButtonUp("Crouch"))
 			{
 				crouch = false;
-			}
-			if (Input.GetButtonDown("Dodge"))
+			}*/
+			if (InputManager.Instance.DodgeInput)
 			{
 				Dodge();
 			}
@@ -70,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
 			{
 				dodgeDirection = false;
 			}
-			if (ableClimb == true && Input.GetButton("Vertical"))
+			if (ableClimb == true && InputManager.Instance.NormInputY > 0)
 			{
 
 				rb.velocity = new Vector2(horizontalMove, verticalMove) * Time.fixedDeltaTime;
@@ -103,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
 	void FixedUpdate()
 	{
 		// move our character
-		controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
+		controller.Move(horizontalMove * Time.fixedDeltaTime, InputManager.Instance.CrouchInput, jump);
 
 		jump = false;
 	}
