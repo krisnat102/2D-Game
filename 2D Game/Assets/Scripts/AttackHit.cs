@@ -1,15 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AttackHit : MonoBehaviour
 {
-
-    [SerializeField] private float attackDmg = 20f; 
+    private Enemy enemy;
+    private float damage;
 
     void Start()
     {
+        enemy = GetComponentInParent<Enemy>();
         Invoke("FinishAttack", 0.5f);
+        damage = enemy.Data.damage * enemy.LevelIndex;
     }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
@@ -18,9 +18,7 @@ public class AttackHit : MonoBehaviour
         {
             PlayerStats player = hitInfo.GetComponent<PlayerStats>();
 
-            player.TakeDamage(attackDmg);
-
-            Debug.Log("it hit");
+            player.TakeDamage(damage);
 
             Destroy(gameObject);
         }

@@ -3,41 +3,18 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    [Header("Stats")]
-    [SerializeField] private float maxHP = 100f;
-    [SerializeField] private float attackSpeed = 1f;
-
-    [Header("Offsets")]
-    [SerializeField] private float offsetX = 1.2f;
-    [SerializeField] private float offsetX2 = 1.2f;
-    [SerializeField] private float offsetY = -1f;
-    private float offsetXSave;
-
-    [Header("Ranged")]
-    [SerializeField] private bool ranged = false;
-    [SerializeField] private Transform firePoint;
-    [SerializeField] private GameObject projectile;
-
-    [Header("Attack")]
-    [SerializeField] private EnemyAttackAI enemyAttackAI;
-    [SerializeField] private GameObject attack;
+    [Header("Other")]
+    [SerializeField] private EnemyData data;
     [SerializeField] private AudioSource attackSound;
-    [SerializeField] private float attackAnimLength = 0.3f;
+    [SerializeField] private Transform playerTrans;
+    [SerializeField] private EnemyAttackAI enemyAttackAI;
     
     [Header("Hp Bar")]
     [SerializeField] private Slider hpBar;
     [SerializeField] private Gradient gradient;
     [SerializeField] private Image fill;
 
-    [Header("Other")]
-    [SerializeField] private Transform playerTrans;
-    [SerializeField] private GameObject deathEffect;
-    [SerializeField] private GameObject bloodEffect;
-
-    [Header("Customiseable")]
-    [SerializeField] private bool lookAtPlayer;
-    [SerializeField] private float knockbackModifier = 5f;
-
+    private float offsetXSave;
     private Rigidbody2D rb;
     private Animator animator;
     private bool immune = false;
@@ -45,8 +22,12 @@ public class Enemy : MonoBehaviour
     private bool flip;
     private bool facingSide;
     private float hp;
+    private float lvlIndex;
 
-    public GameObject BloodEffect { get => bloodEffect; set => bloodEffect = value; }
+    public GameObject BloodEffect { get => Data.bloodEffect; private set => Data.bloodEffect = value; }
+    public Transform PlayerTrans { get => playerTrans; private set => playerTrans = value; }
+    public EnemyData Data { get => data; private set => data = value; }
+    public float LevelIndex { get => lvlIndex; private set => lvlIndex = value; }
 
     public void TakeDamage(float damage)
     {
@@ -75,14 +56,14 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Instantiate(Data.deathEffect, transform.position, Quaternion.identity);
 
         Destroy(gameObject);
     }
 
     private void TakeKnockback(float damage)
     {
-        float knockback = damage * knockbackModifier;
+        float knockback = damage * Data.knockbackModifier;
 
         if (playerTrans.position.x < transform.position.x + 0.5f)
         {
@@ -98,32 +79,26 @@ public class Enemy : MonoBehaviour
 
     public void Attack()
     {
-        if (attackCooldown == false && ranged == false && attack != null)
+        if (attackCooldown == false && Data.ranged == false && Data.attack != null)
         {
             animator.SetTrigger("Attack");
 
             attackCooldown = true;
-            Invoke("AttackCooldown", attackSpeed);
-            Invoke("AttackSpawn", attackAnimLength);
+            Invoke("AttackCooldown", Data.attackSpeed);
+            Invoke("AttackSpawn", Data.attackAnimLength);
         }
-        else if (attackCooldown == false && ranged && enemyAttackAI.PlayerInSight())
+        else if (attackCooldown == false && Data.ranged && enemyAttackAI.PlayerInSight())
         {
             animator.SetTrigger("Attack");
-            Invoke("AttackSpawn", attackAnimLength);
+            Invoke("AttackSpawn", Data.attackAnimLength);
 
             attackCooldown = true;
-            Invoke("AttackCooldown", attackSpeed);
+            Invoke("AttackCooldown", Data.attackSpeed);
         }
     }
 
-    private void StopImmune()
-    {
-        immune = false;
-    }
-    private void AttackCooldown()
-    {
-        attackCooldown = false;
-    }
+    private void StopImmune() => immune = false;
+    private void AttackCooldown() => attackCooldown = false;
 
     private void Update()
     {
@@ -133,17 +108,17 @@ public class Enemy : MonoBehaviour
         {
             if (transform.position.x < playerTrans.position.x)
             {
-                offsetX = -offsetX2;
+                Data.offsetX = -Data.offsetX2;
                 animator.SetBool("Flip", true);
             }
             else
             {
-                offsetX = offsetXSave;
+                Data.offsetX = offsetXSave;
                 animator.SetBool("Flip", false);
             }
         }
 
-        if (lookAtPlayer && enemyAttackAI.PlayerInSight() && PlayerStats.death == false)
+        if (Data.lookAtPlayer && enemyAttackAI.PlayerInSight() && PlayerStats.death == false)
         {
             if (facingSide)
             {
@@ -174,17 +149,18 @@ public class Enemy : MonoBehaviour
 
     private void AttackSpawn()
     {
-        if (ranged == false)
+        if (Data.ranged == false)
         {
-            Vector3 offsetAttack = new Vector3(offsetX, offsetY, 0f);
+            Vector3 offsetAttack = new Vector3(Data.offsetX, Data.offsetY, 0f);
 
-            Instantiate(attack, transform.position - offsetAttack, Quaternion.identity);
+            GameObject attack = Instantiate(Data.attack , transform.position - offsetAttack, Quaternion.identity);
+            attack.transform.parent = gameObject.transform;
 
             attackSound.Play();
         }
         else
         {
-            GameObject attackProjectile = Instantiate(projectile, firePoint);
+            GameObject attackProjectile = Instantiate(Data.projectile, Data.firePoint);
             if (attackProjectile.activeInHierarchy == false)
             {
                 attackProjectile.SetActive(true);
@@ -194,9 +170,11 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        lvlIndex = Data.level * 0.1f + 0.9f;
+
         rb = GetComponent<Rigidbody2D>();
 
-        offsetXSave = offsetX;
+        offsetXSave = Data.offsetX;
 
         flip = ContainsParam(animator, "Flip");
 
@@ -206,8 +184,8 @@ public class Enemy : MonoBehaviour
             animator = GetComponentInChildren<Animator>();
         }
 
-        hp = maxHP;
-        hpBar.maxValue = maxHP;
+        hp = Data.maxHP * lvlIndex;
+        hpBar.maxValue = Data.maxHP * lvlIndex;
         TakeDamage(0);
 
         if (transform.rotation.y == 0)
@@ -232,6 +210,6 @@ public class Enemy : MonoBehaviour
 
     public bool Ranged()
     {
-        return ranged;
+        return Data.ranged;
     }
 }

@@ -2,26 +2,20 @@
 
 public class RangedAttack : MonoBehaviour
 {
-    [Header("Stats")]
-    [SerializeField] private float damage = 15f;
-    [SerializeField] private float speed = 20f;
-    [SerializeField] private int distanceOffset = 5;
-
-    [Header("Other")]
-    [SerializeField] private GameObject impactEffect;
-    [SerializeField] private Transform player;
-
-    private Rigidbody2D rb;
+    private Enemy enemy;
+    private Rigidbody2D arrowRB;
     Vector2 direction;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        enemy = GetComponentInParent<Enemy>();
 
-        float offset = Mathf.Abs(player.position.x - transform.position.x) / distanceOffset;
+        arrowRB = GetComponent<Rigidbody2D>();
 
-        Vector2 direction = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y + offset).normalized;
-        rb.velocity = direction * speed;
+        float offset = Mathf.Abs(enemy.PlayerTrans.position.x - transform.position.x) / enemy.Data.distanceOffset;
+
+        direction = new Vector2(enemy.PlayerTrans.position.x - transform.position.x, enemy.PlayerTrans.position.y - transform.position.y + offset).normalized;
+        arrowRB.velocity = direction * enemy.Data.rangedSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
@@ -31,9 +25,9 @@ public class RangedAttack : MonoBehaviour
             PlayerStats player = hitInfo.GetComponent<PlayerStats>();
             if (player == true)
             {
-                player.TakeDamage(damage);
+                player.TakeDamage(enemy.Data.rangedDamage);
             }
-            Instantiate(impactEffect, transform.position, transform.rotation);
+            Instantiate(enemy.Data.impactEffect, transform.position, transform.rotation);
 
             Destroy(gameObject);
         }
@@ -46,7 +40,7 @@ public class RangedAttack : MonoBehaviour
 
     private void TrackMovement()
     {
-        Vector2 direction = rb.velocity;
+        direction = arrowRB.velocity;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);

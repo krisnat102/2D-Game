@@ -4,22 +4,9 @@ using Pathfinding;
 public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl4I&ab_channel=Etredal
 {
     #region Init variables
-
+    [SerializeField] private EnemyDataAI dataAI;
     [Header("Pathfinding")]
     [SerializeField] private Transform target;
-    [SerializeField] private float activateDistance = 50f;
-    [SerializeField] private float pathUpdateTime = 0.5f;
-
-    [Header("Physics")]
-    [SerializeField] private float speed = 200f;
-    [SerializeField] private float nextWaypointDistance = 3f;
-    [SerializeField] private float jumpNodeHeightRequirement = 0.8f;
-    [SerializeField] private float jumpModifier = 0.3f;
-
-    [Header("Custom Behaviour")]
-    [SerializeField] private bool followEnabled = true;
-    [SerializeField] private bool jumpEnabled = true;
-    [SerializeField] private bool directionLookEnabled = true;
 
     private Path path;
     private int currentWaypoint = 0;
@@ -42,12 +29,12 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
-        InvokeRepeating("UpdatePath", 0f, pathUpdateTime);
+        InvokeRepeating("UpdatePath", 0f, dataAI.pathUpdateTime);
     }
 
     private void FixedUpdate()
     {
-        if (TargetInDistance() && followEnabled)
+        if (TargetInDistance() && dataAI.followEnabled)
         {
             PathFollow();
         }
@@ -62,7 +49,7 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
             else isGrounded = false;
         }
 
-        float horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
+        float horizontalMove = InputManager.Instance.NormInputX * dataAI.speed;
 
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
@@ -75,7 +62,7 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
 
     private void UpdatePath()
     {
-        if(followEnabled && TargetInDistance() && seeker.IsDone())
+        if(dataAI.followEnabled && TargetInDistance() && seeker.IsDone())
         {
             seeker.StartPath(rb.position, target.position, OnPathComplete);
         }
@@ -96,25 +83,25 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
         //isGrounded = Physics2D.Raycast(transform.position, -Vector3.up, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset); //check if colliding with smth
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized; // calculates direction
-        Vector2 force = direction * speed * Time.deltaTime;
+        Vector2 force = direction * dataAI.speed * Time.deltaTime;
 
-        if(jumpEnabled && isGrounded) //jump
+        if(dataAI.jumpEnabled && isGrounded) //jump
         {
-            if(direction.y > jumpNodeHeightRequirement)
+            if(direction.y > dataAI.jumpNodeHeightRequirement)
             {
-                rb.AddForce(Vector2.up * speed * jumpModifier);
+                rb.AddForce(Vector2.up * dataAI.speed * dataAI.jumpModifier);
             }
         }
 
         rb.AddForce(force); //movement
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]); // next waypoint
-        if(distance < nextWaypointDistance)
+        if(distance < dataAI.nextWaypointDistance)
         {
             currentWaypoint++;
         }
 
-        if (directionLookEnabled) //direction graphics
+        if (dataAI.directionLookEnabled) //direction graphics
         {
             if(rb.velocity.x > 0.05f)
             {
@@ -129,7 +116,7 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
 
     private bool TargetInDistance()
     {
-        return Vector2.Distance(transform.position, target.transform.position) < activateDistance;
+        return Vector2.Distance(transform.position, target.transform.position) < dataAI.activateDistance;
     }
 
     private void OnPathComplete(Path p)

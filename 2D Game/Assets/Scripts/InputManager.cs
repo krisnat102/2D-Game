@@ -25,6 +25,7 @@ public class InputManager : MonoBehaviour
     public bool SwitchSpell2Input { get; private set; }
     public bool SwitchAbility1Input { get; private set; }
     public bool SwitchAbility2Input { get; private set; }
+    public Vector2 MousePosition { get; private set; }
 
     [SerializeField] private float inputHoldTime = 0.2f;
     private float jumpInputStartTime;
@@ -264,6 +265,11 @@ public class InputManager : MonoBehaviour
         {
             SwitchAbility2Input = false;
         }
+    }
+
+    public void MousePositionInput(InputAction.CallbackContext context)
+    {
+        MousePosition = context.ReadValue<Vector2>();
     }
     #endregion
 

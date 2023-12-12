@@ -7989,6 +7989,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
         type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 1117637d0e1206f41be5b45d15a32ea5,
+        type: 2}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
       propertyPath: fill
       value: 
       objectReference: {fileID: 1280306020}
@@ -10492,7 +10498,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1233106689}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48e9fe8e94a29de4084585f2410b6022, type: 3}
   m_Name: 
@@ -14271,6 +14277,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 02543c10-465b-4090-a64d-57055e37bb08
     m_ActionName: Gameplay/ChangeAbility2[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1745411690}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: MousePositionInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f027bd00-4060-44d9-a038-072e75fe36fe
+    m_ActionName: Gameplay/MousePosition[/Mouse/position]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Gameplay
@@ -17514,6 +17536,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 167738637749498186, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 9972b22af0715d1408a556a245ecc72e,
+        type: 2}
+    - target: {fileID: 167738637749498186, guid: 056196fb9136d8f42a99f8d1570a6361,
+        type: 3}
       propertyPath: ranged
       value: 0
       objectReference: {fileID: 0}
@@ -17656,7 +17684,7 @@ PrefabInstance:
     - target: {fileID: 167738637749498190, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 167738637749498190, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
@@ -17741,13 +17769,19 @@ PrefabInstance:
     - target: {fileID: 7355610707019080728, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7355610707019080728, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8883700276926463137, guid: 056196fb9136d8f42a99f8d1570a6361,
+        type: 3}
+      propertyPath: dataAI
+      value: 
+      objectReference: {fileID: 11400000, guid: 08516827d0ecd324ab200e8ef583e703,
+        type: 2}
     - target: {fileID: 8883700276926463137, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
       propertyPath: target
@@ -18784,7 +18818,18 @@ PrefabInstance:
       objectReference: {fileID: 519420031}
     - target: {fileID: 4715727150381271160, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 4e3fe04727db610498d50918f9c54095,
+        type: 2}
+    - target: {fileID: 4715727150381271160, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
       propertyPath: player
+      value: 
+      objectReference: {fileID: 1745411682}
+    - target: {fileID: 4715727150381271160, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: playerTrans
       value: 
       objectReference: {fileID: 1745411682}
     - target: {fileID: 4715727150381271160, guid: 822b92523f445d349a5be30b83a06b59,
@@ -18852,6 +18897,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 4e3fe04727db610498d50918f9c54095,
+        type: 2}
     - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
       propertyPath: attackSpeed

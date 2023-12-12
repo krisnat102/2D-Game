@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2121936274c14654a9abc6a3ee4178f7, type: 3}
+  m_Name: Eagle
+  m_EditorClassIdentifier: 
+  level: 1
+  enemyName: Eagle
+  maxHP: 60
+  attackSpeed: 1
+  speed: 200
+  knockbackModifier: 25
+  offsetX: 1.6
+  offsetX2: 1.6
+  offsetY: 1
+  attack: {fileID: 5461576477917390187, guid: d0b601e9d9d98f14cb92691a2748969e, type: 3}
+  attackAnimLength: 0.1
+  lookAtPlayer: 0
+  deathEffect: {fileID: 489641561373093210, guid: 95e6e7e3a2c75aa48a778d33175c94e8,
+    type: 3}
+  bloodEffect: {fileID: 7515634647306772147, guid: b6be51001a0800f4abd4e30fe133548b,
+    type: 3}
+  ranged: 0
+  firePoint: {fileID: 0}
+  projectile: {fileID: 0}
