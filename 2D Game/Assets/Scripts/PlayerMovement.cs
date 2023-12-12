@@ -40,10 +40,6 @@ public class PlayerMovement : MonoBehaviour
 		{
 			horizontalMove = InputManager.Instance.NormInputX * runSpeed;
 			verticalMove = InputManager.Instance.NormInputY * climbSpeed;
-            if (InputManager.Instance.JumpInput)
-            {
-				Debug.Log(1);
-			}
 
 			animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 			animator.SetFloat("ClimbSpeed", Mathf.Abs(verticalMove));

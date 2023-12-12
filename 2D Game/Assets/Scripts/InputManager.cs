@@ -132,10 +132,6 @@ public class InputManager : MonoBehaviour
         {
             InventoryInput = true;
         }
-        if (context.canceled)
-        {
-            InventoryInput = false;
-        }
     }
 
     public void OnSpellInventoryInput(InputAction.CallbackContext context)
@@ -272,6 +268,9 @@ public class InputManager : MonoBehaviour
     #endregion
 
     public void UseJumpInput() => JumpInput = false;
+    public void UseInventoryInput() => InventoryInput = false;
+    public void UseSpellInventoryInput() => SpellInventoryInput = false;
+    public void UseMenuInpit() => MenuInput = false;
 
     private void CheckJumpInputHoldTime()
     {

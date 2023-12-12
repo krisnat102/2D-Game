@@ -121,6 +121,7 @@ public class SpellManager : MonoBehaviour
         {
             if (InputManager.Instance.SpellInventoryInput)
             {
+                InputManager.Instance.UseSpellInventoryInput();
                 if (!inventory.activeInHierarchy && !spellInventory.activeInHierarchy)
                 {
                     spellInventory.SetActive(true);

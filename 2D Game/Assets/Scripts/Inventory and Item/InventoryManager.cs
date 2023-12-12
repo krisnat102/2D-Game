@@ -186,6 +186,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (InputManager.Instance.InventoryInput)
             {
+                InputManager.Instance.UseInventoryInput();
                 if (!Inventory.activeInHierarchy && !SpellInventory.activeInHierarchy)
                 {
                     Inventory.SetActive(true);
@@ -207,6 +208,8 @@ public class InventoryManager : MonoBehaviour
         {
             if (Inventory.activeInHierarchy || SpellInventory.activeInHierarchy)
             {
+                InputManager.Instance.UseMenuInpit();
+
                 Inventory.SetActive(false);
                 SpellInventory.SetActive(false);
 

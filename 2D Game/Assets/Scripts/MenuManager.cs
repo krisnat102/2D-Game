@@ -53,6 +53,7 @@ public class MenuManager : MonoBehaviour
     {
         if (InputManager.Instance.MenuInput && SceneManager.GetActiveScene().name != "MainMenu")
         {
+            InputManager.Instance.UseMenuInpit();
             if (menu.activeSelf)
             {
                 Unpause();
