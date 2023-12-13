@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
 
-public class ItemController : MonoBehaviour
+namespace Inventory
 {
-
-    private Item item;
-
-    public Item GetItem()
+    public class ItemController : MonoBehaviour
     {
-        return this.item;
-    }
 
-    public void SetItem(Item item)
-    {
-        this.item = item;
-    }
+        private Item item;
 
+        public Item GetItem()
+        {
+            return this.item;
+        }
+
+        public void SetItem(Item item)
+        {
+            this.item = item;
+        }
+
+    }
 }

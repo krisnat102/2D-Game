@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Pathfinding;
+using Core;
 
 public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl4I&ab_channel=Etredal
 {

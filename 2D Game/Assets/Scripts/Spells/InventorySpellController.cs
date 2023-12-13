@@ -2,87 +2,90 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventorySpellController : MonoBehaviour
+namespace Spells
 {
-    Spell spell;
-
-    [SerializeField] private int ActiveSpellsMax = 8;
-
-    private Button useButton;
-    private Image spellImage;
-    private TMP_Text spellName, spellPrice, spellValue, spellDescription;
-    private GameObject description;
-
-    public void RemoveSpell()
+    public class InventorySpellController : MonoBehaviour
     {
-        SpellManager.Instance.Remove(spell);
+        Spell spell;
 
-        Destroy(gameObject);
-    }
+        [SerializeField] private int ActiveSpellsMax = 8;
 
-    public void AddSpell(Spell newSpell)
-    {
-        spell = newSpell;
-    }
+        private Button useButton;
+        private Image spellImage;
+        private TMP_Text spellName, spellPrice, spellValue, spellDescription;
+        private GameObject description;
 
-    public void UseSpell()
-    {
-        GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
-        SpellController spellController = button.GetComponent<SpellController>();
-        Spell spell = spellController.GetSpell();
-
-        if (SpellManager.SpellsBar.Count < ActiveSpellsMax && !SpellManager.SpellsBar.Contains(spell) && spell.spell)
+        public void RemoveSpell()
         {
-            SpellManager.SpellsBar.Add(spell);
-            SpellManager.Instance.ListActiveSpells();
-        }
-        else Debug.Log("already there");
+            SpellManager.Instance.Remove(spell);
 
-        if (SpellManager.AbilitiesBar.Count < ActiveSpellsMax && !SpellManager.AbilitiesBar.Contains(spell) && !spell.spell)
+            Destroy(gameObject);
+        }
+
+        public void AddSpell(Spell newSpell)
         {
-            SpellManager.AbilitiesBar.Add(spell);
-            SpellManager.Instance.ListActiveSpells();
+            spell = newSpell;
         }
-        else Debug.Log("already there");
-    }
 
-    public void RemoveActiveSpell()
-    {
-        GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
-        SpellController spellController = button.GetComponent<SpellController>();
-
-        Destroy(gameObject);
-
-        SpellManager.SpellsBar.Remove(spellController.GetSpell());
-        Debug.Log(spellController.GetSpell().name);
-    }
-
-    public void Description()
-    {
-        GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
-        SpellController spellController = button.GetComponent<SpellController>();
-
-        description = SpellManager.description1;
-        description.SetActive(true);
-
-        spellImage = SpellManager.spellImage1;
-        spellName = SpellManager.spellName1;
-        spellDescription = SpellManager.spellDescription1;
-        spellValue = SpellManager.spellValue1;
-        spellPrice = SpellManager.spellPrice1;
-
-        spellImage.sprite = spellController.GetSpell().icon;
-        spellName.text = spellController.GetSpell().spellName.ToUpper();
-        spellDescription.text = spellController.GetSpell().description;
-        if (spellController.GetSpell().value != 0)
+        public void UseSpell()
         {
-            spellValue.text = "DMG - " + spellController.GetSpell().value.ToString();
-        }
-        else spellValue.text = null;
-        spellPrice.text = "COST - " + spellController.GetSpell().cost.ToString();
+            GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+            SpellController spellController = button.GetComponent<SpellController>();
+            Spell spell = spellController.GetSpell();
 
-        useButton = SpellManager.useButton1;
-        SpellController useButtonSpellController = useButton.GetComponent<SpellController>();
-        useButtonSpellController.SetSpell(spellController.GetSpell());
+            if (SpellManager.SpellsBar.Count < ActiveSpellsMax && !SpellManager.SpellsBar.Contains(spell) && spell.spell)
+            {
+                SpellManager.SpellsBar.Add(spell);
+                SpellManager.Instance.ListActiveSpells();
+            }
+            else Debug.Log("already there");
+
+            if (SpellManager.AbilitiesBar.Count < ActiveSpellsMax && !SpellManager.AbilitiesBar.Contains(spell) && !spell.spell)
+            {
+                SpellManager.AbilitiesBar.Add(spell);
+                SpellManager.Instance.ListActiveSpells();
+            }
+            else Debug.Log("already there");
+        }
+
+        public void RemoveActiveSpell()
+        {
+            GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+            SpellController spellController = button.GetComponent<SpellController>();
+
+            Destroy(gameObject);
+
+            SpellManager.SpellsBar.Remove(spellController.GetSpell());
+            Debug.Log(spellController.GetSpell().name);
+        }
+
+        public void Description()
+        {
+            GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+            SpellController spellController = button.GetComponent<SpellController>();
+
+            description = SpellManager.description1;
+            description.SetActive(true);
+
+            spellImage = SpellManager.spellImage1;
+            spellName = SpellManager.spellName1;
+            spellDescription = SpellManager.spellDescription1;
+            spellValue = SpellManager.spellValue1;
+            spellPrice = SpellManager.spellPrice1;
+
+            spellImage.sprite = spellController.GetSpell().icon;
+            spellName.text = spellController.GetSpell().spellName.ToUpper();
+            spellDescription.text = spellController.GetSpell().description;
+            if (spellController.GetSpell().value != 0)
+            {
+                spellValue.text = "DMG - " + spellController.GetSpell().value.ToString();
+            }
+            else spellValue.text = null;
+            spellPrice.text = "COST - " + spellController.GetSpell().cost.ToString();
+
+            useButton = SpellManager.useButton1;
+            SpellController useButtonSpellController = useButton.GetComponent<SpellController>();
+            useButtonSpellController.SetSpell(spellController.GetSpell());
+        }
     }
 }

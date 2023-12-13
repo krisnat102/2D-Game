@@ -1,42 +1,48 @@
-﻿using UnityEngine;
+﻿using Inventory;
+using Spells;
+using UnityEngine;
+using Core;
 
-public class Chest : MonoBehaviour
+namespace Interactables
 {
-    [SerializeField] private Item item;
-    [SerializeField] private Spell spell;
-
-    private Animator animator;
-
-    private bool openned = false;
-
-    private void OnTriggerStay2D(Collider2D collision)
+    public class Chest : MonoBehaviour
     {
-        if(collision.tag == "PickupRange" && InputManager.Instance.UseInput)
+        [SerializeField] private Item item;
+        [SerializeField] private Spell spell;
+
+        private Animator animator;
+
+        private bool openned = false;
+
+        private void OnTriggerStay2D(Collider2D collision)
         {
-            OpenChest();
+            if (collision.tag == "PickupRange" && InputManager.Instance.UseInput)
+            {
+                OpenChest();
 
-            openned = true;
+                openned = true;
+            }
         }
-    }
 
-    private void OpenChest()
-    {
-        if(openned == false && item != null)
+        private void OpenChest()
         {
-            InventoryManager.Instance.Add(item);
+            if (openned == false && item != null)
+            {
+                InventoryManager.Instance.Add(item);
 
-            animator.SetTrigger("Open");
+                animator.SetTrigger("Open");
+            }
+            else if (openned == false && spell != null)
+            {
+                SpellManager.Instance.Add(spell);
+
+                animator.SetTrigger("Open");
+            }
         }
-        else if (openned == false && spell != null)
+
+        private void Start()
         {
-            SpellManager.Instance.Add(spell);
-
-            animator.SetTrigger("Open");
+            animator = GetComponent<Animator>();
         }
-    }
-
-    private void Start()
-    {
-        animator = GetComponent<Animator>();
     }
 }

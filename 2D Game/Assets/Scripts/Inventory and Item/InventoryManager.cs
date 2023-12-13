@@ -2,201 +2,217 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Core;
 
-public class InventoryManager : MonoBehaviour
+namespace Inventory
 {
-    public static InventoryManager Instance;
-    [SerializeField] private List<Item> Items = new List<Item>();
-
-    [SerializeField] private Transform ItemContent;
-    [SerializeField] private GameObject InventoryItem;
-
-    [SerializeField] private Toggle EnableRemove;
-
-    [SerializeField] private InventoryItemController[] InventoryItems;
-
-    [SerializeField] private GameObject Inventory;
-    [SerializeField] private GameObject SpellInventory;
-
-    [Header("Equipment MiniMenu")]
-    [SerializeField] private Animator equipmentMenuAnimator;
-    [SerializeField] private GameObject equipmentMenu;
-    [SerializeField] private Button helmetBn;
-    [SerializeField] private Button chestplateBn;
-    [SerializeField] private Button glovesBn;
-    [SerializeField] private Button bootsBn;
-
-    [Header("Item Description")]
-    [SerializeField] private Button useButton;
-    [SerializeField] private Image itemImage;
-    [SerializeField] private TMP_Text itemName, itemDescription, itemValue, itemPrice, itemWeight, itemArmor, itemMagicRes;
-    [SerializeField] private GameObject description;
-
-    public static Button useButton1;
-    public static Image itemImage1;
-    public static TMP_Text itemName1, itemDescription1, itemValue1, itemPrice1, itemWeight1, itemArmor1, itemMagicRes1;
-    public static GameObject description1;
-
-    private Filter filter = default;
-
-    public Button HelmetBn { get => helmetBn; set => helmetBn = value; }
-    public Button ChestplateBn { get => chestplateBn; set => chestplateBn = value; }
-    public Button GlovesBn { get => glovesBn; set => glovesBn = value; }
-    public Button BootsBn { get => bootsBn; set => bootsBn = value; }
-
-    private enum Filter
+    public class InventoryManager : MonoBehaviour
     {
-        Default,
-        ConsumableInv,
-        MaterialInv,
-        EquimpentInv,
-        QuestInv,
-        MisctInv
-    };
+        public static InventoryManager Instance;
+        [SerializeField] private List<Item> Items = new List<Item>();
 
-    private void Awake()
-    {
-        Instance = this;
+        [SerializeField] private Transform ItemContent;
+        [SerializeField] private GameObject InventoryItem;
 
-        useButton1 = useButton;
-        itemImage1 = itemImage;
-        itemName1 = itemName;
-        itemDescription1 = itemDescription;
-        itemValue1 = itemValue;
-        itemPrice1 = itemPrice;
-        description1 = description;
-        itemWeight1 = itemWeight;
-        itemArmor1 = itemArmor;
-        itemMagicRes1 = itemMagicRes;
-    }
+        [SerializeField] private Toggle EnableRemove;
 
-    public void Add(Item item)
-    {
-        Items.Add(item);
-    }
+        [SerializeField] private InventoryItemController[] InventoryItems;
 
-    public void Remove(Item item)
-    {
-        Items.Remove(item);
-    }
+        [SerializeField] private GameObject Inventory;
+        [SerializeField] private GameObject SpellInventory;
 
-    private void ListItems()
-    {
-        ItemController itemController;
+        [Header("Equipment MiniMenu")]
+        [SerializeField] private Animator equipmentMenuAnimator;
+        [SerializeField] private GameObject equipmentMenu;
+        [SerializeField] private Button helmetBn;
+        [SerializeField] private Button chestplateBn;
+        [SerializeField] private Button glovesBn;
+        [SerializeField] private Button bootsBn;
 
-        //clears the inventory before opening so that items dont duplicate
-        foreach (Transform item in ItemContent)
+        [Header("Item Description")]
+        [SerializeField] private Button useButton;
+        [SerializeField] private Image itemImage;
+        [SerializeField] private TMP_Text itemName, itemDescription, itemValue, itemPrice, itemWeight, itemArmor, itemMagicRes;
+        [SerializeField] private GameObject description;
+
+        public static Button useButton1;
+        public static Image itemImage1;
+        public static TMP_Text itemName1, itemDescription1, itemValue1, itemPrice1, itemWeight1, itemArmor1, itemMagicRes1;
+        public static GameObject description1;
+
+        private Filter filter = default;
+
+        public Button HelmetBn { get => helmetBn; set => helmetBn = value; }
+        public Button ChestplateBn { get => chestplateBn; set => chestplateBn = value; }
+        public Button GlovesBn { get => glovesBn; set => glovesBn = value; }
+        public Button BootsBn { get => bootsBn; set => bootsBn = value; }
+
+        private enum Filter
         {
-            item.gameObject.SetActive(true);
-            Destroy(item.gameObject);
+            Default,
+            ConsumableInv,
+            MaterialInv,
+            EquimpentInv,
+            QuestInv,
+            MisctInv
+        };
+
+        private void Awake()
+        {
+            Instance = this;
+
+            useButton1 = useButton;
+            itemImage1 = itemImage;
+            itemName1 = itemName;
+            itemDescription1 = itemDescription;
+            itemValue1 = itemValue;
+            itemPrice1 = itemPrice;
+            description1 = description;
+            itemWeight1 = itemWeight;
+            itemArmor1 = itemArmor;
+            itemMagicRes1 = itemMagicRes;
         }
 
-        //adds the items to the inventory
-        foreach (var item in Items)
+        public void Add(Item item)
         {
-            GameObject obj = Instantiate(InventoryItem, ItemContent);
+            Items.Add(item);
+        }
 
-            obj.SetActive(true);
+        public void Remove(Item item)
+        {
+            Items.Remove(item);
+        }
 
-            obj.name = item.name;
+        private void ListItems()
+        {
+            ItemController itemController;
 
-            itemController = obj.GetComponent<ItemController>();
-            itemController.SetItem(item);
+            //clears the inventory before opening so that items dont duplicate
+            foreach (Transform item in ItemContent)
+            {
+                item.gameObject.SetActive(true);
+                Destroy(item.gameObject);
+            }
 
-            var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
-            var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
-            var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
+            //adds the items to the inventory
+            foreach (var item in Items)
+            {
+                GameObject obj = Instantiate(InventoryItem, ItemContent);
 
-            itemName.text = item.ItemName;
-            itemIcon.sprite = item.icon;
+                obj.SetActive(true);
 
-            if (filter == Filter.ConsumableInv)
-                if (item.itemClass != Item.ItemClass.Consumable)
+                obj.name = item.name;
+
+                itemController = obj.GetComponent<ItemController>();
+                itemController.SetItem(item);
+
+                var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
+                var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
+                var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
+
+                itemName.text = item.ItemName;
+                itemIcon.sprite = item.icon;
+
+                if (filter == Filter.ConsumableInv)
+                    if (item.itemClass != Item.ItemClass.Consumable)
+                    {
+                        obj.SetActive(false);
+                    }
+                if (filter == Filter.MaterialInv)
+                    if (item.itemClass != Item.ItemClass.Material)
+                    {
+                        obj.SetActive(false);
+                    }
+                if (filter == Filter.EquimpentInv)
+                    if (item.itemClass != Item.ItemClass.Equipment)
+                    {
+                        obj.SetActive(false);
+                    }
+                if (filter == Filter.QuestInv)
+                    if (item.itemClass != Item.ItemClass.Quest)
+                    {
+                        obj.SetActive(false);
+                    }
+                if (filter == Filter.MisctInv)
+                    if (item.itemClass != Item.ItemClass.Misc)
+                    {
+                        obj.SetActive(false);
+                    }
+
+                if (EnableRemove.isOn)
                 {
-                    obj.SetActive(false);
+                    removeButton.gameObject.SetActive(true);
                 }
-            if (filter == Filter.MaterialInv)
-                if (item.itemClass != Item.ItemClass.Material)
-                {
-                    obj.SetActive(false);
-                }
-            if (filter == Filter.EquimpentInv)
-                if (item.itemClass != Item.ItemClass.Equipment)
-                {
-                    obj.SetActive(false);
-                }
-            if (filter == Filter.QuestInv)
-                if (item.itemClass != Item.ItemClass.Quest)
-                {
-                    obj.SetActive(false);
-                }
-            if (filter == Filter.MisctInv)
-                if (item.itemClass != Item.ItemClass.Misc)
-                {
-                    obj.SetActive(false);
-                }
+            }
 
+            SetInventoryItems();
+        }
+
+        private void EnableItemRemove()
+        {
             if (EnableRemove.isOn)
             {
-                removeButton.gameObject.SetActive(true);
-            }
-        }
-
-        SetInventoryItems();
-    }
-
-    private void EnableItemRemove()
-    {
-        if (EnableRemove.isOn)
-        {
-            foreach (Transform item in ItemContent)
-            {
-                item.transform.Find("RemoveButton").GetComponent<Button>().gameObject.SetActive(true);
-            }
-        }
-        else
-        {
-            foreach (Transform item in ItemContent)
-            {
-                item.Find("RemoveButton").gameObject.SetActive(false);
-            }
-        }
-        ListItems();
-    }
-
-    private void SetInventoryItems()
-    {
-        InventoryItems = ItemContent.GetComponentsInChildren<InventoryItemController>();
-        System.Array.Resize(ref InventoryItems, Items.Count);
-
-        for (int i = 0; i < Items.Count; i++)
-        {
-            InventoryItems[i].AddItem(Items[i]);
-        }
-    }
-
-    public void EquipedEquipmentBn()
-    {
-        useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Unequip";
-    }
-
-    public void Update()
-    {
-        if (GameManager.gamePaused == false)
-        {
-            if (InputManager.Instance.InventoryInput)
-            {
-                InputManager.Instance.UseInventoryInput();
-                if (!Inventory.activeInHierarchy && !SpellInventory.activeInHierarchy)
+                foreach (Transform item in ItemContent)
                 {
-                    Inventory.SetActive(true);
-
-                    ListItems();
-
-                    Weapon.canFire = false;
+                    item.transform.Find("RemoveButton").GetComponent<Button>().gameObject.SetActive(true);
                 }
-                else
+            }
+            else
+            {
+                foreach (Transform item in ItemContent)
                 {
+                    item.Find("RemoveButton").gameObject.SetActive(false);
+                }
+            }
+            ListItems();
+        }
+
+        private void SetInventoryItems()
+        {
+            InventoryItems = ItemContent.GetComponentsInChildren<InventoryItemController>();
+            System.Array.Resize(ref InventoryItems, Items.Count);
+
+            for (int i = 0; i < Items.Count; i++)
+            {
+                InventoryItems[i].AddItem(Items[i]);
+            }
+        }
+
+        public void EquipedEquipmentBn()
+        {
+            useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Unequip";
+        }
+
+        public void Update()
+        {
+            if (GameManager.gamePaused == false)
+            {
+                if (InputManager.Instance.InventoryInput)
+                {
+                    InputManager.Instance.UseInventoryInput();
+                    if (!Inventory.activeInHierarchy && !SpellInventory.activeInHierarchy)
+                    {
+                        Inventory.SetActive(true);
+
+                        ListItems();
+
+                        Weapon.canFire = false;
+                    }
+                    else
+                    {
+                        Inventory.SetActive(false);
+                        SpellInventory.SetActive(false);
+
+                        Weapon.canFire = true;
+                    }
+                }
+            }
+            if (InputManager.Instance.MenuInput)
+            {
+                if (Inventory.activeInHierarchy || SpellInventory.activeInHierarchy)
+                {
+                    InputManager.Instance.UseMenuInpit();
+
                     Inventory.SetActive(false);
                     SpellInventory.SetActive(false);
 
@@ -204,58 +220,46 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
-        if (InputManager.Instance.MenuInput)
+
+        private void ConsumableInv()
         {
-            if (Inventory.activeInHierarchy || SpellInventory.activeInHierarchy)
-            {
-                InputManager.Instance.UseMenuInpit();
+            filter = Filter.ConsumableInv;
 
-                Inventory.SetActive(false);
-                SpellInventory.SetActive(false);
-
-                Weapon.canFire = true;
-            }
+            ListItems();
         }
-    }
+        private void MaterialInv()
+        {
+            filter = Filter.MaterialInv;
 
-    private void ConsumableInv()
-    {
-        filter = Filter.ConsumableInv;
+            ListItems();
+        }
+        private void EquipmentInv()
+        {
+            filter = Filter.EquimpentInv;
 
-        ListItems();
-    }
-    private void MaterialInv()
-    {
-        filter = Filter.MaterialInv;
+            ListItems();
 
-        ListItems();
-    }
-    private void EquipmentInv()
-    {
-        filter = Filter.EquimpentInv;
+        }
+        private void QuestInv()
+        {
+            filter = Filter.QuestInv;
 
-        ListItems();
+            ListItems();
+        }
+        private void MiscInv()
+        {
+            filter = Filter.MisctInv;
 
-    }
-    private void QuestInv()
-    {
-        filter = Filter.QuestInv;
+            ListItems();
+        }
 
-        ListItems();
-    }
-    private void MiscInv()
-    {
-        filter = Filter.MisctInv;
-
-        ListItems();
-    }
-
-    public Animator GetEquipmentMenuAnimator()
-    {
-        return equipmentMenuAnimator;
-    }
-    public GameObject GetEquipmentMenu()
-    {
-        return equipmentMenu;
+        public Animator GetEquipmentMenuAnimator()
+        {
+            return equipmentMenuAnimator;
+        }
+        public GameObject GetEquipmentMenu()
+        {
+            return equipmentMenu;
+        }
     }
 }

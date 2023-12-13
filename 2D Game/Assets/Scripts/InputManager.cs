@@ -1,288 +1,291 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputManager : MonoBehaviour
+namespace Core
 {
-    public static InputManager Instance { get; private set; }
-
-    public Vector2 RawMovementInput { get; private set; }
-    public int NormInputX { get; private set; }
-    public int NormInputY { get; private set; }
-    public bool JumpInput { get; private set; }
-    public bool CrouchInput { get; private set; }
-    public bool DodgeInput { get; private set; }
-    public bool SwordInput { get; private set; }
-    public bool GunInput { get; private set; }
-    public bool InventoryInput { get; private set; }
-    public bool SpellInventoryInput { get; private set; }
-    public bool MenuInput { get; private set; }
-    public bool SpellInput { get; private set; }
-    public bool AttackInput { get; private set; }
-    public bool AbilityInput { get; private set; }
-    public bool UseInput { get; private set; }
-    public bool ReloadInput { get; private set; }
-    public bool SwitchSpell1Input { get; private set; }
-    public bool SwitchSpell2Input { get; private set; }
-    public bool SwitchAbility1Input { get; private set; }
-    public bool SwitchAbility2Input { get; private set; }
-    public Vector2 MousePosition { get; private set; }
-
-    [SerializeField] private float inputHoldTime = 0.2f;
-    private float jumpInputStartTime;
-
-    private void Update()
+    public class InputManager : MonoBehaviour
     {
-        CheckJumpInputHoldTime();
-    }
+        public static InputManager Instance { get; private set; }
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-    #region Inputs
-    public void OnMoveInput(InputAction.CallbackContext context)
-    {
-        RawMovementInput = context.ReadValue<Vector2>();
+        public Vector2 RawMovementInput { get; private set; }
+        public int NormInputX { get; private set; }
+        public int NormInputY { get; private set; }
+        public bool JumpInput { get; private set; }
+        public bool CrouchInput { get; private set; }
+        public bool DodgeInput { get; private set; }
+        public bool SwordInput { get; private set; }
+        public bool GunInput { get; private set; }
+        public bool InventoryInput { get; private set; }
+        public bool SpellInventoryInput { get; private set; }
+        public bool MenuInput { get; private set; }
+        public bool SpellInput { get; private set; }
+        public bool AttackInput { get; private set; }
+        public bool AbilityInput { get; private set; }
+        public bool UseInput { get; private set; }
+        public bool ReloadInput { get; private set; }
+        public bool SwitchSpell1Input { get; private set; }
+        public bool SwitchSpell2Input { get; private set; }
+        public bool SwitchAbility1Input { get; private set; }
+        public bool SwitchAbility2Input { get; private set; }
+        public Vector2 MousePosition { get; private set; }
 
-        if (Mathf.Abs(RawMovementInput.x) > 0.5f)
-        {
-            NormInputX = Mathf.RoundToInt(RawMovementInput.x);
-        }
-        else
-        {
-            NormInputX = 0;
-        }
-        if (Mathf.Abs(RawMovementInput.y) > 0.5f)
-        {
-            NormInputY = Mathf.RoundToInt(RawMovementInput.y);
-        }
-        else
-        {
-            NormInputY = 0;
-        }
-    }
+        [SerializeField] private float inputHoldTime = 0.2f;
+        private float jumpInputStartTime;
 
-    public void OnJumpInput(InputAction.CallbackContext context)
-    {
-        if (context.started)
+        private void Update()
         {
-            JumpInput = true;
-            jumpInputStartTime = Time.time;
+            CheckJumpInputHoldTime();
         }
-    }
 
-    public void OnCrouchInput(InputAction.CallbackContext context)
-    {
-        if (context.started)
+        private void Awake()
         {
-            CrouchInput = true;
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-        if (context.canceled)
+        #region Inputs
+        public void OnMoveInput(InputAction.CallbackContext context)
         {
-            CrouchInput = false;
-        }
-    }
+            RawMovementInput = context.ReadValue<Vector2>();
 
-    public void OnDodgeInput(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            DodgeInput = true;
+            if (Mathf.Abs(RawMovementInput.x) > 0.5f)
+            {
+                NormInputX = Mathf.RoundToInt(RawMovementInput.x);
+            }
+            else
+            {
+                NormInputX = 0;
+            }
+            if (Mathf.Abs(RawMovementInput.y) > 0.5f)
+            {
+                NormInputY = Mathf.RoundToInt(RawMovementInput.y);
+            }
+            else
+            {
+                NormInputY = 0;
+            }
         }
-        if (context.canceled)
-        {
-            DodgeInput = false;
-        }
-    }
 
-    public void OnSwordInput(InputAction.CallbackContext context)
-    {
-        if (context.started)
+        public void OnJumpInput(InputAction.CallbackContext context)
         {
-            SwordInput = true;
+            if (context.started)
+            {
+                JumpInput = true;
+                jumpInputStartTime = Time.time;
+            }
         }
-        if (context.canceled)
-        {
-            SwordInput = false;
-        }
-    }
 
-    public void OnGunInput(InputAction.CallbackContext context)
-    {
-        if (context.started)
+        public void OnCrouchInput(InputAction.CallbackContext context)
         {
-            GunInput = true;
+            if (context.started)
+            {
+                CrouchInput = true;
+            }
+            if (context.canceled)
+            {
+                CrouchInput = false;
+            }
         }
-        if (context.canceled)
-        {
-            GunInput = false;
-        }
-    }
 
-    public void OnInventoryInput(InputAction.CallbackContext context)
-    {
-        if (context.started)
+        public void OnDodgeInput(InputAction.CallbackContext context)
         {
-            InventoryInput = true;
+            if (context.started)
+            {
+                DodgeInput = true;
+            }
+            if (context.canceled)
+            {
+                DodgeInput = false;
+            }
         }
-    }
 
-    public void OnSpellInventoryInput(InputAction.CallbackContext context)
-    {
-        if (context.started)
+        public void OnSwordInput(InputAction.CallbackContext context)
         {
-            SpellInventoryInput = true;
+            if (context.started)
+            {
+                SwordInput = true;
+            }
+            if (context.canceled)
+            {
+                SwordInput = false;
+            }
         }
-        if (context.canceled)
-        {
-            SpellInventoryInput = false;
-        }
-    }
 
-    public void OnMenuInput(InputAction.CallbackContext context)
-    {
-        if (context.started)
+        public void OnGunInput(InputAction.CallbackContext context)
         {
-            MenuInput = true;
+            if (context.started)
+            {
+                GunInput = true;
+            }
+            if (context.canceled)
+            {
+                GunInput = false;
+            }
         }
-        if (context.canceled)
-        {
-            MenuInput = false;
-        }
-    }
 
-    public void OnSpellInput(InputAction.CallbackContext context)
-    {
-        if (context.started)
+        public void OnInventoryInput(InputAction.CallbackContext context)
         {
-            SpellInput = true;
+            if (context.started)
+            {
+                InventoryInput = true;
+            }
         }
-        if (context.canceled)
-        {
-            SpellInput = false;
-        }
-    }
 
-    public void OnAttackInput(InputAction.CallbackContext context)
-    {
-        if (context.started)
+        public void OnSpellInventoryInput(InputAction.CallbackContext context)
         {
-            AttackInput = true;
+            if (context.started)
+            {
+                SpellInventoryInput = true;
+            }
+            if (context.canceled)
+            {
+                SpellInventoryInput = false;
+            }
         }
-        if (context.canceled)
-        {
-            AttackInput = false;
-        }
-    }
 
-    public void OnAbilityInput(InputAction.CallbackContext context)
-    {
-        if (context.started)
+        public void OnMenuInput(InputAction.CallbackContext context)
         {
-            AbilityInput = true;
+            if (context.started)
+            {
+                MenuInput = true;
+            }
+            if (context.canceled)
+            {
+                MenuInput = false;
+            }
         }
-        if (context.canceled)
-        {
-            AbilityInput = false;
-        }
-    }
 
-    public void OnUseInput(InputAction.CallbackContext context)
-    {
-        if (context.started)
+        public void OnSpellInput(InputAction.CallbackContext context)
         {
-            UseInput = true;
+            if (context.started)
+            {
+                SpellInput = true;
+            }
+            if (context.canceled)
+            {
+                SpellInput = false;
+            }
         }
-        if (context.canceled)
-        {
-            UseInput = false;
-        }
-    }
 
-    public void OnReloadInput(InputAction.CallbackContext context)
-    {
-        if (context.started)
+        public void OnAttackInput(InputAction.CallbackContext context)
         {
-            ReloadInput = true;
+            if (context.started)
+            {
+                AttackInput = true;
+            }
+            if (context.canceled)
+            {
+                AttackInput = false;
+            }
         }
-        if (context.canceled)
-        {
-            ReloadInput = false;
-        }
-    }
 
-    public void OnSwitchSpell1Input(InputAction.CallbackContext context)
-    {
-        if (context.started)
+        public void OnAbilityInput(InputAction.CallbackContext context)
         {
-            SwitchSpell1Input = true;
+            if (context.started)
+            {
+                AbilityInput = true;
+            }
+            if (context.canceled)
+            {
+                AbilityInput = false;
+            }
         }
-        if (context.canceled)
-        {
-            SwitchSpell1Input = false;
-        }
-    }
 
-    public void OnSwitchSpell2Input(InputAction.CallbackContext context)
-    {
-        if (context.started)
+        public void OnUseInput(InputAction.CallbackContext context)
         {
-            SwitchSpell2Input = true;
+            if (context.started)
+            {
+                UseInput = true;
+            }
+            if (context.canceled)
+            {
+                UseInput = false;
+            }
         }
-        if (context.canceled)
-        {
-            SwitchSpell2Input = false;
-        }
-    }
 
-    public void OnSwitchAbility1Input(InputAction.CallbackContext context)
-    {
-        if (context.started)
+        public void OnReloadInput(InputAction.CallbackContext context)
         {
-            SwitchAbility1Input = true;
+            if (context.started)
+            {
+                ReloadInput = true;
+            }
+            if (context.canceled)
+            {
+                ReloadInput = false;
+            }
         }
-        if (context.canceled)
+
+        public void OnSwitchSpell1Input(InputAction.CallbackContext context)
         {
-            SwitchAbility1Input = false;
+            if (context.started)
+            {
+                SwitchSpell1Input = true;
+            }
+            if (context.canceled)
+            {
+                SwitchSpell1Input = false;
+            }
         }
-    }
 
-    public void OnSwitchAbility2Input(InputAction.CallbackContext context)
-    {
-        if (context.started)
+        public void OnSwitchSpell2Input(InputAction.CallbackContext context)
         {
-            SwitchAbility2Input = true;
+            if (context.started)
+            {
+                SwitchSpell2Input = true;
+            }
+            if (context.canceled)
+            {
+                SwitchSpell2Input = false;
+            }
         }
-        if (context.canceled)
+
+        public void OnSwitchAbility1Input(InputAction.CallbackContext context)
         {
-            SwitchAbility2Input = false;
+            if (context.started)
+            {
+                SwitchAbility1Input = true;
+            }
+            if (context.canceled)
+            {
+                SwitchAbility1Input = false;
+            }
         }
-    }
 
-    public void MousePositionInput(InputAction.CallbackContext context)
-    {
-        MousePosition = context.ReadValue<Vector2>();
-    }
-    #endregion
-
-    public void UseJumpInput() => JumpInput = false;
-    public void UseInventoryInput() => InventoryInput = false;
-    public void UseSpellInventoryInput() => SpellInventoryInput = false;
-    public void UseMenuInpit() => MenuInput = false;
-
-    private void CheckJumpInputHoldTime()
-    {
-        if (Time.time >= jumpInputStartTime + inputHoldTime)
+        public void OnSwitchAbility2Input(InputAction.CallbackContext context)
         {
-            JumpInput = false;
+            if (context.started)
+            {
+                SwitchAbility2Input = true;
+            }
+            if (context.canceled)
+            {
+                SwitchAbility2Input = false;
+            }
+        }
+
+        public void MousePositionInput(InputAction.CallbackContext context)
+        {
+            MousePosition = context.ReadValue<Vector2>();
+        }
+        #endregion
+
+        public void UseJumpInput() => JumpInput = false;
+        public void UseInventoryInput() => InventoryInput = false;
+        public void UseSpellInventoryInput() => SpellInventoryInput = false;
+        public void UseMenuInpit() => MenuInput = false;
+
+        private void CheckJumpInputHoldTime()
+        {
+            if (Time.time >= jumpInputStartTime + inputHoldTime)
+            {
+                JumpInput = false;
+            }
         }
     }
 }

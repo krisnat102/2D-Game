@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Pathfinding;
+using Core;
 
 public class EnemyGFX : MonoBehaviour
 {

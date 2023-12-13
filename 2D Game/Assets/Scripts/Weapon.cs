@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
+using Core;
 
 public class Weapon : MonoBehaviour
 {

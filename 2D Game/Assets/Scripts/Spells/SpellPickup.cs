@@ -1,28 +1,32 @@
 ﻿using UnityEngine;
+using Core;
 
-public class SpellPickup : MonoBehaviour
+namespace Spells
 {
-    [SerializeField] private Spell spell;
-
-    private bool isPickedUp = false;
-
-    void Pickup()
+    public class SpellPickup : MonoBehaviour
     {
-        if (!isPickedUp)
+        [SerializeField] private Spell spell;
+
+        private bool isPickedUp = false;
+
+        void Pickup()
         {
-            SpellManager.Instance.Add(spell);
+            if (!isPickedUp)
+            {
+                SpellManager.Instance.Add(spell);
 
-            Destroy(gameObject);
+                Destroy(gameObject);
 
-            isPickedUp = true;
+                isPickedUp = true;
+            }
         }
-    }
 
-    private void OnTriggerStay2D(Collider2D hitInfo)
-    {
-        if (hitInfo.tag == "PickupRange" && InputManager.Instance.UseInput)
+        private void OnTriggerStay2D(Collider2D hitInfo)
         {
-            Pickup();
+            if (hitInfo.tag == "PickupRange" && InputManager.Instance.UseInput)
+            {
+                Pickup();
+            }
         }
     }
 }

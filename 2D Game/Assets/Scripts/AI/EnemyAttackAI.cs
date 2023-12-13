@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using Core;
 public class EnemyAttackAI : MonoBehaviour
 {
     [SerializeField] private Enemy enemy;

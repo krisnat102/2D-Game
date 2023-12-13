@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using Spells;
+using Core;
 
 public class Grappler : MonoBehaviour
 {
-
     [Header ("Rope")]
     [SerializeField] private Material ropeMaterial;
     [SerializeField] private float ropeWidth = 0.2f;

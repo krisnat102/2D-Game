@@ -1,27 +1,31 @@
 ﻿using UnityEngine;
 
-public class Platform : MonoBehaviour
+
+namespace Interactables
 {
-    Collider2D platform;
-
-    [SerializeField] private Transform player;
-
-    [SerializeField] float offset = 1f;
-
-    private void Start()
+    public class Platform : MonoBehaviour
     {
-        platform = GetComponent<Collider2D>();
-    }
+        Collider2D platform;
 
-    private void Update()
-    {
-        if (player.position.y < transform.position.y + offset)
+        [SerializeField] private Transform player;
+
+        [SerializeField] float offset = 1f;
+
+        private void Start()
         {
-            platform.enabled = false;
+            platform = GetComponent<Collider2D>();
         }
-        else
+
+        private void Update()
         {
-            platform.enabled = true;
+            if (player.position.y < transform.position.y + offset)
+            {
+                platform.enabled = false;
+            }
+            else
+            {
+                platform.enabled = true;
+            }
         }
     }
 }

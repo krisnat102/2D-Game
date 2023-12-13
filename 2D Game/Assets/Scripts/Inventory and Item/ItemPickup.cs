@@ -1,25 +1,29 @@
 ﻿using UnityEngine;
+using Core;
 
-public class ItemPickup : MonoBehaviour
+namespace Inventory
 {
-    [SerializeField] private Item item;
-
-    private bool isPickedUp = false;
-
-    void Pickup()
+    public class ItemPickup : MonoBehaviour
     {
-        if (!isPickedUp)
+        [SerializeField] private Item item;
+
+        private bool isPickedUp = false;
+
+        void Pickup()
         {
-            InventoryManager.Instance.Add(item);
+            if (!isPickedUp)
+            {
+                InventoryManager.Instance.Add(item);
 
-            Destroy(gameObject);
+                Destroy(gameObject);
 
-            isPickedUp = true;
+                isPickedUp = true;
+            }
         }
-    }
 
-    private void OnTriggerStay2D(Collider2D hitInfo)
-    {
-        if (hitInfo.tag == "PickupRange" && InputManager.Instance.UseInput) Pickup();
+        private void OnTriggerStay2D(Collider2D hitInfo)
+        {
+            if (hitInfo.tag == "PickupRange" && InputManager.Instance.UseInput) Pickup();
+        }
     }
 }

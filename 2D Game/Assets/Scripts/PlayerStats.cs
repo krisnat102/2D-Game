@@ -1,195 +1,199 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using Inventory;
 
-public class PlayerStats : MonoBehaviour
+namespace Core
 {
-    public static PlayerStats Instance;
-
-    public static float hp = 100f;
-    public static float maxHP;
-    public static float stam = 100f;
-    public static float maxStam;
-    public static float mana = 100f;
-    public static float maxMana;
-
-    public static bool death = false;
-
-    private bool immune = false;
-    private bool stamRegenCooldown = false;
-
-    [Header("Stats")]
-
-    [SerializeField] private float stamRegenSpeed = 0.20f;
-    [SerializeField] private int level = 1;
-
-    [Header("Weapons")]
-
-    [SerializeField] private GameObject gun;
-    [SerializeField] private GameObject sword;
-
-    [Header("UI")]
-
-    [SerializeField] private Slider HpBar;
-    [SerializeField] private Slider ManaBar;
-    [SerializeField] private Slider StamBar;
-
-    [Header("Other")]
-
-    [SerializeField] private GameObject deathEffect;
-
-    private float armor = 0f;
-    private float magicRes = 0f;
-    private float weight = 0f;
-
-    public bool Immune { get => immune; set => immune = value; }
-
-    private void Awake()
+    public class PlayerStats : MonoBehaviour
     {
-        Instance = this;
+        public static PlayerStats Instance;
 
-        death = false;
-    }
+        public static float hp = 100f;
+        public static float maxHP;
+        public static float stam = 100f;
+        public static float maxStam;
+        public static float mana = 100f;
+        public static float maxMana;
 
-    void Start()
-    {
-        maxHP = hp;
-        maxStam = stam;
-        maxMana = mana;
+        public static bool death = false;
 
-        HpBar.maxValue = maxHP;
-        ManaBar.maxValue = maxMana;
-        StamBar.maxValue = maxStam;
-    }
+        private bool immune = false;
+        private bool stamRegenCooldown = false;
 
-    void Update()
-    {
-        if (GameManager.gamePaused == false)
+        [Header("Stats")]
+
+        [SerializeField] private float stamRegenSpeed = 0.20f;
+        [SerializeField] private int level = 1;
+
+        [Header("Weapons")]
+
+        [SerializeField] private GameObject gun;
+        [SerializeField] private GameObject sword;
+
+        [Header("UI")]
+
+        [SerializeField] private Slider HpBar;
+        [SerializeField] private Slider ManaBar;
+        [SerializeField] private Slider StamBar;
+
+        [Header("Other")]
+
+        [SerializeField] private GameObject deathEffect;
+
+        private float armor = 0f;
+        private float magicRes = 0f;
+        private float weight = 0f;
+
+        public bool Immune { get => immune; set => immune = value; }
+
+        private void Awake()
         {
-            HpBar.value = hp;
-            ManaBar.value = mana;
-            StamBar.value = stam;
+            Instance = this;
 
+            death = false;
+        }
+
+        void Start()
+        {
+            maxHP = hp;
+            maxStam = stam;
+            maxMana = mana;
+
+            HpBar.maxValue = maxHP;
+            ManaBar.maxValue = maxMana;
+            StamBar.maxValue = maxStam;
+        }
+
+        void Update()
+        {
+            if (GameManager.gamePaused == false)
+            {
+                HpBar.value = hp;
+                ManaBar.value = mana;
+                StamBar.value = stam;
+
+                if (hp <= 0)
+                {
+                    Die();
+                }
+
+                if (InputManager.Instance.GunInput)
+                {
+                    gun.SetActive(true);
+                    sword.SetActive(false);
+                }
+
+                if (InputManager.Instance.SwordInput)
+                {
+                    gun.SetActive(false);
+                    sword.SetActive(true);
+                }
+
+                StamRegen();
+            }
+        }
+
+        public void TakeDamage(float damage)
+        {
+            if (Immune == false)
+            {
+                hp -= damage;
+
+                Immune = true;
+
+                Invoke("StopImmune", 0.2f);
+            }
             if (hp <= 0)
             {
+
                 Die();
             }
-
-            if (InputManager.Instance.GunInput)
-            {
-                gun.SetActive(true);
-                sword.SetActive(false);
-            }
-
-            if (InputManager.Instance.SwordInput)
-            {
-                gun.SetActive(false);
-                sword.SetActive(true);
-            }
-
-            StamRegen();
         }
-    }
 
-    public void TakeDamage(float damage)
-    {
-        if (Immune == false)
+        private void StopImmune()
         {
-            hp -= damage;
-
-            Immune = true;
-
-            Invoke("StopImmune", 0.2f);
+            Immune = false;
         }
-        if (hp <= 0)
-        {
 
-            Die();
+        void Die()
+        {
+            GameObject Death = Instantiate(deathEffect, transform.position, transform.rotation);
+
+            death = true;
         }
-    }
 
-    private void StopImmune()
-    {
-        Immune = false;
-    }
-
-    void Die()
-    {
-        GameObject Death = Instantiate(deathEffect, transform.position, transform.rotation);
-
-        death = true;
-    }
-
-    public void Heal(int value)
-    {
-        if(hp < maxHP)
+        public void Heal(int value)
         {
-            hp += value;
-            if (hp > maxHP)
+            if (hp < maxHP)
             {
-                hp = maxHP;
+                hp += value;
+                if (hp > maxHP)
+                {
+                    hp = maxHP;
+                }
             }
         }
-    }
 
-    public void HealMana(int value)
-    {
-        if (mana < maxMana)
+        public void HealMana(int value)
         {
-            hp += value;
-            if (mana > maxMana)
+            if (mana < maxMana)
             {
-                mana = maxMana;
+                hp += value;
+                if (mana > maxMana)
+                {
+                    mana = maxMana;
+                }
             }
         }
-    }
 
-    private void StamRegen()
-    {
-        if (stam < maxStam && stamRegenCooldown != true)
+        private void StamRegen()
         {
-            stamRegenCooldown = true;
+            if (stam < maxStam && stamRegenCooldown != true)
+            {
+                stamRegenCooldown = true;
 
-            stam++;
+                stam++;
 
-            Invoke("StamRegenCooldown", stamRegenSpeed);
-        }
-    }
-
-    private void StamRegenCooldown()
-    {
-        stamRegenCooldown = false;
-    }
-
-    public void RefreshStats()
-    {
-        if (InventoryManager.Instance.HelmetBn.GetComponent<ItemController>().GetItem() != null)
-        {
-            armor += InventoryManager.Instance.HelmetBn.GetComponent<ItemController>().GetItem().armor;
-            magicRes += InventoryManager.Instance.HelmetBn.GetComponent<ItemController>().GetItem().magicRes;
-            weight += InventoryManager.Instance.HelmetBn.GetComponent<ItemController>().GetItem().weight;
+                Invoke("StamRegenCooldown", stamRegenSpeed);
+            }
         }
 
-        if (InventoryManager.Instance.ChestplateBn.GetComponent<ItemController>().GetItem() != null)
+        private void StamRegenCooldown()
         {
-            armor += InventoryManager.Instance.ChestplateBn.GetComponent<ItemController>().GetItem().armor;
-            magicRes += InventoryManager.Instance.ChestplateBn.GetComponent<ItemController>().GetItem().magicRes;
-            weight += InventoryManager.Instance.ChestplateBn.GetComponent<ItemController>().GetItem().weight;
+            stamRegenCooldown = false;
         }
 
-        if (InventoryManager.Instance.GlovesBn.GetComponent<ItemController>().GetItem() != null)
+        public void RefreshStats()
         {
-            armor += InventoryManager.Instance.GlovesBn.GetComponent<ItemController>().GetItem().armor;
-            magicRes += InventoryManager.Instance.GlovesBn.GetComponent<ItemController>().GetItem().magicRes;
-            weight += InventoryManager.Instance.GlovesBn.GetComponent<ItemController>().GetItem().weight;
+            if (InventoryManager.Instance.HelmetBn.GetComponent<ItemController>().GetItem() != null)
+            {
+                armor += InventoryManager.Instance.HelmetBn.GetComponent<ItemController>().GetItem().armor;
+                magicRes += InventoryManager.Instance.HelmetBn.GetComponent<ItemController>().GetItem().magicRes;
+                weight += InventoryManager.Instance.HelmetBn.GetComponent<ItemController>().GetItem().weight;
+            }
+
+            if (InventoryManager.Instance.ChestplateBn.GetComponent<ItemController>().GetItem() != null)
+            {
+                armor += InventoryManager.Instance.ChestplateBn.GetComponent<ItemController>().GetItem().armor;
+                magicRes += InventoryManager.Instance.ChestplateBn.GetComponent<ItemController>().GetItem().magicRes;
+                weight += InventoryManager.Instance.ChestplateBn.GetComponent<ItemController>().GetItem().weight;
+            }
+
+            if (InventoryManager.Instance.GlovesBn.GetComponent<ItemController>().GetItem() != null)
+            {
+                armor += InventoryManager.Instance.GlovesBn.GetComponent<ItemController>().GetItem().armor;
+                magicRes += InventoryManager.Instance.GlovesBn.GetComponent<ItemController>().GetItem().magicRes;
+                weight += InventoryManager.Instance.GlovesBn.GetComponent<ItemController>().GetItem().weight;
+            }
+            if (InventoryManager.Instance.BootsBn.GetComponent<ItemController>().GetItem() != null)
+            {
+                armor += InventoryManager.Instance.BootsBn.GetComponent<ItemController>().GetItem().armor;
+                magicRes += InventoryManager.Instance.BootsBn.GetComponent<ItemController>().GetItem().magicRes;
+                weight += InventoryManager.Instance.BootsBn.GetComponent<ItemController>().GetItem().weight;
+            }
+            Debug.Log("armor " + armor);
+            Debug.Log("magicRes " + magicRes);
+            Debug.Log("weight " + weight);
         }
-        if (InventoryManager.Instance.BootsBn.GetComponent<ItemController>().GetItem() != null)
-        {
-            armor += InventoryManager.Instance.BootsBn.GetComponent<ItemController>().GetItem().armor;
-            magicRes += InventoryManager.Instance.BootsBn.GetComponent<ItemController>().GetItem().magicRes;
-            weight += InventoryManager.Instance.BootsBn.GetComponent<ItemController>().GetItem().weight;
-        }
-        Debug.Log("armor " + armor);
-        Debug.Log("magicRes " + magicRes);
-        Debug.Log("weight " + weight);
     }
 }

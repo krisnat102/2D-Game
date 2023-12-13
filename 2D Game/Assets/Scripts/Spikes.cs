@@ -1,22 +1,26 @@
 ﻿using UnityEngine;
+using Core;
 
-public class Spikes : MonoBehaviour
+namespace Interactables
 {
-    [SerializeField] private float spikeDmg;
-
-    private void OnTriggerEnter2D(Collider2D hitinfo)
+    public class Spikes : MonoBehaviour
     {
-        if(hitinfo.tag == "Player")
-        {
-            PlayerStats player = hitinfo.GetComponent<PlayerStats>();
+        [SerializeField] private float spikeDmg;
 
-            player.TakeDamage(spikeDmg);
-        }
-        else if(hitinfo.tag == "Enemy")
+        private void OnTriggerEnter2D(Collider2D hitinfo)
         {
-            Enemy enemy = hitinfo.GetComponent<Enemy>();
+            if (hitinfo.tag == "Player")
+            {
+                PlayerStats player = hitinfo.GetComponent<PlayerStats>();
 
-            enemy.TakeDamage(spikeDmg);
+                player.TakeDamage(spikeDmg);
+            }
+            else if (hitinfo.tag == "Enemy")
+            {
+                Enemy enemy = hitinfo.GetComponent<Enemy>();
+
+                enemy.TakeDamage(spikeDmg);
+            }
         }
     }
 }

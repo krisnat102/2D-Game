@@ -1,38 +1,42 @@
 ﻿using UnityEngine;
 
-public class GameManager : MonoBehaviour
+
+namespace Core
 {
-    public static bool gamePaused = false;
-
-    public static int money = 0;
-
-    [SerializeField] private GameObject player;
-    [SerializeField] private GameObject weapon1;
-    [SerializeField] private GameObject weapon2;
-
-    [SerializeField] private GameObject deathScreen;
-
-    private void Update()
+    public class GameManager : MonoBehaviour
     {
-        if(PlayerStats.death == true)
+        public static bool gamePaused = false;
+
+        public static int money = 0;
+
+        [SerializeField] private GameObject player;
+        [SerializeField] private GameObject weapon1;
+        [SerializeField] private GameObject weapon2;
+
+        [SerializeField] private GameObject deathScreen;
+
+        private void Update()
         {
-            Destroy(player);
-            Destroy(weapon1);
-            Destroy(weapon2);
+            if (PlayerStats.death == true)
+            {
+                Destroy(player);
+                Destroy(weapon1);
+                Destroy(weapon2);
 
-            deathScreen.SetActive(true);        
+                deathScreen.SetActive(true);
+            }
         }
-    }
 
-    public void TryAgain()
-    {
-  
-        Application.LoadLevel(Application.loadedLevel);
+        public void TryAgain()
+        {
 
-        PlayerStats.death = false;
+            Application.LoadLevel(Application.loadedLevel);
 
-        PlayerStats.hp = PlayerStats.maxHP;
-        PlayerStats.mana = PlayerStats.maxMana;
-        PlayerStats.stam = PlayerStats.maxStam;
+            PlayerStats.death = false;
+
+            PlayerStats.hp = PlayerStats.maxHP;
+            PlayerStats.mana = PlayerStats.maxMana;
+            PlayerStats.stam = PlayerStats.maxStam;
+        }
     }
 }
