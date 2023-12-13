@@ -42,7 +42,6 @@ public class PlayerMovement : MonoBehaviour
 			verticalMove = InputManager.Instance.NormInputY * climbSpeed;
 
 			animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-			animator.SetFloat("ClimbSpeed", Mathf.Abs(verticalMove));
 
 			if (InputManager.Instance.JumpInput)
 			{
@@ -73,10 +72,13 @@ public class PlayerMovement : MonoBehaviour
 			{
 				dodgeDirection = false;
 			}
-			if (ableClimb == true && InputManager.Instance.NormInputY > 0)
+			if (ableClimb == true && InputManager.Instance.NormInputY != 0)
 			{
-
+				animator.SetFloat("ClimbSpeed", Mathf.Abs(verticalMove));
 				rb.velocity = new Vector2(horizontalMove, verticalMove) * Time.fixedDeltaTime;
+			}
+			else {
+				animator.SetFloat("ClimbSpeed", 0);
 			}
 
 			if (horizontalMove != 0 && grassSound == true && CharacterController2D.m_Grounded == true && verticalMove == 0)
