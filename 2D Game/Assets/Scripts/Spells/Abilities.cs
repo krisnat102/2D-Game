@@ -8,12 +8,6 @@ namespace Spells
     {
         [SerializeField] private Transform castingPoint;
 
-        /*[Header("Offsets")]
-        [SerializeField] private float OffsetX;
-        [SerializeField] private float OffsetY;
-        [SerializeField] private float OffsetX2;
-        [SerializeField] private float OffsetY2;*/
-
         [Header("Active Spell Holders")]
         [SerializeField] private Image mainSpell;
         [SerializeField] private Image sideSpell1;
@@ -37,7 +31,7 @@ namespace Spells
 
         private void Update()
         {
-            if (GameManager.gamePaused == false)
+            if (Core.GameManager.gamePaused == false)
             {
                 #region Spells
                 if (SpellManager.SpellsBar.Count >= activeSpell)
@@ -165,16 +159,6 @@ namespace Spells
             {
                 spellCooldownImg.fillAmount -= Time.deltaTime / SpellManager.SpellsBar[activeSpell].cooldown;
             }
-
-            /*if (SpellManager.SpellsBar[activeSpell] == null)
-            {
-                spellCooldownImg.fillAmount = 0;
-            }
-            if (SpellManager.AbilitiesBar[activeSpell] == null)
-            {
-                abilityCooldownImg.gameObject.SetActive(false);
-            }*/
-
         }
 
         void Spell()

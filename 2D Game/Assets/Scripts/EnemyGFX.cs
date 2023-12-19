@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using Pathfinding;
-using Core;
 
 public class EnemyGFX : MonoBehaviour
 {
@@ -12,7 +11,7 @@ public class EnemyGFX : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.gamePaused == false)
+        if (Core.GameManager.gamePaused == false)
         {
             if (aiPath.desiredVelocity.x >= 0.01f)
             {

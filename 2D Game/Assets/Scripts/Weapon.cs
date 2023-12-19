@@ -37,7 +37,7 @@ public class Weapon : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.gamePaused == false)
+        if (Core.GameManager.gamePaused == false)
         {
             if (InputManager.Instance.AttackInput && canFire == true)
             {

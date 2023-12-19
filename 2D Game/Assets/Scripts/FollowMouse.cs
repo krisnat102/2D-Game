@@ -21,7 +21,7 @@ public class FollowMouse : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.gamePaused == false)
+        if (Core.GameManager.gamePaused == false)
         {
             mousePos = cam.ScreenToWorldPoint(InputManager.Instance.MousePosition);
 

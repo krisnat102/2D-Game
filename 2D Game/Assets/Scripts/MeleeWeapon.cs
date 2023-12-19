@@ -29,7 +29,7 @@ public class MeleeWeapon : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.gamePaused == false)
+        if (Core.GameManager.gamePaused == false)
         {
             if (InputManager.Instance.AttackInput)
             {

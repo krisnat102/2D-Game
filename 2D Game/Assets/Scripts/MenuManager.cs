@@ -63,7 +63,7 @@ public class MenuManager : MonoBehaviour
             {
                 menu.SetActive(true);
 
-                GameManager.gamePaused = true;
+                Core.GameManager.gamePaused = true;
                 PauseGame();
             }
         }
@@ -89,7 +89,7 @@ public class MenuManager : MonoBehaviour
 
     void PauseGame()
     {
-        if (GameManager.gamePaused)
+        if (Core.GameManager.gamePaused)
         {
             Time.timeScale = 0f;
         }
@@ -179,7 +179,7 @@ public class MenuManager : MonoBehaviour
     {
         menu.SetActive(false);
 
-        GameManager.gamePaused = false;
+        Core.GameManager.gamePaused = false;
         PauseGame();
     }
 }
