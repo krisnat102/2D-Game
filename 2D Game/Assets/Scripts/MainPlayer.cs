@@ -5,13 +5,13 @@ using Core;
 
 public class MainPlayer : MonoBehaviour
 {
-    protected InputManager inputManager;
+    protected PlayerInputHandler inputHandler;
     protected MainPlayer player;
     protected DataPlayer dataPlayer;
 
-    public MainPlayer(InputManager inputManager, MainPlayer player, DataPlayer dataPlayer)
+    public MainPlayer(PlayerInputHandler inputHandler, MainPlayer player, DataPlayer dataPlayer)
     {
-        this.inputManager = inputManager;
+        this.inputHandler = inputHandler;
         this.player = player;
         this.dataPlayer = dataPlayer;
     }

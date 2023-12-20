@@ -122,9 +122,9 @@ namespace Spells
         {
             if (Core.GameManager.gamePaused == false)
             {
-                if (InputManager.Instance.SpellInventoryInput)
+                if (PlayerInputHandler.Instance.SpellInventoryInput)
                 {
-                    InputManager.Instance.UseSpellInventoryInput();
+                    PlayerInputHandler.Instance.UseSpellInventoryInput();
                     if (!inventory.activeInHierarchy && !spellInventory.activeInHierarchy)
                     {
                         spellInventory.SetActive(true);

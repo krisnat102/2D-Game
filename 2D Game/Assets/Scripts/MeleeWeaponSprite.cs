@@ -53,14 +53,14 @@ public class MeleeWeaponSprite : MeleeWeapon
             }
         }
 
-        if (InputManager.Instance.NormInputX < 0)
+        if (PlayerInputHandler.Instance.NormInputX < 0)
         {
             sprite.flipX = true;
 
             Side = false;
         }
 
-        if (InputManager.Instance.NormInputX > 0)
+        if (PlayerInputHandler.Instance.NormInputX > 0)
         {
             sprite.flipX = false;
 

@@ -52,9 +52,9 @@ public class MenuManager : MonoBehaviour
 
     void Update()
     {
-        if (InputManager.Instance.MenuInput && SceneManager.GetActiveScene().name != "MainMenu")
+        if (PlayerInputHandler.Instance.MenuInput && SceneManager.GetActiveScene().name != "MainMenu")
         {
-            InputManager.Instance.UseMenuInpit();
+            PlayerInputHandler.Instance.UseMenuInpit();
             if (menu.activeSelf)
             {
                 Unpause();

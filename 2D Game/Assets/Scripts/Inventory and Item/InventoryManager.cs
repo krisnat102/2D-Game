@@ -187,9 +187,9 @@ namespace Inventory
         {
             if (Core.GameManager.gamePaused == false)
             {
-                if (InputManager.Instance.InventoryInput)
+                if (PlayerInputHandler.Instance.InventoryInput)
                 {
-                    InputManager.Instance.UseInventoryInput();
+                    PlayerInputHandler.Instance.UseInventoryInput();
                     if (!Inventory.activeInHierarchy && !SpellInventory.activeInHierarchy)
                     {
                         Inventory.SetActive(true);
@@ -207,11 +207,11 @@ namespace Inventory
                     }
                 }
             }
-            if (InputManager.Instance.MenuInput)
+            if (PlayerInputHandler.Instance.MenuInput)
             {
                 if (Inventory.activeInHierarchy || SpellInventory.activeInHierarchy)
                 {
-                    InputManager.Instance.UseMenuInpit();
+                    PlayerInputHandler.Instance.UseMenuInpit();
 
                     Inventory.SetActive(false);
                     SpellInventory.SetActive(false);

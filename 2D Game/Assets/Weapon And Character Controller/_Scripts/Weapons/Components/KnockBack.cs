@@ -27,7 +27,7 @@ namespace Bardent.Weapons.Components
 
             hitBox.OnDetectedCollider2D += HandleDetectCollider2D;
 
-            movement = Core.GetCoreComponent<CoreSystem.Movement>();
+            //movement = Core.GetCoreComponent<CoreSystem.Movement>();
         }
 
         protected override void OnDestroy()

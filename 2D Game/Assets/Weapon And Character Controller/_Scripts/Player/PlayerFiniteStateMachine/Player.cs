@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
 
     private Bardent.Weapons.Weapon primaryWeapon;
     private Bardent.Weapons.Weapon secondaryWeapon;
-    
+
     #endregion
 
     #region Unity Callback Functions
@@ -55,10 +55,10 @@ public class Player : MonoBehaviour
 
         primaryWeapon = transform.Find("PrimaryWeapon").GetComponent<Bardent.Weapons.Weapon>();
         secondaryWeapon = transform.Find("SecondaryWeapon").GetComponent<Bardent.Weapons.Weapon>();
-        
+
         primaryWeapon.SetCore(Core);
         secondaryWeapon.SetCore(Core);
-        
+
         StateMachine = new PlayerStateMachine();
 
         IdleState = new PlayerIdleState(this, StateMachine, playerData, "idle");
@@ -112,12 +112,13 @@ public class Player : MonoBehaviour
 
         MovementCollider.size = workspace;
         MovementCollider.offset = center;
-    }   
+    }
 
     private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
 
     private void AnimtionFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
-   
+
     #endregion
 }
+

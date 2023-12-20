@@ -50,7 +50,7 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
             else isGrounded = false;
         }
 
-        float horizontalMove = InputManager.Instance.NormInputX * dataAI.speed;
+        float horizontalMove = PlayerInputHandler.Instance.NormInputX * dataAI.speed;
 
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 

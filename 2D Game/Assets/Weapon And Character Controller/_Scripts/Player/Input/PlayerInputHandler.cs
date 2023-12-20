@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,9 @@ public class PlayerInputHandler : MonoBehaviour
 {
     private PlayerInput playerInput;
     private Camera cam;
+    public static PlayerInputHandler Instance { get; private set; }
 
+    #region Variables
     public Vector2 RawMovementInput { get; private set; }
     public Vector2 RawDashDirectionInput { get; private set; }
     public Vector2Int DashDirectionInput { get; private set; }
@@ -19,14 +22,35 @@ public class PlayerInputHandler : MonoBehaviour
     public bool GrabInput { get; private set; }
     public bool DashInput { get; private set; }
     public bool DashInputStop { get; private set; }
+    public bool InventoryInput { get; private set; }
+    public bool SpellInventoryInput { get; private set; }
+    public bool MenuInput { get; private set; }
+    public bool SpellInput { get; private set; }
+    public bool AbilityInput { get; private set; }
+    public bool UseInput { get; private set; }
+    public bool SwitchSpell1Input { get; private set; }
+    public bool SwitchSpell2Input { get; private set; }
+    public bool SwitchAbility1Input { get; private set; }
+    public bool SwitchAbility2Input { get; private set; }
+    public Vector2 MousePosition { get; private set; }
 
     public bool[] AttackInputs { get; private set; }
+    #endregion
 
     [SerializeField]
     private float inputHoldTime = 0.2f;
 
     private float jumpInputStartTime;
     private float dashInputStartTime;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -44,6 +68,7 @@ public class PlayerInputHandler : MonoBehaviour
         CheckDashInputHoldTime();
     }
 
+    #region Inputs
     public void OnPrimaryAttackInput(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -132,10 +157,135 @@ public class PlayerInputHandler : MonoBehaviour
 
         DashDirectionInput = Vector2Int.RoundToInt(RawDashDirectionInput.normalized);
     }
+    public void OnInventoryInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            InventoryInput = true;
+        }
+    }
 
+    public void OnSpellInventoryInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            SpellInventoryInput = true;
+        }
+        if (context.canceled)
+        {
+            SpellInventoryInput = false;
+        }
+    }
+
+    public void OnMenuInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            MenuInput = true;
+        }
+        if (context.canceled)
+        {
+            MenuInput = false;
+        }
+    }
+
+    public void OnSpellInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            SpellInput = true;
+        }
+        if (context.canceled)
+        {
+            SpellInput = false;
+        }
+    }
+
+    public void OnAbilityInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            AbilityInput = true;
+        }
+        if (context.canceled)
+        {
+            AbilityInput = false;
+        }
+    }
+
+    public void OnUseInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            UseInput = true;
+        }
+        if (context.canceled)
+        {
+            UseInput = false;
+        }
+    }
+
+    public void OnSwitchSpell1Input(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            SwitchSpell1Input = true;
+        }
+        if (context.canceled)
+        {
+            SwitchSpell1Input = false;
+        }
+    }
+
+    public void OnSwitchSpell2Input(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            SwitchSpell2Input = true;
+        }
+        if (context.canceled)
+        {
+            SwitchSpell2Input = false;
+        }
+    }
+
+    public void OnSwitchAbility1Input(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            SwitchAbility1Input = true;
+        }
+        if (context.canceled)
+        {
+            SwitchAbility1Input = false;
+        }
+    }
+
+    public void OnSwitchAbility2Input(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            SwitchAbility2Input = true;
+        }
+        if (context.canceled)
+        {
+            SwitchAbility2Input = false;
+        }
+    }
+
+    public void MousePositionInput(InputAction.CallbackContext context)
+    {
+        MousePosition = context.ReadValue<Vector2>();
+    }
+    #endregion
+
+    #region UseInput
     public void UseJumpInput() => JumpInput = false;
-
     public void UseDashInput() => DashInput = false;
+    public void UseInventoryInput() => InventoryInput = false;
+    public void UseSpellInventoryInput() => SpellInventoryInput = false;
+    public void UseMenuInpit() => MenuInput = false;
+    #endregion
 
     private void CheckJumpInputHoldTime()
     {

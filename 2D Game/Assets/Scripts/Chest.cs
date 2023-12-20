@@ -16,7 +16,7 @@ namespace Interactables
 
         private void OnTriggerStay2D(Collider2D collision)
         {
-            if (collision.tag == "PickupRange" && InputManager.Instance.UseInput)
+            if (collision.tag == "PickupRange" && PlayerInputHandler.Instance.UseInput)
             {
                 OpenChest();
 

@@ -23,17 +23,17 @@ public class FollowMouse : MonoBehaviour
     {
         if (Core.GameManager.gamePaused == false)
         {
-            mousePos = cam.ScreenToWorldPoint(InputManager.Instance.MousePosition);
+            mousePos = cam.ScreenToWorldPoint(PlayerInputHandler.Instance.MousePosition);
 
-            movement.x = InputManager.Instance.NormInputX;
-            movement.y = InputManager.Instance.NormInputY;
+            movement.x = PlayerInputHandler.Instance.NormInputX;
+            movement.y = PlayerInputHandler.Instance.NormInputY;
 
-            if (InputManager.Instance.NormInputX < 0)
+            if (PlayerInputHandler.Instance.NormInputX < 0)
             {
                 side = false;
             }
 
-            if (InputManager.Instance.NormInputX > 0)
+            if (PlayerInputHandler.Instance.NormInputX > 0)
             {
                 side = true;
             }

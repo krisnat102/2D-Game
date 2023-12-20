@@ -23,7 +23,7 @@ namespace Spells
 
         private void OnTriggerStay2D(Collider2D hitInfo)
         {
-            if (hitInfo.tag == "PickupRange" && InputManager.Instance.UseInput)
+            if (hitInfo.tag == "PickupRange" && PlayerInputHandler.Instance.UseInput)
             {
                 Pickup();
             }

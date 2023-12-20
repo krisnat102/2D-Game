@@ -23,7 +23,7 @@ namespace Inventory
 
         private void OnTriggerStay2D(Collider2D hitInfo)
         {
-            if (hitInfo.tag == "PickupRange" && InputManager.Instance.UseInput) Pickup();
+            if (hitInfo.tag == "PickupRange" && PlayerInputHandler.Instance.UseInput) Pickup();
         }
     }
 }

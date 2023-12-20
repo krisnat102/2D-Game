@@ -35,10 +35,10 @@ namespace Spells
             {
                 #region Spells
                 if (SpellManager.SpellsBar.Count >= activeSpell)
-                    if (InputManager.Instance.SpellInput && PlayerStats.mana >= SpellManager.SpellsBar[activeSpell].cost && spellCooldown == false)
+                    if (PlayerInputHandler.Instance.SpellInput && PlayerStats.mana >= SpellManager.SpellsBar[activeSpell].cost && spellCooldown == false)
                         Spell();
 
-                if (InputManager.Instance.SwitchSpell1Input)
+                if (PlayerInputHandler.Instance.SwitchSpell1Input)
                     if (activeSpell != 0)
                     {
                         activeSpell--;
@@ -46,7 +46,7 @@ namespace Spells
                     else activeSpell = 7;
                 ClearSprites();
 
-                if (InputManager.Instance.SwitchSpell2Input)
+                if (PlayerInputHandler.Instance.SwitchSpell2Input)
                     if (activeSpell != 7)
                     {
                         activeSpell++;
@@ -57,10 +57,10 @@ namespace Spells
 
                 #region Abilites
                 if (SpellManager.AbilitiesBar.Count >= activeAbility)
-                    if (InputManager.Instance.AbilityInput && PlayerStats.stam >= SpellManager.AbilitiesBar[activeAbility].cost && AbilityCooldown1 == false)
+                    if (PlayerInputHandler.Instance.AbilityInput && PlayerStats.stam >= SpellManager.AbilitiesBar[activeAbility].cost && AbilityCooldown1 == false)
                         Ability();
 
-                if (InputManager.Instance.SwitchAbility1Input)
+                if (PlayerInputHandler.Instance.SwitchAbility1Input)
                     if (activeAbility != 0)
                     {
                         activeAbility--;
@@ -68,7 +68,7 @@ namespace Spells
                     else activeAbility = 7;
                 ClearSprites();
 
-                if (InputManager.Instance.SwitchAbility2Input)
+                if (PlayerInputHandler.Instance.SwitchAbility2Input)
                     if (activeAbility != 7)
                     {
                         activeAbility++;
