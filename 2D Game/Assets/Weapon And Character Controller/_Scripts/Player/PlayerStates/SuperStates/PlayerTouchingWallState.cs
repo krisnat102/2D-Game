@@ -11,7 +11,6 @@ public class PlayerTouchingWallState : PlayerState {
 	private Movement movement;
 	private CollisionSenses collisionSenses;
 
-
 	protected bool isGrounded;
 	protected bool isTouchingWall;
 	protected bool grabInput;

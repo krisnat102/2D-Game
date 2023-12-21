@@ -4,6 +4,7 @@ using Bardent.CoreSystem;
 using Bardent.Weapons;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -26,8 +27,7 @@ public class Player : MonoBehaviour
     public PlayerAttackState PrimaryAttackState { get; private set; }
     public PlayerAttackState SecondaryAttackState { get; private set; }
 
-    [SerializeField]
-    private PlayerData playerData;
+    [SerializeField] private PlayerData playerData;
     #endregion
 
     #region Components
@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
 
     private Bardent.Weapons.Weapon primaryWeapon;
     private Bardent.Weapons.Weapon secondaryWeapon;
+
 
     #endregion
 

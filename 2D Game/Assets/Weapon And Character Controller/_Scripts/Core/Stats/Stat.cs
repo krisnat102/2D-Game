@@ -9,6 +9,8 @@ namespace Bardent.CoreSystem.StatsSystem
         public event Action OnCurrentValueZero;
         
         [field: SerializeField] public float MaxValue { get; private set; }
+        [field: SerializeField] public bool Regenerative { get; private set; }
+        [field: SerializeField] public float RecoveryRate { get; private set; }
 
         public float CurrentValue
         {
@@ -31,5 +33,11 @@ namespace Bardent.CoreSystem.StatsSystem
         public void Increase(float amount) => CurrentValue += amount;
 
         public void Decrease(float amount) => CurrentValue -= amount;
+
+        public void Regen()
+        {
+            if (!Regenerative) return;
+            Increase(RecoveryRate * Time.deltaTime);
+        }
     }
 }

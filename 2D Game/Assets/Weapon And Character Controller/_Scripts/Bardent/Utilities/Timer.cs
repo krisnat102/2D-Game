@@ -12,6 +12,8 @@ namespace Bardent.Utilities
         private float targetTime;
 
         private bool isActive;
+
+        public bool Finished { get; private set; }
         
         public Timer(float duration)
         {
@@ -23,6 +25,7 @@ namespace Bardent.Utilities
             startTime = Time.time;
             targetTime = startTime + duration;
             isActive = true;
+            Finished = false;
         }
 
         public void StopTimer()
@@ -38,6 +41,7 @@ namespace Bardent.Utilities
             {
                 OnTimerDone?.Invoke();
                 StopTimer();
+                Finished = true;
             }
         }
     }

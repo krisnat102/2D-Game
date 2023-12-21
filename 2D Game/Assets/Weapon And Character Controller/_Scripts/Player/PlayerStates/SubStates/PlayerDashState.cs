@@ -29,6 +29,7 @@ public class PlayerDashState : PlayerAbilityState {
 
 		player.DashDirectionIndicator.gameObject.SetActive(true);
 
+		Stats.Stam.Decrease(playerData.dashCost);
 	}
 
 	public override void Exit() {

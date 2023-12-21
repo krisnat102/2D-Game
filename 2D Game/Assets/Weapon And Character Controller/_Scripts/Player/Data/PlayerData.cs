@@ -5,12 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "newPlayerData", menuName = "Data/Player Data/Base Data")]
 public class PlayerData : ScriptableObject
 {
+    [Header("General")]
+    public float stamStartRecoveryTime = 1f;
+
     [Header("Move State")]
     public float movementVelocity = 10f;
 
     [Header("Jump State")]
     public float jumpVelocity = 15f;
     public int amountOfJumps = 1;
+    public float jumpCost = 10f;
 
     [Header("Wall Jump State")]
     public float wallJumpVelocity = 20;
@@ -26,6 +30,7 @@ public class PlayerData : ScriptableObject
 
     [Header("Wall Climb State")]
     public float wallClimbVelocity = 3f;
+    public float wallClimbCost = 3f;
 
     [Header("Ledge Climb State")]
     public Vector2 startOffset;
@@ -40,6 +45,7 @@ public class PlayerData : ScriptableObject
     public float drag = 10f;
     public float dashEndYMultiplier = 0.2f;
     public float distBetweenAfterImages = 0.5f;
+    public float dashCost = 20f;
 
     [Header("Crouch States")]
     public float crouchMovementVelocity = 5f;

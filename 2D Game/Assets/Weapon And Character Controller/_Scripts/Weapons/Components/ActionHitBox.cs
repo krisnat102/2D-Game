@@ -25,8 +25,14 @@ namespace Bardent.Weapons.Components
 
             if (detected.Length == 0)
                 return;
-
-            OnDetectedCollider2D?.Invoke(detected);
+            try
+            {
+                OnDetectedCollider2D?.Invoke(detected);
+            }
+            catch (Exception e)
+            {
+                Debug.Log("Knockback Stuff");
+            }
         }
 
         protected override void Start()

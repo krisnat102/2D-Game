@@ -72,15 +72,15 @@ public class PlayerGroundedState : PlayerState
         grabInput = player.InputHandler.GrabInput;
         dashInput = player.InputHandler.DashInput;
 
-        if (player.InputHandler.AttackInputs[(int)CombatInputs.primary] && !isTouchingCeiling)
+        if (player.InputHandler.AttackInputs[(int)CombatInputs.primary] && !isTouchingCeiling && Stats.Stam.CurrentValue > 0)
         {
             stateMachine.ChangeState(player.PrimaryAttackState);
         }
-        else if (player.InputHandler.AttackInputs[(int)CombatInputs.secondary] && !isTouchingCeiling)
+        else if (player.InputHandler.AttackInputs[(int)CombatInputs.secondary] && !isTouchingCeiling && Stats.Stam.CurrentValue > 0)
         {
             stateMachine.ChangeState(player.SecondaryAttackState);
         }
-        else if (jumpInput && player.JumpState.CanJump() && !isTouchingCeiling)
+        else if (jumpInput && player.JumpState.CanJump() && !isTouchingCeiling && Stats.Stam.CurrentValue > 0)
         {
             stateMachine.ChangeState(player.JumpState);
         }
@@ -89,11 +89,11 @@ public class PlayerGroundedState : PlayerState
             player.InAirState.StartCoyoteTime();
             stateMachine.ChangeState(player.InAirState);
         }
-        else if (isTouchingWall && grabInput && isTouchingLedge)
+        else if (isTouchingWall && grabInput && isTouchingLedge && Stats.Stam.CurrentValue > 0)
         {
             stateMachine.ChangeState(player.WallGrabState);
         }
-        else if (dashInput && player.DashState.CheckIfCanDash() && !isTouchingCeiling)
+        else if (dashInput && player.DashState.CheckIfCanDash() && !isTouchingCeiling && Stats.Stam.CurrentValue > 0)
         {
             stateMachine.ChangeState(player.DashState);
         }

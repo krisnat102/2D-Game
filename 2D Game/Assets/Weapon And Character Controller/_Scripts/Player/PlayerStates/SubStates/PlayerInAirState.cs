@@ -101,11 +101,11 @@ public class PlayerInAirState : PlayerState
 
         CheckJumpMultiplier();
 
-        if (player.InputHandler.AttackInputs[(int)CombatInputs.primary])
+        if (player.InputHandler.AttackInputs[(int)CombatInputs.primary] && Stats.Stam.CurrentValue > 0)
         {
             stateMachine.ChangeState(player.PrimaryAttackState);
         }
-        else if (player.InputHandler.AttackInputs[(int)CombatInputs.secondary])
+        else if (player.InputHandler.AttackInputs[(int)CombatInputs.secondary] && Stats.Stam.CurrentValue > 0)
         {
             stateMachine.ChangeState(player.SecondaryAttackState);
         }
@@ -117,18 +117,18 @@ public class PlayerInAirState : PlayerState
         {
             stateMachine.ChangeState(player.LedgeClimbState);
         }
-        else if (jumpInput && (isTouchingWall || isTouchingWallBack || wallJumpCoyoteTime))
+        else if (jumpInput && (isTouchingWall || isTouchingWallBack || wallJumpCoyoteTime) && Stats.Stam.CurrentValue > 0)
         {
             StopWallJumpCoyoteTime();
             isTouchingWall = CollisionSenses.WallFront;
             player.WallJumpState.DetermineWallJumpDirection(isTouchingWall);
             stateMachine.ChangeState(player.WallJumpState);
         }
-        else if (jumpInput && player.JumpState.CanJump())
+        else if (jumpInput && player.JumpState.CanJump() && Stats.Stam.CurrentValue > 0)
         {
             stateMachine.ChangeState(player.JumpState);
         }
-        else if (isTouchingWall && grabInput && isTouchingLedge)
+        else if (isTouchingWall && grabInput && isTouchingLedge && Stats.Stam.CurrentValue > 0)
         {
             stateMachine.ChangeState(player.WallGrabState);
         }
@@ -136,7 +136,7 @@ public class PlayerInAirState : PlayerState
         {
             stateMachine.ChangeState(player.WallSlideState);
         }
-        else if (dashInput && player.DashState.CheckIfCanDash())
+        else if (dashInput && player.DashState.CheckIfCanDash() && Stats.Stam.CurrentValue > 0)
         {
             stateMachine.ChangeState(player.DashState);
         }

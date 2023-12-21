@@ -15,6 +15,8 @@ public class PlayerWallJumpState : PlayerAbilityState {
 		Movement?.SetVelocity(playerData.wallJumpVelocity, playerData.wallJumpAngle, wallJumpDirection);
 		Movement?.CheckIfShouldFlip(wallJumpDirection);
 		player.JumpState.DecreaseAmountOfJumpsLeft();
+
+		Stats.Stam.Decrease(playerData.jumpCost);
 	}
 
 	public override void LogicUpdate() {

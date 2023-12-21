@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class PlayerState
 {
+    protected Stats Stats { get => stats ?? core.GetCoreComponent(ref stats); }
+    private Stats stats;
+
     protected Bardent.CoreSystem.Core core;
 
     protected Player player;
