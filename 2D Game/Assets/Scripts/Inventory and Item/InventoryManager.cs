@@ -83,7 +83,7 @@ namespace Inventory
             Items.Remove(item);
         }
 
-        private void ListItems()
+        public void ListItems()
         {
             ItemController itemController;
 
@@ -221,32 +221,32 @@ namespace Inventory
             }
         }
 
-        private void ConsumableInv()
+        public void ConsumableInvBn()
         {
             filter = Filter.ConsumableInv;
 
             ListItems();
         }
-        private void MaterialInv()
+        public void MaterialInvBn()
         {
             filter = Filter.MaterialInv;
 
             ListItems();
         }
-        private void EquipmentInv()
+        public void EquipmentInvBn()
         {
             filter = Filter.EquimpentInv;
 
             ListItems();
 
         }
-        private void QuestInv()
+        public void QuestInvBn()
         {
             filter = Filter.QuestInv;
 
             ListItems();
         }
-        private void MiscInv()
+        public void MiscInvBn()
         {
             filter = Filter.MisctInv;
 

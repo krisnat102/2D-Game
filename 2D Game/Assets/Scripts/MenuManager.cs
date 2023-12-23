@@ -87,7 +87,7 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    void PauseGame()
+    private void PauseGame()
     {
         if (Core.GameManager.gamePaused)
         {

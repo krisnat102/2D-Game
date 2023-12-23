@@ -22,9 +22,23 @@ MonoBehaviour:
   - rid: 3124257199506325505
   - rid: 2516071312619208705
   - rid: 2516071382426845185
+  - rid: 2402950210433581056
   references:
     version: 2
     RefIds:
+    - rid: 2402950210433581056
+      type: {class: StatCostData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: StatCostData
+        attackData:
+        - name: Attack 1
+          <AttackCost>k__BackingField: 5
+          <AttackRecoveryTime>k__BackingField: 0.6
+          <StamCost>k__BackingField: 1
+        - name: Attack 2
+          <AttackCost>k__BackingField: 5
+          <AttackRecoveryTime>k__BackingField: 0.6
+          <StamCost>k__BackingField: 1
     - rid: 2516071312619208705
       type: {class: KnockBackData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}
       data:
@@ -51,9 +65,9 @@ MonoBehaviour:
         name: DamageData
         attackData:
         - name: Attack 1
-          <Amount>k__BackingField: 5
+          <Amount>k__BackingField: 15
         - name: Attack 2
-          <Amount>k__BackingField: 10
+          <Amount>k__BackingField: 20
     - rid: 4372344435206258689
       type: {class: MovementData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}
       data:

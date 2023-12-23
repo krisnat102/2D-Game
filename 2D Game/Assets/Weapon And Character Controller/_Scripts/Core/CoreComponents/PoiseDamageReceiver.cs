@@ -15,7 +15,7 @@ namespace Bardent.CoreSystem
         {
             base.Awake();
 
-            stats = core.GetCoreComponent<Stats>();
+            stats = Core.GetCoreComponent<Stats>();
         }
     }
 }

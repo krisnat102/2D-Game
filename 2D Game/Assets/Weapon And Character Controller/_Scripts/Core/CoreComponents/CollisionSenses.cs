@@ -4,30 +4,30 @@ namespace Bardent.CoreSystem
 {
 	public class CollisionSenses : CoreComponent {
 
-		private Movement Movement { get => movement ?? core.GetCoreComponent(ref movement); }
+		private Movement Movement { get => movement ?? Core.GetCoreComponent(ref movement); }
 
 		private Movement movement;
 
 		#region Check Transforms
 
 		public Transform GroundCheck {
-			get => GenericNotImplementedError<Transform>.TryGet(groundCheck, core.transform.parent.name);
+			get => GenericNotImplementedError<Transform>.TryGet(groundCheck, Core.transform.parent.name);
 			private set => groundCheck = value;
 		}
 		public Transform WallCheck {
-			get => GenericNotImplementedError<Transform>.TryGet(wallCheck, core.transform.parent.name);
+			get => GenericNotImplementedError<Transform>.TryGet(wallCheck, Core.transform.parent.name);
 			private set => wallCheck = value;
 		}
 		public Transform LedgeCheckHorizontal {
-			get => GenericNotImplementedError<Transform>.TryGet(ledgeCheckHorizontal, core.transform.parent.name);
+			get => GenericNotImplementedError<Transform>.TryGet(ledgeCheckHorizontal, Core.transform.parent.name);
 			private set => ledgeCheckHorizontal = value;
 		}
 		public Transform LedgeCheckVertical {
-			get => GenericNotImplementedError<Transform>.TryGet(ledgeCheckVertical, core.transform.parent.name);
+			get => GenericNotImplementedError<Transform>.TryGet(ledgeCheckVertical, Core.transform.parent.name);
 			private set => ledgeCheckVertical = value;
 		}
 		public Transform CeilingCheck {
-			get => GenericNotImplementedError<Transform>.TryGet(ceilingCheck, core.transform.parent.name);
+			get => GenericNotImplementedError<Transform>.TryGet(ceilingCheck, Core.transform.parent.name);
 			private set => ceilingCheck = value;
 		}
 		public float GroundCheckRadius { get => groundCheckRadius; set => groundCheckRadius = value; }

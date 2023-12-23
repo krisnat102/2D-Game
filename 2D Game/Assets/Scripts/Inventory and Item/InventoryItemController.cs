@@ -2,6 +2,8 @@
 using UnityEngine.UI;
 using TMPro;
 using Core;
+using Bardent.CoreSystem;
+using Bardent.CoreSystem.StatsSystem;
 
 namespace Inventory
 {
@@ -56,12 +58,12 @@ namespace Inventory
                 switch (itemController.GetItem().consumableType)
                 {
                     case Item.ConsumableType.Heal:
-                        if (PlayerStats.maxHP != PlayerStats.hp)
+                        if (Stats.Instance.Health.CurrentValue != Stats.Instance.Health.MaxValue)
                         {
                             RemoveItem2(itemController.GetItem());
-                        }
 
-                        PlayerStats.Instance.Heal(itemController.GetItem().value);
+                            Stats.Instance.Health.Increase(itemController.GetItem().value);
+                        }
                         break;
                 }
             }

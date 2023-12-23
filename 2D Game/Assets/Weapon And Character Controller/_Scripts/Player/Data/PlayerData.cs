@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerData : ScriptableObject
 {
     [Header("General")]
-    public float stamStartRecoveryTime = 1f;
+    public float stamRecoveryTime = 1f;
 
     [Header("Move State")]
     public float movementVelocity = 10f;

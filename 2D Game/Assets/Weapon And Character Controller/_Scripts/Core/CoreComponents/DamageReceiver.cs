@@ -10,7 +10,6 @@ namespace Bardent.CoreSystem
         private ParticleManager particleManager;
 
         public void Damage(float amount) {
-            Debug.Log(core.transform.parent.name + " Damaged!");
             stats.Health.Decrease(amount);
             particleManager.StartParticlesWithRandomRotation(damageParticles);
         }
@@ -19,8 +18,8 @@ namespace Bardent.CoreSystem
         {
             base.Awake();
 
-            stats = core.GetCoreComponent<Stats>();
-            particleManager = core.GetCoreComponent<ParticleManager>();
+            stats = Core.GetCoreComponent<Stats>();
+            particleManager = Core.GetCoreComponent<ParticleManager>();
         }
     }
 }

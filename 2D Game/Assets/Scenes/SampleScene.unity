@@ -13950,19 +13950,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5604515880834827946}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1745411690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 655741070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df97f539b77d8cb479644dad71153d6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputHoldTime: 0.2
 --- !u!114 &1745411691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13975,7 +13962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 97abc6693ed3114479c9f32b57367c4a,
+  m_Actions: {fileID: -944628639613478452, guid: 8e5229cc7e4218d48af6db759e653ae4,
     type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
@@ -13990,309 +13977,77 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1745411690}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: OnMoveInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: f729fb2a-311a-44f6-a18d-000e46a84b88
+      m_Calls: []
+    m_ActionId: 09b57423-a270-4c30-bd70-cc34b7ca47a9
     m_ActionName: Gameplay/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1745411690}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: OnJumpInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: adc13299-4838-47f1-b155-b68c51a41a4e
+      m_Calls: []
+    m_ActionId: 0f9d76e3-7a4e-4d5f-851a-b6b267db8877
     m_ActionName: Gameplay/Jump[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1745411690}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: OnCrouchInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 4195853e-4316-426e-9947-b2ef4641269e
-    m_ActionName: Gameplay/Crouch[/Keyboard/leftCtrl]
+      m_Calls: []
+    m_ActionId: ee8c4c69-67eb-4e6d-b014-3691699bc132
+    m_ActionName: Gameplay/Grab[/Keyboard/ctrl]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1745411690}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: OnDodgeInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: b358d166-cfe2-42bb-849b-949ebcb44074
-    m_ActionName: Gameplay/New action
+      m_Calls: []
+    m_ActionId: 27e4504b-4984-4ca0-b4a5-0a9d03a9083d
+    m_ActionName: Gameplay/Dash[/Keyboard/leftShift]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1745411690}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: OnSwordInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 76941be4-ddf5-46d6-b740-1f5a1a5c44c2
-    m_ActionName: Gameplay/New action
+      m_Calls: []
+    m_ActionId: 4f82a0cb-8525-49a6-99f9-b2785d6dc619
+    m_ActionName: Gameplay/DashDirection[/Mouse/position]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1745411690}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: OnGunInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 1f2c8b90-f9af-4aed-8b08-402c8f08addf
-    m_ActionName: Gameplay/SwordSwitch1[/Keyboard/1]
+      m_Calls: []
+    m_ActionId: 726bea11-c4b5-46d7-ab92-51e4954f04f1
+    m_ActionName: Gameplay/PrimaryAttack[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1745411690}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: OnInventoryInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 0547c0dd-5c8f-4197-940a-347eaf47e56b
-    m_ActionName: Gameplay/New action
+      m_Calls: []
+    m_ActionId: 10d86b8a-51f4-4b82-83a6-9d27277fb0bc
+    m_ActionName: Gameplay/SecondaryAttack[/Mouse/rightButton]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1745411690}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: OnSpellInventoryInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 6e778d13-6e84-42b7-ba85-0d69d129ca5f
-    m_ActionName: Gameplay/Inventory1[/Keyboard/i]
+      m_Calls: []
+    m_ActionId: d6ea372f-0d03-4b0f-8d56-d4c33659e337
+    m_ActionName: Gameplay/Inventory[/Keyboard/i]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1745411690}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: OnMenuInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: af8d7a47-3315-4ad0-9e4c-9a536a0e0c85
-    m_ActionName: Gameplay/Inventory1[/Keyboard/i]
+      m_Calls: []
+    m_ActionId: 0a764d8e-5abb-4511-8569-512d89153df9
+    m_ActionName: Gameplay/SpellInventory[/Keyboard/j]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1745411690}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: OnAttackInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 7ab01563-82d5-4a03-8931-e5de044b3227
-    m_ActionName: Gameplay/Spell[/Mouse/rightButton]
+      m_Calls: []
+    m_ActionId: eed42dc8-1eec-4f21-9d01-4e61046f9912
+    m_ActionName: Gameplay/Menu[/Keyboard/escape]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1745411690}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: OnSpellInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: d6bec6a0-9fe1-48ab-a049-9415b4fe9be1
-    m_ActionName: Gameplay/Attack[/Mouse/leftButton]
+      m_Calls: []
+    m_ActionId: 84cdafb4-b98e-4ee3-adf2-5acd312f11bd
+    m_ActionName: Gameplay/Spell[/Keyboard/e]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1745411690}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: OnAbilityInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 2a030c1d-f5bb-4fff-a09d-7c74376eff1c
-    m_ActionName: Gameplay/Ability[/Keyboard/e]
+      m_Calls: []
+    m_ActionId: 659772df-896b-4a59-bd98-48d3e853ea4e
+    m_ActionName: Gameplay/Ability[/Keyboard/r]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1745411690}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: OnUseInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: d9d6c648-3322-492a-b12e-dc4b3add8df7
-    m_ActionName: Gameplay/New action
+      m_Calls: []
+    m_ActionId: ebd2de1e-6f0a-4533-b28b-32aaf8fbc360
+    m_ActionName: Gameplay/Use[/Keyboard/f]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1745411690}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: OnReloadInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 051203c1-d7c6-4e33-b2c0-03bd661048d3
-    m_ActionName: Gameplay/Reload[/Keyboard/r]
+      m_Calls: []
+    m_ActionId: 16c200ab-b273-4713-8787-e516839ab941
+    m_ActionName: Gameplay/SwitchSpell1[/Keyboard/t]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1745411690}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: OnSwitchSpell1Input
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: c7cf8a47-25d1-40ab-8816-b452da544c52
-    m_ActionName: Gameplay/ChangeSpell1[/Keyboard/t]
+      m_Calls: []
+    m_ActionId: 75c2cbf7-1b19-4a35-9ac9-95017bc49715
+    m_ActionName: Gameplay/SwitchSpell2[/Keyboard/y]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1745411690}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: OnSwitchSpell2Input
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 70a6c1cb-f73a-4981-ae42-51bdd16ec26d
-    m_ActionName: Gameplay/ChangeSpell2[/Keyboard/y]
+      m_Calls: []
+    m_ActionId: 9dc2eca5-4176-4eff-ac96-e4be869da64f
+    m_ActionName: Gameplay/SwitchAbility1[/Keyboard/g]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1745411690}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: OnSwitchAbility1Input
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 34eefa35-5354-4ede-a126-83e9c2f5ee2e
-    m_ActionName: Gameplay/ChangeAbility1[/Keyboard/z]
+      m_Calls: []
+    m_ActionId: 352bccb3-54a9-4cfa-8fa2-8231a94f6ec8
+    m_ActionName: Gameplay/SwitchAbility2[/Keyboard/h]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1745411690}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: OnSwitchAbility2Input
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 02543c10-465b-4090-a64d-57055e37bb08
-    m_ActionName: Gameplay/ChangeAbility2[/Keyboard/x]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1745411690}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: MousePositionInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: f027bd00-4060-44d9-a038-072e75fe36fe
-    m_ActionName: Gameplay/MousePosition[/Mouse/position]
+      m_Calls: []
+    m_ActionId: e2225102-4b74-4763-b92d-00b3b25dedb9
+    m_ActionName: Gameplay/Mouse[/Mouse/position]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Gameplay
@@ -22085,7 +21840,7 @@ PrefabInstance:
         type: 3}
       propertyPath: inputManager
       value: 
-      objectReference: {fileID: 1745411690}
+      objectReference: {fileID: 0}
     - target: {fileID: 5604515879359011021, guid: 04cc9accfdc77de4f8d1d27e41b83da8,
         type: 3}
       propertyPath: dodgeCooldown
@@ -22225,10 +21980,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1745411691}
-    - targetCorrespondingSourceObject: {fileID: 5604515879359011061, guid: 04cc9accfdc77de4f8d1d27e41b83da8,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1745411690}
     - targetCorrespondingSourceObject: {fileID: 5604515879359011061, guid: 04cc9accfdc77de4f8d1d27e41b83da8,
         type: 3}
       insertIndex: -1

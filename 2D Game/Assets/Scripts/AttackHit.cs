@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Core;
+using Bardent.CoreSystem;
 
 public class AttackHit : MonoBehaviour
 {
@@ -17,9 +18,9 @@ public class AttackHit : MonoBehaviour
     {
         if (hitInfo.tag == "Player")
         {
-            PlayerStats player = hitInfo.GetComponent<PlayerStats>();
+            Player player = hitInfo.transform.GetComponent<Player>(); //checks if it hit the player
 
-            player.TakeDamage(damage);
+            player.Core.GetCoreComponent<Stats>().Health.Decrease(damage);
 
             Destroy(gameObject);
         }

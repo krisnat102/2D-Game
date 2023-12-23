@@ -38,6 +38,8 @@ public class PlayerDashState : PlayerAbilityState {
 		if (Movement?.CurrentVelocity.y > 0) {
 			Movement?.SetVelocityY(Movement.CurrentVelocity.y * playerData.dashEndYMultiplier);
 		}
+
+		Stats.Stam.StopRegen(playerData.stamRecoveryTime);
 	}
 
 	public override void LogicUpdate() {

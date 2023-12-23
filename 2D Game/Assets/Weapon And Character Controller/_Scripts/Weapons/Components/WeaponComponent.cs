@@ -7,9 +7,8 @@ namespace Bardent.Weapons.Components
     public abstract class WeaponComponent : MonoBehaviour
     {
         protected Weapon weapon;
-
-        // TODO: Fix this when finishing weapon data
-        // protected AnimationEventHandler EventHandler => weapon.EventHandler;
+        
+        protected AnimationEventHandler EventHandler => weapon.EventHandler;
         protected AnimationEventHandler eventHandler;
         protected CoreSystem.Core Core => weapon.Core;
 

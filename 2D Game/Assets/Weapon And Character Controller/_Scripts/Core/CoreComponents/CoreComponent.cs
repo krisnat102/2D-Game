@@ -4,14 +4,14 @@ namespace Bardent.CoreSystem
 {
     public class CoreComponent : MonoBehaviour, ILogicUpdate
     {
-        protected Core core;
+        public Core Core { get; private set; }
 
         protected virtual void Awake()
         {
-            core = transform.parent.GetComponent<Core>();
+            Core = transform.parent.GetComponent<Core>();
 
-            if(core == null) { Debug.LogError("There is no Core on the parent"); }
-            core.AddComponent(this);
+            if(Core == null) { Debug.LogError("There is no Core on the parent"); }
+            Core.AddComponent(this);
         }
 
         public virtual void LogicUpdate() { }

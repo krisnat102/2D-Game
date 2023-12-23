@@ -32,4 +32,10 @@ public class PlayerJumpState : PlayerAbilityState {
 	public void ResetAmountOfJumpsLeft() => amountOfJumpsLeft = playerData.amountOfJumps;
 
 	public void DecreaseAmountOfJumpsLeft() => amountOfJumpsLeft--;
+
+    public override void Exit()
+    {
+        base.Exit();
+		Stats.Stam.StopRegen(playerData.stamRecoveryTime);
+	}
 }

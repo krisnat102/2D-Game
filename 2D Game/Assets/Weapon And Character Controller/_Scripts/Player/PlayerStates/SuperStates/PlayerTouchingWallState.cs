@@ -60,7 +60,8 @@ public class PlayerTouchingWallState : PlayerState {
 		grabInput = player.InputHandler.GrabInput;
 		jumpInput = player.InputHandler.JumpInput;
 
-		if (jumpInput) {
+		if (jumpInput && Stats.Stam.CurrentValue > 0.5f) 
+		{
 			player.WallJumpState.DetermineWallJumpDirection(isTouchingWall);
 			stateMachine.ChangeState(player.WallJumpState);
 		} else if (isGrounded && !grabInput) {

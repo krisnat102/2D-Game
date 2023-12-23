@@ -37,4 +37,10 @@ public class PlayerWallJumpState : PlayerAbilityState {
 			wallJumpDirection = Movement.FacingDirection;
 		}
 	}
+
+    public override void Exit()
+    {
+        base.Exit();
+		Stats.Stam.StopRegen(playerData.stamRecoveryTime);
+	}
 }

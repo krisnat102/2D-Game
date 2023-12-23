@@ -10,11 +10,14 @@ public class PlayerWallClimbState : PlayerTouchingWallState {
     public override void Enter()
     {
         base.Enter();
+		Stats.Stam.StopRegen();
 	}
 
     public override void Exit()
     {
         base.Exit();
+		Stats.Stam.StartRegen();
+		Stats.Stam.StopRegen(playerData.stamRecoveryTime);
 	}
 
 	public override void LogicUpdate() {
@@ -27,7 +30,7 @@ public class PlayerWallClimbState : PlayerTouchingWallState {
 				stateMachine.ChangeState(player.WallGrabState);
 			}
 
-			if(Stats.Stam.CurrentValue == 0)
+			if(Stats.Stam.CurrentValue < 0.5)
             {
 				stateMachine.ChangeState(player.InAirState);
 			}

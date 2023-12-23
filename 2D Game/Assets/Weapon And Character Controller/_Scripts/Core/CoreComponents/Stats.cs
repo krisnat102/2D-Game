@@ -3,18 +3,19 @@ using Bardent.CoreSystem.StatsSystem;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 namespace Bardent.CoreSystem
 {
     public class Stats : CoreComponent
     {
+        public static Stats Instance;
+
         [field: SerializeField] public Stat Health { get; private set; }
         [field: SerializeField] public Stat Poise { get; private set; }
         [field: SerializeField] public Stat Stam { get; private set; }
         [field: SerializeField] public Stat Mana { get; private set; }
-
-        //[SerializeField] protected float poiseRecoveryRate;
-        //[SerializeField] protected float stamRecoveryRate;
+        List<Stat> stats = new();
 
         [Header("UI")]
         [SerializeField] private Slider HpBar;
@@ -24,11 +25,17 @@ namespace Bardent.CoreSystem
         protected override void Awake()
         {
             base.Awake();
+            Instance = this;
 
-            Health.Init();
-            Poise.Init();
-            Stam.Init();
-            Mana.Init();
+            stats.AddRange(new List<Stat>
+            {
+                Health, Poise, Stam, Mana 
+            });
+
+            foreach(Stat stat in stats)
+            {
+                stat.Init();
+            }
 
             if (HpBar == null || ManaBar == null || StamBar == null) return;
             HpBar.maxValue = Health.CurrentValue;
@@ -39,20 +46,10 @@ namespace Bardent.CoreSystem
 
         private void Update()
         {
-            /*TODO: Put the regenegerion in the stat class and add a bool for whenever if a stat should regen over time or not. 
-            if it does, reveal the recoveryRate variable in the inspector 
-
-            if (!Poise.CurrentValue.Equals(Poise.MaxValue))
+            foreach (Stat stat in stats)
             {
-                Poise.Increase(poiseRecoveryRate * Time.deltaTime);
+                stat.Regen();
             }
-
-            if (!Stam.CurrentValue.Equals(Stam.MaxValue) && StamRegen)
-            {
-                Stam.Increase(stamRecoveryRate * Time.deltaTime);
-            }*/
-            Poise.Regen();
-            Stam.Regen();
 
             if (HpBar == null || ManaBar == null || StamBar == null) return;
             HpBar.value = Health.CurrentValue;

@@ -42,8 +42,8 @@ namespace Bardent.CoreSystem
         {
             base.Awake();
 
-            movement = new CoreComp<Movement>(core);
-            collisionSenses = new CoreComp<CollisionSenses>(core);
+            movement = new CoreComp<Movement>(Core);
+            collisionSenses = new CoreComp<CollisionSenses>(Core);
         }
     }
 }

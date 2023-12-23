@@ -43,7 +43,7 @@ public class EnemyAttackAI : MonoBehaviour
 
             if (hitInfo)
             {
-                PlayerStats player = hitInfo.transform.GetComponent<PlayerStats>(); //checks if it hit the player
+                Player player = hitInfo.transform.GetComponent<Player>(); //checks if it hit the player
                 if (player != null)
                 {
                     inSight = true;

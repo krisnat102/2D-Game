@@ -7,7 +7,7 @@ namespace Bardent.CoreSystem.StatsSystem
     public class Stat
     {
         public event Action OnCurrentValueZero;
-        
+
         [field: SerializeField] public float MaxValue { get; private set; }
         [field: SerializeField] public bool Regenerative { get; private set; }
         [field: SerializeField] public float RecoveryRate { get; private set; }
@@ -25,19 +25,30 @@ namespace Bardent.CoreSystem.StatsSystem
                 }
             }
         }
-        
+
+        private float stopRegenTime;
         private float currentValue;
 
         public void Init() => CurrentValue = MaxValue;
 
         public void Increase(float amount) => CurrentValue += amount;
-
         public void Decrease(float amount) => CurrentValue -= amount;
 
         public void Regen()
         {
-            if (!Regenerative) return;
+            if (!Regenerative || Time.time < stopRegenTime) return;
             Increase(RecoveryRate * Time.deltaTime);
         }
+
+        public void StopRegen(float time)
+        {
+            if (Regenerative)
+            {
+                stopRegenTime = Time.time + time;
+            }
+        }
+
+        public void StopRegen() => Regenerative = false;
+        public void StartRegen() => Regenerative = true;
     }
 }
