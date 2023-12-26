@@ -19,7 +19,7 @@ namespace Interactables
             {
                 Enemy enemy = hitinfo.GetComponent<Enemy>();
 
-                enemy.TakeDamage(spikeDmg);
+                enemy.TakeDamage(spikeDmg, 0);
             }
         }
     }

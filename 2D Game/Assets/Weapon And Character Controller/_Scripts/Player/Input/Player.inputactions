@@ -160,12 +160,12 @@
                 },
                 {
                     "name": "Mouse",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "e2225102-4b74-4763-b92d-00b3b25dedb9",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [

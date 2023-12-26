@@ -14,13 +14,13 @@ GameObject:
   - component: {fileID: 3241220126377040989}
   - component: {fileID: 167738637749498196}
   - component: {fileID: 167738637749498187}
-  - component: {fileID: 167738637749498186}
   - component: {fileID: 4727940582570106995}
+  - component: {fileID: 167738637749498186}
   - component: {fileID: 8883700276926463137}
   - component: {fileID: 1024516264495557032}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HeavyBandit
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,7 +143,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &167738637749498196
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -224,54 +224,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.32580388}
   serializedVersion: 2
   m_Radius: 0.26819003
---- !u!114 &167738637749498186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 167738637749498190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab9904e6a95017147a2295b5998719f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  attackSound: {fileID: 4727940582570106995}
-  playerTrans: {fileID: 0}
-  enemyAttackAI: {fileID: 7992715458322413631}
-  hpBar: {fileID: 7400008869081113992}
-  gradient:
-    serializedVersion: 2
-    key0: {r: 1, g: 0, b: 0, a: 1}
-    key1: {r: 0.990566, g: 0.51352197, b: 0, a: 1}
-    key2: {r: 0.9467213, g: 1, b: 0, a: 0}
-    key3: {r: 0.6110538, g: 1, b: 0, a: 0}
-    key4: {r: 0.2573614, g: 1, b: 0.21226418, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 13107
-    ctime1: 26407
-    ctime2: 39321
-    ctime3: 52428
-    ctime4: 65535
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 1
-    m_ColorSpace: -1
-    m_NumColorKeys: 5
-    m_NumAlphaKeys: 2
-  fill: {fileID: 417042407059819289}
 --- !u!82 &4727940582570106995
 AudioSource:
   m_ObjectHideFlags: 0
@@ -369,6 +321,54 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &167738637749498186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167738637749498190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab9904e6a95017147a2295b5998719f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 9972b22af0715d1408a556a245ecc72e, type: 2}
+  attackSound: {fileID: 4727940582570106995}
+  playerTrans: {fileID: 0}
+  enemyAttackAI: {fileID: 7992715458322413631}
+  hpBar: {fileID: 7400008869081113992}
+  gradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 0.990566, g: 0.51352197, b: 0, a: 1}
+    key2: {r: 0.9467213, g: 1, b: 0, a: 0}
+    key3: {r: 0.6110538, g: 1, b: 0, a: 0}
+    key4: {r: 0.2573614, g: 1, b: 0.21226418, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 13107
+    ctime1: 26407
+    ctime2: 39321
+    ctime3: 52428
+    ctime4: 65535
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 1
+    m_ColorSpace: -1
+    m_NumColorKeys: 5
+    m_NumAlphaKeys: 2
+  fill: {fileID: 417042407059819289}
 --- !u!114 &8883700276926463137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,12 +381,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9100671da9949654aa05b300dc0da08e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataAI: {fileID: 0}
+  dataAI: {fileID: 11400000, guid: 08516827d0ecd324ab200e8ef583e703, type: 2}
   target: {fileID: 0}
   WhatIsGround:
     serializedVersion: 2
-    m_Bits: 0
-  GroundCheck: {fileID: 0}
+    m_Bits: 4096
+  GroundCheck: {fileID: 5866177833939634784}
 --- !u!114 &1024516264495557032
 MonoBehaviour:
   m_ObjectHideFlags: 0

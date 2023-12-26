@@ -24,7 +24,10 @@ public class EnemyData : ScriptableObject
     [Header("Attack")]
     public GameObject attack;
     public float attackAnimLength = 0.3f;
-    
+    public Rect HitBox;
+    public LayerMask DetectableLayers;
+
+
     [Header("Behaviour")]
     public bool lookAtPlayer;
 

@@ -7,8 +7,9 @@ namespace Spells
     public class SpellHitbox : MonoBehaviour
     {
         [SerializeField] private Spell spell;
+        [SerializeField] private LayerMask layerMask, groundLayerMask;
 
-        [Header("Srukine")]
+        [Header("Shuriken")]
         [SerializeField] private float rotationSpeed = 0.1f;
         [SerializeField] private float stuckTime = 1f;
         [SerializeField] private float fadeTimer = 1f;
@@ -56,12 +57,13 @@ namespace Spells
 
         private void OnTriggerEnter2D(Collider2D hitInfo)
         {
-            if (hitInfo.tag != "Player" && hitInfo.tag != "Item" && hitInfo.tag != "Climbable" && hitInfo.tag != "AttackRange" && hitInfo.tag != "BackgroundObject" && hitInfo.tag != "PickupRange")
+            //if (hitInfo.tag != "Player" && hitInfo.tag != "Item" && hitInfo.tag != "Climbable" && hitInfo.tag != "AttackRange" && hitInfo.tag != "BackgroundObject" && hitInfo.tag != "PickupRange")
+            if ((layerMask.value & (1 << hitInfo.gameObject.layer)) != 0)
             {
                 Enemy enemy = hitInfo.GetComponent<Enemy>();
-                if (enemy == true)
+                if (enemy)
                 {
-                    enemy.TakeDamage(spell.value);
+                    enemy.TakeDamage(spell.value, 0);
                     if (spell.name == "Shuriken")
                     {
                         Instantiate(enemy.BloodEffect, transform.position, Quaternion.identity);
@@ -71,7 +73,7 @@ namespace Spells
                 {
                     DestroyObject();
                 }
-                else if (hitInfo.tag == "Ground")
+                else if (hitInfo.gameObject.layer == groundLayerMask)
                 {
                     rb.simulated = false;
                     rotationSpeed = 0;
@@ -83,6 +85,7 @@ namespace Spells
                 }
             }
         }
+
         private void DestroyObject()
         {
             if (spell.spellDeath != null)

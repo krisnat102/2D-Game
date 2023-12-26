@@ -10,7 +10,11 @@ namespace Bardent.Weapons.Components
         {
             foreach (var item in colliders)
             {
-                if (item.TryGetComponent(out IDamageable damageable))
+                if (item.TryGetComponent(out Enemy enemy))
+                {
+                    enemy.TakeDamage(currentAttackData.Amount, 0);
+                }
+                else if (item.TryGetComponent(out IDamageable damageable))
                 {
                     damageable.Damage(currentAttackData.Amount);
                 }

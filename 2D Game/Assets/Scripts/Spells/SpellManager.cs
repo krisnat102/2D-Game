@@ -9,7 +9,7 @@ namespace Spells
     public class SpellManager : MonoBehaviour
     {
         public static SpellManager Instance;
-        [SerializeField] private List<Spell> Spells = new List<Spell>();
+        [SerializeField] private List<Spell> Spells = new();
 
         [SerializeField] private Transform spellContent;
         [SerializeField] private GameObject inventorySpell;
@@ -19,8 +19,8 @@ namespace Spells
         [SerializeField] private GameObject spellInventory;
         [SerializeField] private GameObject inventory;
 
-        public static List<Spell> SpellsBar = new List<Spell>();
-        public static List<Spell> AbilitiesBar = new List<Spell>();
+        public static List<Spell> SpellsBar = new();
+        public static List<Spell> AbilitiesBar = new();
         [SerializeField] private Transform spellContentBar;
         [SerializeField] private GameObject activeSpell;
 

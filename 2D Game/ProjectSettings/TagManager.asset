@@ -13,6 +13,7 @@ TagManager:
   - BackgroundObject
   - PickupRange
   - Ground
+  - ParticleContainer
   layers:
   - Default
   - TransparentFX
@@ -23,10 +24,10 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Enemy
   - Player
   - Obstacle
-  - 
+  - Ground
   - 
   - 
   - 

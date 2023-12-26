@@ -17,12 +17,22 @@ MonoBehaviour:
   maxHP: 100
   attackSpeed: 1
   speed: 200
+  damage: 20
   knockbackModifier: 20
   offsetX: 1.2
   offsetX2: 1.2
   offsetY: -1
   attack: {fileID: 0}
   attackAnimLength: 0.85
+  HitBox:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  DetectableLayers:
+    serializedVersion: 2
+    m_Bits: 0
   lookAtPlayer: 1
   deathEffect: {fileID: 8203424293245319661, guid: d4597ceb8300e93488e0de151c0e3e73,
     type: 3}
@@ -31,3 +41,8 @@ MonoBehaviour:
   ranged: 1
   firePoint: {fileID: 0}
   projectile: {fileID: 0}
+  impactEffect: {fileID: 327621282901348051, guid: c0b641e096985a84089d34a72eb3e26f,
+    type: 3}
+  rangedDamage: 15
+  rangedSpeed: 35
+  distanceOffset: 3.5

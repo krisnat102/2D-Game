@@ -1,72 +1,80 @@
 ﻿using UnityEngine;
 using Core;
+using Pathfinding;
 
 public class FollowMouse : MonoBehaviour
 {
-    [SerializeField] private Camera cam;
+    private Camera cam;
+    private Rigidbody2D rb;
+    private Vector2 mousePos;
+    private bool _side = true;
 
-    [SerializeField] private Rigidbody2D rb, playerRb;
+    public delegate void SideChangedEventHandler(bool newSide);
 
-    [SerializeField] private Transform trans;
-    private Vector2 mousePos, movement;
+    public event SideChangedEventHandler OnSideChanged;
 
-    [SerializeField] private float gunSize = 0f;
+    public bool Side
+    {
+        get { return _side; }
+        set
+        {
+            if (_side != value)
+            {
+                _side = value;
 
-    [SerializeField] private float gunPositionOffsetX = 0f;
-    [SerializeField] private float gunPositionOffsetY = 0f;
+                OnSideChanged?.Invoke(_side);
+            }
+        }
+    }
 
-    [SerializeField] private float playerWidth = -1.35f;
-
-    private bool side = true;
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        cam = FindObjectOfType<Camera>();
+    }
 
     void Update()
     {
         if (Core.GameManager.gamePaused == false)
         {
-            mousePos = cam.ScreenToWorldPoint(PlayerInputHandler.Instance.MousePosition);
-
-            movement.x = PlayerInputHandler.Instance.NormInputX;
-            movement.y = PlayerInputHandler.Instance.NormInputY;
-
             if (PlayerInputHandler.Instance.NormInputX < 0)
             {
-                side = false;
+                Side = false;
             }
 
             if (PlayerInputHandler.Instance.NormInputX > 0)
             {
-                side = true;
+                Side = true;
             }
+            //TODO: fix when side is true. The direction they launch is messed up. Find a way to make the y rotation of the transform -180 when side is true and 0 when its false
         }
     }
 
     void FixedUpdate()
     {
-
+        mousePos = cam.ScreenToWorldPoint(PlayerInputHandler.Instance.MousePosition);
         Vector2 lookDir = mousePos - rb.position;
 
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
 
-        rb.rotation = angle;
+        angle = Mathf.Repeat(angle + 180f, 360f) - 180f;
 
-        if (side == true)
-        {
-            rb.position = new Vector2(playerRb.position.x + gunPositionOffsetX, playerRb.position.y + gunPositionOffsetY);
-        }
-        else
-        {
-            rb.position = new Vector2(playerRb.position.x + gunPositionOffsetX + playerWidth, playerRb.position.y + gunPositionOffsetY);
-        }
+        rb.MoveRotation(angle);
+    }
 
-        if ((angle >= 90 && angle <= 180) || (angle >= -180 && angle <= -90))
-        {
-            trans.transform.localScale = new Vector3(gunSize, -gunSize, gunSize);
+    [System.Obsolete]
+    private void OnSideChange(bool newSide)
+    {
+        transform.rotation.SetEulerRotation(0, -180, 0);
+    }
 
-        }
-        else if ((angle < 90 && angle > 0) || (angle < 0 && angle > -90))
-        {
-            trans.transform.localScale = new Vector3(gunSize, gunSize, gunSize);
+    private void OnEnable()
+    {
+        OnSideChanged += OnSideChange;
+    }
 
-        }
+    private void OnDisable()
+    {
+        OnSideChanged -= OnSideChange;
     }
 }

@@ -24,6 +24,15 @@ MonoBehaviour:
   offsetY: -1
   attack: {fileID: 5461576477917390187, guid: 63ce19bcfd5d3a24ea3457dde2d02c77, type: 3}
   attackAnimLength: 0.3
+  HitBox:
+    serializedVersion: 2
+    x: -0.4
+    y: 0.7
+    width: 2.4
+    height: 2.2
+  DetectableLayers:
+    serializedVersion: 2
+    m_Bits: 1024
   lookAtPlayer: 1
   deathEffect: {fileID: 2479263185497603450, guid: d1cde12569e58d140a042b24f8d8012b,
     type: 3}

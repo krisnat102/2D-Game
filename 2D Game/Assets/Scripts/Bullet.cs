@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
             Enemy enemy = hitInfo.GetComponent<Enemy>();
             if(enemy == true)
             {
-                enemy.TakeDamage(bulletDmg);
+                enemy.TakeDamage(bulletDmg, 0);
 
                 Instantiate(enemy.BloodEffect, transform.position, Quaternion.identity);
             }

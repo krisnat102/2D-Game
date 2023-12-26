@@ -1,17 +1,24 @@
-﻿using Core;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
+    #region OtherVariables
     private PlayerInput playerInput;
     private Camera cam;
     public static PlayerInputHandler Instance { get; private set; }
 
-    #region Variables
+    [SerializeField]
+    private float inputHoldTime = 0.2f;
+    #endregion
+
+    #region StartTimeVariables
+    private float jumpInputStartTime;
+    private float dashInputStartTime;
+    #endregion
+
+    #region VariableInputs
     public Vector2 RawMovementInput { get; private set; }
     public Vector2 RawDashDirectionInput { get; private set; }
     public Vector2Int DashDirectionInput { get; private set; }
@@ -37,12 +44,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool[] AttackInputs { get; private set; }
     #endregion
 
-    [SerializeField]
-    private float inputHoldTime = 0.2f;
-
-    private float jumpInputStartTime;
-    private float dashInputStartTime;
-
+    #region UnityMethods
     private void Awake()
     {
         if (Instance == null)
@@ -67,6 +69,7 @@ public class PlayerInputHandler : MonoBehaviour
         CheckJumpInputHoldTime();
         CheckDashInputHoldTime();
     }
+    #endregion
 
     #region Inputs
     public void OnPrimaryAttackInput(InputAction.CallbackContext context)
@@ -285,8 +288,13 @@ public class PlayerInputHandler : MonoBehaviour
     public void UseInventoryInput() => InventoryInput = false;
     public void UseSpellInventoryInput() => SpellInventoryInput = false;
     public void UseMenuInpit() => MenuInput = false;
+    public void UseSwitchSpell1Input() => SwitchSpell1Input = false;
+    public void UseSwitchSpell2Input() => SwitchSpell2Input = false;
+    public void UseSwitchAbility1Input() => SwitchAbility1Input = false;
+    public void UseSwitchAbility2Input() => SwitchAbility2Input = false;
     #endregion
 
+    #region CheckInputs
     private void CheckJumpInputHoldTime()
     {
         if(Time.time >= jumpInputStartTime + inputHoldTime)
@@ -302,6 +310,7 @@ public class PlayerInputHandler : MonoBehaviour
             DashInput = false;
         }
     }
+    #endregion
 }
 
 public enum CombatInputs

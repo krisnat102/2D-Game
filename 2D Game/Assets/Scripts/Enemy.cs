@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using Core;
+using Bardent.CoreSystem;
 
 public class Enemy : MonoBehaviour
 {
+    #region Serialized Variables
     [Header("Other")]
     [SerializeField] private EnemyData data;
     [SerializeField] private AudioSource attackSound;
@@ -14,23 +16,35 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Slider hpBar;
     [SerializeField] private Gradient gradient;
     [SerializeField] private Image fill;
+    #endregion
 
+    #region Private Variables
     private float offsetXSave;
     private Rigidbody2D rb;
     private Animator animator;
+    private Animator childAnimatior;
     private bool immune = false;
     private bool attackCooldown = false;
     private bool flip;
+    private bool childFlip;
     private bool facingSide;
     private float hp;
     private float lvlIndex;
+    private Vector2 offset;
+    private Collider2D[] detected;
+    private int facingDirection = 1;
+    private Player player;
+    #endregion
 
+    #region Properties
     public GameObject BloodEffect { get => Data.bloodEffect; private set => Data.bloodEffect = value; }
     public Transform PlayerTrans { get => playerTrans; private set => playerTrans = value; }
     public EnemyData Data { get => data; private set => data = value; }
     public float LevelIndex { get => lvlIndex; private set => lvlIndex = value; }
+    #endregion
 
-    public void TakeDamage(float damage)
+    #region Combat
+    public void TakeDamage(float damage, float knockback)
     {
         if (immune == false)
         {
@@ -46,7 +60,7 @@ public class Enemy : MonoBehaviour
 
                 Invoke("StopImmune", 0.1f);
 
-                TakeKnockback(damage);
+                TakeKnockback(damage + knockback);
             }
         }
         if (hp <= 0)
@@ -54,14 +68,6 @@ public class Enemy : MonoBehaviour
             Die();
         }
     }
-
-    private void Die()
-    {
-        Instantiate(Data.deathEffect, transform.position, Quaternion.identity);
-
-        Destroy(gameObject);
-    }
-
     private void TakeKnockback(float damage)
     {
         float knockback = damage * Data.knockbackModifier;
@@ -76,6 +82,13 @@ public class Enemy : MonoBehaviour
             rb.AddForce(transform.up * knockback, ForceMode2D.Force);
             rb.AddForce(transform.right * -knockback, ForceMode2D.Force);
         }
+    }
+
+    private void Die()
+    {
+        Instantiate(Data.deathEffect, transform.position, Quaternion.identity);
+
+        Destroy(gameObject);
     }
 
     public void Attack()
@@ -98,15 +111,82 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void AttackSpawn()
+    {
+        /*if(Data.ranged == false)
+        {
+            Vector3 offsetAttack = new Vector3(Data.offsetX, Data.offsetY, 0f);
+
+            GameObject attack = Instantiate(Data.attack , transform.position - offsetAttack, Quaternion.identity);
+            attack.transform.parent = gameObject.transform;
+
+            attackSound.Play();
+        }
+        else
+        {
+            GameObject attackProjectile = Instantiate(Data.projectile, Data.firePoint);
+            if (attackProjectile.activeInHierarchy == false)
+            {
+                attackProjectile.SetActive(true);
+            }
+        }*/
+        if(Data.ranged)
+        {
+            GameObject attackProjectile = Instantiate(Data.projectile, Data.firePoint);
+            if (attackProjectile.activeInHierarchy == false)
+            {
+                attackProjectile.SetActive(true);
+            }
+            return;
+        }
+        offset.Set(
+            transform.position.x + (data.HitBox.center.x * facingDirection * -1),
+            transform.position.y + data.HitBox.center.y
+        );
+
+        attackSound.Play();
+
+        detected = Physics2D.OverlapBoxAll(offset, data.HitBox.size, 0f, data.DetectableLayers);
+        
+        if (detected.Length == 0) return;
+
+        foreach (Collider2D obj in detected)
+        {
+            player = obj.gameObject.GetComponent<Player>();
+
+            if (player)
+            {
+                player.Core.GetCoreComponent<Stats>().Health.Decrease(data.damage);
+            }
+        }
+    }
+
     private void StopImmune() => immune = false;
     private void AttackCooldown() => attackCooldown = false;
+    #endregion
 
+    #region Unity Methods
     private void Update()
     {
         if (enemyAttackAI.PlayerInRange()) Invoke("Attack", 0.2f);
 
         if (transform != null && flip && PlayerStats.death == false)
         {
+            facingDirection *= -1;
+            if (transform.position.x < playerTrans.position.x)
+            {
+                Data.offsetX = -Data.offsetX2;
+                animator.SetBool("Flip", true);
+            }
+            else
+            {
+                Data.offsetX = offsetXSave;
+                animator.SetBool("Flip", false);
+            }
+        }
+        else if (transform != null && childFlip && PlayerStats.death == false)
+        {
+            facingDirection *= -1;
             if (transform.position.x < playerTrans.position.x)
             {
                 Data.offsetX = -Data.offsetX2;
@@ -145,28 +225,8 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
-    }
-    
 
-    private void AttackSpawn()
-    {
-        if (Data.ranged == false)
-        {
-            Vector3 offsetAttack = new Vector3(Data.offsetX, Data.offsetY, 0f);
-
-            GameObject attack = Instantiate(Data.attack , transform.position - offsetAttack, Quaternion.identity);
-            attack.transform.parent = gameObject.transform;
-
-            attackSound.Play();
-        }
-        else
-        {
-            GameObject attackProjectile = Instantiate(Data.projectile, Data.firePoint);
-            if (attackProjectile.activeInHierarchy == false)
-            {
-                attackProjectile.SetActive(true);
-            }
-        }
+        facingDirection = transform.localScale.x > 0 ? 1 : -1;
     }
 
     private void Start()
@@ -177,9 +237,12 @@ public class Enemy : MonoBehaviour
 
         offsetXSave = Data.offsetX;
 
-        flip = ContainsParam(animator, "Flip");
-
         animator = GetComponent<Animator>();
+        childAnimatior = GetComponentInChildren<Animator>();
+
+        flip = ContainsParam(animator, "Flip");
+        childFlip = ContainsParam(childAnimatior, "Flip");
+
         if (animator == null)
         {
             animator = GetComponentInChildren<Animator>();
@@ -187,7 +250,7 @@ public class Enemy : MonoBehaviour
 
         hp = Data.maxHP * lvlIndex;
         hpBar.maxValue = Data.maxHP * lvlIndex;
-        TakeDamage(0);
+        TakeDamage(0, 0);
 
         if (transform.rotation.y == 0)
         {
@@ -195,7 +258,9 @@ public class Enemy : MonoBehaviour
         }
         else facingSide = false;
     }
+    #endregion
 
+    #region OtherMethods
     //checks if a parameter exists in the animator, found here https://discussions.unity.com/t/is-there-a-way-to-check-if-an-animatorcontroller-has-a-parameter/86194
     private bool ContainsParam(Animator _Anim, string _ParamName)
     {
@@ -208,9 +273,21 @@ public class Enemy : MonoBehaviour
         }
         return false;
     }
+    #endregion
 
-    public bool Ranged()
+    #region GettersSetters
+    public bool GetRanged()
     {
         return Data.ranged;
     }
+    #endregion
+
+    #region Gizmos
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Vector3 adjustedCenter = transform.position + new Vector3(data.HitBox.center.x * facingDirection * -1, data.HitBox.center.y, 0f);
+        Gizmos.DrawWireCube(adjustedCenter, data.HitBox.size);
+    }
+    #endregion
 }

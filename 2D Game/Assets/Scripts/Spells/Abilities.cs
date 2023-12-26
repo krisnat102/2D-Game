@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using Core;
+using Bardent.CoreSystem;
 
 namespace Spells
 {
     public class Abilities : MonoBehaviour
     {
+        #region Variables
         [SerializeField] private Transform castingPoint;
 
         [Header("Active Spell Holders")]
@@ -28,6 +30,7 @@ namespace Spells
         public static Vector3 castPoint = new Vector3();
 
         public bool AbilityCooldown1 { get => abilityCooldown; set => abilityCooldown = value; }
+        #endregion
 
         private void Update()
         {
@@ -42,6 +45,7 @@ namespace Spells
                     if (activeSpell != 0)
                     {
                         activeSpell--;
+                        PlayerInputHandler.Instance.UseSwitchSpell1Input();
                     }
                     else activeSpell = 7;
                 ClearSprites();
@@ -50,6 +54,7 @@ namespace Spells
                     if (activeSpell != 7)
                     {
                         activeSpell++;
+                        PlayerInputHandler.Instance.UseSwitchSpell2Input();
                     }
                     else activeSpell = 0;
                 ClearSprites();
@@ -64,6 +69,7 @@ namespace Spells
                     if (activeAbility != 0)
                     {
                         activeAbility--;
+                        PlayerInputHandler.Instance.UseSwitchAbility1Input();
                     }
                     else activeAbility = 7;
                 ClearSprites();
@@ -72,6 +78,7 @@ namespace Spells
                     if (activeAbility != 7)
                     {
                         activeAbility++;
+                        PlayerInputHandler.Instance.UseSwitchAbility2Input();
                     }
                     else activeAbility = 0;
                 ClearSprites();
@@ -163,7 +170,7 @@ namespace Spells
 
         void Spell()
         {
-            if (SpellManager.SpellsBar[activeSpell] != null)
+            if (SpellManager.SpellsBar[activeSpell] != null && Stats.Instance.Mana.CurrentValue >= SpellManager.SpellsBar[activeSpell].cost)
             {
                 //Vector2 offset = new Vector2(OffsetX, OffsetY);
 
@@ -171,7 +178,7 @@ namespace Spells
 
                 castPoint = castingPoint.position;
 
-                PlayerStats.mana -= SpellManager.SpellsBar[activeSpell].cost;
+                Stats.Instance.Mana.CurrentValue -= SpellManager.SpellsBar[activeSpell].cost;
 
                 spellCooldown = true;
                 Invoke("SpellCooldown", SpellManager.SpellsBar[activeSpell].cooldown);
@@ -186,6 +193,7 @@ namespace Spells
 
             if (SpellManager.AbilitiesBar[activeAbility] != null)
             {
+                Debug.Log(activeAbility);
                 if (SpellManager.AbilitiesBar[activeAbility].name == "grappling hook")
                 {
                     grappler.enabled = true;
@@ -195,13 +203,13 @@ namespace Spells
                     abilityCooldownImg.gameObject.SetActive(true);
                     abilityCooldownImg.fillAmount = 1;
                 }
-                else
+                else if(Stats.Instance.Stam.CurrentValue >= SpellManager.SpellsBar[activeAbility].cost)
                 {
                     //Vector2 offset = new Vector2(OffsetX2, OffsetY2);
 
                     Instantiate(SpellManager.AbilitiesBar[activeAbility].spellEffect, castingPoint.position, castingPoint.rotation);
 
-                    PlayerStats.stam -= SpellManager.AbilitiesBar[activeAbility].cost;
+                    Stats.Instance.Stam.CurrentValue -= SpellManager.AbilitiesBar[activeAbility].cost;
 
                     AbilityCooldown1 = true;
                     Invoke("AbilityCooldown", SpellManager.AbilitiesBar[activeAbility].cooldown);

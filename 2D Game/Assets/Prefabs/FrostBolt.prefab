@@ -28,12 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7122031244096216671}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7122031244096216666
 SpriteRenderer:
@@ -46,6 +47,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -74,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 500
   m_Sprite: {fileID: 21300000, guid: 2d6a18a638b49cd42954c7729e9787e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -88,7 +90,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &7122031244096216667
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -101,10 +103,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!50 &7122031244096216670
 Rigidbody2D:
   serializedVersion: 4
@@ -122,6 +126,12 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0.5
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -136,6 +146,25 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -170,6 +199,7 @@ PolygonCollider2D:
       - {x: -0.07289757, y: 0.08772212}
       - {x: -0.35693803, y: 0.17191152}
       - {x: -0.6816998, y: 0.15544903}
+  m_UseDelaunayMesh: 0
 --- !u!114 &7122031244096216664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,3 +213,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spell: {fileID: 11400000, guid: 11e017910ec90e14db8e07b7d2bcbe41, type: 2}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4608
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  rotationSpeed: 0.1
+  stuckTime: 1
+  fadeTimer: 1

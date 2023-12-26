@@ -29,7 +29,7 @@ namespace Bardent.Weapons.Components
             {
                 OnDetectedCollider2D?.Invoke(detected);
             }
-            catch (Exception e)
+            catch
             {
                 Debug.Log("Knockback Stuff");
             }

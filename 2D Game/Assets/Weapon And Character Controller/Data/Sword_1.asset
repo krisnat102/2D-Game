@@ -74,11 +74,11 @@ MonoBehaviour:
         name: DamageData
         attackData:
         - name: Attack 1
-          <Amount>k__BackingField: 5
+          <Amount>k__BackingField: 17
         - name: Attack 2
-          <Amount>k__BackingField: 10
+          <Amount>k__BackingField: 20
         - name: Attack 3
-          <Amount>k__BackingField: 15
+          <Amount>k__BackingField: 25
     - rid: 4372344435206258688
       type: {class: MovementData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}
       data:
@@ -99,7 +99,7 @@ MonoBehaviour:
         name: ActionHitBoxData
         attackData:
         - name: Attack 1
-          Debug: 0
+          Debug: 1
           <HitBox>k__BackingField:
             serializedVersion: 2
             x: 0.11
@@ -107,7 +107,7 @@ MonoBehaviour:
             width: 1.94
             height: 1.41
         - name: Attack 2
-          Debug: 0
+          Debug: 1
           <HitBox>k__BackingField:
             serializedVersion: 2
             x: 0.11
@@ -115,7 +115,7 @@ MonoBehaviour:
             width: 1.94
             height: 1.41
         - name: Attack 3
-          Debug: 0
+          Debug: 1
           <HitBox>k__BackingField:
             serializedVersion: 2
             x: 0

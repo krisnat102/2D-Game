@@ -65,9 +65,9 @@ MonoBehaviour:
         name: DamageData
         attackData:
         - name: Attack 1
-          <Amount>k__BackingField: 15
+          <Amount>k__BackingField: 50
         - name: Attack 2
-          <Amount>k__BackingField: 20
+          <Amount>k__BackingField: 100
     - rid: 4372344435206258689
       type: {class: MovementData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}
       data:

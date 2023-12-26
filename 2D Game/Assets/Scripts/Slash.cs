@@ -37,7 +37,7 @@ public class Slash : MonoBehaviour
             Enemy enemy = hitInfo.GetComponent<Enemy>();
             if (enemy == true)
             {
-                enemy.TakeDamage(slashDmg);
+                enemy.TakeDamage(slashDmg, 0);
 
                 Instantiate(enemy.BloodEffect, transform.position, Quaternion.identity);
             }
