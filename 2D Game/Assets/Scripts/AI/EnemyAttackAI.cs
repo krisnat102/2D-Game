@@ -2,7 +2,6 @@
 using Core;
 public class EnemyAttackAI : MonoBehaviour
 {
-    [SerializeField] private Enemy enemy;
     [SerializeField] private Transform firePoint;
     [SerializeField] private Transform playerTrans;
 
@@ -37,20 +36,17 @@ public class EnemyAttackAI : MonoBehaviour
 
     private void Update()
     {
-        if(inRange && enemy.GetRanged())
-        {
-            RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, playerTrans.position - firePoint.position, Mathf.Infinity, ~IgnoreMe); //shoots a ray from the firepoint to the player
+        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, playerTrans.position - firePoint.position, Mathf.Infinity, ~IgnoreMe); //shoots a ray from the firepoint to the player
 
-            if (hitInfo)
+        if (hitInfo)
+        {
+            Player player = hitInfo.transform.GetComponent<Player>(); //checks if it hit the player
+            if (player != null)
             {
-                Player player = hitInfo.transform.GetComponent<Player>(); //checks if it hit the player
-                if (player != null)
-                {
-                    inSight = true;
-                }
-                else inSight = false;
-                //Debug.Log("player not seen");
+                inSight = true;
             }
+            else inSight = false;
+            //Debug.Log("player not seen");
         }
     }
 }

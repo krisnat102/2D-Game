@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81c662f382e836a45bb83c6a13508d95, type: 3}
-  m_Name: Shuriken
+  m_Name: Lightning Bolt
   m_EditorClassIdentifier: 
-  spellName: Shuriken
-  spell: 0
+  spellName: Lightning Bolt
+  spell: 1
   cost: 20
-  value: 20
-  speed: 35
+  value: 45
+  speed: 0
   cooldown: 6
-  range: 50000
-  icon: {fileID: 21300000, guid: 0fbdf34e2478e374da08f51fe7df469c, type: 3}
-  spellEffect: {fileID: 7122031244096216671, guid: 657b3e9ec6ab2864392ab766fb6bb53f,
+  range: 50
+  icon: {fileID: 21300000, guid: 360b65526852de447b778a7cf77d2a59, type: 3}
+  spellEffect: {fileID: 201917306390933128, guid: 3d9ab73a12c46904a910cad059e188c2,
     type: 3}
   spellDeath: {fileID: 0}
   description: 
-  useOffset: 0
-  offset: {x: 0, y: 0}
+  useOffset: 1
+  offset: {x: 2, y: 0}

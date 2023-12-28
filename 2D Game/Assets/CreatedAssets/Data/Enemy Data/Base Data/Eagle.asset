@@ -19,14 +19,14 @@ MonoBehaviour:
   speed: 200
   damage: 20
   knockbackModifier: 25
-  offsetX: 1.6
+  offsetX: -1.6
   offsetX2: 1.6
   offsetY: 1
   attack: {fileID: 5461576477917390187, guid: d0b601e9d9d98f14cb92691a2748969e, type: 3}
   attackAnimLength: 0.1
   HitBox:
     serializedVersion: 2
-    x: 0
+    x: 0.2
     y: -1.7
     width: 2
     height: 2

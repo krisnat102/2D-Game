@@ -2,27 +2,26 @@
 using UnityEngine.UI;
 using Core;
 using Bardent.CoreSystem;
+using Pathfinding;
 
 public class Enemy : MonoBehaviour
 {
     #region Serialized Variables
-    [Header("Other")]
-    [SerializeField] private EnemyData data;
-    [SerializeField] private AudioSource attackSound;
-    [SerializeField] private Transform playerTrans;
-    [SerializeField] private EnemyAttackAI enemyAttackAI;
-    
     [Header("Hp Bar")]
     [SerializeField] private Slider hpBar;
     [SerializeField] private Gradient gradient;
     [SerializeField] private Image fill;
+
+    [Header("Other")]
+    [SerializeField] private EnemyData data;
+    [SerializeField] private AudioSource attackSound;
+    [SerializeField] private Transform playerTrans;
     #endregion
 
     #region Private Variables
     private float offsetXSave;
     private Rigidbody2D rb;
     private Animator animator;
-    private Animator childAnimatior;
     private bool immune = false;
     private bool attackCooldown = false;
     private bool flip;
@@ -34,6 +33,9 @@ public class Enemy : MonoBehaviour
     private Collider2D[] detected;
     private int facingDirection = 1;
     private Player player;
+    private AIPath seekerAI;
+    private EnemyAI enemyAI;
+    private EnemyAttackAI enemyAttackAI;
     #endregion
 
     #region Properties
@@ -227,26 +229,42 @@ public class Enemy : MonoBehaviour
         }
 
         facingDirection = transform.localScale.x > 0 ? 1 : -1;
+
+        if (seekerAI != null)
+        {
+            if (enemyAttackAI.PlayerInRange())
+            {
+                seekerAI.enabled = true;
+            }
+            else seekerAI.enabled = false;
+        }
+
+        if (enemyAI != null)
+        {
+            if (enemyAttackAI.PlayerInRange())
+            {
+                enemyAI.enabled = true;
+            }
+            else enemyAI.enabled = false;
+        }
     }
 
     private void Start()
     {
         lvlIndex = Data.level * 0.1f + 0.9f;
 
-        rb = GetComponent<Rigidbody2D>();
-
         offsetXSave = Data.offsetX;
 
+        seekerAI = GetComponent<AIPath>();
+        enemyAI = GetComponent<EnemyAI>();
+        enemyAttackAI = GetComponentInChildren<EnemyAttackAI>();
+        rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        childAnimatior = GetComponentInChildren<Animator>();
-
-        flip = ContainsParam(animator, "Flip");
-        childFlip = ContainsParam(childAnimatior, "Flip");
-
         if (animator == null)
         {
             animator = GetComponentInChildren<Animator>();
         }
+        flip = ContainsParam(animator, "Flip");
 
         hp = Data.maxHP * lvlIndex;
         hpBar.maxValue = Data.maxHP * lvlIndex;

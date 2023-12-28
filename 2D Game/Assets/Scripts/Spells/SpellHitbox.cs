@@ -9,6 +9,10 @@ namespace Spells
         [SerializeField] private Spell spell;
         [SerializeField] private LayerMask layerMask, groundLayerMask;
 
+        [Header("Spell Function")]
+        [SerializeField] private bool move; 
+        [SerializeField] private bool destroyOnTouch;
+
         [Header("Shuriken")]
         [SerializeField] private float rotationSpeed = 0.1f;
         [SerializeField] private float stuckTime = 1f;
@@ -22,7 +26,8 @@ namespace Spells
         {
             rb = GetComponent<Rigidbody2D>();
 
-            rb.velocity = transform.right * spell.speed;
+            rb.velocity = move ? transform.right * spell.speed : rb.velocity = new Vector2(0, 0);
+            transform.right = new Vector2(0, 0);
         }
 
         private void Update()
@@ -69,7 +74,7 @@ namespace Spells
                         Instantiate(enemy.BloodEffect, transform.position, Quaternion.identity);
                     }
                 }
-                if (spell.name != "Shuriken")
+                if (destroyOnTouch && spell.name != "Shuriken")
                 {
                     DestroyObject();
                 }
@@ -79,10 +84,11 @@ namespace Spells
                     rotationSpeed = 0;
                     Invoke("DestroyObject", stuckTime);
                 }
-                else
+                else if (spell.name == "Shuriken")
                 {
                     DestroyObject();
                 }
+                //else they will be handled by some other script or just left as they are
             }
         }
 

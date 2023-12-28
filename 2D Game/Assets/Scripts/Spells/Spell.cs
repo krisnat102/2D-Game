@@ -16,5 +16,7 @@ namespace Spells
         public GameObject spellDeath;
         [TextArea]
         public string description;
+        public bool useOffset;
+        public Vector2 offset;
     }
 }

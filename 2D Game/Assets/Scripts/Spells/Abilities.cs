@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using Core;
 using Bardent.CoreSystem;
+using Pathfinding;
 
 namespace Spells
 {
@@ -23,19 +24,31 @@ namespace Spells
         [SerializeField] private Image abilityCooldownImg;
 
         private bool spellCooldown = false;
+        private bool side = true;
         private bool abilityCooldown = false;
         private int activeSpell = 0;
         private int activeAbility = 0;
+        private Vector2 newPosition;
 
         public static Vector3 castPoint = new Vector3();
 
         public bool AbilityCooldown1 { get => abilityCooldown; set => abilityCooldown = value; }
         #endregion
 
+        #region Unity Methods
         private void Update()
         {
             if (Core.GameManager.gamePaused == false)
             {
+                if (PlayerInputHandler.Instance.NormInputX < 0)
+                {
+                    side = false;
+                }
+                if (PlayerInputHandler.Instance.NormInputX > 0)
+                {
+                    side = true;
+                }
+                
                 #region Spells
                 if (SpellManager.SpellsBar.Count >= activeSpell)
                     if (PlayerInputHandler.Instance.SpellInput && PlayerStats.mana >= SpellManager.SpellsBar[activeSpell].cost && spellCooldown == false)
@@ -62,9 +75,10 @@ namespace Spells
 
                 #region Abilites
                 if (SpellManager.AbilitiesBar.Count >= activeAbility)
+                {
                     if (PlayerInputHandler.Instance.AbilityInput && PlayerStats.stam >= SpellManager.AbilitiesBar[activeAbility].cost && AbilityCooldown1 == false)
                         Ability();
-
+                }
                 if (PlayerInputHandler.Instance.SwitchAbility1Input)
                     if (activeAbility != 0)
                     {
@@ -160,7 +174,7 @@ namespace Spells
 
             if (abilityCooldownImg.gameObject.activeSelf && abilityCooldownImg.fillAmount > 0)
             {
-                abilityCooldownImg.fillAmount -= Time.deltaTime / SpellManager.AbilitiesBar[activeSpell].cooldown;
+                abilityCooldownImg.fillAmount -= Time.deltaTime / SpellManager.AbilitiesBar[activeAbility].cooldown;
             }
             if (spellCooldownImg.gameObject.activeSelf && spellCooldownImg.fillAmount > 0)
             {
@@ -168,13 +182,30 @@ namespace Spells
             }
         }
 
+        #endregion
+
+        #region Spell And Ability Casting
         void Spell()
         {
             if (SpellManager.SpellsBar[activeSpell] != null && Stats.Instance.Mana.CurrentValue >= SpellManager.SpellsBar[activeSpell].cost)
             {
                 //Vector2 offset = new Vector2(OffsetX, OffsetY);
-
-                Instantiate(SpellManager.SpellsBar[activeSpell].spellEffect, castingPoint.position, castingPoint.rotation);
+                if (SpellManager.SpellsBar[activeSpell].useOffset)
+                {
+                    if (side)
+                    {
+                        newPosition = (Vector2)castingPoint.position + SpellManager.SpellsBar[activeSpell].offset;
+                    }
+                    else
+                    {
+                        newPosition = (Vector2)castingPoint.position + new Vector2(-SpellManager.SpellsBar[activeSpell].offset.x, SpellManager.SpellsBar[activeSpell].offset.y);
+                    }
+                    Instantiate(SpellManager.SpellsBar[activeSpell].spellEffect, newPosition, castingPoint.rotation);
+                }
+                else
+                {
+                    Instantiate(SpellManager.SpellsBar[activeSpell].spellEffect, castingPoint.position, castingPoint.rotation);
+                }
 
                 castPoint = castingPoint.position;
 
@@ -186,14 +217,12 @@ namespace Spells
                 spellCooldownImg.fillAmount = 1;
             }
         }
-
         void Ability()
         {
             Grappler grappler = gameObject.GetComponent<Grappler>();
 
             if (SpellManager.AbilitiesBar[activeAbility] != null)
             {
-                Debug.Log(activeAbility);
                 if (SpellManager.AbilitiesBar[activeAbility].name == "grappling hook")
                 {
                     grappler.enabled = true;
@@ -203,7 +232,7 @@ namespace Spells
                     abilityCooldownImg.gameObject.SetActive(true);
                     abilityCooldownImg.fillAmount = 1;
                 }
-                else if(Stats.Instance.Stam.CurrentValue >= SpellManager.SpellsBar[activeAbility].cost)
+                else if(Stats.Instance.Stam.CurrentValue >= SpellManager.AbilitiesBar[activeAbility].cost)
                 {
                     //Vector2 offset = new Vector2(OffsetX2, OffsetY2);
 
@@ -230,6 +259,7 @@ namespace Spells
             AbilityCooldown1 = false;
             abilityCooldownImg.gameObject.SetActive(false);
         }
+        #endregion
 
         void ClearSprites()
         {

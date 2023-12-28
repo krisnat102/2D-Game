@@ -219,6 +219,8 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 4096
+  move: 1
+  destroyOnTouch: 1
   rotationSpeed: 0.1
   stuckTime: 1
   fadeTimer: 1
