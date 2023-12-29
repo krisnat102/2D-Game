@@ -59,7 +59,7 @@ namespace Spells
         private void Release()
         {
             holdTarget = false;
-            targetRB.isKinematic = false;
+            if(targetRB != null) targetRB.isKinematic = false;
             Destroy(gameObject);
         }
     }

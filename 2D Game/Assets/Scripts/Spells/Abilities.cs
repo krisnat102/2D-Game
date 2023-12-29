@@ -204,6 +204,7 @@ namespace Spells
                 }
                 else
                 {
+                    Debug.Log(castingPoint.rotation);
                     Instantiate(SpellManager.SpellsBar[activeSpell].spellEffect, castingPoint.position, castingPoint.rotation);
                 }
 

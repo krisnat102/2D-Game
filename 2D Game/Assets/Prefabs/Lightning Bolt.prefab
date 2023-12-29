@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 201917306390933134}
   - component: {fileID: 4884112257356513390}
   - component: {fileID: 300834781376292935}
+  - component: {fileID: 1482723496187811630}
   - component: {fileID: -1030786744839681751}
   - component: {fileID: 2619312599294634071}
-  - component: {fileID: 1482723496187811630}
   m_Layer: 0
   m_Name: Lightning Bolt
   m_TagString: Untagged
@@ -162,45 +162,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-1030786744839681751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 201917306390933128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cfda3067fe48304b93847308682c3cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spell: {fileID: 11400000, guid: 84ebaf22a924e2e41bab507751541791, type: 2}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 512
-  groundLayerMask:
-    serializedVersion: 2
-    m_Bits: 4096
-  move: 0
-  destroyOnTouch: 0
-  rotationSpeed: 0
-  stuckTime: 0
-  fadeTimer: 0
---- !u!114 &2619312599294634071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 201917306390933128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51f3b9dbedd198143aa0ac9e1796d6b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationLength: 0.2
-  fade: 0
-  fadeTime: 0
 --- !u!82 &1482723496187811630
 AudioSource:
   m_ObjectHideFlags: 0
@@ -298,6 +259,47 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-1030786744839681751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201917306390933128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfda3067fe48304b93847308682c3cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spell: {fileID: 11400000, guid: 84ebaf22a924e2e41bab507751541791, type: 2}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  move: 0
+  destroyOnTouch: 0
+  dontRotate: 1
+  shuriken: 0
+  rotationSpeed: 0
+  stuckTime: 0
+  fadeTimer: 0
+--- !u!114 &2619312599294634071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201917306390933128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51f3b9dbedd198143aa0ac9e1796d6b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationLength: 0.2
+  fade: 0
+  fadeTime: 0
 --- !u!1 &2474861138851934443
 GameObject:
   m_ObjectHideFlags: 0

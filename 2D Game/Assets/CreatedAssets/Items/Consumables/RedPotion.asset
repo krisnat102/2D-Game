@@ -14,16 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3
   ItemName: Red Potion
-  value: 25
+  value: 40
   cost: 20
   usable: 1
-  icon: {fileID: 21300000, guid: 18b381ee30ca4f14095276e007590b7d, type: 3}
+  icon: {fileID: 21300000, guid: 06bd9517723b05f4cb5cba7a57cdac8c, type: 3}
   itemClass: 0
-  itemDescription: Potion of healing that heals 20 HP. An essetial item for any adventurer
+  itemDescription: A potion of healing. An essetial item for any adventurer
   equipment: 0
   armor: 0
   weight: 0
-  physicalRes: 0
   magicRes: 0
   equipmentType: 0
   consumable: 1

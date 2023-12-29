@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b860ad291538dac4f9496d8a9a1d7c60, type: 3}
-  m_Name: Apple
+  m_Name: BluePotion
   m_EditorClassIdentifier: 
-  id: 1
-  ItemName: Apple
-  value: 10
-  cost: 3
+  id: 4
+  ItemName: Blue Potion
+  value: 60
+  cost: 20
   usable: 1
-  icon: {fileID: 21300000, guid: 2e6d6c9c5dbaafc46a6ec0e88d08e844, type: 3}
+  icon: {fileID: 21300000, guid: 45963d2ec407022478e08274e0072f05, type: 3}
   itemClass: 0
-  itemDescription: A tasty looking apple
+  itemDescription: A mana potion, useful for anyone adept in magic
   equipment: 0
   armor: 0
   weight: 0
   magicRes: 0
   equipmentType: 0
   consumable: 1
-  consumableType: 1
+  consumableType: 2

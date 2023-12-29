@@ -266,6 +266,8 @@ MonoBehaviour:
     m_Bits: 4096
   move: 1
   destroyOnTouch: 0
+  dontRotate: 1
+  shuriken: 0
   rotationSpeed: 0.1
   stuckTime: 1
   fadeTimer: 1

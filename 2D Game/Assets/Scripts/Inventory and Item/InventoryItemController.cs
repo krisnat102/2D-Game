@@ -3,14 +3,11 @@ using UnityEngine.UI;
 using TMPro;
 using Core;
 using Bardent.CoreSystem;
-using Bardent.CoreSystem.StatsSystem;
 
 namespace Inventory
 {
     public class InventoryItemController : MonoBehaviour
     {
-        Item item;
-
         [SerializeField] private Button removeButton;
         [SerializeField] private float equipmentCloseTime;
 
@@ -18,8 +15,8 @@ namespace Inventory
         private Image itemImage;
         private TMP_Text itemName, itemPrice, itemValue, itemWeight, itemArmor, itemMagicRes, itemDescription;
         private GameObject description;
-
         private bool equipmentMenuActive = false;
+        private Item item;
 
         public void RemoveItem()
         {
@@ -65,13 +62,21 @@ namespace Inventory
                             Stats.Instance.Health.Increase(itemController.GetItem().value);
                         }
                         break;
+                    case Item.ConsumableType.ManaHeal:
+                        if (Stats.Instance.Mana.CurrentValue != Stats.Instance.Mana.MaxValue)
+                        {
+                            RemoveItem2(itemController.GetItem());
+
+                            Stats.Instance.Mana.Increase(itemController.GetItem().value);
+                        }
+                        break;
                 }
             }
             else if (itemController.GetItem().equipment)
             {
-                GameObject equipmentMenu = InventoryManager.Instance.GetEquipmentMenu();
-
-                PlayerStats.Instance.RefreshStats();
+                //PlayerStats.Instance.RefreshStats();
+                Debug.Log(itemController.GetItem().Equipped + " equip");
+                itemController.GetItem().SetEquipped(true);
 
                 switch (itemController.GetItem().equipmentType)
                 {
@@ -81,7 +86,7 @@ namespace Inventory
                             transform.GetComponent<Image>().gameObject.SetActive(true);
                             transform.GetComponent<Image>().sprite = itemController.GetItem().icon;
                         }
-                        InventoryManager.Instance.HelmetBn.GetComponent<ItemController>().SetItem(itemController.GetItem());
+                            InventoryManager.Instance.HelmetBn.GetComponent<ItemController>().SetItem(itemController.GetItem());
                         break;
 
                     case Item.EquipmentType.Chestplate:
@@ -90,7 +95,7 @@ namespace Inventory
                             transform.GetComponent<Image>().gameObject.SetActive(true);
                             transform.GetComponent<Image>().sprite = itemController.GetItem().icon;
                         }
-                        InventoryManager.Instance.ChestplateBn.GetComponent<ItemController>().SetItem(itemController.GetItem());
+                            InventoryManager.Instance.ChestplateBn.GetComponent<ItemController>().SetItem(itemController.GetItem());
                         break;
 
                     case Item.EquipmentType.Leggings:
@@ -99,7 +104,7 @@ namespace Inventory
                             transform.GetComponent<Image>().gameObject.SetActive(true);
                             transform.GetComponent<Image>().sprite = itemController.GetItem().icon;
                         }
-                        InventoryManager.Instance.BootsBn.GetComponent<ItemController>().SetItem(itemController.GetItem());
+                            InventoryManager.Instance.BootsBn.GetComponent<ItemController>().SetItem(itemController.GetItem());
                         break;
 
                     case Item.EquipmentType.Gloves:
@@ -108,7 +113,7 @@ namespace Inventory
                             transform.GetComponent<Image>().gameObject.SetActive(true);
                             transform.GetComponent<Image>().sprite = itemController.GetItem().icon;
                         }
-                        InventoryManager.Instance.GlovesBn.GetComponent<ItemController>().SetItem(itemController.GetItem());
+                            InventoryManager.Instance.GlovesBn.GetComponent<ItemController>().SetItem(itemController.GetItem());
                         break;
                 }
                 if (button.GetComponentInChildren<TextMeshProUGUI>().text == "Unequip")
@@ -215,7 +220,16 @@ namespace Inventory
                 itemArmor.text = "ARMOR - " + itemController.GetItem().armor.ToString();
                 itemMagicRes.text = "MAGIC RES - " + itemController.GetItem().magicRes.ToString();
 
-                useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Equip";
+                if (itemController.GetItem().Equipped)
+                {
+                    useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Unequip";
+                    Debug.Log(itemController.GetItem().Equipped + " equipped");
+                }
+                else
+                {
+                    useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Equip";
+                }
+
 
                 descriptionExtension.SetActive(true);
                 if (equipmentMenuActive == false)

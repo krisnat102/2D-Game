@@ -196,14 +196,14 @@ namespace Inventory
 
                         ListItems();
 
-                        Weapon.canFire = false;
+                        //Weapon.canFire = false;
                     }
                     else
                     {
                         Inventory.SetActive(false);
                         SpellInventory.SetActive(false);
 
-                        Weapon.canFire = true;
+                        //Weapon.canFire = true;
                     }
                 }
             }
@@ -216,7 +216,7 @@ namespace Inventory
                     Inventory.SetActive(false);
                     SpellInventory.SetActive(false);
 
-                    Weapon.canFire = true;
+                    //Weapon.canFire = true;
                 }
             }
         }

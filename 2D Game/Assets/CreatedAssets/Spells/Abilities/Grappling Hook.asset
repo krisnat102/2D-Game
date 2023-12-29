@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81c662f382e836a45bb83c6a13508d95, type: 3}
   m_Name: Grappling Hook
   m_EditorClassIdentifier: 
-  id: 2
-  spellName: grappling hook
+  spellName: Grappling hook
   spell: 0
   cost: 25
   value: 0
@@ -23,5 +22,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 83587b3a125c65548a96d81d99c575d6, type: 3}
   spellEffect: {fileID: 0}
   spellDeath: {fileID: 0}
-  spellType: 0
   description: Shoots out a grappling hook, allowing you to grapple to terrain
+  useOffset: 0
+  offset: {x: 0, y: 0}

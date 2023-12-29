@@ -19,6 +19,8 @@ namespace Inventory
         [TextArea]
         public string itemDescription;
 
+        private bool equipped = false;
+
         public enum ItemClass
         {
             Consumable,
@@ -46,6 +48,8 @@ namespace Inventory
         [HideInInspector]
         public ConsumableType consumableType;
 
+        public bool Equipped { get => equipped; private set => equipped = value; }
+
         public enum EquipmentType
         {
             None,
@@ -57,7 +61,13 @@ namespace Inventory
         public enum ConsumableType
         {
             None,
-            Heal
+            Heal,
+            ManaHeal
+        }
+
+        public void SetEquipped(bool equip)
+        {
+            Equipped = equip;
         }
     }
 

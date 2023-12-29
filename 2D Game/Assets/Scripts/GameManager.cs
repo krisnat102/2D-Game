@@ -8,11 +8,12 @@ namespace Core
     {
         public static bool gamePaused = false;
 
-        /*public static int money = 0;
+        public static int money = 0;
 
         [SerializeField] private GameObject deathScreen;
         [SerializeField] private GameObject player;
-        private Bardent.CoreSystem.Death death;
+        [SerializeField] private Bardent.CoreSystem.Death death;
+
         private void Update()
         {
             if (death.IsDead == true)
@@ -32,6 +33,6 @@ namespace Core
             Stats.Instance.Stam.Increase(Stats.Instance.Stam.MaxValue - Stats.Instance.Stam.CurrentValue);
 
             player.SetActive(true);
-        }*/
+        }
     }
 }

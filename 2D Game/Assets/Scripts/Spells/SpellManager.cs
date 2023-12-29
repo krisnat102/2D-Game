@@ -131,14 +131,14 @@ namespace Spells
 
                         ListSpells();
 
-                        Weapon.canFire = false;
+                        //Weapon.canFire = false;
                     }
                     else
                     {
                         inventory.SetActive(false);
                         spellInventory.SetActive(false);
 
-                        Weapon.canFire = true;
+                        //Weapon.canFire = true;
                     }
                 }
             }

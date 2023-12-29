@@ -12,6 +12,8 @@ namespace Spells
         [Header("Spell Function")]
         [SerializeField] private bool move; 
         [SerializeField] private bool destroyOnTouch;
+        [SerializeField] private bool dontRotate;
+        [SerializeField] private bool shuriken;
 
         [Header("Shuriken")]
         [SerializeField] private float rotationSpeed = 0.1f;
@@ -27,7 +29,7 @@ namespace Spells
             rb = GetComponent<Rigidbody2D>();
 
             rb.velocity = move ? transform.right * spell.speed : rb.velocity = new Vector2(0, 0);
-            transform.right = new Vector2(0, 0);
+            transform.right = dontRotate ? new Vector2(0, 0) : transform.right;
         }
 
         private void Update()
@@ -43,7 +45,7 @@ namespace Spells
                         if(ContainsParam(anim, "End")) anim.SetBool("End", true);
                 }*/
 
-                if (spell.name == "Shuriken")
+                if (shuriken)
                 {
                     transform.Rotate(0f, 0f, rotationSpeed, Space.Self);
                     SpriteRenderer sprite = GetComponent<SpriteRenderer>();
@@ -69,12 +71,12 @@ namespace Spells
                 if (enemy)
                 {
                     enemy.TakeDamage(spell.value, 0);
-                    if (spell.name == "Shuriken")
+                    if (shuriken)
                     {
                         Instantiate(enemy.BloodEffect, transform.position, Quaternion.identity);
                     }
                 }
-                if (destroyOnTouch && spell.name != "Shuriken")
+                if (destroyOnTouch && !shuriken)
                 {
                     DestroyObject();
                 }
@@ -84,7 +86,7 @@ namespace Spells
                     rotationSpeed = 0;
                     Invoke("DestroyObject", stuckTime);
                 }
-                else if (spell.name == "Shuriken")
+                else if (shuriken)
                 {
                     DestroyObject();
                 }
