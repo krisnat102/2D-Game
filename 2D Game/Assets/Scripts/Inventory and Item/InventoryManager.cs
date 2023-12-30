@@ -71,6 +71,8 @@ namespace Inventory
             itemWeight1 = itemWeight;
             itemArmor1 = itemArmor;
             itemMagicRes1 = itemMagicRes;
+
+            useButton1.GetComponentInChildren<TextMeshProUGUI>().text = "Use";
         }
 
         public void Add(Item item)
