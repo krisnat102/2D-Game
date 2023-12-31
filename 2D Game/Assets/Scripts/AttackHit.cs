@@ -11,7 +11,7 @@ public class AttackHit : MonoBehaviour
     {
         enemy = GetComponentInParent<Enemy>();
         Invoke("FinishAttack", 0.5f);
-        damage = enemy.Data.damage * enemy.LevelIndex;
+        damage = enemy.Data.damage * enemy.EnemyLevelScale;
     }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)

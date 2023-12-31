@@ -2,24 +2,25 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Core;
 
 namespace Inventory
 {
     public class InventoryManager : MonoBehaviour
     {
         public static InventoryManager Instance;
-        [SerializeField] private List<Item> Items = new List<Item>();
 
-        [SerializeField] private Transform ItemContent;
-        [SerializeField] private GameObject InventoryItem;
+        #region Private Variables
+        [SerializeField] private List<Item> items = new();
 
-        [SerializeField] private Toggle EnableRemove;
+        [SerializeField] private Transform itemContent;
+        [SerializeField] private GameObject inventoryItem;
 
-        [SerializeField] private InventoryItemController[] InventoryItems;
+        [SerializeField] private Toggle enableRemove;
 
-        [SerializeField] private GameObject Inventory;
-        [SerializeField] private GameObject SpellInventory;
+        [SerializeField] private InventoryItemController[] inventoryItems;
+
+        [SerializeField] private GameObject inventory;
+        [SerializeField] private GameObject spellInventory;
 
         [Header("Equipment MiniMenu")]
         [SerializeField] private Animator equipmentMenuAnimator;
@@ -34,19 +35,32 @@ namespace Inventory
         [SerializeField] private Image itemImage;
         [SerializeField] private TMP_Text itemName, itemDescription, itemValue, itemPrice, itemWeight, itemArmor, itemMagicRes;
         [SerializeField] private GameObject description;
-
-        public static Button useButton1;
-        public static Image itemImage1;
-        public static TMP_Text itemName1, itemDescription1, itemValue1, itemPrice1, itemWeight1, itemArmor1, itemMagicRes1;
-        public static GameObject description1;
-
+        
         private Filter filter = default;
 
+        private float totalArmor;
+        private float totalMagicRes;
+        private float totalWeight;
+        #endregion
+
+        #region Property Variables
         public Button HelmetBn { get => helmetBn; set => helmetBn = value; }
         public Button ChestplateBn { get => chestplateBn; set => chestplateBn = value; }
         public Button GlovesBn { get => glovesBn; set => glovesBn = value; }
         public Button BootsBn { get => bootsBn; set => bootsBn = value; }
+        public Button UseButton { get => useButton; set => useButton = value; }
+        public Image ItemImage { get => itemImage; set => itemImage = value; }
+        public TMP_Text ItemName { get => itemName; set => itemName = value; }
+        public TMP_Text ItemDescription { get => itemDescription; set => itemDescription = value; }
+        public TMP_Text ItemValue { get => itemValue; set => itemValue = value; }
+        public TMP_Text ItemPrice { get => itemPrice; set => itemPrice = value; }
+        public TMP_Text ItemWeight { get => itemWeight; set => itemWeight = value; }
+        public TMP_Text ItemArmor { get => itemArmor; set => itemArmor = value; }
+        public TMP_Text ItemMagicRes { get => itemMagicRes; set => itemMagicRes = value; }
+        public GameObject Description { get => description; set => description = value; }
+        #endregion
 
+        #region Enums
         private enum Filter
         {
             Default,
@@ -56,33 +70,64 @@ namespace Inventory
             QuestInv,
             MisctInv
         };
+        #endregion
 
+        #region Unity Methods
         private void Awake()
         {
             Instance = this;
 
-            useButton1 = useButton;
-            itemImage1 = itemImage;
-            itemName1 = itemName;
-            itemDescription1 = itemDescription;
-            itemValue1 = itemValue;
-            itemPrice1 = itemPrice;
-            description1 = description;
-            itemWeight1 = itemWeight;
-            itemArmor1 = itemArmor;
-            itemMagicRes1 = itemMagicRes;
-
-            useButton1.GetComponentInChildren<TextMeshProUGUI>().text = "Use";
+            UseButton.GetComponentInChildren<TextMeshProUGUI>().text = "Use";
         }
 
+        public void Update()
+        {
+            if (Core.GameManager.gamePaused == false)
+            {
+                if (PlayerInputHandler.Instance.InventoryInput)
+                {
+                    PlayerInputHandler.Instance.UseInventoryInput();
+                    if (!inventory.activeInHierarchy && !spellInventory.activeInHierarchy)
+                    {
+                        inventory.SetActive(true);
+
+                        ListItems();
+
+                        //Weapon.canFire = false;
+                    }
+                    else
+                    {
+                        inventory.SetActive(false);
+                        spellInventory.SetActive(false);
+
+                        //Weapon.canFire = true;
+                    }
+                }
+            }
+            if (PlayerInputHandler.Instance.MenuInput)
+            {
+                if (inventory.activeInHierarchy || spellInventory.activeInHierarchy)
+                {
+                    PlayerInputHandler.Instance.UseMenuInpit();
+
+                    inventory.SetActive(false);
+                    spellInventory.SetActive(false);
+
+                    //Weapon.canFire = true;
+                }
+            }
+        }
+        #endregion
+
+        #region Item Management Methods
         public void Add(Item item)
         {
-            Items.Add(item);
+            items.Add(item);
         }
 
         public void Remove(Item item)
         {
-            Items.Remove(item);
+            items.Remove(item);
         }
 
         public void ListItems()
@@ -90,16 +135,16 @@ namespace Inventory
             ItemController itemController;
 
             //clears the inventory before opening so that items dont duplicate
-            foreach (Transform item in ItemContent)
+            foreach (Transform item in itemContent)
             {
                 item.gameObject.SetActive(true);
                 Destroy(item.gameObject);
             }
 
             //adds the items to the inventory
-            foreach (var item in Items)
+            foreach (var item in items)
             {
-                GameObject obj = Instantiate(InventoryItem, ItemContent);
+                GameObject obj = Instantiate(inventoryItem, itemContent);
 
                 obj.SetActive(true);
 
@@ -141,7 +186,7 @@ namespace Inventory
                         obj.SetActive(false);
                     }
 
-                if (EnableRemove.isOn)
+                if (enableRemove.isOn)
                 {
                     removeButton.gameObject.SetActive(true);
                 }
@@ -152,16 +197,16 @@ namespace Inventory
 
         private void EnableItemRemove()
         {
-            if (EnableRemove.isOn)
+            if (enableRemove.isOn)
             {
-                foreach (Transform item in ItemContent)
+                foreach (Transform item in itemContent)
                 {
                     item.transform.Find("RemoveButton").GetComponent<Button>().gameObject.SetActive(true);
                 }
             }
             else
             {
-                foreach (Transform item in ItemContent)
+                foreach (Transform item in itemContent)
                 {
                     item.Find("RemoveButton").gameObject.SetActive(false);
                 }
@@ -171,57 +216,48 @@ namespace Inventory
 
         private void SetInventoryItems()
         {
-            InventoryItems = ItemContent.GetComponentsInChildren<InventoryItemController>();
-            System.Array.Resize(ref InventoryItems, Items.Count);
+            inventoryItems = itemContent.GetComponentsInChildren<InventoryItemController>();
+            System.Array.Resize(ref inventoryItems, items.Count);
 
-            for (int i = 0; i < Items.Count; i++)
+            for (int i = 0; i < items.Count; i++)
             {
-                InventoryItems[i].AddItem(Items[i]);
+                inventoryItems[i].AddItem(items[i]);
             }
         }
+        #endregion
 
+        #region Equipment Stat Methods
+        public List<float> GetEquipmentStats()
+        {
+            List<float> totalStats = new();
+            totalStats.Add(totalArmor); totalStats.Add(totalMagicRes); totalStats.Add(totalWeight);
+            return totalStats;
+        }
+
+        public void AddItemStats(Item item)
+        {
+            totalArmor += item.armor;
+            totalWeight += item.weight;
+            totalMagicRes += item.magicRes;
+
+            Debug.Log(totalMagicRes + " " + totalArmor + " " + totalWeight);
+        }
+        public void RemoveItemStats(Item item)
+        {
+            totalArmor -= item.armor;
+            totalWeight -= item.weight;
+            totalMagicRes -= item.magicRes;
+
+            Debug.Log(totalMagicRes + " " + totalArmor + " " + totalWeight);
+        }
+        #endregion
+
+        #region Buttons
         public void EquipedEquipmentBn()
         {
-            useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Unequip";
+            UseButton.GetComponentInChildren<TextMeshProUGUI>().text = "Unequip";
         }
 
-        public void Update()
-        {
-            if (Core.GameManager.gamePaused == false)
-            {
-                if (PlayerInputHandler.Instance.InventoryInput)
-                {
-                    PlayerInputHandler.Instance.UseInventoryInput();
-                    if (!Inventory.activeInHierarchy && !SpellInventory.activeInHierarchy)
-                    {
-                        Inventory.SetActive(true);
-
-                        ListItems();
-
-                        //Weapon.canFire = false;
-                    }
-                    else
-                    {
-                        Inventory.SetActive(false);
-                        SpellInventory.SetActive(false);
-
-                        //Weapon.canFire = true;
-                    }
-                }
-            }
-            if (PlayerInputHandler.Instance.MenuInput)
-            {
-                if (Inventory.activeInHierarchy || SpellInventory.activeInHierarchy)
-                {
-                    PlayerInputHandler.Instance.UseMenuInpit();
-
-                    Inventory.SetActive(false);
-                    SpellInventory.SetActive(false);
-
-                    //Weapon.canFire = true;
-                }
-            }
-        }
 
         public void ConsumableInvBn()
         {
@@ -263,5 +299,6 @@ namespace Inventory
         {
             return equipmentMenu;
         }
+        #endregion
     }
 }

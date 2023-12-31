@@ -9,8 +9,17 @@ namespace Bardent.CoreSystem
         private Stats stats;
         private ParticleManager particleManager;
 
-        public void Damage(float amount) {
-            stats.Health.Decrease(amount);
+        public void Damage(float rawAmount, bool physical) 
+        {
+            if (physical)
+            {
+                stats.Health.Decrease(stats.CalculatePhysicalDamageReduction(rawAmount));
+            }
+            else
+            {
+            stats.Health.Decrease(stats.CalculateMagicalDamageReduction(rawAmount));
+            }
+
             particleManager.StartParticlesWithRandomRotation(damageParticles);
         }
 

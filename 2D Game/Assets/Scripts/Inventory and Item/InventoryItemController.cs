@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Core;
 using Bardent.CoreSystem;
 
 namespace Inventory
 {
     public class InventoryItemController : MonoBehaviour
     {
+        #region Private Variables
         [SerializeField] private Button removeButton;
         [SerializeField] private float equipmentCloseTime;
 
@@ -17,7 +17,9 @@ namespace Inventory
         private GameObject description;
         private bool equipmentMenuActive = false;
         private Item item;
+        #endregion
 
+        #region Item Methods
         public void RemoveItem()
         {
             GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
@@ -37,7 +39,7 @@ namespace Inventory
             if (itemToDelete != null) Destroy(itemToDelete);
             else Debug.Log("not found item to delete");
 
-            InventoryManager.description1.SetActive(false);
+            InventoryManager.Instance.Description.SetActive(false);
         }
 
         public void AddItem(Item newItem)
@@ -77,9 +79,11 @@ namespace Inventory
                 //PlayerStats.Instance.RefreshStats();
                 if (button.GetComponentInChildren<TextMeshProUGUI>().text == "Equip")
                 {
-                    Debug.Log(itemController.GetItem().Equipped + " equip");
                     itemController.GetItem().SetEquipped(true);
-                    Description();
+
+                    InventoryManager.Instance.AddItemStats(itemController.GetItem());
+
+                    Description(); 
 
                     switch (itemController.GetItem().equipmentType)
                     {
@@ -122,8 +126,12 @@ namespace Inventory
                 }
                 else if (button.GetComponentInChildren<TextMeshProUGUI>().text == "Unequip")
                 {
-                    description = InventoryManager.description1;
+                    description = InventoryManager.Instance.Description;
+
                     itemController.GetItem().SetEquipped(false);
+
+                    InventoryManager.Instance.RemoveItemStats(itemController.GetItem());
+
                     Description();
 
                     switch (button.GetComponent<ItemController>().GetItem().equipmentType)
@@ -171,7 +179,9 @@ namespace Inventory
                 }
             }
         }
+        #endregion
 
+        #region UI Methods
         public void Description()
         {
             GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
@@ -180,17 +190,17 @@ namespace Inventory
             GameObject descriptionExtension = InventoryManager.Instance.GetEquipmentMenu();
             Animator descriptionAnimator = InventoryManager.Instance.GetEquipmentMenuAnimator();
 
-            description = InventoryManager.description1;
+            description = InventoryManager.Instance.Description;
             description.SetActive(true);
 
-            itemImage = InventoryManager.itemImage1;
-            itemName = InventoryManager.itemName1;
-            itemDescription = InventoryManager.itemDescription1;
-            itemValue = InventoryManager.itemValue1;
-            itemPrice = InventoryManager.itemPrice1;
-            itemWeight = InventoryManager.itemWeight1;
-            itemArmor = InventoryManager.itemArmor1;
-            itemMagicRes = InventoryManager.itemMagicRes1;
+            itemImage = InventoryManager.Instance.ItemImage;
+            itemName = InventoryManager.Instance.ItemName;
+            itemDescription = InventoryManager.Instance.ItemDescription;
+            itemValue = InventoryManager.Instance.ItemValue;
+            itemPrice = InventoryManager.Instance.ItemPrice;
+            itemWeight = InventoryManager.Instance.ItemWeight;
+            itemArmor = InventoryManager.Instance.ItemArmor;
+            itemMagicRes = InventoryManager.Instance.ItemMagicRes;
 
             itemImage.sprite = itemController.GetItem().icon;
             itemName.text = itemController.GetItem().ItemName.ToUpper();
@@ -203,7 +213,7 @@ namespace Inventory
             else itemValue.gameObject.SetActive(false);
             itemPrice.text = "PRICE - " + itemController.GetItem().cost.ToString();
 
-            useButton = InventoryManager.useButton1;
+            useButton = InventoryManager.Instance.UseButton;
             ItemController useButtonItemController = useButton.GetComponent<ItemController>();
             useButtonItemController.SetItem(itemController.GetItem());
 
@@ -258,10 +268,12 @@ namespace Inventory
                 equipmentMenuActive = false;
             }
         }
+
         private void CloseEquipmentMenu()
         {
             GameObject descriptionExtension = InventoryManager.Instance.GetEquipmentMenu();
             descriptionExtension.SetActive(false);
         }
+        #endregion
     }
 }

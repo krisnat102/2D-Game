@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Image fill;
 
     [Header("Other")]
-    [SerializeField] private EnemyData data;
+    public EnemyData data;
     [SerializeField] private AudioSource attackSound;
     [SerializeField] private Transform playerTrans;
     #endregion
@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
     public GameObject BloodEffect { get => Data.bloodEffect; private set => Data.bloodEffect = value; }
     public Transform PlayerTrans { get => playerTrans; private set => playerTrans = value; }
     public EnemyData Data { get => data; private set => data = value; }
-    public float LevelIndex { get => lvlIndex; private set => lvlIndex = value; }
+    public float EnemyLevelScale { get => lvlIndex; private set => lvlIndex = value; }
     #endregion
 
     #region Combat
@@ -158,7 +158,7 @@ public class Enemy : MonoBehaviour
 
             if (player)
             {
-                player.Core.GetCoreComponent<Stats>().Health.Decrease(data.damage);
+                player.Core.GetCoreComponent<DamageReceiver>().Damage(data.damage * EnemyLevelScale, data.damageType);
             }
         }
     }

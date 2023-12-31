@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Bardent.CoreSystem;
+﻿using Bardent.CoreSystem;
 using UnityEngine;
 
 public class MeleeAttackState : AttackState {
@@ -49,7 +47,7 @@ public class MeleeAttackState : AttackState {
 			IDamageable damageable = collider.GetComponent<IDamageable>();
 
 			if (damageable != null) {
-				damageable.Damage(stateData.attackDamage);
+				damageable.Damage(stateData.attackDamage, true);
 			}
 
 			IKnockBackable knockBackable = collider.GetComponent<IKnockBackable>();

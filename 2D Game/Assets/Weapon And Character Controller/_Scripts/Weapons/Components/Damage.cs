@@ -16,7 +16,7 @@ namespace Bardent.Weapons.Components
                 }
                 else if (item.TryGetComponent(out IDamageable damageable))
                 {
-                    damageable.Damage(currentAttackData.Amount);
+                    damageable.Damage(currentAttackData.Amount, true);
                 }
             }
         }

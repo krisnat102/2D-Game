@@ -27,7 +27,7 @@ public class RangedAttack : MonoBehaviour
             Player player = hitInfo.GetComponent<Player>();
             if (player == true)
             {
-                player.Core.GetCoreComponent<Stats>().Health.Decrease(enemy.Data.rangedDamage * enemy.LevelIndex);
+                player.Core.GetCoreComponent<DamageReceiver>().Damage(enemy.data.rangedDamage * enemy.EnemyLevelScale, enemy.data.damageType);
             }
             Instantiate(enemy.Data.impactEffect, transform.position, transform.rotation) ;
 
