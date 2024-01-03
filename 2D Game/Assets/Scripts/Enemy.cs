@@ -3,14 +3,19 @@ using UnityEngine.UI;
 using Core;
 using Bardent.CoreSystem;
 using Pathfinding;
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
     #region Serialized Variables
     [Header("Hp Bar")]
     [SerializeField] private Slider hpBar;
-    [SerializeField] private Gradient gradient;
-    [SerializeField] private Image fill;
+    [SerializeField] private Gradient hpBarGradient;
+    [SerializeField] private Image hpBarFill;
+    [SerializeField] private GameObject damagePopup;
+    [SerializeField] private Vector3 damagePopupOffset;
+    [SerializeField] private Gradient damagePopupGradient;
+    [SerializeField] private int fontSizeToDamageScaler;
 
     [Header("Other")]
     public EnemyData data;
@@ -46,22 +51,31 @@ public class Enemy : MonoBehaviour
     #endregion
 
     #region Combat
-    public void TakeDamage(float damage, float knockback)
+    public void TakeDamage(float rawDamage, float knockback)
     {
+        float damage = Mathf.Round(rawDamage);
+
         if (immune == false)
         {
             hp -= damage;
             hpBar.value = hp;
-            fill.color = gradient.Evaluate(hpBar.normalizedValue);
+            hpBarFill.color = hpBarGradient.Evaluate(hpBar.normalizedValue);
 
             if (damage > 0)
             {
+                if(GetComponentInChildren<Canvas>() != null && damagePopup != null)
+                {
+                    var dmgNumber = Instantiate(damagePopup, transform.position + damagePopupOffset, Quaternion.identity, GetComponentInChildren<Canvas>().transform).GetComponent<TextMeshProUGUI>();
+                    dmgNumber.text = damage.ToString();
+                    dmgNumber.color = damagePopupGradient.Evaluate(Mathf.Clamp01(damage/100));
+                    dmgNumber.fontSize += Mathf.Round(damage / fontSizeToDamageScaler);
+                }
+
                 animator.SetTrigger("Hurt");
 
                 immune = true;
 
                 Invoke("StopImmune", 0.1f);
-
                 TakeKnockback(damage + knockback);
             }
         }

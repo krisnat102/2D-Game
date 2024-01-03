@@ -100,7 +100,6 @@ namespace Bardent.Weapons
 
         private void ResetAttackCounter()
         {
-            print("Reset Attack Counter");
             CurrentAttackCounter = 0;
         }
 
