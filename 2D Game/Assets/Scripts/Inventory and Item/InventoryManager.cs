@@ -117,6 +117,13 @@ namespace Inventory
                 }
             }
         }
+        private void OnDestroy()
+        {
+            foreach (Item item in items)
+            {
+                item.SetEquipped(false);
+            }
+        }
         #endregion
 
         #region Item Management Methods

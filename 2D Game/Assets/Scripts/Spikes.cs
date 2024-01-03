@@ -1,24 +1,24 @@
 ﻿using UnityEngine;
 using Core;
+using Bardent.CoreSystem;
 
 namespace Interactables
 {
     public class Spikes : MonoBehaviour
     {
         [SerializeField] private float spikeDmg;
+        [SerializeField] private bool damageType;
 
         private void OnTriggerEnter2D(Collider2D hitinfo)
         {
-            if (hitinfo.tag == "Player")
+            DamageReceiver player = hitinfo.GetComponentInChildren<DamageReceiver>();
+            Enemy enemy = hitinfo.GetComponent<Enemy>();
+            if (player)
             {
-                PlayerStats player = hitinfo.GetComponent<PlayerStats>();
-
-                player.TakeDamage(spikeDmg);
+                player.Damage(spikeDmg, damageType);
             }
-            else if (hitinfo.tag == "Enemy")
+            else if (enemy)
             {
-                Enemy enemy = hitinfo.GetComponent<Enemy>();
-
                 enemy.TakeDamage(spikeDmg, 0);
             }
         }

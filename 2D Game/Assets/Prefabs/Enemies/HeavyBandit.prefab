@@ -39,7 +39,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2460784285809934230}
-  - {fileID: 5263844340596144968}
   - {fileID: 1852767507027271901}
   - {fileID: 5866177833939634784}
   - {fileID: 7215631077234520511}
@@ -334,26 +333,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab9904e6a95017147a2295b5998719f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 9972b22af0715d1408a556a245ecc72e, type: 2}
-  attackSound: {fileID: 4727940582570106995}
-  playerTrans: {fileID: 0}
-  enemyAttackAI: {fileID: 7992715458322413631}
   hpBar: {fileID: 7400008869081113992}
-  gradient:
+  hpBarGradient:
     serializedVersion: 2
-    key0: {r: 1, g: 0, b: 0, a: 1}
-    key1: {r: 0.990566, g: 0.51352197, b: 0, a: 1}
-    key2: {r: 0.9467213, g: 1, b: 0, a: 0}
-    key3: {r: 0.6110538, g: 1, b: 0, a: 0}
-    key4: {r: 0.2573614, g: 1, b: 0.21226418, a: 0}
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 13107
-    ctime1: 26407
-    ctime2: 39321
-    ctime3: 52428
-    ctime4: 65535
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
     ctime5: 0
     ctime6: 0
     ctime7: 0
@@ -365,11 +360,47 @@ MonoBehaviour:
     atime5: 0
     atime6: 0
     atime7: 0
-    m_Mode: 1
+    m_Mode: 0
     m_ColorSpace: -1
-    m_NumColorKeys: 5
+    m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  fill: {fileID: 417042407059819289}
+  hpBarFill: {fileID: 0}
+  damagePopup: {fileID: 0}
+  damagePopupOffset: {x: 0, y: 0, z: 0}
+  damagePopupGradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  fontSizeToDamageScaler: 0
+  data: {fileID: 11400000, guid: 9972b22af0715d1408a556a245ecc72e, type: 2}
+  attackSound: {fileID: 4727940582570106995}
+  playerTrans: {fileID: 0}
 --- !u!114 &8883700276926463137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,7 +492,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d8c6340d3651a44b3c5eda576c86f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 167738637749498186}
   firePoint: {fileID: 167738637749498185}
   playerTrans: {fileID: 0}
   IgnoreMe:
@@ -827,7 +857,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d8c6340d3651a44b3c5eda576c86f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 167738637749498186}
   firePoint: {fileID: 0}
   playerTrans: {fileID: 0}
   IgnoreMe:
@@ -914,7 +943,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.029, y: -0.258}
+  m_AnchoredPosition: {x: 0.029, y: -0.25800002}
   m_SizeDelta: {x: 803, y: 890}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6262491716043897648
@@ -962,7 +991,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &5653268027829306708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -980,82 +1009,3 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!1001 &200274219211939361
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 167738637749498185}
-    m_Modifications:
-    - target: {fileID: 5461576477917390185, guid: 63ce19bcfd5d3a24ea3457dde2d02c77,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.165
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390185, guid: 63ce19bcfd5d3a24ea3457dde2d02c77,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.915
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390185, guid: 63ce19bcfd5d3a24ea3457dde2d02c77,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390185, guid: 63ce19bcfd5d3a24ea3457dde2d02c77,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390185, guid: 63ce19bcfd5d3a24ea3457dde2d02c77,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390185, guid: 63ce19bcfd5d3a24ea3457dde2d02c77,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390185, guid: 63ce19bcfd5d3a24ea3457dde2d02c77,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390185, guid: 63ce19bcfd5d3a24ea3457dde2d02c77,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390185, guid: 63ce19bcfd5d3a24ea3457dde2d02c77,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390185, guid: 63ce19bcfd5d3a24ea3457dde2d02c77,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390187, guid: 63ce19bcfd5d3a24ea3457dde2d02c77,
-        type: 3}
-      propertyPath: m_Name
-      value: Heavy Bandit Attack Hitbox
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390187, guid: 63ce19bcfd5d3a24ea3457dde2d02c77,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 63ce19bcfd5d3a24ea3457dde2d02c77, type: 3}
---- !u!4 &5263844340596144968 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5461576477917390185, guid: 63ce19bcfd5d3a24ea3457dde2d02c77,
-    type: 3}
-  m_PrefabInstance: {fileID: 200274219211939361}
-  m_PrefabAsset: {fileID: 0}
