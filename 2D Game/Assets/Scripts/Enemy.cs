@@ -48,13 +48,14 @@ public class Enemy : MonoBehaviour
     public Transform PlayerTrans { get => playerTrans; private set => playerTrans = value; }
     public EnemyData Data { get => data; private set => data = value; }
     public float EnemyLevelScale { get => lvlIndex; private set => lvlIndex = value; }
+    public int FacingDirection { get => facingDirection; private set => facingDirection = value; }
     #endregion
 
     #region Combat
     public void TakeDamage(float rawDamage, float knockback)
     {
         float damage = Mathf.Round(rawDamage);
-
+        
         if (immune == false)
         {
             hp -= damage;
@@ -72,9 +73,8 @@ public class Enemy : MonoBehaviour
                 }
 
                 animator.SetTrigger("Hurt");
-
                 immune = true;
-
+                
                 Invoke("StopImmune", 0.1f);
                 TakeKnockback(damage + knockback);
             }
@@ -90,7 +90,7 @@ public class Enemy : MonoBehaviour
 
         if (playerTrans.position.x < transform.position.x + 0.5f)
         {
-            rb.AddForce(transform.up * knockback / 2, ForceMode2D.Force);
+            rb.AddForce(transform.up * knockback, ForceMode2D.Force);
             rb.AddForce(transform.right * knockback, ForceMode2D.Force);
         }
         else
@@ -109,7 +109,7 @@ public class Enemy : MonoBehaviour
 
     public void Attack()
     {
-        if (attackCooldown == false && Data.ranged == false && Data.attack != null)
+        if (attackCooldown == false && Data.ranged == false)
         {
             animator.SetTrigger("Attack");
 
@@ -156,7 +156,7 @@ public class Enemy : MonoBehaviour
             return;
         }
         offset.Set(
-            transform.position.x + (data.HitBox.center.x * facingDirection * -1),
+            transform.position.x + (data.HitBox.center.x * FacingDirection * -1),
             transform.position.y + data.HitBox.center.y
         );
 
@@ -188,7 +188,7 @@ public class Enemy : MonoBehaviour
 
         if (transform != null && flip && PlayerStats.death == false)
         {
-            facingDirection *= -1;
+            FacingDirection *= -1;
             if (transform.position.x < playerTrans.position.x)
             {
                 Data.offsetX = -Data.offsetX2;
@@ -202,7 +202,7 @@ public class Enemy : MonoBehaviour
         }
         else if (transform != null && childFlip && PlayerStats.death == false)
         {
-            facingDirection *= -1;
+            FacingDirection *= -1;
             if (transform.position.x < playerTrans.position.x)
             {
                 Data.offsetX = -Data.offsetX2;
@@ -242,7 +242,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        facingDirection = transform.localScale.x > 0 ? 1 : -1;
+        FacingDirection = transform.localScale.x > 0 ? 1 : -1;
 
         if (seekerAI != null)
         {
@@ -318,7 +318,7 @@ public class Enemy : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Vector3 adjustedCenter = transform.position + new Vector3(data.HitBox.center.x * facingDirection * -1, data.HitBox.center.y, 0f);
+        Vector3 adjustedCenter = transform.position + new Vector3(data.HitBox.center.x * FacingDirection * -1, data.HitBox.center.y, 0f);
         Gizmos.DrawWireCube(adjustedCenter, data.HitBox.size);
     }
     #endregion

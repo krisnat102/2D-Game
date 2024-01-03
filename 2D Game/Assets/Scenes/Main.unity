@@ -1952,7 +1952,7 @@ PrefabInstance:
     - target: {fileID: 1620560478860096213, guid: a3f6384058c673846ba368a8e2c51dba,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
         type: 3}
@@ -1960,6 +1960,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 1117637d0e1206f41be5b45d15a32ea5,
         type: 2}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: hpBarFill
+      value: 
+      objectReference: {fileID: 1286750893}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: damagePopup
+      value: 
+      objectReference: {fileID: 4574999819551038475, guid: f7045cf55a3095346a99325c93f7a0f2,
+        type: 3}
     - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
         type: 3}
       propertyPath: playerTrans
@@ -1970,6 +1981,191 @@ PrefabInstance:
       propertyPath: enemyAttackAI
       value: 
       objectReference: {fileID: 1431424630}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: damagePopupOffset.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: damagePopupOffset.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: hpBarGradient.ctime0
+      value: 13107
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: hpBarGradient.ctime1
+      value: 26407
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: hpBarGradient.ctime2
+      value: 39321
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: hpBarGradient.ctime3
+      value: 52428
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: hpBarGradient.ctime4
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: hpBarGradient.key0.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: hpBarGradient.key0.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: hpBarGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: hpBarGradient.key1.g
+      value: 0.51352197
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: hpBarGradient.key1.r
+      value: 0.990566
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: hpBarGradient.key2.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: hpBarGradient.key2.r
+      value: 0.9467213
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: hpBarGradient.key3.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: hpBarGradient.key3.r
+      value: 0.6110538
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: hpBarGradient.key4.b
+      value: 0.21226418
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: hpBarGradient.key4.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: hpBarGradient.key4.r
+      value: 0.2573614
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: hpBarGradient.m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: fontSizeToDamageScaler
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: damagePopupGradient.ctime1
+      value: 16384
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: damagePopupGradient.ctime2
+      value: 32768
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: damagePopupGradient.ctime3
+      value: 49151
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: damagePopupGradient.ctime4
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: damagePopupGradient.key0.b
+      value: 0.6839622
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: damagePopupGradient.key0.g
+      value: 0.98325783
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: damagePopupGradient.key1.b
+      value: 0.30980396
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: damagePopupGradient.key1.g
+      value: 0.7038833
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: damagePopupGradient.key2.g
+      value: 0.51984906
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: damagePopupGradient.key2.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: damagePopupGradient.key3.g
+      value: 0.4077799
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: damagePopupGradient.key3.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: damagePopupGradient.key4.g
+      value: 0.25186405
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: damagePopupGradient.key4.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: hpBarGradient.m_NumColorKeys
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: damagePopupGradient.m_NumColorKeys
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2097363334945886374, guid: a3f6384058c673846ba368a8e2c51dba,
         type: 3}
       propertyPath: firePoint
@@ -2003,12 +2199,12 @@ PrefabInstance:
     - target: {fileID: 5704051915864082290, guid: a3f6384058c673846ba368a8e2c51dba,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5704051915864082290, guid: a3f6384058c673846ba368a8e2c51dba,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6812206164071620084, guid: a3f6384058c673846ba368a8e2c51dba,
         type: 3}
@@ -22122,6 +22318,11 @@ PrefabInstance:
       propertyPath: damagePopupGradient.m_NumColorKeys
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 167738637749498187, guid: 056196fb9136d8f42a99f8d1570a6361,
+        type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 1536
+      objectReference: {fileID: 0}
     - target: {fileID: 167738637749498190, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
       propertyPath: m_Name
@@ -22130,7 +22331,12 @@ PrefabInstance:
     - target: {fileID: 167738637749498190, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 167738637749498196, guid: 056196fb9136d8f42a99f8d1570a6361,
+        type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 1536
       objectReference: {fileID: 0}
     - target: {fileID: 1002995020524094799, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
@@ -22190,12 +22396,12 @@ PrefabInstance:
     - target: {fileID: 7355610707019080728, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7355610707019080728, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8883700276926463137, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
@@ -22447,9 +22653,210 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
+      propertyPath: hpBarFill
+      value: 
+      objectReference: {fileID: 1953867656}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: damagePopup
+      value: 
+      objectReference: {fileID: 4574999819551038475, guid: f7045cf55a3095346a99325c93f7a0f2,
+        type: 3}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
       propertyPath: playerTrans
       value: 
       objectReference: {fileID: 225787432}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: damagePopupOffset.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: damagePopupOffset.y
+      value: 1.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: hpBarGradient.ctime0
+      value: 13107
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: hpBarGradient.ctime1
+      value: 26407
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: hpBarGradient.ctime2
+      value: 39321
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: hpBarGradient.ctime3
+      value: 52428
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: hpBarGradient.ctime4
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: hpBarGradient.key0.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: hpBarGradient.key0.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: hpBarGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: hpBarGradient.key1.g
+      value: 0.51352197
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: hpBarGradient.key1.r
+      value: 0.990566
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: hpBarGradient.key2.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: hpBarGradient.key2.r
+      value: 0.9467213
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: hpBarGradient.key3.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: hpBarGradient.key3.r
+      value: 0.6110538
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: hpBarGradient.key4.b
+      value: 0.21226418
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: hpBarGradient.key4.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: hpBarGradient.key4.r
+      value: 0.2573614
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: hpBarGradient.m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: fontSizeToDamageScaler
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: damagePopupGradient.ctime1
+      value: 16384
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: damagePopupGradient.ctime2
+      value: 32768
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: damagePopupGradient.ctime3
+      value: 49151
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: damagePopupGradient.ctime4
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: damagePopupGradient.key0.b
+      value: 0.6839622
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: damagePopupGradient.key0.g
+      value: 0.98325783
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: damagePopupGradient.key1.b
+      value: 0.30980396
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: damagePopupGradient.key1.g
+      value: 0.7038833
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: damagePopupGradient.key2.g
+      value: 0.51984906
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: damagePopupGradient.key2.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: damagePopupGradient.key3.g
+      value: 0.4077799
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: damagePopupGradient.key3.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: damagePopupGradient.key4.g
+      value: 0.25186405
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: damagePopupGradient.key4.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: hpBarGradient.m_NumColorKeys
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: damagePopupGradient.m_NumColorKeys
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637703, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 1536
+      objectReference: {fileID: 0}
     - target: {fileID: 4715727150763637724, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
       propertyPath: m_Name
@@ -22470,6 +22877,16 @@ PrefabInstance:
       propertyPath: playerTrans
       value: 
       objectReference: {fileID: 225787432}
+    - target: {fileID: 6708969765188566197, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: m_Mass
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708969765188566197, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8652173126370724597, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -25028,6 +25445,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1284202577}
   m_CullTransparentMesh: 0
+--- !u!114 &1286750893 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2681175681240443984, guid: a3f6384058c673846ba368a8e2c51dba,
+    type: 3}
+  m_PrefabInstance: {fileID: 153141513}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1289773606
 GameObject:
   m_ObjectHideFlags: 0
@@ -64617,6 +65046,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1933725383}
   m_CullTransparentMesh: 0
+--- !u!114 &1953867656 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1385805572958993379, guid: 822b92523f445d349a5be30b83a06b59,
+    type: 3}
+  m_PrefabInstance: {fileID: 965241762}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1956840739
 GameObject:
   m_ObjectHideFlags: 0

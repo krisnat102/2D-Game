@@ -31,7 +31,6 @@ namespace Bardent.Weapons.Components
             }
             catch
             {
-                Debug.Log("Knockback Stuff");
             }
         }
 

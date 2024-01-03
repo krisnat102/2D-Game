@@ -307,7 +307,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1016675182857375015}
-  - {fileID: 7316501901764364501}
   - {fileID: 1620560478625217046}
   - {fileID: 1205324701305300601}
   - {fileID: 8927564412431801625}
@@ -445,26 +444,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab9904e6a95017147a2295b5998719f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  attackSound: {fileID: 8435544955756322061}
-  playerTrans: {fileID: 0}
-  enemyAttackAI: {fileID: 2097363334945886374}
   hpBar: {fileID: 6764816597267286843}
-  gradient:
+  hpBarGradient:
     serializedVersion: 2
-    key0: {r: 1, g: 0, b: 0, a: 1}
-    key1: {r: 0.990566, g: 0.51352197, b: 0, a: 1}
-    key2: {r: 0.9467213, g: 1, b: 0, a: 0}
-    key3: {r: 0.6110538, g: 1, b: 0, a: 0}
-    key4: {r: 0.2573614, g: 1, b: 0.21226418, a: 0}
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 13107
-    ctime1: 26407
-    ctime2: 39321
-    ctime3: 52428
-    ctime4: 65535
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
     ctime5: 0
     ctime6: 0
     ctime7: 0
@@ -476,11 +471,47 @@ MonoBehaviour:
     atime5: 0
     atime6: 0
     atime7: 0
-    m_Mode: 1
+    m_Mode: 0
     m_ColorSpace: -1
-    m_NumColorKeys: 5
+    m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  fill: {fileID: 2681175681240443984}
+  hpBarFill: {fileID: 0}
+  damagePopup: {fileID: 0}
+  damagePopupOffset: {x: 0, y: 0, z: 0}
+  damagePopupGradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  fontSizeToDamageScaler: 0
+  data: {fileID: 0}
+  attackSound: {fileID: 8435544955756322061}
+  playerTrans: {fileID: 0}
 --- !u!82 &8435544955756322061
 AudioSource:
   m_ObjectHideFlags: 0
@@ -760,7 +791,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d8c6340d3651a44b3c5eda576c86f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1620560478860096214}
   firePoint: {fileID: 0}
   playerTrans: {fileID: 0}
   IgnoreMe:
@@ -811,7 +841,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d8c6340d3651a44b3c5eda576c86f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
   firePoint: {fileID: 1620560478860096211}
   playerTrans: {fileID: 0}
   IgnoreMe:
@@ -1026,87 +1055,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1001 &3333232625468288444
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1620560478860096211}
-    m_Modifications:
-    - target: {fileID: 4064330568095004171, guid: d0b601e9d9d98f14cb92691a2748969e,
-        type: 3}
-      propertyPath: enemy
-      value: 
-      objectReference: {fileID: 1620560478860096214}
-    - target: {fileID: 5461576477917390185, guid: d0b601e9d9d98f14cb92691a2748969e,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.165
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390185, guid: d0b601e9d9d98f14cb92691a2748969e,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.915
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390185, guid: d0b601e9d9d98f14cb92691a2748969e,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390185, guid: d0b601e9d9d98f14cb92691a2748969e,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390185, guid: d0b601e9d9d98f14cb92691a2748969e,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390185, guid: d0b601e9d9d98f14cb92691a2748969e,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390185, guid: d0b601e9d9d98f14cb92691a2748969e,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390185, guid: d0b601e9d9d98f14cb92691a2748969e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390185, guid: d0b601e9d9d98f14cb92691a2748969e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390185, guid: d0b601e9d9d98f14cb92691a2748969e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390187, guid: d0b601e9d9d98f14cb92691a2748969e,
-        type: 3}
-      propertyPath: m_Name
-      value: Eagle Attack Hitbox
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461576477917390187, guid: d0b601e9d9d98f14cb92691a2748969e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d0b601e9d9d98f14cb92691a2748969e, type: 3}
---- !u!4 &7316501901764364501 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5461576477917390185, guid: d0b601e9d9d98f14cb92691a2748969e,
-    type: 3}
-  m_PrefabInstance: {fileID: 3333232625468288444}
-  m_PrefabAsset: {fileID: 0}

@@ -71,8 +71,6 @@ namespace Bardent.CoreSystem
             float defense = InventoryManager.Instance.GetEquipmentStats()[1];
             float finalDamage = damage / Mathf.Pow(2, defense / damage);
 
-            Debug.Log(finalDamage);
-
             return Mathf.Round(finalDamage);
         }
     }

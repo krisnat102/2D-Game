@@ -15,14 +15,14 @@ MonoBehaviour:
   level: 1
   enemyName: Ranger
   maxHP: 100
-  attackSpeed: 1
+  attackSpeed: 2
   speed: 200
   damage: 20
   knockbackModifier: 20
   offsetX: 1.2
   offsetX2: 1.2
   offsetY: -1
-  attack: {fileID: 0}
+  damageType: 0
   attackAnimLength: 0.85
   HitBox:
     serializedVersion: 2
@@ -45,4 +45,4 @@ MonoBehaviour:
     type: 3}
   rangedDamage: 15
   rangedSpeed: 35
-  distanceOffset: 3.5
+  distanceOffset: 3.3

@@ -427,6 +427,7 @@ GameObject:
   - component: {fileID: 4715727150763637703}
   - component: {fileID: 4715727150763637696}
   - component: {fileID: 4715727150763637702}
+  - component: {fileID: 6708969765188566197}
   m_Layer: 9
   m_Name: Ranger
   m_TagString: Enemy
@@ -680,26 +681,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab9904e6a95017147a2295b5998719f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  attackSound: {fileID: 4715727150763637696}
-  playerTrans: {fileID: 0}
-  enemyAttackAI: {fileID: 4715727151536337906}
   hpBar: {fileID: 7669163624617155162}
-  gradient:
+  hpBarGradient:
     serializedVersion: 2
-    key0: {r: 1, g: 0, b: 0, a: 1}
-    key1: {r: 0.990566, g: 0.51352197, b: 0, a: 1}
-    key2: {r: 0.9467213, g: 1, b: 0, a: 0}
-    key3: {r: 0.6110538, g: 1, b: 0, a: 0}
-    key4: {r: 0.2573614, g: 1, b: 0.21226418, a: 0}
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 13107
-    ctime1: 26407
-    ctime2: 39321
-    ctime3: 52428
-    ctime4: 65535
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
     ctime5: 0
     ctime6: 0
     ctime7: 0
@@ -711,11 +708,74 @@ MonoBehaviour:
     atime5: 0
     atime6: 0
     atime7: 0
-    m_Mode: 1
+    m_Mode: 0
     m_ColorSpace: -1
-    m_NumColorKeys: 5
+    m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  fill: {fileID: 1385805572958993379}
+  hpBarFill: {fileID: 0}
+  damagePopup: {fileID: 0}
+  damagePopupOffset: {x: 0, y: 0, z: 0}
+  damagePopupGradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  fontSizeToDamageScaler: 0
+  data: {fileID: 0}
+  attackSound: {fileID: 4715727150763637696}
+  playerTrans: {fileID: 0}
+--- !u!50 &6708969765188566197
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4715727150763637724}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &4715727151536337869
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,7 +821,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d8c6340d3651a44b3c5eda576c86f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 4715727150763637702}
   firePoint: {fileID: 4715727150742174635}
   playerTrans: {fileID: 0}
   IgnoreMe:

@@ -50,9 +50,7 @@ namespace Bardent.Weapons
         private bool currentInput;
         
         public void Enter()
-        {            
-            print($"{transform.name} enter");
-            
+        {
             attackCounterResetTimer.StopTimer();
             
             anim.SetBool("active", true);
