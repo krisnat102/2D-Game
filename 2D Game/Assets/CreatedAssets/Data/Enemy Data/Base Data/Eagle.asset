@@ -23,7 +23,6 @@ MonoBehaviour:
   offsetX2: 1.6
   offsetY: 1
   damageType: 1
-  attack: {fileID: 5461576477917390187, guid: d0b601e9d9d98f14cb92691a2748969e, type: 3}
   attackAnimLength: 0.1
   HitBox:
     serializedVersion: 2
@@ -34,14 +33,14 @@ MonoBehaviour:
   DetectableLayers:
     serializedVersion: 2
     m_Bits: 1024
+  minCoinsDropped: 8
+  maxCoinsDropped: 16
   lookAtPlayer: 0
   deathEffect: {fileID: 489641561373093210, guid: 95e6e7e3a2c75aa48a778d33175c94e8,
     type: 3}
   bloodEffect: {fileID: 7515634647306772147, guid: b6be51001a0800f4abd4e30fe133548b,
     type: 3}
   ranged: 0
-  firePoint: {fileID: 0}
-  projectile: {fileID: 0}
   impactEffect: {fileID: 0}
   rangedDamage: 0
   rangedSpeed: 0

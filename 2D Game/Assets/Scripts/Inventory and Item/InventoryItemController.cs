@@ -9,6 +9,7 @@ namespace Inventory
     {
         #region Private Variables
         [SerializeField] private Button removeButton;
+        [SerializeField] private TMP_Text itemCount;
         [SerializeField] private float equipmentCloseTime;
 
         private Button useButton;
@@ -17,6 +18,16 @@ namespace Inventory
         private GameObject description;
         private bool equipmentMenuActive = false;
         private Item item;
+        #endregion
+
+        #region Unity Methods
+        private void Update()
+        {
+            if (GetComponent<ItemController>().GetItem().ItemCount <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
         #endregion
 
         #region Item Methods
@@ -51,32 +62,39 @@ namespace Inventory
         {
             GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
             ItemController itemController = button.GetComponent<ItemController>();
+            Item item = itemController.GetItem();
 
-            if (itemController.GetItem().consumable)
+            if (item.consumable && item.ItemCount > 0)
             {
-                switch (itemController.GetItem().consumableType)
+                switch (item.consumableType)
                 {
                     case Item.ConsumableType.Heal:
                         if (Stats.Instance.Health.CurrentValue != Stats.Instance.Health.MaxValue)
                         {
-                            RemoveItem2(itemController.GetItem());
-
-                            Stats.Instance.Health.Increase(itemController.GetItem().value);
+                            item.DecreaseItemCount();
+                            InventoryManager.Instance.Remove(item);
+                            if(itemCount == null) Debug.Log(1);
+                            Debug.Log(itemCount.text);
+                            itemCount.text = (item.ItemCount > 1 ? "x" + item.ItemCount.ToString() : "");
+                            itemCount.ForceMeshUpdate();
+                            
+                            Stats.Instance.Health.Increase(item.value);
                         }
                         break;
                     case Item.ConsumableType.ManaHeal:
                         if (Stats.Instance.Mana.CurrentValue != Stats.Instance.Mana.MaxValue)
                         {
-                            RemoveItem2(itemController.GetItem());
+                            item.DecreaseItemCount();
+                            InventoryManager.Instance.Remove(item);
+                            itemCount.text = (item.ItemCount > 1 ? "x" + item.ItemCount.ToString() : "");
 
-                            Stats.Instance.Mana.Increase(itemController.GetItem().value);
+                            Stats.Instance.Mana.Increase(item.value);
                         }
                         break;
                 }
             }
-            else if (itemController.GetItem().equipment)
+            else if (itemController.GetItem().equipment && item.ItemCount > 0)
             {
-                //PlayerStats.Instance.RefreshStats();
                 if (button.GetComponentInChildren<TextMeshProUGUI>().text == "Equip")
                 {
                     itemController.GetItem().SetEquipped(true);
@@ -203,7 +221,7 @@ namespace Inventory
             itemMagicRes = InventoryManager.Instance.ItemMagicRes;
 
             itemImage.sprite = itemController.GetItem().icon;
-            itemName.text = itemController.GetItem().ItemName.ToUpper();
+            itemName.text = itemController.GetItem().itemName.ToUpper();
             itemDescription.text = itemController.GetItem().itemDescription;
             if (itemController.GetItem().value != 0)
             {
@@ -239,7 +257,6 @@ namespace Inventory
                 if (itemController.GetItem().Equipped)
                 {
                     useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Unequip";
-                    Debug.Log(itemController.GetItem().Equipped + " equipped");
                 }
                 else
                 {
@@ -251,7 +268,7 @@ namespace Inventory
                 {
                     descriptionAnimator.SetTrigger("Open");
                     descriptionAnimator.SetBool("OpenClose", true);
-                    Debug.Log("open");
+
                     equipmentMenuActive = true;
                 }
             }
@@ -263,7 +280,7 @@ namespace Inventory
 
                 descriptionAnimator.SetTrigger("Close");
                 descriptionAnimator.SetBool("OpenClose", false);
-                Debug.Log("close");
+
                 Invoke("CloseEquipmentMenu", equipmentCloseTime);
                 equipmentMenuActive = false;
             }

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 namespace Inventory
 {
@@ -41,9 +42,13 @@ namespace Inventory
         private float totalArmor;
         private float totalMagicRes;
         private float totalWeight;
+
+        private List<Item> distinctItems = new();
+        private List<Item> duplicates = new();
         #endregion
 
         #region Property Variables
+        public int Coins { get; private set; }
         public Button HelmetBn { get => helmetBn; set => helmetBn = value; }
         public Button ChestplateBn { get => chestplateBn; set => chestplateBn = value; }
         public Button GlovesBn { get => glovesBn; set => glovesBn = value; }
@@ -91,6 +96,9 @@ namespace Inventory
                     {
                         inventory.SetActive(true);
 
+                        //TODO: Optimize this awful code out of the game
+                        //(done 2 times because of a bug with the item count upon first openning on inv)
+                        ListItems();
                         ListItems();
 
                         //Weapon.canFire = false;
@@ -122,6 +130,7 @@ namespace Inventory
             foreach (Item item in items)
             {
                 item.SetEquipped(false);
+                item.SetItemCount(1);
             }
         }
         #endregion
@@ -139,32 +148,45 @@ namespace Inventory
 
         public void ListItems()
         {
-            ItemController itemController;
+            distinctItems = items.GroupBy(x => x.name).Select(y => y.First()).ToList();
+            duplicates = items.GroupBy(p => new { p.name })
+                .Where(g => g.Count() > 1)
+                .SelectMany(g => g.Skip(1))
+                .ToList();
 
             //clears the inventory before opening so that items dont duplicate
             foreach (Transform item in itemContent)
             {
                 item.gameObject.SetActive(true);
+                item.GetComponent<ItemController>().GetItem().SetItemCount(1);
                 Destroy(item.gameObject);
             }
 
             //adds the items to the inventory
-            foreach (var item in items)
+            foreach (var item in distinctItems)
             {
+                foreach (var duplicateItem in duplicates)
+                {
+                    if (item.name == duplicateItem.name)
+                        item.IncreaseItemCount();
+                }
+
                 GameObject obj = Instantiate(inventoryItem, itemContent);
 
                 obj.SetActive(true);
 
                 obj.name = item.name;
 
-                itemController = obj.GetComponent<ItemController>();
+                ItemController itemController = obj.GetComponent<ItemController>();
                 itemController.SetItem(item);
 
-                var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
+                var itemName = obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
+                var itemCount = obj.transform.Find("ItemCount").GetComponent<TextMeshProUGUI>();
                 var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
                 var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
 
-                itemName.text = item.ItemName;
+                itemName.text = item.itemName;
+                itemCount.text = (item.ItemCount > 1 ? "x" + item.ItemCount.ToString() : "");
                 itemIcon.sprite = item.icon;
 
                 if (filter == Filter.ConsumableInv)
@@ -224,11 +246,11 @@ namespace Inventory
         private void SetInventoryItems()
         {
             inventoryItems = itemContent.GetComponentsInChildren<InventoryItemController>();
-            System.Array.Resize(ref inventoryItems, items.Count);
+            System.Array.Resize(ref inventoryItems, distinctItems.Count);
 
-            for (int i = 0; i < items.Count; i++)
+            for (int i = 0; i < distinctItems.Count; i++)
             {
-                inventoryItems[i].AddItem(items[i]);
+                inventoryItems[i].AddItem(distinctItems[i]);
             }
         }
         #endregion
@@ -306,6 +328,19 @@ namespace Inventory
         {
             return equipmentMenu;
         }
+        #endregion
+
+        #region Other Methods
+
+        public void SetCoins(int i)
+        {
+            Coins = i;
+        }
+        public void IncreaseCoins()
+        {
+            Coins++;
+        }
+
         #endregion
     }
 }

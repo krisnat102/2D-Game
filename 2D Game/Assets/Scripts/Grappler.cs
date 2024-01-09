@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Spells;
 using Core;
+using Bardent.CoreSystem;
 
 public class Grappler : MonoBehaviour
 {
@@ -59,9 +60,9 @@ public class Grappler : MonoBehaviour
         // Shot rope on mouse position
         if (hitInfo)
         {
-            if (Input.GetButton("Ability") && checker == true && hitInfo.collider.gameObject.tag == "Ground" && PlayerStats.stam >= grapplingHook.cost && abilities.AbilityCooldown1 == false)
+            if (Input.GetButton("Ability") && checker == true && hitInfo.collider.gameObject.tag == "Ground" && Stats.Instance.Stam.CurrentValue >= grapplingHook.cost && abilities.AbilityCooldown1 == false)
             {
-                PlayerStats.stam -= grapplingHook.cost;
+                Stats.Instance.Stam.Decrease(grapplingHook.cost);
 
                 rope = gameObject.AddComponent<DistanceJoint2D>();
                 lineRenderer.enabled = true;

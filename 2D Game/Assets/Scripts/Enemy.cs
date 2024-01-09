@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using Core;
 using Bardent.CoreSystem;
 using Pathfinding;
 using TMPro;
@@ -41,6 +40,11 @@ public class Enemy : MonoBehaviour
     private AIPath seekerAI;
     private EnemyAI enemyAI;
     private EnemyAttackAI enemyAttackAI;
+    private Transform firePoint;
+    private GameObject arrow;
+    private ParticleSystem coinBurstParticleEffect;
+    private Transform particleContainer;
+    private int coinsDropped;
     #endregion
 
     #region Properties
@@ -102,6 +106,8 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        var coins = Instantiate(coinBurstParticleEffect.gameObject, transform.position, Quaternion.identity, particleContainer);
+        coins.GetComponent<ParticleSystem>().Emit(coinsDropped);
         Instantiate(Data.deathEffect, transform.position, Quaternion.identity);
 
         Destroy(gameObject);
@@ -148,7 +154,7 @@ public class Enemy : MonoBehaviour
         }*/
         if(Data.ranged)
         {
-            GameObject attackProjectile = Instantiate(Data.projectile, Data.firePoint);
+            GameObject attackProjectile = Instantiate(arrow, firePoint);
             if (attackProjectile.activeInHierarchy == false)
             {
                 attackProjectile.SetActive(true);
@@ -186,7 +192,7 @@ public class Enemy : MonoBehaviour
     {
         if (enemyAttackAI.PlayerInRange()) Invoke("Attack", 0.2f);
 
-        if (transform != null && flip && PlayerStats.death == false)
+        if (transform != null && flip)
         {
             FacingDirection *= -1;
             if (transform.position.x < playerTrans.position.x)
@@ -200,7 +206,7 @@ public class Enemy : MonoBehaviour
                 animator.SetBool("Flip", false);
             }
         }
-        else if (transform != null && childFlip && PlayerStats.death == false)
+        else if (transform != null && childFlip)
         {
             FacingDirection *= -1;
             if (transform.position.x < playerTrans.position.x)
@@ -215,7 +221,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if (Data.lookAtPlayer && enemyAttackAI.PlayerInSight() && PlayerStats.death == false)
+        if (Data.lookAtPlayer && enemyAttackAI.PlayerInSight())
         {
             if (facingSide)
             {
@@ -265,23 +271,34 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        lvlIndex = Data.level * 0.1f + 0.9f;
-
-        offsetXSave = Data.offsetX;
-
+        #region Variable Getting and Finding
         seekerAI = GetComponent<AIPath>();
         enemyAI = GetComponent<EnemyAI>();
         enemyAttackAI = GetComponentInChildren<EnemyAttackAI>();
+        coinBurstParticleEffect = GetComponentInChildren<ParticleSystem>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        particleContainer = GameObject.FindGameObjectWithTag("ParticleContainer").transform;
         if (animator == null)
         {
             animator = GetComponentInChildren<Animator>();
         }
         flip = ContainsParam(animator, "Flip");
+        firePoint = gameObject.transform.Find("FirePoint");
+        arrow = gameObject.transform.Find("Arrow")?.gameObject;
+        #endregion
+
+        #region Calculations
+        lvlIndex = Data.level * 0.1f + 0.9f;
+
+        offsetXSave = Data.offsetX;
 
         hp = Data.maxHP * lvlIndex;
         hpBar.maxValue = Data.maxHP * lvlIndex;
+
+        coinsDropped = Random.Range(data.minCoinsDropped, data.maxCoinsDropped++);
+        #endregion
+
         TakeDamage(0, 0);
 
         if (transform.rotation.y == 0)

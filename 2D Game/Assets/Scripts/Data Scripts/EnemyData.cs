@@ -28,6 +28,9 @@ public class EnemyData : ScriptableObject
     public Rect HitBox;
     public LayerMask DetectableLayers;
 
+    [Header("Drops")]
+    public int minCoinsDropped;
+    public int maxCoinsDropped;
 
     [Header("Behaviour")]
     public bool lookAtPlayer;
@@ -40,10 +43,6 @@ public class EnemyData : ScriptableObject
     [Header("Ranged")]
     //[HideInInspector]
     public bool ranged = false;
-    [HideInInspector]
-    public Transform firePoint;
-    [HideInInspector]
-    public GameObject projectile;
     [HideInInspector]
     public GameObject impactEffect;
     [HideInInspector]
@@ -69,8 +68,6 @@ public class Enemy_Editor : Editor
         //script.ranged = EditorGUILayout.Toggle("Ranged", script.ranged);
         if (script.ranged) // if bool is true, show other fields
         {
-            script.firePoint = EditorGUILayout.ObjectField("Fire Point", script.firePoint, typeof(Transform)) as Transform;
-            script.projectile = EditorGUILayout.ObjectField("Projectile", script.projectile, typeof(GameObject)) as GameObject;
             script.impactEffect = EditorGUILayout.ObjectField("Impact Effect", script.impactEffect, typeof(GameObject)) as GameObject;
             script.rangedDamage = EditorGUILayout.FloatField("Damage", script.rangedDamage);
             script.rangedSpeed = EditorGUILayout.FloatField("Projectile Speed", script.rangedSpeed);

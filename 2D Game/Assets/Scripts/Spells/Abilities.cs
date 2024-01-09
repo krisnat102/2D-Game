@@ -51,7 +51,7 @@ namespace Spells
                 
                 #region Spells
                 if (SpellManager.SpellsBar.Count >= activeSpell)
-                    if (PlayerInputHandler.Instance.SpellInput && PlayerStats.mana >= SpellManager.SpellsBar[activeSpell].cost && spellCooldown == false)
+                    if (PlayerInputHandler.Instance.SpellInput && Stats.Instance.Mana.CurrentValue >= SpellManager.SpellsBar[activeSpell].cost && spellCooldown == false)
                         Spell();
 
                 if (PlayerInputHandler.Instance.SwitchSpell1Input)
@@ -76,7 +76,7 @@ namespace Spells
                 #region Abilites
                 if (SpellManager.AbilitiesBar.Count >= activeAbility)
                 {
-                    if (PlayerInputHandler.Instance.AbilityInput && PlayerStats.stam >= SpellManager.AbilitiesBar[activeAbility].cost && AbilityCooldown1 == false)
+                    if (PlayerInputHandler.Instance.AbilityInput && Stats.Instance.Stam.CurrentValue >= SpellManager.AbilitiesBar[activeAbility].cost && AbilityCooldown1 == false)
                         Ability();
                 }
                 if (PlayerInputHandler.Instance.SwitchAbility1Input)

@@ -33,14 +33,14 @@ MonoBehaviour:
   DetectableLayers:
     serializedVersion: 2
     m_Bits: 0
+  minCoinsDropped: 12
+  maxCoinsDropped: 22
   lookAtPlayer: 1
   deathEffect: {fileID: 8203424293245319661, guid: d4597ceb8300e93488e0de151c0e3e73,
     type: 3}
   bloodEffect: {fileID: 7515634647306772147, guid: b6be51001a0800f4abd4e30fe133548b,
     type: 3}
   ranged: 1
-  firePoint: {fileID: 0}
-  projectile: {fileID: 0}
   impactEffect: {fileID: 327621282901348051, guid: c0b641e096985a84089d34a72eb3e26f,
     type: 3}
   rangedDamage: 15

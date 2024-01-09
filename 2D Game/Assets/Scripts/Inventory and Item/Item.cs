@@ -9,8 +9,8 @@ namespace Inventory
     [CreateAssetMenu(fileName = "New Item", menuName = "Item/Create New ITem")]
     public class Item : ScriptableObject
     {
-        public int id;
-        public string ItemName;
+        #region Public Variables
+        public string itemName;
         public int value;
         public int cost;
         public bool usable;
@@ -18,8 +18,6 @@ namespace Inventory
         public ItemClass itemClass;
         [TextArea]
         public string itemDescription;
-
-        private bool equipped = false;
 
         public enum ItemClass
         {
@@ -30,6 +28,17 @@ namespace Inventory
             Quest,
             Misc
         }
+        #endregion
+
+        #region Private Variables
+        private bool equipped = false;
+        private int itemCount = 1;
+        #endregion
+
+        #region Method Variables
+        public bool Equipped { get => equipped; private set => equipped = value; }
+        public int ItemCount { get => itemCount; private set => itemCount = value; }
+        #endregion
 
         #region Variable Dependencies
         [HideInInspector]
@@ -48,8 +57,6 @@ namespace Inventory
         [HideInInspector]
         public ConsumableType consumableType;
 
-        public bool Equipped { get => equipped; private set => equipped = value; }
-
         public enum EquipmentType
         {
             None,
@@ -64,13 +71,28 @@ namespace Inventory
             Heal,
             ManaHeal
         }
+        #endregion
 
+        #region Setters
         public void SetEquipped(bool equip)
         {
             Equipped = equip;
         }
+        public void SetItemCount(int count)
+        {
+            ItemCount = count;
+        }
+        public void IncreaseItemCount()
+        {
+            ItemCount++;
+        }
+        public void DecreaseItemCount()
+        {
+            ItemCount--;
+        }
+        #endregion
     }
-
+    #region Variable Dependency Class
 #if UNITY_EDITOR
     [CustomEditor(typeof(Item))]
     public class Item_Editor : Editor
