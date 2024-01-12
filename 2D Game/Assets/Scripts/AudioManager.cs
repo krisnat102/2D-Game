@@ -5,21 +5,31 @@ using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
+    #region Private Variables
     [SerializeField] private AudioMixer musicMixer;
     [SerializeField] private AudioMixer sfxMixer;
-
-    //public Sound[] sounds;
-
-    /*public static float music = 1f;
-    public static float sfx = 1f;
-    public static int audioMute = 1;*/
-
     [SerializeField] private Slider Music;
     [SerializeField] private Slider SFX;
     [SerializeField] private Toggle Mute;
 
+    [SerializeField] private AudioSource buySound;
+    #endregion
+
+    #region Method Variables
+    public AudioSource BuySound { get => buySound; set => buySound = value; }
+    #endregion
+
+    #region Static Variables
     public static float musicSave = 0;
     public static float sfxSave = 0;
+    public static AudioManager Instance;
+    #endregion
+
+    #region Unity Methods
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -34,7 +44,9 @@ public class AudioManager : MonoBehaviour
 
         LoadAudioSettings();
     }
+    #endregion
 
+    #region Settings
     public void SaveAudioSettings()
     {
         PlayerPrefs.SetFloat("MusicVolume", Music.value);
@@ -42,7 +54,6 @@ public class AudioManager : MonoBehaviour
         PlayerPrefs.SetInt("Mute", Mute.isOn ? 1 : 0);
         PlayerPrefs.Save();
     }
-
     public void LoadAudioSettings()
     {
         if (PlayerPrefs.HasKey("MusicVolume"))
@@ -62,34 +73,9 @@ public class AudioManager : MonoBehaviour
             Mute.isOn = PlayerPrefs.GetInt("Mute") == 1;
         }
     }
+    #endregion
 
-    /*void Awake()
-    {
-        foreach (Sound s in sounds)
-        {
-            s.source = gameObject.AddComponent<AudioSource>();
-
-            s.source.clip = s.clip;
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-
-            if (s.name.Contains("Theme"))
-            {
-                s.source.volume = s.volume * music * audioMute;
-            }
-            else
-            {
-                s.source.volume = s.volume * sfx * audioMute;
-            }
-
-            Music.value = music;
-            SFX.value = sfx;
-            Mute.isOn = (audioMute == 0); //will set to true if audioMute is 0 and to false otherwise
-        }
-        
-    }*/
-
+    #region Audio
     public void MuteAudio(bool mute)
     {
         Mute.isOn = mute;
@@ -105,17 +91,9 @@ public class AudioManager : MonoBehaviour
         }
 
         SaveAudioSettings();
-        //audioMute = muteVolume;
-
-        /*foreach (Sound s in sounds)
-        {
-            s.source.volume = s.volume * muteVolume;
-        }*/
     }
-
     public void MusicAudio(float volume)
     {
-        //music = volume;
 
         musicMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
 
@@ -125,7 +103,6 @@ public class AudioManager : MonoBehaviour
     }
     public void SFXAudio(float volume)
     {
-        //sfx = volume;
 
         sfxMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
 
@@ -133,18 +110,5 @@ public class AudioManager : MonoBehaviour
 
         SaveAudioSettings();
     }
-
-    /*private void Start()
-    {
-        Play("Theme");
-    }
-
-    public void Play (string name)
-    {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-
-        if (s == null) return;
-
-        s.source.Play();
-    }*/
+    #endregion
 }

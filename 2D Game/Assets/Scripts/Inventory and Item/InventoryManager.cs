@@ -339,22 +339,23 @@ namespace Inventory
 
         #region Coin Methods
 
-        public void SetCoins(int i)
-        {
-            Coins = i;
-        }
+        public void SetCoins(int i) => Coins = i;
         public void IncreaseCoins()
         {
             Coins++;
 
             if(coinAnimationTracker == false)
             {
-                coinAnimationTracker = true;
-                UIManager.Instance.MovePurseAnimation(true, purseAnimationDistance, purseAnimationDuration);
-                Invoke("EndCoinAnimation", purseAnimationTimeOnScreen);
+                StartCoinAnimation();
             }
         }
 
+        public void StartCoinAnimation()
+        {
+            coinAnimationTracker = true;
+            UIManager.Instance.MovePurseAnimation(true, purseAnimationDistance, purseAnimationDuration);
+            Invoke("EndCoinAnimation", purseAnimationTimeOnScreen);
+        }
         private void EndCoinAnimation()
         {
             coinAnimationTracker = false;

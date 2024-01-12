@@ -61139,6 +61139,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2301836118970275872, guid: a5bf0b0578739fd4fac2b905a63217aa,
+        type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301836118970275872, guid: a5bf0b0578739fd4fac2b905a63217aa,
+        type: 3}
+      propertyPath: chest
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4418657037509415993, guid: a5bf0b0578739fd4fac2b905a63217aa,
         type: 3}
       propertyPath: m_Name
@@ -61200,6 +61210,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5291979051441734192, guid: a5bf0b0578739fd4fac2b905a63217aa,
+        type: 3}
+      propertyPath: chest
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291979051441734192, guid: a5bf0b0578739fd4fac2b905a63217aa,
+        type: 3}
+      propertyPath: spell
+      value: 
+      objectReference: {fileID: 11400000, guid: ddd09cd857a1b9b4d81d64aaa8c595c9,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -61348,6 +61369,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -438616097858673548, guid: edd47335a940cff44a1ad32bade1df7b,
+        type: 3}
+      propertyPath: price
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -438616097858673548, guid: edd47335a940cff44a1ad32bade1df7b,
+        type: 3}
+      propertyPath: forSale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3096476449244818979, guid: edd47335a940cff44a1ad32bade1df7b,
         type: 3}
       propertyPath: m_Name

@@ -72,7 +72,7 @@ using static UnityEditor.Progress;
                     {
                         itemPickup.Pickup();
                     }
-                    else if (spellPickup != null)
+                    if (spellPickup != null)
                     {
                         spellPickup.Pickup();
                     }
