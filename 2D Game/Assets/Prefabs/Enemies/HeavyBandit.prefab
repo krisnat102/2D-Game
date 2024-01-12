@@ -402,7 +402,6 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 9972b22af0715d1408a556a245ecc72e, type: 2}
   attackSound: {fileID: 4727940582570106995}
   playerTrans: {fileID: 0}
-  coinBurstParticleEffect: {fileID: 0}
 --- !u!114 &8883700276926463137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1032,7 +1031,7 @@ PrefabInstance:
     - target: {fileID: 6037440538041968046, guid: 944564c67a0fb5a4697b7f2e5d6867e0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.081
+      value: 1.207
       objectReference: {fileID: 0}
     - target: {fileID: 6037440538041968046, guid: 944564c67a0fb5a4697b7f2e5d6867e0,
         type: 3}

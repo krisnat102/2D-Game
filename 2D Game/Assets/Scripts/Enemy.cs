@@ -297,6 +297,7 @@ public class Enemy : MonoBehaviour
         hpBar.maxValue = Data.maxHP * lvlIndex;
 
         coinsDropped = Random.Range(data.minCoinsDropped, data.maxCoinsDropped++);
+        Debug.Log(coinsDropped);
         #endregion
 
         TakeDamage(0, 0);

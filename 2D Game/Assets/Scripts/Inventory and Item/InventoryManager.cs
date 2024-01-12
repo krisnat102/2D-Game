@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using Krisnat;
 
 namespace Inventory
 {
@@ -36,15 +37,20 @@ namespace Inventory
         [SerializeField] private Image itemImage;
         [SerializeField] private TMP_Text itemName, itemDescription, itemValue, itemPrice, itemWeight, itemArmor, itemMagicRes;
         [SerializeField] private GameObject description;
-        
-        private Filter filter = default;
 
+        [Header("Coins")]
+        [SerializeField] private TMP_Text coinCounter;
+        [SerializeField] private float purseAnimationDistance;
+        [SerializeField] private float purseAnimationDuration;
+        [SerializeField] private float purseAnimationTimeOnScreen;
+
+        private Filter filter = default;
         private float totalArmor;
         private float totalMagicRes;
         private float totalWeight;
-
         private List<Item> distinctItems = new();
         private List<Item> duplicates = new();
+        private bool coinAnimationTracker;
         #endregion
 
         #region Property Variables
@@ -89,6 +95,7 @@ namespace Inventory
         {
             if (Core.GameManager.gamePaused == false)
             {
+                coinCounter.text = Coins.ToString();
                 if (PlayerInputHandler.Instance.InventoryInput)
                 {
                     PlayerInputHandler.Instance.UseInventoryInput();
@@ -330,7 +337,7 @@ namespace Inventory
         }
         #endregion
 
-        #region Other Methods
+        #region Coin Methods
 
         public void SetCoins(int i)
         {
@@ -339,6 +346,19 @@ namespace Inventory
         public void IncreaseCoins()
         {
             Coins++;
+
+            if(coinAnimationTracker == false)
+            {
+                coinAnimationTracker = true;
+                UIManager.Instance.MovePurseAnimation(true, purseAnimationDistance, purseAnimationDuration);
+                Invoke("EndCoinAnimation", purseAnimationTimeOnScreen);
+            }
+        }
+
+        private void EndCoinAnimation()
+        {
+            coinAnimationTracker = false;
+            UIManager.Instance.MovePurseAnimation(false, purseAnimationDistance, purseAnimationDuration);
         }
 
         #endregion

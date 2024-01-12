@@ -750,7 +750,6 @@ MonoBehaviour:
   data: {fileID: 0}
   attackSound: {fileID: 4715727150763637696}
   playerTrans: {fileID: 0}
-  coinBurstParticleEffect: {fileID: 0}
 --- !u!50 &6708969765188566197
 Rigidbody2D:
   serializedVersion: 4
@@ -957,7 +956,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &7793977528917468093
 MonoBehaviour:
   m_ObjectHideFlags: 0

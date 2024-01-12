@@ -6,10 +6,11 @@ namespace Inventory
     public class ItemPickup : MonoBehaviour
     {
         [SerializeField] private Item item;
+        [SerializeField] private bool forSale;
 
         private bool isPickedUp = false;
 
-        void Pickup()
+        public void Pickup()
         {
             if (!isPickedUp)
             {
@@ -19,11 +20,6 @@ namespace Inventory
 
                 isPickedUp = true;
             }
-        }
-
-        private void OnTriggerStay2D(Collider2D hitInfo)
-        {
-            if (hitInfo.tag == "PickupRange" && PlayerInputHandler.Instance.UseInput) Pickup();
         }
     }
 }

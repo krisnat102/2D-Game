@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Inventory;
@@ -9,7 +8,6 @@ namespace Krisnat
     {
         private new ParticleSystem particleSystem;
         private AudioSource coinsPickupAudio;
-
         private List<ParticleSystem.Particle> pickedUp = new List<ParticleSystem.Particle>();
 
         private void Awake()
@@ -22,13 +20,14 @@ namespace Krisnat
         {
             int numEnter = particleSystem.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, pickedUp);
 
+            Debug.Log(numEnter);
             for (int i = 0; i < numEnter; i++)
             {
                 ParticleSystem.Particle particle = pickedUp[i];
 
                 InventoryManager.Instance.IncreaseCoins();
 
-                particle.remainingLifetime = 0.1f;
+                particle.remainingLifetime = 0.001f;
                 pickedUp[i] = particle;
             }
             coinsPickupAudio.Play();

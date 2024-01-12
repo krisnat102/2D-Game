@@ -9,7 +9,7 @@ namespace Spells
 
         private bool isPickedUp = false;
 
-        void Pickup()
+        public void Pickup()
         {
             if (!isPickedUp)
             {
@@ -18,14 +18,6 @@ namespace Spells
                 Destroy(gameObject);
 
                 isPickedUp = true;
-            }
-        }
-
-        private void OnTriggerStay2D(Collider2D hitInfo)
-        {
-            if (hitInfo.tag == "PickupRange" && PlayerInputHandler.Instance.UseInput)
-            {
-                Pickup();
             }
         }
     }
