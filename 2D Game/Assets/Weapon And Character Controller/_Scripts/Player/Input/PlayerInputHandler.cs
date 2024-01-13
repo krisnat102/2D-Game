@@ -285,6 +285,7 @@ public class PlayerInputHandler : MonoBehaviour
     #region UseInput
     public void UseJumpInput() => JumpInput = false;
     public void UseDashInput() => DashInput = false;
+    public void UseUseInput() => UseInput = false;
     public void UseInventoryInput() => InventoryInput = false;
     public void UseSpellInventoryInput() => SpellInventoryInput = false;
     public void UseMenuInpit() => MenuInput = false;

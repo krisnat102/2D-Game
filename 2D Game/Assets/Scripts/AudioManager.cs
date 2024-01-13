@@ -13,10 +13,12 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private Toggle Mute;
 
     [SerializeField] private AudioSource buySound;
+    [SerializeField] private AudioSource coinPickupSound;
     #endregion
 
     #region Method Variables
-    public AudioSource BuySound { get => buySound; set => buySound = value; }
+    public AudioSource BuySound { get => buySound; private set => buySound = value; }
+    public AudioSource CoinPickupSound { get => coinPickupSound; private set => coinPickupSound = value; }
     #endregion
 
     #region Static Variables

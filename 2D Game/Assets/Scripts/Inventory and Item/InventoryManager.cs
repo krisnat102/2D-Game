@@ -40,6 +40,7 @@ namespace Inventory
 
         [Header("Coins")]
         [SerializeField] private TMP_Text coinCounter;
+        [SerializeField] private TMP_Text inventoryCoinCounter;
         [SerializeField] private float purseAnimationDistance;
         [SerializeField] private float purseAnimationDuration;
         [SerializeField] private float purseAnimationTimeOnScreen;
@@ -55,6 +56,9 @@ namespace Inventory
 
         #region Property Variables
         public int Coins { get; private set; }
+        public bool InventoryActiveInHierarchy { get; private set; }
+        public bool SpellInventoryActiveInHierarchy { get; private set; }
+        public bool Shop { get; set; }
         public Button HelmetBn { get => helmetBn; set => helmetBn = value; }
         public Button ChestplateBn { get => chestplateBn; set => chestplateBn = value; }
         public Button GlovesBn { get => glovesBn; set => glovesBn = value; }
@@ -93,22 +97,20 @@ namespace Inventory
 
         public void Update()
         {
+            InventoryActiveInHierarchy = inventory.activeInHierarchy;
+            SpellInventoryActiveInHierarchy = spellInventory.activeInHierarchy;
+
             if (Core.GameManager.gamePaused == false)
             {
                 coinCounter.text = Coins.ToString();
+                inventoryCoinCounter.text = Coins.ToString();
+
                 if (PlayerInputHandler.Instance.InventoryInput)
                 {
                     PlayerInputHandler.Instance.UseInventoryInput();
-                    if (!inventory.activeInHierarchy && !spellInventory.activeInHierarchy)
+                    if (!InventoryActiveInHierarchy && !SpellInventoryActiveInHierarchy)
                     {
-                        inventory.SetActive(true);
-
-                        //TODO: Optimize this awful code out of the game
-                        //(done 2 times because of a bug with the item count upon first openning on inv)
-                        ListItems();
-                        ListItems();
-
-                        //Weapon.canFire = false;
+                        OpenCloseInventory(true);
                     }
                     else
                     {
@@ -121,7 +123,7 @@ namespace Inventory
             }
             if (PlayerInputHandler.Instance.MenuInput)
             {
-                if (inventory.activeInHierarchy || spellInventory.activeInHierarchy)
+                if (InventoryActiveInHierarchy || SpellInventoryActiveInHierarchy)
                 {
                     PlayerInputHandler.Instance.UseMenuInpit();
 
@@ -138,6 +140,31 @@ namespace Inventory
             {
                 item.SetEquipped(false);
                 item.SetItemCount(1);
+            }
+        }
+        #endregion
+
+        #region Inventory Methods
+        public void OpenCloseInventory(bool openOrClose)
+        {
+            if (openOrClose)
+            {
+                inventory.SetActive(true);
+
+                //TODO: Optimize this awful code out of the game
+                //(done 2 times because of a bug with the item count upon first openning on inv)
+                ListItems();
+                ListItems();
+            }
+            else
+            {
+                inventory.SetActive(false);
+                spellInventory.SetActive(false);
+
+                if (Shop)
+                {
+                    Shop = false;
+                }
             }
         }
         #endregion
@@ -339,12 +366,20 @@ namespace Inventory
 
         #region Coin Methods
 
-        public void SetCoins(int i) => Coins = i;
-        public void IncreaseCoins()
+        public void SetCoins(int i, bool animation)
+        {
+            Coins = i;
+
+            if (coinAnimationTracker == false && animation)
+            {
+                StartCoinAnimation();
+            }
+        }
+        public void IncreaseCoins(bool animation)
         {
             Coins++;
 
-            if(coinAnimationTracker == false)
+            if(coinAnimationTracker == false && animation)
             {
                 StartCoinAnimation();
             }

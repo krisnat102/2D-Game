@@ -12,8 +12,6 @@ namespace Inventory
         private bool isPickedUp = false;
         private Animator animator;
 
-        //TODO: Make a hold time for chests so that it takes a certain amount of time to open them
-
         public void Pickup()
         {
             if (!isPickedUp && item != null)
@@ -30,7 +28,7 @@ namespace Inventory
                     if(InventoryManager.Instance.Coins >= price)
                     {
                         AudioManager.Instance.BuySound.Play();
-                        InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - price);
+                        InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - price, false);
                     }
                     else
                     {

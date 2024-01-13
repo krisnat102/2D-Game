@@ -7,30 +7,27 @@ namespace Krisnat
     public class CoinPickup : MonoBehaviour
     {
         private new ParticleSystem particleSystem;
-        private AudioSource coinsPickupAudio;
         private List<ParticleSystem.Particle> pickedUp = new List<ParticleSystem.Particle>();
 
         private void Awake()
         {
             particleSystem = GetComponent<ParticleSystem>();
-            coinsPickupAudio = GetComponent<AudioSource>();
         }
 
         private void OnParticleTrigger()
         {
             int numEnter = particleSystem.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, pickedUp);
 
-            Debug.Log(numEnter);
             for (int i = 0; i < numEnter; i++)
             {
                 ParticleSystem.Particle particle = pickedUp[i];
 
-                InventoryManager.Instance.IncreaseCoins();
+                InventoryManager.Instance.IncreaseCoins(true);
 
                 particle.remainingLifetime = 0.001f;
                 pickedUp[i] = particle;
             }
-            coinsPickupAudio.Play();
+            AudioManager.Instance.CoinPickupSound.Play();
             Debug.Log(InventoryManager.Instance.Coins);
 
             particleSystem.SetTriggerParticles(ParticleSystemTriggerEventType.Enter, pickedUp);

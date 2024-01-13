@@ -30,7 +30,7 @@ namespace Spells
                     if (InventoryManager.Instance.Coins >= price)
                     {
                         AudioManager.Instance.BuySound.Play();
-                        InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - price);
+                        InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - price, false);
                     }
                     else
                     {
