@@ -23,6 +23,7 @@ namespace Inventory
 
         [SerializeField] private GameObject inventory;
         [SerializeField] private GameObject spellInventory;
+        [SerializeField] private GameObject characterTab;
 
         [Header("Equipment MiniMenu")]
         [SerializeField] private Animator equipmentMenuAnimator;
@@ -58,21 +59,25 @@ namespace Inventory
         public int Coins { get; private set; }
         public bool InventoryActiveInHierarchy { get; private set; }
         public bool SpellInventoryActiveInHierarchy { get; private set; }
+        public bool CharacterTabActiveInHierarchy { get; private set; }
         public bool Shop { get; set; }
-        public Button HelmetBn { get => helmetBn; set => helmetBn = value; }
-        public Button ChestplateBn { get => chestplateBn; set => chestplateBn = value; }
-        public Button GlovesBn { get => glovesBn; set => glovesBn = value; }
-        public Button BootsBn { get => bootsBn; set => bootsBn = value; }
-        public Button UseButton { get => useButton; set => useButton = value; }
-        public Image ItemImage { get => itemImage; set => itemImage = value; }
-        public TMP_Text ItemName { get => itemName; set => itemName = value; }
-        public TMP_Text ItemDescription { get => itemDescription; set => itemDescription = value; }
-        public TMP_Text ItemValue { get => itemValue; set => itemValue = value; }
-        public TMP_Text ItemPrice { get => itemPrice; set => itemPrice = value; }
-        public TMP_Text ItemWeight { get => itemWeight; set => itemWeight = value; }
-        public TMP_Text ItemArmor { get => itemArmor; set => itemArmor = value; }
-        public TMP_Text ItemMagicRes { get => itemMagicRes; set => itemMagicRes = value; }
-        public GameObject Description { get => description; set => description = value; }
+        public Button HelmetBn { get => helmetBn; private set => helmetBn = value; }
+        public Button ChestplateBn { get => chestplateBn; private set => chestplateBn = value; }
+        public Button GlovesBn { get => glovesBn; private set => glovesBn = value; }
+        public Button BootsBn { get => bootsBn; private set => bootsBn = value; }
+        public Button UseButton { get => useButton; private set => useButton = value; }
+        public Image ItemImage { get => itemImage; private set => itemImage = value; }
+        public TMP_Text ItemName { get => itemName; private set => itemName = value; }
+        public TMP_Text ItemDescription { get => itemDescription; private set => itemDescription = value; }
+        public TMP_Text ItemValue { get => itemValue; private set => itemValue = value; }
+        public TMP_Text ItemPrice { get => itemPrice; private set => itemPrice = value; }
+        public TMP_Text ItemWeight { get => itemWeight; private set => itemWeight = value; }
+        public TMP_Text ItemArmor { get => itemArmor; private set => itemArmor = value; }
+        public TMP_Text ItemMagicRes { get => itemMagicRes; private set => itemMagicRes = value; }
+        public GameObject Description { get => description; private set => description = value; }
+        public float TotalArmor { get => totalArmor; private set => totalArmor = value; }
+        public float TotalMagicRes { get => totalMagicRes; private set => totalMagicRes = value; }
+        public float TotalWeight { get => totalWeight; private set => totalWeight = value; }
         #endregion
 
         #region Enums
@@ -99,6 +104,7 @@ namespace Inventory
         {
             InventoryActiveInHierarchy = inventory.activeInHierarchy;
             SpellInventoryActiveInHierarchy = spellInventory.activeInHierarchy;
+            CharacterTabActiveInHierarchy = characterTab.activeInHierarchy;
 
             if (Core.GameManager.gamePaused == false)
             {
@@ -108,14 +114,13 @@ namespace Inventory
                 if (PlayerInputHandler.Instance.InventoryInput)
                 {
                     PlayerInputHandler.Instance.UseInventoryInput();
-                    if (!InventoryActiveInHierarchy && !SpellInventoryActiveInHierarchy)
+                    if (!InventoryActiveInHierarchy && !SpellInventoryActiveInHierarchy && !CharacterTabActiveInHierarchy)
                     {
                         OpenCloseInventory(true);
                     }
                     else
                     {
-                        inventory.SetActive(false);
-                        spellInventory.SetActive(false);
+                        OpenCloseInventory(false);
 
                         //Weapon.canFire = true;
                     }
@@ -123,7 +128,7 @@ namespace Inventory
             }
             if (PlayerInputHandler.Instance.MenuInput)
             {
-                if (InventoryActiveInHierarchy || SpellInventoryActiveInHierarchy)
+                if (InventoryActiveInHierarchy || SpellInventoryActiveInHierarchy || CharacterTabActiveInHierarchy)
                 {
                     PlayerInputHandler.Instance.UseMenuInpit();
 
@@ -160,6 +165,7 @@ namespace Inventory
             {
                 inventory.SetActive(false);
                 spellInventory.SetActive(false);
+                characterTab.SetActive(false);
 
                 if (Shop)
                 {
@@ -290,28 +296,21 @@ namespace Inventory
         #endregion
 
         #region Equipment Stat Methods
-        public List<float> GetEquipmentStats()
-        {
-            List<float> totalStats = new();
-            totalStats.Add(totalArmor); totalStats.Add(totalMagicRes); totalStats.Add(totalWeight);
-            return totalStats;
-        }
-
         public void AddItemStats(Item item)
         {
-            totalArmor += item.armor;
-            totalWeight += item.weight;
-            totalMagicRes += item.magicRes;
+            TotalArmor += item.armor;
+            TotalWeight += item.weight;
+            TotalMagicRes += item.magicRes;
 
-            Debug.Log(totalMagicRes + " " + totalArmor + " " + totalWeight);
+            Debug.Log(TotalMagicRes + " " + TotalArmor + " " + TotalWeight);
         }
         public void RemoveItemStats(Item item)
         {
-            totalArmor -= item.armor;
-            totalWeight -= item.weight;
-            totalMagicRes -= item.magicRes;
+            TotalArmor -= item.armor;
+            TotalWeight -= item.weight;
+            TotalMagicRes -= item.magicRes;
 
-            Debug.Log(totalMagicRes + " " + totalArmor + " " + totalWeight);
+            Debug.Log(TotalMagicRes + " " + TotalArmor + " " + TotalWeight);
         }
         #endregion
 

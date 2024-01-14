@@ -61,14 +61,14 @@ namespace Bardent.CoreSystem
 
         public float CalculatePhysicalDamageReduction(float damage)
         {
-            float defense = InventoryManager.Instance.GetEquipmentStats()[0];
+            float defense = InventoryManager.Instance.TotalArmor;
             float finalDamage = damage/ Mathf.Pow(2, defense/damage);
 
             return Mathf.Round(finalDamage);
         }
         public float CalculateMagicalDamageReduction(float damage)
         {
-            float defense = InventoryManager.Instance.GetEquipmentStats()[1];
+            float defense = InventoryManager.Instance.TotalMagicRes;
             float finalDamage = damage / Mathf.Pow(2, defense / damage);
 
             return Mathf.Round(finalDamage);

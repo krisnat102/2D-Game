@@ -1,14 +1,11 @@
 ﻿using Bardent.CoreSystem;
 using UnityEngine;
 
-
 namespace Core
 {
     public class GameManager : MonoBehaviour
     {
         public static bool gamePaused = false;
-
-        public static int money = 0;
 
         [SerializeField] private GameObject deathScreen;
         [SerializeField] private GameObject player;

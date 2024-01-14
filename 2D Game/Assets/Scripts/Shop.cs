@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Krisnat
 {
-    public class Shop : MonoBehaviour
+    public class Shop : MonoBehaviour, IStructurable
     {
-        private void OnTriggerStay2D(Collider2D collision)
+        void IStructurable.OnTriggerStay2D(Collider2D collision)
         {
             var player = collision.GetComponent<Player>();
             if (PlayerInputHandler.Instance.UseInput && player != null)
