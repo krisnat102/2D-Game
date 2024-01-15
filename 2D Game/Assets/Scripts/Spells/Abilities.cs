@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using Core;
 using Bardent.CoreSystem;
-using Pathfinding;
+using Krisnat;
 
 namespace Spells
 {
@@ -29,8 +28,6 @@ namespace Spells
         private int activeSpell = 0;
         private int activeAbility = 0;
         private Vector2 newPosition;
-
-        public static Vector3 castPoint = new Vector3();
 
         public bool AbilityCooldown1 { get => abilityCooldown; set => abilityCooldown = value; }
         #endregion
@@ -181,7 +178,6 @@ namespace Spells
                 spellCooldownImg.fillAmount -= Time.deltaTime / SpellManager.SpellsBar[activeSpell].cooldown;
             }
         }
-
         #endregion
 
         #region Spell And Ability Casting
@@ -207,8 +203,6 @@ namespace Spells
                     Debug.Log(castingPoint.rotation);
                     Instantiate(SpellManager.SpellsBar[activeSpell].spellEffect, castingPoint.position, castingPoint.rotation);
                 }
-
-                castPoint = castingPoint.position;
 
                 Stats.Instance.Mana.CurrentValue -= SpellManager.SpellsBar[activeSpell].cost;
 

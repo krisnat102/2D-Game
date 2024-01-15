@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     public Rigidbody2D RB { get; private set; }
     public Transform DashDirectionIndicator { get; private set; }
     public BoxCollider2D MovementCollider { get; private set; }
+    public PlayerData PlayerData { get => playerData; set => playerData = value; }
     #endregion
 
     #region Other Variables         
@@ -62,21 +63,21 @@ public class Player : MonoBehaviour
 
         StateMachine = new PlayerStateMachine();
 
-        IdleState = new PlayerIdleState(this, StateMachine, playerData, "idle");
-        MoveState = new PlayerMoveState(this, StateMachine, playerData, "move");
-        JumpState = new PlayerJumpState(this, StateMachine, playerData, "inAir");
-        InAirState = new PlayerInAirState(this, StateMachine, playerData, "inAir");
-        LandState = new PlayerLandState(this, StateMachine, playerData, "land");
-        WallSlideState = new PlayerWallSlideState(this, StateMachine, playerData, "wallSlide");
-        WallGrabState = new PlayerWallGrabState(this, StateMachine, playerData, "wallGrab");
-        WallClimbState = new PlayerWallClimbState(this, StateMachine, playerData, "wallClimb");
-        WallJumpState = new PlayerWallJumpState(this, StateMachine, playerData, "inAir");
-        LedgeClimbState = new PlayerLedgeClimbState(this, StateMachine, playerData, "ledgeClimbState");
-        DashState = new PlayerDashState(this, StateMachine, playerData, "inAir");
-        CrouchIdleState = new PlayerCrouchIdleState(this, StateMachine, playerData, "crouchIdle");
-        CrouchMoveState = new PlayerCrouchMoveState(this, StateMachine, playerData, "crouchMove");
-        PrimaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack", primaryWeapon, CombatInputs.primary);
-        SecondaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack", secondaryWeapon, CombatInputs.secondary);
+        IdleState = new PlayerIdleState(this, StateMachine, PlayerData, "idle");
+        MoveState = new PlayerMoveState(this, StateMachine, PlayerData, "move");
+        JumpState = new PlayerJumpState(this, StateMachine, PlayerData, "inAir");
+        InAirState = new PlayerInAirState(this, StateMachine, PlayerData, "inAir");
+        LandState = new PlayerLandState(this, StateMachine, PlayerData, "land");
+        WallSlideState = new PlayerWallSlideState(this, StateMachine, PlayerData, "wallSlide");
+        WallGrabState = new PlayerWallGrabState(this, StateMachine, PlayerData, "wallGrab");
+        WallClimbState = new PlayerWallClimbState(this, StateMachine, PlayerData, "wallClimb");
+        WallJumpState = new PlayerWallJumpState(this, StateMachine, PlayerData, "inAir");
+        LedgeClimbState = new PlayerLedgeClimbState(this, StateMachine, PlayerData, "ledgeClimbState");
+        DashState = new PlayerDashState(this, StateMachine, PlayerData, "inAir");
+        CrouchIdleState = new PlayerCrouchIdleState(this, StateMachine, PlayerData, "crouchIdle");
+        CrouchMoveState = new PlayerCrouchMoveState(this, StateMachine, PlayerData, "crouchMove");
+        PrimaryAttackState = new PlayerAttackState(this, StateMachine, PlayerData, "attack", primaryWeapon, CombatInputs.primary);
+        SecondaryAttackState = new PlayerAttackState(this, StateMachine, PlayerData, "attack", secondaryWeapon, CombatInputs.secondary);
     }
 
     private void Start()

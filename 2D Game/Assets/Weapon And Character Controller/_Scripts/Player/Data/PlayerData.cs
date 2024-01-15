@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "newPlayerData", menuName = "Data/Player Data/Base Data")]
 public class PlayerData : ScriptableObject
 {
     [Header("General")]
     public float stamRecoveryTime = 1f;
+    private int playerLevel = 1;
 
     [Header("Move State")]
     public float movementVelocity = 10f;
@@ -51,4 +50,8 @@ public class PlayerData : ScriptableObject
     public float crouchMovementVelocity = 5f;
     public float crouchColliderHeight = 0.8f;
     public float standColliderHeight = 1.6f;
+
+    public int PlayerLevel { get => playerLevel; private set => playerLevel = value; }
+
+    public void LevelUp() => PlayerLevel++;
 }

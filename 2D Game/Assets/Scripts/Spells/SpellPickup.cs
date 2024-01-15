@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using Core;
 using Inventory;
+using TMPro;
+using UnityEngine.UI;
 
 namespace Spells
 {
@@ -10,9 +12,11 @@ namespace Spells
         [SerializeField] private bool forSale;
         [SerializeField] private int price;
         [SerializeField] private bool chest;
+        [SerializeField] private float offset = 0.2f;
 
         private bool isPickedUp = false;
         private Animator animator;
+        private GameObject itemPrice;
 
         public void Pickup()
         {
@@ -48,6 +52,21 @@ namespace Spells
         private void Start()
         {
             animator = GetComponent<Animator>();
+
+            if (forSale)
+            {
+                itemPrice = GetComponentInChildren<Canvas>()?.GetComponent<Transform>()?.Find("ItemPrice")?.gameObject;
+                itemPrice.SetActive(true);
+                itemPrice.GetComponentInChildren<TMP_Text>().text = price.ToString();
+                if (price < 10)
+                {
+                    itemPrice.GetComponentInChildren<Image>().gameObject.transform.position -= new Vector3(offset, 0);
+                }
+                else if (price > 99)
+                {
+                    itemPrice.GetComponentInChildren<Image>().gameObject.transform.position += new Vector3(offset, 0);
+                }
+            }
         }
     }
 }

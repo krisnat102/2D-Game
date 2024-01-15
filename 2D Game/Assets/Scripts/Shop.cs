@@ -5,7 +5,7 @@ namespace Krisnat
 {
     public class Shop : MonoBehaviour, IStructurable
     {
-        void IStructurable.OnTriggerStay2D(Collider2D collision)
+        public void OnTriggerStay2D(Collider2D collision)
         {
             var player = collision.GetComponent<Player>();
             if (PlayerInputHandler.Instance.UseInput && player != null)

@@ -12,24 +12,33 @@ namespace Krisnat
         [Header("Purse")]
         [SerializeField] private GameObject purse;
 
-        [Header("CharacterTab")]
+        [Header("Character Tab")]
         [SerializeField] private GameObject characterTab;
         [SerializeField] private TMP_Text levelText, hpText, manaText, stamText, armorText, magicResText, weightText;
 
+        [Header("Level Up")]
         [SerializeField] private GameObject levelUpInterface;
+        [SerializeField] private TMP_Text levelTextLevelUpInterface, levelUpCost;
 
         private Vector3 oldPosition;
+        private PlayerData playerData;
+        private LevelHandler levelHandler;
 
         public GameObject LevelUpInterface { get => levelUpInterface; set => levelUpInterface = value; }
 
         private void Awake()
         {
             Instance = this;
+            playerData = Stats.Instance.gameObject.GetComponentInParent<Player>().PlayerData;
+            levelHandler = Stats.Instance.gameObject.GetComponentInParent<LevelHandler>();
         }
 
         private void Update()
         {
-            levelText.text = "1";
+            levelUpCost.text = levelHandler.LevelUpCost.ToString();
+            levelTextLevelUpInterface.text = playerData.PlayerLevel.ToString();
+
+            levelText.text = playerData.PlayerLevel.ToString();
             hpText.text = Stats.Instance.Health.MaxValue.ToString();
             manaText.text = Stats.Instance.Mana.MaxValue.ToString();
             stamText.text = Stats.Instance.Stam.MaxValue.ToString();

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using Core;
+using Krisnat;
 
 namespace Spells
 {
@@ -21,12 +22,14 @@ namespace Spells
         [SerializeField] private float fadeTimer = 1f;
 
         private Rigidbody2D rb;
+        private LevelHandler levelHandler;
         private bool stuckShuriken = false;
         private float transparency = 1f;
 
-        void Start()
+        void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
+            levelHandler = FindAnyObjectByType<Player>().GetComponent<LevelHandler>();
 
             rb.velocity = move ? transform.right * spell.speed : rb.velocity = new Vector2(0, 0);
             transform.right = dontRotate ? new Vector2(0, 0) : transform.right;
@@ -70,7 +73,15 @@ namespace Spells
                 Enemy enemy = hitInfo.GetComponent<Enemy>();
                 if (enemy)
                 {
-                    enemy.TakeDamage(spell.value, 0);
+                    if (spell.spell)
+                    {
+                        enemy.TakeDamage(spell.value * levelHandler.IntelligenceDamage, 0);
+                    }
+                    else
+                    {
+                        enemy.TakeDamage(spell.value * levelHandler.DexterityDamage, 0);
+                    }
+
                     if (shuriken)
                     {
                         Instantiate(enemy.BloodEffect, transform.position, Quaternion.identity);

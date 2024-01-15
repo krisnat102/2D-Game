@@ -13,6 +13,4 @@ public class DataPlayer : ScriptableObject
 
     [Header("Climb")]
     public float climbSpeed = 200f;
-
-    //do this for playerStats as well and do getters instead of public static
 }
