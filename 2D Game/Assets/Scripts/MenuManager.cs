@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Core;
+using Krisnat.Assets.Scripts;
 
 public class MenuManager : MonoBehaviour
 {
@@ -155,12 +156,10 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
-    public void Credits()
-    {
-        Debug.Log("credits");
-    }
     public void ExitGame()
     {
+        var player = transform.Find("Player").GetComponent<Player>();
+        SaveSystem.SavePlayer(player);
         Application.Quit();
 
         Debug.Log("exit"); 

@@ -50,10 +50,10 @@ namespace Bardent.CoreSystem.StatsSystem
 
         public void StopRegen() => Regenerative = false;
         public void StartRegen() => Regenerative = true;
-        
-        public void LevelUpStat(float levelUpValue)
-        {
-            MaxValue += levelUpValue;
-        }
+
+        public void LevelUpStat(float levelUpValue) => MaxValue += levelUpValue;
+
+        public void SetMaxStat(float maxStat) => MaxValue = maxStat;
+        public void SetCurrentStat(float currentStat) => CurrentValue = currentStat;
     }
 }

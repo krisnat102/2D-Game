@@ -54,4 +54,5 @@ public class PlayerData : ScriptableObject
     public int PlayerLevel { get => playerLevel; private set => playerLevel = value; }
 
     public void LevelUp() => PlayerLevel++;
+    public void SetLevel(int level) => PlayerLevel = level;
 }

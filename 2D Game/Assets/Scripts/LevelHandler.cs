@@ -16,17 +16,19 @@ namespace Krisnat
         private Stats stats;
         private Player player;
         private PlayerData playerData;
-        private int strengthCounter, dexterityCounter, intelligenceCounter = 1;
-        #endregion
+        private int strengthCounter = 1;
+        private int dexterityCounter = 1;
+        private int intelligenceCounter = 1;
+        #endregion 
 
         #region Method Variables
-        public float StrengthDamage { get => strengthDamage; set => strengthDamage = value; }
-        public float DexterityDamage { get => dexterityDamage; set => dexterityDamage = value; }
-        public float IntelligenceDamage { get => intelligenceDamage; set => intelligenceDamage = value; }
-        public int LevelUpCost { get => levelUpCost; set => levelUpCost = value; }
-        public int StrengthCounter { get => strengthCounter; set => strengthCounter = value; }
-        public int DexterityCounter { get => dexterityCounter; set => dexterityCounter = value; }
-        public int IntelligenceCounter { get => intelligenceCounter; set => intelligenceCounter = value; }
+        public float StrengthDamage { get => strengthDamage; private set => strengthDamage = value; }
+        public float DexterityDamage { get => dexterityDamage; private set => dexterityDamage = value; }
+        public float IntelligenceDamage { get => intelligenceDamage; private set => intelligenceDamage = value; }
+        public int LevelUpCost { get => levelUpCost; private set => levelUpCost = value; }
+        public int StrengthCounter { get => strengthCounter; private set => strengthCounter = value; }
+        public int DexterityCounter { get => dexterityCounter; private set => dexterityCounter = value; }
+        public int IntelligenceCounter { get => intelligenceCounter; private set => intelligenceCounter = value; }
         #endregion
 
         #region Unity Methods
@@ -40,6 +42,9 @@ namespace Krisnat
         private void Update()
         {
             LevelUpCost = initialLevelUpCost * playerData.PlayerLevel / 2;
+            StrengthDamage = 1 + StrengthCounter / 10;
+            DexterityDamage = 1 + DexterityCounter / 10;
+            IntelligenceDamage = 1 + IntelligenceCounter / 10;
         }
         #endregion
 
@@ -49,7 +54,6 @@ namespace Krisnat
             if (InventoryManager.Instance.Coins < LevelUpCost) return;
 
             stats.Health.LevelUpStat(mainStatIncrease);
-            StrengthDamage += mainStatIncrease / 50;
             StrengthCounter++;
 
             UniversalStatsIncrease();
@@ -59,7 +63,6 @@ namespace Krisnat
             if (InventoryManager.Instance.Coins < LevelUpCost) return;
 
             stats.Stam.LevelUpStat(mainStatIncrease);
-            DexterityDamage += mainStatIncrease / 50;
             DexterityCounter++;
 
             UniversalStatsIncrease();
@@ -69,7 +72,6 @@ namespace Krisnat
             if (InventoryManager.Instance.Coins < LevelUpCost) return;
 
             stats.Mana.LevelUpStat(mainStatIncrease);
-            IntelligenceDamage += mainStatIncrease / 50;
             IntelligenceCounter++;
 
             UniversalStatsIncrease();
@@ -86,6 +88,10 @@ namespace Krisnat
             playerData.LevelUp();
             InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - LevelUpCost, false);
         }
+
+        public void SetStrength(int strength) => StrengthCounter = strength;
+        public void SetDexterity(int dexterity) => DexterityCounter = dexterity;
+        public void SetIntelligence(int intelligence) => IntelligenceCounter = intelligence;
         #endregion
     }
 }

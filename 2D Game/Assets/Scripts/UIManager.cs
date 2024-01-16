@@ -58,7 +58,6 @@ namespace Krisnat
         {
             if (directionUpOrDown)
             {
-                //purse.transform.LeanMoveLocal(new Vector2(purse.transform.position.x, purse.transform.position.y + animationDistance), animationDuration);
                 purse.transform.LeanMove(new Vector2(purse.transform.position.x, purse.transform.position.y + animationDistance), animationDuration);
                 oldPosition = purse.transform.position;
             }
