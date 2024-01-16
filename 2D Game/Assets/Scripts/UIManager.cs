@@ -16,9 +16,9 @@ namespace Krisnat
         [SerializeField] private GameObject characterTab;
         [SerializeField] private TMP_Text levelText, hpText, manaText, stamText, armorText, magicResText, weightText;
 
-        [Header("Level Up")]
+        [Header("Level Up Interface")]
         [SerializeField] private GameObject levelUpInterface;
-        [SerializeField] private TMP_Text levelTextLevelUpInterface, levelUpCost;
+        [SerializeField] private TMP_Text levelTextLevelUpInterface, levelUpCost, hpLevelUpText, manaLevelUpText, stamLevelUpText, strLevelUpText, dexLevelUpText, intLevelUpText;
 
         private Vector3 oldPosition;
         private PlayerData playerData;
@@ -45,6 +45,13 @@ namespace Krisnat
             armorText.text = InventoryManager.Instance.TotalArmor.ToString();
             magicResText.text = InventoryManager.Instance.TotalMagicRes.ToString();
             weightText.text = InventoryManager.Instance.TotalWeight.ToString() + "/50";
+
+            hpLevelUpText.text = "HP - " + Stats.Instance.Health.MaxValue.ToString();
+            manaLevelUpText.text = "Mana - " + Stats.Instance.Mana.MaxValue.ToString();
+            stamLevelUpText.text = "Stam - " + Stats.Instance.Stam.MaxValue.ToString();
+            strLevelUpText.text = "STR - " + levelHandler.StrengthCounter.ToString();
+            dexLevelUpText.text = "DEX - " + levelHandler.DexterityCounter.ToString();
+            intLevelUpText.text = "INT - " + levelHandler.IntelligenceCounter.ToString();
         }
 
         public void MovePurseAnimation(bool directionUpOrDown, float animationDistance, float animationDuration)

@@ -21,17 +21,12 @@ namespace Inventory
 
         [SerializeField] private InventoryItemController[] inventoryItems;
 
-        [SerializeField] private GameObject inventory;
-        [SerializeField] private GameObject spellInventory;
-        [SerializeField] private GameObject characterTab;
+        [SerializeField] private GameObject inventory, spellInventory, characterTab;
 
         [Header("Equipment MiniMenu")]
         [SerializeField] private Animator equipmentMenuAnimator;
         [SerializeField] private GameObject equipmentMenu;
-        [SerializeField] private Button helmetBn;
-        [SerializeField] private Button chestplateBn;
-        [SerializeField] private Button glovesBn;
-        [SerializeField] private Button bootsBn;
+        [SerializeField] private Button helmetBn, chestplateBn, glovesBn, bootsBn;
 
         [Header("Item Description")]
         [SerializeField] private Button useButton;
@@ -40,18 +35,12 @@ namespace Inventory
         [SerializeField] private GameObject description;
 
         [Header("Coins")]
-        [SerializeField] private TMP_Text coinCounter;
-        [SerializeField] private TMP_Text inventoryCoinCounter;
-        [SerializeField] private float purseAnimationDistance;
-        [SerializeField] private float purseAnimationDuration;
-        [SerializeField] private float purseAnimationTimeOnScreen;
+        [SerializeField] private TMP_Text coinCounter, levelUpCoinCounter, inventoryCoinCounter;
+        [SerializeField] private float purseAnimationDistance, purseAnimationDuration, purseAnimationTimeOnScreen;
 
         private Filter filter = default;
-        private float totalArmor;
-        private float totalMagicRes;
-        private float totalWeight;
-        private List<Item> distinctItems = new();
-        private List<Item> duplicates = new();
+        private float totalArmor, totalMagicRes, totalWeight;
+        private List<Item> distinctItems, duplicates = new();
         private bool coinAnimationTracker;
         #endregion
 
@@ -110,6 +99,7 @@ namespace Inventory
             {
                 coinCounter.text = Coins.ToString();
                 inventoryCoinCounter.text = Coins.ToString();
+                levelUpCoinCounter.text = Coins.ToString();
 
                 if (PlayerInputHandler.Instance.InventoryInput)
                 {

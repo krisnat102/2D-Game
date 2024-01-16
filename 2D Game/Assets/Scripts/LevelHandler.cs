@@ -11,13 +11,12 @@ namespace Krisnat
         [SerializeField] private float mainStatIncrease;
         [SerializeField] private float subStatsIncrease;
 
-        private float strengthDamage = 1;
-        private float dexterityDamage = 1;
-        private float intelligenceDamage = 1;
+        private float strengthDamage, dexterityDamage, intelligenceDamage = 1;
         private int levelUpCost;
         private Stats stats;
         private Player player;
         private PlayerData playerData;
+        private int strengthCounter, dexterityCounter, intelligenceCounter = 1;
         #endregion
 
         #region Method Variables
@@ -25,6 +24,9 @@ namespace Krisnat
         public float DexterityDamage { get => dexterityDamage; set => dexterityDamage = value; }
         public float IntelligenceDamage { get => intelligenceDamage; set => intelligenceDamage = value; }
         public int LevelUpCost { get => levelUpCost; set => levelUpCost = value; }
+        public int StrengthCounter { get => strengthCounter; set => strengthCounter = value; }
+        public int DexterityCounter { get => dexterityCounter; set => dexterityCounter = value; }
+        public int IntelligenceCounter { get => intelligenceCounter; set => intelligenceCounter = value; }
         #endregion
 
         #region Unity Methods
@@ -48,6 +50,7 @@ namespace Krisnat
 
             stats.Health.LevelUpStat(mainStatIncrease);
             StrengthDamage += mainStatIncrease / 50;
+            StrengthCounter++;
 
             UniversalStatsIncrease();
         }
@@ -57,6 +60,7 @@ namespace Krisnat
 
             stats.Stam.LevelUpStat(mainStatIncrease);
             DexterityDamage += mainStatIncrease / 50;
+            DexterityCounter++;
 
             UniversalStatsIncrease();
         }
@@ -66,6 +70,7 @@ namespace Krisnat
 
             stats.Mana.LevelUpStat(mainStatIncrease);
             IntelligenceDamage += mainStatIncrease / 50;
+            IntelligenceCounter++;
 
             UniversalStatsIncrease();
         }
