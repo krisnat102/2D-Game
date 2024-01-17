@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 using Krisnat;
+using UnityEditor;
+using System.Collections;
 
 namespace Inventory
 {

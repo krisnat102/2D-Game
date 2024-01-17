@@ -4387,6 +4387,11 @@ PrefabInstance:
       objectReference: {fileID: 942446861}
     - target: {fileID: 6684929901192448980, guid: 8ca25b3807d5df8439b2cac892605be7,
         type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 519420032}
+    - target: {fileID: 6684929901192448980, guid: 8ca25b3807d5df8439b2cac892605be7,
+        type: 3}
       propertyPath: hpText
       value: 
       objectReference: {fileID: 193609028}
@@ -6723,10 +6728,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: Back
-        m_Mode: 1
+      - m_Target: {fileID: 640598367}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

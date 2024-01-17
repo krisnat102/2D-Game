@@ -2,6 +2,7 @@
 using Inventory;
 using Krisnat;
 using Krisnat.Assets.Scripts;
+using UnityEditor;
 using UnityEngine;
 
 namespace Core
@@ -13,10 +14,10 @@ namespace Core
         [SerializeField] private GameObject deathScreen;
         [SerializeField] private GameObject playerGO;
         [SerializeField] private Bardent.CoreSystem.Death death;
+        [SerializeField] private Transform camera;
 
         private Player player;
         private LevelHandler levelHandler;
-        private Transform camera;
 
         private void Update()
         {
@@ -26,9 +27,29 @@ namespace Core
             }
         }
         private void Awake() {
+            string searchFilter = "t:Item";
+            string folderPath = "Assets/CreatedAssets/Items";
+            string[] assetGuids = AssetDatabase.FindAssets(searchFilter, new[] { folderPath });
+
+            foreach (string assetGuid in assetGuids)
+            {
+                string assetPath = AssetDatabase.GUIDToAssetPath(assetGuid);
+
+                // Load the asset using AssetDatabase.LoadAssetAtPath
+                Object asset = AssetDatabase.LoadAssetAtPath<Object>(assetPath);
+
+                if (asset != null)
+                {
+                    Debug.Log("Loaded custom asset: " + asset.name + " at path: " + assetPath);
+                }
+                else
+                {
+                    Debug.LogWarning("Failed to load asset at path: " + assetPath);
+                }
+            }
+
             player = playerGO.GetComponent<Player>();
             levelHandler = playerGO.GetComponent<LevelHandler>();
-            camera = transform.Find("Camera");
         }
 
         public void TryAgain()
