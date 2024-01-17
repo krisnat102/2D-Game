@@ -43,6 +43,7 @@ namespace Inventory
         private Filter filter = default;
         private float totalArmor, totalMagicRes, totalWeight;
         private List<Item> distinctItems, duplicates = new();
+        private List<Item> allItems = new();
         private bool coinAnimationTracker;
         #endregion
 
@@ -69,6 +70,7 @@ namespace Inventory
         public float TotalArmor { get => totalArmor; private set => totalArmor = value; }
         public float TotalMagicRes { get => totalMagicRes; private set => totalMagicRes = value; }
         public float TotalWeight { get => totalWeight; private set => totalWeight = value; }
+        public List<Item> AllItems { get => allItems; private set => allItems = value; }
         #endregion
 
         #region Enums
@@ -89,6 +91,7 @@ namespace Inventory
             Instance = this;
 
             UseButton.GetComponentInChildren<TextMeshProUGUI>().text = "Use";
+            allItems = Core.GameManager.Instance.GetCustomAssets<Item>("Item", "CreatedAssets");
         }
 
         public void Update()
@@ -97,7 +100,7 @@ namespace Inventory
             SpellInventoryActiveInHierarchy = spellInventory.activeInHierarchy;
             CharacterTabActiveInHierarchy = characterTab.activeInHierarchy;
 
-            if (Core.GameManager.gamePaused == false)
+            if (Core.GameManager.Instance.gamePaused == false)
             {
                 coinCounter.text = Coins.ToString();
                 inventoryCoinCounter.text = Coins.ToString();
@@ -171,6 +174,10 @@ namespace Inventory
         public void Add(Item item)
         {
             items.Add(item);
+        }
+        public void Add(List<Item> itemsToAdd)
+        {
+            items.AddRange(itemsToAdd);
         }
 
         public void Remove(Item item)

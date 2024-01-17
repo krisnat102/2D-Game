@@ -11,7 +11,7 @@ public class EnemyGFX : MonoBehaviour
 
     void Update()
     {
-        if (Core.GameManager.gamePaused == false)
+        if (Core.GameManager.Instance.gamePaused == false)
         {
             if (aiPath.desiredVelocity.x >= 0.01f)
             {

@@ -35,7 +35,7 @@ namespace Spells
         #region Unity Methods
         private void Update()
         {
-            if (Core.GameManager.gamePaused == false)
+            if (Core.GameManager.Instance.gamePaused == false)
             {
                 if (PlayerInputHandler.Instance.NormInputX < 0)
                 {

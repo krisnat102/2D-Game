@@ -120,7 +120,7 @@ namespace Spells
 
         public void Update()
         {
-            if (Core.GameManager.gamePaused == false)
+            if (Core.GameManager.Instance.gamePaused == false)
             {
                 if (PlayerInputHandler.Instance.SpellInventoryInput)
                 {

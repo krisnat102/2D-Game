@@ -16,6 +16,7 @@ namespace Krisnat.Assets.Scripts
         public int strength, dexterity, intelligence;
         public int coins;
         public float[] position;
+        public int[] itemsId;
 
         public PlayerSaveData(Player player)
         {
@@ -38,6 +39,9 @@ namespace Krisnat.Assets.Scripts
             intelligence = levelHandler.IntelligenceCounter;
 
             coins = InventoryManager.Instance.Coins;
+
+            List<Item> itemsArray = Core.GameManager.Instance.GetCustomAssets<Item>("Item", "CreatedAssets");
+            itemsId = itemsArray.Select(item => item.id).ToArray();
 
             position = new float[3];
 

@@ -10,6 +10,7 @@ namespace Inventory
     public class Item : ScriptableObject
     {
         #region Public Variables
+        public int id;
         public string itemName;
         public int value;
         public int cost;

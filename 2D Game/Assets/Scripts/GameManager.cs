@@ -1,4 +1,8 @@
-﻿using Bardent.CoreSystem;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Bardent.CoreSystem;
 using Inventory;
 using Krisnat;
 using Krisnat.Assets.Scripts;
@@ -9,7 +13,8 @@ namespace Core
 {
     public class GameManager : MonoBehaviour
     {
-        public static bool gamePaused = false;
+        public static GameManager Instance;
+        public bool gamePaused = false;
 
         [SerializeField] private GameObject deathScreen;
         [SerializeField] private GameObject playerGO;
@@ -19,6 +24,7 @@ namespace Core
         private Player player;
         private LevelHandler levelHandler;
 
+        #region Unity Methods
         private void Update()
         {
             if (death.IsDead == true)
@@ -26,32 +32,16 @@ namespace Core
                 deathScreen.SetActive(true);
             }
         }
-        private void Awake() {
-            string searchFilter = "t:Item";
-            string folderPath = "Assets/CreatedAssets/Items";
-            string[] assetGuids = AssetDatabase.FindAssets(searchFilter, new[] { folderPath });
-
-            foreach (string assetGuid in assetGuids)
-            {
-                string assetPath = AssetDatabase.GUIDToAssetPath(assetGuid);
-
-                // Load the asset using AssetDatabase.LoadAssetAtPath
-                Object asset = AssetDatabase.LoadAssetAtPath<Object>(assetPath);
-
-                if (asset != null)
-                {
-                    Debug.Log("Loaded custom asset: " + asset.name + " at path: " + assetPath);
-                }
-                else
-                {
-                    Debug.LogWarning("Failed to load asset at path: " + assetPath);
-                }
-            }
+        private void Awake()
+        {
+            Instance = this;
 
             player = playerGO.GetComponent<Player>();
             levelHandler = playerGO.GetComponent<LevelHandler>();
         }
+        #endregion
 
+        #region Player Methods
         public void TryAgain()
         {
             Application.LoadLevel(Application.loadedLevel);
@@ -73,6 +63,8 @@ namespace Core
         {
             PlayerSaveData data = SaveSystem.LoadPlayer();
 
+            List<Item> loadItems = InventoryManager.Instance.AllItems.Where(item => data.itemsId.Contains(item.id)).ToList();
+
             player.PlayerData.SetLevel(data.level);
             Stats.Instance.Health.SetMaxStat(data.maxHealth);
             Stats.Instance.Mana.SetMaxStat(data.maxMana);
@@ -84,11 +76,69 @@ namespace Core
             levelHandler.SetDexterity(data.dexterity);
             levelHandler.SetIntelligence(data.intelligence);
             InventoryManager.Instance.SetCoins(data.coins, false);
+            InventoryManager.Instance.Add(loadItems);
 
             var playerTransform = player.transform;
-            
+
             playerTransform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
             camera.position = new Vector3(data.position[0], data.position[1], data.position[2]);
         }
+        #endregion
+
+        #region General Core Methods
+        [MenuItem("Tools/Load Custom Assets")]
+        private static void LoadItemNames()
+        {
+            // Define the search filter, for example, search for all ScriptableObject assets
+            string searchFilter = "t:Item";
+
+            // Specify the folder in which you want to search for assets (can be "Assets" for the entire project)
+            string folderPath = "Assets/CreatedAssets";
+
+            // Use AssetDatabase.FindAssets to get all asset GUIDs that match the search filter in the specified folder
+            string[] assetGuids = AssetDatabase.FindAssets(searchFilter, new[] { folderPath });
+
+            // Load the assets based on their paths
+            foreach (string assetGuid in assetGuids)
+            {
+                string assetPath = AssetDatabase.GUIDToAssetPath(assetGuid);
+
+                // Load the asset using AssetDatabase.LoadAssetAtPath
+                UnityEngine.Object asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
+
+                if (asset != null)
+                {
+                    Debug.Log("Loaded custom asset: " + asset.name + " at path: " + assetPath);
+                }
+                else
+                {
+                    Debug.LogWarning("Failed to load asset at path: " + assetPath);
+                }
+            }
+        }
+
+        public List<T> GetCustomAssets<T>(string customAssetType, string location) where T : UnityEngine.Object
+        {
+            List<T> loadedAssets = new();
+
+            string searchFilter = "t:" + customAssetType;
+            string folderPath = "Assets/" + location;
+
+            string[] assetGuids = AssetDatabase.FindAssets(searchFilter, new[] { folderPath });
+
+            foreach (string assetGuid in assetGuids)
+            {
+                string assetPath = AssetDatabase.GUIDToAssetPath(assetGuid);
+
+                T asset = AssetDatabase.LoadAssetAtPath<T>(assetPath);
+
+                if (asset != null)
+                {
+                    loadedAssets.Add(asset);
+                }
+            }
+            return loadedAssets;
+        }
+        #endregion
     }
 }
