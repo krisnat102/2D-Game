@@ -64,6 +64,12 @@ namespace Core
             PlayerSaveData data = SaveSystem.LoadPlayer();
 
             List<Item> loadItems = InventoryManager.Instance.AllItems.Where(item => data.itemsId.Contains(item.id)).ToList();
+            
+            Debug.Log(data.itemsId);
+            foreach(Item item in loadItems)
+            {
+                Debug.Log(item.name);
+            }
 
             player.PlayerData.SetLevel(data.level);
             Stats.Instance.Health.SetMaxStat(data.maxHealth);
@@ -120,11 +126,12 @@ namespace Core
         public List<T> GetCustomAssets<T>(string customAssetType, string location) where T : UnityEngine.Object
         {
             List<T> loadedAssets = new();
-
+            
             string searchFilter = "t:" + customAssetType;
             string folderPath = "Assets/" + location;
-
+            
             string[] assetGuids = AssetDatabase.FindAssets(searchFilter, new[] { folderPath });
+            if (assetGuids == null) Debug.Log(customAssetType + "not found at " + location);
 
             foreach (string assetGuid in assetGuids)
             {
@@ -136,6 +143,10 @@ namespace Core
                 {
                     loadedAssets.Add(asset);
                 }
+            }
+            foreach(T item in loadedAssets)
+            {
+                Debug.Log(item.name);
             }
             return loadedAssets;
         }

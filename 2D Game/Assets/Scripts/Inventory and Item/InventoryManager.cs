@@ -91,6 +91,9 @@ namespace Inventory
             Instance = this;
 
             UseButton.GetComponentInChildren<TextMeshProUGUI>().text = "Use";
+        }
+        private void Start()
+        {
             allItems = Core.GameManager.Instance.GetCustomAssets<Item>("Item", "CreatedAssets");
         }
 
