@@ -71,6 +71,9 @@ namespace Inventory
         public float TotalMagicRes { get => totalMagicRes; private set => totalMagicRes = value; }
         public float TotalWeight { get => totalWeight; private set => totalWeight = value; }
         public List<Item> AllItems { get => allItems; private set => allItems = value; }
+        public List<Item> DistinctItems { get => distinctItems; private set => distinctItems = value; }
+        public List<Item> Duplicates { get => duplicates; private set => duplicates = value; }
+        public List<Item> Items { get => items; private set => items = value; }
         #endregion
 
         #region Enums
@@ -94,7 +97,7 @@ namespace Inventory
         }
         private void Start()
         {
-            allItems = Core.GameManager.Instance.GetCustomAssets<Item>("Item", "CreatedAssets");
+            AllItems = Core.GameManager.Instance.GetCustomAssets<Item>("Item", "CreatedAssets");
         }
 
         public void Update()
@@ -139,7 +142,7 @@ namespace Inventory
         }
         private void OnDestroy()
         {
-            foreach (Item item in items)
+            foreach (Item item in Items)
             {
                 item.SetEquipped(false);
                 item.SetItemCount(1);
@@ -176,22 +179,26 @@ namespace Inventory
         #region Item Management Methods
         public void Add(Item item)
         {
-            items.Add(item);
+            Items.Add(item);
         }
         public void Add(List<Item> itemsToAdd)
         {
-            items.AddRange(itemsToAdd);
+            Items.AddRange(itemsToAdd);
         }
-
         public void Remove(Item item)
         {
-            items.Remove(item);
+            Items.Remove(item);
+        }
+        public void ClearInventory()
+        {
+            Items.Clear();
+            ListItems();
         }
 
         public void ListItems()
         {
-            distinctItems = items.GroupBy(x => x.name).Select(y => y.First()).ToList();
-            duplicates = items.GroupBy(p => new { p.name })
+            DistinctItems = Items.GroupBy(x => x.name).Select(y => y.First()).ToList();
+            Duplicates = Items.GroupBy(p => new { p.name })
                 .Where(g => g.Count() > 1)
                 .SelectMany(g => g.Skip(1))
                 .ToList();
@@ -205,9 +212,9 @@ namespace Inventory
             }
 
             //adds the items to the inventory
-            foreach (var item in distinctItems)
+            foreach (var item in DistinctItems)
             {
-                foreach (var duplicateItem in duplicates)
+                foreach (var duplicateItem in Duplicates)
                 {
                     if (item.name == duplicateItem.name)
                         item.IncreaseItemCount();
@@ -288,11 +295,11 @@ namespace Inventory
         private void SetInventoryItems()
         {
             inventoryItems = itemContent.GetComponentsInChildren<InventoryItemController>();
-            System.Array.Resize(ref inventoryItems, distinctItems.Count);
+            System.Array.Resize(ref inventoryItems, DistinctItems.Count);
 
-            for (int i = 0; i < distinctItems.Count; i++)
+            for (int i = 0; i < DistinctItems.Count; i++)
             {
-                inventoryItems[i].AddItem(distinctItems[i]);
+                inventoryItems[i].AddItem(DistinctItems[i]);
             }
         }
         #endregion

@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Numerics;
 using Bardent.CoreSystem;
 using Inventory;
-using UnityEngine;
 
 namespace Krisnat.Assets.Scripts
 {
@@ -40,14 +40,19 @@ namespace Krisnat.Assets.Scripts
 
             coins = InventoryManager.Instance.Coins;
 
-            List<Item> itemsArray = Core.GameManager.Instance.GetCustomAssets<Item>("Item", "CreatedAssets");
-            itemsId = itemsArray.Select(item => item.id).ToArray();
+            List<Item> allItemsArray = InventoryManager.Instance.AllItems;
+            itemsId = InventoryManager.Instance.Items.Select(item => item.id).ToArray();
 
             position = new float[3];
 
             position[0] = player.transform.position.x;
             position[1] = player.transform.position.y;
             position[2] = player.transform.position.z;
+            
+            foreach(int i in itemsId)
+            {
+                UnityEngine.Debug.Log(i);
+            }
         }
     }
 }

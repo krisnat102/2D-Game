@@ -63,9 +63,14 @@ namespace Core
         {
             PlayerSaveData data = SaveSystem.LoadPlayer();
 
-            List<Item> loadItems = InventoryManager.Instance.AllItems.Where(item => data.itemsId.Contains(item.id)).ToList();
-            
-            Debug.Log(data.itemsId);
+            List<Item> loadItems = new();
+            InventoryManager.Instance.ClearInventory();
+
+            foreach(int id in data.itemsId)
+            {
+                loadItems.AddRange(InventoryManager.Instance.AllItems.Where(item => item.id == id).ToList());
+            }
+
             foreach(Item item in loadItems)
             {
                 Debug.Log(item.name);
