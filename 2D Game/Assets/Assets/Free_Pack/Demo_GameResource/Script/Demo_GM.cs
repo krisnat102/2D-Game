@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 
 
-public class Demo_GM : MonoBehaviour {
+public class Demo_GM : MonoBehaviour
+{
 
 
 
@@ -15,16 +16,18 @@ public class Demo_GM : MonoBehaviour {
     public Image[] UIImage;
 
     // Use this for initialization
-    void Awake () {
+    void Awake()
+    {
         Screen.fullScreen = false;
 
         Gm = this;
         Color myColor = new Color32(180, 180, 180, 255);
         UIImage[0].color = myColor;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
         KeyUPDownchange();
 
@@ -112,7 +115,7 @@ public class Demo_GM : MonoBehaviour {
             Demo_GM.Gm.UIImage[1].color = myColor;
         }
 
-   
+
 
 
         if (Input.GetKeyDown(KeyCode.Mouse0))

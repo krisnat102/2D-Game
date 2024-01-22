@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using Bardent.CoreSystem;
 using Krisnat;
@@ -35,66 +35,64 @@ namespace Spells
         #region Unity Methods
         private void Update()
         {
-            if (Core.GameManager.Instance.gamePaused == false)
+            if (PlayerInputHandler.Instance.NormInputX < 0)
             {
-                if (PlayerInputHandler.Instance.NormInputX < 0)
-                {
-                    side = false;
-                }
-                if (PlayerInputHandler.Instance.NormInputX > 0)
-                {
-                    side = true;
-                }
-                
-                #region Spells
-                if (SpellManager.SpellsBar.Count >= activeSpell)
-                    if (PlayerInputHandler.Instance.SpellInput && Stats.Instance.Mana.CurrentValue >= SpellManager.SpellsBar[activeSpell].cost && spellCooldown == false)
-                        Spell();
-
-                if (PlayerInputHandler.Instance.SwitchSpell1Input)
-                    if (activeSpell != 0)
-                    {
-                        activeSpell--;
-                        PlayerInputHandler.Instance.UseSwitchSpell1Input();
-                    }
-                    else activeSpell = 7;
-                ClearSprites();
-
-                if (PlayerInputHandler.Instance.SwitchSpell2Input)
-                    if (activeSpell != 7)
-                    {
-                        activeSpell++;
-                        PlayerInputHandler.Instance.UseSwitchSpell2Input();
-                    }
-                    else activeSpell = 0;
-                ClearSprites();
-                #endregion
-
-                #region Abilites
-                if (SpellManager.AbilitiesBar.Count >= activeAbility)
-                {
-                    if (PlayerInputHandler.Instance.AbilityInput && Stats.Instance.Stam.CurrentValue >= SpellManager.AbilitiesBar[activeAbility].cost && AbilityCooldown1 == false)
-                        Ability();
-                }
-                if (PlayerInputHandler.Instance.SwitchAbility1Input)
-                    if (activeAbility != 0)
-                    {
-                        activeAbility--;
-                        PlayerInputHandler.Instance.UseSwitchAbility1Input();
-                    }
-                    else activeAbility = 7;
-                ClearSprites();
-
-                if (PlayerInputHandler.Instance.SwitchAbility2Input)
-                    if (activeAbility != 7)
-                    {
-                        activeAbility++;
-                        PlayerInputHandler.Instance.UseSwitchAbility2Input();
-                    }
-                    else activeAbility = 0;
-                ClearSprites();
-                #endregion
+                side = false;
             }
+            if (PlayerInputHandler.Instance.NormInputX > 0)
+            {
+                side = true;
+            }
+
+            #region Spells
+            if (SpellManager.SpellsBar.Count >= activeSpell)
+                if (PlayerInputHandler.Instance.SpellInput && Stats.Instance.Mana.CurrentValue >= SpellManager.SpellsBar[activeSpell].cost && spellCooldown == false)
+                    Spell();
+
+            if (PlayerInputHandler.Instance.SwitchSpell1Input)
+                if (activeSpell != 0)
+                {
+                    activeSpell--;
+                    PlayerInputHandler.Instance.UseSwitchSpell1Input();
+                }
+                else activeSpell = 7;
+            ClearSprites();
+
+            if (PlayerInputHandler.Instance.SwitchSpell2Input)
+                if (activeSpell != 7)
+                {
+                    activeSpell++;
+                    PlayerInputHandler.Instance.UseSwitchSpell2Input();
+                }
+                else activeSpell = 0;
+            ClearSprites();
+            #endregion
+
+            #region Abilites
+            if (SpellManager.AbilitiesBar.Count >= activeAbility)
+            {
+                if (PlayerInputHandler.Instance.AbilityInput && Stats.Instance.Stam.CurrentValue >= SpellManager.AbilitiesBar[activeAbility].cost && AbilityCooldown1 == false)
+                    Ability();
+            }
+            if (PlayerInputHandler.Instance.SwitchAbility1Input)
+                if (activeAbility != 0)
+                {
+                    activeAbility--;
+                    PlayerInputHandler.Instance.UseSwitchAbility1Input();
+                }
+                else activeAbility = 7;
+            ClearSprites();
+
+            if (PlayerInputHandler.Instance.SwitchAbility2Input)
+                if (activeAbility != 7)
+                {
+                    activeAbility++;
+                    PlayerInputHandler.Instance.UseSwitchAbility2Input();
+                }
+                else activeAbility = 0;
+            ClearSprites();
+            #endregion
+
             #region Spells
             if (SpellManager.SpellsBar.Count > activeSpell)
                 if (SpellManager.SpellsBar[activeSpell] != null)
@@ -227,7 +225,7 @@ namespace Spells
                     abilityCooldownImg.gameObject.SetActive(true);
                     abilityCooldownImg.fillAmount = 1;
                 }
-                else if(Stats.Instance.Stam.CurrentValue >= SpellManager.AbilitiesBar[activeAbility].cost)
+                else if (Stats.Instance.Stam.CurrentValue >= SpellManager.AbilitiesBar[activeAbility].cost)
                 {
                     //Vector2 offset = new Vector2(OffsetX2, OffsetY2);
 

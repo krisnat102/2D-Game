@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using Bardent.CoreSystem;
 using UnityEngine;
@@ -7,7 +7,8 @@ public class State
 {
     protected FiniteStateMachine stateMachine;
     protected Entity entity;
-    protected Bardent.CoreSystem.Core core;    
+    protected Bardent.CoreSystem.Core core;
+
 
     public float startTime { get; protected set; }
 

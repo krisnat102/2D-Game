@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 
 public class ObjectPool : MonoBehaviour
@@ -17,7 +17,7 @@ public class ObjectPool : MonoBehaviour
     {
         pooledObjects = new List<GameObject>();
         GameObject temporary;
-        for(int i = 0; i < amountToPool; i++)
+        for (int i = 0; i < amountToPool; i++)
         {
             temporary = Instantiate(objectToPool);
             temporary.SetActive(false);

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,14 +32,15 @@ public class E2_PlayerDetectedState : PlayerDetectedState
 
         if (performCloseRangeAction)
         {
-            if(Time.time >= enemy.dodgeState.startTime + enemy.dodgeStateData.dodgeCooldown)
+            if (Time.time >= enemy.dodgeState.startTime + enemy.dodgeStateData.dodgeCooldown)
             {
                 stateMachine.ChangeState(enemy.dodgeState);
             }
             else
             {
                 stateMachine.ChangeState(enemy.meleeAttackState);
-            }            
+            }
+
         }
         else if (performLongRangeAction)
         {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace Bardent.Utilities
@@ -6,7 +6,8 @@ namespace Bardent.Utilities
     public class Timer
     {
         public event Action OnTimerDone;
-        
+
+
         private float startTime;
         private float duration;
         private float targetTime;
@@ -14,7 +15,8 @@ namespace Bardent.Utilities
         private bool isActive;
 
         public bool Finished { get; private set; }
-        
+
+
         public Timer(float duration)
         {
             this.duration = duration;
@@ -35,7 +37,7 @@ namespace Bardent.Utilities
 
         public void Tick()
         {
-            if(!isActive) return;
+            if (!isActive) return;
 
             if (Time.time >= targetTime)
             {

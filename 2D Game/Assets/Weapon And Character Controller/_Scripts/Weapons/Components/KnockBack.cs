@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Bardent.Weapons.Components
 {
@@ -7,7 +7,8 @@ namespace Bardent.Weapons.Components
         private ActionHitBox hitBox;
 
         private CoreSystem.Movement movement;
-        
+
+
         private void HandleDetectCollider2D(Collider2D[] colliders)
         {
             foreach (var item in colliders)
@@ -18,7 +19,8 @@ namespace Bardent.Weapons.Components
                 }
             }
         }
-        
+
+
         protected override void Start()
         {
             base.Start();

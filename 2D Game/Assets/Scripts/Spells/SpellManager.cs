@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -120,28 +120,26 @@ namespace Spells
 
         public void Update()
         {
-            if (Core.GameManager.Instance.gamePaused == false)
+            if (PlayerInputHandler.Instance.SpellInventoryInput)
             {
-                if (PlayerInputHandler.Instance.SpellInventoryInput)
+                PlayerInputHandler.Instance.UseSpellInventoryInput();
+                if (!inventory.activeInHierarchy && !spellInventory.activeInHierarchy)
                 {
-                    PlayerInputHandler.Instance.UseSpellInventoryInput();
-                    if (!inventory.activeInHierarchy && !spellInventory.activeInHierarchy)
-                    {
-                        spellInventory.SetActive(true);
+                    spellInventory.SetActive(true);
 
-                        ListSpells();
+                    ListSpells();
 
-                        //Weapon.canFire = false;
-                    }
-                    else
-                    {
-                        inventory.SetActive(false);
-                        spellInventory.SetActive(false);
+                    //Weapon.canFire = false;
+                }
+                else
+                {
+                    inventory.SetActive(false);
+                    spellInventory.SetActive(false);
 
-                        //Weapon.canFire = true;
-                    }
+                    //Weapon.canFire = true;
                 }
             }
+
         }
 
         public void ListActiveSpells()

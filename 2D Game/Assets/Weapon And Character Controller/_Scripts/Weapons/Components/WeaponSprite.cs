@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using Bardent.Weapons.Components;
 using UnityEngine;
@@ -9,7 +9,8 @@ namespace Bardent.Weapons.Components
     {
         private SpriteRenderer baseSpriteRenderer;
         private SpriteRenderer weaponSpriteRenderer;
-        
+
+
         private int currentWeaponSpriteIndex;
 
         private Sprite[] currentPhaseSprites;
@@ -17,7 +18,8 @@ namespace Bardent.Weapons.Components
         protected override void HandleEnter()
         {
             base.HandleEnter();
-            
+
+
             currentWeaponSpriteIndex = 0;
         }
 
@@ -41,7 +43,8 @@ namespace Bardent.Weapons.Components
                 Debug.LogWarning($"{weapon.name} weapon sprites length mismatch");
                 return;
             }
-            
+
+
             weaponSpriteRenderer.sprite = currentPhaseSprites[currentWeaponSpriteIndex];
 
             currentWeaponSpriteIndex++;
@@ -53,9 +56,11 @@ namespace Bardent.Weapons.Components
 
             baseSpriteRenderer = weapon.BaseGameObject.GetComponent<SpriteRenderer>();
             weaponSpriteRenderer = weapon.WeaponSpriteGameObject.GetComponent<SpriteRenderer>();
-            
+
+
             data = weapon.Data.GetData<WeaponSpriteData>();
-            
+
+
             baseSpriteRenderer.RegisterSpriteChangeCallback(HandleBaseSpriteChange);
 
             eventHandler.OnEnterAttackPhase += HandleEnterAttackPhase;
@@ -64,9 +69,11 @@ namespace Bardent.Weapons.Components
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            
+
+
             baseSpriteRenderer.UnregisterSpriteChangeCallback(HandleBaseSpriteChange);
-            
+
+
             eventHandler.OnEnterAttackPhase -= HandleEnterAttackPhase;
         }
     }

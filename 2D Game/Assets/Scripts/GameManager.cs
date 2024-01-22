@@ -27,7 +27,7 @@ namespace Core
         #region Unity Methods
         private void Update()
         {
-            if (death.IsDead == true)
+            if (death.IsDead)
             {
                 deathScreen.SetActive(true);
             }
@@ -66,12 +66,12 @@ namespace Core
             List<Item> loadItems = new();
             InventoryManager.Instance.ClearInventory();
 
-            foreach(int id in data.itemsId)
+            foreach (int id in data.itemsId)
             {
                 loadItems.AddRange(InventoryManager.Instance.AllItems.Where(item => item.id == id).ToList());
             }
 
-            foreach(Item item in loadItems)
+            foreach (Item item in loadItems)
             {
                 Debug.Log(item.name);
             }
@@ -131,10 +131,10 @@ namespace Core
         public List<T> GetCustomAssets<T>(string customAssetType, string location) where T : UnityEngine.Object
         {
             List<T> loadedAssets = new();
-            
+
             string searchFilter = "t:" + customAssetType;
             string folderPath = "Assets/" + location;
-            
+
             string[] assetGuids = AssetDatabase.FindAssets(searchFilter, new[] { folderPath });
             if (assetGuids == null) Debug.Log(customAssetType + "not found at " + location);
 
@@ -149,10 +149,10 @@ namespace Core
                     loadedAssets.Add(asset);
                 }
             }
-            foreach(T item in loadedAssets)
+            /*foreach (T item in loadedAssets)
             {
                 Debug.Log(item.name);
-            }
+            }*/
             return loadedAssets;
         }
         #endregion

@@ -8,7 +8,8 @@ namespace Bardent.Weapons.Components
     {
         private ActionHitBox hitBox;
         private LevelHandler levelHandler;
-        
+
+
         private void HandleDetectCollider2D(Collider2D[] colliders)
         {
             foreach (var item in colliders)

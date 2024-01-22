@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using Core;
 using Krisnat;
@@ -11,7 +11,7 @@ namespace Spells
         [SerializeField] private LayerMask layerMask, groundLayerMask;
 
         [Header("Spell Function")]
-        [SerializeField] private bool move; 
+        [SerializeField] private bool move;
         [SerializeField] private bool destroyOnTouch;
         [SerializeField] private bool dontRotate;
         [SerializeField] private bool shuriken;
@@ -37,32 +37,30 @@ namespace Spells
 
         private void Update()
         {
-            if (Core.GameManager.Instance.gamePaused == false)
+            Vector3 range = new Vector3(spell.range, spell.range, 0);
+            /*if (Math.Abs(Abilities.castPoint.x) + range.x < Math.Abs(transform.position.x) || Math.Abs(Abilities.castPoint.y) + range.y > Math.Abs(transform.position.y))
             {
-                Vector3 range = new Vector3(spell.range, spell.range, 0);
-                /*if (Math.Abs(Abilities.castPoint.x) + range.x < Math.Abs(transform.position.x) || Math.Abs(Abilities.castPoint.y) + range.y > Math.Abs(transform.position.y))
-                {
-                    Invoke("DestroyObject", 0.5f);
+                Invoke("DestroyObject", 0.5f);
 
-                    if(anim != null)
-                        if(ContainsParam(anim, "End")) anim.SetBool("End", true);
-                }*/
+                if(anim != null)
+                    if(ContainsParam(anim, "End")) anim.SetBool("End", true);
+            }*/
 
-                if (shuriken)
+            if (shuriken)
+            {
+                transform.Rotate(0f, 0f, rotationSpeed, Space.Self);
+                SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+                if (stuckShuriken)
                 {
-                    transform.Rotate(0f, 0f, rotationSpeed, Space.Self);
-                    SpriteRenderer sprite = GetComponent<SpriteRenderer>();
-                    if (stuckShuriken)
-                    {
-                        transparency -= Time.deltaTime * fadeTimer;
-                        sprite.color = new Color(sprite.color.r, sprite.color.b, sprite.color.g, transparency);
-                    }
-                    if (sprite.color.a <= 0)
-                    {
-                        Destroy(gameObject);
-                    }
+                    transparency -= Time.deltaTime * fadeTimer;
+                    sprite.color = new Color(sprite.color.r, sprite.color.b, sprite.color.g, transparency);
+                }
+                if (sprite.color.a <= 0)
+                {
+                    Destroy(gameObject);
                 }
             }
+
         }
 
         private void OnTriggerEnter2D(Collider2D hitInfo)

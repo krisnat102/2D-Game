@@ -11,16 +11,13 @@ public class EnemyGFX : MonoBehaviour
 
     void Update()
     {
-        if (Core.GameManager.Instance.gamePaused == false)
+        if (aiPath.desiredVelocity.x >= 0.01f)
         {
-            if (aiPath.desiredVelocity.x >= 0.01f)
-            {
-                transform.localScale = new Vector3(-sizeX, sizeY, 1f);
-            }
-            else if (aiPath.desiredVelocity.x <= 0.01f)
-            {
-                transform.localScale = new Vector3(sizeX, sizeY, 1f);
-            }
+            transform.localScale = new Vector3(-sizeX, sizeY, 1f);
+        }
+        else if (aiPath.desiredVelocity.x <= 0.01f)
+        {
+            transform.localScale = new Vector3(sizeX, sizeY, 1f);
         }
     }
 }

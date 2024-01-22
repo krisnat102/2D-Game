@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -58,7 +58,8 @@ public class Enemy1 : Entity
 
     private void Start()
     {
-        stateMachine.Initialize(moveState);        
+        stateMachine.Initialize(moveState);
+
     }
 
     private void OnDestroy()

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.U2D;
 
 public class Death : MonoBehaviour
@@ -29,7 +29,7 @@ public class Death : MonoBehaviour
             return;
         }
         Destroy(gameObject);
-    }  
+    }
     public void FadeAnimation()
     {
         if (sprite != null)

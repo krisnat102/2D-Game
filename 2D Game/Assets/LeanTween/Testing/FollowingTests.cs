@@ -1,8 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowingTests : MonoBehaviour {
+public class FollowingTests : MonoBehaviour
+{
 
     public Transform followTrans;
 
@@ -26,14 +27,16 @@ public class FollowingTests : MonoBehaviour {
 
     public Transform fly1;
 
-    private void Start(){
+    private void Start()
+    {
         followTrans.gameObject.LeanDelayedCall(3f, moveFollow).setOnStart(moveFollow).setRepeat(-1);
 
         LeanTween.followDamp(cube6, followTrans, LeanProp.position, 0.6f);
     }
 
-    private void moveFollow(){
-        followTrans.LeanMove( new Vector3(Random.Range(-50f, 50f), Random.Range(-10f, 10f), 0f), 0f);
+    private void moveFollow()
+    {
+        followTrans.LeanMove(new Vector3(Random.Range(-50f, 50f), Random.Range(-10f, 10f), 0f), 0f);
     }
 
     void Update()
@@ -61,7 +64,8 @@ public class FollowingTests : MonoBehaviour {
 
         // cube6.position = LeanTween.smoothGravity(cube6.position, followTrans.position, ref cube6Velocity, 1.1f);
 
-        if(LeanTween.isTweening(0)){
+        if (LeanTween.isTweening(0))
+        {
             Debug.Log("Tweening");
         }
     }

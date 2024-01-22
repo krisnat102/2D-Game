@@ -1,4 +1,4 @@
-﻿using TMPro;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +29,7 @@ namespace Inventory
                 if (forSale)
                 {
                     InventoryManager.Instance.StartCoinAnimation();
-                    if(InventoryManager.Instance.Coins >= price)
+                    if (InventoryManager.Instance.Coins >= price)
                     {
                         AudioManager.Instance.BuySound.Play();
                         InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - price, false);
@@ -56,11 +56,11 @@ namespace Inventory
                 itemPrice = GetComponentInChildren<Canvas>()?.GetComponent<Transform>()?.Find("ItemPrice")?.gameObject;
                 itemPrice.SetActive(true);
                 itemPrice.GetComponentInChildren<TMP_Text>().text = price.ToString();
-                if(price < 10)
+                if (price < 10)
                 {
                     itemPrice.GetComponentInChildren<Image>().gameObject.transform.position -= new Vector3(offset, 0);
                 }
-                else if(price > 99)
+                else if (price > 99)
                 {
                     itemPrice.GetComponentInChildren<Image>().gameObject.transform.position += new Vector3(offset, 0);
                 }

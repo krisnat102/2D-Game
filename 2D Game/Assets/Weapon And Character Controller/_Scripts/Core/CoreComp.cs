@@ -15,7 +15,8 @@ namespace Bardent.CoreSystem
             {
                 Debug.LogWarning($"Core is Null for component {typeof(T)}");
             }
-            
+
+
             this.core = core;
         }
     }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
@@ -34,7 +34,7 @@ public class MenuManager : MonoBehaviour
 
             resolutionsList.Add(resolution);
 
-            if(resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
             {
                 currentResolutionIndex = i;
             }
@@ -76,7 +76,7 @@ public class MenuManager : MonoBehaviour
         {
             qualityDropdown.SetValueWithoutNotify(PlayerPrefs.GetInt("Quality"));
         }
-        
+
         if (PlayerPrefs.HasKey("Resolution"))
         {
             resolutionDropdown.SetValueWithoutNotify(PlayerPrefs.GetInt("Resolution"));
@@ -99,14 +99,14 @@ public class MenuManager : MonoBehaviour
             Time.timeScale = 1;
         }
     }
-    public void SetQuality (int qualityIndex)
+    public void SetQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
 
         PlayerPrefs.SetInt("Quality", qualityIndex);
         PlayerPrefs.Save();
     }
-    public void SetResolution (int resoulutionIndex)
+    public void SetResolution(int resoulutionIndex)
     {
         Resolution resolution = resolutions[resoulutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
@@ -143,7 +143,7 @@ public class MenuManager : MonoBehaviour
         PlayerPrefs.SetInt("Fps", fpsIndex);
         PlayerPrefs.Save();
     }
-    public void SetFullscreen (bool isFullscreen)
+    public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
     }
@@ -162,7 +162,7 @@ public class MenuManager : MonoBehaviour
         SaveSystem.SavePlayer(player);
         Application.Quit();
 
-        Debug.Log("exit"); 
+        Debug.Log("exit");
     }
     public void Back()
     {

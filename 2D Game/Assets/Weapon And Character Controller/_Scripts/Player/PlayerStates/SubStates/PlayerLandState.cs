@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,6 +22,7 @@ public class PlayerLandState : PlayerGroundedState
             {
                 stateMachine.ChangeState(player.IdleState);
             }
-        }       
+        }
+
     }
 }

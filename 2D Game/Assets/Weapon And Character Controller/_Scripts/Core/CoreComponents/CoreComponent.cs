@@ -10,7 +10,7 @@ namespace Bardent.CoreSystem
         {
             Core = transform.parent.GetComponent<Core>();
 
-            if(Core == null) { Debug.LogError("There is no Core on the parent"); }
+            if (Core == null) { Debug.LogError("There is no Core on the parent"); }
             Core.AddComponent(this);
         }
 

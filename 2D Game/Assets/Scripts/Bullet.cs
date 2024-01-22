@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
@@ -17,12 +17,12 @@ public class Bullet : MonoBehaviour
         rb.velocity = transform.right * speed;
     }
 
-    private void OnTriggerEnter2D (Collider2D hitInfo)
+    private void OnTriggerEnter2D(Collider2D hitInfo)
     {
         if (hitInfo.tag != "Player" && hitInfo.tag != "Item" && hitInfo.tag != "Climbable" && hitInfo.tag != "AttackRange" && hitInfo.tag != "BackgroundObject" && hitInfo.tag != "PickupRange")
         {
             Enemy enemy = hitInfo.GetComponent<Enemy>();
-            if(enemy == true)
+            if (enemy)
             {
                 enemy.TakeDamage(bulletDmg, 0);
 

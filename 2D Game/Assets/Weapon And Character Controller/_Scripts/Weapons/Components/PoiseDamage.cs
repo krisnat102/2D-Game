@@ -1,4 +1,4 @@
-﻿using Bardent.Interfaces;
+using Bardent.Interfaces;
 using UnityEngine;
 
 namespace Bardent.Weapons.Components
@@ -17,7 +17,8 @@ namespace Bardent.Weapons.Components
                 }
             }
         }
-        
+
+
         protected override void Start()
         {
             base.Start();

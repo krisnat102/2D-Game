@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using Bardent.CoreSystem;
 using Pathfinding;
@@ -6,7 +6,7 @@ using TMPro;
 
 public class Enemy : MonoBehaviour
 {
-    #region Serialized Variables
+    #region Private Variables
     [Header("Hp Bar")]
     [SerializeField] private Slider hpBar;
     [SerializeField] private Gradient hpBarGradient;
@@ -20,9 +20,8 @@ public class Enemy : MonoBehaviour
     public EnemyData data;
     [SerializeField] private AudioSource attackSound;
     [SerializeField] private Transform playerTrans;
-    #endregion
+    [SerializeField] private EnemyAttackAI enemyAttackAIRange, enemyAttackAI;
 
-    #region Private Variables
     private float offsetXSave;
     private Rigidbody2D rb;
     private Animator animator;
@@ -37,9 +36,7 @@ public class Enemy : MonoBehaviour
     private Collider2D[] detected;
     private int facingDirection = 1;
     private Player player;
-    private AIPath seekerAI;
-    private EnemyAI enemyAI;
-    private EnemyAttackAI enemyAttackAI;
+    private AIPath aiPath;
     private Transform firePoint;
     private GameObject arrow;
     private ParticleSystem coinBurstParticleEffect;
@@ -59,7 +56,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float rawDamage, float knockback)
     {
         float damage = Mathf.Round(rawDamage);
-        
+
         if (immune == false)
         {
             hp -= damage;
@@ -68,17 +65,17 @@ public class Enemy : MonoBehaviour
 
             if (damage > 0)
             {
-                if(GetComponentInChildren<Canvas>() != null && damagePopup != null)
+                if (GetComponentInChildren<Canvas>() != null && damagePopup != null)
                 {
                     var dmgNumber = Instantiate(damagePopup, transform.position + damagePopupOffset, Quaternion.identity, GetComponentInChildren<Canvas>().transform).GetComponent<TextMeshProUGUI>();
                     dmgNumber.text = damage.ToString();
-                    dmgNumber.color = damagePopupGradient.Evaluate(Mathf.Clamp01(damage/100));
+                    dmgNumber.color = damagePopupGradient.Evaluate(Mathf.Clamp01(damage / 100));
                     dmgNumber.fontSize += Mathf.Round(damage / fontSizeToDamageScaler);
                 }
 
                 animator.SetTrigger("Hurt");
                 immune = true;
-                
+
                 Invoke("StopImmune", 0.1f);
                 TakeKnockback(damage + knockback);
             }
@@ -123,7 +120,7 @@ public class Enemy : MonoBehaviour
             Invoke("AttackCooldown", Data.attackSpeed);
             Invoke("AttackSpawn", Data.attackAnimLength);
         }
-        else if (attackCooldown == false && Data.ranged && enemyAttackAI.PlayerInSight())
+        else if (attackCooldown == false && Data.ranged && enemyAttackAI.InSight)
         {
             animator.SetTrigger("Attack");
             Invoke("AttackSpawn", Data.attackAnimLength);
@@ -135,24 +132,7 @@ public class Enemy : MonoBehaviour
 
     private void AttackSpawn()
     {
-        /*if(Data.ranged == false)
-        {
-            Vector3 offsetAttack = new Vector3(Data.offsetX, Data.offsetY, 0f);
-
-            GameObject attack = Instantiate(Data.attack , transform.position - offsetAttack, Quaternion.identity);
-            attack.transform.parent = gameObject.transform;
-
-            attackSound.Play();
-        }
-        else
-        {
-            GameObject attackProjectile = Instantiate(Data.projectile, Data.firePoint);
-            if (attackProjectile.activeInHierarchy == false)
-            {
-                attackProjectile.SetActive(true);
-            }
-        }*/
-        if(Data.ranged)
+        if (Data.ranged)
         {
             GameObject attackProjectile = Instantiate(arrow, firePoint);
             if (attackProjectile.activeInHierarchy == false)
@@ -161,6 +141,7 @@ public class Enemy : MonoBehaviour
             }
             return;
         }
+
         offset.Set(
             transform.position.x + (data.HitBox.center.x * FacingDirection * -1),
             transform.position.y + data.HitBox.center.y
@@ -169,7 +150,7 @@ public class Enemy : MonoBehaviour
         attackSound.Play();
 
         detected = Physics2D.OverlapBoxAll(offset, data.HitBox.size, 0f, data.DetectableLayers);
-        
+
         if (detected.Length == 0) return;
 
         foreach (Collider2D obj in detected)
@@ -190,11 +171,13 @@ public class Enemy : MonoBehaviour
     #region Unity Methods
     private void Update()
     {
-        if (enemyAttackAI.PlayerInRange()) Invoke("Attack", 0.2f);
-
-        if (transform != null && flip)
+        if (enemyAttackAI.InRange)
         {
-            FacingDirection *= -1;
+            Invoke("Attack", 0.2f);
+        }
+        /*if (transform != null && flip)
+        {
+            //FacingDirection *= -1;
             if (transform.position.x < playerTrans.position.x)
             {
                 Data.offsetX = -Data.offsetX2;
@@ -208,7 +191,7 @@ public class Enemy : MonoBehaviour
         }
         else if (transform != null && childFlip)
         {
-            FacingDirection *= -1;
+            //FacingDirection *= -1;
             if (transform.position.x < playerTrans.position.x)
             {
                 Data.offsetX = -Data.offsetX2;
@@ -219,9 +202,9 @@ public class Enemy : MonoBehaviour
                 Data.offsetX = offsetXSave;
                 animator.SetBool("Flip", false);
             }
-        }
+        }*/
 
-        if (Data.lookAtPlayer && enemyAttackAI.PlayerInSight())
+        if (Data.lookAtPlayer && enemyAttackAI.InSight)
         {
             if (facingSide)
             {
@@ -250,31 +233,22 @@ public class Enemy : MonoBehaviour
 
         FacingDirection = transform.localScale.x > 0 ? 1 : -1;
 
-        if (seekerAI != null)
+        if (aiPath != null)
         {
-            if (enemyAttackAI.PlayerInRange())
+            if (enemyAttackAIRange.InSight)
             {
-                seekerAI.enabled = true;
+                Debug.Log(3);
+                aiPath.canMove = true;
             }
-            else seekerAI.enabled = false;
-        }
-
-        if (enemyAI != null)
-        {
-            if (enemyAttackAI.PlayerInRange())
-            {
-                enemyAI.enabled = true;
-            }
-            else enemyAI.enabled = false;
+            //else aiPath.canMove = false;
         }
     }
 
     private void Start()
     {
         #region Variable Getting and Finding
-        seekerAI = GetComponent<AIPath>();
-        enemyAI = GetComponent<EnemyAI>();
-        enemyAttackAI = GetComponentInChildren<EnemyAttackAI>();
+        aiPath = GetComponent<AIPath>();
+        //enemyAttackAI = GetComponentInChildren<EnemyAttackAI>();
         coinBurstParticleEffect = GetComponentInChildren<ParticleSystem>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();

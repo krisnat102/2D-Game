@@ -1,4 +1,4 @@
-﻿using Bardent.Weapons.Components;
+using Bardent.Weapons.Components;
 using UnityEngine;
 
 namespace Bardent.Weapons.Components
@@ -9,7 +9,8 @@ namespace Bardent.Weapons.Components
 
         private CoreSystem.Movement CoreMovement =>
             coreMovement ? coreMovement : Core.GetCoreComponent(ref coreMovement);
-        
+
+
         private void HandleStartMovement()
         {
             CoreMovement.SetVelocity(currentAttackData.Velocity, currentAttackData.Direction, CoreMovement.FacingDirection);
@@ -31,7 +32,8 @@ namespace Bardent.Weapons.Components
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            
+
+
             eventHandler.OnStartMovement -= HandleStartMovement;
             eventHandler.OnStopMovement -= HandleStopMovement;
         }

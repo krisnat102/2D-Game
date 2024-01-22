@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Bardent.CoreSystem
 {
@@ -33,7 +33,8 @@ namespace Bardent.CoreSystem
 
         public void SetVelocityZero()
         {
-            workspace = Vector2.zero;        
+            workspace = Vector2.zero;
+
             SetFinalVelocity();
         }
 
@@ -68,7 +69,8 @@ namespace Bardent.CoreSystem
             {
                 RB.velocity = workspace;
                 CurrentVelocity = workspace;
-            }        
+            }
+
         }
 
         public void CheckIfShouldFlip(int xInput)

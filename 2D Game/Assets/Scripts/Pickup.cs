@@ -6,7 +6,7 @@ namespace Krisnat
     using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.UI;
-using static UnityEditor.Progress;
+    using static UnityEditor.Progress;
 
     public class Pickup : MonoBehaviour
     {
@@ -40,10 +40,10 @@ using static UnityEditor.Progress;
 
         private void Update()
         {
-            if(FindClosestItem()!= null)
+            if (FindClosestItem() != null)
             {
                 var closestItemImage = FindClosestItem().GetComponent<Transform>().Find("Canvas").Find("PickUpKeyImage").gameObject;
-                if(oldClosestItem != null)
+                if (oldClosestItem != null)
                 {
                     oldClosestItemImage = oldClosestItem.GetComponent<Transform>().Find("Canvas").Find("PickUpKeyImage").gameObject;
                     closestItemDistance = Vector2.Distance(transform.position, oldClosestItem.transform.position);
@@ -53,7 +53,7 @@ using static UnityEditor.Progress;
                 {
                     closestItemImage.SetActive(true);
                 }
-                else if(oldClosestItem != FindClosestItem() && oldClosestItemImage != null)
+                else if (oldClosestItem != FindClosestItem() && oldClosestItemImage != null)
                 {
                     oldClosestItemImage.SetActive(false);
                 }

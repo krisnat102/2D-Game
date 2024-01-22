@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,7 +29,7 @@ public class E1_MoveState : MoveState
         {
             stateMachine.ChangeState(enemy.playerDetectedState);
         }
-        else if(isDetectingWall || !isDetectingLedge)
+        else if (isDetectingWall || !isDetectingLedge)
         {
             enemy.idleState.SetFlipAfterIdle(true);
             stateMachine.ChangeState(enemy.idleState);

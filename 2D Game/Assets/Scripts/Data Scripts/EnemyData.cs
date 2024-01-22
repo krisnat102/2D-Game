@@ -22,8 +22,8 @@ public class EnemyData : ScriptableObject
     public float offsetY = -1f;
 
     [Header("Attack")]
-    [Tooltip ("True is physical damage, false is magical")] 
-    public bool damageType; 
+    [Tooltip("True is physical damage, false is magical")]
+    public bool damageType;
     public float attackAnimLength = 0.3f;
     public Rect HitBox;
     public LayerMask DetectableLayers;

@@ -1,8 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColliderEvent_Sender : MonoBehaviour {
+public class ColliderEvent_Sender : MonoBehaviour
+{
     private CharacterController_2D m_parent;
     void Start()
     {
@@ -11,7 +12,7 @@ public class ColliderEvent_Sender : MonoBehaviour {
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-    
+
         if (m_parent.Once_Attack)
             return;
 

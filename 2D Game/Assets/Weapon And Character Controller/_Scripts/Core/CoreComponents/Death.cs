@@ -11,23 +11,23 @@ namespace Bardent.CoreSystem
 
         private ParticleManager ParticleManager =>
             particleManager ? particleManager : Core.GetCoreComponent(ref particleManager);
-    
+
         private ParticleManager particleManager;
 
         private Stats Stats => stats ? stats : Core.GetCoreComponent(ref stats);
         private Stats stats;
-    
+
         public void Die()
         {
             foreach (var particle in deathParticles)
             {
                 ParticleManager.StartParticles(particle);
             }
-            if(deathScreen != null)
+            if (deathScreen != null)
             {
                 deathScreen.SetActive(true);
             }
-        
+
             Core.transform.parent.gameObject.SetActive(false);
             IsDead = true;
         }

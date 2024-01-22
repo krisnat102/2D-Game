@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,7 +39,7 @@ public class PlayerAfterImageSprite : MonoBehaviour
         color = new Color(1f, 1f, 1f, alpha);
         SR.color = color;
 
-        if(Time.time >= (timeActivated + activeTime))
+        if (Time.time >= (timeActivated + activeTime))
         {
             PlayerAfterImagePool.Instance.AddToPool(gameObject);
         }

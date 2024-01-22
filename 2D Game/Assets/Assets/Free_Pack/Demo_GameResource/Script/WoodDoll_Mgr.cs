@@ -1,8 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WoodDoll_Mgr : MonoBehaviour {
+public class WoodDoll_Mgr : MonoBehaviour
+{
 
 
     public int sortingOrder = 0;
@@ -11,7 +12,8 @@ public class WoodDoll_Mgr : MonoBehaviour {
 
     Animator m_Animator;
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         m_Animator = this.transform.GetComponent<Animator>();
         m_SpriteGroup = this.transform.GetComponentsInChildren<SpriteRenderer>(true);
 
@@ -34,12 +36,12 @@ public class WoodDoll_Mgr : MonoBehaviour {
 
     }
 
-    public void  Sword_Hitted()
+    public void Sword_Hitted()
     {
         m_Animator.Play("Hit");
-  
+
     }
 
-  
+
 
 }

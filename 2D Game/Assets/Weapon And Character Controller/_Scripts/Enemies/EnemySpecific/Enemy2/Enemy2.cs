@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy2 : Entity
-{   
+{
+
     public E2_MoveState moveState { get; private set; }
     public E2_IdleState idleState { get; private set; }
     public E2_PlayerDetectedState playerDetectedState { get; private set; }
@@ -68,7 +69,8 @@ public class Enemy2 : Entity
 
     private void Start()
     {
-        stateMachine.Initialize(moveState);        
+        stateMachine.Initialize(moveState);
+
     }
 
     public override void OnDrawGizmos()

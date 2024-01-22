@@ -1,4 +1,4 @@
-﻿using UnityEngine.Audio;
+using UnityEngine.Audio;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,7 +35,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        if(musicSave != 0)
+        if (musicSave != 0)
         {
             Music.value = musicSave;
         }
@@ -81,9 +81,9 @@ public class AudioManager : MonoBehaviour
     public void MuteAudio(bool mute)
     {
         Mute.isOn = mute;
-        if (mute == true)
+        if (mute)
         {
-            musicMixer.SetFloat("volume",-80);
+            musicMixer.SetFloat("volume", -80);
             sfxMixer.SetFloat("volume", -80);
         }
         else

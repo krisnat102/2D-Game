@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -106,27 +106,25 @@ namespace Inventory
             SpellInventoryActiveInHierarchy = spellInventory.activeInHierarchy;
             CharacterTabActiveInHierarchy = characterTab.activeInHierarchy;
 
-            if (Core.GameManager.Instance.gamePaused == false)
+            coinCounter.text = Coins.ToString();
+            inventoryCoinCounter.text = Coins.ToString();
+            levelUpCoinCounter.text = Coins.ToString();
+
+            if (PlayerInputHandler.Instance.InventoryInput)
             {
-                coinCounter.text = Coins.ToString();
-                inventoryCoinCounter.text = Coins.ToString();
-                levelUpCoinCounter.text = Coins.ToString();
-
-                if (PlayerInputHandler.Instance.InventoryInput)
+                PlayerInputHandler.Instance.UseInventoryInput();
+                if (!InventoryActiveInHierarchy && !SpellInventoryActiveInHierarchy && !CharacterTabActiveInHierarchy)
                 {
-                    PlayerInputHandler.Instance.UseInventoryInput();
-                    if (!InventoryActiveInHierarchy && !SpellInventoryActiveInHierarchy && !CharacterTabActiveInHierarchy)
-                    {
-                        OpenCloseInventory(true);
-                    }
-                    else
-                    {
-                        OpenCloseInventory(false);
+                    OpenCloseInventory(true);
+                }
+                else
+                {
+                    OpenCloseInventory(false);
 
-                        //Weapon.canFire = true;
-                    }
+                    //Weapon.canFire = true;
                 }
             }
+
             if (PlayerInputHandler.Instance.MenuInput)
             {
                 if (InventoryActiveInHierarchy || SpellInventoryActiveInHierarchy || CharacterTabActiveInHierarchy)
@@ -387,7 +385,7 @@ namespace Inventory
         {
             Coins++;
 
-            if(coinAnimationTracker == false && animation)
+            if (coinAnimationTracker == false && animation)
             {
                 StartCoinAnimation();
             }

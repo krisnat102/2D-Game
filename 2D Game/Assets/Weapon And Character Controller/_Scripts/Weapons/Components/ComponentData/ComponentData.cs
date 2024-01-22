@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace Bardent.Weapons.Components
@@ -7,7 +7,8 @@ namespace Bardent.Weapons.Components
     public abstract class ComponentData
     {
         [SerializeField, HideInInspector] private string name;
-        
+
+
         public Type ComponentDependency { get; protected set; }
 
         public ComponentData()
@@ -15,14 +16,16 @@ namespace Bardent.Weapons.Components
             SetComponentName();
             SetComponentDependency();
         }
-        
+
+
         public void SetComponentName() => name = GetType().Name;
 
         protected abstract void SetComponentDependency();
 
-        public virtual void SetAttackDataNames(){}
-        
-        public virtual void InitializeAttackData(int numberOfAttacks){}
+        public virtual void SetAttackDataNames() { }
+
+
+        public virtual void InitializeAttackData(int numberOfAttacks) { }
     }
 
     [Serializable]
@@ -34,22 +37,25 @@ namespace Bardent.Weapons.Components
         public override void SetAttackDataNames()
         {
             base.SetAttackDataNames();
-            
+
+
             for (var i = 0; i < AttackData.Length; i++)
             {
                 AttackData[i].SetAttackName(i + 1);
             }
         }
-        
+
+
         public override void InitializeAttackData(int numberOfAttacks)
         {
             base.InitializeAttackData(numberOfAttacks);
 
             var oldLen = attackData != null ? attackData.Length : 0;
-            
-            if(oldLen == numberOfAttacks)
+
+            if (oldLen == numberOfAttacks)
                 return;
-            
+
+
             Array.Resize(ref attackData, numberOfAttacks);
 
             if (oldLen < numberOfAttacks)
@@ -60,7 +66,8 @@ namespace Bardent.Weapons.Components
                     attackData[i] = newObj;
                 }
             }
-            
+
+
             SetAttackDataNames();
         }
     }

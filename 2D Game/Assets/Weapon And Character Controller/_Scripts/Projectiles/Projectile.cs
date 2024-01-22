@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -79,7 +79,8 @@ public class Projectile : MonoBehaviour
                 isGravityOn = true;
                 rb.gravityScale = gravity;
             }
-        }        
+        }
+
     }
 
     public void FireProjectile(float speed, float travelDistance, float damage)

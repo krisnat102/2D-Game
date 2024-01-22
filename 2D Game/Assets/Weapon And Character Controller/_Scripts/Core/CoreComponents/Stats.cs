@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Bardent.CoreSystem.StatsSystem;
 using Unity.Mathematics;
 using UnityEngine;
@@ -31,10 +31,10 @@ namespace Bardent.CoreSystem
 
             stats.AddRange(new List<Stat>
             {
-                Health, Poise, Stam, Mana 
+                Health, Poise, Stam, Mana
             });
 
-            foreach(Stat stat in stats)
+            foreach (Stat stat in stats)
             {
                 stat.Init();
             }
@@ -62,7 +62,7 @@ namespace Bardent.CoreSystem
         public float CalculatePhysicalDamageReduction(float damage)
         {
             float defense = InventoryManager.Instance.TotalArmor;
-            float finalDamage = damage/ Mathf.Pow(2, defense/damage);
+            float finalDamage = damage / Mathf.Pow(2, defense / damage);
 
             return Mathf.Round(finalDamage);
         }

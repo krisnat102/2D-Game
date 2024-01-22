@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Bardent.CoreSystem;
 using UnityEngine;
 
@@ -39,7 +39,7 @@ namespace Bardent.Weapons.Components
             base.Start();
 
             movement = new CoreComp<CoreSystem.Movement>(Core);
-            
+
             eventHandler.OnAttackAction += HandleAttackAction;
         }
 
@@ -58,7 +58,7 @@ namespace Bardent.Weapons.Components
             {
                 if (!item.Debug)
                     continue;
-                
+
                 Gizmos.DrawWireCube(transform.position + (Vector3)item.HitBox.center, item.HitBox.size);
             }
         }

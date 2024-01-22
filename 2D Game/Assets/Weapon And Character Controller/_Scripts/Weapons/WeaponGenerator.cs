@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Bardent.Weapons.Components;
@@ -18,7 +18,8 @@ namespace Bardent.Weapons
         private List<Type> componentDependencies = new List<Type>();
 
         private Animator anim;
-        
+
+
         private void Start()
         {
             anim = GetComponentInChildren<Animator>();
@@ -34,7 +35,8 @@ namespace Bardent.Weapons
         public void GenerateWeapon(WeaponDataSO data)
         {
             weapon.SetData(data);
-            
+
+
             componentAlreadyOnWeapon.Clear();
             componentsAddedToWeapon.Clear();
             componentDependencies.Clear();
@@ -45,7 +47,7 @@ namespace Bardent.Weapons
 
             foreach (var dependency in componentDependencies)
             {
-                if(componentsAddedToWeapon.FirstOrDefault(component => component.GetType() == dependency))
+                if (componentsAddedToWeapon.FirstOrDefault(component => component.GetType() == dependency))
                     continue;
 
                 var weaponComponent =
@@ -55,14 +57,17 @@ namespace Bardent.Weapons
                 {
                     weaponComponent = gameObject.AddComponent(dependency) as WeaponComponent;
                 }
-                
+
+
                 weaponComponent.Init();
-                
+
+
                 componentsAddedToWeapon.Add(weaponComponent);
             }
 
             var componentsToRemove = componentAlreadyOnWeapon.Except(componentsAddedToWeapon);
-            
+
+
             foreach (var weaponComponent in componentsToRemove)
             {
                 Destroy(weaponComponent);

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class BackgroundMove : MonoBehaviour
 {
@@ -26,11 +26,11 @@ public class BackgroundMove : MonoBehaviour
 
         transform.position = new Vector3(startPos + distance, transform.position.y, transform.position.z);
 
-        if(temp > startPos + length)
+        if (temp > startPos + length)
         {
             startPos += length;
         }
-        else if(temp < startPos - length)
+        else if (temp < startPos - length)
         {
             startPos -= length;
         }

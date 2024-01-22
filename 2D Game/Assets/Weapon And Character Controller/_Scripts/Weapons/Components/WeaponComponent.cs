@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Bardent.CoreSystem;
 using UnityEngine;
 
@@ -7,7 +7,8 @@ namespace Bardent.Weapons.Components
     public abstract class WeaponComponent : MonoBehaviour
     {
         protected Weapon weapon;
-        
+
+
         protected AnimationEventHandler EventHandler => weapon.EventHandler;
         protected AnimationEventHandler eventHandler;
         protected CoreSystem.Core Core => weapon.Core;
@@ -16,9 +17,10 @@ namespace Bardent.Weapons.Components
 
         public virtual void Init()
         {
-            
+
         }
-        
+
+
         protected virtual void Awake()
         {
             weapon = GetComponent<Weapon>();

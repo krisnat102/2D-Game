@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Bardent.Weapons.Components;
@@ -26,9 +26,10 @@ namespace Bardent.Weapons
 
         public void AddData(ComponentData data)
         {
-            if(ComponentData.FirstOrDefault(t => t.GetType() == data.GetType()) != null) 
+            if (ComponentData.FirstOrDefault(t => t.GetType() == data.GetType()) != null)
                 return;
-            
+
+
             ComponentData.Add(data);
         }
     }

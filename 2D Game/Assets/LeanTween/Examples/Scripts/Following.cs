@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Following : MonoBehaviour {
+public class Following : MonoBehaviour
+{
 
     public Transform planet;
 
@@ -78,7 +79,7 @@ public class Following : MonoBehaviour {
         Debug.Log("Smoothed y:" + fromY + " vec3:" + fromVec3 + " color:" + fromColor);
     }
 
-	private void moveArrow()
+    private void moveArrow()
     {
         LeanTween.moveLocalY(followArrow.gameObject, Random.Range(-100f, 100f), 0f);
 

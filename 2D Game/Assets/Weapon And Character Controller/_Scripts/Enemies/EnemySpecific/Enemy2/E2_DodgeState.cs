@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,11 +32,11 @@ public class E2_DodgeState : DodgeState
 
         if (isDodgeOver)
         {
-            if(isPlayerInMaxAgroRange && performCloseRangeAction)
+            if (isPlayerInMaxAgroRange && performCloseRangeAction)
             {
                 stateMachine.ChangeState(enemy.meleeAttackState);
             }
-            else if(isPlayerInMaxAgroRange && !performCloseRangeAction)
+            else if (isPlayerInMaxAgroRange && !performCloseRangeAction)
             {
                 stateMachine.ChangeState(enemy.rangedAttackState);
             }

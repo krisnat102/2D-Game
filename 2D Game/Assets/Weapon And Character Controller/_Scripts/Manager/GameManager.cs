@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 
     private void CheckRespawn()
     {
-        if(Time.time >= respawnTimeStart + respawnTime && respawn)
+        if (Time.time >= respawnTimeStart + respawnTime && respawn)
         {
             var playerTemp = Instantiate(player, respawnPoint);
             CVC.m_Follow = playerTemp.transform;

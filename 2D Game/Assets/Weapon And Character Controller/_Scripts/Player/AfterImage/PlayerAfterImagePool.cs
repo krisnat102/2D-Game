@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,7 +35,7 @@ public class PlayerAfterImagePool : MonoBehaviour
 
     public GameObject GetFromPool()
     {
-        if(availableObjects.Count == 0)
+        if (availableObjects.Count == 0)
         {
             GrowPool();
         }

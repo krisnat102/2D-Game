@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Core;
 using Bardent.CoreSystem;
 
@@ -25,11 +25,11 @@ public class RangedAttack : MonoBehaviour
         if (hitInfo.tag != "Enemy" && hitInfo.tag != "Item" && hitInfo.tag != "Climbable" && hitInfo.tag != "AttackRange" && hitInfo.tag != "BackgroundObject" && hitInfo.tag != "PickupRange")
         {
             Player player = hitInfo.GetComponent<Player>();
-            if (player == true)
+            if (player)
             {
                 player.Core.GetCoreComponent<DamageReceiver>().Damage(enemy.data.rangedDamage * enemy.EnemyLevelScale, enemy.data.damageType);
             }
-            Instantiate(enemy.Data.impactEffect, transform.position, transform.rotation) ;
+            Instantiate(enemy.Data.impactEffect, transform.position, transform.rotation);
 
             Destroy(gameObject);
         }

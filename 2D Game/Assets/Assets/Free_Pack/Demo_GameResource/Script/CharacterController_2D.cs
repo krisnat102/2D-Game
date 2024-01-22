@@ -1,13 +1,14 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController_2D : MonoBehaviour {
+public class CharacterController_2D : MonoBehaviour
+{
 
-  
 
 
-    
+
+
     public Rigidbody2D m_rigidbody;
     Animator m_Animator;
     public Transform m_tran;
@@ -23,26 +24,28 @@ public class CharacterController_2D : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         m_rigidbody = this.GetComponent<Rigidbody2D>();
         m_Animator = this.transform.Find("BURLY-MAN_1_swordsman_model").GetComponent<Animator>();
         m_tran = this.transform;
         m_SpriteGroup = this.transform.Find("BURLY-MAN_1_swordsman_model").GetComponentsInChildren<SpriteRenderer>(true);
 
-  
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
 
         spriteOrder_Controller();
 
 
-      
 
-        if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") || m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Die")||
-            m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Hit")|| m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack2"))
+
+        if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") || m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Die") ||
+            m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Hit") || m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack2"))
             return;
 
         Move_Fuc();
@@ -50,12 +53,12 @@ public class CharacterController_2D : MonoBehaviour {
 
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
-       
 
 
-        m_Animator.SetFloat("MoveSpeed", Mathf.Abs(h )+Mathf.Abs (v));
 
- 
+        m_Animator.SetFloat("MoveSpeed", Mathf.Abs(h) + Mathf.Abs(v));
+
+
     }
 
     public int sortingOrder = 0;
@@ -84,7 +87,7 @@ public class CharacterController_2D : MonoBehaviour {
             Update_Tic = 0;
         }
 
-     
+
 
     }
 
@@ -112,18 +115,18 @@ public class CharacterController_2D : MonoBehaviour {
         {
             Debug.Log("up");
             m_rigidbody.AddForce(Vector2.up * MoveSpeed);
-          
+
         }
         else if (Input.GetKey(KeyCode.S))
         {
             Debug.Log("Down");
             m_rigidbody.AddForce(Vector2.down * MoveSpeed);
-          
-            
+
+
         }
 
 
-     
+
 
     }
 
@@ -143,11 +146,11 @@ public class CharacterController_2D : MonoBehaviour {
     }
 
 
- 
+
     //   Sword,Dagger,Spear,Punch,Bow,Gun,Grenade
 
 
-  
 
-  
+
+
 }

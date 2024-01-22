@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Bardent.CoreSystem
 {
@@ -9,7 +9,7 @@ namespace Bardent.CoreSystem
         private Stats stats;
         private ParticleManager particleManager;
 
-        public void Damage(float rawAmount, bool physical) 
+        public void Damage(float rawAmount, bool physical)
         {
             if (physical)
             {
@@ -17,7 +17,7 @@ namespace Bardent.CoreSystem
             }
             else
             {
-            stats.Health.Decrease(stats.CalculateMagicalDamageReduction(rawAmount));
+                stats.Health.Decrease(stats.CalculateMagicalDamageReduction(rawAmount));
             }
 
             particleManager.StartParticlesWithRandomRotation(damageParticles);

@@ -21,7 +21,7 @@ namespace Krisnat.Assets.Scripts
             formatter.Serialize(stream, data);
             stream.Close();
         }
-    
+
 
         public static PlayerSaveData LoadPlayer()
         {
@@ -39,8 +39,8 @@ namespace Krisnat.Assets.Scripts
             else
             {
                 Debug.LogError("Save file not found in" + path);
-                return null; 
+                return null;
             }
         }
-    }   
+    }
 }

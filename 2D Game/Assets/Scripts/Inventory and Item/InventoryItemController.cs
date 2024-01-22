@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Bardent.CoreSystem;
@@ -73,7 +73,7 @@ namespace Inventory
             ItemController itemController = button.GetComponent<ItemController>();
             Item item = itemController.GetItem();
 
-            if(button.GetComponentInChildren<TextMeshProUGUI>().text == "Sell")
+            if (button.GetComponentInChildren<TextMeshProUGUI>().text == "Sell")
             {
                 if (item.equipment && item.Equipped) return;
                 DecreaseItem(item);
@@ -91,7 +91,7 @@ namespace Inventory
                         if (Stats.Instance.Health.CurrentValue != Stats.Instance.Health.MaxValue)
                         {
                             DecreaseItem(item);
-                            
+
                             Stats.Instance.Health.Increase(item.value);
                         }
                         break;
