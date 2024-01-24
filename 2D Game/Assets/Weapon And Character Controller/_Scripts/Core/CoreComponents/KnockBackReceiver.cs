@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Bardent.Combat.KnockBack;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Bardent.CoreSystem
@@ -45,5 +46,6 @@ namespace Bardent.CoreSystem
             movement = new CoreComp<Movement>(Core);
             collisionSenses = new CoreComp<CollisionSenses>(Core);
         }
+
     }
 }

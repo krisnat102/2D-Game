@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public interface IKnockBackable
-
+namespace Bardent
 {
-    void KnockBack(Vector2 angle, float strength, int direction);
+    public interface IKnockBackable
+    {
+        void KnockBack(Vector2 angle, float strength, int direction);
+    }
 }

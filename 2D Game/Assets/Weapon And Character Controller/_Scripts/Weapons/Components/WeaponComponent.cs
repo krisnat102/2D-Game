@@ -8,24 +8,20 @@ namespace Bardent.Weapons.Components
     {
         protected Weapon weapon;
 
-
-        protected AnimationEventHandler EventHandler => weapon.EventHandler;
-        protected AnimationEventHandler eventHandler;
-        protected CoreSystem.Core Core => weapon.Core;
+        protected AnimationEventHandler AnimationEventHandler => weapon.EventHandler;
+        protected Bardent.CoreSystem.Core Core => weapon.Core;
+        protected float attackStartTime => weapon.AttackStartTime;
 
         protected bool isAttackActive;
 
         public virtual void Init()
         {
-
+            
         }
-
-
+        
         protected virtual void Awake()
         {
             weapon = GetComponent<Weapon>();
-
-            eventHandler = GetComponentInChildren<AnimationEventHandler>();
         }
 
         protected virtual void Start()
@@ -60,7 +56,7 @@ namespace Bardent.Weapons.Components
         {
             base.HandleEnter();
 
-            currentAttackData = data.AttackData[weapon.CurrentAttackCounter];
+            currentAttackData = data.GetAttackData(weapon.CurrentAttackCounter);
         }
 
         public override void Init()
