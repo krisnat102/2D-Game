@@ -2,6 +2,7 @@ using Bardent.CoreSystem;
 using Inventory;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Krisnat
 {
@@ -20,11 +21,14 @@ namespace Krisnat
         [SerializeField] private GameObject levelUpInterface;
         [SerializeField] private TMP_Text levelTextLevelUpInterface, levelUpCost, hpLevelUpText, manaLevelUpText, stamLevelUpText, strLevelUpText, dexLevelUpText, intLevelUpText;
 
+        [SerializeField] private Slider bowChargeTimeSlider;
+
         private Vector3 oldPosition;
         private PlayerData playerData;
         private LevelHandler levelHandler;
 
         public GameObject LevelUpInterface { get => levelUpInterface; set => levelUpInterface = value; }
+        public Slider BowChargeTimeSlider { get => bowChargeTimeSlider; set => bowChargeTimeSlider = value; }
 
         private void Awake()
         {

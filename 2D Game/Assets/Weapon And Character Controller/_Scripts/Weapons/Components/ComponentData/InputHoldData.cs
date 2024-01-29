@@ -1,6 +1,8 @@
-﻿namespace Bardent.Weapons.Components
+﻿using Krisnat;
+
+namespace Bardent.Weapons.Components
 {
-    public class InputHoldData : ComponentData
+    public class InputHoldData : ComponentData<AttackInputHold>
     {
         protected override void SetComponentDependency()
         {

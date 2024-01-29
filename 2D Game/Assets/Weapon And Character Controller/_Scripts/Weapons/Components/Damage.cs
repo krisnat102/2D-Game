@@ -16,7 +16,7 @@ namespace Bardent.Weapons.Components
             {
                 if (item.TryGetComponent(out Enemy enemy))
                 {
-                    enemy.TakeDamage(currentAttackData.Amount, 0);
+                    enemy.TakeDamage(currentAttackData.Amount * levelHandler.StrengthDamage, 0, false);
                 }
                 else if (item.TryGetComponent(out IDamageable damageable))
                 {

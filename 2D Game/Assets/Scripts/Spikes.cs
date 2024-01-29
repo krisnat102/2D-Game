@@ -19,7 +19,7 @@ namespace Interactables
             }
             else if (enemy)
             {
-                enemy.TakeDamage(spikeDmg, 0);
+                enemy.TakeDamage(spikeDmg, 0, false);
             }
         }
     }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a5a6cd738645369231540dd8f9631f, type: 3}
   m_Name: Bow_1
   m_EditorClassIdentifier: 
+  <Type>k__BackingField: Bow
   <AnimatorController>k__BackingField: {fileID: 9100000, guid: 1089e6ad3ab9c034382f2409dbcddd6c,
     type: 2}
   <NumberOfAttacks>k__BackingField: 1
@@ -45,3 +46,22 @@ MonoBehaviour:
       type: {class: InputHoldData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}
       data:
         name: InputHoldData
+        attackData:
+        - name: 
+          <inputHoldAttackDatas>k__BackingField:
+          - <Offset>k__BackingField: {x: 0, y: -0.2}
+            <Projectile>k__BackingField: {fileID: -7690693297168986500, guid: 75b1c1fcb724f8a4aa8c23df6d65e469,
+              type: 3}
+            <Damage>k__BackingField: 15
+            <Speed>k__BackingField: 1000
+          - <Offset>k__BackingField: {x: 0, y: 0.3}
+            <Projectile>k__BackingField: {fileID: -7690693297168986500, guid: 75b1c1fcb724f8a4aa8c23df6d65e469,
+              type: 3}
+            <Damage>k__BackingField: 15
+            <Speed>k__BackingField: 1000
+          <FirstStageChargeTime>k__BackingField: 0.2
+          <SecondStageChargeTime>k__BackingField: 0.3
+          <ThirdStageChargeTime>k__BackingField: 0.4
+          <FinalStageChargeTime>k__BackingField: 0.5
+          <PerfectShotChargeTimeLowerRange>k__BackingField: 0.6
+          <PerfectShotChargeTimeUpperRange>k__BackingField: 0.7

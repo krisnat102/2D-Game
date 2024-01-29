@@ -9,6 +9,12 @@ public class PlayerInputHandler : MonoBehaviour
     private Camera cam;
     public static PlayerInputHandler Instance { get; private set; }
 
+    public delegate void AttackCancelledHandler(CombatInputs combatInput);
+    public event AttackCancelledHandler OnAttackCancelled;
+
+    public delegate void AttackStartedHandler(CombatInputs combatInput);
+    public event AttackCancelledHandler OnAttackStarted;
+
     [SerializeField]
     private float inputHoldTime = 0.2f;
     #endregion
@@ -77,11 +83,13 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.started)
         {
             AttackInputs[(int)CombatInputs.primary] = true;
+            OnAttackStarted?.Invoke(CombatInputs.primary);
         }
 
         if (context.canceled)
         {
             AttackInputs[(int)CombatInputs.primary] = false;
+            OnAttackCancelled?.Invoke(CombatInputs.primary);
         }
     }
 
@@ -89,12 +97,14 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (context.started)
         {
-            AttackInputs[(int)CombatInputs.secondary] = true;
+            AttackInputs[(int)CombatInputs.secondary] = true;            
+            OnAttackStarted?.Invoke(CombatInputs.secondary);
         }
 
         if (context.canceled)
         {
             AttackInputs[(int)CombatInputs.secondary] = false;
+            OnAttackCancelled?.Invoke(CombatInputs.secondary);
         }
     }
 

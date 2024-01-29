@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
     #endregion
 
     #region Combat
-    public void TakeDamage(float rawDamage, float knockback)
+    public void TakeDamage(float rawDamage, float knockback, bool multipleDamageSources)
     {
         float damage = Mathf.Round(rawDamage);
 
@@ -74,9 +74,14 @@ public class Enemy : MonoBehaviour
                 }
 
                 animator.SetTrigger("Hurt");
-                immune = true;
 
-                Invoke("StopImmune", 0.1f);
+                if(!multipleDamageSources)
+                {
+                    immune = true;
+
+                    Invoke("StopImmune", 0.1f);
+                }
+
                 TakeKnockback(damage + knockback);
             }
         }
@@ -237,7 +242,6 @@ public class Enemy : MonoBehaviour
         {
             if (enemyAttackAIRange.InSight)
             {
-                Debug.Log(3);
                 aiPath.canMove = true;
             }
             //else aiPath.canMove = false;
@@ -271,10 +275,9 @@ public class Enemy : MonoBehaviour
         hpBar.maxValue = Data.maxHP * lvlIndex;
 
         coinsDropped = Random.Range(data.minCoinsDropped, data.maxCoinsDropped++);
-        Debug.Log(coinsDropped);
         #endregion
 
-        TakeDamage(0, 0);
+        TakeDamage(0, 0, false);
 
         if (transform.rotation.y == 0)
         {

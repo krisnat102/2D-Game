@@ -56,11 +56,14 @@ namespace Bardent.Weapons.Components
         protected T1 data;
         protected T2 currentAttackData;
 
+        protected WeaponDataSO weaponData;
+
         protected override void HandleEnter()
         {
             base.HandleEnter();
 
             currentAttackData = data.AttackData[weapon.CurrentAttackCounter];
+            weaponData = weapon.Data;
         }
 
         public override void Init()
