@@ -24,7 +24,7 @@ namespace Spells
                 triggered = true;
                 holdTarget = true;
                 target = hitInfo.gameObject;
-                target?.GetComponent<Enemy>().TakeDamage(trap.value, 0);
+                target?.GetComponent<Enemy>().TakeDamage(trap.value, 0, false);
                 targetRB = target?.GetComponent<Rigidbody2D>();
                 shutSound.Play();
             }

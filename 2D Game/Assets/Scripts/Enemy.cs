@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
     #endregion
 
     #region Combat
-    public void TakeDamage(float rawDamage, float knockback)
+    public void TakeDamage(float rawDamage, float knockback, bool multipleDamageSources)
     {
         float damage = Mathf.Round(rawDamage);
         
@@ -77,9 +77,20 @@ public class Enemy : MonoBehaviour
                 }
 
                 animator.SetTrigger("Hurt");
+<<<<<<< Updated upstream
                 immune = true;
                 
                 Invoke("StopImmune", 0.1f);
+=======
+
+                if(!multipleDamageSources)
+                {
+                    immune = true;
+
+                    Invoke("StopImmune", 0.1f);
+                }
+
+>>>>>>> Stashed changes
                 TakeKnockback(damage + knockback);
             }
         }
@@ -297,10 +308,9 @@ public class Enemy : MonoBehaviour
         hpBar.maxValue = Data.maxHP * lvlIndex;
 
         coinsDropped = Random.Range(data.minCoinsDropped, data.maxCoinsDropped++);
-        Debug.Log(coinsDropped);
         #endregion
 
-        TakeDamage(0, 0);
+        TakeDamage(0, 0, false);
 
         if (transform.rotation.y == 0)
         {

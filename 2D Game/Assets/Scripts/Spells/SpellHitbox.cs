@@ -70,7 +70,19 @@ namespace Spells
                 Enemy enemy = hitInfo.GetComponent<Enemy>();
                 if (enemy)
                 {
+<<<<<<< Updated upstream
                     enemy.TakeDamage(spell.value, 0);
+=======
+                    if (spell.spell)
+                    {
+                        enemy.TakeDamage(spell.value * levelHandler.IntelligenceDamage, 0, false);
+                    }
+                    else
+                    {
+                        enemy.TakeDamage(spell.value * levelHandler.DexterityDamage, 0, false);
+                    }
+
+>>>>>>> Stashed changes
                     if (shuriken)
                     {
                         Instantiate(enemy.BloodEffect, transform.position, Quaternion.identity);
@@ -96,13 +108,13 @@ namespace Spells
 
         private void DestroyObject()
         {
-            if (spell.spellDeath != null)
-                Instantiate(spell.spellDeath, transform.position, Quaternion.identity);
+            if (spell.spellDeath != null) Instantiate(spell.spellDeath, transform.position, Quaternion.identity);
+
             stuckShuriken = true;
+
             if (spell.name != "Shuriken")
             {
                 Destroy(gameObject);
-
             }
         }
 
