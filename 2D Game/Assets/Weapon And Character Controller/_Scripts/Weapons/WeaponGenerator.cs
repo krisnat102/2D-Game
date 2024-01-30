@@ -19,17 +19,18 @@ namespace Bardent.Weapons
 
         private Animator anim;
 
+        public WeaponDataSO Data { get => data; set => data = value; }
 
         private void Start()
         {
             anim = GetComponentInChildren<Animator>();
-            GenerateWeapon(data);
+            GenerateWeapon(Data);
         }
 
         [ContextMenu("Test Generate")]
         private void TestGeneration()
         {
-            GenerateWeapon(data);
+            GenerateWeapon(Data);
         }
 
         public void GenerateWeapon(WeaponDataSO data)

@@ -3,13 +3,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Core;
+using Inventory;
+using Krisnat;
+using UnityEngine.UIElements;
 
 namespace Spells
 {
     public class SpellManager : MonoBehaviour
     {
         public static SpellManager Instance;
-        [SerializeField] private List<Spell> Spells = new();
+        #region Private Variables
+        [SerializeField] private List<Spell> spells = new();
 
         [SerializeField] private Transform spellContent;
         [SerializeField] private GameObject inventorySpell;
@@ -19,24 +23,34 @@ namespace Spells
         [SerializeField] private GameObject spellInventory;
         [SerializeField] private GameObject inventory;
 
-        public static List<Spell> SpellsBar = new();
-        public static List<Spell> AbilitiesBar = new();
         [SerializeField] private Transform spellContentBar;
         [SerializeField] private GameObject activeSpell;
 
+        [SerializeField] private float inventoryOpenTime = 0.3f;
+        [SerializeField] private float inventoryCloseTime = 0.3f;
+
         [Header("Item Description")]
-        [SerializeField] private Button useButton;
-        [SerializeField] private Image spellImage;
+        [SerializeField] private UnityEngine.UI.Button useButton;
+        [SerializeField] private UnityEngine.UI.Image spellImage;
         [SerializeField] private TMP_Text spellName, spellDescription, spellValue, spellPrice;
         [SerializeField] private GameObject description;
-
-        public static Button useButton1;
-        public static Image spellImage1;
-        public static TMP_Text spellName1, spellDescription1, spellValue1, spellPrice1;
-        public static GameObject description1;
-
         private bool spellAbilityTab;
+        #endregion
 
+        #region Public Variables
+        public List<Spell> AllSpells { get; private set; }
+        public List<Spell> Spells { get => spells; set => spells = value; }
+
+        public List<Spell> SpellsBar = new();
+        public List<Spell> AbilitiesBar = new();
+
+        public UnityEngine.UI.Button useButton1;
+        public UnityEngine.UI.Image spellImage1;
+        public TMP_Text spellName1, spellDescription1, spellValue1, spellPrice1;
+        public GameObject description1;
+        #endregion
+
+        #region Unity Methods
         private void Awake()
         {
             Instance = this;
@@ -51,14 +65,55 @@ namespace Spells
 
             spellAbilityTab = true;
         }
+        private void Start()
+        {
+            AllSpells = Core.GameManager.Instance.GetCustomAssets<Spell>("Spell", "CreatedAssets");
+        }
 
+        public void Update()
+        {
+            if (PlayerInputHandler.Instance.SpellInventoryInput)
+            {
+                PlayerInputHandler.Instance.UseSpellInventoryInput();
+                if (!inventory.activeInHierarchy && !spellInventory.activeInHierarchy)
+                {
+                    spellInventory.SetActive(true);
+                    var scale = spellInventory.transform.localScale.x;
+                    spellInventory.transform.localScale = new Vector3(0.05f, 0.05f, spellInventory.transform.localScale.z);
+                    UIManager.Instance.OpenUIAnimation(spellInventory, scale, inventoryOpenTime, true);
+
+                    ListSpells();
+
+                    //Weapon.canFire = false;
+                }
+                else
+                {
+                    UIManager.Instance.OpenUIAnimation(spellInventory, 0.05f, inventoryCloseTime, false);
+
+                    //Weapon.canFire = true;
+                }
+            }
+
+        }
+#endregion
+
+        #region Spell Management
         public void Add(Spell spell)
         {
             Spells.Add(spell);
         }
+        public void Add(List<Spell> spell)
+        {
+            Spells.AddRange(spell);
+        }
         public void Remove(Spell spell)
         {
             Spells.Remove(spell);
+        }
+        public void ClearInventory()
+        {
+            Spells.Clear();
+            ListSpells();
         }
 
         public void ListSpells()
@@ -86,7 +141,7 @@ namespace Spells
                 spellController.SetSpell(spell);
 
                 var spellName = obj.transform.Find("SpellName").GetComponent<Text>();
-                var spellImage = obj.transform.Find("SpellIcon").GetComponent<Image>();
+                var spellImage = obj.transform.Find("SpellIcon").GetComponent<UnityEngine.UI.Image>();
 
                 spellName.text = spell.spellName;
                 spellImage.sprite = spell.icon;
@@ -118,29 +173,6 @@ namespace Spells
             }
         }*/
 
-        public void Update()
-        {
-            if (PlayerInputHandler.Instance.SpellInventoryInput)
-            {
-                PlayerInputHandler.Instance.UseSpellInventoryInput();
-                if (!inventory.activeInHierarchy && !spellInventory.activeInHierarchy)
-                {
-                    spellInventory.SetActive(true);
-
-                    ListSpells();
-
-                    //Weapon.canFire = false;
-                }
-                else
-                {
-                    inventory.SetActive(false);
-                    spellInventory.SetActive(false);
-
-                    //Weapon.canFire = true;
-                }
-            }
-
-        }
 
         public void ListActiveSpells()
         {
@@ -162,7 +194,7 @@ namespace Spells
                     spellController.SetSpell(spell);
 
                     var spellName = obj.transform.Find("SpellName").GetComponent<Text>();
-                    var spellIcon = obj.transform.Find("SpellIcon").GetComponent<Image>();
+                    var spellIcon = obj.transform.Find("SpellIcon").GetComponent<UnityEngine.UI.Image>();
 
                     if (spellName != null && spellIcon != null)
                     {
@@ -188,7 +220,7 @@ namespace Spells
                     spellController.SetSpell(spell);
 
                     var spellName = obj.transform.Find("SpellName").GetComponent<Text>();
-                    var spellIcon = obj.transform.Find("SpellIcon").GetComponent<Image>();
+                    var spellIcon = obj.transform.Find("SpellIcon").GetComponent<UnityEngine.UI.Image>();
 
                     if (spellName != null && spellIcon != null)
                     {
@@ -203,7 +235,9 @@ namespace Spells
                 }
             }
         }
+        #endregion
 
+        #region Buttons
         public void SpellsTabBn()
         {
             spellAbilityTab = true;
@@ -216,5 +250,6 @@ namespace Spells
             ListSpells();
             ListActiveSpells();
         }
+        #endregion
     }
 }

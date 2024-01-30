@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81c662f382e836a45bb83c6a13508d95, type: 3}
   m_Name: Ray of Frost
   m_EditorClassIdentifier: 
-  id: 1
+  id: 3
   spellName: Ray of Frost
   spell: 1
   cost: 8
@@ -25,5 +25,6 @@ MonoBehaviour:
     type: 3}
   spellDeath: {fileID: 5496392243636567719, guid: 48c565086564714488da3cf481ff809c,
     type: 3}
-  spellType: 2
   description: An ever spinning shard of ice
+  useOffset: 0
+  offset: {x: 0, y: 0}

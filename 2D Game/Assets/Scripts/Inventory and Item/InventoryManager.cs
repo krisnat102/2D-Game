@@ -6,6 +6,7 @@ using System.Linq;
 using Krisnat;
 using UnityEditor;
 using System.Collections;
+using UnityEngine.UIElements;
 
 namespace Inventory
 {
@@ -19,20 +20,24 @@ namespace Inventory
         [SerializeField] private Transform itemContent;
         [SerializeField] private GameObject inventoryItem;
 
-        [SerializeField] private Toggle enableRemove;
+        [SerializeField] private UnityEngine.UI.Toggle enableRemove;
 
         [SerializeField] private InventoryItemController[] inventoryItems;
 
         [SerializeField] private GameObject inventory, spellInventory, characterTab;
 
+        [Header("Inventory")]
+        [SerializeField] private float inventoryOpeningSpeed = 2;
+        [SerializeField] private float inventoryClosingSpeed = 2;
+
         [Header("Equipment MiniMenu")]
         [SerializeField] private Animator equipmentMenuAnimator;
         [SerializeField] private GameObject equipmentMenu;
-        [SerializeField] private Button helmetBn, chestplateBn, glovesBn, bootsBn;
+        [SerializeField] private UnityEngine.UI.Button helmetBn, chestplateBn, glovesBn, bootsBn;
 
         [Header("Item Description")]
-        [SerializeField] private Button useButton;
-        [SerializeField] private Image itemImage;
+        [SerializeField] private UnityEngine.UI.Button useButton;
+        [SerializeField] private UnityEngine.UI.Image itemImage;
         [SerializeField] private TMP_Text itemName, itemDescription, itemValue, itemPrice, itemWeight, itemArmor, itemMagicRes;
         [SerializeField] private GameObject description;
 
@@ -45,6 +50,8 @@ namespace Inventory
         private List<Item> distinctItems, duplicates = new();
         private List<Item> allItems = new();
         private bool coinAnimationTracker;
+        //private bool inventoryOpenAnimationTracker;
+        //private bool inventoryCloseAnimationTracker;
         #endregion
 
         #region Property Variables
@@ -53,12 +60,12 @@ namespace Inventory
         public bool SpellInventoryActiveInHierarchy { get; private set; }
         public bool CharacterTabActiveInHierarchy { get; private set; }
         public bool Shop { get; set; }
-        public Button HelmetBn { get => helmetBn; private set => helmetBn = value; }
-        public Button ChestplateBn { get => chestplateBn; private set => chestplateBn = value; }
-        public Button GlovesBn { get => glovesBn; private set => glovesBn = value; }
-        public Button BootsBn { get => bootsBn; private set => bootsBn = value; }
-        public Button UseButton { get => useButton; private set => useButton = value; }
-        public Image ItemImage { get => itemImage; private set => itemImage = value; }
+        public UnityEngine.UI.Button HelmetBn { get => helmetBn; private set => helmetBn = value; }
+        public UnityEngine.UI.Button ChestplateBn { get => chestplateBn; private set => chestplateBn = value; }
+        public UnityEngine.UI.Button GlovesBn { get => glovesBn; private set => glovesBn = value; }
+        public UnityEngine.UI.Button BootsBn { get => bootsBn; private set => bootsBn = value; }
+        public UnityEngine.UI.Button UseButton { get => useButton; private set => useButton = value; }
+        public UnityEngine.UI.Image ItemImage { get => itemImage; private set => itemImage = value; }
         public TMP_Text ItemName { get => itemName; private set => itemName = value; }
         public TMP_Text ItemDescription { get => itemDescription; private set => itemDescription = value; }
         public TMP_Text ItemValue { get => itemValue; private set => itemValue = value; }
@@ -138,6 +145,7 @@ namespace Inventory
                 }
             }
         }
+
         private void OnDestroy()
         {
             foreach (Item item in Items)
@@ -154,15 +162,18 @@ namespace Inventory
             if (openOrClose)
             {
                 inventory.SetActive(true);
+                var scale = inventory.transform.localScale.x;
+                inventory.transform.localScale = new Vector3(0.05f, 0.05f, inventory.transform.localScale.z);
+                UIManager.Instance.OpenUIAnimation(inventory, scale, inventoryOpeningSpeed, true);
 
                 //TODO: Optimize this awful code out of the game
-                //(done 2 times because of a bug with the item count upon first openning on inv)
+                //(done 2 times because of a bug with the item count upon first opening on inv)
                 ListItems();
                 ListItems();
             }
             else
             {
-                inventory.SetActive(false);
+                UIManager.Instance.OpenUIAnimation(inventory, 0.05f, inventoryClosingSpeed, false);
                 spellInventory.SetActive(false);
                 characterTab.SetActive(false);
 
@@ -229,8 +240,8 @@ namespace Inventory
 
                 var itemName = obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
                 var itemCount = obj.transform.Find("ItemCount").GetComponent<TextMeshProUGUI>();
-                var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
-                var removeButton = obj.transform.Find("RemoveButton").GetComponent<Button>();
+                var itemIcon = obj.transform.Find("ItemIcon").GetComponent<UnityEngine.UI.Image>();
+                var removeButton = obj.transform.Find("RemoveButton").GetComponent<UnityEngine.UI.Button>();
 
                 itemName.text = item.itemName;
                 itemCount.text = (item.ItemCount > 1 ? "x" + item.ItemCount.ToString() : "");
@@ -277,7 +288,7 @@ namespace Inventory
             {
                 foreach (Transform item in itemContent)
                 {
-                    item.transform.Find("RemoveButton").GetComponent<Button>().gameObject.SetActive(true);
+                    item.transform.Find("RemoveButton").GetComponent<UnityEngine.UI.Button>().gameObject.SetActive(true);
                 }
             }
             else
@@ -394,13 +405,13 @@ namespace Inventory
         public void StartCoinAnimation()
         {
             coinAnimationTracker = true;
-            UIManager.Instance.MovePurseAnimation(true, purseAnimationDistance, purseAnimationDuration);
+            UIManager.Instance.MovePurseAnimation(purseAnimationDistance, purseAnimationDuration);
             Invoke("EndCoinAnimation", purseAnimationTimeOnScreen);
         }
         private void EndCoinAnimation()
         {
             coinAnimationTracker = false;
-            UIManager.Instance.MovePurseAnimation(false, purseAnimationDistance, purseAnimationDuration);
+            UIManager.Instance.MovePurseAnimation(purseAnimationDistance, purseAnimationDuration);
         }
 
         #endregion

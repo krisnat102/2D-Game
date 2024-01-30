@@ -4,6 +4,7 @@ namespace Spells
     [CreateAssetMenu(fileName = "New Spell", menuName = "Spell/Create New Spell")]
     public class Spell : ScriptableObject
     {
+        public int id;
         public string spellName;
         public bool spell;
         public int cost;

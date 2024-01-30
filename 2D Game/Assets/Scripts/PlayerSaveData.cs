@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Numerics;
 using Bardent.CoreSystem;
 using Inventory;
+using Spells;
 
 namespace Krisnat.Assets.Scripts
 {
@@ -17,6 +16,7 @@ namespace Krisnat.Assets.Scripts
         public int coins;
         public float[] position;
         public int[] itemsId;
+        public int[] spellsId;
 
         public PlayerSaveData(Player player)
         {
@@ -39,8 +39,10 @@ namespace Krisnat.Assets.Scripts
             intelligence = levelHandler.IntelligenceCounter;
 
             coins = InventoryManager.Instance.Coins;
-
+            List<Spell> allSpellsArray = SpellManager.Instance.AllSpells;
             List<Item> allItemsArray = InventoryManager.Instance.AllItems;
+
+            spellsId = SpellManager.Instance.Spells.Select(spell => spell.id).ToArray();
             itemsId = InventoryManager.Instance.Items.Select(item => item.id).ToArray();
 
             position = new float[3];

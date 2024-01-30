@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81c662f382e836a45bb83c6a13508d95, type: 3}
   m_Name: Firebolt
   m_EditorClassIdentifier: 
-  id: 0
+  id: 1
   spellName: Firebolt
   spell: 1
   cost: 10
@@ -25,5 +25,6 @@ MonoBehaviour:
     type: 3}
   spellDeath: {fileID: 9018320000383621700, guid: f688d8fbbd48e5b4f98da503f5bded33,
     type: 3}
-  spellType: 1
   description: A slow moving ball of fiery destruction
+  useOffset: 0
+  offset: {x: 0, y: 0}

@@ -1,5 +1,6 @@
 using Bardent.CoreSystem;
 using Inventory;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,6 +27,7 @@ namespace Krisnat
         private Vector3 oldPosition;
         private PlayerData playerData;
         private LevelHandler levelHandler;
+        private bool purseAnimationTracker = false;
 
         public GameObject LevelUpInterface { get => levelUpInterface; set => levelUpInterface = value; }
         public Slider BowChargeTimeSlider { get => bowChargeTimeSlider; set => bowChargeTimeSlider = value; }
@@ -39,8 +41,8 @@ namespace Krisnat
 
         private void Update()
         {
-            levelUpCost.text = levelHandler.LevelUpCost.ToString();
-            levelTextLevelUpInterface.text = playerData.PlayerLevel.ToString();
+            levelUpCost.text = "Cost - " + levelHandler.LevelUpCost.ToString();
+            levelTextLevelUpInterface.text = "Level - " + playerData.PlayerLevel.ToString();
 
             levelText.text = playerData.PlayerLevel.ToString();
             hpText.text = Stats.Instance.Health.MaxValue.ToString();
@@ -58,17 +60,60 @@ namespace Krisnat
             intLevelUpText.text = "INT - " + levelHandler.IntelligenceCounter.ToString();
         }
 
-        public void MovePurseAnimation(bool directionUpOrDown, float animationDistance, float animationDuration)
+        public void MovePurseAnimation(float animationDistance, float animationDuration)
         {
-            if (directionUpOrDown)
+            if (!purseAnimationTracker)
             {
+                purseAnimationTracker = true;
                 purse.transform.LeanMove(new Vector2(purse.transform.position.x, purse.transform.position.y + animationDistance), animationDuration);
                 oldPosition = purse.transform.position;
             }
             else
             {
+                purseAnimationTracker = false;
                 purse.transform.LeanMove(oldPosition, animationDuration);
             }
+        }
+
+        public void OpenUIAnimation(GameObject menu, float targetSize, float duration, bool openClose)
+        {
+            if(openClose) StartCoroutine(OpenUIAnimationCoroutine(menu, targetSize, duration));
+            else StartCoroutine(CloseUIAnimationCoroutine(menu, targetSize, duration));
+        }
+
+        private IEnumerator OpenUIAnimationCoroutine(GameObject menu, float targetSize, float duration)
+        {
+            Vector3 initialScale = menu.transform.localScale;
+            Vector3 targetScale = new Vector3(targetSize, targetSize, menu.transform.localScale.z);
+
+            float elapsedTime = 0f;
+
+            while (elapsedTime < duration)
+            {
+                menu.transform.localScale = Vector3.Lerp(initialScale, targetScale, elapsedTime / duration);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            menu.transform.localScale = targetScale;
+        }
+
+        private IEnumerator CloseUIAnimationCoroutine(GameObject menu, float targetSize, float duration)
+        {
+            Vector3 initialScale = menu.transform.localScale;
+            Vector3 targetScale = new Vector3(targetSize, targetSize, menu.transform.localScale.z);
+
+            float elapsedTime = 0f;
+
+            while (elapsedTime < duration)
+            {
+                menu.transform.localScale = Vector3.Lerp(initialScale, targetScale, elapsedTime / duration);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            menu.transform.localScale = initialScale;
+            menu.SetActive(false);
         }
 
         public void OpenCharacterTabBn()

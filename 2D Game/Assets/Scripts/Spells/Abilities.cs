@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Bardent.CoreSystem;
 using Krisnat;
+using System.Collections.Generic;
 
 namespace Spells
 {
@@ -28,6 +29,8 @@ namespace Spells
         private int activeSpell = 0;
         private int activeAbility = 0;
         private Vector2 newPosition;
+        private List<Spell> spellsBar;
+        private List<Spell> abilitiesBar;
 
         public bool AbilityCooldown1 { get => abilityCooldown; set => abilityCooldown = value; }
         #endregion
@@ -35,6 +38,9 @@ namespace Spells
         #region Unity Methods
         private void Update()
         {
+            spellsBar = SpellManager.Instance.SpellsBar;
+            abilitiesBar = SpellManager.Instance.AbilitiesBar;
+
             if (PlayerInputHandler.Instance.NormInputX < 0)
             {
                 side = false;
@@ -45,8 +51,8 @@ namespace Spells
             }
 
             #region Spells
-            if (SpellManager.SpellsBar.Count >= activeSpell)
-                if (PlayerInputHandler.Instance.SpellInput && Stats.Instance.Mana.CurrentValue >= SpellManager.SpellsBar[activeSpell].cost && spellCooldown == false)
+            if (spellsBar.Count >= activeSpell)
+                if (PlayerInputHandler.Instance.SpellInput && Stats.Instance.Mana.CurrentValue >= spellsBar[activeSpell].cost && spellCooldown == false)
                     Spell();
 
             if (PlayerInputHandler.Instance.SwitchSpell1Input)
@@ -69,9 +75,9 @@ namespace Spells
             #endregion
 
             #region Abilites
-            if (SpellManager.AbilitiesBar.Count >= activeAbility)
+            if (abilitiesBar.Count >= activeAbility)
             {
-                if (PlayerInputHandler.Instance.AbilityInput && Stats.Instance.Stam.CurrentValue >= SpellManager.AbilitiesBar[activeAbility].cost && AbilityCooldown1 == false)
+                if (PlayerInputHandler.Instance.AbilityInput && Stats.Instance.Stam.CurrentValue >= abilitiesBar[activeAbility].cost && AbilityCooldown1 == false)
                     Ability();
             }
             if (PlayerInputHandler.Instance.SwitchAbility1Input)
@@ -94,86 +100,86 @@ namespace Spells
             #endregion
 
             #region Spells
-            if (SpellManager.SpellsBar.Count > activeSpell)
-                if (SpellManager.SpellsBar[activeSpell] != null)
+            if (spellsBar.Count > activeSpell)
+                if (spellsBar[activeSpell] != null)
                 {
-                    mainSpell.sprite = SpellManager.SpellsBar[activeSpell].icon;
+                    mainSpell.sprite = spellsBar[activeSpell].icon;
                     mainSpell.gameObject.SetActive(true);
                 }
 
-            if (SpellManager.SpellsBar.Count > activeSpell - 1 && activeSpell != 0)
+            if (spellsBar.Count > activeSpell - 1 && activeSpell != 0)
             {
-                if (SpellManager.SpellsBar[activeSpell - 1] != null && SpellManager.SpellsBar.Count > activeSpell - 1)
+                if (spellsBar[activeSpell - 1] != null && spellsBar.Count > activeSpell - 1)
                 {
-                    sideSpell1.sprite = SpellManager.SpellsBar[activeSpell - 1].icon;
+                    sideSpell1.sprite = spellsBar[activeSpell - 1].icon;
                     sideSpell1.gameObject.SetActive(true);
                 }
             }
-            else if (SpellManager.SpellsBar.Count == 7)
+            else if (spellsBar.Count == 7)
             {
-                sideSpell1.sprite = SpellManager.SpellsBar[7].icon;
+                sideSpell1.sprite = spellsBar[7].icon;
                 sideSpell1.gameObject.SetActive(true);
             }
 
-            if (SpellManager.SpellsBar.Count > activeSpell + 1 && activeSpell != 7)
+            if (spellsBar.Count > activeSpell + 1 && activeSpell != 7)
             {
-                if (SpellManager.SpellsBar[activeSpell + 1] != null && SpellManager.SpellsBar.Count > activeSpell + 1)
+                if (spellsBar[activeSpell + 1] != null && spellsBar.Count > activeSpell + 1)
                 {
-                    sideSpell2.sprite = SpellManager.SpellsBar[activeSpell + 1].icon;
+                    sideSpell2.sprite = spellsBar[activeSpell + 1].icon;
                     sideSpell2.gameObject.SetActive(true);
                 }
             }
-            else if (SpellManager.SpellsBar.Count == 7)
+            else if (spellsBar.Count == 7)
             {
-                sideSpell2.sprite = SpellManager.SpellsBar[0].icon;
+                sideSpell2.sprite = spellsBar[0].icon;
                 sideSpell2.gameObject.SetActive(true);
             }
             #endregion
 
             #region Abilities
-            if (SpellManager.AbilitiesBar.Count > activeAbility)
-                if (SpellManager.AbilitiesBar[activeAbility] != null)
+            if (abilitiesBar.Count > activeAbility)
+                if (abilitiesBar[activeAbility] != null)
                 {
-                    mainAbility.sprite = SpellManager.AbilitiesBar[activeAbility].icon;
+                    mainAbility.sprite = abilitiesBar[activeAbility].icon;
                     mainAbility.gameObject.SetActive(true);
                 }
 
-            if (SpellManager.AbilitiesBar.Count > activeAbility - 1 && activeAbility != 0)
+            if (abilitiesBar.Count > activeAbility - 1 && activeAbility != 0)
             {
-                if (SpellManager.AbilitiesBar[activeAbility - 1] != null && SpellManager.AbilitiesBar.Count > activeAbility - 1)
+                if (abilitiesBar[activeAbility - 1] != null && abilitiesBar.Count > activeAbility - 1)
                 {
-                    sideAbility1.sprite = SpellManager.AbilitiesBar[activeAbility - 1].icon;
+                    sideAbility1.sprite = abilitiesBar[activeAbility - 1].icon;
                     sideAbility1.gameObject.SetActive(true);
                 }
             }
-            else if (SpellManager.AbilitiesBar.Count == 7)
+            else if (abilitiesBar.Count == 7)
             {
-                sideAbility1.sprite = SpellManager.AbilitiesBar[7].icon;
+                sideAbility1.sprite = abilitiesBar[7].icon;
                 sideAbility1.gameObject.SetActive(true);
             }
 
-            if (SpellManager.AbilitiesBar.Count > activeAbility + 1 && activeAbility != 7)
+            if (abilitiesBar.Count > activeAbility + 1 && activeAbility != 7)
             {
-                if (SpellManager.AbilitiesBar[activeAbility + 1] != null && SpellManager.AbilitiesBar.Count > activeAbility + 1)
+                if (abilitiesBar[activeAbility + 1] != null && abilitiesBar.Count > activeAbility + 1)
                 {
-                    sideAbility2.sprite = SpellManager.AbilitiesBar[activeAbility + 1].icon;
+                    sideAbility2.sprite = abilitiesBar[activeAbility + 1].icon;
                     sideAbility2.gameObject.SetActive(true);
                 }
             }
-            else if (SpellManager.AbilitiesBar.Count == 7)
+            else if (abilitiesBar.Count == 7)
             {
-                sideAbility2.sprite = SpellManager.AbilitiesBar[0].icon;
+                sideAbility2.sprite = abilitiesBar[0].icon;
                 sideAbility2.gameObject.SetActive(true);
             }
             #endregion
 
             if (abilityCooldownImg.gameObject.activeSelf && abilityCooldownImg.fillAmount > 0)
             {
-                abilityCooldownImg.fillAmount -= Time.deltaTime / SpellManager.AbilitiesBar[activeAbility].cooldown;
+                abilityCooldownImg.fillAmount -= Time.deltaTime / abilitiesBar[activeAbility].cooldown;
             }
             if (spellCooldownImg.gameObject.activeSelf && spellCooldownImg.fillAmount > 0)
             {
-                spellCooldownImg.fillAmount -= Time.deltaTime / SpellManager.SpellsBar[activeSpell].cooldown;
+                spellCooldownImg.fillAmount -= Time.deltaTime / spellsBar[activeSpell].cooldown;
             }
         }
         #endregion
@@ -181,31 +187,31 @@ namespace Spells
         #region Spell And Ability Casting
         void Spell()
         {
-            if (SpellManager.SpellsBar[activeSpell] != null && Stats.Instance.Mana.CurrentValue >= SpellManager.SpellsBar[activeSpell].cost)
+            if (spellsBar[activeSpell] != null && Stats.Instance.Mana.CurrentValue >= spellsBar[activeSpell].cost)
             {
                 //Vector2 offset = new Vector2(OffsetX, OffsetY);
-                if (SpellManager.SpellsBar[activeSpell].useOffset)
+                if (spellsBar[activeSpell].useOffset)
                 {
                     if (side)
                     {
-                        newPosition = (Vector2)castingPoint.position + SpellManager.SpellsBar[activeSpell].offset;
+                        newPosition = (Vector2)castingPoint.position + spellsBar[activeSpell].offset;
                     }
                     else
                     {
-                        newPosition = (Vector2)castingPoint.position + new Vector2(-SpellManager.SpellsBar[activeSpell].offset.x, SpellManager.SpellsBar[activeSpell].offset.y);
+                        newPosition = (Vector2)castingPoint.position + new Vector2(-spellsBar[activeSpell].offset.x, spellsBar[activeSpell].offset.y);
                     }
-                    Instantiate(SpellManager.SpellsBar[activeSpell].spellEffect, newPosition, castingPoint.rotation);
+                    Instantiate(spellsBar[activeSpell].spellEffect, newPosition, castingPoint.rotation);
                 }
                 else
                 {
                     Debug.Log(castingPoint.rotation);
-                    Instantiate(SpellManager.SpellsBar[activeSpell].spellEffect, castingPoint.position, castingPoint.rotation);
+                    Instantiate(spellsBar[activeSpell].spellEffect, castingPoint.position, castingPoint.rotation);
                 }
 
-                Stats.Instance.Mana.CurrentValue -= SpellManager.SpellsBar[activeSpell].cost;
+                Stats.Instance.Mana.CurrentValue -= spellsBar[activeSpell].cost;
 
                 spellCooldown = true;
-                Invoke("SpellCooldown", SpellManager.SpellsBar[activeSpell].cooldown);
+                Invoke("SpellCooldown", spellsBar[activeSpell].cooldown);
                 spellCooldownImg.gameObject.SetActive(true);
                 spellCooldownImg.fillAmount = 1;
             }
@@ -214,27 +220,27 @@ namespace Spells
         {
             Grappler grappler = gameObject.GetComponent<Grappler>();
 
-            if (SpellManager.AbilitiesBar[activeAbility] != null)
+            if (abilitiesBar[activeAbility] != null)
             {
-                if (SpellManager.AbilitiesBar[activeAbility].name == "grappling hook")
+                if (abilitiesBar[activeAbility].name == "grappling hook")
                 {
                     grappler.enabled = true;
 
                     AbilityCooldown1 = true;
-                    Invoke("AbilityCooldown", SpellManager.AbilitiesBar[activeAbility].cooldown);
+                    Invoke("AbilityCooldown", abilitiesBar[activeAbility].cooldown);
                     abilityCooldownImg.gameObject.SetActive(true);
                     abilityCooldownImg.fillAmount = 1;
                 }
-                else if (Stats.Instance.Stam.CurrentValue >= SpellManager.AbilitiesBar[activeAbility].cost)
+                else if (Stats.Instance.Stam.CurrentValue >= abilitiesBar[activeAbility].cost)
                 {
                     //Vector2 offset = new Vector2(OffsetX2, OffsetY2);
 
-                    Instantiate(SpellManager.AbilitiesBar[activeAbility].spellEffect, castingPoint.position, castingPoint.rotation);
+                    Instantiate(abilitiesBar[activeAbility].spellEffect, castingPoint.position, castingPoint.rotation);
 
-                    Stats.Instance.Stam.CurrentValue -= SpellManager.AbilitiesBar[activeAbility].cost;
+                    Stats.Instance.Stam.CurrentValue -= abilitiesBar[activeAbility].cost;
 
                     AbilityCooldown1 = true;
-                    Invoke("AbilityCooldown", SpellManager.AbilitiesBar[activeAbility].cooldown);
+                    Invoke("AbilityCooldown", abilitiesBar[activeAbility].cooldown);
                     abilityCooldownImg.gameObject.SetActive(true);
                     abilityCooldownImg.fillAmount = 1;
 

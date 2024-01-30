@@ -1,4 +1,5 @@
-﻿using Bardent.Utilities;
+﻿using Bardent.CoreSystem;
+using Bardent.Utilities;
 using Krisnat;
 using System.Collections;
 using System.Threading;
@@ -9,18 +10,21 @@ namespace Bardent.Weapons.Components
 {
     public class InputHold : WeaponComponent <InputHoldData , AttackInputHold>
     {
-        private Animator animator;
-
         private bool input;
-
         private bool minHoldPassed;
-        private bool attackStarted;
+        private bool attackStarted = false;
+        private bool cooldown = false;
+        private bool lockMovement = false;
+        private bool potentialLockMovement = false;
+        private int oldFacingDirection;
         private float attackHoldTime;
-        private bool cooldown;
+        private Animator animator;
         private CoreSystem.Movement movement;
         private Slider bowSlider;
-        private int oldFacingDirection;
+        private CollisionSenses collisionSenses;
+        private WeaponDataSO currentWeaponData;
         private const float COOLDOWN_DURATION = 0.3f;
+
 
         protected override void HandleEnter()
         {
@@ -59,7 +63,7 @@ namespace Bardent.Weapons.Components
 
         private void Attack(CombatInputs combatInput)
         {
-            if (currentAttackData != null && !cooldown && weaponData.Type == "Bow")
+            if (currentAttackData != null && !cooldown && currentWeaponData.Type == "Bow")
             {
                 bowSlider = UIManager.Instance.BowChargeTimeSlider;
 
@@ -111,8 +115,36 @@ namespace Bardent.Weapons.Components
             cooldown = false;
         }
 
-        private void StartHold(CombatInputs combatInput) => attackStarted = true;
-        private void EndHold() => attackStarted = false;
+        private void StartHold(CombatInputs combatInput)
+        {
+            if (combatInput == CombatInputs.primary)
+            {
+                currentWeaponData = Core.transform.parent.Find("PrimaryWeapon").GetComponent<WeaponGenerator>().Data;
+            }
+            else if (combatInput == CombatInputs.secondary)
+            {
+                currentWeaponData = Core.transform.parent.Find("SecondaryWeapon").GetComponent<WeaponGenerator>().Data;
+            }
+
+            if(currentWeaponData.Type == "Bow")
+            {
+                attackStarted = true;
+                if (collisionSenses.Ground)
+                {
+                    lockMovement = true;
+                }
+                else
+                {
+                    potentialLockMovement = true;
+                }
+            }
+        }
+        private void EndHold() 
+        {
+            attackStarted = false;
+            lockMovement = false;
+            potentialLockMovement = false;
+        }
 
         private void Update()
         {
@@ -126,8 +158,8 @@ namespace Bardent.Weapons.Components
             {
                 attackHoldTime += Time.deltaTime;
 
-                bowSlider.gameObject.SetActive(true);
                 bowSlider.value = attackHoldTime;
+                bowSlider.gameObject.SetActive(true);
             }
             else
             {
@@ -135,13 +167,13 @@ namespace Bardent.Weapons.Components
                 bowSlider.gameObject.SetActive(false);
             }
 
-            if(attackHoldTime > 0)
+            if(potentialLockMovement && collisionSenses.Ground)
             {
                 Core.transform.parent.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                //if(attackHoldTime > currentAttackData.PerfectShotChargeTimeLowerRange && attackHoldTime < currentAttackData.PerfectShotChargeTimeUpperRange)
-                {
-                    
-                }
+            }
+            if(lockMovement)
+            {
+                Core.transform.parent.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             }
             
         }
@@ -151,12 +183,13 @@ namespace Bardent.Weapons.Components
 
             animator = GetComponentInChildren<Animator>();
             movement = Core.GetCoreComponent<CoreSystem.Movement>();
+            collisionSenses = Core.GetCoreComponent<CollisionSenses>();
+            bowSlider = UIManager.Instance.BowChargeTimeSlider;
 
             weapon.OnCurrentInputChange += HandleCurrentInputChange;
             eventHandler.OnMinHoldPassed += HandleMinHoldPassed;
             PlayerInputHandler.Instance.OnAttackCancelled += Attack;
             PlayerInputHandler.Instance.OnAttackStarted += StartHold;
-            bowSlider = UIManager.Instance.BowChargeTimeSlider;
         }
         protected override void OnDestroy()
         {

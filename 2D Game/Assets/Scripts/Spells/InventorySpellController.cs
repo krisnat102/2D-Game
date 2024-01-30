@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,16 +35,16 @@ namespace Spells
             SpellController spellController = button.GetComponent<SpellController>();
             Spell spell = spellController.GetSpell();
 
-            if (SpellManager.SpellsBar.Count < ActiveSpellsMax && !SpellManager.SpellsBar.Contains(spell) && spell.spell)
+            if (SpellManager.Instance.SpellsBar.Count < ActiveSpellsMax && !SpellManager.Instance.SpellsBar.Contains(spell) && spell.spell)
             {
-                SpellManager.SpellsBar.Add(spell);
+                SpellManager.Instance.SpellsBar.Add(spell);
                 SpellManager.Instance.ListActiveSpells();
             }
             else Debug.Log("already there");
 
-            if (SpellManager.AbilitiesBar.Count < ActiveSpellsMax && !SpellManager.AbilitiesBar.Contains(spell) && !spell.spell)
+            if (SpellManager.Instance.AbilitiesBar.Count < ActiveSpellsMax && !SpellManager.Instance.AbilitiesBar.Contains(spell) && !spell.spell)
             {
-                SpellManager.AbilitiesBar.Add(spell);
+                SpellManager.Instance.AbilitiesBar.Add(spell);
                 SpellManager.Instance.ListActiveSpells();
             }
             else Debug.Log("already there");
@@ -56,7 +57,7 @@ namespace Spells
 
             Destroy(gameObject);
 
-            SpellManager.SpellsBar.Remove(spellController.GetSpell());
+            SpellManager.Instance.SpellsBar.Remove(spellController.GetSpell());
             Debug.Log(spellController.GetSpell().name);
         }
 
@@ -65,14 +66,14 @@ namespace Spells
             GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
             SpellController spellController = button.GetComponent<SpellController>();
 
-            description = SpellManager.description1;
+            description = SpellManager.Instance.description1;
             description.SetActive(true);
 
-            spellImage = SpellManager.spellImage1;
-            spellName = SpellManager.spellName1;
-            spellDescription = SpellManager.spellDescription1;
-            spellValue = SpellManager.spellValue1;
-            spellPrice = SpellManager.spellPrice1;
+            spellImage = SpellManager.Instance.spellImage1;
+            spellName = SpellManager.Instance.spellName1;
+            spellDescription = SpellManager.Instance.spellDescription1;
+            spellValue = SpellManager.Instance.spellValue1;
+            spellPrice = SpellManager.Instance.spellPrice1;
 
             spellImage.sprite = spellController.GetSpell().icon;
             spellName.text = spellController.GetSpell().spellName.ToUpper();
@@ -84,7 +85,7 @@ namespace Spells
             else spellValue.text = null;
             spellPrice.text = "COST - " + spellController.GetSpell().cost.ToString();
 
-            useButton = SpellManager.useButton1;
+            useButton = SpellManager.Instance.useButton1;
             SpellController useButtonSpellController = useButton.GetComponent<SpellController>();
             useButtonSpellController.SetSpell(spellController.GetSpell());
         }

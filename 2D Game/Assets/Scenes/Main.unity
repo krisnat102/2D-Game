@@ -14037,6 +14037,16 @@ PrefabInstance:
       objectReference: {fileID: 2137669189}
     - target: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
         type: 3}
+      propertyPath: inventoryClosingSpeed
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
+        type: 3}
+      propertyPath: inventoryOpeningSpeed
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
+        type: 3}
       propertyPath: purseAnimationDistance
       value: 200
       objectReference: {fileID: 0}
