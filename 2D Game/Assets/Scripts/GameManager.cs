@@ -6,6 +6,7 @@ using Bardent.CoreSystem;
 using Inventory;
 using Krisnat;
 using Krisnat.Assets.Scripts;
+using Spells;
 using UnityEditor;
 using UnityEngine;
 
@@ -64,11 +65,17 @@ namespace Core
             PlayerSaveData data = SaveSystem.LoadPlayer();
 
             List<Item> loadItems = new();
+            List<Spell> loadSpells = new();
             InventoryManager.Instance.ClearInventory();
+            SpellManager.Instance.ClearInventory();
 
             foreach (int id in data.itemsId)
             {
                 loadItems.AddRange(InventoryManager.Instance.AllItems.Where(item => item.id == id).ToList());
+            }
+            foreach (int id in data.spellsId)
+            {
+                loadSpells.AddRange(SpellManager.Instance.AllSpells.Where(spell => spell.id == id).ToList());
             }
 
             foreach (Item item in loadItems)
@@ -88,6 +95,7 @@ namespace Core
             levelHandler.SetIntelligence(data.intelligence);
             InventoryManager.Instance.SetCoins(data.coins, false);
             InventoryManager.Instance.Add(loadItems);
+            SpellManager.Instance.Add(loadSpells);
 
             var playerTransform = player.transform;
 
