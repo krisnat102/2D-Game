@@ -5,9 +5,12 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using Core;
 using Krisnat.Assets.Scripts;
+using Krisnat;
+using UnityEngine.UIElements;
 
 public class MenuManager : MonoBehaviour
 {
+    #region Private Variables
     [SerializeField] private GameObject menu;
     [SerializeField] private GameObject miniMenu;
     [SerializeField] private GameObject settings;
@@ -16,8 +19,13 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private TMP_Dropdown qualityDropdown;
     [SerializeField] private TMP_Dropdown fpsDropdown;
 
-    Resolution[] resolutions;
+    [SerializeField] private float openingMenuDuration = 0.2f;
+    [SerializeField] private float closingMenuDuration = 0.2f;
 
+    private Resolution[] resolutions;
+    #endregion
+
+    #region Unity Methods
     private void Start()
     {
         resolutions = Screen.resolutions;
@@ -59,15 +67,39 @@ public class MenuManager : MonoBehaviour
             if (menu.activeSelf)
             {
                 Unpause();
+                menu.SetActive(false);
+                //UIManager.Instance.OpenUIAnimation(miniMenu, 0.05f, closingMenuDuration, false);
             }
             else
             {
                 menu.SetActive(true);
+                /*var scale = miniMenu.transform.localScale.x;
+                miniMenu.transform.localScale = new Vector3(0.05f, 0.05f, miniMenu.transform.localScale.z);
+                UIManager.Instance.OpenUIAnimation(miniMenu, scale, openingMenuDuration, true);
 
-                Core.GameManager.Instance.gamePaused = true;
+                Core.GameManager.Instance.gamePaused = true;*/
                 PauseGame();
             }
         }
+    }
+    #endregion
+
+    #region Other Methods
+    private void PauseGame()
+    {
+        if (Core.GameManager.Instance.gamePaused)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+    }
+    public void Unpause()
+    {
+        Core.GameManager.Instance.gamePaused = false;
+        PauseGame();
     }
 
     public void LoadVideoSettings()
@@ -87,18 +119,9 @@ public class MenuManager : MonoBehaviour
             fpsDropdown.SetValueWithoutNotify(PlayerPrefs.GetInt("Fps"));
         }
     }
+    #endregion
 
-    private void PauseGame()
-    {
-        if (Core.GameManager.Instance.gamePaused)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1;
-        }
-    }
+    #region Settings
     public void SetQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
@@ -147,6 +170,9 @@ public class MenuManager : MonoBehaviour
     {
         Screen.fullScreen = isFullscreen;
     }
+    #endregion
+
+    #region Menu
     public void StartSettings()
     {
         settings.SetActive(true);
@@ -174,11 +200,5 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
-    public void Unpause()
-    {
-        menu.SetActive(false);
-
-        Core.GameManager.Instance.gamePaused = false;
-        PauseGame();
-    }
+    #endregion
 }

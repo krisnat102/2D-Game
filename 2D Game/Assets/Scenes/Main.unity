@@ -4863,6 +4863,16 @@ PrefabInstance:
       propertyPath: resolutionDropdown
       value: 
       objectReference: {fileID: 1226674587}
+    - target: {fileID: 6684929901192448983, guid: 8ca25b3807d5df8439b2cac892605be7,
+        type: 3}
+      propertyPath: closingMenuDuration
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684929901192448983, guid: 8ca25b3807d5df8439b2cac892605be7,
+        type: 3}
+      propertyPath: openingMenuDuration
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13834,6 +13844,16 @@ PrefabInstance:
       propertyPath: spellDescription
       value: 
       objectReference: {fileID: 560866237}
+    - target: {fileID: 76648772342980793, guid: d50db331ba403b54a961879a9514ab7e,
+        type: 3}
+      propertyPath: inventoryOpenTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 76648772342980793, guid: d50db331ba403b54a961879a9514ab7e,
+        type: 3}
+      propertyPath: inventoryCloseTime
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6974382459076998430, guid: d50db331ba403b54a961879a9514ab7e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14038,12 +14058,12 @@ PrefabInstance:
     - target: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
         type: 3}
       propertyPath: inventoryClosingSpeed
-      value: 0.3
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
         type: 3}
       propertyPath: inventoryOpeningSpeed
-      value: 0.3
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
         type: 3}
