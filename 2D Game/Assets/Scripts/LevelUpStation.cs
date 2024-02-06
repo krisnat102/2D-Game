@@ -17,11 +17,11 @@ namespace Krisnat
                 {
                     levelUpUI.SetActive(true);
                     levelUpUI.transform.localScale = new Vector3(0.05f, 0.05f, levelUpUI.transform.localScale.z);
-                    UIManager.Instance.OpenUIAnimation(levelUpUI, scale, openingAnimationDuration, true);
+                    UIManager.Instance.OpenCloseUIAnimation(levelUpUI, scale, openingAnimationDuration, true);
                 }
                 else
                 {
-                    UIManager.Instance.OpenUIAnimation(levelUpUI, 0.05f, closingAnimationDuration, false);
+                    UIManager.Instance.OpenCloseUIAnimation(levelUpUI, 0.05f, closingAnimationDuration, false);
                 }
                 PlayerInputHandler.Instance.UseUseInput();
             }

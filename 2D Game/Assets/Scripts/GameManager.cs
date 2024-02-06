@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Bardent.CoreSystem;
 using Inventory;
@@ -15,15 +13,17 @@ namespace Core
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
-        public bool gamePaused = false;
+        private bool gamePaused = false;
 
         [SerializeField] private GameObject deathScreen;
         [SerializeField] private GameObject playerGO;
         [SerializeField] private Bardent.CoreSystem.Death death;
-        [SerializeField] private Transform camera;
+        [SerializeField] private new Transform camera;
 
         private Player player;
         private LevelHandler levelHandler;
+
+        public bool GamePaused { get => gamePaused; set => gamePaused = value; }
 
         #region Unity Methods
         private void Update()
@@ -49,9 +49,10 @@ namespace Core
 
             death.IsDead = false;
 
-            Stats.Instance.Health.Increase(Stats.Instance.Health.MaxValue - Stats.Instance.Health.CurrentValue);
-            Stats.Instance.Mana.Increase(Stats.Instance.Mana.MaxValue - Stats.Instance.Mana.CurrentValue);
-            Stats.Instance.Stam.Increase(Stats.Instance.Stam.MaxValue - Stats.Instance.Stam.CurrentValue);
+            //Stats.Instance.Health.Increase(Stats.Instance.Health.MaxValue - Stats.Instance.Health.CurrentValue);
+            //Stats.Instance.Mana.Increase(Stats.Instance.Mana.MaxValue - Stats.Instance.Mana.CurrentValue);
+            //Stats.Instance.Stam.Increase(Stats.Instance.Stam.MaxValue - Stats.Instance.Stam.CurrentValue);
+            LoadPlayer();
 
             playerGO.SetActive(true);
         }
@@ -66,8 +67,11 @@ namespace Core
 
             List<Item> loadItems = new();
             List<Spell> loadSpells = new();
+            List<Spell> loadActiveSpells = new();
+            List<Spell> loadActiveAbilities = new();
             InventoryManager.Instance.ClearInventory();
             SpellManager.Instance.ClearInventory();
+            SpellManager.Instance.ClearActiveBar();
 
             foreach (int id in data.itemsId)
             {
@@ -77,10 +81,13 @@ namespace Core
             {
                 loadSpells.AddRange(SpellManager.Instance.AllSpells.Where(spell => spell.id == id).ToList());
             }
-
-            foreach (Item item in loadItems)
+            foreach (int id in data.activeSpellsId)
             {
-                Debug.Log(item.name);
+                loadActiveSpells.AddRange(SpellManager.Instance.AllSpells.Where(spell => spell.id == id).ToList());
+            }
+            foreach (int id in data.activeAbilitiesId)
+            {
+                loadActiveAbilities.AddRange(SpellManager.Instance.AllSpells.Where(spell => spell.id == id).ToList());
             }
 
             player.PlayerData.SetLevel(data.level);
@@ -96,6 +103,14 @@ namespace Core
             InventoryManager.Instance.SetCoins(data.coins, false);
             InventoryManager.Instance.Add(loadItems);
             SpellManager.Instance.Add(loadSpells);
+            foreach(Spell spell in loadActiveSpells)
+            {
+                SpellManager.Instance.SpellsBar.Add(spell);
+            }
+            foreach (Spell spell in loadActiveAbilities)
+            {
+                SpellManager.Instance.AbilitiesBar.Add(spell);
+            }
 
             var playerTransform = player.transform;
 

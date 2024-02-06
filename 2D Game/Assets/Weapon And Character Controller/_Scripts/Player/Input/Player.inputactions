@@ -87,6 +87,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "CharacterTab",
+                    "type": "Button",
+                    "id": "2382500b-2d83-449b-8c82-5d190bba68ef",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Menu",
                     "type": "Button",
                     "id": "eed42dc8-1eec-4f21-9d01-4e61046f9912",
@@ -584,6 +593,17 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Mouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "44f14eba-52f6-4900-baf1-d08822fa4f48",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CharacterTab",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

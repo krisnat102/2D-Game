@@ -13,15 +13,9 @@ namespace Spells
     {
         public static SpellManager Instance;
         #region Private Variables
-        [SerializeField] private List<Spell> spells = new();
 
         [SerializeField] private Transform spellContent;
         [SerializeField] private GameObject inventorySpell;
-
-        //[SerializeField] private InventorySpellController[] InventorySpells;
-
-        [SerializeField] private GameObject spellInventory;
-        [SerializeField] private GameObject inventory;
 
         [SerializeField] private Transform spellContentBar;
         [SerializeField] private GameObject activeSpell;
@@ -34,15 +28,21 @@ namespace Spells
         [SerializeField] private UnityEngine.UI.Image spellImage;
         [SerializeField] private TMP_Text spellName, spellDescription, spellValue, spellPrice;
         [SerializeField] private GameObject description;
+
+        private GameObject spellInventory, inventory, characterTab;
+        private float spellInventoryScale;
         private bool spellAbilityTab;
+        private List<Spell> spells = new();
+        private List<Spell> spellsBar = new();
+        private List<Spell> abilitiesBar = new();
         #endregion
 
         #region Public Variables
         public List<Spell> AllSpells { get; private set; }
-        public List<Spell> Spells { get => spells; set => spells = value; }
+        public List<Spell> Spells { get => spells; private set => spells = value; }
+        public List<Spell> SpellsBar { get => spellsBar; private set => spellsBar = value; }
+        public List<Spell> AbilitiesBar { get => abilitiesBar; private set => abilitiesBar = value; }
 
-        public List<Spell> SpellsBar = new();
-        public List<Spell> AbilitiesBar = new();
 
         public UnityEngine.UI.Button useButton1;
         public UnityEngine.UI.Image spellImage1;
@@ -68,6 +68,11 @@ namespace Spells
         private void Start()
         {
             AllSpells = Core.GameManager.Instance.GetCustomAssets<Spell>("Spell", "CreatedAssets");
+
+            inventory = InventoryManager.Instance.Inventory;
+            spellInventory = InventoryManager.Instance.SpellInventory;
+            characterTab = InventoryManager.Instance.CharacterTab;
+            spellInventoryScale = spellInventory.transform.localScale.x;
         }
 
         public void Update()
@@ -77,20 +82,11 @@ namespace Spells
                 PlayerInputHandler.Instance.UseSpellInventoryInput();
                 if (!inventory.activeInHierarchy && !spellInventory.activeInHierarchy)
                 {
-                    spellInventory.SetActive(true);
-                    var scale = spellInventory.transform.localScale.x;
-                    spellInventory.transform.localScale = new Vector3(0.05f, 0.05f, spellInventory.transform.localScale.z);
-                    UIManager.Instance.OpenUIAnimation(spellInventory, scale, inventoryOpenTime, true);
-
-                    ListSpells();
-
-                    //Weapon.canFire = false;
+                    OpenCloseSpellInventory(true);
                 }
                 else
                 {
-                    UIManager.Instance.OpenUIAnimation(spellInventory, 0.05f, inventoryCloseTime, false);
-
-                    //Weapon.canFire = true;
+                    OpenCloseSpellInventory(false);
                 }
             }
 
@@ -114,6 +110,12 @@ namespace Spells
         {
             Spells.Clear();
             ListSpells();
+        }
+        public void ClearActiveBar()
+        {
+            SpellsBar.Clear();
+            AbilitiesBar.Clear();
+            ListActiveSpells();
         }
 
         public void ListSpells()
@@ -233,6 +235,24 @@ namespace Spells
                         obj.SetActive(false);
                     }
                 }
+            }
+        }
+        #endregion
+
+        #region Spell Inventory Management
+
+        public void OpenCloseSpellInventory(bool openClose)
+        {
+            if (openClose)
+            {
+                UIManager.Instance.OpenCloseUI(spellInventory, spellInventoryScale, inventoryOpenTime, true, false, true);
+                ListSpells();
+            }
+            else
+            {
+                GameObject[] uiToClose = new GameObject[2];
+                uiToClose[0] = inventory; uiToClose[1] = characterTab;
+                UIManager.Instance.OpenCloseUI(spellInventory, spellInventoryScale, inventoryCloseTime, true, false, false, uiToClose);
             }
         }
         #endregion

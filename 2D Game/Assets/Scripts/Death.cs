@@ -9,7 +9,7 @@ public class Death : MonoBehaviour
 
     private float transparency = 1f;
     private SpriteRenderer sprite;
-    private bool startFade;
+    private bool startFade = false;
 
     private void Start()
     {
@@ -18,7 +18,18 @@ public class Death : MonoBehaviour
     }
     private void Update()
     {
-        if (startFade && fade) FadeAnimation();
+        if (startFade)
+        {
+            if (sprite != null)
+            {
+                transparency -= Time.deltaTime * fadeTime;
+                sprite.color = new Color(sprite.color.r, sprite.color.b, sprite.color.g, transparency);
+                if (transparency <= 0)
+                {
+                    Destroy(gameObject);
+                }
+            }
+        }
     }
     public void DeathAnimation()
     {
@@ -29,17 +40,5 @@ public class Death : MonoBehaviour
             return;
         }
         Destroy(gameObject);
-    }
-    public void FadeAnimation()
-    {
-        if (sprite != null)
-        {
-            transparency -= Time.deltaTime * fadeTime;
-            sprite.color = new Color(sprite.color.r, sprite.color.b, sprite.color.g, transparency);
-            if (transparency == 0)
-            {
-                Destroy(gameObject);
-            }
-        }
     }
 }

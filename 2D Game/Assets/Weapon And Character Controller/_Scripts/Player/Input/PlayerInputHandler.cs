@@ -5,9 +5,13 @@ using UnityEngine.InputSystem;
 public class PlayerInputHandler : MonoBehaviour
 {
     #region OtherVariables
+    public static PlayerInputHandler Instance { get; private set; }
+
+    private bool stopAllInputs = false;
+    private bool stopAttack = false;
+
     private PlayerInput playerInput;
     private Camera cam;
-    public static PlayerInputHandler Instance { get; private set; }
 
     public delegate void AttackCancelledHandler(CombatInputs combatInput);
     public event AttackCancelledHandler OnAttackCancelled;
@@ -17,6 +21,9 @@ public class PlayerInputHandler : MonoBehaviour
 
     [SerializeField]
     private float inputHoldTime = 0.2f;
+
+    public bool StopAllInputs { get => stopAllInputs; set => stopAllInputs = value; }
+    public bool StopAttack { get => stopAttack; set => stopAttack = value; }
     #endregion
 
     #region StartTimeVariables
@@ -37,6 +44,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool DashInputStop { get; private set; }
     public bool InventoryInput { get; private set; }
     public bool SpellInventoryInput { get; private set; }
+    public bool CharacterTabInput { get; private set; }
     public bool MenuInput { get; private set; }
     public bool SpellInput { get; private set; }
     public bool AbilityInput { get; private set; }
@@ -80,13 +88,13 @@ public class PlayerInputHandler : MonoBehaviour
     #region Inputs
     public void OnPrimaryAttackInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !StopAllInputs && !StopAttack)
         {
             AttackInputs[(int)CombatInputs.primary] = true;
             OnAttackStarted?.Invoke(CombatInputs.primary);
         }
 
-        if (context.canceled)
+        if (context.canceled && !StopAllInputs && !StopAttack)
         {
             AttackInputs[(int)CombatInputs.primary] = false;
             OnAttackCancelled?.Invoke(CombatInputs.primary);
@@ -95,13 +103,13 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnSecondaryAttackInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !StopAllInputs && !StopAttack)
         {
             AttackInputs[(int)CombatInputs.secondary] = true;            
             OnAttackStarted?.Invoke(CombatInputs.secondary);
         }
 
-        if (context.canceled)
+        if (context.canceled && !StopAllInputs && !StopAttack)
         {
             AttackInputs[(int)CombatInputs.secondary] = false;
             OnAttackCancelled?.Invoke(CombatInputs.secondary);
@@ -119,14 +127,14 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnJumpInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !StopAllInputs)
         {
             JumpInput = true;
             JumpInputStop = false;
             jumpInputStartTime = Time.time;
         }
 
-        if (context.canceled)
+        if (context.canceled && !StopAllInputs)
         {
             JumpInputStop = true;
         }
@@ -134,12 +142,12 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnGrabInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !StopAllInputs)
         {
             GrabInput = true;
         }
 
-        if (context.canceled)
+        if (context.canceled && !StopAllInputs)
         {
             GrabInput = false;
         }
@@ -147,13 +155,13 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnDashInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !StopAllInputs)
         {
             DashInput = true;
             DashInputStop = false;
             dashInputStartTime = Time.time;
         }
-        else if (context.canceled)
+        else if (context.canceled && !StopAllInputs)
         {
             DashInputStop = true;
         }
@@ -161,18 +169,21 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnDashDirectionInput(InputAction.CallbackContext context)
     {
-        RawDashDirectionInput = context.ReadValue<Vector2>();
-
-        if (playerInput.currentControlScheme == "Keyboard")
+        if (!StopAllInputs)
         {
-            RawDashDirectionInput = cam.ScreenToWorldPoint((Vector3)RawDashDirectionInput) - transform.position;
-        }
+            RawDashDirectionInput = context.ReadValue<Vector2>();
 
-        DashDirectionInput = Vector2Int.RoundToInt(RawDashDirectionInput.normalized);
+            if (playerInput.currentControlScheme == "Keyboard")
+            {
+                RawDashDirectionInput = cam.ScreenToWorldPoint((Vector3)RawDashDirectionInput) - transform.position;
+            }
+
+            DashDirectionInput = Vector2Int.RoundToInt(RawDashDirectionInput.normalized);
+        }
     }
     public void OnInventoryInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !StopAllInputs)
         {
             InventoryInput = true;
         }
@@ -180,13 +191,25 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnSpellInventoryInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !StopAllInputs)
         {
             SpellInventoryInput = true;
         }
-        if (context.canceled)
+        if (context.canceled && !StopAllInputs)
         {
             SpellInventoryInput = false;
+        }
+    }
+
+    public void OnCharacterTabInput(InputAction.CallbackContext context)
+    {
+        if (context.started && !StopAllInputs)
+        {
+            CharacterTabInput = true;
+        }
+        if (context.canceled && !StopAllInputs)
+        {
+            CharacterTabInput = false;
         }
     }
 
@@ -204,11 +227,11 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnSpellInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !StopAllInputs)
         {
             SpellInput = true;
         }
-        if (context.canceled)
+        if (context.canceled && !StopAllInputs)
         {
             SpellInput = false;
         }
@@ -216,11 +239,11 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnAbilityInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !StopAllInputs)
         {
             AbilityInput = true;
         }
-        if (context.canceled)
+        if (context.canceled && !StopAllInputs)
         {
             AbilityInput = false;
         }
@@ -228,11 +251,11 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnUseInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !StopAllInputs)
         {
             UseInput = true;
         }
-        if (context.canceled)
+        if (context.canceled && !StopAllInputs)
         {
             UseInput = false;
         }
@@ -240,11 +263,11 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnSwitchSpell1Input(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !StopAllInputs)
         {
             SwitchSpell1Input = true;
         }
-        if (context.canceled)
+        if (context.canceled && !StopAllInputs)
         {
             SwitchSpell1Input = false;
         }
@@ -252,11 +275,11 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnSwitchSpell2Input(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !StopAllInputs)
         {
             SwitchSpell2Input = true;
         }
-        if (context.canceled)
+        if (context.canceled && !StopAllInputs)
         {
             SwitchSpell2Input = false;
         }
@@ -264,11 +287,11 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnSwitchAbility1Input(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !StopAllInputs)
         {
             SwitchAbility1Input = true;
         }
-        if (context.canceled)
+        if (context.canceled && !StopAllInputs)
         {
             SwitchAbility1Input = false;
         }
@@ -276,11 +299,11 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnSwitchAbility2Input(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !StopAllInputs)
         {
             SwitchAbility2Input = true;
         }
-        if (context.canceled)
+        if (context.canceled && !StopAllInputs)
         {
             SwitchAbility2Input = false;
         }
@@ -298,6 +321,7 @@ public class PlayerInputHandler : MonoBehaviour
     public void UseUseInput() => UseInput = false;
     public void UseInventoryInput() => InventoryInput = false;
     public void UseSpellInventoryInput() => SpellInventoryInput = false;
+    public void UseCharacterTabInput() => CharacterTabInput = false;
     public void UseMenuInpit() => MenuInput = false;
     public void UseSwitchSpell1Input() => SwitchSpell1Input = false;
     public void UseSwitchSpell2Input() => SwitchSpell2Input = false;

@@ -34,8 +34,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   minCoinsDropped: 15
-  maxCoinsDropped: 27
+  maxCoinsDropped: 34
   lookAtPlayer: 0
+  flipWhenPlayerIsRight: 1
   deathEffect: {fileID: 489641561373093210, guid: 95e6e7e3a2c75aa48a778d33175c94e8,
     type: 3}
   bloodEffect: {fileID: 7515634647306772147, guid: b6be51001a0800f4abd4e30fe133548b,

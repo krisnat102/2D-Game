@@ -1,12 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 using Krisnat;
 using UnityEditor;
-using System.Collections;
-using UnityEngine.UIElements;
+using Spells;
 
 namespace Inventory
 {
@@ -26,9 +24,12 @@ namespace Inventory
 
         [SerializeField] private GameObject inventory, spellInventory, characterTab;
 
-        [Header("Inventory")]
-        [SerializeField] private float inventoryOpeningSpeed = 2;
-        [SerializeField] private float inventoryClosingSpeed = 2;
+        [Header("Animations")]
+        [SerializeField] private float inventoryOpeningSpeed = 2f;
+        [SerializeField] private float inventoryClosingSpeed = 2f;
+
+        [SerializeField] private float characterTabOpeningSpeed = 2f;
+        [SerializeField] private float characterTabClosingSpeed = 2f;
 
         [Header("Equipment MiniMenu")]
         [SerializeField] private Animator equipmentMenuAnimator;
@@ -50,6 +51,7 @@ namespace Inventory
         private List<Item> distinctItems, duplicates = new();
         private List<Item> allItems = new();
         private bool coinAnimationTracker;
+        private float inventoryScale, characterTabScale;
         //private bool inventoryOpenAnimationTracker;
         //private bool inventoryCloseAnimationTracker;
         #endregion
@@ -81,6 +83,9 @@ namespace Inventory
         public List<Item> DistinctItems { get => distinctItems; private set => distinctItems = value; }
         public List<Item> Duplicates { get => duplicates; private set => duplicates = value; }
         public List<Item> Items { get => items; private set => items = value; }
+        public GameObject Inventory { get => inventory; private set => inventory = value; }
+        public GameObject SpellInventory { get => spellInventory; private set => spellInventory = value; }
+        public GameObject CharacterTab { get => characterTab; private set => characterTab = value; }
         #endregion
 
         #region Enums
@@ -105,13 +110,16 @@ namespace Inventory
         private void Start()
         {
             AllItems = Core.GameManager.Instance.GetCustomAssets<Item>("Item", "CreatedAssets");
+
+            inventoryScale = inventory.transform.localScale.x;
+            characterTabScale = characterTab.transform.localScale.x;
         }
 
         public void Update()
         {
-            InventoryActiveInHierarchy = inventory.activeInHierarchy;
-            SpellInventoryActiveInHierarchy = spellInventory.activeInHierarchy;
-            CharacterTabActiveInHierarchy = characterTab.activeInHierarchy;
+            InventoryActiveInHierarchy = Inventory.activeInHierarchy;
+            SpellInventoryActiveInHierarchy = SpellInventory.activeInHierarchy;
+            CharacterTabActiveInHierarchy = CharacterTab.activeInHierarchy;
 
             coinCounter.text = Coins.ToString();
             inventoryCoinCounter.text = Coins.ToString();
@@ -127,21 +135,34 @@ namespace Inventory
                 else
                 {
                     OpenCloseInventory(false);
-
-                    //Weapon.canFire = true;
+                }
+            }
+            if (PlayerInputHandler.Instance.CharacterTabInput)
+            {
+                PlayerInputHandler.Instance.UseCharacterTabInput();
+                if (!InventoryActiveInHierarchy && !SpellInventoryActiveInHierarchy && !CharacterTabActiveInHierarchy)
+                {
+                    OpenCloseCharacterTab(true);
+                }
+                else
+                {
+                    OpenCloseCharacterTab(false);
                 }
             }
 
             if (PlayerInputHandler.Instance.MenuInput)
             {
-                if (InventoryActiveInHierarchy || SpellInventoryActiveInHierarchy || CharacterTabActiveInHierarchy)
+                if (InventoryActiveInHierarchy)
                 {
-                    PlayerInputHandler.Instance.UseMenuInpit();
-
-                    inventory.SetActive(false);
-                    spellInventory.SetActive(false);
-
-                    //Weapon.canFire = true;
+                    OpenCloseInventory(false);
+                }
+                else if (SpellInventoryActiveInHierarchy)
+                {
+                    SpellManager.Instance.OpenCloseSpellInventory(false);
+                }
+                else if (CharacterTabActiveInHierarchy)
+                {
+                    OpenCloseCharacterTab(false);
                 }
             }
         }
@@ -161,10 +182,7 @@ namespace Inventory
         {
             if (openOrClose)
             {
-                inventory.SetActive(true);
-                var scale = inventory.transform.localScale.x;
-                inventory.transform.localScale = new Vector3(0.05f, 0.05f, inventory.transform.localScale.z);
-                UIManager.Instance.OpenUIAnimation(inventory, scale, inventoryOpeningSpeed, true);
+                UIManager.Instance.OpenCloseUI(Inventory, inventoryScale, inventoryOpeningSpeed, true, false, true);
 
                 //TODO: Optimize this awful code out of the game
                 //(done 2 times because of a bug with the item count upon first opening on inv)
@@ -173,14 +191,24 @@ namespace Inventory
             }
             else
             {
-                UIManager.Instance.OpenUIAnimation(inventory, 0.05f, inventoryClosingSpeed, false);
-                spellInventory.SetActive(false);
-                characterTab.SetActive(false);
+                GameObject[] uiToClose = new GameObject[2];
+                uiToClose[0] = SpellInventory; uiToClose[1] = CharacterTab;
+                UIManager.Instance.OpenCloseUI(Inventory, inventoryScale, inventoryClosingSpeed, true, false, false, uiToClose);
+            }
+        }
+        
 
-                if (Shop)
-                {
-                    Shop = false;
-                }
+        public void OpenCloseCharacterTab(bool openOrClose)
+        {
+            if (openOrClose)
+            {
+                UIManager.Instance.OpenCloseUI(CharacterTab, characterTabScale, characterTabOpeningSpeed, true, false, true);
+            }
+            else
+            {
+                GameObject[] uiToClose = new GameObject[2];
+                uiToClose[0] = SpellInventory; uiToClose[1] = Inventory;
+                UIManager.Instance.OpenCloseUI(CharacterTab, characterTabScale, characterTabClosingSpeed, true, false, false, uiToClose);
             }
         }
         #endregion

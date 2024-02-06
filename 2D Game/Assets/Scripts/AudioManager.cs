@@ -5,26 +5,30 @@ using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
+    #region Static Variables
+    public static float musicSave = 0;
+    public static float sfxSave = 0;
+    public static AudioManager Instance;
+    #endregion
+
     #region Private Variables
+    [Header("Audio Settings")]
     [SerializeField] private AudioMixer musicMixer;
     [SerializeField] private AudioMixer sfxMixer;
     [SerializeField] private Slider Music;
     [SerializeField] private Slider SFX;
     [SerializeField] private Toggle Mute;
 
+    [Header("Sounds")]
     [SerializeField] private AudioSource buySound;
     [SerializeField] private AudioSource coinPickupSound;
+
+    private bool muteTracker;
     #endregion
 
     #region Method Variables
     public AudioSource BuySound { get => buySound; private set => buySound = value; }
     public AudioSource CoinPickupSound { get => coinPickupSound; private set => coinPickupSound = value; }
-    #endregion
-
-    #region Static Variables
-    public static float musicSave = 0;
-    public static float sfxSave = 0;
-    public static AudioManager Instance;
     #endregion
 
     #region Unity Methods
@@ -81,6 +85,8 @@ public class AudioManager : MonoBehaviour
     public void MuteAudio(bool mute)
     {
         Mute.isOn = mute;
+        muteTracker = mute;
+
         if (mute)
         {
             musicMixer.SetFloat("volume", -80);
@@ -96,21 +102,33 @@ public class AudioManager : MonoBehaviour
     }
     public void MusicAudio(float volume)
     {
+        if (!muteTracker)
+        {
+            musicMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
 
-        musicMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
+            musicSave = volume;
 
-        musicSave = volume;
-
-        SaveAudioSettings();
+            SaveAudioSettings();
+        }
+        else
+        {
+            musicSave = volume;
+        } 
     }
     public void SFXAudio(float volume)
     {
+        if (!muteTracker)
+        {
+            sfxMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
 
-        sfxMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
+            sfxSave = volume;
 
-        sfxSave = volume;
-
-        SaveAudioSettings();
+            SaveAudioSettings();
+        }
+        else
+        {
+            sfxSave = volume;
+        }
     }
-    #endregion
-}
+        #endregion
+    }

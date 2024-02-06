@@ -184,7 +184,7 @@ namespace Spells
         }
         #endregion
 
-        #region Spell And Ability Casting
+        #region Spell And Ability Casting Methods
         void Spell()
         {
             if (spellsBar[activeSpell] != null && Stats.Instance.Mana.CurrentValue >= spellsBar[activeSpell].cost)
@@ -260,7 +260,8 @@ namespace Spells
         }
         #endregion
 
-        void ClearSprites()
+        #region UI Methods
+        public void ClearSprites()
         {
             mainSpell.sprite = null;
             sideSpell1.sprite = null;
@@ -278,5 +279,6 @@ namespace Spells
             sideAbility1.gameObject.SetActive(false);
             sideAbility2.gameObject.SetActive(false);
         }
+        #endregion
     }
 }

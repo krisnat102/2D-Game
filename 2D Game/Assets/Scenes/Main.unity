@@ -1659,8 +1659,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1057183206}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: Unpause
-        m_Mode: 1
+        m_MethodName: OpenCloseMenu
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4625,6 +4625,11 @@ PrefabInstance:
       objectReference: {fileID: 1480049090}
     - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
         type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 189398466}
+    - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
+        type: 3}
       propertyPath: hpText
       value: 
       objectReference: {fileID: 193609028}
@@ -4670,9 +4675,24 @@ PrefabInstance:
       objectReference: {fileID: 1323743379}
     - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
         type: 3}
+      propertyPath: moveDistance
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
+        type: 3}
+      propertyPath: moveDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
+        type: 3}
       propertyPath: hpLevelUpText
       value: 
       objectReference: {fileID: 286880570}
+    - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
+        type: 3}
+      propertyPath: popUpDuration
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
         type: 3}
       propertyPath: dexLevelUpText
@@ -4690,6 +4710,12 @@ PrefabInstance:
       objectReference: {fileID: 232936001}
     - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
         type: 3}
+      propertyPath: itemPickupPopUp
+      value: 
+      objectReference: {fileID: 2129565579540532992, guid: a755190821da1ac4d8c44af17d1a55dd,
+        type: 3}
+    - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
+        type: 3}
       propertyPath: manaLevelUpText
       value: 
       objectReference: {fileID: 1185257127}
@@ -4703,6 +4729,11 @@ PrefabInstance:
       propertyPath: levelUpInterface
       value: 
       objectReference: {fileID: 645519437}
+    - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
+        type: 3}
+      propertyPath: popUpFadeDuration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
         type: 3}
       propertyPath: bowChargeTimeSlider
@@ -5049,6 +5080,8 @@ Transform:
   - {fileID: 1333019204}
   - {fileID: 966273142}
   - {fileID: 498712059}
+  - {fileID: 986147879}
+  - {fileID: 1671423153}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &215931486
@@ -5844,6 +5877,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e2225102-4b74-4763-b92d-00b3b25dedb9
     m_ActionName: Gameplay/Mouse[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 225787430}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnCharacterTabInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2382500b-2d83-449b-8c82-5d190bba68ef
+    m_ActionName: Gameplay/CharacterTab[/Keyboard/c]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -6785,7 +6834,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -178, y: 184}
+  m_AnchoredPosition: {x: -190.9, y: 184}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.46753186, y: -0.746776}
 --- !u!114 &282008635
@@ -6808,7 +6857,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Cost - 1
+  m_text: Cost - 500
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0adafc03a98c9eb4fa025c8f3c7f5b6b, type: 2}
   m_sharedMaterial: {fileID: -5356559570777352072, guid: 0adafc03a98c9eb4fa025c8f3c7f5b6b,
@@ -6873,7 +6922,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 61.04023, z: -55.158936, w: 0}
+  m_margin: {x: 0, y: 61.04023, z: -139.08559, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -7117,6 +7166,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2056851658}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &293293370
 MonoBehaviour:
@@ -11203,7 +11264,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 705189566}
         m_TargetAssemblyTypeName: Inventory.InventoryManager, Assembly-CSharp
-        m_MethodName: OpenCloseInventory
+        m_MethodName: OpenCloseCharacterTab
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14077,6 +14138,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
         type: 3}
+      propertyPath: characterTabClosingSpeed
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
+        type: 3}
+      propertyPath: characterTabOpeningSpeed
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
+        type: 3}
       propertyPath: purseAnimationTimeOnScreen
       value: 2.5
       objectReference: {fileID: 0}
@@ -15188,9 +15259,9 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 705189566}
+        m_TargetAssemblyTypeName: Inventory.InventoryManager, Assembly-CSharp
+        m_MethodName: ListItems
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15651,7 +15722,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -170, y: 248}
+  m_AnchoredPosition: {x: -182.9, y: 248}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &823069668
@@ -27019,7 +27090,7 @@ PrefabInstance:
     - target: {fileID: 167738637749498190, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 167738637749498196, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
@@ -27094,12 +27165,12 @@ PrefabInstance:
     - target: {fileID: 7355610707019080728, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7355610707019080728, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8294230122329821646, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
@@ -27584,7 +27655,7 @@ PrefabInstance:
     - target: {fileID: 4715727150763637724, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4715727151536337906, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
@@ -27640,12 +27711,12 @@ PrefabInstance:
     - target: {fileID: 8652173126370724597, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8652173126370724597, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27957,7 +28028,7 @@ Transform:
   m_GameObject: {fileID: 986147878}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.25, y: -5.84, z: 0}
+  m_LocalPosition: {x: 64.15818, y: -22.919325, z: 0.38238418}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -27966,7 +28037,7 @@ Transform:
   - {fileID: 739222142}
   - {fileID: 687198049}
   - {fileID: 1111674814}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 215040361}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &986147880
 BoxCollider2D:
@@ -65255,10 +65326,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 553799657}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 705189565}
+        m_TargetAssemblyTypeName: Spells.SpellManager, Assembly-CSharp
+        m_MethodName: CloseSpellInventory
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -68922,7 +68993,7 @@ Transform:
   m_GameObject: {fileID: 1671423152}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.275, y: 8.069, z: 0}
+  m_LocalPosition: {x: 51.13318, y: -9.0103245, z: 0.38238418}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -68930,7 +69001,7 @@ Transform:
   - {fileID: 2044105988}
   - {fileID: 2116236311}
   - {fileID: 5891248}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 215040361}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1671423154
 SpriteRenderer:
@@ -76670,8 +76741,6 @@ SceneRoots:
   - {fileID: 1007974626}
   - {fileID: 1372236344}
   - {fileID: 706019100}
-  - {fileID: 986147879}
-  - {fileID: 1671423153}
   - {fileID: 182526300}
   - {fileID: 207635945}
   - {fileID: 103014884}

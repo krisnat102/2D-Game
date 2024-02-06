@@ -34,6 +34,7 @@ public class EnemyData : ScriptableObject
 
     [Header("Behaviour")]
     public bool lookAtPlayer;
+    public bool flipWhenPlayerIsRight;
 
     [Header("Other")]
     public GameObject deathEffect;

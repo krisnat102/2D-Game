@@ -9,7 +9,11 @@ namespace Krisnat
 {
     public class UIManager : MonoBehaviour
     {
+        #region Variables
         public static UIManager Instance;
+
+        [Header("General")]
+        [SerializeField] private GameObject canvas;
 
         [Header("Purse")]
         [SerializeField] private GameObject purse;
@@ -22,16 +26,28 @@ namespace Krisnat
         [SerializeField] private GameObject levelUpInterface;
         [SerializeField] private TMP_Text levelTextLevelUpInterface, levelUpCost, hpLevelUpText, manaLevelUpText, stamLevelUpText, strLevelUpText, dexLevelUpText, intLevelUpText;
 
+        [Header("Weapon Interface")]
         [SerializeField] private Slider bowChargeTimeSlider;
+
+        [Header("Item Interface")]
+        [SerializeField] private GameObject itemPickupPopUp;
+        [SerializeField] private float moveDuration;
+        [SerializeField] private float moveDistance;
 
         private Vector3 oldPosition;
         private PlayerData playerData;
         private LevelHandler levelHandler;
         private bool purseAnimationTracker = false;
 
-        public GameObject LevelUpInterface { get => levelUpInterface; set => levelUpInterface = value; }
-        public Slider BowChargeTimeSlider { get => bowChargeTimeSlider; set => bowChargeTimeSlider = value; }
+        public GameObject LevelUpInterface { get => levelUpInterface; private set => levelUpInterface = value; }
+        public Slider BowChargeTimeSlider { get => bowChargeTimeSlider; private set => bowChargeTimeSlider = value; }
+        public GameObject ItemPickupPopUp { get => itemPickupPopUp; private set => itemPickupPopUp = value; }
+        public GameObject Canvas { get => canvas; private set => canvas = value; }
+        public float MoveDuration { get => moveDuration; private set => moveDuration = value; }
+        public float MoveDistance { get => moveDistance; private set => moveDistance = value; }
+        #endregion
 
+        #region Unity Methods
         private void Awake()
         {
             Instance = this;
@@ -59,23 +75,12 @@ namespace Krisnat
             dexLevelUpText.text = "DEX - " + levelHandler.DexterityCounter.ToString();
             intLevelUpText.text = "INT - " + levelHandler.IntelligenceCounter.ToString();
         }
+        #endregion
 
-        public void MovePurseAnimation(float animationDistance, float animationDuration)
-        {
-            if (!purseAnimationTracker)
-            {
-                purseAnimationTracker = true;
-                purse.transform.LeanMove(new Vector2(purse.transform.position.x, purse.transform.position.y + animationDistance), animationDuration);
-                oldPosition = purse.transform.position;
-            }
-            else
-            {
-                purseAnimationTracker = false;
-                purse.transform.LeanMove(oldPosition, animationDuration);
-            }
-        }
+        #region Core UI Methods
 
-        public void OpenUIAnimation(GameObject menu, float targetSize, float duration, bool openClose)
+        #region Open or Close UI Animation
+        public void OpenCloseUIAnimation(GameObject menu, float targetSize, float duration, bool openClose)
         {
             if(openClose) StartCoroutine(OpenUIAnimationCoroutine(menu, targetSize, duration));
             else StartCoroutine(CloseUIAnimationCoroutine(menu, targetSize, duration));
@@ -115,12 +120,74 @@ namespace Krisnat
             menu.transform.localScale = initialScale;
             menu.SetActive(false);
         }
+        #endregion
 
+        #region Open or Close UI
+        public void OpenCloseUI(GameObject ui, float initialScale, float openingSpeed, bool stopAttack, bool stopAllInputs, bool openOrClose)
+        {
+            OpenCloseUI(ui, initialScale, openingSpeed, stopAttack, stopAllInputs, openOrClose, null);
+        }
+        public void OpenCloseUI(GameObject ui, float initialScale, float openingSpeed, bool stopAttack, bool stopAllInputs, bool openOrClose, GameObject[] uiToClose)
+        {
+            if (openOrClose)
+            {
+                ui.SetActive(true);
+                ui.transform.localScale = new Vector3(0.05f, 0.05f, ui.transform.localScale.z);
+                OpenCloseUIAnimation(ui, initialScale, openingSpeed, true);
+
+                if (stopAttack) PlayerInputHandler.Instance.StopAttack = true;
+                if (stopAllInputs) PlayerInputHandler.Instance.StopAllInputs = true;
+            }
+            else
+            {
+                OpenCloseUIAnimation(ui, 0.05f, openingSpeed, false);
+
+                if (stopAttack) PlayerInputHandler.Instance.StopAttack = false;
+                if (stopAllInputs) PlayerInputHandler.Instance.StopAllInputs = false;
+
+                if (InventoryManager.Instance.Shop)
+                {
+                    InventoryManager.Instance.Shop = false;
+                }
+
+                if (uiToClose != null)
+                {
+                    foreach (var uiElement in uiToClose)
+                    {
+                        uiElement.SetActive(false);
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #endregion
+
+        #region UI Animation
+        public void MovePurseAnimation(float animationDistance, float animationDuration)
+        {
+            if (!purseAnimationTracker)
+            {
+                purseAnimationTracker = true;
+                purse.transform.LeanMove(new Vector2(purse.transform.position.x, purse.transform.position.y + animationDistance), animationDuration);
+                oldPosition = purse.transform.position;
+            }
+            else
+            {
+                Invoke("StopPurseTracker", animationDuration);
+                purse.transform.LeanMove(oldPosition, animationDuration);
+            }
+        }
+        private void StopPurseTracker() => purseAnimationTracker = false;
+        #endregion
+
+        #region Buttons
         public void OpenCharacterTabBn()
         {
             InventoryManager.Instance.OpenCloseInventory(false);
 
             characterTab.SetActive(true);
         }
+        #endregion
     }
 }

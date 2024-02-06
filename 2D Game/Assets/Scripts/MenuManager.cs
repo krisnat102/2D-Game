@@ -1,12 +1,10 @@
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine.SceneManagement;
-using Core;
 using Krisnat.Assets.Scripts;
 using Krisnat;
-using UnityEngine.UIElements;
+using Inventory;
 
 public class MenuManager : MonoBehaviour
 {
@@ -23,12 +21,15 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private float closingMenuDuration = 0.2f;
 
     private Resolution[] resolutions;
+    private float scale;
     #endregion
 
     #region Unity Methods
     private void Start()
     {
         resolutions = Screen.resolutions;
+
+        scale = miniMenu.transform.localScale.x;
 
         resolutionDropdown.ClearOptions();
 
@@ -61,33 +62,7 @@ public class MenuManager : MonoBehaviour
 
     void Update()
     {
-        if (PlayerInputHandler.Instance.MenuInput && SceneManager.GetActiveScene().name != "MainMenu")
-        {
-            PlayerInputHandler.Instance.UseMenuInpit();
-            if (menu.activeSelf)
-            {
-                Unpause();
-                menu.SetActive(false);
-                //UIManager.Instance.OpenUIAnimation(miniMenu, 0.05f, closingMenuDuration, false);
-            }
-            else
-            {
-                menu.SetActive(true);
-                /*var scale = miniMenu.transform.localScale.x;
-                miniMenu.transform.localScale = new Vector3(0.05f, 0.05f, miniMenu.transform.localScale.z);
-                UIManager.Instance.OpenUIAnimation(miniMenu, scale, openingMenuDuration, true);
-
-                Core.GameManager.Instance.gamePaused = true;*/
-                PauseGame();
-            }
-        }
-    }
-    #endregion
-
-    #region Other Methods
-    private void PauseGame()
-    {
-        if (Core.GameManager.Instance.gamePaused)
+        if (Core.GameManager.Instance.GamePaused)
         {
             Time.timeScale = 0f;
         }
@@ -95,13 +70,46 @@ public class MenuManager : MonoBehaviour
         {
             Time.timeScale = 1;
         }
-    }
-    public void Unpause()
-    {
-        Core.GameManager.Instance.gamePaused = false;
-        PauseGame();
-    }
 
+        if (PlayerInputHandler.Instance.MenuInput && SceneManager.GetActiveScene().name != "MainMenu" && !InventoryManager.Instance.InventoryActiveInHierarchy && !InventoryManager.Instance.SpellInventoryActiveInHierarchy && !InventoryManager.Instance.CharacterTabActiveInHierarchy)
+        {
+            PlayerInputHandler.Instance.UseMenuInpit();
+
+            if (!menu.activeInHierarchy)
+            {
+                OpenCloseMenu(true);
+            }
+            else
+            {
+                OpenCloseMenu(false);
+            }
+        }
+    }
+    #endregion
+
+    #region Other Methods
+    public void OpenCloseMenu(bool openOrClose)
+    {
+        if (openOrClose)
+        {
+            menu.SetActive(true);
+            UIManager.Instance.OpenCloseUI(miniMenu, scale, openingMenuDuration, false, true, true);
+            Core.GameManager.Instance.GamePaused = true;
+        }
+        else
+        {
+            //UIManager.Instance.OpenCloseUI(miniMenu, scale, closingMenuDuration, false, true, false);
+            //Invoke("CloseMenu", closingMenuDuration);
+            CloseMenu();
+        }
+    }
+    private void CloseMenu()
+    { 
+        menu.SetActive(false);
+        Core.GameManager.Instance.GamePaused = false;
+        PlayerInputHandler.Instance.StopAllInputs = false;
+        PlayerInputHandler.Instance.StopAttack = false;
+    }
     public void LoadVideoSettings()
     {
         if (PlayerPrefs.HasKey("Quality"))
@@ -172,7 +180,7 @@ public class MenuManager : MonoBehaviour
     }
     #endregion
 
-    #region Menu
+    #region Menu Buttons
     public void StartSettings()
     {
         settings.SetActive(true);
@@ -185,7 +193,7 @@ public class MenuManager : MonoBehaviour
     public void ExitGame()
     {
         var player = transform.Find("Player").GetComponent<Player>();
-        SaveSystem.SavePlayer(player);
+        if(player != null) SaveSystem.SavePlayer(player);
         Application.Quit();
 
         Debug.Log("exit");

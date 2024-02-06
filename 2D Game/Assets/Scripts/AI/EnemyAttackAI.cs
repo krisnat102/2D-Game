@@ -11,6 +11,9 @@ public class EnemyAttackAI : MonoBehaviour
 
     private bool inRange = false;
     private bool inSight = false;
+    private bool inRangeOfSight = false;
+    private bool flipTracker;
+    private Enemy enemy;
 
     public bool InRange { get => inRange; private set => inRange = value; }
     public bool InSight { get => inSight; private set => inSight = value; }
@@ -22,10 +25,11 @@ public class EnemyAttackAI : MonoBehaviour
         if (player && attackOrDetectRange)
         {
             InRange = true;
+            flipTracker = true;
         }
         if (player && !attackOrDetectRange)
         {
-            InSight = true;
+            inRangeOfSight = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -34,34 +38,53 @@ public class EnemyAttackAI : MonoBehaviour
         if (player && attackOrDetectRange)
         {
             InRange = false;
+            if (flipTracker == false)
+            {
+                Flip();
+                flipTracker = true;
+            }
         }
         if (player && !attackOrDetectRange)
         {
-            InSight = false;
+            inRangeOfSight = false;
         }
-    }
-
-    public bool PlayerInRange()
-    {
-        return InRange;
-    }
-    public bool PlayerInSight()
-    {
-        return InSight;
     }
 
     private void Update()
     {
-        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, playerTrans.position - firePoint.position, Mathf.Infinity, ~IgnoreMe); //shoots a ray from the firepoint to the player
-
-        if (hitInfo)
+        if (inRangeOfSight)
         {
-            Player player = hitInfo.transform.GetComponent<Player>(); //checks if it hit the player
-            if (player != null)
+            RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, playerTrans.position - firePoint.position, Mathf.Infinity, ~IgnoreMe); //shoots a ray from the fire point to the player
+
+            if (hitInfo)
             {
-                InSight = true;
+                Player player = hitInfo.transform.GetComponent<Player>(); //checks if it hit the player
+                if (player != null)
+                {
+                    InSight = true;
+                }
+                else InSight = false;
             }
-            else InSight = false;
         }
+
+        if (InRange && enemy.data.flipWhenPlayerIsRight && playerTrans.position.x > enemy.transform.position.x && flipTracker)
+        {
+            Flip();
+            flipTracker = false;
+        }
+        if (InRange && enemy.data.flipWhenPlayerIsRight && playerTrans.position.x < enemy.transform.position.x && !flipTracker)
+        {
+            Flip();
+            flipTracker = true;
+        }
+    }
+    private void Start()
+    {
+        enemy = transform.parent.GetComponent<Enemy>();
+    }
+
+    private void Flip()
+    {
+        enemy.transform.localScale = new Vector3(-1 * enemy.transform.localScale.x, enemy.transform.localScale.y, enemy.transform.localScale.z);
     }
 }

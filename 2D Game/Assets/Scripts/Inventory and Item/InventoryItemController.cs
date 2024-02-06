@@ -41,6 +41,7 @@ namespace Inventory
             InventoryManager.Instance.Remove(item);
 
             Destroy(gameObject);
+            InventoryManager.Instance.ListItems();
         }
         public void RemoveItem2(Item item)
         {
@@ -65,6 +66,7 @@ namespace Inventory
 
             itemCount.text = (item.ItemCount > 1 ? "x" + item.ItemCount.ToString() : "");
             itemCount.ForceMeshUpdate();
+            InventoryManager.Instance.ListItems();
         }
 
         public void UseItem()

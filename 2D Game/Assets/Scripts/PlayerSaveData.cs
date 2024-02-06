@@ -17,6 +17,8 @@ namespace Krisnat.Assets.Scripts
         public float[] position;
         public int[] itemsId;
         public int[] spellsId;
+        public int[] activeSpellsId;
+        public int[] activeAbilitiesId;
 
         public PlayerSaveData(Player player)
         {
@@ -39,10 +41,10 @@ namespace Krisnat.Assets.Scripts
             intelligence = levelHandler.IntelligenceCounter;
 
             coins = InventoryManager.Instance.Coins;
-            List<Spell> allSpellsArray = SpellManager.Instance.AllSpells;
-            List<Item> allItemsArray = InventoryManager.Instance.AllItems;
-
+            
             spellsId = SpellManager.Instance.Spells.Select(spell => spell.id).ToArray();
+            activeSpellsId = SpellManager.Instance.SpellsBar.Select(spell => spell.id).ToArray();
+            activeAbilitiesId = SpellManager.Instance.AbilitiesBar.Select(spell => spell.id).ToArray();
             itemsId = InventoryManager.Instance.Items.Select(item => item.id).ToArray();
 
             position = new float[3];

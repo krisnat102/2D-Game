@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Krisnat
 {
-    public class Shop : MonoBehaviour, IStructurable
+    public class Shop : MonoBehaviour, IStructurable 
     {
         public void OnTriggerStay2D(Collider2D collision)
         {

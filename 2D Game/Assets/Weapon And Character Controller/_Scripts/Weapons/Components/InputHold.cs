@@ -10,8 +10,8 @@ namespace Bardent.Weapons.Components
 {
     public class InputHold : WeaponComponent <InputHoldData , AttackInputHold>
     {
-        private bool input;
-        private bool minHoldPassed;
+        private bool input = false;
+        private bool minHoldPassed = false;
         private bool attackStarted = false;
         private bool cooldown = false;
         private bool lockMovement = false;
@@ -24,7 +24,6 @@ namespace Bardent.Weapons.Components
         private CollisionSenses collisionSenses;
         private WeaponDataSO currentWeaponData;
         private const float COOLDOWN_DURATION = 0.3f;
-
 
         protected override void HandleEnter()
         {
