@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 3041750686747491371}
   - component: {fileID: -540780155965849331}
   - component: {fileID: 6064843278796858386}
+  - component: {fileID: 8403151154774915182}
   m_Layer: 5
   m_Name: ItemPickUpUI
   m_TagString: Untagged
@@ -239,8 +240,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationLength: 2
-  fade: 0
-  fadeTime: 0
+  fade: 1
+  fadeTime: 1
+  ui: 0
+  uiCanvasGroup: 1
+--- !u!225 &8403151154774915182
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129565579540532992}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3410337347924950077
 GameObject:
   m_ObjectHideFlags: 0
