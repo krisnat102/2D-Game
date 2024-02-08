@@ -9,17 +9,19 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
     [Header("Pathfinding")]
     [SerializeField] private Transform target;
 
+    [Header("Grounded Check")]
+
+    [SerializeField] private LayerMask WhatIsGround;
+    [SerializeField] private Transform GroundCheck;
+
     private Path path;
     private int currentWaypoint = 0;
     private bool isGrounded = false;
     private Seeker seeker;
     private Rigidbody2D rb;
     private Animator animator;
+    private Vector3 oldPosition;
 
-    [Header("Grounded Check")]
-
-    [SerializeField] private LayerMask WhatIsGround;
-    [SerializeField] private Transform GroundCheck;
     const float GroundedRadius = .2f;
 
     #endregion
@@ -50,7 +52,15 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
             else isGrounded = false;
         }
 
-        float horizontalMove = PlayerInputHandler.Instance.NormInputX * dataAI.speed;
+        int horizontalMove;
+
+        if (oldPosition.x != transform.position.x)
+        {
+            horizontalMove = 1;
+        }
+        else horizontalMove = 0;
+
+        oldPosition = transform.position;
 
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
@@ -115,10 +125,7 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
         }
     }
 
-    private bool TargetInDistance()
-    {
-        return Vector2.Distance(transform.position, target.transform.position) < dataAI.activateDistance;
-    }
+    private bool TargetInDistance() => Vector2.Distance(transform.position, target.transform.position) < dataAI.activateDistance;
 
     private void OnPathComplete(Path p)
     {

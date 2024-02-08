@@ -17,16 +17,18 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private TMP_Dropdown qualityDropdown;
     [SerializeField] private TMP_Dropdown fpsDropdown;
 
-    [SerializeField] private float openingMenuDuration = 0.2f;
     [SerializeField] private float closingMenuDuration = 0.2f;
 
     private Resolution[] resolutions;
+    private Animator animator;
     private float scale;
     #endregion
 
     #region Unity Methods
     private void Start()
     {
+        animator = menu.GetComponentInChildren<Animator>();
+
         resolutions = Screen.resolutions;
 
         scale = miniMenu.transform.localScale.x;
@@ -71,7 +73,13 @@ public class MenuManager : MonoBehaviour
             Time.timeScale = 1;
         }
 
-        if (PlayerInputHandler.Instance.MenuInput && SceneManager.GetActiveScene().name != "MainMenu" && !InventoryManager.Instance.InventoryActiveInHierarchy && !InventoryManager.Instance.SpellInventoryActiveInHierarchy && !InventoryManager.Instance.CharacterTabActiveInHierarchy)
+        if (
+            PlayerInputHandler.Instance.MenuInput && SceneManager.GetActiveScene().name != "MainMenu"
+            && !InventoryManager.Instance.InventoryActiveInHierarchy
+            && !InventoryManager.Instance.SpellInventoryActiveInHierarchy
+            && !InventoryManager.Instance.CharacterTabActiveInHierarchy
+            && !UIManager.Instance.LevelUpInterface.activeInHierarchy
+            )
         {
             PlayerInputHandler.Instance.UseMenuInpit();
 
@@ -92,14 +100,16 @@ public class MenuManager : MonoBehaviour
     {
         if (openOrClose)
         {
+            //UIManager.Instance.OpenCloseUI(miniMenu, scale, openingMenuDuration, false, true, true);
             menu.SetActive(true);
-            UIManager.Instance.OpenCloseUI(miniMenu, scale, openingMenuDuration, false, true, true);
+            animator.SetTrigger("menuOpen");
             Core.GameManager.Instance.GamePaused = true;
         }
         else
         {
             //UIManager.Instance.OpenCloseUI(miniMenu, scale, closingMenuDuration, false, true, false);
             //Invoke("CloseMenu", closingMenuDuration);
+            animator.SetTrigger("menuClose");
             CloseMenu();
         }
     }

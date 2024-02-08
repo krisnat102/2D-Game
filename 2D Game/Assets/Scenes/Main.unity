@@ -4676,12 +4676,12 @@ PrefabInstance:
     - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
         type: 3}
       propertyPath: moveDistance
-      value: 50
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
         type: 3}
       propertyPath: moveDuration
-      value: 1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
         type: 3}
@@ -14134,7 +14134,7 @@ PrefabInstance:
     - target: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
         type: 3}
       propertyPath: purseAnimationDuration
-      value: 0.75
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
         type: 3}

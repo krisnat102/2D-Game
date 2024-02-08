@@ -25,6 +25,7 @@ namespace Krisnat
         [Header("Level Up Interface")]
         [SerializeField] private GameObject levelUpInterface;
         [SerializeField] private TMP_Text levelTextLevelUpInterface, levelUpCost, hpLevelUpText, manaLevelUpText, stamLevelUpText, strLevelUpText, dexLevelUpText, intLevelUpText;
+        [SerializeField] private float levelUpClosingDuration = 0.2f;
 
         [Header("Weapon Interface")]
         [SerializeField] private Slider bowChargeTimeSlider;
@@ -74,6 +75,11 @@ namespace Krisnat
             strLevelUpText.text = "STR - " + levelHandler.StrengthCounter.ToString();
             dexLevelUpText.text = "DEX - " + levelHandler.DexterityCounter.ToString();
             intLevelUpText.text = "INT - " + levelHandler.IntelligenceCounter.ToString();
+
+            if (PlayerInputHandler.Instance.MenuInput && LevelUpInterface.activeInHierarchy)
+            {
+                OpenCloseUIAnimation(LevelUpInterface, 0.05f, levelUpClosingDuration, false);
+            }
         }
         #endregion
 

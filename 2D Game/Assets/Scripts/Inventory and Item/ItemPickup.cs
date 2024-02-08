@@ -18,7 +18,7 @@ namespace Inventory
         private bool isPickedUp = false;
         private Animator animator;
         private GameObject itemPrice;
-        private List<PopUpUI> itemPopUps = new();
+        public static List<PopUpUI> itemPopUps = new();
 
         public void Pickup()
         {
@@ -59,24 +59,23 @@ namespace Inventory
                 }
 
                 itemPopUps.Add(itemPopUp);
-                Debug.Log(itemPopUps.Count);
 
                 switch (resolutionHeight)
                 {
                     case <= 720:
-                        itemPopUp.transform.position = itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -300, 0);
-                        break;
-                    case <= 1080:
                         itemPopUp.transform.position = itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -350, 0);
                         break;
-                    case <= 1440:
-                        itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -400, 0);
+                    case <= 1080:
+                        itemPopUp.transform.position = itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -400, 0);
                         break;
-                    case <= 2160:
+                    case <= 1440:
                         itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -450, 0);
                         break;
-                    case > 2160:
+                    case <= 2160:
                         itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -500, 0);
+                        break;
+                    case > 2160:
+                        itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -550, 0);
                         break;
                 }
                 itemPopUp.GetComponentsInChildren<Image>()[1].sprite = item.icon;

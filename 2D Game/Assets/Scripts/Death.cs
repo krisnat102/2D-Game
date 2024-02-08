@@ -1,3 +1,4 @@
+using Inventory;
 using Krisnat;
 using UnityEngine;
 using UnityEngine.U2D;
@@ -16,6 +17,7 @@ public class Death : MonoBehaviour
     private SpriteRenderer sprite;
     private Image image;
     private CanvasGroup canvasGroup;
+    private PopUpUI popUp;
     private bool startFade = false;
 
     private void Start()
@@ -24,6 +26,7 @@ public class Death : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         image = GetComponent<Image>();
         canvasGroup = GetComponent<CanvasGroup>();
+        popUp = GetComponent<PopUpUI>();    
     }
     private void Update()
     {
@@ -53,6 +56,10 @@ public class Death : MonoBehaviour
                 canvasGroup.alpha = transparency;
                 if (transparency <= 0)
                 {
+                    if(popUp != null)
+                    {
+                        ItemPickup.itemPopUps.Remove(popUp);
+                    }
                     Destroy(gameObject);
                 }
             }
