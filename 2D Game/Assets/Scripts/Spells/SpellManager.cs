@@ -83,6 +83,7 @@ namespace Spells
                 if (!inventory.activeInHierarchy && !spellInventory.activeInHierarchy)
                 {
                     OpenCloseSpellInventory(true);
+                    ListSpells();
                 }
                 else
                 {
@@ -91,7 +92,7 @@ namespace Spells
             }
 
         }
-#endregion
+        #endregion
 
         #region Spell Management
         public void Add(Spell spell)

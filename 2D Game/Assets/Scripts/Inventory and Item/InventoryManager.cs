@@ -34,7 +34,7 @@ namespace Inventory
         [Header("Equipment MiniMenu")]
         [SerializeField] private Animator equipmentMenuAnimator;
         [SerializeField] private GameObject equipmentMenu;
-        [SerializeField] private UnityEngine.UI.Button helmetBn, chestplateBn, glovesBn, bootsBn;
+        [SerializeField] private UnityEngine.UI.Button helmetBn, chestplateBn, glovesBn, bootsBn, weapon1Bn, weapon2Bn;
 
         [Header("Item Description")]
         [SerializeField] private UnityEngine.UI.Button useButton;
@@ -66,6 +66,8 @@ namespace Inventory
         public UnityEngine.UI.Button ChestplateBn { get => chestplateBn; private set => chestplateBn = value; }
         public UnityEngine.UI.Button GlovesBn { get => glovesBn; private set => glovesBn = value; }
         public UnityEngine.UI.Button BootsBn { get => bootsBn; private set => bootsBn = value; }
+        public UnityEngine.UI.Button Weapon1Bn { get => weapon1Bn; private set => weapon1Bn = value; }
+        public UnityEngine.UI.Button Weapon2Bn { get => weapon2Bn; private set => weapon2Bn = value; }
         public UnityEngine.UI.Button UseButton { get => useButton; private set => useButton = value; }
         public UnityEngine.UI.Image ItemImage { get => itemImage; private set => itemImage = value; }
         public TMP_Text ItemName { get => itemName; private set => itemName = value; }

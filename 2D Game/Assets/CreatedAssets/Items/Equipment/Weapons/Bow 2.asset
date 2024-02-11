@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b860ad291538dac4f9496d8a9a1d7c60, type: 3}
+  m_Name: Bow 2
+  m_EditorClassIdentifier: 
+  id: 107
+  itemName: 
+  value: 0
+  cost: 0
+  usable: 1
+  icon: {fileID: 21300000, guid: cf85937742119644981e5e7d525561f2, type: 3}
+  itemClass: 2
+  itemDescription: 
+  equipment: 1
+  armor: 0
+  weight: 0
+  magicRes: 0
+  equipmentType: 5
+  weaponData: {fileID: 11400000, guid: 34a22b2e4f061dd4e833ca5b0b73ddc6, type: 2}
+  consumable: 0
+  consumableType: 0

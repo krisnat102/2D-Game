@@ -155,6 +155,37 @@ namespace Inventory
                                 }
                                 InventoryManager.Instance.GlovesBn.GetComponent<ItemController>().SetItem(itemController.GetItem());
                                 break;
+                            case Item.EquipmentType.Weapon:
+                                if(InventoryManager.Instance.Weapon1Bn.GetComponent<ItemController>().GetItem() == null )
+                                {
+                                    foreach (Transform transform in InventoryManager.Instance.Weapon1Bn.transform)
+                                    {
+                                        transform.GetComponent<Image>().gameObject.SetActive(true);
+                                        transform.GetComponent<Image>().sprite = itemController.GetItem().icon;
+                                    }
+                                    InventoryManager.Instance.Weapon1Bn.GetComponent<ItemController>().SetItem(itemController.GetItem());
+                                    break;
+                                }
+                                else if(InventoryManager.Instance.Weapon2Bn.GetComponent<ItemController>().GetItem() == null)
+                                {
+                                    foreach (Transform transform in InventoryManager.Instance.Weapon2Bn.transform)
+                                    {
+                                        transform.GetComponent<Image>().gameObject.SetActive(true);
+                                        transform.GetComponent<Image>().sprite = itemController.GetItem().icon;
+                                    }
+                                    InventoryManager.Instance.Weapon2Bn.GetComponent<ItemController>().SetItem(itemController.GetItem());
+                                    break;
+                                }
+                                else
+                                {
+                                    foreach (Transform transform in InventoryManager.Instance.Weapon1Bn.transform)
+                                    {
+                                        transform.GetComponent<Image>().gameObject.SetActive(true);
+                                        transform.GetComponent<Image>().sprite = itemController.GetItem().icon;
+                                    }
+                                    InventoryManager.Instance.Weapon1Bn.GetComponent<ItemController>().SetItem(itemController.GetItem());
+                                    break;
+                                }
                         }
                         break;
 
@@ -208,6 +239,29 @@ namespace Inventory
                                 InventoryManager.Instance.GlovesBn.GetComponent<ItemController>().SetItem(null);
                                 description.SetActive(false);
                                 break;
+                            case Item.EquipmentType.Weapon:
+                                if(InventoryManager.Instance.Weapon1Bn.GetComponent<ItemController>().GetItem() == item)
+                                {
+                                    foreach (Transform transform in InventoryManager.Instance.Weapon1Bn.transform)
+                                    {
+                                        transform.GetComponent<Image>().gameObject.SetActive(false);
+                                        transform.GetComponent<Image>().sprite = null;
+                                    }
+                                    InventoryManager.Instance.Weapon1Bn.GetComponent<ItemController>().SetItem(null);
+                                    description.SetActive(false);
+                                    break;
+                                }
+                                else
+                                {
+                                    foreach (Transform transform in InventoryManager.Instance.Weapon2Bn.transform)
+                                    {
+                                        transform.GetComponent<Image>().gameObject.SetActive(false);
+                                        transform.GetComponent<Image>().sprite = null;
+                                    }
+                                    InventoryManager.Instance.Weapon2Bn.GetComponent<ItemController>().SetItem(null);
+                                    description.SetActive(false);
+                                    break;
+                                }
                         }
                         break;
                 }

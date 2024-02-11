@@ -200,7 +200,8 @@ namespace Spells
                     {
                         newPosition = (Vector2)castingPoint.position + new Vector2(-spellsBar[activeSpell].offset.x, spellsBar[activeSpell].offset.y);
                     }
-                    Instantiate(spellsBar[activeSpell].spellEffect, newPosition, castingPoint.rotation);
+                    new ObjectPool(spellsBar[activeSpell].spellEffect, newPosition, castingPoint.rotation, 5, 10);
+                    //Instantiate(spellsBar[activeSpell].spellEffect, newPosition, castingPoint.rotation);
                 }
                 else
                 {

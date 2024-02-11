@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using Bardent.Weapons;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -52,6 +54,8 @@ namespace Inventory
         public float magicRes;
         [HideInInspector]
         public EquipmentType equipmentType;
+        [HideInInspector]
+        public WeaponDataSO weaponData;
 
         [HideInInspector]
         public bool consumable;
@@ -64,7 +68,8 @@ namespace Inventory
             Helmet,
             Chestplate,
             Gloves,
-            Leggings
+            Leggings,
+            Weapon
         }
         public enum ConsumableType
         {
@@ -94,7 +99,7 @@ namespace Inventory
         #endregion
     }
     #region Variable Dependency Class
-#if UNITY_EDITOR
+    #if UNITY_EDITOR
     [CustomEditor(typeof(Item))]
     public class Item_Editor : Editor
     {
@@ -108,10 +113,17 @@ namespace Inventory
             script.equipment = EditorGUILayout.Toggle("Equipment", script.equipment);
             if (script.equipment) // if bool is true, show other fields
             {
-                script.armor = EditorGUILayout.FloatField("Armor", script.armor);
-                script.weight = EditorGUILayout.FloatField("Weight", script.weight);
-                script.magicRes = EditorGUILayout.FloatField("Magic Resistance", script.magicRes);
                 script.equipmentType = (Item.EquipmentType)EditorGUILayout.EnumPopup("Type", script.equipmentType);
+                if (script.equipmentType != Item.EquipmentType.Weapon)
+                {
+                    script.armor = EditorGUILayout.FloatField("Armor", script.armor);
+                    script.weight = EditorGUILayout.FloatField("Weight", script.weight);
+                    script.magicRes = EditorGUILayout.FloatField("Magic Resistance", script.magicRes);
+                }
+                else
+                {
+                    script.weaponData = (WeaponDataSO)EditorGUILayout.ObjectField("Weapon Data", script.weaponData, typeof(WeaponDataSO), false);
+                }
             }
 
             script.consumable = EditorGUILayout.Toggle("Consumable", script.consumable);

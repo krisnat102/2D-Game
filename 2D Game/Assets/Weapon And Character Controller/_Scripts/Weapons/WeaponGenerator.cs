@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Bardent.Weapons.Components;
+using Inventory;
 using UnityEngine;
 
 namespace Bardent.Weapons
@@ -9,7 +10,8 @@ namespace Bardent.Weapons
     public class WeaponGenerator : MonoBehaviour
     {
         [SerializeField] private Weapon weapon;
-        [SerializeField] private WeaponDataSO data;
+        [SerializeField] private int weaponCount;
+        private WeaponDataSO data;
 
         private List<WeaponComponent> componentAlreadyOnWeapon = new List<WeaponComponent>();
 
@@ -19,12 +21,26 @@ namespace Bardent.Weapons
 
         private Animator anim;
 
-        public WeaponDataSO Data { get => data; set => data = value; }
+        public WeaponDataSO Data { get => data; private set => data = value; }
 
         private void Start()
         {
             anim = GetComponentInChildren<Animator>();
-            GenerateWeapon(Data);
+        }
+        private void Update()
+        {
+            if(weaponCount == 1)
+            {
+                Data = InventoryManager.Instance.Weapon1Bn.GetComponent<ItemController>().GetItem()?.weaponData;
+            }
+            if (weaponCount == 2)
+            {
+                Data = InventoryManager.Instance.Weapon2Bn.GetComponent<ItemController>().GetItem()?.weaponData;
+            }
+            if(Data != null)
+            {
+                GenerateWeapon(Data);
+            }
         }
 
         [ContextMenu("Test Generate")]

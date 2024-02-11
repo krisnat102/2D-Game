@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b860ad291538dac4f9496d8a9a1d7c60, type: 3}
+  m_Name: New Item 88
+  m_EditorClassIdentifier: 
+  id: 91
+  itemName: 
+  value: 0
+  cost: 0
+  usable: 1
+  icon: {fileID: 21300000, guid: b43b73234bbb9f94ebca0d8b233b0af9, type: 3}
+  itemClass: 2
+  itemDescription: 
+  equipment: 1
+  armor: 0
+  weight: 0
+  magicRes: 0
+  equipmentType: 1
+  consumable: 0
+  consumableType: 0

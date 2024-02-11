@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6684929901192448980}
   - component: {fileID: 6684929901192448983}
   - component: {fileID: 5051135755799443179}
-  - component: {fileID: 4595806039137018734}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -48,8 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 0}
-  player: {fileID: 0}
+  playerGO: {fileID: 0}
   death: {fileID: 0}
+  camera: {fileID: 0}
 --- !u!114 &6684929901192448983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,6 +68,7 @@ MonoBehaviour:
   resolutionDropdown: {fileID: 0}
   qualityDropdown: {fileID: 0}
   fpsDropdown: {fileID: 0}
+  closingMenuDuration: 0.2
 --- !u!114 &5051135755799443179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,19 +81,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de692fb665f00d1489d8159677c34cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
   purse: {fileID: 0}
---- !u!114 &4595806039137018734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6684929901192448982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be7d4c15f40f5e444b3021f307890c93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pooledObjects: []
-  objectToPool: {fileID: 0}
-  amountToPool: 0
+  characterTab: {fileID: 0}
+  levelText: {fileID: 0}
+  hpText: {fileID: 0}
+  manaText: {fileID: 0}
+  stamText: {fileID: 0}
+  armorText: {fileID: 0}
+  magicResText: {fileID: 0}
+  weightText: {fileID: 0}
+  levelUpInterface: {fileID: 0}
+  levelTextLevelUpInterface: {fileID: 0}
+  levelUpCost: {fileID: 0}
+  hpLevelUpText: {fileID: 0}
+  manaLevelUpText: {fileID: 0}
+  stamLevelUpText: {fileID: 0}
+  strLevelUpText: {fileID: 0}
+  dexLevelUpText: {fileID: 0}
+  intLevelUpText: {fileID: 0}
+  levelUpClosingDuration: 0.2
+  bowChargeTimeSlider: {fileID: 0}
+  itemPickupPopUp: {fileID: 0}
+  moveDuration: 0
+  moveDistance: 0
