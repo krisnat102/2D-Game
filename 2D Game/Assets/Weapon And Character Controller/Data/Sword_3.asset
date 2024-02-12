@@ -1,0 +1,163 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a5a6cd738645369231540dd8f9631f, type: 3}
+  m_Name: Sword_3
+  m_EditorClassIdentifier: 
+  <Type>k__BackingField: Sword
+  <AnimatorController>k__BackingField: {fileID: 9100000, guid: 95b2394cafcd7ac4eb455b8d8735c661,
+    type: 2}
+  <NumberOfAttacks>k__BackingField: 3
+  <ComponentData>k__BackingField:
+  - rid: 5662276240811753473
+  - rid: 4372344435206258689
+  - rid: 4372345045472247810
+  - rid: 3124257199506325505
+  - rid: 2516071312619208705
+  - rid: 2516071382426845185
+  - rid: 2402950210433581056
+  references:
+    version: 2
+    RefIds:
+    - rid: 2402950210433581056
+      type: {class: StatCostData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: StatCostData
+        attackData:
+        - name: Attack 1
+          <AttackCost>k__BackingField: 5
+          <AttackRecoveryTime>k__BackingField: 0.6
+          <StamCost>k__BackingField: 1
+        - name: Attack 2
+          <AttackCost>k__BackingField: 5
+          <AttackRecoveryTime>k__BackingField: 0.6
+          <StamCost>k__BackingField: 1
+        - name: Attack 3
+          <AttackCost>k__BackingField: 8
+          <AttackRecoveryTime>k__BackingField: 0.8
+          <StamCost>k__BackingField: 1
+    - rid: 2516071312619208705
+      type: {class: KnockBackData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: KnockBackData
+        attackData:
+        - name: Attack 1
+          <Angle>k__BackingField: {x: 1, y: 1}
+          <Strength>k__BackingField: 10
+        - name: Attack 2
+          <Angle>k__BackingField: {x: 1, y: 1}
+          <Strength>k__BackingField: 10
+        - name: Attack 3
+          <Angle>k__BackingField: {x: 1, y: 3}
+          <Strength>k__BackingField: 20
+    - rid: 2516071382426845185
+      type: {class: PoiseDamageData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: PoiseDamageData
+        attackData:
+        - name: Attack 1
+          <Amount>k__BackingField: 20
+        - name: Attack 2
+          <Amount>k__BackingField: 0
+        - name: Attack 3
+          <Amount>k__BackingField: 0
+    - rid: 3124257199506325505
+      type: {class: DamageData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: DamageData
+        attackData:
+        - name: Attack 1
+          <Amount>k__BackingField: 22
+          <DamageType>k__BackingField: 1
+        - name: Attack 2
+          <Amount>k__BackingField: 26
+          <DamageType>k__BackingField: 1
+        - name: Attack 3
+          <Amount>k__BackingField: 32
+          <DamageType>k__BackingField: 1
+    - rid: 4372344435206258689
+      type: {class: MovementData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: MovementData
+        attackData:
+        - name: Attack 1
+          <Direction>k__BackingField: {x: 1, y: 0}
+          <Velocity>k__BackingField: 3
+        - name: Attack 2
+          <Direction>k__BackingField: {x: 1, y: 0}
+          <Velocity>k__BackingField: 4
+        - name: Attack 3
+          <Direction>k__BackingField: {x: 1, y: 5}
+          <Velocity>k__BackingField: 5
+    - rid: 4372345045472247810
+      type: {class: ActionHitBoxData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: ActionHitBoxData
+        attackData:
+        - name: Attack 1
+          Debug: 1
+          <HitBox>k__BackingField:
+            serializedVersion: 2
+            x: 0.11
+            y: -0.9
+            width: 2.1
+            height: 1.5
+        - name: Attack 2
+          Debug: 0
+          <HitBox>k__BackingField:
+            serializedVersion: 2
+            x: 0.11
+            y: -0.9
+            width: 2.1
+            height: 1.5
+        - name: Attack 3
+          Debug: 0
+          <HitBox>k__BackingField:
+            serializedVersion: 2
+            x: 0
+            y: -0.99
+            width: 1.7
+            height: 2.7
+        <DetectableLayers>k__BackingField:
+          serializedVersion: 2
+          m_Bits: 512
+    - rid: 5662276240811753473
+      type: {class: WeaponSpriteData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: WeaponSpriteData
+        attackData:
+        - name: Attack 1
+          <PhaseSprites>k__BackingField:
+          - <Phase>k__BackingField: 2
+            <Sprites>k__BackingField:
+            - {fileID: 1821946496, guid: 7a037f137b84b41479261ae77f58c1cd, type: 3}
+            - {fileID: -1635618086, guid: 7a037f137b84b41479261ae77f58c1cd, type: 3}
+            - {fileID: 522476566, guid: 7a037f137b84b41479261ae77f58c1cd, type: 3}
+            - {fileID: 2077503652, guid: 7a037f137b84b41479261ae77f58c1cd, type: 3}
+            - {fileID: -769290877, guid: 7a037f137b84b41479261ae77f58c1cd, type: 3}
+        - name: Attack 1
+          <PhaseSprites>k__BackingField:
+          - <Phase>k__BackingField: 2
+            <Sprites>k__BackingField:
+            - {fileID: 192542729, guid: 7a037f137b84b41479261ae77f58c1cd, type: 3}
+            - {fileID: 2001568669, guid: 7a037f137b84b41479261ae77f58c1cd, type: 3}
+            - {fileID: 49618263, guid: 7a037f137b84b41479261ae77f58c1cd, type: 3}
+            - {fileID: 1153958627, guid: 7a037f137b84b41479261ae77f58c1cd, type: 3}
+            - {fileID: 563613719, guid: 7a037f137b84b41479261ae77f58c1cd, type: 3}
+        - name: Attack 1
+          <PhaseSprites>k__BackingField:
+          - <Phase>k__BackingField: 2
+            <Sprites>k__BackingField:
+            - {fileID: -775300450, guid: 7a037f137b84b41479261ae77f58c1cd, type: 3}
+            - {fileID: -969381846, guid: 7a037f137b84b41479261ae77f58c1cd, type: 3}
+            - {fileID: -1440407212, guid: 7a037f137b84b41479261ae77f58c1cd, type: 3}
+            - {fileID: 1184464580, guid: 7a037f137b84b41479261ae77f58c1cd, type: 3}
+            - {fileID: -1035968199, guid: 7a037f137b84b41479261ae77f58c1cd, type: 3}

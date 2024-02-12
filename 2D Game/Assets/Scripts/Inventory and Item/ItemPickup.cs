@@ -24,12 +24,6 @@ namespace Inventory
         {
             if (!isPickedUp && item != null)
             {
-                if (chest)
-                {
-                    animator?.SetTrigger("Open");
-                    InventoryManager.Instance.Add(item);
-                    return;
-                }
                 if (forSale)
                 {
                     InventoryManager.Instance.StartCoinAnimation();
@@ -45,7 +39,14 @@ namespace Inventory
                 }
                 InventoryManager.Instance.Add(item);
 
-                Destroy(gameObject);
+                if (chest)
+                {
+                    animator?.SetTrigger("Open");
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
 
                 isPickedUp = true;
 

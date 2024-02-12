@@ -9,6 +9,7 @@ namespace Inventory
     {
         #region Private Variables
         [SerializeField] private Button removeButton;
+        [SerializeField] private Image selectedItemIndicator;
         [SerializeField] private TMP_Text itemCount;
         [SerializeField] private float equipmentCloseTime;
 
@@ -18,6 +19,8 @@ namespace Inventory
         private GameObject description;
         private bool equipmentMenuActive = false;
         private Item item;
+
+        public Image SelectedItemIndicator { get => selectedItemIndicator; private set => selectedItemIndicator = value; }
         #endregion
 
         #region Unity Methods
@@ -267,6 +270,8 @@ namespace Inventory
                 }
             }
         }
+
+        public void DisableSelectedIndicators() => InventoryManager.Instance.DisableSelectedIndicators();
         #endregion
 
         #region UI Methods

@@ -24,24 +24,23 @@ namespace Spells
         {
             if (!isPickedUp && spell != null)
             {
-                if (chest)
-                {
-                    animator?.SetTrigger("Open");
-                    SpellManager.Instance.Add(spell);
-                    return;
-                }
                 if (forSale)
                 {
                     InventoryManager.Instance.StartCoinAnimation();
                     if (InventoryManager.Instance.Coins >= price)
                     {
                         AudioManager.Instance.BuySound.Play();
+                        SpellManager.Instance.Add(spell);
                         InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - price, false);
                     }
                     else
                     {
                         return;
                     }
+                }
+                else
+                {
+                    SpellManager.Instance.Add(spell);
                 }
                 int resolutionHeight = Screen.currentResolution.height;
 
@@ -75,7 +74,14 @@ namespace Spells
                 itemPopUp.GetComponentsInChildren<Image>()[1].sprite = spell.icon;
                 itemPopUp.GetComponentInChildren<TMP_Text>().text = spell.spellName;
 
-                Destroy(gameObject);
+                if (chest)
+                {
+                    animator?.SetTrigger("Open");
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
             }
         }
 

@@ -238,6 +238,14 @@ namespace Spells
                 }
             }
         }
+
+        public void DisableSelectedIndicators()
+        {
+            foreach (Transform spell in spellContent)
+            {
+                spell.GetComponent<InventorySpellController>().SelectedItemIndicator.gameObject.SetActive(false);
+            }
+        }
         #endregion
 
         #region Spell Inventory Management

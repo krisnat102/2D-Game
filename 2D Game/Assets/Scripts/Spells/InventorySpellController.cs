@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Inventory;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -10,12 +11,15 @@ namespace Spells
     {
         Spell spell;
 
+        [SerializeField] private Image selectedItemIndicator;
         [SerializeField] private int ActiveSpellsMax = 8;
 
         private Button useButton;
         private Image spellImage;
         private TMP_Text spellName, spellPrice, spellValue, spellDescription;
         private GameObject description;
+
+        public Image SelectedItemIndicator { get => selectedItemIndicator; private set => selectedItemIndicator = value; }
 
         public void RemoveSpell()
         {
@@ -89,5 +93,7 @@ namespace Spells
             SpellController useButtonSpellController = useButton.GetComponent<SpellController>();
             useButtonSpellController.SetSpell(spellController.GetSpell());
         }
+
+        public void DisableSelectedIndicators() => SpellManager.Instance.DisableSelectedIndicators();
     }
 }

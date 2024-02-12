@@ -200,13 +200,13 @@ namespace Spells
                     {
                         newPosition = (Vector2)castingPoint.position + new Vector2(-spellsBar[activeSpell].offset.x, spellsBar[activeSpell].offset.y);
                     }
-                    new ObjectPool(spellsBar[activeSpell].spellEffect, newPosition, castingPoint.rotation, 5, 10);
-                    //Instantiate(spellsBar[activeSpell].spellEffect, newPosition, castingPoint.rotation);
+                    //new ObjectPool(spellsBar[activeSpell].spellEffect, newPosition, castingPoint.rotation, 5, 10);
+                    Instantiate(spellsBar[activeSpell].spellEffect, newPosition, castingPoint.rotation);
                 }
                 else
                 {
-                    Debug.Log(castingPoint.rotation);
                     Instantiate(spellsBar[activeSpell].spellEffect, castingPoint.position, castingPoint.rotation);
+                    //new ObjectPool(spellsBar[activeSpell].spellEffect, castingPoint.position, castingPoint.rotation, 5, 10);
                 }
 
                 Stats.Instance.Mana.CurrentValue -= spellsBar[activeSpell].cost;

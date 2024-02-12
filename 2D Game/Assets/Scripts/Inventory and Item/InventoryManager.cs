@@ -341,6 +341,14 @@ namespace Inventory
                 inventoryItems[i].AddItem(DistinctItems[i]);
             }
         }
+
+        public void DisableSelectedIndicators()
+        {
+            foreach(Transform item in itemContent)
+            {
+                item.GetComponent<InventoryItemController>().SelectedItemIndicator.gameObject.SetActive(false);
+            }
+        }
         #endregion
 
         #region Equipment Stat Methods
