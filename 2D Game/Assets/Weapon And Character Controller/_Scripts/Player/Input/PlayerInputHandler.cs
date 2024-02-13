@@ -1,3 +1,4 @@
+using Bardent.Weapons;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -88,13 +89,14 @@ public class PlayerInputHandler : MonoBehaviour
     #region Inputs
     public void OnPrimaryAttackInput(InputAction.CallbackContext context)
     {
-        if (context.started && !StopAllInputs && !StopAttack)
+        var weapon = GetComponentsInChildren<WeaponGenerator>()[0].Data;
+        if (context.started && !StopAllInputs && !StopAttack && weapon != null)
         {
             AttackInputs[(int)CombatInputs.primary] = true;
             OnAttackStarted?.Invoke(CombatInputs.primary);
         }
 
-        if (context.canceled && !StopAllInputs && !StopAttack)
+        if (context.canceled && !StopAllInputs && !StopAttack && weapon != null)
         {
             AttackInputs[(int)CombatInputs.primary] = false;
             OnAttackCancelled?.Invoke(CombatInputs.primary);
@@ -103,13 +105,14 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnSecondaryAttackInput(InputAction.CallbackContext context)
     {
-        if (context.started && !StopAllInputs && !StopAttack)
+        var weapon = GetComponentsInChildren<WeaponGenerator>()[1].Data;
+        if (context.started && !StopAllInputs && !StopAttack && weapon != null)
         {
             AttackInputs[(int)CombatInputs.secondary] = true;            
             OnAttackStarted?.Invoke(CombatInputs.secondary);
         }
 
-        if (context.canceled && !StopAllInputs && !StopAttack)
+        if (context.canceled && !StopAllInputs && !StopAttack && weapon != null)
         {
             AttackInputs[(int)CombatInputs.secondary] = false;
             OnAttackCancelled?.Invoke(CombatInputs.secondary);

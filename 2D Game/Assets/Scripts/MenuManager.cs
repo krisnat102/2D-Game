@@ -101,15 +101,15 @@ public class MenuManager : MonoBehaviour
         if (openOrClose)
         {
             //UIManager.Instance.OpenCloseUI(miniMenu, scale, openingMenuDuration, false, true, true);
+            //animator.SetTrigger("menuOpen");
             menu.SetActive(true);
-            animator.SetTrigger("menuOpen");
             Core.GameManager.Instance.GamePaused = true;
         }
         else
         {
             //UIManager.Instance.OpenCloseUI(miniMenu, scale, closingMenuDuration, false, true, false);
             //Invoke("CloseMenu", closingMenuDuration);
-            animator.SetTrigger("menuClose");
+            //animator.SetTrigger("menuClose");
             CloseMenu();
         }
     }

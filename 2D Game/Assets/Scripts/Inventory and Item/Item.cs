@@ -114,15 +114,17 @@ namespace Inventory
             if (script.equipment) // if bool is true, show other fields
             {
                 script.equipmentType = (Item.EquipmentType)EditorGUILayout.EnumPopup("Type", script.equipmentType);
+
                 if (script.equipmentType != Item.EquipmentType.Weapon)
                 {
                     script.armor = EditorGUILayout.FloatField("Armor", script.armor);
-                    script.weight = EditorGUILayout.FloatField("Weight", script.weight);
                     script.magicRes = EditorGUILayout.FloatField("Magic Resistance", script.magicRes);
+                    script.weight = EditorGUILayout.FloatField("Weight", script.weight);
                 }
                 else
                 {
                     script.weaponData = (WeaponDataSO)EditorGUILayout.ObjectField("Weapon Data", script.weaponData, typeof(WeaponDataSO), false);
+                    script.weight = EditorGUILayout.FloatField("Weight", script.weight);
                 }
             }
 

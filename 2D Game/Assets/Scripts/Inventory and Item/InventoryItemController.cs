@@ -15,7 +15,7 @@ namespace Inventory
 
         private Button useButton;
         private Image itemImage;
-        private TMP_Text itemName, itemPrice, itemValue, itemWeight, itemArmor, itemMagicRes, itemDescription;
+        private TMP_Text itemName, itemPrice, itemValue, itemWeight, itemArmor, itemMagicRes, itemDescription, weaponAttack;
         private GameObject description;
         private bool equipmentMenuActive = false;
         private Item item;
@@ -279,6 +279,7 @@ namespace Inventory
         {
             GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
             ItemController itemController = button.GetComponent<ItemController>();
+            Item item = itemController.GetItem();
 
             GameObject descriptionExtension = InventoryManager.Instance.GetEquipmentMenu();
             Animator descriptionAnimator = InventoryManager.Instance.GetEquipmentMenuAnimator();
@@ -294,42 +295,54 @@ namespace Inventory
             itemWeight = InventoryManager.Instance.ItemWeight;
             itemArmor = InventoryManager.Instance.ItemArmor;
             itemMagicRes = InventoryManager.Instance.ItemMagicRes;
+            weaponAttack = InventoryManager.Instance.WeaponAttack;
 
-            itemImage.sprite = itemController.GetItem().icon;
-            itemName.text = itemController.GetItem().itemName.ToUpper();
-            itemDescription.text = itemController.GetItem().itemDescription;
-            if (itemController.GetItem().value != 0)
+            itemImage.sprite = item.icon;
+            itemName.text = item.itemName.ToUpper();
+            itemDescription.text = item.itemDescription;
+            if (item.value != 0 && item.equipmentType != Item.EquipmentType.Weapon)
             {
                 itemValue.gameObject.SetActive(true);
-                itemValue.text = "VALUE - " + itemController.GetItem().value.ToString();
+                itemValue.text = "VALUE - " + item.value.ToString();
             }
             else itemValue.gameObject.SetActive(false);
-            itemPrice.text = "PRICE - " + itemController.GetItem().cost.ToString();
+            itemPrice.text = "PRICE - " + item.cost.ToString();
 
             useButton = InventoryManager.Instance.UseButton;
             ItemController useButtonItemController = useButton.GetComponent<ItemController>();
-            useButtonItemController.SetItem(itemController.GetItem());
+            useButtonItemController.SetItem(item);
 
-            if (itemController.GetItem().usable)
+            if (item.usable)
                 useButton.gameObject.SetActive(true);
             else useButton.gameObject.SetActive(false);
 
-            if (itemController.GetItem().consumable)
+            if (item.consumable)
             {
                 useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Use";
             }
 
-            if (itemController.GetItem().equipment)
+            if (item.equipment)
             {
-                itemWeight.gameObject.SetActive(true);
-                itemArmor.gameObject.SetActive(true);
-                itemMagicRes.gameObject.SetActive(true);
+                    itemWeight.gameObject.SetActive(true);
 
-                itemWeight.text = "WEIGHT - " + itemController.GetItem().weight.ToString();
-                itemArmor.text = "ARMOR - " + itemController.GetItem().armor.ToString();
-                itemMagicRes.text = "MAGIC RES - " + itemController.GetItem().magicRes.ToString();
+                    itemWeight.text = "WEIGHT - " + item.weight.ToString();
 
-                if (itemController.GetItem().Equipped)
+                if (item.equipmentType != Item.EquipmentType.Weapon)
+                {
+                    itemArmor.gameObject.SetActive(true);
+                    itemMagicRes.gameObject.SetActive(true);
+
+                    itemArmor.text = "ARMOR - " + item.armor.ToString();
+                    itemMagicRes.text = "MAGIC RES - " + item.magicRes.ToString();
+                }
+                else
+                {
+                    weaponAttack.gameObject.SetActive(true);
+
+                    weaponAttack.text = "ATTACK - " + item.value.ToString();
+                }
+
+                if (item.Equipped)
                 {
                     useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Unequip";
                 }
@@ -352,6 +365,7 @@ namespace Inventory
                 itemWeight.gameObject.SetActive(false);
                 itemArmor.gameObject.SetActive(false);
                 itemMagicRes.gameObject.SetActive(false);
+                weaponAttack.gameObject.SetActive(false);
 
                 descriptionAnimator.SetTrigger("Close");
                 descriptionAnimator.SetBool("OpenClose", false);

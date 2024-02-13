@@ -23,7 +23,7 @@ namespace Spells
         [SerializeField] private float inventoryOpenTime = 0.3f;
         [SerializeField] private float inventoryCloseTime = 0.3f;
 
-        [Header("Item Description")]
+        [Header("Spell Description")]
         [SerializeField] private UnityEngine.UI.Button useButton;
         [SerializeField] private UnityEngine.UI.Image spellImage;
         [SerializeField] private TMP_Text spellName, spellDescription, spellValue, spellPrice;

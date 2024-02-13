@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Bow 2
   m_EditorClassIdentifier: 
   id: 107
-  itemName: 
-  value: 0
-  cost: 0
+  itemName: True Ice Bow
+  value: 16
+  cost: 150
   usable: 1
   icon: {fileID: 21300000, guid: cf85937742119644981e5e7d525561f2, type: 3}
   itemClass: 2
@@ -25,6 +25,6 @@ MonoBehaviour:
   weight: 0
   magicRes: 0
   equipmentType: 5
-  weaponData: {fileID: 11400000, guid: 34a22b2e4f061dd4e833ca5b0b73ddc6, type: 2}
+  weaponData: {fileID: 11400000, guid: b75dff90b7e1def4ba15b51ead33d4ab, type: 2}
   consumable: 0
   consumableType: 0

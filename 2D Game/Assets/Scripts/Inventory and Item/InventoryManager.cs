@@ -39,7 +39,7 @@ namespace Inventory
         [Header("Item Description")]
         [SerializeField] private UnityEngine.UI.Button useButton;
         [SerializeField] private UnityEngine.UI.Image itemImage;
-        [SerializeField] private TMP_Text itemName, itemDescription, itemValue, itemPrice, itemWeight, itemArmor, itemMagicRes;
+        [SerializeField] private TMP_Text itemName, itemDescription, itemValue, itemPrice, itemWeight, itemArmor, itemMagicRes, weaponAttack;
         [SerializeField] private GameObject description;
 
         [Header("Coins")]
@@ -77,6 +77,7 @@ namespace Inventory
         public TMP_Text ItemWeight { get => itemWeight; private set => itemWeight = value; }
         public TMP_Text ItemArmor { get => itemArmor; private set => itemArmor = value; }
         public TMP_Text ItemMagicRes { get => itemMagicRes; private set => itemMagicRes = value; }
+        public TMP_Text WeaponAttack { get => weaponAttack; private set => weaponAttack = value; }
         public GameObject Description { get => description; private set => description = value; }
         public float TotalArmor { get => totalArmor; private set => totalArmor = value; }
         public float TotalMagicRes { get => totalMagicRes; private set => totalMagicRes = value; }
