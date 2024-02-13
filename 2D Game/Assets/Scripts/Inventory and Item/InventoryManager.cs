@@ -5,6 +5,7 @@ using System.Linq;
 using Krisnat;
 using UnityEditor;
 using Spells;
+using UnityEngine.UI;
 
 namespace Inventory
 {
@@ -350,6 +351,169 @@ namespace Inventory
                 item.GetComponent<InventoryItemController>().SelectedItemIndicator.gameObject.SetActive(false);
             }
         }
+
+        public int[] EquippedItemsIds()
+        {
+            int[] ids = new int[6];
+
+            ids[0] = HelmetBn.GetComponent<ItemController>()?.GetItem()?.id ?? 0;
+            ids[1] = ChestplateBn.GetComponent<ItemController>()?.GetItem()?.id ?? 0;
+            ids[2] = GlovesBn.GetComponent<ItemController>()?.GetItem()?.id ?? 0;
+            ids[3] = BootsBn.GetComponent<ItemController>()?.GetItem()?.id ?? 0;
+            ids[4] = Weapon1Bn.GetComponent<ItemController>()?.GetItem()?.id ?? 0;
+            ids[5] = Weapon2Bn.GetComponent<ItemController>()?.GetItem()?.id ?? 0;
+
+            return ids;
+        }
+
+        public void EquipItem(Item item)
+        {
+            item.SetEquipped(true);
+
+            AddItemStats(item);
+
+            switch (item.equipmentType)
+            {
+                case Item.EquipmentType.Helmet:
+                    foreach (Transform transform in HelmetBn.transform)
+                    {
+                        transform.GetComponent<Image>().gameObject.SetActive(true);
+                        transform.GetComponent<Image>().sprite = item.icon;
+                    }
+                    HelmetBn.GetComponent<ItemController>().SetItem(item);
+                    break;
+
+                case Item.EquipmentType.Chestplate:
+                    foreach (Transform transform in ChestplateBn.transform)
+                    {
+                        transform.GetComponent<Image>().gameObject.SetActive(true);
+                        transform.GetComponent<Image>().sprite = item.icon;
+                    }
+                    ChestplateBn.GetComponent<ItemController>().SetItem(item);
+                    break;
+
+                case Item.EquipmentType.Leggings:
+                    foreach (Transform transform in BootsBn.transform)
+                    {
+                        transform.GetComponent<Image>().gameObject.SetActive(true);
+                        transform.GetComponent<Image>().sprite = item.icon;
+                    }
+                    BootsBn.GetComponent<ItemController>().SetItem(item);
+                    break;
+
+                case Item.EquipmentType.Gloves:
+                    foreach (Transform transform in GlovesBn.transform)
+                    {
+                        transform.GetComponent<Image>().gameObject.SetActive(true);
+                        transform.GetComponent<Image>().sprite = item.icon;
+                    }
+                    GlovesBn.GetComponent<ItemController>().SetItem(item);
+                    break;
+                case Item.EquipmentType.Weapon:
+                    if (Weapon1Bn.GetComponent<ItemController>().GetItem() == null)
+                    {
+                        foreach (Transform transform in Weapon1Bn.transform)
+                        {
+                            transform.GetComponent<Image>().gameObject.SetActive(true);
+                            transform.GetComponent<Image>().sprite = item.icon;
+                        }
+                        Weapon1Bn.GetComponent<ItemController>().SetItem(item);
+                        break;
+                    }
+                    else if (Weapon2Bn.GetComponent<ItemController>().GetItem() == null)
+                    {
+                        foreach (Transform transform in Weapon2Bn.transform)
+                        {
+                            transform.GetComponent<Image>().gameObject.SetActive(true);
+                            transform.GetComponent<Image>().sprite = item.icon;
+                        }
+                        Weapon2Bn.GetComponent<ItemController>().SetItem(item);
+                        break;
+                    }
+                    else
+                    {
+                        foreach (Transform transform in Weapon1Bn.transform)
+                        {
+                            transform.GetComponent<Image>().gameObject.SetActive(true);
+                            transform.GetComponent<Image>().sprite = item.icon;
+                        }
+                        Weapon1Bn.GetComponent<ItemController>().SetItem(item);
+                        break;
+                    }
+            }
+        }
+        public void UnequipItem(Item item)
+        {
+            item.SetEquipped(false);
+
+            RemoveItemStats(item);
+
+            switch (item.equipmentType)
+            {
+                case Item.EquipmentType.Helmet:
+                    foreach (Transform transform in HelmetBn.transform)
+                    {
+                        transform.GetComponent<Image>().gameObject.SetActive(false);
+                        transform.GetComponent<Image>().sprite = null;
+                    }
+                    HelmetBn.GetComponent<ItemController>().SetItem(null);
+                    description.SetActive(false);
+                    break;
+
+                case Item.EquipmentType.Chestplate:
+                    foreach (Transform transform in ChestplateBn.transform)
+                    {
+                        transform.GetComponent<Image>().gameObject.SetActive(false);
+                        transform.GetComponent<Image>().sprite = null;
+                    }
+                    ChestplateBn.GetComponent<ItemController>().SetItem(null);
+                    description.SetActive(false);
+                    break;
+
+                case Item.EquipmentType.Leggings:
+                    foreach (Transform transform in BootsBn.transform)
+                    {
+                        transform.GetComponent<Image>().gameObject.SetActive(false);
+                        transform.GetComponent<Image>().sprite = null;
+                    }
+                    BootsBn.GetComponent<ItemController>().SetItem(null);
+                    description.SetActive(false);
+                    break;
+
+                case Item.EquipmentType.Gloves:
+                    foreach (Transform transform in GlovesBn.transform)
+                    {
+                        transform.GetComponent<Image>().gameObject.SetActive(false);
+                        transform.GetComponent<Image>().sprite = null;
+                    }
+                    GlovesBn.GetComponent<ItemController>().SetItem(null);
+                    description.SetActive(false);
+                    break;
+                case Item.EquipmentType.Weapon:
+                    if (Weapon1Bn.GetComponent<ItemController>().GetItem() == item)
+                    {
+                        foreach (Transform transform in Weapon1Bn.transform)
+                        {
+                            transform.GetComponent<Image>().gameObject.SetActive(false);
+                            transform.GetComponent<Image>().sprite = null;
+                        }
+                        Weapon1Bn.GetComponent<ItemController>().SetItem(null);
+                        description.SetActive(false);
+                        break;
+                    }
+                    else
+                    {
+                        foreach (Transform transform in Weapon2Bn.transform)
+                        {
+                            transform.GetComponent<Image>().gameObject.SetActive(false);
+                            transform.GetComponent<Image>().sprite = null;
+                        }
+                        Weapon2Bn.GetComponent<ItemController>().SetItem(null);
+                        description.SetActive(false);
+                        break;
+                    }
+            }
+        }
         #endregion
 
         #region Equipment Stat Methods
@@ -358,16 +522,12 @@ namespace Inventory
             TotalArmor += item.armor;
             TotalWeight += item.weight;
             TotalMagicRes += item.magicRes;
-
-            Debug.Log(TotalMagicRes + " " + TotalArmor + " " + TotalWeight);
         }
         public void RemoveItemStats(Item item)
         {
             TotalArmor -= item.armor;
             TotalWeight -= item.weight;
             TotalMagicRes -= item.magicRes;
-
-            Debug.Log(TotalMagicRes + " " + TotalArmor + " " + TotalWeight);
         }
         #endregion
 

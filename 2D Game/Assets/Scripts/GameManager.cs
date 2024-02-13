@@ -66,6 +66,7 @@ namespace Core
             PlayerSaveData data = SaveSystem.LoadPlayer();
 
             List<Item> loadItems = new();
+            List<Item> loadEquippedItems = new();
             List<Spell> loadSpells = new();
             List<Spell> loadActiveSpells = new();
             List<Spell> loadActiveAbilities = new();
@@ -76,6 +77,10 @@ namespace Core
             foreach (int id in data.itemsId)
             {
                 loadItems.AddRange(InventoryManager.Instance.AllItems.Where(item => item.id == id).ToList());
+            }
+            foreach (int id in data.equippedItemsId)
+            {
+                loadEquippedItems.AddRange(InventoryManager.Instance.AllItems.Where(item => item.id == id).ToList());
             }
             foreach (int id in data.spellsId)
             {
@@ -88,6 +93,18 @@ namespace Core
             foreach (int id in data.activeAbilitiesId)
             {
                 loadActiveAbilities.AddRange(SpellManager.Instance.AllSpells.Where(spell => spell.id == id).ToList());
+            }
+
+            foreach (int id in InventoryManager.Instance.EquippedItemsIds())
+            {
+                foreach(Item item in InventoryManager.Instance.AllItems.Where(item => item.id == id))
+                {
+                    InventoryManager.Instance.UnequipItem(item);
+                }
+            }
+            foreach(Item item in loadEquippedItems)
+            {
+                InventoryManager.Instance.EquipItem(item);
             }
 
             player.PlayerData.SetLevel(data.level);

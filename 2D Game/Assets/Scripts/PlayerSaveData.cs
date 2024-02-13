@@ -16,6 +16,7 @@ namespace Krisnat.Assets.Scripts
         public int coins;
         public float[] position;
         public int[] itemsId;
+        public int[] equippedItemsId;
         public int[] spellsId;
         public int[] activeSpellsId;
         public int[] activeAbilitiesId;
@@ -46,6 +47,7 @@ namespace Krisnat.Assets.Scripts
             activeSpellsId = SpellManager.Instance.SpellsBar.Select(spell => spell.id).ToArray();
             activeAbilitiesId = SpellManager.Instance.AbilitiesBar.Select(spell => spell.id).ToArray();
             itemsId = InventoryManager.Instance.Items.Select(item => item.id).ToArray();
+            equippedItemsId = InventoryManager.Instance.EquippedItemsIds();
 
             position = new float[3];
 

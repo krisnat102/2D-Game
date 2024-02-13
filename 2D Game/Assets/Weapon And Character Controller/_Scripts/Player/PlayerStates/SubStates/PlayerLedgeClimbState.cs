@@ -42,6 +42,7 @@ public class PlayerLedgeClimbState : PlayerState
         base.AnimationTrigger();
 
         isHanging = true;
+        Movement.IsHanging = true;
     }
 
     public override void Enter()
@@ -64,6 +65,7 @@ public class PlayerLedgeClimbState : PlayerState
         base.Exit();
 
         isHanging = false;
+        Movement.IsHanging = false;
 
         if (isClimbing)
         {

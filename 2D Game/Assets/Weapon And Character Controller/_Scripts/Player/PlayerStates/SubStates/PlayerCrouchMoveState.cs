@@ -12,12 +12,14 @@ public class PlayerCrouchMoveState : PlayerGroundedState
     {
         base.Enter();
         player.SetColliderHeight(playerData.crouchColliderHeight);
+        Movement.IsCrouching = true;
     }
 
     public override void Exit()
     {
         base.Exit();
         player.SetColliderHeight(playerData.standColliderHeight);
+        Movement.IsCrouching = false;
     }
 
     public override void LogicUpdate()
@@ -38,6 +40,5 @@ public class PlayerCrouchMoveState : PlayerGroundedState
                 stateMachine.ChangeState(player.MoveState);
             }
         }
-
     }
 }

@@ -104,6 +104,7 @@ public class MenuManager : MonoBehaviour
             //animator.SetTrigger("menuOpen");
             menu.SetActive(true);
             Core.GameManager.Instance.GamePaused = true;
+            PlayerInputHandler.Instance.StopAllInputs = true;
         }
         else
         {

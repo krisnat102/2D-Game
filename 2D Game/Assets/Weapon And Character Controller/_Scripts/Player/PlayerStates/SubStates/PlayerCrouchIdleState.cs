@@ -14,12 +14,14 @@ public class PlayerCrouchIdleState : PlayerGroundedState
 
         Movement?.SetVelocityZero();
         player.SetColliderHeight(playerData.crouchColliderHeight);
+        Movement.IsCrouching = true;
     }
 
     public override void Exit()
     {
         base.Exit();
         player.SetColliderHeight(playerData.standColliderHeight);
+        Movement.IsCrouching = false;
     }
 
     public override void LogicUpdate()

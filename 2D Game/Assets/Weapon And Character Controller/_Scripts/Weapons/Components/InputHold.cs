@@ -62,6 +62,7 @@ namespace Bardent.Weapons.Components
 
         private void Attack(CombatInputs combatInput)
         {
+            if (movement.IsHanging || (movement.IsCrouching && collisionSenses.Ceiling)) return;
             if (currentAttackData != null && !cooldown && currentWeaponData.Type == "Bow")
             {
                 bowSlider = UIManager.Instance.BowChargeTimeSlider;
@@ -116,6 +117,7 @@ namespace Bardent.Weapons.Components
 
         private void StartHold(CombatInputs combatInput)
         {
+            if (movement.IsHanging || (movement.IsCrouching && collisionSenses.Ceiling)) return;
             if (combatInput == CombatInputs.primary)
             {
                 currentWeaponData = Core.transform.parent.Find("PrimaryWeapon").GetComponent<WeaponGenerator>().Data;

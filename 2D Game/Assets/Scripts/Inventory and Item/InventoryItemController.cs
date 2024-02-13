@@ -115,157 +115,16 @@ namespace Inventory
                 switch (button.GetComponentInChildren<TextMeshProUGUI>().text)
                 {
                     case "Equip":
-                        itemController.GetItem().SetEquipped(true);
-
-                        InventoryManager.Instance.AddItemStats(itemController.GetItem());
+                        InventoryManager.Instance.EquipItem(itemController.GetItem());
 
                         Description();
-
-                        switch (itemController.GetItem().equipmentType)
-                        {
-                            case Item.EquipmentType.Helmet:
-                                foreach (Transform transform in InventoryManager.Instance.HelmetBn.transform)
-                                {
-                                    transform.GetComponent<Image>().gameObject.SetActive(true);
-                                    transform.GetComponent<Image>().sprite = itemController.GetItem().icon;
-                                }
-                                InventoryManager.Instance.HelmetBn.GetComponent<ItemController>().SetItem(itemController.GetItem());
-                                break;
-
-                            case Item.EquipmentType.Chestplate:
-                                foreach (Transform transform in InventoryManager.Instance.ChestplateBn.transform)
-                                {
-                                    transform.GetComponent<Image>().gameObject.SetActive(true);
-                                    transform.GetComponent<Image>().sprite = itemController.GetItem().icon;
-                                }
-                                InventoryManager.Instance.ChestplateBn.GetComponent<ItemController>().SetItem(itemController.GetItem());
-                                break;
-
-                            case Item.EquipmentType.Leggings:
-                                foreach (Transform transform in InventoryManager.Instance.BootsBn.transform)
-                                {
-                                    transform.GetComponent<Image>().gameObject.SetActive(true);
-                                    transform.GetComponent<Image>().sprite = itemController.GetItem().icon;
-                                }
-                                InventoryManager.Instance.BootsBn.GetComponent<ItemController>().SetItem(itemController.GetItem());
-                                break;
-
-                            case Item.EquipmentType.Gloves:
-                                foreach (Transform transform in InventoryManager.Instance.GlovesBn.transform)
-                                {
-                                    transform.GetComponent<Image>().gameObject.SetActive(true);
-                                    transform.GetComponent<Image>().sprite = itemController.GetItem().icon;
-                                }
-                                InventoryManager.Instance.GlovesBn.GetComponent<ItemController>().SetItem(itemController.GetItem());
-                                break;
-                            case Item.EquipmentType.Weapon:
-                                if(InventoryManager.Instance.Weapon1Bn.GetComponent<ItemController>().GetItem() == null )
-                                {
-                                    foreach (Transform transform in InventoryManager.Instance.Weapon1Bn.transform)
-                                    {
-                                        transform.GetComponent<Image>().gameObject.SetActive(true);
-                                        transform.GetComponent<Image>().sprite = itemController.GetItem().icon;
-                                    }
-                                    InventoryManager.Instance.Weapon1Bn.GetComponent<ItemController>().SetItem(itemController.GetItem());
-                                    break;
-                                }
-                                else if(InventoryManager.Instance.Weapon2Bn.GetComponent<ItemController>().GetItem() == null)
-                                {
-                                    foreach (Transform transform in InventoryManager.Instance.Weapon2Bn.transform)
-                                    {
-                                        transform.GetComponent<Image>().gameObject.SetActive(true);
-                                        transform.GetComponent<Image>().sprite = itemController.GetItem().icon;
-                                    }
-                                    InventoryManager.Instance.Weapon2Bn.GetComponent<ItemController>().SetItem(itemController.GetItem());
-                                    break;
-                                }
-                                else
-                                {
-                                    foreach (Transform transform in InventoryManager.Instance.Weapon1Bn.transform)
-                                    {
-                                        transform.GetComponent<Image>().gameObject.SetActive(true);
-                                        transform.GetComponent<Image>().sprite = itemController.GetItem().icon;
-                                    }
-                                    InventoryManager.Instance.Weapon1Bn.GetComponent<ItemController>().SetItem(itemController.GetItem());
-                                    break;
-                                }
-                        }
                         break;
 
                     case "Unequip":
-                        description = InventoryManager.Instance.Description;
-
-                        itemController.GetItem().SetEquipped(false);
-
-                        InventoryManager.Instance.RemoveItemStats(itemController.GetItem());
+                        //description = InventoryManager.Instance.Description;
+                        InventoryManager.Instance.UnequipItem(itemController.GetItem());
 
                         Description();
-
-                        switch (button.GetComponent<ItemController>().GetItem().equipmentType)
-                        {
-                            case Item.EquipmentType.Helmet:
-                                foreach (Transform transform in InventoryManager.Instance.HelmetBn.transform)
-                                {
-                                    transform.GetComponent<Image>().gameObject.SetActive(false);
-                                    transform.GetComponent<Image>().sprite = null;
-                                }
-                                InventoryManager.Instance.HelmetBn.GetComponent<ItemController>().SetItem(null);
-                                description.SetActive(false);
-                                break;
-
-                            case Item.EquipmentType.Chestplate:
-                                foreach (Transform transform in InventoryManager.Instance.ChestplateBn.transform)
-                                {
-                                    transform.GetComponent<Image>().gameObject.SetActive(false);
-                                    transform.GetComponent<Image>().sprite = null;
-                                }
-                                InventoryManager.Instance.ChestplateBn.GetComponent<ItemController>().SetItem(null);
-                                description.SetActive(false);
-                                break;
-
-                            case Item.EquipmentType.Leggings:
-                                foreach (Transform transform in InventoryManager.Instance.BootsBn.transform)
-                                {
-                                    transform.GetComponent<Image>().gameObject.SetActive(false);
-                                    transform.GetComponent<Image>().sprite = null;
-                                }
-                                InventoryManager.Instance.BootsBn.GetComponent<ItemController>().SetItem(null);
-                                description.SetActive(false);
-                                break;
-
-                            case Item.EquipmentType.Gloves:
-                                foreach (Transform transform in InventoryManager.Instance.GlovesBn.transform)
-                                {
-                                    transform.GetComponent<Image>().gameObject.SetActive(false);
-                                    transform.GetComponent<Image>().sprite = null;
-                                }
-                                InventoryManager.Instance.GlovesBn.GetComponent<ItemController>().SetItem(null);
-                                description.SetActive(false);
-                                break;
-                            case Item.EquipmentType.Weapon:
-                                if(InventoryManager.Instance.Weapon1Bn.GetComponent<ItemController>().GetItem() == item)
-                                {
-                                    foreach (Transform transform in InventoryManager.Instance.Weapon1Bn.transform)
-                                    {
-                                        transform.GetComponent<Image>().gameObject.SetActive(false);
-                                        transform.GetComponent<Image>().sprite = null;
-                                    }
-                                    InventoryManager.Instance.Weapon1Bn.GetComponent<ItemController>().SetItem(null);
-                                    description.SetActive(false);
-                                    break;
-                                }
-                                else
-                                {
-                                    foreach (Transform transform in InventoryManager.Instance.Weapon2Bn.transform)
-                                    {
-                                        transform.GetComponent<Image>().gameObject.SetActive(false);
-                                        transform.GetComponent<Image>().sprite = null;
-                                    }
-                                    InventoryManager.Instance.Weapon2Bn.GetComponent<ItemController>().SetItem(null);
-                                    description.SetActive(false);
-                                    break;
-                                }
-                        }
                         break;
                 }
             }
