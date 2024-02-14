@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b860ad291538dac4f9496d8a9a1d7c60, type: 3}
-  m_Name: New Item
+  m_Name: TrainingHelmet
   m_EditorClassIdentifier: 
   id: 6
-  itemName: 
+  itemName: Training Helmet
   value: 0
-  cost: 0
+  cost: 5
   usable: 1
   icon: {fileID: 21300000, guid: 6a287383a8bc35f4f84f32d09922d5ad, type: 3}
   itemClass: 2
-  itemDescription: 
+  itemDescription: Every adventurer has gone through one of these
   equipment: 1
-  armor: 0
-  weight: 0
-  magicRes: 0
+  armor: 2
+  weight: 2
+  magicRes: 2
   equipmentType: 1
+  weaponData: {fileID: 0}
   consumable: 0
   consumableType: 0

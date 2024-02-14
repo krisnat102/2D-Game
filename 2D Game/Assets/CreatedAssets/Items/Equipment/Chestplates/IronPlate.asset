@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b860ad291538dac4f9496d8a9a1d7c60, type: 3}
-  m_Name: New Item 13
+  m_Name: IronPlate
   m_EditorClassIdentifier: 
   id: 18
-  itemName: 
+  itemName: Iron Plate
   value: 0
-  cost: 0
+  cost: 45
   usable: 1
   icon: {fileID: 21300000, guid: bb5d32e2e17bbe64fbc7012ef408d32d, type: 3}
   itemClass: 2
-  itemDescription: 
+  itemDescription: A heavy chest piece providing significant defense
   equipment: 1
-  armor: 0
-  weight: 0
-  magicRes: 0
+  armor: 16
+  weight: 15
+  magicRes: 6
   equipmentType: 2
+  weaponData: {fileID: 0}
   consumable: 0
   consumableType: 0

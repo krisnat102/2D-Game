@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b860ad291538dac4f9496d8a9a1d7c60, type: 3}
-  m_Name: New Item 19
+  m_Name: IronChestplate
   m_EditorClassIdentifier: 
-  id: 24
-  itemName: 
+  id: 17
+  itemName: Iron Chestplate
   value: 0
-  cost: 0
+  cost: 30
   usable: 1
-  icon: {fileID: 21300000, guid: cce207efc07af4646bc5638ff67ff0a5, type: 3}
+  icon: {fileID: 21300000, guid: e11729dc0233be64882e43ee203ffc19, type: 3}
   itemClass: 2
-  itemDescription: 
+  itemDescription: A cornerstone in defense
   equipment: 1
-  armor: 0
-  weight: 0
-  magicRes: 0
+  armor: 11
+  weight: 10
+  magicRes: 4
   equipmentType: 2
+  weaponData: {fileID: 0}
   consumable: 0
   consumableType: 0

@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b860ad291538dac4f9496d8a9a1d7c60, type: 3}
-  m_Name: New Item 1
+  m_Name: CrusadersBreastplate
   m_EditorClassIdentifier: 
-  id: 7
-  itemName: 
+  id: 24
+  itemName: Crusader's Breastplate
   value: 0
-  cost: 0
+  cost: 75
   usable: 1
-  icon: {fileID: 21300000, guid: 33434a082f203784d83d3f9b81b5398d, type: 3}
+  icon: {fileID: 21300000, guid: cce207efc07af4646bc5638ff67ff0a5, type: 3}
   itemClass: 2
-  itemDescription: 
+  itemDescription: Imbued with holy protection
   equipment: 1
-  armor: 0
-  weight: 0
-  magicRes: 0
-  equipmentType: 1
+  armor: 9
+  weight: 15
+  magicRes: 20
+  equipmentType: 2
+  weaponData: {fileID: 0}
   consumable: 0
   consumableType: 0

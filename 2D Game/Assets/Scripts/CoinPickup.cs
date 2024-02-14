@@ -24,11 +24,10 @@ namespace Krisnat
 
                 InventoryManager.Instance.IncreaseCoins(true);
 
-                particle.remainingLifetime = 0.001f;
+                particle.remainingLifetime = 0;
                 pickedUp[i] = particle;
             }
             AudioManager.Instance.CoinPickupSound.Play();
-            Debug.Log(InventoryManager.Instance.Coins);
 
             particleSystem.SetTriggerParticles(ParticleSystemTriggerEventType.Enter, pickedUp);
         }

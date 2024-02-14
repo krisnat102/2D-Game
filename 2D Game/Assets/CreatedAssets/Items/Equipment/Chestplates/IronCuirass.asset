@@ -15,15 +15,16 @@ MonoBehaviour:
   id: 4
   itemName: Iron Cuirass
   value: 0
-  cost: 15
+  cost: 20
   usable: 1
   icon: {fileID: 21300000, guid: d6da72e3b0653f945869375f92cefc8a, type: 3}
   itemClass: 2
   itemDescription: A worn down chestplate covering the torso
   equipment: 1
-  armor: 15
-  weight: 4
-  magicRes: 5
+  armor: 8
+  weight: 6
+  magicRes: 3
   equipmentType: 2
+  weaponData: {fileID: 0}
   consumable: 0
   consumableType: 0
