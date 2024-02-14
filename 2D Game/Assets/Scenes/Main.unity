@@ -27682,7 +27682,7 @@ PrefabInstance:
     - target: {fileID: 167738637749498190, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 167738637749498196, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
@@ -27757,12 +27757,12 @@ PrefabInstance:
     - target: {fileID: 7355610707019080728, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7355610707019080728, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8294230122329821646, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
@@ -28247,13 +28247,18 @@ PrefabInstance:
     - target: {fileID: 4715727150763637724, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4715727151536337906, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
       propertyPath: playerTrans
       value: 
       objectReference: {fileID: 225787432}
+    - target: {fileID: 4715727151536337906, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: attackOrDetectRange
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6647677843303844164, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
       propertyPath: TriggerModule.exit
@@ -28294,6 +28299,11 @@ PrefabInstance:
       propertyPath: playerTrans
       value: 
       objectReference: {fileID: 225787432}
+    - target: {fileID: 6881677303310164175, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: attackOrDetectRange
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7725120459805488099, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
       propertyPath: m_Sprite
@@ -28303,12 +28313,12 @@ PrefabInstance:
     - target: {fileID: 8652173126370724597, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8652173126370724597, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
