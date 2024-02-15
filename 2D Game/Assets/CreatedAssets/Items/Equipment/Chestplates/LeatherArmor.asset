@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b860ad291538dac4f9496d8a9a1d7c60, type: 3}
-  m_Name: New Item 52
+  m_Name: LeatherArmor
   m_EditorClassIdentifier: 
   id: 55
-  itemName: 
+  itemName: Leather Armor
   value: 0
-  cost: 0
+  cost: 40
   usable: 1
   icon: {fileID: 21300000, guid: 269d0fcb44bdccf4691bff3c13704f2e, type: 3}
   itemClass: 2
-  itemDescription: 
+  itemDescription: Mostly used by hunters and thieves
   equipment: 1
-  armor: 0
-  weight: 0
-  magicRes: 0
+  armor: 7
+  weight: 6
+  magicRes: 4
   equipmentType: 2
+  weaponData: {fileID: 0}
   consumable: 0
   consumableType: 0
