@@ -17,6 +17,8 @@ public class EnemyAttackAI : MonoBehaviour
 
     public bool InRange { get => inRange; private set => inRange = value; }
     public bool InSight { get => inSight; private set => inSight = value; }
+    public bool InRangeOfSight { get => inRangeOfSight; private set => inRangeOfSight = value; }
+    public bool Alerted { get; private set; } 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -27,9 +29,9 @@ public class EnemyAttackAI : MonoBehaviour
             InRange = true;
             flipTracker = true;
         }
-        if (player && !attackOrDetectRange)
+        else if (player && !attackOrDetectRange)
         {
-            inRangeOfSight = true;
+            InRangeOfSight = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -44,15 +46,15 @@ public class EnemyAttackAI : MonoBehaviour
                 flipTracker = true;
             }
         }
-        if (player && !attackOrDetectRange)
+        else if (player && !attackOrDetectRange)
         {
-            inRangeOfSight = false;
+            InRangeOfSight = false;
         }
     }
 
     private void Update()
     {
-        if (inRangeOfSight)
+        if (InRangeOfSight)
         {
             RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, playerTrans.position - firePoint.position, Mathf.Infinity, ~IgnoreMe); //shoots a ray from the fire point to the player
 
@@ -62,6 +64,7 @@ public class EnemyAttackAI : MonoBehaviour
                 if (player != null)
                 {
                     InSight = true;
+                    Alerted = true;
                 }
                 else InSight = false;
             }

@@ -117,7 +117,6 @@ public class Enemy : MonoBehaviour
 
     public void Attack()
     {
-        if (enemyAttackAI.InSight) Debug.Log(1);
         if (attackCooldown == false && Data.ranged == false)
         {
             animator.SetTrigger("Attack");
@@ -130,7 +129,6 @@ public class Enemy : MonoBehaviour
         {
             animator.SetTrigger("Attack");
             Invoke("AttackSpawn", Data.attackAnimLength);
-            Debug.Log(1);
 
             attackCooldown = true;
             Invoke("AttackCooldown", Data.attackSpeed);
@@ -178,10 +176,8 @@ public class Enemy : MonoBehaviour
     #region Unity Methods
     private void Update()
     {
-        if (enemyAttackAI.InRange)
-        {
-            Invoke("Attack", 0.2f);
-        }
+        if (enemyAttackAI.InRange && !data.ranged) Attack();
+        else if (enemyAttackAI.InSight && data.ranged) Attack();
         /*if (transform != null && flip)
         {
             //FacingDirection *= -1;
@@ -211,7 +207,7 @@ public class Enemy : MonoBehaviour
             }
         }*/
 
-        if (Data.lookAtPlayer && enemyAttackAI.InSight)
+        if (Data.lookAtPlayer && enemyAttackAI.Alerted)
         {
             if (facingSide)
             {
