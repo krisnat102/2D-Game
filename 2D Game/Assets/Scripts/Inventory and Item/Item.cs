@@ -56,6 +56,8 @@ namespace Inventory
         public EquipmentType equipmentType;
         [HideInInspector]
         public WeaponDataSO weaponData;
+        [HideInInspector]
+        public WeaponType weaponType;
 
         [HideInInspector]
         public bool consumable;
@@ -70,6 +72,11 @@ namespace Inventory
             Gloves,
             Leggings,
             Weapon
+        }
+        public enum WeaponType
+        {
+            Sword,
+            Bow
         }
         public enum ConsumableType
         {
@@ -124,6 +131,7 @@ namespace Inventory
                 else
                 {
                     script.weaponData = (WeaponDataSO)EditorGUILayout.ObjectField("Weapon Data", script.weaponData, typeof(WeaponDataSO), false);
+                    script.weaponType = (Item.WeaponType)EditorGUILayout.EnumPopup("Type", script.weaponType);
                     script.weight = EditorGUILayout.FloatField("Weight", script.weight);
                 }
             }

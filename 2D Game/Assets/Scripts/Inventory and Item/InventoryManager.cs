@@ -19,7 +19,7 @@ namespace Inventory
         [SerializeField] private Transform itemContent;
         [SerializeField] private GameObject inventoryItem;
 
-        [SerializeField] private UnityEngine.UI.Toggle enableRemove;
+        [SerializeField] private Toggle enableRemove;
 
         [SerializeField] private InventoryItemController[] inventoryItems;
 
@@ -35,24 +35,25 @@ namespace Inventory
         [Header("Equipment MiniMenu")]
         [SerializeField] private Animator equipmentMenuAnimator;
         [SerializeField] private GameObject equipmentMenu;
-        [SerializeField] private UnityEngine.UI.Button helmetBn, chestplateBn, glovesBn, bootsBn, weapon1Bn, weapon2Bn;
+        [SerializeField] private Button helmetBn, chestplateBn, glovesBn, bootsBn, swordBn, bowBn;
 
         [Header("Item Description")]
-        [SerializeField] private UnityEngine.UI.Button useButton;
-        [SerializeField] private UnityEngine.UI.Image itemImage;
+        [SerializeField] private Button useButton;
+        [SerializeField] private Image itemImage;
         [SerializeField] private TMP_Text itemName, itemDescription, itemValue, itemPrice, itemWeight, itemArmor, itemMagicRes, weaponAttack;
         [SerializeField] private GameObject description;
 
         [Header("Coins")]
-        [SerializeField] private TMP_Text coinCounter, levelUpCoinCounter, inventoryCoinCounter;
+        [SerializeField] private GameObject purse;
+        [SerializeField] private TMP_Text coinCounter, levelUpCoinCounter, inventoryCoinCounter; 
         [SerializeField] private float purseAnimationDistance, purseAnimationDuration, purseAnimationTimeOnScreen;
 
         private Filter filter = default;
         private float totalArmor, totalMagicRes, totalWeight;
         private List<Item> distinctItems, duplicates = new();
         private List<Item> allItems = new();
-        private bool coinAnimationTracker;
         private float inventoryScale, characterTabScale;
+        private Animator purseAnimator;
         //private bool inventoryOpenAnimationTracker;
         //private bool inventoryCloseAnimationTracker;
         #endregion
@@ -63,14 +64,14 @@ namespace Inventory
         public bool SpellInventoryActiveInHierarchy { get; private set; }
         public bool CharacterTabActiveInHierarchy { get; private set; }
         public bool Shop { get; set; }
-        public UnityEngine.UI.Button HelmetBn { get => helmetBn; private set => helmetBn = value; }
-        public UnityEngine.UI.Button ChestplateBn { get => chestplateBn; private set => chestplateBn = value; }
-        public UnityEngine.UI.Button GlovesBn { get => glovesBn; private set => glovesBn = value; }
-        public UnityEngine.UI.Button BootsBn { get => bootsBn; private set => bootsBn = value; }
-        public UnityEngine.UI.Button Weapon1Bn { get => weapon1Bn; private set => weapon1Bn = value; }
-        public UnityEngine.UI.Button Weapon2Bn { get => weapon2Bn; private set => weapon2Bn = value; }
-        public UnityEngine.UI.Button UseButton { get => useButton; private set => useButton = value; }
-        public UnityEngine.UI.Image ItemImage { get => itemImage; private set => itemImage = value; }
+        public Button HelmetBn { get => helmetBn; private set => helmetBn = value; }
+        public Button ChestplateBn { get => chestplateBn; private set => chestplateBn = value; }
+        public Button GlovesBn { get => glovesBn; private set => glovesBn = value; }
+        public Button BootsBn { get => bootsBn; private set => bootsBn = value; }
+        public Button SwordBn { get => swordBn; private set => swordBn = value; }
+        public Button BowBn { get => bowBn; private set => bowBn = value; }
+        public Button UseButton { get => useButton; private set => useButton = value; }
+        public Image ItemImage { get => itemImage; private set => itemImage = value; }
         public TMP_Text ItemName { get => itemName; private set => itemName = value; }
         public TMP_Text ItemDescription { get => itemDescription; private set => itemDescription = value; }
         public TMP_Text ItemValue { get => itemValue; private set => itemValue = value; }
@@ -117,6 +118,8 @@ namespace Inventory
 
             inventoryScale = inventory.transform.localScale.x;
             characterTabScale = characterTab.transform.localScale.x;
+
+            purseAnimator = purse.GetComponent<Animator>();
         }
 
         public void Update()
@@ -360,8 +363,8 @@ namespace Inventory
             ids[1] = ChestplateBn.GetComponent<ItemController>()?.GetItem()?.id ?? 0;
             ids[2] = GlovesBn.GetComponent<ItemController>()?.GetItem()?.id ?? 0;
             ids[3] = BootsBn.GetComponent<ItemController>()?.GetItem()?.id ?? 0;
-            ids[4] = Weapon1Bn.GetComponent<ItemController>()?.GetItem()?.id ?? 0;
-            ids[5] = Weapon2Bn.GetComponent<ItemController>()?.GetItem()?.id ?? 0;
+            ids[4] = SwordBn.GetComponent<ItemController>()?.GetItem()?.id ?? 0;
+            ids[5] = BowBn.GetComponent<ItemController>()?.GetItem()?.id ?? 0;
 
             return ids;
         }
@@ -380,6 +383,12 @@ namespace Inventory
                         transform.GetComponent<Image>().gameObject.SetActive(true);
                         transform.GetComponent<Image>().sprite = item.icon;
                     }
+
+                    if (HelmetBn.GetComponent<ItemController>().GetItem() != null)
+                    {
+                        HelmetBn.GetComponent<ItemController>().GetItem().SetEquipped(false);
+                    }
+
                     HelmetBn.GetComponent<ItemController>().SetItem(item);
                     break;
 
@@ -389,6 +398,12 @@ namespace Inventory
                         transform.GetComponent<Image>().gameObject.SetActive(true);
                         transform.GetComponent<Image>().sprite = item.icon;
                     }
+
+                    if (ChestplateBn.GetComponent<ItemController>().GetItem() != null)
+                    {
+                        ChestplateBn.GetComponent<ItemController>().GetItem().SetEquipped(false);
+                    }
+
                     ChestplateBn.GetComponent<ItemController>().SetItem(item);
                     break;
 
@@ -398,6 +413,12 @@ namespace Inventory
                         transform.GetComponent<Image>().gameObject.SetActive(true);
                         transform.GetComponent<Image>().sprite = item.icon;
                     }
+
+                    if (BootsBn.GetComponent<ItemController>().GetItem() != null)
+                    {
+                        BootsBn.GetComponent<ItemController>().GetItem().SetEquipped(false);
+                    }
+
                     BootsBn.GetComponent<ItemController>().SetItem(item);
                     break;
 
@@ -407,39 +428,47 @@ namespace Inventory
                         transform.GetComponent<Image>().gameObject.SetActive(true);
                         transform.GetComponent<Image>().sprite = item.icon;
                     }
+
+                    if (GlovesBn.GetComponent<ItemController>().GetItem() != null)
+                    {
+                        GlovesBn.GetComponent<ItemController>().GetItem().SetEquipped(false);
+                    }
+
                     GlovesBn.GetComponent<ItemController>().SetItem(item);
                     break;
                 case Item.EquipmentType.Weapon:
-                    if (Weapon1Bn.GetComponent<ItemController>().GetItem() == null)
+                    switch (item.weaponType)
                     {
-                        foreach (Transform transform in Weapon1Bn.transform)
-                        {
-                            transform.GetComponent<Image>().gameObject.SetActive(true);
-                            transform.GetComponent<Image>().sprite = item.icon;
-                        }
-                        Weapon1Bn.GetComponent<ItemController>().SetItem(item);
-                        break;
+                        case Item.WeaponType.Sword:
+                            foreach (Transform transform in SwordBn.transform)
+                            {
+                                transform.GetComponent<Image>().gameObject.SetActive(true);
+                                transform.GetComponent<Image>().sprite = item.icon;
+                            }
+
+                            if (SwordBn.GetComponent<ItemController>().GetItem() != null)
+                            {
+                                SwordBn.GetComponent<ItemController>().GetItem().SetEquipped(false);
+                            }
+
+                            SwordBn.GetComponent<ItemController>().SetItem(item);
+                            break;
+                        case Item.WeaponType.Bow:
+                            foreach (Transform transform in BowBn.transform)
+                            {
+                                transform.GetComponent<Image>().gameObject.SetActive(true);
+                                transform.GetComponent<Image>().sprite = item.icon;
+                            }
+
+                            if(BowBn.GetComponent<ItemController>().GetItem() != null)
+                            {
+                                BowBn.GetComponent<ItemController>().GetItem().SetEquipped(false);
+                            }
+
+                            BowBn.GetComponent<ItemController>().SetItem(item);
+                            break;
                     }
-                    else if (Weapon2Bn.GetComponent<ItemController>().GetItem() == null)
-                    {
-                        foreach (Transform transform in Weapon2Bn.transform)
-                        {
-                            transform.GetComponent<Image>().gameObject.SetActive(true);
-                            transform.GetComponent<Image>().sprite = item.icon;
-                        }
-                        Weapon2Bn.GetComponent<ItemController>().SetItem(item);
-                        break;
-                    }
-                    else
-                    {
-                        foreach (Transform transform in Weapon1Bn.transform)
-                        {
-                            transform.GetComponent<Image>().gameObject.SetActive(true);
-                            transform.GetComponent<Image>().sprite = item.icon;
-                        }
-                        Weapon1Bn.GetComponent<ItemController>().SetItem(item);
-                        break;
-                    }
+                    break;
             }
         }
         public void UnequipItem(Item item)
@@ -490,25 +519,25 @@ namespace Inventory
                     description.SetActive(false);
                     break;
                 case Item.EquipmentType.Weapon:
-                    if (Weapon1Bn.GetComponent<ItemController>().GetItem() == item)
+                    if (SwordBn.GetComponent<ItemController>().GetItem() == item)
                     {
-                        foreach (Transform transform in Weapon1Bn.transform)
+                        foreach (Transform transform in SwordBn.transform)
                         {
                             transform.GetComponent<Image>().gameObject.SetActive(false);
                             transform.GetComponent<Image>().sprite = null;
                         }
-                        Weapon1Bn.GetComponent<ItemController>().SetItem(null);
+                        SwordBn.GetComponent<ItemController>().SetItem(null);
                         description.SetActive(false);
                         break;
                     }
                     else
                     {
-                        foreach (Transform transform in Weapon2Bn.transform)
+                        foreach (Transform transform in BowBn.transform)
                         {
                             transform.GetComponent<Image>().gameObject.SetActive(false);
                             transform.GetComponent<Image>().sprite = null;
                         }
-                        Weapon2Bn.GetComponent<ItemController>().SetItem(null);
+                        BowBn.GetComponent<ItemController>().SetItem(null);
                         description.SetActive(false);
                         break;
                     }
@@ -586,7 +615,7 @@ namespace Inventory
         {
             Coins = i;
 
-            if (coinAnimationTracker == false && animation)
+            if (animation)
             {
                 StartCoinAnimation();
             }
@@ -595,7 +624,7 @@ namespace Inventory
         {
             Coins++;
 
-            if (coinAnimationTracker == false && animation)
+            if (animation)
             {
                 StartCoinAnimation();
             }
@@ -603,16 +632,8 @@ namespace Inventory
 
         public void StartCoinAnimation()
         {
-            coinAnimationTracker = true;
-            UIManager.Instance.MovePurseAnimation(purseAnimationDistance, purseAnimationDuration);
-            Invoke("EndCoinAnimation", purseAnimationTimeOnScreen);
+            purseAnimator.SetTrigger("open");
         }
-        private void EndCoinAnimation()
-        {
-            coinAnimationTracker = false;
-            UIManager.Instance.MovePurseAnimation(purseAnimationDistance, purseAnimationDuration);
-        }
-
         #endregion
     }
 }

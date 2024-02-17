@@ -15,9 +15,6 @@ namespace Krisnat
         [Header("General")]
         [SerializeField] private GameObject canvas;
 
-        [Header("Purse")]
-        [SerializeField] private GameObject purse;
-
         [Header("Character Tab")]
         [SerializeField] private GameObject characterTab;
         [SerializeField] private TMP_Text levelText, hpText, manaText, stamText, armorText, magicResText, weightText;
@@ -39,6 +36,7 @@ namespace Krisnat
         private PlayerData playerData;
         private LevelHandler levelHandler;
         private bool purseAnimationTracker = false;
+        private Animator purseAnimator;
 
         public GameObject LevelUpInterface { get => levelUpInterface; private set => levelUpInterface = value; }
         public Slider BowChargeTimeSlider { get => bowChargeTimeSlider; private set => bowChargeTimeSlider = value; }
@@ -170,7 +168,7 @@ namespace Krisnat
         #endregion
 
         #region UI Animation
-        public void MovePurseAnimation(float animationDistance, float animationDuration)
+        /*public void MovePurseAnimation(float animationDistance, float animationDuration)
         {
             if (!purseAnimationTracker)
             {
@@ -184,7 +182,7 @@ namespace Krisnat
                 purse.transform.LeanMove(oldPosition, animationDuration);
             }
         }
-        private void StopPurseTracker() => purseAnimationTracker = false;
+        private void StopPurseTracker() => purseAnimationTracker = false;*/
         #endregion
 
         #region Buttons

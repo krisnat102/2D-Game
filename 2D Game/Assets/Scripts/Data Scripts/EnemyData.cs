@@ -28,6 +28,10 @@ public class EnemyData : ScriptableObject
     public Rect HitBox;
     public LayerMask DetectableLayers;
 
+    [Header("Dash")]
+    public bool canDash;
+    public float dashCooldown;
+
     [Header("Drops")]
     public int minCoinsDropped;
     public int maxCoinsDropped;

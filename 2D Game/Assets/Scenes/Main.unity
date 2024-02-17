@@ -1036,7 +1036,7 @@ PrefabInstance:
         type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: cf290382ca612354c8f95d20c0056acd,
+      objectReference: {fileID: 11400000, guid: e54dc2810f1b4c44389c39229cd6ca53,
         type: 2}
     - target: {fileID: 5565661106004909518, guid: 8444c67ff518a884eb58228568541179,
         type: 3}
@@ -14367,9 +14367,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
         type: 3}
+      propertyPath: bowBn
+      value: 
+      objectReference: {fileID: 967680333}
+    - target: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
+        type: 3}
+      propertyPath: purse
+      value: 
+      objectReference: {fileID: 1480049090}
+    - target: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
+        type: 3}
       propertyPath: bootsBn
       value: 
       objectReference: {fileID: 1316011851}
+    - target: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
+        type: 3}
+      propertyPath: swordBn
+      value: 
+      objectReference: {fileID: 1756837554}
     - target: {fileID: 6974382459076998431, guid: d50db331ba403b54a961879a9514ab7e,
         type: 3}
       propertyPath: glovesBn
@@ -16084,7 +16099,7 @@ PrefabInstance:
         type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: fb8fb6c1c5eafa2408d409eedecb7577,
+      objectReference: {fileID: 11400000, guid: 9acca07b3607fee4ca5720230f9acdca,
         type: 2}
     - target: {fileID: 5565661106004909518, guid: 8444c67ff518a884eb58228568541179,
         type: 3}
@@ -27670,7 +27685,7 @@ PrefabInstance:
     - target: {fileID: 167738637749498190, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 167738637749498196, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
@@ -27745,12 +27760,12 @@ PrefabInstance:
     - target: {fileID: 7355610707019080728, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7355610707019080728, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8294230122329821646, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
@@ -28000,6 +28015,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637698, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 3.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715727150763637698, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 3.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
       propertyPath: data
@@ -28235,7 +28260,7 @@ PrefabInstance:
     - target: {fileID: 4715727150763637724, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4715727151536337906, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
@@ -28301,12 +28326,12 @@ PrefabInstance:
     - target: {fileID: 8652173126370724597, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8652173126370724597, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -28334,7 +28359,7 @@ GameObject:
   - component: {fileID: 967680333}
   - component: {fileID: 967680332}
   m_Layer: 5
-  m_Name: Weapon2Bn
+  m_Name: BowBn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28460,7 +28485,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cc5ee25fa1b3acf458abcfc2a82d7650, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a6f3dfc62133cd042880e7297adede03, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -67823,6 +67848,7 @@ GameObject:
   - component: {fileID: 1480049091}
   - component: {fileID: 1480049093}
   - component: {fileID: 1480049092}
+  - component: {fileID: 1480049094}
   m_Layer: 5
   m_Name: CoinPurse
   m_TagString: Untagged
@@ -67847,7 +67873,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -207, y: -94}
+  m_AnchoredPosition: {x: -207, y: -93}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1480049092
@@ -67885,6 +67911,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1480049090}
   m_CullTransparentMesh: 1
+--- !u!95 &1480049094
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480049090}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c785437e6b7feaf4981c08bc3b5e2e4e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1492369574
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71896,7 +71943,7 @@ GameObject:
   - component: {fileID: 1756837554}
   - component: {fileID: 1756837553}
   m_Layer: 5
-  m_Name: Weapon1Bn
+  m_Name: SwordBn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

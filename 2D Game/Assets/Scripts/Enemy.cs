@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
     private Animator animator;
     private bool immune = false;
     private bool attackCooldown = false;
+    private bool dashCooldown = false;
     private bool flip;
     private bool childFlip;
     private bool facingSide;
@@ -53,6 +54,8 @@ public class Enemy : MonoBehaviour
     #endregion
 
     #region Combat
+
+    #region Takers
     public void TakeDamage(float rawDamage, float knockback, bool multipleDamageSources)
     {
         float damage = Mathf.Round(rawDamage);
@@ -105,7 +108,9 @@ public class Enemy : MonoBehaviour
             rb.AddForce(transform.right * -knockback, ForceMode2D.Force);
         }
     }
+    #endregion
 
+    #region Actions
     private void Die()
     {
         var coins = Instantiate(coinBurstParticleEffect.gameObject, transform.position, Quaternion.identity, particleContainer);
@@ -115,7 +120,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void Attack()
+    private void Attack()
     {
         if (attackCooldown == false && Data.ranged == false)
         {
@@ -134,6 +139,17 @@ public class Enemy : MonoBehaviour
             Invoke("AttackCooldown", Data.attackSpeed);
         }
     }
+
+    private void Dash()
+    {
+        animator.SetTrigger("Dash");
+        dashCooldown = true;
+        Invoke("DashCooldown", Data.dashCooldown);
+
+        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        rb.AddForce(new Vector2(data.dashStrength, 0));
+    }
+    #endregion
 
     private void AttackSpawn()
     {
@@ -171,6 +187,7 @@ public class Enemy : MonoBehaviour
 
     private void StopImmune() => immune = false;
     private void AttackCooldown() => attackCooldown = false;
+    private void DashCooldown() => dashCooldown = false;
     #endregion
 
     #region Unity Methods

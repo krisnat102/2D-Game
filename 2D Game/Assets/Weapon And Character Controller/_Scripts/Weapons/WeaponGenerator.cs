@@ -31,11 +31,11 @@ namespace Bardent.Weapons
         {
             if(weaponCount == 1)
             {
-                Data = InventoryManager.Instance.Weapon1Bn.GetComponent<ItemController>().GetItem()?.weaponData;
+                Data = InventoryManager.Instance.SwordBn.GetComponent<ItemController>().GetItem()?.weaponData;
             }
             if (weaponCount == 2)
             {
-                Data = InventoryManager.Instance.Weapon2Bn.GetComponent<ItemController>().GetItem()?.weaponData;
+                Data = InventoryManager.Instance.BowBn.GetComponent<ItemController>().GetItem()?.weaponData;
             }
             if(Data != null)
             {
