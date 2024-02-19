@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using Bardent.CoreSystem;
 using Pathfinding;
 using TMPro;
+using UnityEditor;
 
 public class Enemy : MonoBehaviour
 {
@@ -12,37 +13,48 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Gradient hpBarGradient;
     [SerializeField] private Image hpBarFill;
     [SerializeField] private GameObject damagePopup;
-    [SerializeField] private Vector3 damagePopupOffset;
     [SerializeField] private Gradient damagePopupGradient;
+    [SerializeField] private Vector3 damagePopupOffset;
     [SerializeField] private int fontSizeToDamageScaler;
+
+    [Header("Ranges")]
+    [SerializeField] private EnemyAttackAI enemyAttackAIRange;
+    [SerializeField] private EnemyAttackAI enemyAttackAI, enemyDashAIRAnge;
+    [SerializeField] private Transform leftPatrolBarrier, rightPatrolBarrier;
 
     [Header("Other")]
     public EnemyData data;
     [SerializeField] private AudioSource attackSound;
     [SerializeField] private Transform playerTrans;
-    [SerializeField] private EnemyAttackAI enemyAttackAIRange, enemyAttackAI;
 
+    private int coinsDropped;
+    private int facingDirection = 1;
     private float offsetXSave;
-    private Rigidbody2D rb;
-    private Animator animator;
+    private float hp;
+    private float lvlIndex;
     private bool immune = false;
     private bool attackCooldown = false;
     private bool dashCooldown = false;
+    private bool isDashing = false;
+    private bool isPatrolling;
     private bool flip;
-    private bool childFlip;
     private bool facingSide;
-    private float hp;
-    private float lvlIndex;
+    private bool childFlip;
+    private bool rooted;
+    private bool patrollingDirection = true;
+    private Vector2 leftPatrolBarrierPosition;
+    private Vector2 rightPatrolBarrierPosition;
     private Vector2 offset;
+    private Vector2 previousPosition;
+    private Rigidbody2D rb;
+    private Animator animator;
     private Collider2D[] detected;
-    private int facingDirection = 1;
     private Player player;
     private AIPath aiPath;
     private Transform firePoint;
     private GameObject arrow;
     private ParticleSystem coinBurstParticleEffect;
     private Transform particleContainer;
-    private int coinsDropped;
     #endregion
 
     #region Properties
@@ -138,19 +150,32 @@ public class Enemy : MonoBehaviour
             attackCooldown = true;
             Invoke("AttackCooldown", Data.attackSpeed);
         }
+        if (data.rootWhenAttacking)
+        {
+            Invoke("StartRooted", 0.1f);
+            Invoke("StopRooted", Data.attackAnimLength);
+        }
     }
 
     private void Dash()
     {
         animator.SetTrigger("Dash");
+
         dashCooldown = true;
         Invoke("DashCooldown", Data.dashCooldown);
+        attackCooldown = true;
+        Invoke("AttackCooldown", Data.attackSpeed);
+
+        isDashing = true;
+        Invoke("StopDash", Data.dashDuration);
 
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-        rb.AddForce(new Vector2(data.dashStrength, 0));
+        if (playerTrans.position.x > transform.position.x) rb.AddForce(new Vector2(-data.dashStrength, 0), ForceMode2D.Impulse);
+        else rb.AddForce(new Vector2(data.dashStrength, 0), ForceMode2D.Impulse);
     }
     #endregion
 
+    #region Spawners
     private void AttackSpawn()
     {
         if (Data.ranged)
@@ -184,16 +209,23 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+    #endregion
+    #endregion
 
+    #region Cooldown and Bool Invoke Methods
     private void StopImmune() => immune = false;
+    private void StartRooted() => rooted = true;
+    private void StopRooted() => rooted = false;
     private void AttackCooldown() => attackCooldown = false;
     private void DashCooldown() => dashCooldown = false;
+    private void StopDash() => isDashing = false;
     #endregion
 
     #region Unity Methods
     private void Update()
     {
-        if (enemyAttackAI.InRange && !data.ranged) Attack();
+        if (enemyDashAIRAnge.InRange && data.canDash && !dashCooldown && !attackCooldown) Dash();
+        else if (enemyAttackAI.InRange && !data.ranged) Attack();
         else if (enemyAttackAI.InSight && data.ranged) Attack();
         /*if (transform != null && flip)
         {
@@ -224,7 +256,7 @@ public class Enemy : MonoBehaviour
             }
         }*/
 
-        if (Data.lookAtPlayer && enemyAttackAI.Alerted)
+        if (Data.lookAtPlayer && enemyAttackAI.Alerted && !isDashing)
         {
             if (facingSide)
             {
@@ -261,6 +293,29 @@ public class Enemy : MonoBehaviour
             }
             //else aiPath.canMove = false;
         }
+
+        if (rooted)
+        {
+            rb.velocity = Vector3.zero;
+            transform.position = previousPosition;
+        }
+
+        if (enemyAttackAI.Alerted) isPatrolling = false;
+        if (isPatrolling)
+        {
+            if (transform.position == (Vector3)leftPatrolBarrierPosition || transform.position == (Vector3)rightPatrolBarrierPosition)
+            {
+                rooted = true;
+                Invoke("StopRooted", data.patrolPauseTime);
+                patrollingDirection = !patrollingDirection;
+            }
+            if (patrollingDirection)
+            {
+
+            }
+        }
+
+        previousPosition = transform.position;
     }
 
     private void Start()
@@ -279,6 +334,9 @@ public class Enemy : MonoBehaviour
         flip = ContainsParam(animator, "Flip");
         firePoint = gameObject.transform.Find("FirePoint");
         arrow = gameObject.transform.Find("Arrow")?.gameObject;
+        rightPatrolBarrierPosition = rightPatrolBarrier.transform.position;
+        leftPatrolBarrierPosition = leftPatrolBarrier.transform.position;
+        isPatrolling = data.patrol;
         #endregion
 
         #region Calculations
@@ -289,7 +347,7 @@ public class Enemy : MonoBehaviour
         hp = Data.maxHP * lvlIndex;
         hpBar.maxValue = Data.maxHP * lvlIndex;
 
-        coinsDropped = Random.Range(data.minCoinsDropped, data.maxCoinsDropped++);
+        coinsDropped = Random.Range(data.minCoinsDropped, data.maxCoinsDropped);
         #endregion
 
         TakeDamage(0, 0, false);

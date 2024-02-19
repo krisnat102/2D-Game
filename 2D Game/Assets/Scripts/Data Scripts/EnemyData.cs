@@ -31,14 +31,22 @@ public class EnemyData : ScriptableObject
     [Header("Dash")]
     public bool canDash;
     public float dashCooldown;
+    public float dashStrength;
+    public float dashDuration;
 
     [Header("Drops")]
     public int minCoinsDropped;
     public int maxCoinsDropped;
 
+    [Header("Patrol")]
+    public float patrolPauseTime;
+    public float patrolSpeedPercent;
+
     [Header("Behaviour")]
     public bool lookAtPlayer;
     public bool flipWhenPlayerIsRight;
+    public bool rootWhenAttacking;
+    public bool patrol;
 
     [Header("Other")]
     public GameObject deathEffect;

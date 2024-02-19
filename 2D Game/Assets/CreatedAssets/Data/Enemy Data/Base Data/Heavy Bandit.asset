@@ -33,9 +33,14 @@ MonoBehaviour:
   DetectableLayers:
     serializedVersion: 2
     m_Bits: 1024
+  canDash: 0
+  dashCooldown: 0
+  dashStrength: 0
   minCoinsDropped: 15
   maxCoinsDropped: 26
   lookAtPlayer: 1
+  flipWhenPlayerIsRight: 0
+  rootWhenAttacking: 1
   deathEffect: {fileID: 2479263185497603450, guid: d1cde12569e58d140a042b24f8d8012b,
     type: 3}
   bloodEffect: {fileID: 7515634647306772147, guid: b6be51001a0800f4abd4e30fe133548b,
