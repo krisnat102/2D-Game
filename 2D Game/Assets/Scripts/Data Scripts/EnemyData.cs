@@ -40,7 +40,7 @@ public class EnemyData : ScriptableObject
 
     [Header("Patrol")]
     public float patrolPauseTime;
-    public float patrolSpeedPercent;
+    public float patrolSpeed;
 
     [Header("Behaviour")]
     public bool lookAtPlayer;

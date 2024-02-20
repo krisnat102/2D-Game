@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Ranges")]
     [SerializeField] private EnemyAttackAI enemyAttackAIRange;
-    [SerializeField] private EnemyAttackAI enemyAttackAI, enemyDashAIRAnge;
+    [SerializeField] private EnemyAttackAI enemyAttackAI, enemyDashAIRange;
     [SerializeField] private Transform leftPatrolBarrier, rightPatrolBarrier;
 
     [Header("Other")]
@@ -46,11 +46,11 @@ public class Enemy : MonoBehaviour
     private Vector2 rightPatrolBarrierPosition;
     private Vector2 offset;
     private Vector2 previousPosition;
+    private Seeker seeker;
     private Rigidbody2D rb;
     private Animator animator;
     private Collider2D[] detected;
     private Player player;
-    private AIPath aiPath;
     private Transform firePoint;
     private GameObject arrow;
     private ParticleSystem coinBurstParticleEffect;
@@ -63,6 +63,120 @@ public class Enemy : MonoBehaviour
     public EnemyData Data { get => data; private set => data = value; }
     public float EnemyLevelScale { get => lvlIndex; private set => lvlIndex = value; }
     public int FacingDirection { get => facingDirection; private set => facingDirection = value; }
+    #endregion
+
+    #region Unity Methods
+    private void Update()
+    {
+        if (enemyDashAIRange && enemyDashAIRange.InRange && data.canDash && !dashCooldown && !attackCooldown) Dash();
+        else if (enemyAttackAI.InRange && !data.ranged) Attack();
+        else if (enemyAttackAI.InSight && data.ranged) Attack();
+
+        if (Data.lookAtPlayer && enemyAttackAI.Alerted && !isDashing)
+        {
+            if (facingSide)
+            {
+                if (playerTrans.position.x < transform.position.x + 0.5f)
+                {
+                    transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                }
+                else if (playerTrans.position.x > transform.position.x - 0.5f)
+                {
+                    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                }
+            }
+            else
+            {
+                if (playerTrans.position.x < transform.position.x + 0.5f)
+                {
+                    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                }
+                else if (playerTrans.position.x > transform.position.x - 0.5f)
+                {
+                    transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+
+                }
+            }
+        }
+
+        FacingDirection = transform.localScale.x > 0 ? 1 : -1;
+
+        if (seeker != null)
+        {
+            if (enemyAttackAIRange.InSight)
+            {
+                seeker.enabled = true; //add a way to stop and enable pathfinding
+            }
+            else seeker.enabled = false;
+        }
+
+        if (rooted)
+        {
+            rb.velocity = Vector3.zero;
+            transform.position = new Vector2(previousPosition.x, transform.position.y);
+        }
+
+        if (enemyAttackAI.Alerted) isPatrolling = false;
+        if (isPatrolling)
+        {
+            if (transform.position.x == leftPatrolBarrierPosition.x || transform.position.x == rightPatrolBarrierPosition.x)
+            {
+                rooted = true;
+                Invoke("StopRooted", data.patrolPauseTime);
+                patrollingDirection = !patrollingDirection;
+            }
+            if (patrollingDirection)
+            {
+                rb.AddForce(new Vector2(data.patrolSpeed, 0), ForceMode2D.Force);
+            }
+            else
+            {
+                rb.AddForce(new Vector2(-data.patrolSpeed, 0), ForceMode2D.Force);
+            }
+        }
+
+        previousPosition = transform.position;
+    }
+
+    private void Start()
+    {
+        #region Variable Getting and Finding
+        //enemyAttackAI = GetComponentInChildren<EnemyAttackAI>();
+        coinBurstParticleEffect = GetComponentInChildren<ParticleSystem>();
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        particleContainer = GameObject.FindGameObjectWithTag("ParticleContainer").transform;
+        if (animator == null)
+        {
+            animator = GetComponentInChildren<Animator>();
+        }
+        flip = ContainsParam(animator, "Flip");
+        firePoint = gameObject.transform.Find("FirePoint");
+        arrow = gameObject.transform.Find("Arrow")?.gameObject;
+        if (rightPatrolBarrier) rightPatrolBarrierPosition = rightPatrolBarrier.transform.position;
+        if (leftPatrolBarrier) leftPatrolBarrierPosition = leftPatrolBarrier.transform.position;
+        isPatrolling = data.patrol;
+        #endregion
+
+        #region Calculations
+        lvlIndex = Data.level * 0.1f + 0.9f;
+
+        offsetXSave = Data.offsetX;
+
+        hp = Data.maxHP * lvlIndex;
+        hpBar.maxValue = Data.maxHP * lvlIndex;
+
+        coinsDropped = Random.Range(data.minCoinsDropped, data.maxCoinsDropped);
+        #endregion
+
+        TakeDamage(0, 0, false);
+
+        if (transform.rotation.y == 0)
+        {
+            facingSide = true;
+        }
+        else facingSide = false;
+    }
     #endregion
 
     #region Combat
@@ -219,145 +333,6 @@ public class Enemy : MonoBehaviour
     private void AttackCooldown() => attackCooldown = false;
     private void DashCooldown() => dashCooldown = false;
     private void StopDash() => isDashing = false;
-    #endregion
-
-    #region Unity Methods
-    private void Update()
-    {
-        if (enemyDashAIRAnge.InRange && data.canDash && !dashCooldown && !attackCooldown) Dash();
-        else if (enemyAttackAI.InRange && !data.ranged) Attack();
-        else if (enemyAttackAI.InSight && data.ranged) Attack();
-        /*if (transform != null && flip)
-        {
-            //FacingDirection *= -1;
-            if (transform.position.x < playerTrans.position.x)
-            {
-                Data.offsetX = -Data.offsetX2;
-                animator.SetBool("Flip", true);
-            }
-            else
-            {
-                Data.offsetX = offsetXSave;
-                animator.SetBool("Flip", false);
-            }
-        }
-        else if (transform != null && childFlip)
-        {
-            //FacingDirection *= -1;
-            if (transform.position.x < playerTrans.position.x)
-            {
-                Data.offsetX = -Data.offsetX2;
-                animator.SetBool("Flip", true);
-            }
-            else
-            {
-                Data.offsetX = offsetXSave;
-                animator.SetBool("Flip", false);
-            }
-        }*/
-
-        if (Data.lookAtPlayer && enemyAttackAI.Alerted && !isDashing)
-        {
-            if (facingSide)
-            {
-                if (playerTrans.position.x < transform.position.x + 0.5f)
-                {
-                    transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-                }
-                else if (playerTrans.position.x > transform.position.x - 0.5f)
-                {
-                    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-                }
-            }
-            else
-            {
-                if (playerTrans.position.x < transform.position.x + 0.5f)
-                {
-                    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-                }
-                else if (playerTrans.position.x > transform.position.x - 0.5f)
-                {
-                    transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-
-                }
-            }
-        }
-
-        FacingDirection = transform.localScale.x > 0 ? 1 : -1;
-
-        if (aiPath != null)
-        {
-            if (enemyAttackAIRange.InSight)
-            {
-                aiPath.canMove = true;
-            }
-            //else aiPath.canMove = false;
-        }
-
-        if (rooted)
-        {
-            rb.velocity = Vector3.zero;
-            transform.position = previousPosition;
-        }
-
-        if (enemyAttackAI.Alerted) isPatrolling = false;
-        if (isPatrolling)
-        {
-            if (transform.position == (Vector3)leftPatrolBarrierPosition || transform.position == (Vector3)rightPatrolBarrierPosition)
-            {
-                rooted = true;
-                Invoke("StopRooted", data.patrolPauseTime);
-                patrollingDirection = !patrollingDirection;
-            }
-            if (patrollingDirection)
-            {
-
-            }
-        }
-
-        previousPosition = transform.position;
-    }
-
-    private void Start()
-    {
-        #region Variable Getting and Finding
-        aiPath = GetComponent<AIPath>();
-        //enemyAttackAI = GetComponentInChildren<EnemyAttackAI>();
-        coinBurstParticleEffect = GetComponentInChildren<ParticleSystem>();
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        particleContainer = GameObject.FindGameObjectWithTag("ParticleContainer").transform;
-        if (animator == null)
-        {
-            animator = GetComponentInChildren<Animator>();
-        }
-        flip = ContainsParam(animator, "Flip");
-        firePoint = gameObject.transform.Find("FirePoint");
-        arrow = gameObject.transform.Find("Arrow")?.gameObject;
-        rightPatrolBarrierPosition = rightPatrolBarrier.transform.position;
-        leftPatrolBarrierPosition = leftPatrolBarrier.transform.position;
-        isPatrolling = data.patrol;
-        #endregion
-
-        #region Calculations
-        lvlIndex = Data.level * 0.1f + 0.9f;
-
-        offsetXSave = Data.offsetX;
-
-        hp = Data.maxHP * lvlIndex;
-        hpBar.maxValue = Data.maxHP * lvlIndex;
-
-        coinsDropped = Random.Range(data.minCoinsDropped, data.maxCoinsDropped);
-        #endregion
-
-        TakeDamage(0, 0, false);
-
-        if (transform.rotation.y == 0)
-        {
-            facingSide = true;
-        }
-        else facingSide = false;
-    }
     #endregion
 
     #region OtherMethods
