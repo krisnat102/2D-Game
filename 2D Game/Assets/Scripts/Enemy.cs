@@ -18,8 +18,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int fontSizeToDamageScaler;
 
     [Header("Ranges")]
-    [SerializeField] private EnemyAttackAI enemyAttackAIRange;
-    [SerializeField] private EnemyAttackAI enemyAttackAI, enemyDashAIRange;
+    [SerializeField] private EnemyAttackAI detectAIRange;
+    [SerializeField] private EnemyAttackAI attackAIRange, dashAIRange;
     [SerializeField] private Transform leftPatrolBarrier, rightPatrolBarrier;
 
     [Header("Other")]
@@ -46,7 +46,8 @@ public class Enemy : MonoBehaviour
     private Vector2 rightPatrolBarrierPosition;
     private Vector2 offset;
     private Vector2 previousPosition;
-    private Seeker seeker;
+    private EnemyAI enemyAI;
+    private AIPath aiPath;
     private Rigidbody2D rb;
     private Animator animator;
     private Collider2D[] detected;
@@ -68,30 +69,30 @@ public class Enemy : MonoBehaviour
     #region Unity Methods
     private void Update()
     {
-        if (enemyDashAIRange && enemyDashAIRange.InRange && data.canDash && !dashCooldown && !attackCooldown) Dash();
-        else if (enemyAttackAI.InRange && !data.ranged) Attack();
-        else if (enemyAttackAI.InSight && data.ranged) Attack();
+        if (dashAIRange && dashAIRange.InRange && data.canDash && !dashCooldown && !attackCooldown) Dash();
+        else if (attackAIRange.InRange && !data.ranged) Attack();
+        else if (attackAIRange.InSight && data.ranged) Attack();
 
-        if (Data.lookAtPlayer && enemyAttackAI.Alerted && !isDashing)
+        if (Data.lookAtPlayer && detectAIRange.Alerted && !isDashing)
         {
             if (facingSide)
             {
-                if (playerTrans.position.x < transform.position.x + 0.5f)
+                if (playerTrans.position.x < transform.position.x)
                 {
                     transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 }
-                else if (playerTrans.position.x > transform.position.x - 0.5f)
+                else if (playerTrans.position.x > transform.position.x)
                 {
                     transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 }
             }
             else
             {
-                if (playerTrans.position.x < transform.position.x + 0.5f)
+                if (playerTrans.position.x < transform.position.x)
                 {
                     transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 }
-                else if (playerTrans.position.x > transform.position.x - 0.5f)
+                else if (playerTrans.position.x > transform.position.x)
                 {
                     transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
 
@@ -101,13 +102,22 @@ public class Enemy : MonoBehaviour
 
         FacingDirection = transform.localScale.x > 0 ? 1 : -1;
 
-        if (seeker != null)
+        if (enemyAI != null)
         {
-            if (enemyAttackAIRange.InSight)
+            if (detectAIRange.Alerted || attackAIRange.Alerted)
             {
-                seeker.enabled = true; //add a way to stop and enable pathfinding
+                enemyAI.enabled = true;
             }
-            else seeker.enabled = false;
+            else enemyAI.enabled = false;
+        }
+        if (aiPath != null)
+        {
+            if (detectAIRange.Alerted)
+            {
+                aiPath.enabled = true;
+                Debug.Log(2);
+            }
+            //else aiPath.enabled = false;
         }
 
         if (rooted)
@@ -116,7 +126,7 @@ public class Enemy : MonoBehaviour
             transform.position = new Vector2(previousPosition.x, transform.position.y);
         }
 
-        if (enemyAttackAI.Alerted) isPatrolling = false;
+        if (detectAIRange.Alerted) isPatrolling = false;
         if (isPatrolling)
         {
             if (transform.position.x == leftPatrolBarrierPosition.x || transform.position.x == rightPatrolBarrierPosition.x)
@@ -141,7 +151,8 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         #region Variable Getting and Finding
-        //enemyAttackAI = GetComponentInChildren<EnemyAttackAI>();
+        enemyAI = GetComponentInChildren<EnemyAI>();
+        aiPath = GetComponentInChildren<AIPath>();
         coinBurstParticleEffect = GetComponentInChildren<ParticleSystem>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -256,7 +267,7 @@ public class Enemy : MonoBehaviour
             Invoke("AttackCooldown", Data.attackSpeed);
             Invoke("AttackSpawn", Data.attackAnimLength);
         }
-        else if (attackCooldown == false && Data.ranged && enemyAttackAI.InSight)
+        else if (attackCooldown == false && Data.ranged && attackAIRange.InSight)
         {
             animator.SetTrigger("Attack");
             Invoke("AttackSpawn", Data.attackAnimLength);

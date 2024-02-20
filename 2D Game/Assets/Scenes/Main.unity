@@ -1148,6 +1148,37 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &37670831
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 37670832}
+  m_Layer: 9
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &37670832
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37670831}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.094, y: 1.071, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1333019204}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &41416687
 GameObject:
   m_ObjectHideFlags: 0
@@ -2657,6 +2688,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1089091996379231738, guid: a3f6384058c673846ba368a8e2c51dba,
         type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 1509079921}
+    - target: {fileID: 1089091996379231738, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
       propertyPath: playerTrans
       value: 
       objectReference: {fileID: 225787432}
@@ -2772,6 +2808,16 @@ PrefabInstance:
       propertyPath: playerTrans
       value: 
       objectReference: {fileID: 225787432}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: attackAIRange
+      value: 
+      objectReference: {fileID: 1431424630}
+    - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: detectAIRange
+      value: 
+      objectReference: {fileID: 2099906442}
     - target: {fileID: 1620560478860096214, guid: a3f6384058c673846ba368a8e2c51dba,
         type: 3}
       propertyPath: enemyAttackAI
@@ -2989,9 +3035,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4477328867668029076, guid: a3f6384058c673846ba368a8e2c51dba,
         type: 3}
+      propertyPath: flip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477328867668029076, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
       propertyPath: enemy
       value: 
       objectReference: {fileID: 463507645}
+    - target: {fileID: 4477328867668029076, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 1509079921}
     - target: {fileID: 4477328867668029076, guid: a3f6384058c673846ba368a8e2c51dba,
         type: 3}
       propertyPath: playerTrans
@@ -3006,6 +3062,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Constraints
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4541564529560461442, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      propertyPath: m_Name
+      value: EagleAttackRange
       objectReference: {fileID: 0}
     - target: {fileID: 5124546117721066476, guid: a3f6384058c673846ba368a8e2c51dba,
         type: 3}
@@ -3056,7 +3117,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 3671426381491481227, guid: a3f6384058c673846ba368a8e2c51dba, type: 3}
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1620560478860096211, guid: a3f6384058c673846ba368a8e2c51dba,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1509079921}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3f6384058c673846ba368a8e2c51dba, type: 3}
 --- !u!1 &158111961
@@ -27378,6 +27443,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 167738637749498185, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 167738637749498185, guid: 056196fb9136d8f42a99f8d1570a6361,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 54.448765
       objectReference: {fileID: 0}
@@ -27453,6 +27523,16 @@ PrefabInstance:
       propertyPath: playerTrans
       value: 
       objectReference: {fileID: 225787432}
+    - target: {fileID: 167738637749498186, guid: 056196fb9136d8f42a99f8d1570a6361,
+        type: 3}
+      propertyPath: attackAIRange
+      value: 
+      objectReference: {fileID: 1462249196}
+    - target: {fileID: 167738637749498186, guid: 056196fb9136d8f42a99f8d1570a6361,
+        type: 3}
+      propertyPath: detectAIRange
+      value: 
+      objectReference: {fileID: 77378628}
     - target: {fileID: 167738637749498186, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
       propertyPath: enemyAttackAI
@@ -27755,6 +27835,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3937027893918305383, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 37670832}
+    - target: {fileID: 3937027893918305383, guid: 056196fb9136d8f42a99f8d1570a6361,
+        type: 3}
       propertyPath: playerTrans
       value: 
       objectReference: {fileID: 225787432}
@@ -27842,9 +27927,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9185476502398813675, guid: 056196fb9136d8f42a99f8d1570a6361,
         type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 37670832}
+    - target: {fileID: 9185476502398813675, guid: 056196fb9136d8f42a99f8d1570a6361,
+        type: 3}
       propertyPath: playerTrans
       value: 
       objectReference: {fileID: 225787432}
+    - target: {fileID: 9185476502398813675, guid: 056196fb9136d8f42a99f8d1570a6361,
+        type: 3}
+      propertyPath: IgnoreMe.m_Bits
+      value: 7471671
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5877640676203730170, guid: 056196fb9136d8f42a99f8d1570a6361, type: 3}
@@ -27858,6 +27953,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1499938300}
+    - targetCorrespondingSourceObject: {fileID: 167738637749498185, guid: 056196fb9136d8f42a99f8d1570a6361,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 37670832}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 056196fb9136d8f42a99f8d1570a6361, type: 3}
 --- !u!1 &953644809
@@ -28111,6 +28210,16 @@ PrefabInstance:
       propertyPath: playerTrans
       value: 
       objectReference: {fileID: 225787432}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: attackAIRange
+      value: 
+      objectReference: {fileID: 1322459703}
+    - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
+        type: 3}
+      propertyPath: detectAIRange
+      value: 
+      objectReference: {fileID: 1322459703}
     - target: {fileID: 4715727150763637702, guid: 822b92523f445d349a5be30b83a06b59,
         type: 3}
       propertyPath: enemyAttackAI
@@ -68396,6 +68505,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1506392899}
   m_CullTransparentMesh: 1
+--- !u!1 &1509079920
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1509079921}
+  m_Layer: 9
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1509079921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509079920}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 498712059}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1509827688
 GameObject:
   m_ObjectHideFlags: 0
@@ -75492,7 +75632,7 @@ MonoBehaviour:
   IgnoreMe:
     serializedVersion: 2
     m_Bits: 7471159
-  attackOrDetectRange: 1
+  flip: 1
 --- !u!1 &2034786590
 GameObject:
   m_ObjectHideFlags: 0
