@@ -37,13 +37,13 @@ public class Enemy : MonoBehaviour
     private bool dashCooldown = false;
     private bool isDashing = false;
     private bool isPatrolling;
+    private bool stopPatrol;
     private bool flip;
-    private bool facingSide;
     private bool childFlip;
     private bool rooted;
     private bool patrollingDirection = true;
-    private Vector2 leftPatrolBarrierPosition;
-    private Vector2 rightPatrolBarrierPosition;
+    private float leftPatrolBarrierPositionX;
+    private float rightPatrolBarrierPositionX;
     private Vector2 offset;
     private Vector2 previousPosition;
     private EnemyAI enemyAI;
@@ -75,27 +75,26 @@ public class Enemy : MonoBehaviour
 
         if (Data.lookAtPlayer && detectAIRange.Alerted && !isDashing)
         {
-            if (facingSide)
+            if (data.facingDirection)
             {
                 if (playerTrans.position.x < transform.position.x)
                 {
-                    transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                    transform.localScale = new Vector3(1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 }
                 else if (playerTrans.position.x > transform.position.x)
                 {
-                    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                    transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 }
             }
             else
             {
                 if (playerTrans.position.x < transform.position.x)
                 {
-                    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                    transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 }
                 else if (playerTrans.position.x > transform.position.x)
                 {
-                    transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-
+                    transform.localScale = new Vector3(1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 }
             }
         }
@@ -115,9 +114,8 @@ public class Enemy : MonoBehaviour
             if (detectAIRange.Alerted)
             {
                 aiPath.enabled = true;
-                Debug.Log(2);
             }
-            //else aiPath.enabled = false;
+            else aiPath.enabled = false;
         }
 
         if (rooted)
@@ -129,19 +127,23 @@ public class Enemy : MonoBehaviour
         if (detectAIRange.Alerted) isPatrolling = false;
         if (isPatrolling)
         {
-            if (transform.position.x == leftPatrolBarrierPosition.x || transform.position.x == rightPatrolBarrierPosition.x)
+            if ((transform.position.x <= leftPatrolBarrierPositionX || transform.position.x >= rightPatrolBarrierPositionX) && !stopPatrol)
             {
                 rooted = true;
+                stopPatrol = true;
                 Invoke("StopRooted", data.patrolPauseTime);
+                Invoke("StartPatrol", data.patrolPauseTime + 1);
                 patrollingDirection = !patrollingDirection;
+                if (transform.position.x >= rightPatrolBarrierPositionX && transform.localScale.x < 0) Invoke("Flip", data.patrolPauseTime);
+                else if (transform.position.x <= leftPatrolBarrierPositionX && transform.localScale.x > 0) Invoke("Flip", data.patrolPauseTime);
             }
-            if (patrollingDirection)
+            if (patrollingDirection && !rooted)
             {
-                rb.AddForce(new Vector2(data.patrolSpeed, 0), ForceMode2D.Force);
+                rb.velocity = new Vector2(data.patrolSpeed, 0);
             }
-            else
+            else if (!rooted)
             {
-                rb.AddForce(new Vector2(-data.patrolSpeed, 0), ForceMode2D.Force);
+                rb.velocity = new Vector2(-data.patrolSpeed, 0);
             }
         }
 
@@ -164,8 +166,8 @@ public class Enemy : MonoBehaviour
         flip = ContainsParam(animator, "Flip");
         firePoint = gameObject.transform.Find("FirePoint");
         arrow = gameObject.transform.Find("Arrow")?.gameObject;
-        if (rightPatrolBarrier) rightPatrolBarrierPosition = rightPatrolBarrier.transform.position;
-        if (leftPatrolBarrier) leftPatrolBarrierPosition = leftPatrolBarrier.transform.position;
+        if (rightPatrolBarrier) rightPatrolBarrierPositionX = rightPatrolBarrier.transform.position.x;
+        if (leftPatrolBarrier) leftPatrolBarrierPositionX = leftPatrolBarrier.transform.position.x;
         isPatrolling = data.patrol;
         #endregion
 
@@ -181,12 +183,6 @@ public class Enemy : MonoBehaviour
         #endregion
 
         TakeDamage(0, 0, false);
-
-        if (transform.rotation.y == 0)
-        {
-            facingSide = true;
-        }
-        else facingSide = false;
     }
     #endregion
 
@@ -341,6 +337,7 @@ public class Enemy : MonoBehaviour
     private void StopImmune() => immune = false;
     private void StartRooted() => rooted = true;
     private void StopRooted() => rooted = false;
+    private void StartPatrol() => stopPatrol = false;
     private void AttackCooldown() => attackCooldown = false;
     private void DashCooldown() => dashCooldown = false;
     private void StopDash() => isDashing = false;
@@ -348,6 +345,7 @@ public class Enemy : MonoBehaviour
 
     #region OtherMethods
     //checks if a parameter exists in the animator, found here https://discussions.unity.com/t/is-there-a-way-to-check-if-an-animatorcontroller-has-a-parameter/86194
+    private void Flip() => transform.localScale = new Vector3(-1f * transform.localScale.x, transform.localScale.y, transform.localScale.z);
     private bool ContainsParam(Animator _Anim, string _ParamName)
     {
         if (_Anim != null)

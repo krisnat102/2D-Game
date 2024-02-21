@@ -40,9 +40,10 @@ MonoBehaviour:
   minCoinsDropped: 15
   maxCoinsDropped: 26
   patrolPauseTime: 4
-  patrolSpeed: 15
+  patrolSpeed: 10
   lookAtPlayer: 1
   flipWhenPlayerIsRight: 0
+  facingDirection: 1
   rootWhenAttacking: 1
   patrol: 1
   deathEffect: {fileID: 2479263185497603450, guid: d1cde12569e58d140a042b24f8d8012b,

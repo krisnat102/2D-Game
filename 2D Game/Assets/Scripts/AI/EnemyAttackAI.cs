@@ -58,7 +58,6 @@ public class EnemyAttackAI : MonoBehaviour
                 Player player = hitInfo.transform.GetComponent<Player>(); //checks if it hit the player
                 if (player != null)
                 {
-                    Debug.Log(1);
                     InSight = true;
                     Alerted = true;
                 }

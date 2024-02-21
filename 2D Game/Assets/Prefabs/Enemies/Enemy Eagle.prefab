@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &696525457044071388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2350393881328445392}
+  m_Layer: 9
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2350393881328445392
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696525457044071388}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1620560478860096211}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1126916960505201451
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,6 +343,9 @@ Transform:
   - {fileID: 1620560478625217046}
   - {fileID: 1205324701305300601}
   - {fileID: 8927564412431801625}
+  - {fileID: 2350393881328445392}
+  - {fileID: 5650920199865895937}
+  - {fileID: 2559493015804330787}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &1620560478860096215
@@ -449,19 +483,19 @@ MonoBehaviour:
   hpBar: {fileID: 6764816597267286843}
   hpBarGradient:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 0.990566, g: 0.51352197, b: 0, a: 1}
+    key2: {r: 0.9467213, g: 1, b: 0, a: 0}
+    key3: {r: 0.6110538, g: 1, b: 0, a: 0}
+    key4: {r: 0.2573614, g: 1, b: 0.21226418, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
+    ctime0: 13107
+    ctime1: 26407
+    ctime2: 39321
+    ctime3: 52428
+    ctime4: 65535
     ctime5: 0
     ctime6: 0
     ctime7: 0
@@ -473,28 +507,28 @@ MonoBehaviour:
     atime5: 0
     atime6: 0
     atime7: 0
-    m_Mode: 0
+    m_Mode: 1
     m_ColorSpace: -1
-    m_NumColorKeys: 2
+    m_NumColorKeys: 5
     m_NumAlphaKeys: 2
-  hpBarFill: {fileID: 0}
-  damagePopup: {fileID: 0}
-  damagePopupOffset: {x: 0, y: 0, z: 0}
+  hpBarFill: {fileID: 2681175681240443984}
+  damagePopup: {fileID: 4574999819551038475, guid: f7045cf55a3095346a99325c93f7a0f2,
+    type: 3}
   damagePopupGradient:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
+    key0: {r: 1, g: 0.98325783, b: 0.6839622, a: 1}
+    key1: {r: 1, g: 0.7038833, b: 0.30980396, a: 1}
+    key2: {r: 1, g: 0.51984906, b: 0, a: 0}
+    key3: {r: 1, g: 0.4077799, b: 0, a: 0}
+    key4: {r: 1, g: 0.25186405, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
+    ctime1: 16384
+    ctime2: 32768
+    ctime3: 49151
+    ctime4: 65535
     ctime5: 0
     ctime6: 0
     ctime7: 0
@@ -508,9 +542,15 @@ MonoBehaviour:
     atime7: 0
     m_Mode: 0
     m_ColorSpace: -1
-    m_NumColorKeys: 2
+    m_NumColorKeys: 5
     m_NumAlphaKeys: 2
-  fontSizeToDamageScaler: 0
+  damagePopupOffset: {x: 0.7, y: 0.7, z: 0}
+  fontSizeToDamageScaler: 1
+  detectAIRange: {fileID: 1089091996379231738}
+  attackAIRange: {fileID: 4477328867668029076}
+  dashAIRange: {fileID: 0}
+  leftPatrolBarrier: {fileID: 5650920199865895937}
+  rightPatrolBarrier: {fileID: 2559493015804330787}
   data: {fileID: 11400000, guid: 1117637d0e1206f41be5b45d15a32ea5, type: 2}
   attackSound: {fileID: 8435544955756322061}
   playerTrans: {fileID: 0}
@@ -703,7 +743,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7d52993b33d38ec40a7ddc9fed86210e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 29b9730143d94ec409a6fb9940096fe8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -713,6 +753,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2635430364419999453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2559493015804330787}
+  m_Layer: 9
+  m_Name: RightPatrolBarrier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2559493015804330787
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2635430364419999453}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.32, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1620560478860096211}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3671426381491481227
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,7 +869,7 @@ MonoBehaviour:
   IgnoreMe:
     serializedVersion: 2
     m_Bits: 0
-  attackOrDetectRange: 0
+  flip: 0
 --- !u!1 &4541564529560461442
 GameObject:
   m_ObjectHideFlags: 0
@@ -849,7 +920,7 @@ MonoBehaviour:
   IgnoreMe:
     serializedVersion: 2
     m_Bits: 7471159
-  attackOrDetectRange: 0
+  flip: 0
 --- !u!61 &5376083165032317222
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -945,7 +1016,7 @@ MonoBehaviour:
   IgnoreMe:
     serializedVersion: 2
     m_Bits: 7471159
-  attackOrDetectRange: 0
+  flip: 0
 --- !u!61 &3762439836771473364
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1155,6 +1226,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &7445441402837054647
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5650920199865895937}
+  m_Layer: 9
+  m_Name: LeftPatrolBarrier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5650920199865895937
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7445441402837054647}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.43, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1620560478860096211}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6429575860822872114
 PrefabInstance:
   m_ObjectHideFlags: 0
