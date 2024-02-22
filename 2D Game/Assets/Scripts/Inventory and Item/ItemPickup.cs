@@ -16,7 +16,6 @@ namespace Inventory
         [SerializeField] private float offset = 0.2f;
 
         private bool isPickedUp = false;
-        private Animator animator;
         private GameObject itemPrice;
         public static List<PopUpUI> itemPopUps = new();
 
@@ -37,57 +36,13 @@ namespace Inventory
                         return;
                     }
                 }
-                InventoryManager.Instance.Add(item);
-
-                if (chest)
-                {
-                    animator?.SetTrigger("Open");
-                }
-                else
-                {
-                    Destroy(gameObject);
-                }
-
-                isPickedUp = true;
-
-                int resolutionHeight = Screen.currentResolution.height;
-
-                var itemPopUp = Instantiate(UIManager.Instance.ItemPickupPopUp, UIManager.Instance.Canvas.transform).GetComponent<PopUpUI>();
-
-                foreach (var ui in itemPopUps)
-                {
-                    ui.GoUp();
-                }
-
-                itemPopUps.Add(itemPopUp);
-
-                switch (resolutionHeight)
-                {
-                    case <= 720:
-                        itemPopUp.transform.position = itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -350, 0);
-                        break;
-                    case <= 1080:
-                        itemPopUp.transform.position = itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -400, 0);
-                        break;
-                    case <= 1440:
-                        itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -450, 0);
-                        break;
-                    case <= 2160:
-                        itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -500, 0);
-                        break;
-                    case > 2160:
-                        itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -550, 0);
-                        break;
-                }
-                itemPopUp.GetComponentsInChildren<Image>()[1].sprite = item.icon;
-                itemPopUp.GetComponentInChildren<TMP_Text>().text = item.itemName;
+                InventoryManager.Instance.Add(item, true);
+                Destroy(gameObject);
             }
         }
 
         private void Awake()
         {
-            animator = GetComponent<Animator>();
-
             if (forSale)
             {
                 itemPrice = GetComponentInChildren<Canvas>()?.GetComponent<Transform>()?.Find("ItemPrice")?.gameObject;

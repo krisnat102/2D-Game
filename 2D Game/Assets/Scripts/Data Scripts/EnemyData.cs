@@ -1,4 +1,6 @@
 using UnityEngine;
+using Inventory;
+using Spells;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -37,6 +39,12 @@ public class EnemyData : ScriptableObject
     [Header("Drops")]
     public int minCoinsDropped;
     public int maxCoinsDropped;
+    [Range(0,1)]
+    public float itemDropChance;
+    [Range(0, 1)]
+    public float spellDropChance;
+    public Item itemDrop;
+    public Spell spellDrop;
 
     [Header("Patrol")]
     public float patrolPauseTime;

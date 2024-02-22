@@ -4,6 +4,9 @@ using Bardent.CoreSystem;
 using Pathfinding;
 using TMPro;
 using UnityEditor;
+using System.Security.Cryptography;
+using Inventory;
+using Spells;
 
 public class Enemy : MonoBehaviour
 {
@@ -244,16 +247,28 @@ public class Enemy : MonoBehaviour
     #endregion
 
     #region Actions
-    private void Die()
+    protected virtual void Die()
     {
         var coins = Instantiate(coinBurstParticleEffect.gameObject, transform.position, Quaternion.identity, particleContainer);
         coins.GetComponent<ParticleSystem>().Emit(coinsDropped);
         Instantiate(Data.deathEffect, transform.position, Quaternion.identity);
+        if (data.itemDrop)
+        {
+            var random = new System.Random();
+            if(random.NextDouble() <= data.itemDropChance)
+            {
+                InventoryManager.Instance.Add(data.itemDrop, true);
+            }
+            if (random.NextDouble() <= data.spellDropChance)
+            {
+                SpellManager.Instance.Add(data.spellDrop);
+            }
+        }
 
         Destroy(gameObject);
     }
 
-    private void Attack()
+    protected virtual void Attack()
     {
         if (attackCooldown == false && Data.ranged == false)
         {
@@ -278,7 +293,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void Dash()
+    protected virtual void Dash()
     {
         animator.SetTrigger("Dash");
 

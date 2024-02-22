@@ -39,6 +39,10 @@ MonoBehaviour:
   dashDuration: 0
   minCoinsDropped: 15
   maxCoinsDropped: 34
+  itemDropChance: 1
+  spellDropChance: 0
+  itemDrop: {fileID: 11400000, guid: 13d00a2078f201747b00e801dd92ffdf, type: 2}
+  spellDrop: {fileID: 0}
   patrolPauseTime: 2
   patrolSpeed: 8
   lookAtPlayer: 0

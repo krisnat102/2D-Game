@@ -28,7 +28,7 @@ namespace Interactables
         {
             if (openned == false && item != null)
             {
-                InventoryManager.Instance.Add(item);
+                InventoryManager.Instance.Add(item, true);
 
                 animator.SetTrigger("Open");
             }
