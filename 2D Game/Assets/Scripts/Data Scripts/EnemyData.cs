@@ -26,7 +26,7 @@ public class EnemyData : ScriptableObject
     [Header("Attack")]
     [Tooltip("True is physical damage, false is magical")]
     public bool damageType;
-    public float attackAnimLength = 0.3f;
+    public float attackAnimationLength = 0.3f;
     public Rect HitBox;
     public LayerMask DetectableLayers;
 
@@ -56,6 +56,10 @@ public class EnemyData : ScriptableObject
     public bool facingDirection;
     public bool rootWhenAttacking;
     public bool patrol;
+
+    [Header("Boss")]
+    public bool boss;
+    public GameObject bossProjectile;
 
     [Header("Other")]
     public GameObject deathEffect;

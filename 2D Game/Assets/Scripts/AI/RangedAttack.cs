@@ -4,6 +4,7 @@ using Bardent.CoreSystem;
 
 public class RangedAttack : MonoBehaviour
 {
+    [SerializeField] private bool parabola;
     private Enemy enemy;
     private Rigidbody2D arrowRB;
     Vector2 direction;
@@ -16,8 +17,15 @@ public class RangedAttack : MonoBehaviour
 
         float offset = Mathf.Abs(enemy.PlayerTrans.position.x - transform.position.x) / enemy.Data.distanceOffset;
 
-        direction = new Vector2(enemy.PlayerTrans.position.x - transform.position.x, enemy.PlayerTrans.position.y - transform.position.y + offset).normalized;
-        arrowRB.velocity = direction * enemy.Data.rangedSpeed;
+        if (parabola)
+        {
+            direction = new Vector2(enemy.PlayerTrans.position.x - transform.position.x, enemy.PlayerTrans.position.y - transform.position.y + offset).normalized;
+            arrowRB.velocity = direction * enemy.Data.rangedSpeed;
+        }
+        else
+        {
+            arrowRB.velocity = Vector2.right * enemy.Data.rangedSpeed;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)

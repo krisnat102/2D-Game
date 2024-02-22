@@ -67,6 +67,7 @@ public class Enemy : MonoBehaviour
     public EnemyData Data { get => data; private set => data = value; }
     public float EnemyLevelScale { get => lvlIndex; private set => lvlIndex = value; }
     public int FacingDirection { get => facingDirection; private set => facingDirection = value; }
+    public Transform FirePoint { get => firePoint; private set => firePoint = value; }
     #endregion
 
     #region Unity Methods
@@ -167,7 +168,7 @@ public class Enemy : MonoBehaviour
             animator = GetComponentInChildren<Animator>();
         }
         flip = ContainsParam(animator, "Flip");
-        firePoint = gameObject.transform.Find("FirePoint");
+        FirePoint = gameObject.transform.Find("FirePoint");
         arrow = gameObject.transform.Find("Arrow")?.gameObject;
         if (rightPatrolBarrier) rightPatrolBarrierPositionX = rightPatrolBarrier.transform.position.x;
         if (leftPatrolBarrier) leftPatrolBarrierPositionX = leftPatrolBarrier.transform.position.x;
@@ -247,7 +248,7 @@ public class Enemy : MonoBehaviour
     #endregion
 
     #region Actions
-    protected virtual void Die()
+    private void Die()
     {
         var coins = Instantiate(coinBurstParticleEffect.gameObject, transform.position, Quaternion.identity, particleContainer);
         coins.GetComponent<ParticleSystem>().Emit(coinsDropped);
@@ -268,7 +269,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    protected virtual void Attack()
+    public void Attack()
     {
         if (attackCooldown == false && Data.ranged == false)
         {
@@ -276,12 +277,12 @@ public class Enemy : MonoBehaviour
 
             attackCooldown = true;
             Invoke("AttackCooldown", Data.attackSpeed);
-            Invoke("AttackSpawn", Data.attackAnimLength);
+            Invoke("AttackSpawn", Data.attackAnimationLength);
         }
         else if (attackCooldown == false && Data.ranged && attackAIRange.InSight)
         {
             animator.SetTrigger("Attack");
-            Invoke("AttackSpawn", Data.attackAnimLength);
+            Invoke("AttackSpawn", Data.attackAnimationLength);
 
             attackCooldown = true;
             Invoke("AttackCooldown", Data.attackSpeed);
@@ -289,11 +290,11 @@ public class Enemy : MonoBehaviour
         if (data.rootWhenAttacking)
         {
             Invoke("StartRooted", 0.1f);
-            Invoke("StopRooted", Data.attackAnimLength);
+            Invoke("StopRooted", Data.attackAnimationLength);
         }
     }
 
-    protected virtual void Dash()
+    public void Dash()
     {
         animator.SetTrigger("Dash");
 
@@ -316,7 +317,7 @@ public class Enemy : MonoBehaviour
     {
         if (Data.ranged)
         {
-            GameObject attackProjectile = Instantiate(arrow, firePoint);
+            GameObject attackProjectile = Instantiate(arrow, FirePoint);
             if (attackProjectile.activeInHierarchy == false)
             {
                 attackProjectile.SetActive(true);

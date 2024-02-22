@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2121936274c14654a9abc6a3ee4178f7, type: 3}
+  m_Name: Boss
+  m_EditorClassIdentifier: 
+  level: 1
+  enemyName: 
+  maxHP: 100
+  attackSpeed: 1
+  speed: 200
+  damage: 20
+  knockbackModifier: 5
+  offsetX: 1.2
+  offsetX2: 1.2
+  offsetY: -1
+  damageType: 0
+  attackAnimationLength: 0.3
+  HitBox:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  DetectableLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  canDash: 0
+  dashCooldown: 0
+  dashStrength: 0
+  dashDuration: 0
+  minCoinsDropped: 0
+  maxCoinsDropped: 0
+  itemDropChance: 0
+  spellDropChance: 0
+  itemDrop: {fileID: 0}
+  spellDrop: {fileID: 0}
+  patrolPauseTime: 0
+  patrolSpeed: 0
+  lookAtPlayer: 0
+  flipWhenPlayerIsRight: 0
+  facingDirection: 0
+  rootWhenAttacking: 0
+  patrol: 0
+  boss: 1
+  deathEffect: {fileID: 0}
+  bloodEffect: {fileID: 0}
+  ranged: 0
+  impactEffect: {fileID: 0}
+  rangedDamage: 0
+  rangedSpeed: 0
+  distanceOffset: 0
