@@ -10,51 +10,57 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2121936274c14654a9abc6a3ee4178f7, type: 3}
-  m_Name: Boss
+  m_Name: StoneGolem
   m_EditorClassIdentifier: 
   level: 1
-  enemyName: 
-  maxHP: 100
-  attackSpeed: 1
+  enemyName: Stone Golem
+  maxHP: 500
+  attackSpeed: 1.4
   speed: 200
-  damage: 20
+  damage: 30
   knockbackModifier: 5
   offsetX: 1.2
   offsetX2: 1.2
   offsetY: -1
   damageType: 0
-  attackAnimationLength: 0.3
+  attackAnimationLength: 0.9
   HitBox:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
+    x: -3.1
+    y: -2.3
+    width: 3
+    height: 3
   DetectableLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   canDash: 0
   dashCooldown: 0
   dashStrength: 0
   dashDuration: 0
-  minCoinsDropped: 0
-  maxCoinsDropped: 0
+  minCoinsDropped: 69
+  maxCoinsDropped: 101
   itemDropChance: 0
   spellDropChance: 0
   itemDrop: {fileID: 0}
   spellDrop: {fileID: 0}
   patrolPauseTime: 0
   patrolSpeed: 0
-  lookAtPlayer: 0
+  lookAtPlayer: 1
   flipWhenPlayerIsRight: 0
   facingDirection: 0
   rootWhenAttacking: 0
   patrol: 0
   boss: 1
-  deathEffect: {fileID: 0}
-  bloodEffect: {fileID: 0}
+  bossProjectile: {fileID: 7796753809111118328, guid: a39870c4aad6cf84991ad21e40a2962f,
+    type: 3}
+  bossMusic: {fileID: 0}
+  deathEffect: {fileID: 8203424293245319661, guid: 300aca216a33d6941b80bf60552e2e0e,
+    type: 3}
+  bloodEffect: {fileID: 7515634647306772147, guid: 6dc9c141b46ffcc4b9a12f2f255fcf76,
+    type: 3}
   ranged: 0
-  impactEffect: {fileID: 0}
-  rangedDamage: 0
-  rangedSpeed: 0
+  impactEffect: {fileID: 7515634647306772147, guid: 9727440dcf67ccc4e94ad9612cc84d16,
+    type: 3}
+  rangedDamage: 25
+  rangedSpeed: 25
   distanceOffset: 0

@@ -60,10 +60,12 @@ public class EnemyData : ScriptableObject
     [Header("Boss")]
     public bool boss;
     public GameObject bossProjectile;
+    public AudioSource bossMusic;
 
     [Header("Other")]
     public GameObject deathEffect;
     public GameObject bloodEffect;
+
 
     #region Variable Dependencies
     [Header("Ranged")]

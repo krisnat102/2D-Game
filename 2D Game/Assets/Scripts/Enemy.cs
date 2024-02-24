@@ -3,10 +3,9 @@ using UnityEngine.UI;
 using Bardent.CoreSystem;
 using Pathfinding;
 using TMPro;
-using UnityEditor;
-using System.Security.Cryptography;
 using Inventory;
 using Spells;
+using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
@@ -68,18 +67,22 @@ public class Enemy : MonoBehaviour
     public float EnemyLevelScale { get => lvlIndex; private set => lvlIndex = value; }
     public int FacingDirection { get => facingDirection; private set => facingDirection = value; }
     public Transform FirePoint { get => firePoint; private set => firePoint = value; }
+    public Transform FirePoint2 { get; private set; }
+    public EnemyAttackAI DetectAIRange { get => detectAIRange; private set => detectAIRange = value; }
+    public EnemyAttackAI AttackAIRange { get => attackAIRange; private set => attackAIRange = value; }
+    public EnemyAttackAI DashAIRange { get => dashAIRange; private set => dashAIRange = value; }
     #endregion
 
     #region Unity Methods
     private void Update()
     {
-        if (dashAIRange && dashAIRange.InRange && data.canDash && !dashCooldown && !attackCooldown) Dash();
-        else if (attackAIRange.InRange && !data.ranged) Attack();
-        else if (attackAIRange.InSight && data.ranged) Attack();
+        if (DashAIRange && DashAIRange.InRange && Data.canDash && !dashCooldown && !attackCooldown) Dash();
+        else if (AttackAIRange.InRange && !Data.ranged) Attack(true);
+        else if (AttackAIRange.InSight && Data.ranged) Attack(false);
 
-        if (Data.lookAtPlayer && detectAIRange.Alerted && !isDashing)
+        if (Data.lookAtPlayer && DetectAIRange.Alerted && !isDashing)
         {
-            if (data.facingDirection)
+            if (Data.facingDirection)
             {
                 if (playerTrans.position.x < transform.position.x)
                 {
@@ -107,7 +110,7 @@ public class Enemy : MonoBehaviour
 
         if (enemyAI != null)
         {
-            if (detectAIRange.Alerted || attackAIRange.Alerted)
+            if (DetectAIRange.Alerted || AttackAIRange.Alerted)
             {
                 enemyAI.enabled = true;
             }
@@ -115,7 +118,7 @@ public class Enemy : MonoBehaviour
         }
         if (aiPath != null)
         {
-            if (detectAIRange.Alerted)
+            if (DetectAIRange.Alerted)
             {
                 aiPath.enabled = true;
             }
@@ -128,26 +131,37 @@ public class Enemy : MonoBehaviour
             transform.position = new Vector2(previousPosition.x, transform.position.y);
         }
 
-        if (detectAIRange.Alerted) isPatrolling = false;
+        if (DetectAIRange.Alerted)
+        {
+            isPatrolling = false;
+
+            if (Data.boss && !hpBar.gameObject.activeInHierarchy)
+            {
+                hpBar.gameObject.SetActive(true);
+            }
+        }
         if (isPatrolling)
         {
             if ((transform.position.x <= leftPatrolBarrierPositionX || transform.position.x >= rightPatrolBarrierPositionX) && !stopPatrol)
             {
                 rooted = true;
                 stopPatrol = true;
-                Invoke("StopRooted", data.patrolPauseTime);
-                Invoke("StartPatrol", data.patrolPauseTime + 1);
+
+                StartCoroutine(StopRootedCoroutine(Data.patrolPauseTime));
+                StartCoroutine(StartPatrolCoroutine(Data.patrolPauseTime + 1));
+
                 patrollingDirection = !patrollingDirection;
-                if (transform.position.x >= rightPatrolBarrierPositionX && transform.localScale.x < 0) Invoke("Flip", data.patrolPauseTime);
-                else if (transform.position.x <= leftPatrolBarrierPositionX && transform.localScale.x > 0) Invoke("Flip", data.patrolPauseTime);
+
+                if (transform.position.x >= rightPatrolBarrierPositionX && transform.localScale.x < 0) StartCoroutine(FlipCoroutine(Data.patrolPauseTime));
+                else if (transform.position.x <= leftPatrolBarrierPositionX && transform.localScale.x > 0) StartCoroutine(FlipCoroutine(Data.patrolPauseTime));
             }
             if (patrollingDirection && !rooted)
             {
-                rb.velocity = new Vector2(data.patrolSpeed, 0);
+                rb.velocity = new Vector2(Data.patrolSpeed, 0);
             }
             else if (!rooted)
             {
-                rb.velocity = new Vector2(-data.patrolSpeed, 0);
+                rb.velocity = new Vector2(-Data.patrolSpeed, 0);
             }
         }
 
@@ -169,10 +183,11 @@ public class Enemy : MonoBehaviour
         }
         flip = ContainsParam(animator, "Flip");
         FirePoint = gameObject.transform.Find("FirePoint");
+        FirePoint2 = gameObject.transform.Find("FirePoint2");
         arrow = gameObject.transform.Find("Arrow")?.gameObject;
         if (rightPatrolBarrier) rightPatrolBarrierPositionX = rightPatrolBarrier.transform.position.x;
         if (leftPatrolBarrier) leftPatrolBarrierPositionX = leftPatrolBarrier.transform.position.x;
-        isPatrolling = data.patrol;
+        isPatrolling = Data.patrol;
         #endregion
 
         #region Calculations
@@ -183,7 +198,7 @@ public class Enemy : MonoBehaviour
         hp = Data.maxHP * lvlIndex;
         hpBar.maxValue = Data.maxHP * lvlIndex;
 
-        coinsDropped = Random.Range(data.minCoinsDropped, data.maxCoinsDropped);
+        coinsDropped = Random.Range(Data.minCoinsDropped, Data.maxCoinsDropped);
         #endregion
 
         TakeDamage(0, 0, false);
@@ -213,13 +228,13 @@ public class Enemy : MonoBehaviour
                     dmgNumber.fontSize += Mathf.Round(damage / fontSizeToDamageScaler);
                 }
 
-                animator.SetTrigger("Hurt");
+                if(ContainsParam(animator, "Hurt")) animator.SetTrigger("Hurt");
 
                 if(!multipleDamageSources)
                 {
                     immune = true;
 
-                    Invoke("StopImmune", 0.1f);
+                    StartCoroutine(StopImmuneCoroutine(0.1f));
                 }
 
                 TakeKnockback(damage + knockback);
@@ -253,44 +268,50 @@ public class Enemy : MonoBehaviour
         var coins = Instantiate(coinBurstParticleEffect.gameObject, transform.position, Quaternion.identity, particleContainer);
         coins.GetComponent<ParticleSystem>().Emit(coinsDropped);
         Instantiate(Data.deathEffect, transform.position, Quaternion.identity);
-        if (data.itemDrop)
+        if (Data.itemDrop)
         {
             var random = new System.Random();
-            if(random.NextDouble() <= data.itemDropChance)
+            if(random.NextDouble() <= Data.itemDropChance)
             {
-                InventoryManager.Instance.Add(data.itemDrop, true);
+                InventoryManager.Instance.Add(Data.itemDrop, true);
             }
-            if (random.NextDouble() <= data.spellDropChance)
+            if (random.NextDouble() <= Data.spellDropChance)
             {
-                SpellManager.Instance.Add(data.spellDrop);
+                SpellManager.Instance.Add(Data.spellDrop);
             }
         }
 
         Destroy(gameObject);
     }
 
-    public void Attack()
+    public void Attack(bool meleeRanged)
     {
-        if (attackCooldown == false && Data.ranged == false)
+        if (!attackCooldown && meleeRanged)
         {
-            animator.SetTrigger("Attack");
+            if (ContainsParam(animator, "Attack")) animator.SetTrigger("Attack");
 
             attackCooldown = true;
-            Invoke("AttackCooldown", Data.attackSpeed);
-            Invoke("AttackSpawn", Data.attackAnimationLength);
+            StartCoroutine(AttackCooldownCoroutine(Data.attackSpeed));
+            StartCoroutine(AttackSpawnCoroutine(Data.attackAnimationLength));
+
+            if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
+            if (ContainsParam(animator, "attack")) animator.SetBool("attack", true);
         }
-        else if (attackCooldown == false && Data.ranged && attackAIRange.InSight)
+        else if (!attackCooldown && !meleeRanged && AttackAIRange.InSight)
         {
-            animator.SetTrigger("Attack");
-            Invoke("AttackSpawn", Data.attackAnimationLength);
+            if (ContainsParam(animator, "Attack")) animator.SetTrigger("Attack");
+            StartCoroutine(AttackSpawnBossRangedCoroutine(Data.attackAnimationLength));
 
             attackCooldown = true;
-            Invoke("AttackCooldown", Data.attackSpeed);
+            StartCoroutine(AttackCooldownCoroutine(Data.attackSpeed));
+
+            if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
+            if (ContainsParam(animator, "ranged")) animator.SetBool("ranged", true);
         }
-        if (data.rootWhenAttacking)
+        if (Data.rootWhenAttacking)
         {
-            Invoke("StartRooted", 0.1f);
-            Invoke("StopRooted", Data.attackAnimationLength);
+            StartCoroutine(StartRootedCoroutine(0.1f));
+            StartCoroutine(StopRootedCoroutine(Data.attackAnimationLength + 0.1f));
         }
     }
 
@@ -299,23 +320,23 @@ public class Enemy : MonoBehaviour
         animator.SetTrigger("Dash");
 
         dashCooldown = true;
-        Invoke("DashCooldown", Data.dashCooldown);
+        StartCoroutine(DashCooldownCoroutine(Data.dashCooldown));
         attackCooldown = true;
-        Invoke("AttackCooldown", Data.attackSpeed);
+        StartCoroutine(AttackCooldownCoroutine(Data.attackSpeed));
 
         isDashing = true;
-        Invoke("StopDash", Data.dashDuration);
+        StartCoroutine(StopDashCoroutine(Data.dashDuration));
 
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-        if (playerTrans.position.x > transform.position.x) rb.AddForce(new Vector2(-data.dashStrength, 0), ForceMode2D.Impulse);
-        else rb.AddForce(new Vector2(data.dashStrength, 0), ForceMode2D.Impulse);
+        if (playerTrans.position.x > transform.position.x) rb.AddForce(new Vector2(-Data.dashStrength, 0), ForceMode2D.Impulse);
+        else rb.AddForce(new Vector2(Data.dashStrength, 0), ForceMode2D.Impulse);
     }
     #endregion
 
     #region Spawners
-    private void AttackSpawn()
+    private void AttackSpawn(bool bossRanged)
     {
-        if (Data.ranged)
+        if (arrow && Data.ranged && FirePoint)
         {
             GameObject attackProjectile = Instantiate(arrow, FirePoint);
             if (attackProjectile.activeInHierarchy == false)
@@ -324,15 +345,32 @@ public class Enemy : MonoBehaviour
             }
             return;
         }
+        else if (Data.bossProjectile && bossRanged && FirePoint2)
+        {
+            GameObject attackProjectile = Instantiate(Data.bossProjectile, FirePoint2);
+
+            if (attackProjectile.activeInHierarchy == false)
+            {
+                attackProjectile.SetActive(true);
+            }
+
+            if (ContainsParam(animator, "idle")) animator.SetBool("idle", true);
+            if (ContainsParam(animator, "ranged")) animator.SetBool("ranged", false);
+
+            return;
+        }
 
         offset.Set(
-            transform.position.x + (data.HitBox.center.x * FacingDirection * -1),
-            transform.position.y + data.HitBox.center.y
+            transform.position.x + (Data.HitBox.center.x * FacingDirection * -1),
+            transform.position.y + Data.HitBox.center.y
         );
 
-        attackSound.Play();
+        attackSound?.Play();
 
-        detected = Physics2D.OverlapBoxAll(offset, data.HitBox.size, 0f, data.DetectableLayers);
+        detected = Physics2D.OverlapBoxAll(offset, Data.HitBox.size, 0f, Data.DetectableLayers);
+
+        if (ContainsParam(animator, "idle")) animator.SetBool("idle", true);
+        if (ContainsParam(animator, "attack")) animator.SetBool("attack", false);
 
         if (detected.Length == 0) return;
 
@@ -342,27 +380,77 @@ public class Enemy : MonoBehaviour
 
             if (player)
             {
-                player.Core.GetCoreComponent<DamageReceiver>().Damage(data.damage * EnemyLevelScale, data.damageType);
+                player.Core.GetCoreComponent<DamageReceiver>().Damage(Data.damage * EnemyLevelScale, Data.damageType);
             }
         }
     }
     #endregion
     #endregion
 
-    #region Cooldown and Bool Invoke Methods
-    private void StopImmune() => immune = false;
-    private void StartRooted() => rooted = true;
-    private void StopRooted() => rooted = false;
-    private void StartPatrol() => stopPatrol = false;
-    private void AttackCooldown() => attackCooldown = false;
-    private void DashCooldown() => dashCooldown = false;
-    private void StopDash() => isDashing = false;
+    #region Coroutines
+    IEnumerator AttackCooldownCoroutine(float cooldownTime)
+    {
+        yield return new WaitForSeconds(cooldownTime);
+        attackCooldown = false;
+    }
+
+    IEnumerator DashCooldownCoroutine(float cooldownTime)
+    {
+        yield return new WaitForSeconds(cooldownTime);
+        dashCooldown = false;
+    }
+
+    IEnumerator StopDashCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        isDashing = false;
+    }
+
+    IEnumerator StopImmuneCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        immune = false;
+    }
+
+    IEnumerator StopRootedCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        rooted = false;
+    }
+    IEnumerator StartRootedCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        rooted = true;
+    }
+
+    IEnumerator StartPatrolCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        isPatrolling = true;
+    }
+
+    IEnumerator AttackSpawnBossRangedCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        AttackSpawn(true);
+    }
+    IEnumerator AttackSpawnCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        AttackSpawn(false);
+    }
+
+    IEnumerator FlipCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Flip();
+    }
     #endregion
 
     #region OtherMethods
     //checks if a parameter exists in the animator, found here https://discussions.unity.com/t/is-there-a-way-to-check-if-an-animatorcontroller-has-a-parameter/86194
     private void Flip() => transform.localScale = new Vector3(-1f * transform.localScale.x, transform.localScale.y, transform.localScale.z);
-    private bool ContainsParam(Animator _Anim, string _ParamName)
+    public bool ContainsParam(Animator _Anim, string _ParamName)
     {
         if (_Anim != null)
         {
@@ -386,8 +474,8 @@ public class Enemy : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Vector3 adjustedCenter = transform.position + new Vector3(data.HitBox.center.x * FacingDirection * -1, data.HitBox.center.y, 0f);
-        Gizmos.DrawWireCube(adjustedCenter, data.HitBox.size);
+        Vector3 adjustedCenter = transform.position + new Vector3(Data.HitBox.center.x * FacingDirection * -1, Data.HitBox.center.y, 0f);
+        Gizmos.DrawWireCube(adjustedCenter, Data.HitBox.size);
     }
     #endregion
 }
