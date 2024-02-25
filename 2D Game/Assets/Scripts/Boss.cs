@@ -12,7 +12,6 @@ namespace Krisnat
 
         private Actions[] actions = new Actions[3];
         private Enemy enemy;
-        private Animator animator;
         #endregion
 
         #region Actions
@@ -26,9 +25,14 @@ namespace Krisnat
             enemy.Attack(false);
         }
 
-        public void DashAttack()
+        public void Dash()
         {
             enemy.Dash();
+        }
+
+        public void SpecialRangedAttack()
+        {
+            enemy.SpecialRangedAttack();
         }
         #endregion
 
@@ -40,7 +44,6 @@ namespace Krisnat
             actions[2] = action3;
 
             enemy = GetComponent<Enemy>();
-            animator = GetComponent<Animator>();
         }
         private void Update()
         {
@@ -53,12 +56,21 @@ namespace Krisnat
                 }
             }
 
+            // Special Ranged Attack
+            foreach (var action in actions)
+            {
+                if (action == Actions.SpecialRangedAttack)
+                {
+                    if (enemy.DetectAIRange.InSight && !enemy.AttackAIRange.InRange && !enemy.SpecialRangedAttackCooldown) SpecialRangedAttack();
+                }
+            }
+
             // Ranged attack
             foreach (var action in actions)
             {
                 if (action == Actions.RangedAttack)
                 {
-                    if (enemy.DetectAIRange.InSight && !enemy.AttackAIRange.InRange) RangedAttack();
+                    if (enemy.DetectAIRange.InSight && !enemy.AttackAIRange.InRange && enemy.SpecialRangedAttackCooldown) RangedAttack();
                 }
             }
         }
@@ -69,6 +81,7 @@ namespace Krisnat
     {
         MeleeAttack,
         RangedAttack,
-        DashAttack
+        SpecialRangedAttack,
+        Dash
     }
 }

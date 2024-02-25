@@ -60,6 +60,9 @@ public class EnemyData : ScriptableObject
     [Header("Boss")]
     public bool boss;
     public GameObject bossProjectile;
+    public GameObject bossSpecialProjectile;
+    public float specialProjectileChargeTime;
+    public float specialRangedAttackCooldown;
     public AudioSource bossMusic;
 
     [Header("Other")]

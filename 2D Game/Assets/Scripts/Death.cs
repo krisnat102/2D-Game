@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class Death : MonoBehaviour
 {
     [SerializeField] private float animationLength = 1f;
+    [Header("Behaviour")]
+    [SerializeField] private bool destroy = true;
+    [SerializeField] private GameObject objectToSpawnBeforeDeath;
     [SerializeField] private bool fade;
     [SerializeField] private float fadeTime;
     [Header("Types")]
@@ -20,7 +23,7 @@ public class Death : MonoBehaviour
     private PopUpUI popUp;
     private bool startFade = false;
 
-    private void Start()
+    private void OnEnable()
     {
         Invoke("DeathAnimation", animationLength);
         sprite = GetComponent<SpriteRenderer>();
@@ -60,7 +63,9 @@ public class Death : MonoBehaviour
                     {
                         ItemPickup.itemPopUps.Remove(popUp);
                     }
-                    Destroy(gameObject);
+                    if (objectToSpawnBeforeDeath) objectToSpawnBeforeDeath.SetActive(true);
+                    if (destroy) Destroy(gameObject);
+                    else gameObject.SetActive(false);
                 }
             }
         }
@@ -73,6 +78,8 @@ public class Death : MonoBehaviour
         {
             return;
         }
-        Destroy(gameObject);
+        if (objectToSpawnBeforeDeath) objectToSpawnBeforeDeath.SetActive(true);
+        if (destroy) Destroy(gameObject);
+        else gameObject.SetActive(false);
     }
 }

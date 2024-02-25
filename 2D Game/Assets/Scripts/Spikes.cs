@@ -1,26 +1,38 @@
 ﻿using UnityEngine;
 using Core;
 using Bardent.CoreSystem;
+using UnityEditor.PackageManager;
 
 namespace Interactables
 {
     public class Spikes : MonoBehaviour
     {
-        [SerializeField] private float spikeDmg;
+        [SerializeField] private float damage;
         [SerializeField] private bool damageType;
+        [SerializeField] private bool damageEnemies;
 
-        private void OnTriggerEnter2D(Collider2D hitinfo)
+        private bool canDamagePlayer = true;
+
+        private void OnTriggerStay2D(Collider2D collision)
         {
-            DamageReceiver player = hitinfo.GetComponentInChildren<DamageReceiver>();
-            Enemy enemy = hitinfo.GetComponent<Enemy>();
-            if (player)
+            Player player = collision.GetComponent<Player>();
+            Enemy enemy = collision.GetComponent<Enemy>();
+
+            if (player && canDamagePlayer)
             {
-                player.Damage(spikeDmg, damageType);
+                player.Core.GetCoreComponent<DamageReceiver>().Damage(damage, damageType);
+                canDamagePlayer = false;
+                Invoke(nameof(ResetDamageCooldown), 0.3f);
             }
-            else if (enemy)
+            else if (enemy && damageEnemies)
             {
-                enemy.TakeDamage(spikeDmg, 0, false);
+                enemy.TakeDamage(damage, 0, false);
             }
+        }
+
+        private void ResetDamageCooldown()
+        {
+            canDamagePlayer = true;
         }
     }
 }

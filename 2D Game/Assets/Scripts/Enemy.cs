@@ -6,6 +6,7 @@ using TMPro;
 using Inventory;
 using Spells;
 using System.Collections;
+using UnityEngine.Rendering.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Other")]
     public EnemyData data;
+    [SerializeField] private GameObject bossSpecialProjectile;
     [SerializeField] private AudioSource attackSound;
     [SerializeField] private Transform playerTrans;
 
@@ -36,14 +38,16 @@ public class Enemy : MonoBehaviour
     private float lvlIndex;
     private bool immune = false;
     private bool attackCooldown = false;
+    private bool specialRangedAttackCooldown = false;
     private bool dashCooldown = false;
     private bool isDashing = false;
     private bool isPatrolling;
     private bool stopPatrol;
+    private bool patrollingDirection = true;
     private bool flip;
     private bool childFlip;
     private bool rooted;
-    private bool patrollingDirection = true;
+    private bool matchPlayerY = false;
     private float leftPatrolBarrierPositionX;
     private float rightPatrolBarrierPositionX;
     private Vector2 offset;
@@ -71,6 +75,7 @@ public class Enemy : MonoBehaviour
     public EnemyAttackAI DetectAIRange { get => detectAIRange; private set => detectAIRange = value; }
     public EnemyAttackAI AttackAIRange { get => attackAIRange; private set => attackAIRange = value; }
     public EnemyAttackAI DashAIRange { get => dashAIRange; private set => dashAIRange = value; }
+    public bool SpecialRangedAttackCooldown { get => specialRangedAttackCooldown; private set => specialRangedAttackCooldown = value; }
     #endregion
 
     #region Unity Methods
@@ -118,7 +123,7 @@ public class Enemy : MonoBehaviour
         }
         if (aiPath != null)
         {
-            if (DetectAIRange.Alerted)
+            if (DetectAIRange.Alerted && !matchPlayerY)
             {
                 aiPath.enabled = true;
             }
@@ -165,6 +170,22 @@ public class Enemy : MonoBehaviour
             }
         }
 
+        if (matchPlayerY && !aiPath.enabled)
+        {
+            if (playerTrans.transform.position.y > FirePoint.position.y - 0.5f && playerTrans.transform.position.y < FirePoint.position.y + 0.5f)
+            {
+                rooted = true;
+            }
+            else if(playerTrans.transform.position.y > FirePoint.position.y)
+            {
+                rb.velocity = new Vector2(0, 6);
+            }
+            else
+            {
+                rb.velocity = new Vector2(0, -6);
+            }
+        }
+
         previousPosition = transform.position;
     }
 
@@ -202,6 +223,8 @@ public class Enemy : MonoBehaviour
         #endregion
 
         TakeDamage(0, 0, false);
+
+        StartCoroutine(SpecialRangedAttackCooldownCoroutine(Data.specialRangedAttackCooldown));
     }
     #endregion
 
@@ -286,7 +309,9 @@ public class Enemy : MonoBehaviour
 
     public void Attack(bool meleeRanged)
     {
-        if (!attackCooldown && meleeRanged)
+        if (attackCooldown) return;
+
+        if (meleeRanged)
         {
             if (ContainsParam(animator, "Attack")) animator.SetTrigger("Attack");
 
@@ -297,7 +322,7 @@ public class Enemy : MonoBehaviour
             if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
             if (ContainsParam(animator, "attack")) animator.SetBool("attack", true);
         }
-        else if (!attackCooldown && !meleeRanged && AttackAIRange.InSight)
+        else if (!meleeRanged && AttackAIRange.InSight)
         {
             if (ContainsParam(animator, "Attack")) animator.SetTrigger("Attack");
             StartCoroutine(AttackSpawnBossRangedCoroutine(Data.attackAnimationLength));
@@ -312,6 +337,32 @@ public class Enemy : MonoBehaviour
         {
             StartCoroutine(StartRootedCoroutine(0.1f));
             StartCoroutine(StopRootedCoroutine(Data.attackAnimationLength + 0.1f));
+        }
+    }
+
+    public void SpecialRangedAttack()
+    {
+        if (attackCooldown || SpecialRangedAttackCooldown) return;
+
+        SpecialRangedAttackCooldown = true;
+        attackCooldown = true;
+
+        StartCoroutine(SpecialRangedAttackCooldownCoroutine(Data.specialRangedAttackCooldown));
+        StartCoroutine(AttackCooldownCoroutine(Data.attackSpeed + Data.specialProjectileChargeTime));
+        StartCoroutine(SpecialRangedAttackSpawnCoroutine(Data.specialProjectileChargeTime));
+
+        //StartCoroutine(StartRootedCoroutine(0.1f));
+        StartCoroutine(StopRootedCoroutine(Data.specialProjectileChargeTime + 1f));
+
+        if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
+        if (ContainsParam(animator, "specialRanged")) animator.SetBool("specialRanged", true);
+
+        if (aiPath)
+        {
+            aiPath.enabled = false;
+            StartCoroutine(EnableAIPathCoroutine(Data.specialProjectileChargeTime + 1f));
+            matchPlayerY = true;
+            StartCoroutine(StopMatchPlayerYCoroutine(Data.specialProjectileChargeTime));
         }
     }
 
@@ -331,6 +382,7 @@ public class Enemy : MonoBehaviour
         if (playerTrans.position.x > transform.position.x) rb.AddForce(new Vector2(-Data.dashStrength, 0), ForceMode2D.Impulse);
         else rb.AddForce(new Vector2(Data.dashStrength, 0), ForceMode2D.Impulse);
     }
+
     #endregion
 
     #region Spawners
@@ -339,9 +391,10 @@ public class Enemy : MonoBehaviour
         if (arrow && Data.ranged && FirePoint)
         {
             GameObject attackProjectile = Instantiate(arrow, FirePoint);
+
             if (attackProjectile.activeInHierarchy == false)
             {
-                attackProjectile.SetActive(true);
+                StartCoroutine(SetObjectActiveCoroutine(0.2f, attackProjectile));
             }
             return;
         }
@@ -384,6 +437,27 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+
+    private void SpecialRangedAttackSpawn()
+    {
+        if (!Data.bossSpecialProjectile)
+        {
+            bossSpecialProjectile.SetActive(true);
+        }
+        else
+        {
+            GameObject attackProjectile = Instantiate(Data.bossSpecialProjectile, FirePoint);
+            if (attackProjectile.activeInHierarchy == false)
+            {
+                attackProjectile.SetActive(true);
+            }
+        }
+
+        if (ContainsParam(animator, "idle")) animator.SetBool("idle", true);
+        if (ContainsParam(animator, "specialRanged")) animator.SetBool("specialRanged", false);
+
+        return;
+    }
     #endregion
     #endregion
 
@@ -392,6 +466,12 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(cooldownTime);
         attackCooldown = false;
+    }
+
+    IEnumerator SpecialRangedAttackCooldownCoroutine(float cooldownTime)
+    {
+        yield return new WaitForSeconds(cooldownTime);
+        SpecialRangedAttackCooldown = false;
     }
 
     IEnumerator DashCooldownCoroutine(float cooldownTime)
@@ -429,6 +509,18 @@ public class Enemy : MonoBehaviour
         isPatrolling = true;
     }
 
+    IEnumerator StopMatchPlayerYCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        matchPlayerY = false;
+    }
+
+    IEnumerator EnableAIPathCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        aiPath.enabled = true;
+    }
+
     IEnumerator AttackSpawnBossRangedCoroutine(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -440,10 +532,22 @@ public class Enemy : MonoBehaviour
         AttackSpawn(false);
     }
 
+    IEnumerator SpecialRangedAttackSpawnCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SpecialRangedAttackSpawn();
+    }
+
     IEnumerator FlipCoroutine(float delay)
     {
         yield return new WaitForSeconds(delay);
         Flip();
+    }
+
+    IEnumerator SetObjectActiveCoroutine(float delay, GameObject objectToSetActive)
+    {
+        yield return new WaitForSeconds(delay);
+        objectToSetActive.SetActive(true);
     }
     #endregion
 

@@ -10,6 +10,8 @@ public class RangedAttack : MonoBehaviour
     private Rigidbody2D arrowRB;
     Vector2 direction;
 
+    public Vector2 Direction { get; set; }
+
     void Start()
     {
         enemy = GetComponentInParent<Enemy>();
