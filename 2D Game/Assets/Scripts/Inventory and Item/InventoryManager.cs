@@ -98,10 +98,10 @@ namespace Inventory
         {
             Default,
             ConsumableInv,
-            MaterialInv,
-            EquimpentInv,
+            EquipmentInv,
+            WeaponInv,
             QuestInv,
-            MisctInv
+            MiscInv
         };
         #endregion
 
@@ -322,12 +322,12 @@ namespace Inventory
                     {
                         obj.SetActive(false);
                     }
-                if (filter == Filter.MaterialInv)
-                    if (item.itemClass != Item.ItemClass.Material)
+                if (filter == Filter.WeaponInv)
+                    if (item.itemClass != Item.ItemClass.Weapon)
                     {
                         obj.SetActive(false);
                     }
-                if (filter == Filter.EquimpentInv)
+                if (filter == Filter.EquipmentInv)
                     if (item.itemClass != Item.ItemClass.Equipment)
                     {
                         obj.SetActive(false);
@@ -337,7 +337,7 @@ namespace Inventory
                     {
                         obj.SetActive(false);
                     }
-                if (filter == Filter.MisctInv)
+                if (filter == Filter.MiscInv)
                     if (item.itemClass != Item.ItemClass.Misc)
                     {
                         obj.SetActive(false);
@@ -604,32 +604,67 @@ namespace Inventory
 
         public void ConsumableInvBn()
         {
-            filter = Filter.ConsumableInv;
+            if (filter == Filter.ConsumableInv)
+            {
+                filter = Filter.Default;
+            }
+            else
+            {
+                filter = Filter.ConsumableInv;
+            }
 
             ListItems();
         }
-        public void MaterialInvBn()
+        public void WeaponInvBn()
         {
-            filter = Filter.MaterialInv;
+            if (filter == Filter.WeaponInv)
+            {
+                filter = Filter.Default;
+            }
+            else
+            {
+                filter = Filter.WeaponInv;
+            }
 
             ListItems();
         }
         public void EquipmentInvBn()
         {
-            filter = Filter.EquimpentInv;
+            if (filter == Filter.EquipmentInv)
+            {
+                filter = Filter.Default;
+            }
+            else
+            {
+                filter = Filter.EquipmentInv;
+            }
 
             ListItems();
 
         }
         public void QuestInvBn()
         {
-            filter = Filter.QuestInv;
+            if (filter == Filter.QuestInv)
+            {
+                filter = Filter.Default;
+            }
+            else
+            {
+                filter = Filter.QuestInv;
+            }
 
             ListItems();
         }
         public void MiscInvBn()
         {
-            filter = Filter.MisctInv;
+            if (filter == Filter.MiscInv)
+            {
+                filter = Filter.Default;
+            }
+            else
+            {
+                filter = Filter.MiscInv;
+            }
 
             ListItems();
         }

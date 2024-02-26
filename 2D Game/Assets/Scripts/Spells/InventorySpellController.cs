@@ -44,14 +44,12 @@ namespace Spells
                 SpellManager.Instance.SpellsBar.Add(spell);
                 SpellManager.Instance.ListActiveSpells();
             }
-            else Debug.Log("already there");
 
             if (SpellManager.Instance.AbilitiesBar.Count < ActiveSpellsMax && !SpellManager.Instance.AbilitiesBar.Contains(spell) && !spell.spell)
             {
                 SpellManager.Instance.AbilitiesBar.Add(spell);
                 SpellManager.Instance.ListActiveSpells();
             }
-            else Debug.Log("already there");
         }
 
         public void RemoveActiveSpell()

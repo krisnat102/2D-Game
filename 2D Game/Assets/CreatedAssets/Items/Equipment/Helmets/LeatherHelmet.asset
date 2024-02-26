@@ -18,12 +18,14 @@ MonoBehaviour:
   cost: 10
   usable: 1
   icon: {fileID: 21300000, guid: b7b729ee957ac7b43b94889b7ee0aa9e, type: 3}
-  itemClass: 2
+  itemClass: 1
   itemDescription: Provides little protection, but doesn't weigh much
   equipment: 1
   armor: 5
   weight: 1
   magicRes: 1
   equipmentType: 1
+  weaponData: {fileID: 0}
+  weaponType: 0
   consumable: 0
   consumableType: 0

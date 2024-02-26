@@ -18,7 +18,7 @@ MonoBehaviour:
   cost: 40
   usable: 1
   icon: {fileID: 21300000, guid: 269d0fcb44bdccf4691bff3c13704f2e, type: 3}
-  itemClass: 2
+  itemClass: 1
   itemDescription: Mostly used by hunters and thieves
   equipment: 1
   armor: 7
@@ -26,5 +26,6 @@ MonoBehaviour:
   magicRes: 4
   equipmentType: 2
   weaponData: {fileID: 0}
+  weaponType: 0
   consumable: 0
   consumableType: 0

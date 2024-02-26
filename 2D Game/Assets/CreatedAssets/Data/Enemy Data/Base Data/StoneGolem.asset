@@ -53,10 +53,12 @@ MonoBehaviour:
   boss: 1
   bossProjectile: {fileID: 7796753809111118328, guid: a39870c4aad6cf84991ad21e40a2962f,
     type: 3}
+  rangedAttackSoundDelay: 0.4
   bossSpecialProjectile: {fileID: 0}
-  specialProjectileChargeTime: 1.2
+  specialRangedAttackChargeTime: 1
+  specialRangedAttackChargeExecutionTime: 1.2
   specialRangedAttackCooldown: 20
-  bossMusic: {fileID: 0}
+  bossMusic: {fileID: 8300000, guid: 5aa633a9f33e07547b59e7bbd680ddbc, type: 3}
   deathEffect: {fileID: 8203424293245319661, guid: 300aca216a33d6941b80bf60552e2e0e,
     type: 3}
   bloodEffect: {fileID: 7515634647306772147, guid: 6dc9c141b46ffcc4b9a12f2f255fcf76,

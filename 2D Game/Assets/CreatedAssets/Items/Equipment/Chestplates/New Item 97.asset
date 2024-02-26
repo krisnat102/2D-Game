@@ -18,7 +18,7 @@ MonoBehaviour:
   cost: 0
   usable: 1
   icon: {fileID: 21300000, guid: 2ad717e98fc0d2542a92dd4a40a03b8e, type: 3}
-  itemClass: 2
+  itemClass: 1
   itemDescription: 
   equipment: 1
   armor: 0
@@ -26,5 +26,6 @@ MonoBehaviour:
   magicRes: 0
   equipmentType: 2
   weaponData: {fileID: 0}
+  weaponType: 0
   consumable: 0
   consumableType: 0

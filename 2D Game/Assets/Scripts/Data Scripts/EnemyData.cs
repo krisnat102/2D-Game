@@ -60,10 +60,12 @@ public class EnemyData : ScriptableObject
     [Header("Boss")]
     public bool boss;
     public GameObject bossProjectile;
+    public float rangedAttackSoundDelay;
     public GameObject bossSpecialProjectile;
-    public float specialProjectileChargeTime;
+    public float specialRangedAttackChargeTime;
+    public float specialRangedAttackChargeExecutionTime;
     public float specialRangedAttackCooldown;
-    public AudioSource bossMusic;
+    public AudioClip bossMusic;
 
     [Header("Other")]
     public GameObject deathEffect;

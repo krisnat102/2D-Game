@@ -18,7 +18,7 @@ MonoBehaviour:
   cost: 0
   usable: 1
   icon: {fileID: 21300000, guid: 99af0c769eae3964fa806c48ce3b0186, type: 3}
-  itemClass: 2
+  itemClass: 1
   itemDescription: A heavy protective robe used by monks in battle
   equipment: 1
   armor: 13
@@ -26,5 +26,6 @@ MonoBehaviour:
   magicRes: 6
   equipmentType: 2
   weaponData: {fileID: 0}
+  weaponType: 0
   consumable: 0
   consumableType: 0

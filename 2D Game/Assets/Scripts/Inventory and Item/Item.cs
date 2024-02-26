@@ -21,16 +21,6 @@ namespace Inventory
         public ItemClass itemClass;
         [TextArea]
         public string itemDescription;
-
-        public enum ItemClass
-        {
-            Consumable,
-            Material,
-            Equipment,
-            Weapon,
-            Quest,
-            Misc
-        }
         #endregion
 
         #region Private Variables
@@ -64,6 +54,14 @@ namespace Inventory
         [HideInInspector]
         public ConsumableType consumableType;
 
+        public enum ItemClass
+        {
+            Consumable,
+            Equipment,
+            Weapon,
+            Quest,
+            Misc
+        }
         public enum EquipmentType
         {
             None,

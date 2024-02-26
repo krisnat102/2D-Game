@@ -25,10 +25,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EnemyAttackAI attackAIRange, dashAIRange;
     [SerializeField] private Transform leftPatrolBarrier, rightPatrolBarrier;
 
+    [Header("Sound")]
+    [SerializeField] private AudioSource attackSound;
+    [SerializeField] private AudioSource rangedAttackSound;
+    [SerializeField] private AudioSource bossMusicPlayer;
+
     [Header("Other")]
     public EnemyData data;
     [SerializeField] private GameObject bossSpecialProjectile;
-    [SerializeField] private AudioSource attackSound;
     [SerializeField] private Transform playerTrans;
 
     private int coinsDropped;
@@ -38,7 +42,7 @@ public class Enemy : MonoBehaviour
     private float lvlIndex;
     private bool immune = false;
     private bool attackCooldown = false;
-    private bool specialRangedAttackCooldown = false;
+    private bool specialRangedAttackCooldown = true;
     private bool dashCooldown = false;
     private bool isDashing = false;
     private bool isPatrolling;
@@ -47,9 +51,12 @@ public class Enemy : MonoBehaviour
     private bool flip;
     private bool childFlip;
     private bool rooted;
+    private bool fixRotation;
     private bool matchPlayerY = false;
+    private bool bossMusicTracker = true;
     private float leftPatrolBarrierPositionX;
     private float rightPatrolBarrierPositionX;
+    private float previousRotationX;
     private Vector2 offset;
     private Vector2 previousPosition;
     private EnemyAI enemyAI;
@@ -144,6 +151,12 @@ public class Enemy : MonoBehaviour
             {
                 hpBar.gameObject.SetActive(true);
             }
+            if (bossMusicPlayer && bossMusicTracker)
+            {
+                bossMusicTracker = false;
+                AudioManager.Instance.PauseMusic();
+                bossMusicPlayer.Play();
+            }
         }
         if (isPatrolling)
         {
@@ -186,6 +199,9 @@ public class Enemy : MonoBehaviour
             }
         }
 
+        if (fixRotation) transform.localScale = new Vector2(previousRotationX, transform.localScale.y);
+
+        previousRotationX = transform.localScale.x;
         previousPosition = transform.position;
     }
 
@@ -332,6 +348,8 @@ public class Enemy : MonoBehaviour
 
             if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
             if (ContainsParam(animator, "ranged")) animator.SetBool("ranged", true);
+
+            if (rangedAttackSound) StartCoroutine(PlayRangedAttackSoundCoroutine(Data.rangedAttackSoundDelay));
         }
         if (Data.rootWhenAttacking)
         {
@@ -348,11 +366,10 @@ public class Enemy : MonoBehaviour
         attackCooldown = true;
 
         StartCoroutine(SpecialRangedAttackCooldownCoroutine(Data.specialRangedAttackCooldown));
-        StartCoroutine(AttackCooldownCoroutine(Data.attackSpeed + Data.specialProjectileChargeTime));
-        StartCoroutine(SpecialRangedAttackSpawnCoroutine(Data.specialProjectileChargeTime));
+        StartCoroutine(AttackCooldownCoroutine(Data.attackSpeed + Data.specialRangedAttackChargeTime));
+        StartCoroutine(SpecialRangedAttackSpawnCoroutine(Data.specialRangedAttackChargeTime));
 
-        //StartCoroutine(StartRootedCoroutine(0.1f));
-        StartCoroutine(StopRootedCoroutine(Data.specialProjectileChargeTime + 1f));
+        StartCoroutine(StopRootedCoroutine(Data.specialRangedAttackChargeTime + Data.specialRangedAttackChargeExecutionTime));
 
         if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
         if (ContainsParam(animator, "specialRanged")) animator.SetBool("specialRanged", true);
@@ -360,9 +377,9 @@ public class Enemy : MonoBehaviour
         if (aiPath)
         {
             aiPath.enabled = false;
-            StartCoroutine(EnableAIPathCoroutine(Data.specialProjectileChargeTime + 1f));
+            StartCoroutine(EnableAIPathCoroutine(Data.specialRangedAttackChargeTime + Data.specialRangedAttackChargeExecutionTime));
             matchPlayerY = true;
-            StartCoroutine(StopMatchPlayerYCoroutine(Data.specialProjectileChargeTime));
+            StartCoroutine(StopMatchPlayerYCoroutine(Data.specialRangedAttackChargeTime));
         }
     }
 
@@ -396,6 +413,7 @@ public class Enemy : MonoBehaviour
             {
                 StartCoroutine(SetObjectActiveCoroutine(0.2f, attackProjectile));
             }
+
             return;
         }
         else if (Data.bossProjectile && bossRanged && FirePoint2)
@@ -452,6 +470,8 @@ public class Enemy : MonoBehaviour
                 attackProjectile.SetActive(true);
             }
         }
+        fixRotation = true;
+        StartCoroutine(StopFixRotationCoroutine(Data.specialRangedAttackChargeExecutionTime));
 
         if (ContainsParam(animator, "idle")) animator.SetBool("idle", true);
         if (ContainsParam(animator, "specialRanged")) animator.SetBool("specialRanged", false);
@@ -459,6 +479,7 @@ public class Enemy : MonoBehaviour
         return;
     }
     #endregion
+
     #endregion
 
     #region Coroutines
@@ -503,6 +524,12 @@ public class Enemy : MonoBehaviour
         rooted = true;
     }
 
+    IEnumerator StopFixRotationCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        fixRotation = false;
+    }
+
     IEnumerator StartPatrolCoroutine(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -542,6 +569,12 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         Flip();
+    }
+
+    IEnumerator PlayRangedAttackSoundCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        rangedAttackSound.Play();
     }
 
     IEnumerator SetObjectActiveCoroutine(float delay, GameObject objectToSetActive)

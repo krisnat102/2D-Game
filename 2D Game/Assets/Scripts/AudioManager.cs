@@ -20,6 +20,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private Toggle Mute;
 
     [Header("Sounds")]
+    [SerializeField] private AudioSource music;
     [SerializeField] private AudioSource buySound;
     [SerializeField] private AudioSource coinPickupSound;
 
@@ -82,6 +83,9 @@ public class AudioManager : MonoBehaviour
     #endregion
 
     #region Audio
+    public void PauseMusic() => music.Pause();
+    public void UnPauseMusic() => music.UnPause();
+
     public void MuteAudio(bool mute)
     {
         Mute.isOn = mute;
