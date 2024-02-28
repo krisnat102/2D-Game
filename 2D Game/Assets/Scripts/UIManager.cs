@@ -50,14 +50,14 @@ namespace Krisnat
         private void Awake()
         {
             Instance = this;
-            playerData = Stats.Instance.gameObject.GetComponentInParent<Player>().PlayerData;
-            levelHandler = Stats.Instance.gameObject.GetComponentInParent<LevelHandler>();
+            playerData = Stats.Instance?.gameObject.GetComponentInParent<Player>().PlayerData;
+            levelHandler = Stats.Instance?.gameObject.GetComponentInParent<LevelHandler>();
         }
 
         private void Update()
         {
-            levelUpCost.text = "Cost - " + levelHandler.LevelUpCost.ToString();
-            levelTextLevelUpInterface.text = "Level - " + playerData.PlayerLevel.ToString();
+            if(levelUpCost) levelUpCost.text = "Cost - " + levelHandler.LevelUpCost.ToString();
+            if (levelTextLevelUpInterface) levelTextLevelUpInterface.text = "Level - " + playerData.PlayerLevel.ToString();
 
             levelText.text = playerData.PlayerLevel.ToString();
             hpText.text = Stats.Instance.Health.MaxValue.ToString();

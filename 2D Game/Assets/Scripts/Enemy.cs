@@ -7,6 +7,7 @@ using Inventory;
 using Spells;
 using System.Collections;
 using UnityEngine.Rendering.UI;
+using Krisnat;
 
 public class Enemy : MonoBehaviour
 {
@@ -69,6 +70,7 @@ public class Enemy : MonoBehaviour
     private GameObject arrow;
     private ParticleSystem coinBurstParticleEffect;
     private Transform particleContainer;
+    private CameraShake cameraShake;
     #endregion
 
     #region Properties
@@ -88,9 +90,9 @@ public class Enemy : MonoBehaviour
     #region Unity Methods
     private void Update()
     {
-        if (DashAIRange && DashAIRange.InRange && Data.canDash && !dashCooldown && !attackCooldown) Dash();
-        else if (AttackAIRange.InRange && !Data.ranged) Attack(true);
-        else if (AttackAIRange.InSight && Data.ranged) Attack(false);
+        if (DashAIRange && DashAIRange.InRange && Data.canDash && !dashCooldown && !attackCooldown && !Data.boss) Dash();
+        else if (AttackAIRange.InRange && !Data.ranged && !Data.boss) Attack(true);
+        else if (AttackAIRange.InSight && Data.ranged && !Data.boss) Attack(false);
 
         if (Data.lookAtPlayer && DetectAIRange.Alerted && !isDashing)
         {
@@ -225,6 +227,7 @@ public class Enemy : MonoBehaviour
         if (rightPatrolBarrier) rightPatrolBarrierPositionX = rightPatrolBarrier.transform.position.x;
         if (leftPatrolBarrier) leftPatrolBarrierPositionX = leftPatrolBarrier.transform.position.x;
         isPatrolling = Data.patrol;
+        cameraShake = CameraShake.instance;
         #endregion
 
         #region Calculations
@@ -430,6 +433,8 @@ public class Enemy : MonoBehaviour
 
             return;
         }
+        
+        if(data.boss) cameraShake.ShakeCamera(0.5f, 1.2f);
 
         offset.Set(
             transform.position.x + (Data.HitBox.center.x * FacingDirection * -1),
@@ -470,8 +475,12 @@ public class Enemy : MonoBehaviour
                 attackProjectile.SetActive(true);
             }
         }
+
         fixRotation = true;
+
         StartCoroutine(StopFixRotationCoroutine(Data.specialRangedAttackChargeExecutionTime));
+
+        cameraShake.ShakeCamera(Data.specialRangedAttackChargeExecutionTime, 2f);
 
         if (ContainsParam(animator, "idle")) animator.SetBool("idle", true);
         if (ContainsParam(animator, "specialRanged")) animator.SetBool("specialRanged", false);

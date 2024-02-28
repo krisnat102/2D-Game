@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,11 +7,8 @@ namespace Krisnat
     public class Boss : MonoBehaviour
     {
         #region Private Variables
-        [SerializeField] private Actions action1;
-        [SerializeField] private Actions action2;
-        [SerializeField] private Actions action3;
+        [SerializeField] private List<Actions> actions;
 
-        private Actions[] actions = new Actions[3];
         private Enemy enemy;
         #endregion
 
@@ -39,10 +37,6 @@ namespace Krisnat
         #region Unity Methods
         private void Start()
         {
-            actions[0] = action1;
-            actions[1] = action2;
-            actions[2] = action3;
-
             enemy = GetComponent<Enemy>();
         }
         private void Update()
@@ -79,6 +73,7 @@ namespace Krisnat
 
     enum Actions
     {
+        Empty,
         MeleeAttack,
         RangedAttack,
         SpecialRangedAttack,

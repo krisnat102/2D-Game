@@ -21,6 +21,8 @@ namespace Interactables
                 OpenChest();
 
                 openned = true;
+
+                PlayerInputHandler.Instance.UseUseInput();
             }
         }
 

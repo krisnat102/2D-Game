@@ -7,6 +7,7 @@ using Krisnat.Assets.Scripts;
 using Spells;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Core
 {
@@ -37,24 +38,19 @@ namespace Core
         {
             Instance = this;
 
-            player = playerGO.GetComponent<Player>();
-            levelHandler = playerGO.GetComponent<LevelHandler>();
+            player = playerGO?.GetComponent<Player>();
+            levelHandler = playerGO?.GetComponent<LevelHandler>();
         }
         #endregion
 
         #region Player Methods
         public void TryAgain()
         {
-            Application.LoadLevel(Application.loadedLevel);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
             death.IsDead = false;
 
-            //Stats.Instance.Health.Increase(Stats.Instance.Health.MaxValue - Stats.Instance.Health.CurrentValue);
-            //Stats.Instance.Mana.Increase(Stats.Instance.Mana.MaxValue - Stats.Instance.Mana.CurrentValue);
-            //Stats.Instance.Stam.Increase(Stats.Instance.Stam.MaxValue - Stats.Instance.Stam.CurrentValue);
             LoadPlayer();
-
-            playerGO.SetActive(true);
         }
 
         public void SavePlayer()

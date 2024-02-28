@@ -9,6 +9,8 @@ using Inventory;
 public class MenuManager : MonoBehaviour
 {
     #region Private Variables
+    [SerializeField] private Player player;
+
     [SerializeField] private GameObject menu;
     [SerializeField] private GameObject miniMenu;
     [SerializeField] private GameObject settings;
@@ -64,17 +66,19 @@ public class MenuManager : MonoBehaviour
 
     void Update()
     {
-        if (Core.GameManager.Instance.GamePaused)
+        if (Core.GameManager.Instance != null && Core.GameManager.Instance.GamePaused)
         {
             Time.timeScale = 0f;
         }
-        else
+        else if (Core.GameManager.Instance != null)
         {
             Time.timeScale = 1;
         }
 
         if (
-            PlayerInputHandler.Instance.MenuInput && SceneManager.GetActiveScene().name != "MainMenu"
+            PlayerInputHandler.Instance != null 
+            && PlayerInputHandler.Instance.MenuInput
+            && SceneManager.GetActiveScene().name != "MainMenu"
             && !InventoryManager.Instance.InventoryActiveInHierarchy
             && !InventoryManager.Instance.SpellInventoryActiveInHierarchy
             && !InventoryManager.Instance.CharacterTabActiveInHierarchy
@@ -199,6 +203,7 @@ public class MenuManager : MonoBehaviour
     }
     public void MainMenu()
     {
+        Destroy(player.gameObject);
         SceneManager.LoadScene("MainMenu");
     }
     public void ExitGame()
