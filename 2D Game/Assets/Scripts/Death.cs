@@ -1,5 +1,6 @@
 using Inventory;
 using Krisnat;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
@@ -12,9 +13,13 @@ public class Death : MonoBehaviour
     [SerializeField] private GameObject objectToSpawnBeforeDeath;
     [SerializeField] private bool fade;
     [SerializeField] private float fadeTime;
+
     [Header("Types")]
     [SerializeField] private bool ui;
     [SerializeField] private bool uiCanvasGroup;
+
+    [Header("Other")]
+    [SerializeField] private UnityEngine.GameObject hpBar;
 
     private float transparency = 1f;
     private SpriteRenderer sprite;
@@ -70,6 +75,7 @@ public class Death : MonoBehaviour
             }
         }
     }
+
     public void DeathAnimation()
     {
         //gameObject.SetActive(false);
@@ -81,5 +87,11 @@ public class Death : MonoBehaviour
         if (objectToSpawnBeforeDeath) objectToSpawnBeforeDeath.SetActive(true);
         if (destroy) Destroy(gameObject);
         else gameObject.SetActive(false);
+    }
+
+    IEnumerable SetBossHealthBar(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        hpBar?.gameObject.SetActive(false);
     }
 }

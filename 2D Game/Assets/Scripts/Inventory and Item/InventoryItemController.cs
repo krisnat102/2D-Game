@@ -137,7 +137,7 @@ namespace Inventory
         public void Description()
         {
             GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
-            ItemController itemController = button.GetComponent<ItemController>();
+            ItemController itemController = button?.GetComponent<ItemController>();
             Item item = itemController.GetItem();
 
             GameObject descriptionExtension = InventoryManager.Instance.GetEquipmentMenu();

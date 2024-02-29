@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject damagePopup;
     [SerializeField] private Gradient damagePopupGradient;
     [SerializeField] private Vector3 damagePopupOffset;
-    [SerializeField] private int fontSizeToDamageScaler;
+    [SerializeField] private float fontSizeToDamageScaler;
 
     [Header("Ranges")]
     [SerializeField] private EnemyAttackAI detectAIRange;
@@ -264,6 +264,7 @@ public class Enemy : MonoBehaviour
             {
                 if (GetComponentInChildren<Canvas>() != null && damagePopup != null)
                 {
+                    damagePopupOffset.x += Random.Range(-2f, 1f);
                     var dmgNumber = Instantiate(damagePopup, transform.position + damagePopupOffset, Quaternion.identity, GetComponentInChildren<Canvas>().transform).GetComponent<TextMeshProUGUI>();
                     dmgNumber.text = damage.ToString();
                     dmgNumber.color = damagePopupGradient.Evaluate(Mathf.Clamp01(damage / 100));
@@ -278,6 +279,8 @@ public class Enemy : MonoBehaviour
 
                     StartCoroutine(StopImmuneCoroutine(0.1f));
                 }
+
+                if (BloodEffect) Instantiate(Data.bloodEffect);
 
                 TakeKnockback(damage + knockback);
             }
