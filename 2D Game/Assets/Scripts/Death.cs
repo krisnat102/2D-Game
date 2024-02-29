@@ -18,9 +18,6 @@ public class Death : MonoBehaviour
     [SerializeField] private bool ui;
     [SerializeField] private bool uiCanvasGroup;
 
-    [Header("Other")]
-    [SerializeField] private UnityEngine.GameObject hpBar;
-
     private float transparency = 1f;
     private SpriteRenderer sprite;
     private Image image;
@@ -87,11 +84,5 @@ public class Death : MonoBehaviour
         if (objectToSpawnBeforeDeath) objectToSpawnBeforeDeath.SetActive(true);
         if (destroy) Destroy(gameObject);
         else gameObject.SetActive(false);
-    }
-
-    IEnumerable SetBossHealthBar(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        hpBar?.gameObject.SetActive(false);
-    }
+    } 
 }

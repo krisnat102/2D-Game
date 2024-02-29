@@ -82,7 +82,7 @@ namespace Spells
 
                     if (shuriken)
                     {
-                        Instantiate(enemy.BloodEffect, transform.position, Quaternion.identity);
+                        Instantiate(enemy.data.bloodEffect, transform.position, Quaternion.identity);
                     }
                 }
                 if (destroyOnTouch && !shuriken)

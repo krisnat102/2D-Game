@@ -26,7 +26,7 @@ public class Bullet : MonoBehaviour
             {
                 enemy.TakeDamage(bulletDmg, 0, false);
 
-                Instantiate(enemy.BloodEffect, transform.position, Quaternion.identity);
+                Instantiate(enemy.Data.bloodEffect, transform.position, Quaternion.identity);
             }
             Instantiate(impactEffect, transform.position, transform.rotation);
             /*impactEffect.SetActive(true);

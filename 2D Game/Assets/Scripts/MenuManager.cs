@@ -8,6 +8,8 @@ using Inventory;
 
 public class MenuManager : MonoBehaviour
 {
+    public static MenuManager Instance;
+
     #region Private Variables
     [SerializeField] private Player player;
 
@@ -26,7 +28,14 @@ public class MenuManager : MonoBehaviour
     private float scale;
     #endregion
 
+    public bool DamagePopUps { get; private set; }
+
     #region Unity Methods
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Start()
     {
         animator = menu.GetComponentInChildren<Animator>();
@@ -107,6 +116,12 @@ public class MenuManager : MonoBehaviour
             //UIManager.Instance.OpenCloseUI(miniMenu, scale, openingMenuDuration, false, true, true);
             //animator.SetTrigger("menuOpen");
             menu.SetActive(true);
+
+            if (settings.activeInHierarchy)
+            {
+                settings.SetActive(false);
+                miniMenu.SetActive(true);
+            }
             Core.GameManager.Instance.GamePaused = true;
             PlayerInputHandler.Instance.StopAllInputs = true;
         }
@@ -189,10 +204,9 @@ public class MenuManager : MonoBehaviour
         PlayerPrefs.SetInt("Fps", fpsIndex);
         PlayerPrefs.Save();
     }
-    public void SetFullscreen(bool isFullscreen)
-    {
-        Screen.fullScreen = isFullscreen;
-    }
+    public void SetFullscreen(bool isFullscreen) => Screen.fullScreen = isFullscreen;
+
+    public void SetDamagePopUps(bool value) => DamagePopUps = value;
     #endregion
 
     #region Menu Buttons
@@ -203,12 +217,12 @@ public class MenuManager : MonoBehaviour
     }
     public void MainMenu()
     {
+        SaveSystem.SavePlayer(player);
         Destroy(player.gameObject);
         SceneManager.LoadScene("MainMenu");
     }
     public void ExitGame()
     {
-        var player = transform.Find("Player").GetComponent<Player>();
         if(player != null) SaveSystem.SavePlayer(player);
         Application.Quit();
 

@@ -85,7 +85,7 @@ namespace Krisnat
             {
                 enemy.TakeDamage(damage * levelHandler.DexterityDamage, 0, true);
                 damage = 0;
-                if(enemy.BloodEffect) Instantiate(enemy.BloodEffect, transform.position, Quaternion.identity);
+                if(enemy.Data.bloodEffect) Instantiate(enemy.Data.bloodEffect, transform.position, Quaternion.identity);
             }
             if (collision.tag == "Ground")
             {

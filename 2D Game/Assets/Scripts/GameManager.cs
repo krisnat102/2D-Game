@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Bardent.CoreSystem;
 using Inventory;
@@ -191,6 +192,14 @@ namespace Core
             }*/
             return loadedAssets;
         }
+
+        IEnumerator DeactivateObjectCoroutine(float duration, GameObject obj)
+        {
+            yield return new WaitForSeconds(duration);
+            obj?.gameObject.SetActive(false);
+        }
+
+        public void DeactivateObject(float duration, GameObject objectToDeactivate) => StartCoroutine(DeactivateObjectCoroutine(duration, objectToDeactivate));
         #endregion
     }
 }

@@ -74,7 +74,6 @@ public class Enemy : MonoBehaviour
     #endregion
 
     #region Properties
-    public GameObject BloodEffect { get => Data.bloodEffect; private set => Data.bloodEffect = value; }
     public Transform PlayerTrans { get => playerTrans; private set => playerTrans = value; }
     public EnemyData Data { get => data; private set => data = value; }
     public float EnemyLevelScale { get => lvlIndex; private set => lvlIndex = value; }
@@ -159,7 +158,24 @@ public class Enemy : MonoBehaviour
                 AudioManager.Instance.PauseMusic();
                 bossMusicPlayer.Play();
             }
+            if(ContainsParam(animator, "sleep") && ContainsParam(animator, "wakeUp") && animator.GetBool("sleep"))
+            {
+                animator.SetBool("wakeUp", true);
+                animator.SetBool("sleep", false);
+                rooted = true;
+                StartCoroutine(StopRootedCoroutine(Data.wakeUpTime));
+                StartCoroutine(StartIdleCoroutine(Data.wakeUpTime - 0.2f, "wakeUp"));
+            }
         }
+        else
+        {
+            if(ContainsParam(animator, "sleep") && ContainsParam(animator, "idle"))
+            {
+                animator.SetBool("idle", false);
+                animator.SetBool("sleep", true);
+            }
+        }
+
         if (isPatrolling)
         {
             if ((transform.position.x <= leftPatrolBarrierPositionX || transform.position.x >= rightPatrolBarrierPositionX) && !stopPatrol)
@@ -262,7 +278,7 @@ public class Enemy : MonoBehaviour
 
             if (damage > 0)
             {
-                if (GetComponentInChildren<Canvas>() != null && damagePopup != null)
+                if (GetComponentInChildren<Canvas>() != null && damagePopup != null && MenuManager.Instance.DamagePopUps)
                 {
                     damagePopupOffset.x += Random.Range(-2f, 1f);
                     var dmgNumber = Instantiate(damagePopup, transform.position + damagePopupOffset, Quaternion.identity, GetComponentInChildren<Canvas>().transform).GetComponent<TextMeshProUGUI>();
@@ -280,7 +296,10 @@ public class Enemy : MonoBehaviour
                     StartCoroutine(StopImmuneCoroutine(0.1f));
                 }
 
-                if (BloodEffect) Instantiate(Data.bloodEffect);
+                if (Data.bloodEffect)
+                {
+                    Instantiate(Data.bloodEffect, new Vector3(transform.position.x + Random.Range(-1,1), transform.position.y + Random.Range(-1, 1), transform.position.z), Quaternion.identity);
+                }
 
                 TakeKnockback(damage + knockback);
             }
@@ -311,8 +330,13 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         var coins = Instantiate(coinBurstParticleEffect.gameObject, transform.position, Quaternion.identity, particleContainer);
+
         coins.GetComponent<ParticleSystem>().Emit(coinsDropped);
-        Instantiate(Data.deathEffect, transform.position, Quaternion.identity);
+
+        Instantiate(Data.deathEffect, transform.position, Quaternion.identity).GetComponent<Death>();
+
+        if (Data.boss) Core.GameManager.Instance.DeactivateObject(4, hpBar.gameObject);
+
         if (Data.itemDrop)
         {
             var random = new System.Random();
@@ -593,6 +617,16 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         objectToSetActive.SetActive(true);
+    }
+
+    IEnumerator StartIdleCoroutine(float delay, string boolToDisable)
+    {
+        yield return new WaitForSeconds(delay);
+        if(ContainsParam(animator, "idle") && ContainsParam(animator, boolToDisable))
+        {
+            animator.SetBool(boolToDisable, false);
+            animator.SetBool("idle", true);
+        }
     }
     #endregion
 

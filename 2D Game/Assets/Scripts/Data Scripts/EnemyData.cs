@@ -66,6 +66,7 @@ public class EnemyData : ScriptableObject
     public float specialRangedAttackChargeExecutionTime;
     public float specialRangedAttackCooldown;
     public AudioClip bossMusic;
+    public float wakeUpTime;
 
     [Header("Other")]
     public GameObject deathEffect;
