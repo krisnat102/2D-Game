@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Ranges")]
     [SerializeField] private EnemyAttackAI detectAIRange;
-    [SerializeField] private EnemyAttackAI attackAIRange, dashAIRange;
+    [SerializeField] private EnemyAttackAI attackAIRange, cancelRangedAIRange, dashAIRange;
     [SerializeField] private Transform leftPatrolBarrier, rightPatrolBarrier;
 
     [Header("Sound")]
@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
     public EnemyData data;
     [SerializeField] private GameObject bossSpecialProjectile;
     [SerializeField] private Transform playerTrans;
+    [SerializeField] private BoxCollider2D groundCollider;
 
     private int coinsDropped;
     private int facingDirection = 1;
@@ -52,6 +53,7 @@ public class Enemy : MonoBehaviour
     private bool flip;
     private bool childFlip;
     private bool rooted;
+    private bool sleeping;
     private bool fixRotation;
     private bool matchPlayerY = false;
     private bool bossMusicTracker = true;
@@ -163,7 +165,10 @@ public class Enemy : MonoBehaviour
                 animator.SetBool("wakeUp", true);
                 animator.SetBool("sleep", false);
                 rooted = true;
+                immune = true;
                 StartCoroutine(StopRootedCoroutine(Data.wakeUpTime));
+                StartCoroutine(StopImmuneCoroutine(Data.wakeUpTime));
+                StartCoroutine(StopSleepingCoroutine(Data.wakeUpTime));
                 StartCoroutine(StartIdleCoroutine(Data.wakeUpTime - 0.2f, "wakeUp"));
             }
         }
@@ -171,6 +176,7 @@ public class Enemy : MonoBehaviour
         {
             if(ContainsParam(animator, "sleep") && ContainsParam(animator, "idle"))
             {
+                sleeping = true;
                 animator.SetBool("idle", false);
                 animator.SetBool("sleep", true);
             }
@@ -355,7 +361,7 @@ public class Enemy : MonoBehaviour
 
     public void Attack(bool meleeRanged)
     {
-        if (attackCooldown) return;
+        if (attackCooldown || sleeping) return;
 
         if (meleeRanged)
         {
@@ -390,7 +396,9 @@ public class Enemy : MonoBehaviour
 
     public void SpecialRangedAttack()
     {
-        if (attackCooldown || SpecialRangedAttackCooldown) return;
+        if (attackCooldown || SpecialRangedAttackCooldown || sleeping) return;
+
+        if (groundCollider) groundCollider.isTrigger = true;
 
         SpecialRangedAttackCooldown = true;
         attackCooldown = true;
@@ -415,10 +423,13 @@ public class Enemy : MonoBehaviour
 
     public void Dash()
     {
+        if (dashCooldown || sleeping) return;
+
         animator.SetTrigger("Dash");
 
         dashCooldown = true;
         StartCoroutine(DashCooldownCoroutine(Data.dashCooldown));
+
         attackCooldown = true;
         StartCoroutine(AttackCooldownCoroutine(Data.attackSpeed));
 
@@ -448,6 +459,17 @@ public class Enemy : MonoBehaviour
         }
         else if (Data.bossProjectile && bossRanged && FirePoint2)
         {
+            if (cancelRangedAIRange.InRange)
+            {
+                attackCooldown = false;
+
+                Attack(true);
+
+                if (ContainsParam(animator, "ranged")) animator.SetBool("ranged", false);
+
+                return;
+            }
+
             GameObject attackProjectile = Instantiate(Data.bossProjectile, FirePoint2);
 
             if (attackProjectile.activeInHierarchy == false)
@@ -549,6 +571,12 @@ public class Enemy : MonoBehaviour
         immune = false;
     }
 
+    IEnumerator StopSleepingCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        sleeping = false;
+    }
+
     IEnumerator StopRootedCoroutine(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -564,6 +592,7 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         fixRotation = false;
+        if(groundCollider) groundCollider.isTrigger = false;
     }
 
     IEnumerator StartPatrolCoroutine(float delay)
