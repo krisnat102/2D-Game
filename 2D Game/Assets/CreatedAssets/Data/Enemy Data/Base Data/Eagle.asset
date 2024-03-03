@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   enemyName: Eagle
-  maxHP: 60
+  maxHP: 45
   attackSpeed: 1
   speed: 200
   damage: 20
@@ -23,7 +23,7 @@ MonoBehaviour:
   offsetX2: 1.6
   offsetY: 1
   damageType: 1
-  attackAnimLength: 0.1
+  attackAnimationLength: 0.3
   HitBox:
     serializedVersion: 2
     x: 0.2
@@ -49,7 +49,17 @@ MonoBehaviour:
   flipWhenPlayerIsRight: 1
   facingDirection: 1
   rootWhenAttacking: 0
+  fixRotationWhenAttacking: 0
   patrol: 1
+  boss: 0
+  bossProjectile: {fileID: 0}
+  rangedAttackSoundDelay: 0
+  bossSpecialProjectile: {fileID: 0}
+  specialRangedAttackChargeTime: 0
+  specialRangedAttackChargeExecutionTime: 0
+  specialRangedAttackCooldown: 0
+  bossMusic: {fileID: 0}
+  wakeUpTime: 0
   deathEffect: {fileID: 489641561373093210, guid: 95e6e7e3a2c75aa48a778d33175c94e8,
     type: 3}
   bloodEffect: {fileID: 7515634647306772147, guid: b6be51001a0800f4abd4e30fe133548b,

@@ -21,6 +21,7 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
     private Rigidbody2D rb;
     private Animator animator;
     private Vector3 oldPosition;
+    private Enemy enemy;
 
     const float GroundedRadius = .2f;
 
@@ -28,6 +29,7 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
 
     public void Start()
     {
+        enemy = GetComponent<Enemy>();
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -62,13 +64,13 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
 
         oldPosition = transform.position;
 
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+        if (enemy.ContainsParam(animator, "Speed")) animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
         if (horizontalMove == 0)
         {
-            animator.SetBool("Standing", true);
+            if (enemy.ContainsParam(animator, "Standing")) animator.SetBool("Standing", true);
         }
-        else animator.SetBool("Standing", false);
+        else if (enemy.ContainsParam(animator, "Standing")) animator.SetBool("Standing", false);
     }
 
     private void UpdatePath()

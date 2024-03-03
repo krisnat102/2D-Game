@@ -6,7 +6,6 @@ using TMPro;
 using Inventory;
 using Spells;
 using System.Collections;
-using UnityEngine.Rendering.UI;
 using Krisnat;
 
 public class Enemy : MonoBehaviour
@@ -57,6 +56,7 @@ public class Enemy : MonoBehaviour
     private bool fixRotation;
     private bool matchPlayerY = false;
     private bool bossMusicTracker = true;
+    private bool attacking;
     private float leftPatrolBarrierPositionX;
     private float rightPatrolBarrierPositionX;
     private float previousRotationX;
@@ -148,6 +148,7 @@ public class Enemy : MonoBehaviour
 
         if (DetectAIRange.Alerted)
         {
+            if (ContainsParam(animator, "combat")) animator.SetBool("combat", true);
             isPatrolling = false;
 
             if (Data.boss && !hpBar.gameObject.activeInHierarchy)
@@ -223,6 +224,35 @@ public class Enemy : MonoBehaviour
             }
         }
 
+        if(rb.velocity.x != 0 && !attacking)
+        {
+            if (ContainsParam(animator, "run")) animator.SetBool("run", true);
+            if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
+        }
+        else if (!attacking)
+        {
+            if (ContainsParam(animator, "run")) animator.SetBool("run", false);
+            if (ContainsParam(animator, "idle")) animator.SetBool("idle", true);
+        }
+        if (rb.velocity.y != 0 && !attacking)
+        {
+            if (ContainsParam(animator, "jump")) animator.SetBool("jump", true);
+            if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
+        }
+        else if (!attacking)
+        {
+            if (ContainsParam(animator, "jump")) animator.SetBool("jump", false);
+            if (ContainsParam(animator, "idle")) animator.SetBool("idle", true);
+        }
+
+        if (attacking)
+        {
+            if (ContainsParam(animator, "jump")) animator.SetBool("jump", false);
+            if (ContainsParam(animator, "run")) animator.SetBool("run", false);
+            if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
+            if (ContainsParam(animator, "attack")) animator.SetBool("attack", true);
+        }
+
         if (fixRotation) transform.localScale = new Vector2(previousRotationX, transform.localScale.y);
 
         previousRotationX = transform.localScale.x;
@@ -293,9 +323,13 @@ public class Enemy : MonoBehaviour
                     dmgNumber.fontSize += Mathf.Round(damage / fontSizeToDamageScaler);
                 }
 
-                if(ContainsParam(animator, "Hurt")) animator.SetTrigger("Hurt");
+                if (ContainsParam(animator, "Hurt")) animator.SetTrigger("Hurt");
 
-                if(!multipleDamageSources)
+                if (ContainsParam(animator, "hurt")) animator.SetBool("hurt", true);
+                if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
+                StartCoroutine(StartIdleCoroutine(0.1f, "hurt"));
+
+                if (!multipleDamageSources)
                 {
                     immune = true;
 
@@ -362,6 +396,10 @@ public class Enemy : MonoBehaviour
     public void Attack(bool meleeRanged)
     {
         if (attackCooldown || sleeping) return;
+
+        attacking = true;
+
+        if (data.fixRotationWhenAttacking) fixRotation = true;
 
         if (meleeRanged)
         {
@@ -493,6 +531,10 @@ public class Enemy : MonoBehaviour
         attackSound?.Play();
 
         detected = Physics2D.OverlapBoxAll(offset, Data.HitBox.size, 0f, Data.DetectableLayers);
+
+        attacking = false;
+
+        if (data.fixRotationWhenAttacking) fixRotation = false;
 
         if (ContainsParam(animator, "idle")) animator.SetBool("idle", true);
         if (ContainsParam(animator, "attack")) animator.SetBool("attack", false);
