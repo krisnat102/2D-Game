@@ -5,10 +5,13 @@ using UnityEngine.SceneManagement;
 using Krisnat.Assets.Scripts;
 using Krisnat;
 using Inventory;
+using System;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance;
+    public bool DamagePopUps { get; private set; }
 
     #region Private Variables
     [SerializeField] private Player player;
@@ -17,9 +20,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject miniMenu;
     [SerializeField] private GameObject settings;
 
-    [SerializeField] private TMP_Dropdown resolutionDropdown;
-    [SerializeField] private TMP_Dropdown qualityDropdown;
-    [SerializeField] private TMP_Dropdown fpsDropdown;
+    [SerializeField] private TMP_Dropdown resolutionDropdown, qualityDropdown, fpsDropdown;
+    [SerializeField] private Toggle fullScreenToggle, damagePopUpsToggle;
 
     [SerializeField] private float closingMenuDuration = 0.2f;
 
@@ -27,8 +29,6 @@ public class MenuManager : MonoBehaviour
     private Animator animator;
     private float scale;
     #endregion
-
-    public bool DamagePopUps { get; private set; }
 
     #region Unity Methods
     private void Awake()
@@ -71,10 +71,13 @@ public class MenuManager : MonoBehaviour
         }
 
         LoadVideoSettings();
+        LoadGameSettings();
     }
 
     void Update()
     {
+        Screen.fullScreen = fullScreenToggle.isOn;
+
         if (Core.GameManager.Instance != null && Core.GameManager.Instance.GamePaused)
         {
             Time.timeScale = 0f;
@@ -113,8 +116,6 @@ public class MenuManager : MonoBehaviour
     {
         if (openOrClose)
         {
-            //UIManager.Instance.OpenCloseUI(miniMenu, scale, openingMenuDuration, false, true, true);
-            //animator.SetTrigger("menuOpen");
             menu.SetActive(true);
 
             if (settings.activeInHierarchy)
@@ -127,9 +128,6 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            //UIManager.Instance.OpenCloseUI(miniMenu, scale, closingMenuDuration, false, true, false);
-            //Invoke("CloseMenu", closingMenuDuration);
-            //animator.SetTrigger("menuClose");
             CloseMenu();
         }
     }
@@ -140,26 +138,42 @@ public class MenuManager : MonoBehaviour
         PlayerInputHandler.Instance.StopAllInputs = false;
         PlayerInputHandler.Instance.StopAttack = false;
     }
+    #endregion
+
+    #region Settings
     public void LoadVideoSettings()
     {
+        //Quality
         if (PlayerPrefs.HasKey("Quality"))
         {
             qualityDropdown.SetValueWithoutNotify(PlayerPrefs.GetInt("Quality"));
         }
-
+        //Resolution
         if (PlayerPrefs.HasKey("Resolution"))
         {
             resolutionDropdown.SetValueWithoutNotify(PlayerPrefs.GetInt("Resolution"));
         }
-
+        //FPS
         if (PlayerPrefs.HasKey("Fps"))
         {
             fpsDropdown.SetValueWithoutNotify(PlayerPrefs.GetInt("Fps"));
         }
+        //FullScreen
+        if (PlayerPrefs.HasKey("FullScreen"))
+        {
+            fullScreenToggle.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("FullScreen"));
+        }
     }
-    #endregion
+    public void LoadGameSettings()
+    {
+        //Damage Pop Ups
+        if (PlayerPrefs.HasKey("DamagePopUp"))
+        {
+            damagePopUpsToggle.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("DamagePopUp"));
+            DamagePopUps = damagePopUpsToggle.isOn;
+        }
+    }
 
-    #region Settings
     public void SetQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
@@ -175,6 +189,7 @@ public class MenuManager : MonoBehaviour
         PlayerPrefs.SetInt("Resolution", resoulutionIndex);
         PlayerPrefs.Save();
     }
+
     public void SetMaxFramerate(int fpsIndex)
     {
         QualitySettings.vSyncCount = 0;
@@ -204,9 +219,20 @@ public class MenuManager : MonoBehaviour
         PlayerPrefs.SetInt("Fps", fpsIndex);
         PlayerPrefs.Save();
     }
-    public void SetFullscreen(bool isFullscreen) => Screen.fullScreen = isFullscreen;
 
-    public void SetDamagePopUps(bool value) => DamagePopUps = value;
+    public void SetFullscreen(bool isFullscreen)
+    {
+        Screen.fullScreen = isFullscreen;
+        PlayerPrefs.SetInt("FullScreen", isFullscreen ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    public void SetDamagePopUps(bool value)
+    {
+        DamagePopUps = value;
+        PlayerPrefs.SetInt("DamagePopUp", value ? 1 : 0);
+        PlayerPrefs.Save();
+    }
     #endregion
 
     #region Menu Buttons
