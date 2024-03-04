@@ -17,6 +17,7 @@ namespace Krisnat
         private BoxCollider2D collider;
         private Animator animator;
         private bool cooldown = false;
+        private bool opened = false;
 
         private void Start()
         {
@@ -25,6 +26,7 @@ namespace Krisnat
 
             if (open)
             {
+                opened = true;
                 animator.SetBool("open", true);
                 collider.enabled = false;
             }
@@ -32,7 +34,7 @@ namespace Krisnat
 
         public void OnTriggerStay2D(Collider2D collision)
         {
-            if (PlayerInputHandler.Instance.UseInput && !cooldown)
+            if (PlayerInputHandler.Instance.UseInput && !cooldown && !opened)
             {
                 cooldown = true;
                 Invoke(nameof(StopCooldown), 1.5f);
@@ -56,6 +58,7 @@ namespace Krisnat
                 collider.enabled = false;
                 animator.SetBool("open", true);
                 openAudio.Play();
+                opened = true;
             }
         }
         private void StopCooldown() => cooldown = false;
