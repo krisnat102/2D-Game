@@ -23,11 +23,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private TMP_Dropdown resolutionDropdown, qualityDropdown, fpsDropdown;
     [SerializeField] private Toggle fullScreenToggle, damagePopUpsToggle;
 
-    [SerializeField] private float closingMenuDuration = 0.2f;
-
     private Resolution[] resolutions;
-    private Animator animator;
-    private float scale;
     #endregion
 
     #region Unity Methods
@@ -38,11 +34,7 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        animator = menu.GetComponentInChildren<Animator>();
-
         resolutions = Screen.resolutions;
-
-        scale = miniMenu.transform.localScale.x;
 
         resolutionDropdown.ClearOptions();
 

@@ -35,8 +35,6 @@ namespace Krisnat
         private Vector3 oldPosition;
         private PlayerData playerData;
         private LevelHandler levelHandler;
-        private bool purseAnimationTracker = false;
-        private Animator purseAnimator;
 
         public GameObject LevelUpInterface { get => levelUpInterface; private set => levelUpInterface = value; }
         public Slider BowChargeTimeSlider { get => bowChargeTimeSlider; private set => bowChargeTimeSlider = value; }

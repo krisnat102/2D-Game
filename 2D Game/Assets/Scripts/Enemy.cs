@@ -7,6 +7,8 @@ using Inventory;
 using Spells;
 using System.Collections;
 using Krisnat;
+using System;
+using Unity.Collections.LowLevel.Unsafe;
 
 public class Enemy : MonoBehaviour
 {
@@ -57,6 +59,7 @@ public class Enemy : MonoBehaviour
     private bool matchPlayerY = false;
     private bool bossMusicTracker = true;
     private bool attacking;
+    private bool alerted = false;
     private float leftPatrolBarrierPositionX;
     private float rightPatrolBarrierPositionX;
     private float previousRotationX;
@@ -167,10 +170,21 @@ public class Enemy : MonoBehaviour
                 animator.SetBool("sleep", false);
                 rooted = true;
                 immune = true;
-                StartCoroutine(StopRootedCoroutine(Data.wakeUpTime));
-                StartCoroutine(StopImmuneCoroutine(Data.wakeUpTime));
-                StartCoroutine(StopSleepingCoroutine(Data.wakeUpTime));
+                //StartCoroutine(StopRootedCoroutine(Data.wakeUpTime));
+                StartCoroutine(ChangeBoolCoroutine(Data.wakeUpTime, newValue => rooted = newValue[0], new[] { false }));
+                //StartCoroutine(StopImmuneCoroutine(Data.wakeUpTime));
+                StartCoroutine(ChangeBoolCoroutine(Data.wakeUpTime, newValue => immune = newValue[0], new[] { false }));
+                //StartCoroutine(StopSleepingCoroutine(Data.wakeUpTime));
+                StartCoroutine(ChangeBoolCoroutine(Data.wakeUpTime, newValue => sleeping = newValue[0], new[] { false }));
                 StartCoroutine(StartIdleCoroutine(Data.wakeUpTime - 0.2f, "wakeUp"));
+            }
+
+            if (!alerted)
+            {
+                //StartCoroutine(SpecialRangedAttackCooldownCoroutine(Data.specialRangedAttackCooldown));
+                StartCoroutine(ChangeBoolCoroutine(Data.specialRangedAttackCooldown, newValue => specialRangedAttackCooldown = newValue[0], new[] { false }));
+
+                alerted = true;
             }
         }
         else
@@ -189,14 +203,22 @@ public class Enemy : MonoBehaviour
             {
                 rooted = true;
                 stopPatrol = true;
-
-                StartCoroutine(StopRootedCoroutine(Data.patrolPauseTime));
-                StartCoroutine(StartPatrolCoroutine(Data.patrolPauseTime + 1));
+                
+                //StartCoroutine(StopRootedCoroutine(Data.patrolPauseTime));
+                StartCoroutine(ChangeBoolCoroutine(Data.patrolPauseTime, newValue => rooted = newValue[0], new[] { false }));
+                //StartCoroutine(StartPatrolCoroutine(Data.patrolPauseTime + 1));
+                StartCoroutine(ChangeBoolCoroutine(Data.patrolPauseTime + 1, newValue => stopPatrol = newValue[0], new[] { false }));
 
                 patrollingDirection = !patrollingDirection;
 
-                if (transform.position.x >= rightPatrolBarrierPositionX && transform.localScale.x < 0) StartCoroutine(FlipCoroutine(Data.patrolPauseTime));
-                else if (transform.position.x <= leftPatrolBarrierPositionX && transform.localScale.x > 0) StartCoroutine(FlipCoroutine(Data.patrolPauseTime));
+                if (transform.position.x >= rightPatrolBarrierPositionX && transform.localScale.x < 0)
+                {
+                    StartCoroutine(FlipCoroutine(Data.patrolPauseTime));
+                }
+                else if (transform.position.x <= leftPatrolBarrierPositionX && transform.localScale.x > 0)
+                {
+                    StartCoroutine(FlipCoroutine(Data.patrolPauseTime));
+                }
             }
             if (patrollingDirection && !rooted)
             {
@@ -224,33 +246,36 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if(rb.velocity.x != 0 && !attacking)
+        if (!Data.boss)
         {
-            if (ContainsParam(animator, "run")) animator.SetBool("run", true);
-            if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
-        }
-        else if (!attacking)
-        {
-            if (ContainsParam(animator, "run")) animator.SetBool("run", false);
-            if (ContainsParam(animator, "idle")) animator.SetBool("idle", true);
-        }
-        if (rb.velocity.y != 0 && !attacking)
-        {
-            if (ContainsParam(animator, "jump")) animator.SetBool("jump", true);
-            if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
-        }
-        else if (!attacking)
-        {
-            if (ContainsParam(animator, "jump")) animator.SetBool("jump", false);
-            if (ContainsParam(animator, "idle")) animator.SetBool("idle", true);
-        }
+            if (rb.velocity.x != 0 && !attacking)
+            {
+                if (ContainsParam(animator, "run")) animator.SetBool("run", true);
+                if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
+            }
+            else if (!attacking)
+            {
+                if (ContainsParam(animator, "run")) animator.SetBool("run", false);
+                if (ContainsParam(animator, "idle")) animator.SetBool("idle", true);
+            }
+            if (rb.velocity.y != 0 && !attacking)
+            {
+                if (ContainsParam(animator, "jump")) animator.SetBool("jump", true);
+                if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
+            }
+            else if (!attacking)
+            {
+                if (ContainsParam(animator, "jump")) animator.SetBool("jump", false);
+                if (ContainsParam(animator, "idle")) animator.SetBool("idle", true);
+            }
 
-        if (attacking)
-        {
-            if (ContainsParam(animator, "jump")) animator.SetBool("jump", false);
-            if (ContainsParam(animator, "run")) animator.SetBool("run", false);
-            if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
-            if (ContainsParam(animator, "attack")) animator.SetBool("attack", true);
+            if (attacking)
+            {
+                if (ContainsParam(animator, "jump")) animator.SetBool("jump", false);
+                if (ContainsParam(animator, "run")) animator.SetBool("run", false);
+                if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
+                if (ContainsParam(animator, "attack")) animator.SetBool("attack", true);
+            }
         }
 
         if (fixRotation) transform.localScale = new Vector2(previousRotationX, transform.localScale.y);
@@ -290,12 +315,10 @@ public class Enemy : MonoBehaviour
         hp = Data.maxHP * lvlIndex;
         hpBar.maxValue = Data.maxHP * lvlIndex;
 
-        coinsDropped = Random.Range(Data.minCoinsDropped, Data.maxCoinsDropped);
+        coinsDropped = UnityEngine.Random.Range(Data.minCoinsDropped, Data.maxCoinsDropped);
         #endregion
 
         TakeDamage(0, 0, false);
-
-        StartCoroutine(SpecialRangedAttackCooldownCoroutine(Data.specialRangedAttackCooldown));
     }
     #endregion
 
@@ -316,7 +339,7 @@ public class Enemy : MonoBehaviour
             {
                 if (GetComponentInChildren<Canvas>() != null && damagePopup != null && MenuManager.Instance.DamagePopUps)
                 {
-                    damagePopupOffset.x += Random.Range(-2f, 1f);
+                    damagePopupOffset.x += UnityEngine.Random.Range(-2f, 1f);
                     var dmgNumber = Instantiate(damagePopup, transform.position + damagePopupOffset, Quaternion.identity, GetComponentInChildren<Canvas>().transform).GetComponent<TextMeshProUGUI>();
                     dmgNumber.text = damage.ToString();
                     dmgNumber.color = damagePopupGradient.Evaluate(Mathf.Clamp01(damage / 100));
@@ -333,12 +356,13 @@ public class Enemy : MonoBehaviour
                 {
                     immune = true;
 
-                    StartCoroutine(StopImmuneCoroutine(0.1f));
+                    //StartCoroutine(StopImmuneCoroutine(0.1f));
+                    StartCoroutine(ChangeBoolCoroutine(0.1f, newValue => immune = newValue[0], new[] { false }));
                 }
 
                 if (Data.bloodEffect)
                 {
-                    Instantiate(Data.bloodEffect, new Vector3(transform.position.x + Random.Range(-1,1), transform.position.y + Random.Range(-1, 1), transform.position.z), Quaternion.identity);
+                    Instantiate(Data.bloodEffect, new Vector3(transform.position.x + UnityEngine.Random.Range(-1,1), transform.position.y + UnityEngine.Random.Range(-1, 1), transform.position.z), Quaternion.identity);
                 }
 
                 TakeKnockback(damage + knockback);
@@ -401,12 +425,14 @@ public class Enemy : MonoBehaviour
 
         if (data.fixRotationWhenAttacking) fixRotation = true;
 
+        attackCooldown = true;
+        //StartCoroutine(AttackCooldownCoroutine(Data.attackSpeed));
+        StartCoroutine(ChangeBoolCoroutine(Data.attackSpeed, newValue => attackCooldown = newValue[0], new[] { false }));
+
         if (meleeRanged)
         {
             if (ContainsParam(animator, "Attack")) animator.SetTrigger("Attack");
 
-            attackCooldown = true;
-            StartCoroutine(AttackCooldownCoroutine(Data.attackSpeed));
             StartCoroutine(AttackSpawnCoroutine(Data.attackAnimationLength));
 
             if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
@@ -417,9 +443,6 @@ public class Enemy : MonoBehaviour
             if (ContainsParam(animator, "Attack")) animator.SetTrigger("Attack");
             StartCoroutine(AttackSpawnBossRangedCoroutine(Data.attackAnimationLength));
 
-            attackCooldown = true;
-            StartCoroutine(AttackCooldownCoroutine(Data.attackSpeed));
-
             if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
             if (ContainsParam(animator, "ranged")) animator.SetBool("ranged", true);
 
@@ -427,8 +450,10 @@ public class Enemy : MonoBehaviour
         }
         if (Data.rootWhenAttacking)
         {
-            StartCoroutine(StartRootedCoroutine(0.1f));
-            StartCoroutine(StopRootedCoroutine(Data.attackAnimationLength + 0.1f));
+            //StartCoroutine(StartRootedCoroutine(0.1f));
+            StartCoroutine(ChangeBoolCoroutine(0.1f, newValue => rooted = newValue[0], new[] { true }));
+            //StartCoroutine(StopRootedCoroutine(Data.attackAnimationLength + 0.1f));
+            StartCoroutine(ChangeBoolCoroutine(Data.attackAnimationLength + 0.1f, newValue => rooted = newValue[0], new[] { false }));
         }
     }
 
@@ -441,11 +466,14 @@ public class Enemy : MonoBehaviour
         SpecialRangedAttackCooldown = true;
         attackCooldown = true;
 
-        StartCoroutine(SpecialRangedAttackCooldownCoroutine(Data.specialRangedAttackCooldown));
-        StartCoroutine(AttackCooldownCoroutine(Data.attackSpeed + Data.specialRangedAttackChargeTime));
+        //StartCoroutine(SpecialRangedAttackCooldownCoroutine(Data.specialRangedAttackCooldown));
+        StartCoroutine(ChangeBoolCoroutine(Data.specialRangedAttackCooldown, newValue => specialRangedAttackCooldown = newValue[0], new[] { false }));
+        //StartCoroutine(AttackCooldownCoroutine(Data.attackSpeed + Data.specialRangedAttackChargeTime));
+        StartCoroutine(ChangeBoolCoroutine(Data.attackSpeed + Data.specialRangedAttackChargeTime, newValue => attackCooldown = newValue[0], new[] { false }));
         StartCoroutine(SpecialRangedAttackSpawnCoroutine(Data.specialRangedAttackChargeTime));
 
-        StartCoroutine(StopRootedCoroutine(Data.specialRangedAttackChargeTime + Data.specialRangedAttackChargeExecutionTime));
+        //StartCoroutine(StopRootedCoroutine(Data.specialRangedAttackChargeTime + Data.specialRangedAttackChargeExecutionTime));
+        StartCoroutine(ChangeBoolCoroutine(Data.specialRangedAttackChargeTime + Data.specialRangedAttackChargeExecutionTime, newValue => rooted = newValue[0], new[] { false }));
 
         if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
         if (ContainsParam(animator, "specialRanged")) animator.SetBool("specialRanged", true);
@@ -453,9 +481,11 @@ public class Enemy : MonoBehaviour
         if (aiPath)
         {
             aiPath.enabled = false;
-            StartCoroutine(EnableAIPathCoroutine(Data.specialRangedAttackChargeTime + Data.specialRangedAttackChargeExecutionTime));
+            //StartCoroutine(EnableAIPathCoroutine(Data.specialRangedAttackChargeTime + Data.specialRangedAttackChargeExecutionTime));
+            StartCoroutine(ChangeBoolCoroutine(Data.specialRangedAttackChargeTime + Data.specialRangedAttackChargeExecutionTime, newValue => aiPath.enabled = newValue[0], new[] { true }));
             matchPlayerY = true;
-            StartCoroutine(StopMatchPlayerYCoroutine(Data.specialRangedAttackChargeTime));
+            //StartCoroutine(StopMatchPlayerYCoroutine(Data.specialRangedAttackChargeTime));
+            StartCoroutine(ChangeBoolCoroutine(Data.specialRangedAttackChargeTime, newValue => matchPlayerY = newValue[0], new[] { false }));
         }
     }
 
@@ -466,13 +496,16 @@ public class Enemy : MonoBehaviour
         animator.SetTrigger("Dash");
 
         dashCooldown = true;
-        StartCoroutine(DashCooldownCoroutine(Data.dashCooldown));
+        //StartCoroutine(DashCooldownCoroutine(Data.dashCooldown));
+        StartCoroutine(ChangeBoolCoroutine(Data.dashCooldown, newValue => dashCooldown = newValue[0], new[] { false }));
 
         attackCooldown = true;
-        StartCoroutine(AttackCooldownCoroutine(Data.attackSpeed));
+        //StartCoroutine(AttackCooldownCoroutine(Data.attackSpeed));
+        StartCoroutine(ChangeBoolCoroutine(Data.attackSpeed, newValue => attackCooldown = newValue[0], new[] { false }));
 
         isDashing = true;
-        StartCoroutine(StopDashCoroutine(Data.dashDuration));
+        //StartCoroutine(StopDashCoroutine(Data.dashDuration));
+        StartCoroutine(ChangeBoolCoroutine(Data.dashDuration, newValue => isDashing = newValue[0], new[] { false }));
 
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
         if (playerTrans.position.x > transform.position.x) rb.AddForce(new Vector2(-Data.dashStrength, 0), ForceMode2D.Impulse);
@@ -497,16 +530,15 @@ public class Enemy : MonoBehaviour
         }
         else if (Data.bossProjectile && bossRanged && FirePoint2)
         {
+            attacking = false;
+
             if (cancelRangedAIRange.InRange)
             {
-                attackCooldown = false;
-
-                Attack(true);
-
                 if (ContainsParam(animator, "ranged")) animator.SetBool("ranged", false);
+                if (ContainsParam(animator, "attack")) animator.SetBool("attack", false);
 
                 return;
-            }
+            } 
 
             GameObject attackProjectile = Instantiate(Data.bossProjectile, FirePoint2);
 
@@ -569,7 +601,9 @@ public class Enemy : MonoBehaviour
 
         fixRotation = true;
 
-        StartCoroutine(StopFixRotationCoroutine(Data.specialRangedAttackChargeExecutionTime));
+        //StartCoroutine(StopFixRotationCoroutine(Data.specialRangedAttackChargeExecutionTime));
+        StartCoroutine(ChangeBoolCoroutine(Data.specialRangedAttackChargeExecutionTime, newValue => fixRotation = newValue[0], new[] { false }));
+        StartCoroutine(ChangeBoolCoroutine(Data.specialRangedAttackChargeExecutionTime, newValue => groundCollider.isTrigger = newValue[0], new[] { false }));
 
         cameraShake.ShakeCamera(Data.specialRangedAttackChargeExecutionTime, 2f);
 
@@ -583,78 +617,11 @@ public class Enemy : MonoBehaviour
     #endregion
 
     #region Coroutines
-    IEnumerator AttackCooldownCoroutine(float cooldownTime)
+    IEnumerator ChangeBoolCoroutine(float time, Action<bool[]> boolSetter, bool[] newValue)
     {
-        yield return new WaitForSeconds(cooldownTime);
-        attackCooldown = false;
+        yield return new WaitForSeconds(time);
+        boolSetter(newValue);
     }
-
-    IEnumerator SpecialRangedAttackCooldownCoroutine(float cooldownTime)
-    {
-        yield return new WaitForSeconds(cooldownTime);
-        SpecialRangedAttackCooldown = false;
-    }
-
-    IEnumerator DashCooldownCoroutine(float cooldownTime)
-    {
-        yield return new WaitForSeconds(cooldownTime);
-        dashCooldown = false;
-    }
-
-    IEnumerator StopDashCoroutine(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        isDashing = false;
-    }
-
-    IEnumerator StopImmuneCoroutine(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        immune = false;
-    }
-
-    IEnumerator StopSleepingCoroutine(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        sleeping = false;
-    }
-
-    IEnumerator StopRootedCoroutine(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        rooted = false;
-    }
-    IEnumerator StartRootedCoroutine(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        rooted = true;
-    }
-
-    IEnumerator StopFixRotationCoroutine(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        fixRotation = false;
-        if(groundCollider) groundCollider.isTrigger = false;
-    }
-
-    IEnumerator StartPatrolCoroutine(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        isPatrolling = true;
-    }
-
-    IEnumerator StopMatchPlayerYCoroutine(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        matchPlayerY = false;
-    }
-
-    IEnumerator EnableAIPathCoroutine(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        aiPath.enabled = true;
-    }
-
     IEnumerator AttackSpawnBossRangedCoroutine(float delay)
     {
         yield return new WaitForSeconds(delay);

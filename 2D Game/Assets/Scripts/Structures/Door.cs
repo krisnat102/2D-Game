@@ -1,6 +1,4 @@
 using Inventory;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -8,13 +6,16 @@ namespace Krisnat
 {
     public class Door : MonoBehaviour, IStructurable
     {
+        [Header("Behaviour")]
         [SerializeField] private bool open;
         [SerializeField] private Item key;
+
+        [Header("Variable References")]
         [SerializeField] private AudioSource openAudio;
         [SerializeField] private AudioSource lockedAudio;
         [SerializeField] private GameObject uiPopUp;
 
-        private BoxCollider2D collider;
+        private new BoxCollider2D collider;
         private Animator animator;
         private bool cooldown = false;
         private bool opened = false;
@@ -34,7 +35,9 @@ namespace Krisnat
 
         public void OnTriggerStay2D(Collider2D collision)
         {
-            if (PlayerInputHandler.Instance.UseInput && !cooldown && !opened)
+            var player = collision.GetComponent<Player>();
+
+            if (PlayerInputHandler.Instance.UseInput && !cooldown && !opened && player)
             {
                 cooldown = true;
                 Invoke(nameof(StopCooldown), 1.5f);
@@ -59,8 +62,15 @@ namespace Krisnat
                 animator.SetBool("open", true);
                 openAudio.Play();
                 opened = true;
+
+                if (player.transform.position.x + 0.3f > transform.position.x)
+                {
+                    transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+                    transform.position += new Vector3(-1.5f, 0);
+                }
             }
         }
+
         private void StopCooldown() => cooldown = false;
     }
 }
