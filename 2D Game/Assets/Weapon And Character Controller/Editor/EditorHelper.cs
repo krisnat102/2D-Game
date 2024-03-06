@@ -7,6 +7,7 @@ using System.Linq;
 public class EditorHelper : MonoBehaviour
 {
     [MenuItem("EditorHelper/SliceSprites")]
+    [System.Obsolete]
     static void SliceSprites()
     {
         // Change the below for the with and height dimensions of each sprite within the spritesheets

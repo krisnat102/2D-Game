@@ -684,13 +684,6 @@ public class Enemy : MonoBehaviour
     }
     #endregion
 
-    #region GettersSetters
-    public bool GetRanged()
-    {
-        return Data.ranged;
-    }
-    #endregion
-
     #region Gizmos
     private void OnDrawGizmosSelected()
     {
