@@ -27,8 +27,16 @@ public class EnemyData : ScriptableObject
     [Tooltip("True is physical damage, false is magical")]
     public bool damageType;
     public float attackAnimationLength = 0.3f;
+    public float damageTriggerTime = 0.3f;
     public Rect HitBox;
     public LayerMask DetectableLayers;
+
+    [Header("Attack Behaviour")]
+    public bool rootWhenAttacking;
+    public bool moveWhenAttacking;
+    public Vector2 direction;
+    public float velocity;
+    public float movementDelay;
 
     [Header("Dash")]
     public bool canDash;
@@ -54,7 +62,6 @@ public class EnemyData : ScriptableObject
     public bool lookAtPlayer;
     public bool flipWhenPlayerIsRight;
     public bool facingDirection;
-    public bool rootWhenAttacking;
     public bool fixRotationWhenAttacking;
     public bool patrol;
 

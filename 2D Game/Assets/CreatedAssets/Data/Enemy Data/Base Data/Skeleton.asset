@@ -23,16 +23,22 @@ MonoBehaviour:
   offsetX2: 1.2
   offsetY: -1
   damageType: 1
-  attackAnimationLength: 0.3
+  attackAnimationLength: 1.2
+  damageTriggerTime: 1.2
   HitBox:
     serializedVersion: 2
-    x: -0.16
+    x: -1.42
     y: 0.95
     width: 1.61
     height: -2.2
   DetectableLayers:
     serializedVersion: 2
     m_Bits: 1024
+  rootWhenAttacking: 1
+  moveWhenAttacking: 1
+  direction: {x: 0, y: 0}
+  velocity: 0
+  movementDelay: 0.8
   canDash: 0
   dashCooldown: 0
   dashStrength: 0
@@ -48,7 +54,6 @@ MonoBehaviour:
   lookAtPlayer: 1
   flipWhenPlayerIsRight: 0
   facingDirection: 0
-  rootWhenAttacking: 1
   fixRotationWhenAttacking: 0
   patrol: 0
   boss: 0

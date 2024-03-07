@@ -423,7 +423,7 @@ public class Enemy : MonoBehaviour
 
         attacking = true;
 
-        if (data.fixRotationWhenAttacking) fixRotation = true;
+        if (Data.fixRotationWhenAttacking) fixRotation = true;
 
         attackCooldown = true;
         //StartCoroutine(AttackCooldownCoroutine(Data.attackSpeed));
@@ -433,7 +433,7 @@ public class Enemy : MonoBehaviour
         {
             if (ContainsParam(animator, "Attack")) animator.SetTrigger("Attack");
 
-            StartCoroutine(AttackSpawnCoroutine(Data.attackAnimationLength));
+            StartCoroutine(AttackSpawnCoroutine(Data.damageTriggerTime));
 
             if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
             if (ContainsParam(animator, "attack")) animator.SetBool("attack", true);
@@ -441,19 +441,25 @@ public class Enemy : MonoBehaviour
         else if (!meleeRanged && AttackAIRange.InSight)
         {
             if (ContainsParam(animator, "Attack")) animator.SetTrigger("Attack");
-            StartCoroutine(AttackSpawnBossRangedCoroutine(Data.attackAnimationLength));
+            StartCoroutine(AttackSpawnBossRangedCoroutine(Data.damageTriggerTime));
 
             if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
             if (ContainsParam(animator, "ranged")) animator.SetBool("ranged", true);
 
             if (rangedAttackSound) StartCoroutine(PlayRangedAttackSoundCoroutine(Data.rangedAttackSoundDelay));
         }
+
         if (Data.rootWhenAttacking)
         {
             //StartCoroutine(StartRootedCoroutine(0.1f));
             StartCoroutine(ChangeBoolCoroutine(0.1f, newValue => rooted = newValue[0], new[] { true }));
             //StartCoroutine(StopRootedCoroutine(Data.attackAnimationLength + 0.1f));
             StartCoroutine(ChangeBoolCoroutine(Data.attackAnimationLength + 0.1f, newValue => rooted = newValue[0], new[] { false }));
+        }
+
+        if (Data.moveWhenAttacking)
+        {
+            StartCoroutine(MovementCoroutine(Data.movementDelay, Data.direction, Data.velocity));
         }
     }
 
@@ -665,6 +671,12 @@ public class Enemy : MonoBehaviour
             animator.SetBool(boolToDisable, false);
             animator.SetBool("idle", true);
         }
+    }
+
+    IEnumerator MovementCoroutine(float delay, Vector2 direction, float velocity)
+    {
+        yield return new WaitForSeconds(delay);
+        rb.AddForce(direction * velocity);
     }
     #endregion
 
