@@ -8,7 +8,6 @@ using Spells;
 using System.Collections;
 using Krisnat;
 using System;
-using Unity.Collections.LowLevel.Unsafe;
 
 public class Enemy : MonoBehaviour
 {
@@ -459,6 +458,7 @@ public class Enemy : MonoBehaviour
 
         if (Data.moveWhenAttacking)
         {
+            StartCoroutine(ChangeBoolCoroutine(Data.movementDelay, newValue => rooted = newValue[0], new[] { false }));
             StartCoroutine(MovementCoroutine(Data.movementDelay, Data.direction, Data.velocity));
         }
     }

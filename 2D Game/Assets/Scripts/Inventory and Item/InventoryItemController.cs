@@ -67,6 +67,12 @@ namespace Inventory
             item.DecreaseItemCount();
             InventoryManager.Instance.Remove(item);
 
+            if (item.ItemCount == 0)
+            {
+                description = InventoryManager.Instance.Description;
+                description.SetActive(false);
+            }
+
             itemCount.text = (item.ItemCount > 1 ? "x" + item.ItemCount.ToString() : "");
             itemCount.ForceMeshUpdate();
             InventoryManager.Instance.ListItems();

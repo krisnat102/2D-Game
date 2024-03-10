@@ -10,47 +10,47 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2121936274c14654a9abc6a3ee4178f7, type: 3}
-  m_Name: Skeleton
+  m_Name: ArcaneArcher
   m_EditorClassIdentifier: 
   level: 1
-  enemyName: Skeleton
-  maxHP: 20
-  attackSpeed: 1.5
-  speed: 40
+  enemyName: Ranger
+  maxHP: 70
+  attackSpeed: 2
+  speed: 200
   damage: 20
   knockbackModifier: 20
   offsetX: 1.2
   offsetX2: 1.2
   offsetY: -1
-  damageType: 1
-  attackAnimationLength: 1.2
-  damageTriggerTime: 1.2
+  damageType: 0
+  attackAnimationLength: 0.3
+  damageTriggerTime: 0.3
   HitBox:
     serializedVersion: 2
-    x: -1.42
-    y: 0.95
-    width: 1.61
-    height: -2.2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
   DetectableLayers:
     serializedVersion: 2
-    m_Bits: 1024
-  rootWhenAttacking: 1
-  moveWhenAttacking: 1
-  direction: {x: 5, y: 0}
-  velocity: 50
-  movementDelay: 0.8
-  canDash: 0
-  dashCooldown: 0
-  dashStrength: 0
-  dashDuration: 0
-  minCoinsDropped: 8
-  maxCoinsDropped: 14
+    m_Bits: 0
+  rootWhenAttacking: 0
+  moveWhenAttacking: 0
+  direction: {x: 0, y: 0}
+  velocity: 0
+  movementDelay: 0
+  canDash: 1
+  dashCooldown: 5
+  dashStrength: 55
+  dashDuration: 0.9
+  minCoinsDropped: 12
+  maxCoinsDropped: 42
   itemDropChance: 0
   spellDropChance: 0
   itemDrop: {fileID: 0}
   spellDrop: {fileID: 0}
-  patrolPauseTime: 4
-  patrolSpeed: 10
+  patrolPauseTime: 0
+  patrolSpeed: 0
   lookAtPlayer: 1
   flipWhenPlayerIsRight: 0
   facingDirection: 0
@@ -65,12 +65,13 @@ MonoBehaviour:
   specialRangedAttackCooldown: 0
   bossMusic: {fileID: 0}
   wakeUpTime: 0
-  deathEffect: {fileID: 2479263185497603450, guid: 613baaf495681e7479f8b9b49ddfe35f,
+  deathEffect: {fileID: 8203424293245319661, guid: d4597ceb8300e93488e0de151c0e3e73,
     type: 3}
   bloodEffect: {fileID: 7515634647306772147, guid: b6be51001a0800f4abd4e30fe133548b,
     type: 3}
-  ranged: 0
-  impactEffect: {fileID: 0}
-  rangedDamage: 0
-  rangedSpeed: 0
-  distanceOffset: 0
+  ranged: 1
+  impactEffect: {fileID: 327621282901348051, guid: c0b641e096985a84089d34a72eb3e26f,
+    type: 3}
+  rangedDamage: 15
+  rangedSpeed: 35
+  distanceOffset: 3.3

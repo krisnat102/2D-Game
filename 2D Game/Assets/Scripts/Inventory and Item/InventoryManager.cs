@@ -195,12 +195,14 @@ namespace Inventory
                 //(done 2 times because of a bug with the item count upon first opening on inv)
                 ListItems();
                 ListItems();
+                Core.GameManager.Instance.ChangeBool(0.25f, newValue => Core.GameManager.Instance.GamePaused = newValue[0], true);
             }
             else
             {
                 GameObject[] uiToClose = new GameObject[2];
                 uiToClose[0] = SpellInventory; uiToClose[1] = CharacterTab;
                 UIManager.Instance.OpenCloseUI(Inventory, inventoryScale, inventoryClosingSpeed, true, false, false, uiToClose);
+                Core.GameManager.Instance.GamePaused = false;
             }
         }
         

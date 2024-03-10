@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Bardent.CoreSystem;
@@ -192,14 +193,22 @@ namespace Core
             }*/
             return loadedAssets;
         }
+        public void DeactivateObject(float duration, GameObject objectToDeactivate) => StartCoroutine(DeactivateObjectCoroutine(duration, objectToDeactivate));
+        public void ChangeBool(float duration, Action<bool[]> boolSetter, bool newValue) => StartCoroutine(ChangeBoolCoroutine(duration, boolSetter, new[] { newValue }));
 
+        #region Core Coroutines
         IEnumerator DeactivateObjectCoroutine(float duration, GameObject obj)
         {
             yield return new WaitForSeconds(duration);
             obj?.gameObject.SetActive(false);
         }
 
-        public void DeactivateObject(float duration, GameObject objectToDeactivate) => StartCoroutine(DeactivateObjectCoroutine(duration, objectToDeactivate));
+        IEnumerator ChangeBoolCoroutine(float time, Action<bool[]> boolSetter, bool[] newValue)
+        {
+            yield return new WaitForSeconds(time);
+            boolSetter(newValue);
+        }
+        #endregion
         #endregion
     }
 }
