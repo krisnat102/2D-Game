@@ -24,6 +24,7 @@ MonoBehaviour:
   offsetY: -1
   damageType: 0
   attackAnimationLength: 0.3
+  damageTriggerTime: 0.3
   HitBox:
     serializedVersion: 2
     x: 0
@@ -33,10 +34,15 @@ MonoBehaviour:
   DetectableLayers:
     serializedVersion: 2
     m_Bits: 0
+  rootWhenAttacking: 0
+  moveWhenAttacking: 0
+  direction: {x: 0, y: 0}
+  velocity: 0
+  movementDelay: 0
   canDash: 1
   dashCooldown: 5
-  dashStrength: 55
-  dashDuration: 0.9
+  dashStrength: 70
+  dashDuration: 0.7
   minCoinsDropped: 12
   maxCoinsDropped: 42
   itemDropChance: 0
@@ -48,7 +54,6 @@ MonoBehaviour:
   lookAtPlayer: 1
   flipWhenPlayerIsRight: 0
   facingDirection: 0
-  rootWhenAttacking: 0
   fixRotationWhenAttacking: 0
   patrol: 0
   boss: 0
@@ -69,4 +74,4 @@ MonoBehaviour:
     type: 3}
   rangedDamage: 15
   rangedSpeed: 35
-  distanceOffset: 3.3
+  distanceOffset: 3.6

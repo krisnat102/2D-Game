@@ -290,16 +290,12 @@ public class Enemy : MonoBehaviour
         aiPath = GetComponentInChildren<AIPath>();
         coinBurstParticleEffect = GetComponentInChildren<ParticleSystem>();
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         particleContainer = GameObject.FindGameObjectWithTag("ParticleContainer").transform;
-        if (animator == null)
-        {
-            animator = GetComponentInChildren<Animator>();
-        }
         flip = ContainsParam(animator, "Flip");
         FirePoint = gameObject.transform.Find("FirePoint");
         FirePoint2 = gameObject.transform.Find("FirePoint2");
-        arrow = gameObject.transform.Find("Arrow")?.gameObject;
+        arrow = GetComponentInChildren<RangedAttack>(true)?.gameObject;
         if (rightPatrolBarrier) rightPatrolBarrierPositionX = rightPatrolBarrier.transform.position.x;
         if (leftPatrolBarrier) leftPatrolBarrierPositionX = leftPatrolBarrier.transform.position.x;
         isPatrolling = Data.patrol;
@@ -428,21 +424,20 @@ public class Enemy : MonoBehaviour
         //StartCoroutine(AttackCooldownCoroutine(Data.attackSpeed));
         StartCoroutine(ChangeBoolCoroutine(Data.attackSpeed, newValue => attackCooldown = newValue[0], new[] { false }));
 
+        if (ContainsParam(animator, "Attack")) animator.SetTrigger("Attack");
+
+        if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
+
         if (meleeRanged)
         {
-            if (ContainsParam(animator, "Attack")) animator.SetTrigger("Attack");
-
             StartCoroutine(AttackSpawnCoroutine(Data.damageTriggerTime));
 
-            if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
             if (ContainsParam(animator, "attack")) animator.SetBool("attack", true);
         }
         else if (!meleeRanged && AttackAIRange.InSight)
         {
-            if (ContainsParam(animator, "Attack")) animator.SetTrigger("Attack");
             StartCoroutine(AttackSpawnBossRangedCoroutine(Data.damageTriggerTime));
 
-            if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
             if (ContainsParam(animator, "ranged")) animator.SetBool("ranged", true);
 
             if (rangedAttackSound) StartCoroutine(PlayRangedAttackSoundCoroutine(Data.rangedAttackSoundDelay));
@@ -512,6 +507,7 @@ public class Enemy : MonoBehaviour
         isDashing = true;
         //StartCoroutine(StopDashCoroutine(Data.dashDuration));
         StartCoroutine(ChangeBoolCoroutine(Data.dashDuration, newValue => isDashing = newValue[0], new[] { false }));
+        StartCoroutine(StopMomentumCoroutine(Data.dashDuration));
 
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
         if (playerTrans.position.x > transform.position.x) rb.AddForce(new Vector2(-Data.dashStrength, 0), ForceMode2D.Impulse);
@@ -677,6 +673,12 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         rb.AddForce(direction * velocity);
+    }
+
+    IEnumerator StopMomentumCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        rb.velocity = Vector2.zero;
     }
     #endregion
 

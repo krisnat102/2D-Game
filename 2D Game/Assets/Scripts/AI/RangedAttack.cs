@@ -23,7 +23,7 @@ public class RangedAttack : MonoBehaviour
         enemy = GetComponentInParent<Enemy>();
 
         arrowRB = GetComponent<Rigidbody2D>();
-
+        
         float offset = Mathf.Abs(enemy.PlayerTrans.position.x - transform.position.x) / enemy.Data.distanceOffset;
 
         if (directedParabola)
@@ -39,6 +39,7 @@ public class RangedAttack : MonoBehaviour
             arrowRB.velocity = Vector2.right * enemy.Data.rangedSpeed;
             return;
         }
+
         if (randomized)
         {
             int next;
@@ -60,7 +61,7 @@ public class RangedAttack : MonoBehaviour
             {
                 player.Core.GetCoreComponent<DamageReceiver>().Damage(enemy.data.rangedDamage * enemy.EnemyLevelScale, enemy.data.damageType);
             }
-            if (enemy.Data.impactEffect) Instantiate(enemy.Data.impactEffect, transform.position, transform.rotation);
+            if (enemy.Data.impactEffect) Instantiate(enemy.Data.impactEffect, transform.position, Quaternion.identity);
 
             Destroy(gameObject);
         }

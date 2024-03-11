@@ -15,7 +15,7 @@ MonoBehaviour:
   level: 1
   enemyName: Ranger
   maxHP: 70
-  attackSpeed: 2
+  attackSpeed: 1.6
   speed: 200
   damage: 20
   knockbackModifier: 20
@@ -41,8 +41,8 @@ MonoBehaviour:
   movementDelay: 0
   canDash: 1
   dashCooldown: 5
-  dashStrength: 55
-  dashDuration: 0.9
+  dashStrength: 75
+  dashDuration: 0.6
   minCoinsDropped: 12
   maxCoinsDropped: 42
   itemDropChance: 0
@@ -70,8 +70,8 @@ MonoBehaviour:
   bloodEffect: {fileID: 7515634647306772147, guid: b6be51001a0800f4abd4e30fe133548b,
     type: 3}
   ranged: 1
-  impactEffect: {fileID: 327621282901348051, guid: c0b641e096985a84089d34a72eb3e26f,
+  impactEffect: {fileID: 327621282901348051, guid: 6f26da2382b8aa64392312a21eb22c01,
     type: 3}
   rangedDamage: 15
   rangedSpeed: 35
-  distanceOffset: 3.3
+  distanceOffset: 3.6

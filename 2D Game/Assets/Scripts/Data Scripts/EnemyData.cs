@@ -13,6 +13,7 @@ public class EnemyData : ScriptableObject
     public int level = 1;
     public string enemyName;
     public float maxHP = 100f;
+    [Tooltip("Higher value is lower attack speed")]
     public float attackSpeed = 1f;
     public float speed = 200f;
     public float damage = 20f;
