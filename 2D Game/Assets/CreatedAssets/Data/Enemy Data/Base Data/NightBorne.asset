@@ -10,52 +10,47 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2121936274c14654a9abc6a3ee4178f7, type: 3}
-  m_Name: ArcaneArcher
+  m_Name: NightBorne
   m_EditorClassIdentifier: 
   level: 1
-  enemyName: Ranger
-  maxHP: 70
-  attackSpeed: 1.6
+  enemyName: Heavy Bandit
+  maxHP: 100
+  attackSpeed: 1
   speed: 200
   damage: 20
   knockbackModifier: 20
   offsetX: 1.2
   offsetX2: 1.2
   offsetY: -1
-  damageType: 0
+  damageType: 1
   attackAnimationLength: 0.3
-  damageTriggerTime: 0.3
   HitBox:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
+    x: -0.4
+    y: 0.7
+    width: 2.4
+    height: 2.2
   DetectableLayers:
     serializedVersion: 2
-    m_Bits: 0
-  rootWhenAttacking: 0
-  moveWhenAttacking: 0
-  direction: {x: 0, y: 0}
-  velocity: 0
-  movementDelay: 0
-  canDash: 1
-  dashCooldown: 5
-  dashStrength: 75
-  dashDuration: 0.6
-  minCoinsDropped: 12
-  maxCoinsDropped: 42
+    m_Bits: 1024
+  canDash: 0
+  dashCooldown: 0
+  dashStrength: 0
+  dashDuration: 0
+  minCoinsDropped: 15
+  maxCoinsDropped: 26
   itemDropChance: 0
   spellDropChance: 0
   itemDrop: {fileID: 0}
   spellDrop: {fileID: 0}
-  patrolPauseTime: 0
-  patrolSpeed: 0
+  patrolPauseTime: 4
+  patrolSpeed: 10
   lookAtPlayer: 1
   flipWhenPlayerIsRight: 0
-  facingDirection: 0
+  facingDirection: 1
+  rootWhenAttacking: 1
   fixRotationWhenAttacking: 0
-  patrol: 0
+  patrol: 1
   boss: 0
   bossProjectile: {fileID: 0}
   rangedAttackSoundDelay: 0
@@ -65,13 +60,12 @@ MonoBehaviour:
   specialRangedAttackCooldown: 0
   bossMusic: {fileID: 0}
   wakeUpTime: 0
-  deathEffect: {fileID: 8203424293245319661, guid: 6e63785d1b2a0c840aaf40ef047882a6,
+  deathEffect: {fileID: 2479263185497603450, guid: d1cde12569e58d140a042b24f8d8012b,
     type: 3}
   bloodEffect: {fileID: 7515634647306772147, guid: b6be51001a0800f4abd4e30fe133548b,
     type: 3}
-  ranged: 1
-  impactEffect: {fileID: 327621282901348051, guid: 6f26da2382b8aa64392312a21eb22c01,
-    type: 3}
-  rangedDamage: 15
-  rangedSpeed: 35
-  distanceOffset: 3.6
+  ranged: 0
+  impactEffect: {fileID: 0}
+  rangedDamage: 0
+  rangedSpeed: 0
+  distanceOffset: 0
