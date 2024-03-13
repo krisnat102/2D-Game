@@ -32,6 +32,12 @@ namespace Krisnat
         [SerializeField] private float moveDuration;
         [SerializeField] private float moveDistance;
 
+        [Header("Messages")]
+        [SerializeField] private GameObject noteUI;
+        [SerializeField] private TMP_Text noteText;
+        [SerializeField] private float noteScale;
+        [SerializeField] private float noteOpeningSpeed;
+
         private Vector3 oldPosition;
         private PlayerData playerData;
         private LevelHandler levelHandler;
@@ -42,6 +48,11 @@ namespace Krisnat
         public GameObject Canvas { get => canvas; private set => canvas = value; }
         public float MoveDuration { get => moveDuration; private set => moveDuration = value; }
         public float MoveDistance { get => moveDistance; private set => moveDistance = value; }
+        public GameObject NoteUI { get => noteUI; private set => noteUI = value; }
+        public TMP_Text NoteText { get => noteText; private set => noteText = value; }
+        public float NoteScale { get => noteScale; private set => noteScale = value; }
+        public float NoteOpeningSpeed { get => noteOpeningSpeed; private set => noteOpeningSpeed = value; }
+        public bool NoteOpen { get; set; }
         #endregion
 
         #region Unity Methods
@@ -75,6 +86,20 @@ namespace Krisnat
             if (PlayerInputHandler.Instance.MenuInput && LevelUpInterface.activeInHierarchy)
             {
                 OpenCloseUIAnimation(LevelUpInterface, 0.05f, levelUpClosingDuration, false);
+                PlayerInputHandler.Instance.UseMenuInput();
+            }
+
+            if (PlayerInputHandler.Instance.UseInput && NoteUI.activeInHierarchy)
+            {
+                Transform[] noteChildren = NoteUI.GetComponentsInChildren<Transform>();
+
+                foreach (Transform child in noteChildren)
+                {
+                    child.gameObject.SetActive(false);
+                }
+                PlayerInputHandler.Instance.UseUseInput();
+
+                NoteOpen = false;
             }
         }
         #endregion

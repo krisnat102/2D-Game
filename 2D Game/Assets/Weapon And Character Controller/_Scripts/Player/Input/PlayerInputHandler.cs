@@ -325,7 +325,7 @@ public class PlayerInputHandler : MonoBehaviour
     public void UseInventoryInput() => InventoryInput = false;
     public void UseSpellInventoryInput() => SpellInventoryInput = false;
     public void UseCharacterTabInput() => CharacterTabInput = false;
-    public void UseMenuInpit() => MenuInput = false;
+    public void UseMenuInput() => MenuInput = false;
     public void UseSwitchSpell1Input() => SwitchSpell1Input = false;
     public void UseSwitchSpell2Input() => SwitchSpell2Input = false;
     public void UseSwitchAbility1Input() => SwitchAbility1Input = false;

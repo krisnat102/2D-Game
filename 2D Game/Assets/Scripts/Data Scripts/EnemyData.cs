@@ -84,7 +84,6 @@ public class EnemyData : ScriptableObject
 
     #region Variable Dependencies
     [Header("Ranged")]
-    //[HideInInspector]
     public bool ranged = false;
     [HideInInspector]
     public GameObject impactEffect;

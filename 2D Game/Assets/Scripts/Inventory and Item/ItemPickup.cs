@@ -1,5 +1,4 @@
 using Krisnat;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -14,14 +13,35 @@ namespace Inventory
         [SerializeField] private int price;
         [SerializeField] private bool chest;
         [SerializeField] private float offset = 0.2f;
+        [SerializeField] private bool note;
+        [TextArea]
+        [SerializeField] private string noteText;
+        [SerializeField] private GameObject noteUIPreset;
 
         private bool isPickedUp = false;
         private GameObject itemPrice;
         public static List<PopUpUI> itemPopUps = new();
 
+
         public void Pickup()
         {
-            if (!isPickedUp && item != null)
+            PlayerInputHandler.Instance.UseUseInput(); // TODO: Fix the bug listen in Monday under fixBugs
+            if (note)
+            {
+                if (noteUIPreset)
+                {
+                    UIManager.Instance.NoteUI.SetActive(true);
+                    noteUIPreset.SetActive(true);
+                }
+                else
+                {
+                    UIManager.Instance.NoteUI.SetActive(true);
+                    UIManager.Instance.NoteText.text = noteText;
+                }
+
+                UIManager.Instance.NoteOpen = true;
+            }
+            else if (!isPickedUp && item != null)
             {
                 if (forSale)
                 {

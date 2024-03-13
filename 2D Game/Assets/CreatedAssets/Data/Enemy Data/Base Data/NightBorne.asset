@@ -14,23 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   enemyName: Heavy Bandit
-  maxHP: 100
+  maxHP: 120
   attackSpeed: 1
   speed: 200
-  damage: 20
+  damage: 22
   knockbackModifier: 20
   offsetX: 1.2
   offsetX2: 1.2
   offsetY: -1
   damageType: 1
-  attackAnimationLength: 0.9
-  damageTriggerTime: 0.8
+  attackAnimationLength: 0.8
+  damageTriggerTime: 0.7
   HitBox:
     serializedVersion: 2
-    x: -0.09
-    y: -1.91
-    width: -2.54
-    height: 3.26
+    x: -2.87
+    y: -1.68
+    width: 2.85
+    height: 2.8
   DetectableLayers:
     serializedVersion: 2
     m_Bits: 1024
@@ -43,8 +43,8 @@ MonoBehaviour:
   dashCooldown: 0
   dashStrength: 0
   dashDuration: 0
-  minCoinsDropped: 15
-  maxCoinsDropped: 26
+  minCoinsDropped: 16
+  maxCoinsDropped: 31
   itemDropChance: 0
   spellDropChance: 0
   itemDrop: {fileID: 0}
@@ -65,7 +65,7 @@ MonoBehaviour:
   specialRangedAttackCooldown: 0
   bossMusic: {fileID: 0}
   wakeUpTime: 0
-  deathEffect: {fileID: 2479263185497603450, guid: d1cde12569e58d140a042b24f8d8012b,
+  deathEffect: {fileID: 5593984272972194576, guid: 17a78a1fae94f5944a833dbf3d774e5e,
     type: 3}
   bloodEffect: {fileID: 7515634647306772147, guid: b6be51001a0800f4abd4e30fe133548b,
     type: 3}
