@@ -436,12 +436,17 @@ MonoBehaviour:
   fontSizeToDamageScaler: 1
   detectAIRange: {fileID: 8830960705150138966}
   attackAIRange: {fileID: 3937027893918305383}
+  cancelRangedAIRange: {fileID: 0}
   dashAIRange: {fileID: 0}
   leftPatrolBarrier: {fileID: 1089764315117952273}
   rightPatrolBarrier: {fileID: 7834516549825113048}
-  data: {fileID: 11400000, guid: 9972b22af0715d1408a556a245ecc72e, type: 2}
   attackSound: {fileID: 4727940582570106995}
+  rangedAttackSound: {fileID: 0}
+  bossMusicPlayer: {fileID: 0}
+  data: {fileID: 11400000, guid: 9972b22af0715d1408a556a245ecc72e, type: 2}
+  bossSpecialProjectile: {fileID: 0}
   playerTrans: {fileID: 0}
+  groundCollider: {fileID: 0}
 --- !u!114 &8883700276926463137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1070,7 +1075,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.2235758, y: -0.55186546}
+  m_Offset: {x: 1.1222707, y: -0.55186546}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1081,7 +1086,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.218282, y: 3.420317}
+  m_Size: {x: 3.9288385, y: 3.420317}
   m_EdgeRadius: 0
 --- !u!1 &6898129808637948748
 GameObject:

@@ -8,6 +8,7 @@ using Spells;
 using System.Collections;
 using Krisnat;
 using System;
+using System.Drawing;
 
 public class Enemy : MonoBehaviour
 {
@@ -565,7 +566,7 @@ public class Enemy : MonoBehaviour
         attackSound?.Play();
 
         detected = Physics2D.OverlapBoxAll(offset, Data.HitBox.size, 0f, Data.DetectableLayers);
-
+        
         attacking = false;
 
         if (data.fixRotationWhenAttacking) fixRotation = false;
@@ -701,9 +702,14 @@ public class Enemy : MonoBehaviour
     #region Gizmos
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Vector3 adjustedCenter = transform.position + new Vector3(Data.HitBox.center.x * FacingDirection * -1, Data.HitBox.center.y, 0f);
-        Gizmos.DrawWireCube(adjustedCenter, Data.HitBox.size);
+        Gizmos.color = UnityEngine.Color.red;
+        offset.Set(
+        transform.position.x + (Data.HitBox.center.x * FacingDirection * -1),
+        transform.position.y + Data.HitBox.center.y
+        );
+        //Vector3 adjustedCenter = transform.position + new Vector3(Data.HitBox.center.x * FacingDirection * -1, Data.HitBox.center.y, 0f);
+        //Gizmos.DrawWireCube(adjustedCenter, Data.HitBox.size);
+        Gizmos.DrawWireCube(offset, Data.HitBox.size);
     }
     #endregion
 }
