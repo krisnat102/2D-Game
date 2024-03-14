@@ -8,6 +8,7 @@ namespace Bardent.CoreSystem
 
         [SerializeField] private GameObject[] deathParticles;
         [SerializeField] private GameObject deathScreen;
+        [SerializeField] private float deathDepth;
 
         private ParticleManager ParticleManager =>
             particleManager ? particleManager : Core.GetCoreComponent(ref particleManager);
@@ -30,6 +31,14 @@ namespace Bardent.CoreSystem
 
             Core.transform.parent.gameObject.SetActive(false);
             IsDead = true;
+        }
+
+        private void Update()
+        {
+            if(transform.position.y < deathDepth)
+            {
+                Die();
+            }
         }
 
         private void OnEnable() => Stats.Health.OnCurrentValueZero += Die;

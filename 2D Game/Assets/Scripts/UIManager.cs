@@ -61,11 +61,12 @@ namespace Krisnat
             Instance = this;
             playerData = Stats.Instance?.gameObject.GetComponentInParent<Player>().PlayerData;
             levelHandler = Stats.Instance?.gameObject.GetComponentInParent<LevelHandler>();
+            NoteOpen = false;
         }
 
         private void Update()
         {
-            if(levelUpCost) levelUpCost.text = "Cost - " + levelHandler.LevelUpCost.ToString();
+            if(levelUpCost) levelUpCost.text = "Cost - " + levelHandler?.LevelUpCost.ToString();
             if (levelTextLevelUpInterface) levelTextLevelUpInterface.text = "Level - " + playerData.PlayerLevel.ToString();
 
             levelText.text = playerData.PlayerLevel.ToString();

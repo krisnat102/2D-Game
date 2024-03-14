@@ -25,7 +25,7 @@ namespace Inventory
 
         public void Pickup()
         {
-            PlayerInputHandler.Instance.UseUseInput(); // TODO: Fix the bug listen in Monday under fixBugs
+            if(!UIManager.Instance.NoteOpen) PlayerInputHandler.Instance.UseUseInput(); // TODO: Fix the bug listen in Monday under fixBugs
             if (note)
             {
                 if (noteUIPreset)
