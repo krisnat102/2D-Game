@@ -25,7 +25,7 @@ namespace Inventory
 
         public void Pickup()
         {
-            if(!UIManager.Instance.NoteOpen) PlayerInputHandler.Instance.UseUseInput(); // TODO: Fix the bug listen in Monday under fixBugs
+            if(!UIManager.Instance.NoteOpen) PlayerInputHandler.Instance.UseUseInput();
             if (note)
             {
                 if (noteUIPreset)
@@ -36,6 +36,7 @@ namespace Inventory
                 else
                 {
                     UIManager.Instance.NoteUI.SetActive(true);
+                    UIManager.Instance.NoteText.gameObject.SetActive(true);
                     UIManager.Instance.NoteText.text = noteText;
                 }
 
