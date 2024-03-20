@@ -48,7 +48,7 @@ namespace Core
         #region Player Methods
         public void TryAgain()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
 
             death.IsDead = false;
 

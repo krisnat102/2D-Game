@@ -14,7 +14,7 @@ namespace Krisnat
             if (PlayerInputHandler.Instance.UseInput)
             {
                 //if(sceneToLoad == "MainMenu") collision.GetComponent<Player>().gameObject.SetActive(false);
-                SceneManager.LoadScene(sceneToLoad);
+                UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad);
 
                 PlayerInputHandler.Instance.UseUseInput();
             }

@@ -82,7 +82,7 @@ public class MenuManager : MonoBehaviour
         if (
             PlayerInputHandler.Instance != null 
             && PlayerInputHandler.Instance.MenuInput
-            && SceneManager.GetActiveScene().name != "MainMenu"
+            && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "MainMenu"
             && !InventoryManager.Instance.InventoryActiveInHierarchy
             && !InventoryManager.Instance.SpellInventoryActiveInHierarchy
             && !InventoryManager.Instance.CharacterTabActiveInHierarchy
@@ -237,7 +237,7 @@ public class MenuManager : MonoBehaviour
     {
         SaveSystem.SavePlayer(player);
         Destroy(player.gameObject);
-        SceneManager.LoadScene("MainMenu");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
     public void ExitGame()
     {
@@ -254,7 +254,7 @@ public class MenuManager : MonoBehaviour
     }
     public void Play()
     {
-        SceneManager.LoadScene(1);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1); 
     }
     #endregion
 }
