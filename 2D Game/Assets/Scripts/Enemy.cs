@@ -8,7 +8,6 @@ using Spells;
 using System.Collections;
 using Krisnat;
 using System;
-using System.Drawing;
 
 public class Enemy : MonoBehaviour
 {
@@ -94,6 +93,8 @@ public class Enemy : MonoBehaviour
     #region Unity Methods
     private void Update()
     {
+        if (Data.dummy) return;
+
         if (DashAIRange && DashAIRange.InRange && Data.canDash && !dashCooldown && !attackCooldown && !Data.boss) Dash();
         else if (AttackAIRange.InRange && !Data.ranged && !Data.boss) Attack(true);
         else if (AttackAIRange.InSight && Data.ranged && !Data.boss) Attack(false);
@@ -286,6 +287,8 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        if (Data.dummy) return;
+
         #region Variable Getting and Finding
         enemyAI = GetComponentInChildren<EnemyAI>();
         aiPath = GetComponentInChildren<AIPath>();
@@ -327,7 +330,7 @@ public class Enemy : MonoBehaviour
 
         if (immune == false)
         {
-            hp -= damage;
+            if (!Data.dummy) hp -= damage;
             hpBar.value = hp;
             hpBarFill.color = hpBarGradient.Evaluate(hpBar.normalizedValue);
 
@@ -702,6 +705,8 @@ public class Enemy : MonoBehaviour
     #region Gizmos
     private void OnDrawGizmosSelected()
     {
+        if (Data.dummy) return;
+
         Gizmos.color = UnityEngine.Color.red;
         offset.Set(
         transform.position.x + (Data.HitBox.center.x * FacingDirection * -1),

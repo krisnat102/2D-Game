@@ -14,6 +14,11 @@ namespace Krisnat
         {
             InventoryManager.Instance.Add(itemsToStartWith);
             InventoryManager.Instance.Add(itemsToEquip);
+
+            foreach(Item item in itemsToEquip) 
+            {
+                InventoryManager.Instance.EquipItem(item);
+            }
         }
     }
 }

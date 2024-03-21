@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6684929901192448980}
   - component: {fileID: 6684929901192448983}
   - component: {fileID: 5051135755799443179}
+  - component: {fileID: 8394194292753847921}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -62,13 +63,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b149b2637e3714b97dc2898e149db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   menu: {fileID: 0}
   miniMenu: {fileID: 0}
   settings: {fileID: 0}
   resolutionDropdown: {fileID: 0}
   qualityDropdown: {fileID: 0}
   fpsDropdown: {fileID: 0}
-  closingMenuDuration: 0.2
+  fullScreenToggle: {fileID: 0}
+  damagePopUpsToggle: {fileID: 0}
 --- !u!114 &5051135755799443179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +85,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
-  purse: {fileID: 0}
   characterTab: {fileID: 0}
   levelText: {fileID: 0}
   hpText: {fileID: 0}
@@ -105,3 +107,21 @@ MonoBehaviour:
   itemPickupPopUp: {fileID: 0}
   moveDuration: 0
   moveDistance: 0
+  noteUI: {fileID: 0}
+  noteText: {fileID: 0}
+  noteScale: 0
+  noteOpeningSpeed: 0
+--- !u!114 &8394194292753847921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6684929901192448982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fac909e0006be542bd3df41357469b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsToStartWith: []
+  itemsToEquip: []

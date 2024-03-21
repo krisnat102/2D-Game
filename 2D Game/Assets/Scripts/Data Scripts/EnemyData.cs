@@ -60,6 +60,7 @@ public class EnemyData : ScriptableObject
     public float patrolSpeed;
 
     [Header("Behaviour")]
+    public bool dummy = false;
     public bool lookAtPlayer;
     public bool flipWhenPlayerIsRight;
     public bool facingDirection;

@@ -408,6 +408,8 @@ namespace Inventory
 
         public void EquipItem(Item item)
         {
+            if (!Items.Contains(item)) return;
+
             item.SetEquipped(true);
 
             AddItemStats(item);
