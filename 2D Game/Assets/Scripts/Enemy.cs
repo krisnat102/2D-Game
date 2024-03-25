@@ -287,6 +287,8 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        TakeDamage(0, 0, false);
+
         if (Data.dummy) return;
 
         #region Variable Getting and Finding
@@ -317,7 +319,6 @@ public class Enemy : MonoBehaviour
         coinsDropped = UnityEngine.Random.Range(Data.minCoinsDropped, Data.maxCoinsDropped);
         #endregion
 
-        TakeDamage(0, 0, false);
     }
     #endregion
 
@@ -326,17 +327,24 @@ public class Enemy : MonoBehaviour
     #region Takers
     public void TakeDamage(float rawDamage, float knockback, bool multipleDamageSources)
     {
+        Debug.Log(1);
         float damage = Mathf.Round(rawDamage);
 
         if (immune == false)
         {
+            Debug.Log(2);
             if (!Data.dummy) hp -= damage;
-            hpBar.value = hp;
-            hpBarFill.color = hpBarGradient.Evaluate(hpBar.normalizedValue);
+
+            if (hpBar)
+            {
+                hpBar.value = hp;
+                hpBarFill.color = hpBarGradient.Evaluate(hpBar.normalizedValue);
+            }
 
             if (damage > 0)
             {
-                if (GetComponentInChildren<Canvas>() != null && damagePopup != null && MenuManager.Instance.DamagePopUps)
+                Debug.Log(3);
+                if (GetComponentInChildren<Canvas>() && damagePopup && MenuManager.Instance.DamagePopUps)
                 {
                     damagePopupOffset.x += UnityEngine.Random.Range(-2f, 1f);
                     var dmgNumber = Instantiate(damagePopup, transform.position + damagePopupOffset, Quaternion.identity, GetComponentInChildren<Canvas>().transform).GetComponent<TextMeshProUGUI>();
@@ -347,7 +355,7 @@ public class Enemy : MonoBehaviour
 
                 if (ContainsParam(animator, "Hurt")) animator.SetTrigger("Hurt");
 
-                if (ContainsParam(animator, "hurt")) animator.SetBool("hurt", true);
+                if (ContainsParam(animator, "hurt")){ animator.SetBool("hurt", true); Debug.Log(true); }
                 if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
                 StartCoroutine(StartIdleCoroutine(0.25f, "hurt"));
 
@@ -367,13 +375,16 @@ public class Enemy : MonoBehaviour
                 TakeKnockback(damage + knockback);
             }
         }
-        if (hp <= 0)
+        if (hp <= 0 && !Data.dummy)
         {
             Die();
         }
+        Debug.Log(4);
     }
     private void TakeKnockback(float damage)
     {
+        if (Data.dummy) return;
+
         float knockback = damage * Data.knockbackModifier;
 
         if (playerTrans.position.x < transform.position.x + 0.5f)
