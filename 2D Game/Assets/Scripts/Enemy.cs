@@ -289,8 +289,6 @@ public class Enemy : MonoBehaviour
     {
         TakeDamage(0, 0, false);
 
-        if (Data.dummy) return;
-
         #region Variable Getting and Finding
         enemyAI = GetComponentInChildren<EnemyAI>();
         aiPath = GetComponentInChildren<AIPath>();
@@ -307,6 +305,8 @@ public class Enemy : MonoBehaviour
         isPatrolling = Data.patrol;
         cameraShake = CameraShake.instance;
         #endregion
+
+        if (Data.dummy) return;
 
         #region Calculations
         lvlIndex = Data.level * 0.1f + 0.9f;
@@ -355,7 +355,7 @@ public class Enemy : MonoBehaviour
 
                 if (ContainsParam(animator, "Hurt")) animator.SetTrigger("Hurt");
 
-                if (ContainsParam(animator, "hurt")){ animator.SetBool("hurt", true); Debug.Log(true); }
+                if (ContainsParam(animator, "hurt")) { animator.SetBool("hurt", true); Debug.Log(true); }
                 if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
                 StartCoroutine(StartIdleCoroutine(0.25f, "hurt"));
 
