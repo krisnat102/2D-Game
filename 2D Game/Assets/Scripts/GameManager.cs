@@ -9,7 +9,6 @@ using Krisnat.Assets.Scripts;
 using Spells;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Core
 {

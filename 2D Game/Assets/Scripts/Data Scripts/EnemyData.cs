@@ -78,9 +78,12 @@ public class EnemyData : ScriptableObject
     public AudioClip bossMusic;
     public float wakeUpTime;
 
+    [Header("Blood")]
+    public GameObject bloodEffect;
+    public Vector2 bloodOffset;
+
     [Header("Other")]
     public GameObject deathEffect;
-    public GameObject bloodEffect;
 
 
     #region Variable Dependencies

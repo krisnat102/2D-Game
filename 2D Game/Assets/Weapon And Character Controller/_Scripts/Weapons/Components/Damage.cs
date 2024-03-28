@@ -14,13 +14,14 @@ namespace Bardent.Weapons.Components
         {
             foreach (var item in colliders)
             {
+                Debug.Log(item.name);
                 if (item.TryGetComponent(out Enemy enemy))
                 {
                     enemy.TakeDamage(currentAttackData.Amount * levelHandler.StrengthDamage, 0, false);
                 }
                 else if (item.TryGetComponent(out IDamageable damageable))
                 {
-                    damageable.Damage(currentAttackData.Amount, true);
+                    damageable.Damage(currentAttackData.Amount * levelHandler.StrengthDamage, true);
                 }
             }
         }

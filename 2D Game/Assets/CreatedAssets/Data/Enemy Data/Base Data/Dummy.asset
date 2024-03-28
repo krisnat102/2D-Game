@@ -66,8 +66,10 @@ MonoBehaviour:
   specialRangedAttackCooldown: 0
   bossMusic: {fileID: 0}
   wakeUpTime: 0
+  bloodEffect: {fileID: 7515634647306772147, guid: 835f7d05283994c4d812625980c8657f,
+    type: 3}
+  bloodOffset: {x: -1.68, y: 0}
   deathEffect: {fileID: 0}
-  bloodEffect: {fileID: 0}
   ranged: 0
   impactEffect: {fileID: 0}
   rangedDamage: 0

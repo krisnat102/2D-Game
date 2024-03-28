@@ -369,7 +369,7 @@ public class Enemy : MonoBehaviour
 
                 if (Data.bloodEffect)
                 {
-                    Instantiate(Data.bloodEffect, new Vector3(transform.position.x + UnityEngine.Random.Range(-1,1), transform.position.y + UnityEngine.Random.Range(-1, 1), transform.position.z), Quaternion.identity);
+                    Instantiate(Data.bloodEffect, new Vector3(transform.position.x + UnityEngine.Random.Range(-1,1) + Data.bloodOffset.x, transform.position.y + UnityEngine.Random.Range(-1, 1) + Data.bloodOffset.y, transform.position.z), Quaternion.identity);
                 }
 
                 TakeKnockback(damage + knockback);
