@@ -342,8 +342,11 @@ public class Enemy : MonoBehaviour
             {
                 if (GetComponentInChildren<Canvas>() && damagePopup && MenuManager.Instance.DamagePopUps)
                 {
-                    damagePopupOffset.x += UnityEngine.Random.Range(-2f, 1f);
-                    var dmgNumber = Instantiate(damagePopup, transform.position + damagePopupOffset, Quaternion.identity, GetComponentInChildren<Canvas>().transform).GetComponent<TextMeshProUGUI>();
+                    Vector3 popUpOffset;
+                    if (!multipleDamageSources) popUpOffset = new Vector3(damagePopupOffset.x + UnityEngine.Random.Range(-2f, 1f), damagePopupOffset.y);
+                    else popUpOffset = Vector3.zero;
+
+                    var dmgNumber = Instantiate(damagePopup, transform.position + popUpOffset, Quaternion.identity, GetComponentInChildren<Canvas>().transform).GetComponent<TextMeshProUGUI>();
                     dmgNumber.text = damage.ToString();
                     dmgNumber.color = damagePopupGradient.Evaluate(Mathf.Clamp01(damage / 100));
                     dmgNumber.fontSize += Mathf.Round(damage / fontSizeToDamageScaler);
@@ -373,7 +376,6 @@ public class Enemy : MonoBehaviour
         }
         if (hp <= 0 && !Data.dummy)
         {
-            Debug.Log("die");
             Die();
         }
     }

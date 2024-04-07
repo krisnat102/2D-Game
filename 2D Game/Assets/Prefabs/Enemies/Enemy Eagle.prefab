@@ -115,7 +115,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &835428162689584748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -548,12 +548,17 @@ MonoBehaviour:
   fontSizeToDamageScaler: 1
   detectAIRange: {fileID: 1089091996379231738}
   attackAIRange: {fileID: 4477328867668029076}
+  cancelRangedAIRange: {fileID: 0}
   dashAIRange: {fileID: 0}
   leftPatrolBarrier: {fileID: 5650920199865895937}
   rightPatrolBarrier: {fileID: 2559493015804330787}
-  data: {fileID: 11400000, guid: 1117637d0e1206f41be5b45d15a32ea5, type: 2}
   attackSound: {fileID: 8435544955756322061}
+  rangedAttackSound: {fileID: 0}
+  bossMusicPlayer: {fileID: 0}
+  data: {fileID: 11400000, guid: 1117637d0e1206f41be5b45d15a32ea5, type: 2}
+  bossSpecialProjectile: {fileID: 0}
   playerTrans: {fileID: 0}
+  groundCollider: {fileID: 0}
 --- !u!82 &8435544955756322061
 AudioSource:
   m_ObjectHideFlags: 0

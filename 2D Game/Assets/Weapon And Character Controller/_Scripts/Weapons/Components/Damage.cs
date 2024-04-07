@@ -14,7 +14,6 @@ namespace Bardent.Weapons.Components
         {
             foreach (var item in colliders)
             {
-                Debug.Log(item.name);
                 if (item.TryGetComponent(out Enemy enemy))
                 {
                     enemy.TakeDamage(currentAttackData.Amount * levelHandler.StrengthDamage, 0, false);

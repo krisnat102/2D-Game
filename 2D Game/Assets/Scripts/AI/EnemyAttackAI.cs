@@ -5,7 +5,6 @@ using UnityEditor.Build;
 public class EnemyAttackAI : MonoBehaviour
 {
     [SerializeField] private Transform firePoint;
-    [SerializeField] private Transform playerTrans;
     [SerializeField] private LayerMask IgnoreMe;
     [SerializeField] private bool flip = true;
 
@@ -13,6 +12,7 @@ public class EnemyAttackAI : MonoBehaviour
     private bool inSight = false;
     private bool inRangeOfSight = false;
     private bool flipTracker;
+    private Transform playerTrans;
     private Enemy enemy;
 
     public bool InRange { get => inRange; private set => inRange = value; }
@@ -79,6 +79,7 @@ public class EnemyAttackAI : MonoBehaviour
     private void Start()
     {
         enemy = transform.parent.GetComponent<Enemy>();
+        playerTrans = enemy.PlayerTrans;
     }
 
     private void Flip()
