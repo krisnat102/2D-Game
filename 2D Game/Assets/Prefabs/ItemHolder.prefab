@@ -215,7 +215,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 151
+  m_SortingOrder: 513
   m_Sprite: {fileID: 21300000, guid: ea42c531f133f814d8cf18df0d881f8d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -310,6 +310,9 @@ MonoBehaviour:
   price: 0
   chest: 0
   offset: 0.16
+  note: 0
+  noteText: 
+  noteUIPreset: {fileID: 0}
 --- !u!114 &418600410156487958
 MonoBehaviour:
   m_ObjectHideFlags: 0
