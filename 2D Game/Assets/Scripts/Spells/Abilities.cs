@@ -31,6 +31,8 @@ namespace Spells
         private Vector2 newPosition;
         private List<Spell> spellsBar;
         private List<Spell> abilitiesBar;
+        private Spell lastCastSpell;
+        private Spell lastCastAbility;
 
         public bool AbilityCooldown1 { get => abilityCooldown; set => abilityCooldown = value; }
         #endregion
@@ -50,11 +52,12 @@ namespace Spells
                 side = true;
             }
 
-            #region Spells
-            if (spellsBar.Count >= activeSpell)
+            #region Spell Casting
+            if (spellsBar.Count > activeSpell)
+            {
                 if (PlayerInputHandler.Instance.SpellInput && Stats.Instance.Mana.CurrentValue >= spellsBar[activeSpell].cost && spellCooldown == false)
                     Spell();
-
+            }
             if (PlayerInputHandler.Instance.SwitchSpell1Input)
                 if (activeSpell != 0)
                 {
@@ -74,8 +77,8 @@ namespace Spells
             ClearSprites();
             #endregion
 
-            #region Abilites
-            if (abilitiesBar.Count >= activeAbility)
+            #region Ability Casting
+            if (abilitiesBar.Count > activeAbility)
             {
                 if (PlayerInputHandler.Instance.AbilityInput && Stats.Instance.Stam.CurrentValue >= abilitiesBar[activeAbility].cost && AbilityCooldown1 == false)
                     Ability();
@@ -99,7 +102,7 @@ namespace Spells
             ClearSprites();
             #endregion
 
-            #region Spells
+            #region Spells UI
             if (spellsBar.Count > activeSpell)
                 if (spellsBar[activeSpell] != null)
                 {
@@ -136,7 +139,7 @@ namespace Spells
             }
             #endregion
 
-            #region Abilities
+            #region Abilities UI
             if (abilitiesBar.Count > activeAbility)
                 if (abilitiesBar[activeAbility] != null)
                 {
@@ -173,14 +176,16 @@ namespace Spells
             }
             #endregion
 
-            if (abilityCooldownImg.gameObject.activeSelf && abilityCooldownImg.fillAmount > 0)
-            {
-                abilityCooldownImg.fillAmount -= Time.deltaTime / abilitiesBar[activeAbility].cooldown;
-            }
+            #region Cooldowns
             if (spellCooldownImg.gameObject.activeSelf && spellCooldownImg.fillAmount > 0)
             {
-                spellCooldownImg.fillAmount -= Time.deltaTime / spellsBar[activeSpell].cooldown;
+                spellCooldownImg.fillAmount -= Time.deltaTime / lastCastSpell.cooldown;
             }
+            if (abilityCooldownImg.gameObject.activeSelf && abilityCooldownImg.fillAmount > 0)
+            {
+                abilityCooldownImg.fillAmount -= Time.deltaTime / lastCastAbility.cooldown;
+            }
+            #endregion
         }
         #endregion
 
@@ -212,6 +217,7 @@ namespace Spells
                 Stats.Instance.Mana.CurrentValue -= spellsBar[activeSpell].cost;
 
                 spellCooldown = true;
+                lastCastSpell = spellsBar[activeSpell];
                 Invoke("SpellCooldown", spellsBar[activeSpell].cooldown);
                 spellCooldownImg.gameObject.SetActive(true);
                 spellCooldownImg.fillAmount = 1;
@@ -241,6 +247,7 @@ namespace Spells
                     Stats.Instance.Stam.CurrentValue -= abilitiesBar[activeAbility].cost;
 
                     AbilityCooldown1 = true;
+                    lastCastAbility = abilitiesBar[activeAbility];
                     Invoke("AbilityCooldown", abilitiesBar[activeAbility].cooldown);
                     abilityCooldownImg.gameObject.SetActive(true);
                     abilityCooldownImg.fillAmount = 1;

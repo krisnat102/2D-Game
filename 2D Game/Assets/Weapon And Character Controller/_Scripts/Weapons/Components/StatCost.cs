@@ -1,6 +1,4 @@
 ﻿using Bardent.CoreSystem;
-using System.Collections;
-using UnityEngine;
 
 namespace Bardent.Weapons.Components
 {

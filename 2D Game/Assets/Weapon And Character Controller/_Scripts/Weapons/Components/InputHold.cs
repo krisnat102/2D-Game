@@ -1,10 +1,9 @@
 ﻿using Bardent.CoreSystem;
-using Bardent.Utilities;
 using Krisnat;
 using System.Collections;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
+using static Inventory.Item;
 
 namespace Bardent.Weapons.Components
 {
@@ -63,13 +62,15 @@ namespace Bardent.Weapons.Components
         private void Attack(CombatInputs combatInput)
         {
             if (movement.IsHanging || (movement.IsCrouching && collisionSenses.Ceiling)) return;
-            if (currentAttackData != null && !cooldown && currentWeaponData.Type == "Bow")
+            if (currentAttackData != null && !cooldown && currentWeaponData.Type == WeaponType.Bow)
             {
                 bowSlider = UIManager.Instance.BowChargeTimeSlider;
 
                 EndHold();
 
                 StartCoroutine(CooldownCoroutine());
+
+                AudioManager.Instance.BowSoundEffect.Play();
 
                 foreach (var data in currentAttackData.inputHoldAttackDatas)
                 {
@@ -127,7 +128,7 @@ namespace Bardent.Weapons.Components
                 currentWeaponData = Core.transform.parent.Find("SecondaryWeapon").GetComponent<WeaponGenerator>().Data;
             }
 
-            if(currentWeaponData.Type == "Bow")
+            if(currentWeaponData.Type == WeaponType.Bow)
             {
                 attackStarted = true;
                 if (collisionSenses.Ground)

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a5a6cd738645369231540dd8f9631f, type: 3}
   m_Name: Sword_3
   m_EditorClassIdentifier: 
-  <Type>k__BackingField: Sword
+  <Type>k__BackingField: 0
   <AnimatorController>k__BackingField: {fileID: 9100000, guid: 95b2394cafcd7ac4eb455b8d8735c661,
     type: 2}
   <NumberOfAttacks>k__BackingField: 3
@@ -24,6 +24,7 @@ MonoBehaviour:
   - rid: 2516071312619208705
   - rid: 2516071382426845185
   - rid: 2402950210433581056
+  - rid: 8926345669322735618
   references:
     version: 2
     RefIds:
@@ -161,3 +162,14 @@ MonoBehaviour:
             - {fileID: -1440407212, guid: 7a037f137b84b41479261ae77f58c1cd, type: 3}
             - {fileID: 1184464580, guid: 7a037f137b84b41479261ae77f58c1cd, type: 3}
             - {fileID: -1035968199, guid: 7a037f137b84b41479261ae77f58c1cd, type: 3}
+    - rid: 8926345669322735618
+      type: {class: SoundEffectData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: SoundEffectData
+        attackData:
+        - name: Attack 1
+          <Delay>k__BackingField: 0.07
+        - name: Attack 2
+          <Delay>k__BackingField: 0.1
+        - name: Attack 3
+          <Delay>k__BackingField: 0.15

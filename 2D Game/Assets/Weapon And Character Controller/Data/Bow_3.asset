@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a5a6cd738645369231540dd8f9631f, type: 3}
   m_Name: Bow_3
   m_EditorClassIdentifier: 
-  <Type>k__BackingField: Bow
+  <Type>k__BackingField: 1
   <AnimatorController>k__BackingField: {fileID: 9100000, guid: 1089e6ad3ab9c034382f2409dbcddd6c,
     type: 2}
   <NumberOfAttacks>k__BackingField: 1
   <ComponentData>k__BackingField:
   - rid: 6785867263041863682
   - rid: 6785867404348227586
+  - rid: 8926345669322735619
   references:
     version: 2
     RefIds:
@@ -65,3 +66,9 @@ MonoBehaviour:
           <FinalStageChargeTime>k__BackingField: 0.5
           <PerfectShotChargeTimeLowerRange>k__BackingField: 0.6
           <PerfectShotChargeTimeUpperRange>k__BackingField: 0.7
+    - rid: 8926345669322735619
+      type: {class: SoundEffectData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: SoundEffectData
+        attackData:
+        - name: Attack 1

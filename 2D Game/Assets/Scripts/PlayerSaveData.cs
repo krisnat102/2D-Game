@@ -54,11 +54,6 @@ namespace Krisnat.Assets.Scripts
             position[0] = player.transform.position.x;
             position[1] = player.transform.position.y;
             position[2] = player.transform.position.z;
-
-            foreach (int i in itemsId)
-            {
-                UnityEngine.Debug.Log(i);
-            }
         }
     }
 }

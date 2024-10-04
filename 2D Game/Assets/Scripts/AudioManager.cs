@@ -23,6 +23,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource music;
     [SerializeField] private AudioSource buySound;
     [SerializeField] private AudioSource coinPickupSound;
+    [SerializeField] private AudioSource swordSoundEffect;
+    [SerializeField] private AudioSource bowSoundEffect;
 
     private bool muteTracker;
     #endregion
@@ -30,6 +32,8 @@ public class AudioManager : MonoBehaviour
     #region Method Variables
     public AudioSource BuySound { get => buySound; private set => buySound = value; }
     public AudioSource CoinPickupSound { get => coinPickupSound; private set => coinPickupSound = value; }
+    public AudioSource SwordSoundEffect { get => swordSoundEffect; private set => swordSoundEffect = value; }
+    public AudioSource BowSoundEffect { get => bowSoundEffect; private set => bowSoundEffect = value; }
     #endregion
 
     #region Unity Methods

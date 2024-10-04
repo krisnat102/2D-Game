@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using Bardent.Weapons.Components;
 using UnityEngine;
+using static Inventory.Item;
 
 namespace Bardent.Weapons
 {
     [CreateAssetMenu(fileName = "newWeaponData", menuName = "Data/Weapon Data/Basic Weapon Data", order = 0)]
     public class WeaponDataSO : ScriptableObject
     {
-        [field: SerializeField] public string Type { get; private set; }
+        [field: SerializeField] public WeaponType Type { get; private set; }
         [field: SerializeField] public RuntimeAnimatorController AnimatorController { get; private set; }
         [field: SerializeField] public int NumberOfAttacks { get; private set; }
 

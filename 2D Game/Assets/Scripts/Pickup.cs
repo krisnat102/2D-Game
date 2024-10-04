@@ -14,7 +14,6 @@ namespace Krisnat
         private List<Collider2D> potentialItems = new List<Collider2D>();
         private Collider2D oldClosestItem;
         private GameObject oldClosestItemImage;
-        private float closestItemDistance;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -35,6 +34,7 @@ namespace Krisnat
             if ((itemPickup != null || spellPickup != null) && potentialItems.Contains(other))
             {
                 potentialItems.Remove(other);
+                other.GetComponent<Transform>().Find("Canvas").Find("PickUpKeyImage").gameObject.SetActive(false);
             }
         }
 
@@ -46,14 +46,13 @@ namespace Krisnat
                 if (oldClosestItem != null)
                 {
                     oldClosestItemImage = oldClosestItem.GetComponent<Transform>().Find("Canvas").Find("PickUpKeyImage").gameObject;
-                    closestItemDistance = Vector2.Distance(transform.position, oldClosestItem.transform.position);
                 }
 
                 if (closestItemImage != null && oldClosestItem == FindClosestItem())
                 {
                     closestItemImage.SetActive(true);
                 }
-                else if (oldClosestItem != FindClosestItem() && oldClosestItemImage != null)
+                else if ((oldClosestItem != FindClosestItem() && oldClosestItemImage != null))
                 {
                     oldClosestItemImage.SetActive(false);
                 }
