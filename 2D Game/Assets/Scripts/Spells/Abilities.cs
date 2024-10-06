@@ -177,11 +177,11 @@ namespace Spells
             #endregion
 
             #region Cooldowns
-            if (spellCooldownImg.gameObject.activeSelf && spellCooldownImg.fillAmount > 0)
+            if (spellCooldown && spellCooldownImg.gameObject.activeSelf && spellCooldownImg.fillAmount > 0)
             {
                 spellCooldownImg.fillAmount -= Time.deltaTime / lastCastSpell.cooldown;
             }
-            if (abilityCooldownImg.gameObject.activeSelf && abilityCooldownImg.fillAmount > 0)
+            if (abilityCooldown && abilityCooldownImg.gameObject.activeSelf && abilityCooldownImg.fillAmount > 0)
             {
                 abilityCooldownImg.fillAmount -= Time.deltaTime / lastCastAbility.cooldown;
             }
@@ -271,6 +271,7 @@ namespace Spells
         #region UI Methods
         public void ClearSprites()
         {
+            if (!mainSpell || !sideSpell1 || !sideSpell2 || !mainAbility || !sideAbility1 || !sideAbility2) return;
             mainSpell.sprite = null;
             sideSpell1.sprite = null;
             sideSpell2.sprite = null;

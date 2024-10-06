@@ -41,6 +41,8 @@ namespace Inventory
             ItemController itemController = button.GetComponentInParent<ItemController>();
             Item item = itemController.GetItem();
 
+            if (item.Equipped == true) return;
+
             InventoryManager.Instance.Remove(item);
 
             Destroy(gameObject);

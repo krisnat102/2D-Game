@@ -1,4 +1,5 @@
 using Krisnat;
+using Spells;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -11,7 +12,6 @@ namespace Inventory
         [SerializeField] private Item item;
         [SerializeField] private bool forSale;
         [SerializeField] private int price;
-        [SerializeField] private bool chest;
         [SerializeField] private float offset = 0.2f;
         [SerializeField] private bool note;
         [TextArea]
@@ -42,21 +42,10 @@ namespace Inventory
 
                 UIManager.Instance.NoteOpen = true;
             }
-            else if (!isPickedUp && item != null)
+            else if (!isPickedUp && item)
             {
-                if (forSale)
-                {
-                    InventoryManager.Instance.StartCoinAnimation();
-                    if (InventoryManager.Instance.Coins >= price)
-                    {
-                        AudioManager.Instance.BuySound.Play();
-                        InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - price, false);
-                    }
-                    else
-                    {
-                        return;
-                    }
-                }
+                ForSale();
+
                 InventoryManager.Instance.Add(item, true);
                 Destroy(gameObject);
             }
@@ -76,6 +65,23 @@ namespace Inventory
                 else if (price > 99)
                 {
                     itemPrice.GetComponentInChildren<Image>().gameObject.transform.position += new Vector3(offset, 0);
+                }
+            }
+        }
+
+        public void ForSale()
+        {
+            if (forSale)
+            {
+                InventoryManager.Instance.StartCoinAnimation();
+                if (InventoryManager.Instance.Coins >= price)
+                {
+                    AudioManager.Instance.BuySound.Play();
+                    InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - price, false);
+                }
+                else
+                {
+                    return;
                 }
             }
         }

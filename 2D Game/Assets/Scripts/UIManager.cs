@@ -208,14 +208,5 @@ namespace Krisnat
         }
         private void StopPurseTracker() => purseAnimationTracker = false;*/
         #endregion
-
-        #region Buttons
-        public void OpenCharacterTabBn()
-        {
-            InventoryManager.Instance.OpenCloseInventory(false);
-
-            characterTab.SetActive(true);
-        }
-        #endregion
     }
 }

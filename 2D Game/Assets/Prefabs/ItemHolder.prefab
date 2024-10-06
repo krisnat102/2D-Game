@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 6844190976975360612}
   - component: {fileID: 5565661106004909518}
   - component: {fileID: 418600410156487958}
+  - component: {fileID: 1143973624757098530}
   m_Layer: 0
   m_Name: ItemHolder
   m_TagString: Item
@@ -308,7 +309,6 @@ MonoBehaviour:
   item: {fileID: 0}
   forSale: 0
   price: 0
-  chest: 0
   offset: 0.16
   note: 0
   noteText: 
@@ -325,6 +325,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25abad67f5bc78e4f84924f53cecbe9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1143973624757098530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310284978144543288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 713bc554222bb674d9003b7fe20f2e03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spell: {fileID: 0}
+  forSale: 0
+  price: 0
+  chest: 0
+  offset: 0.2
 --- !u!1 &1310284978158071259
 GameObject:
   m_ObjectHideFlags: 0
