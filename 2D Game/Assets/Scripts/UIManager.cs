@@ -38,7 +38,7 @@ namespace Krisnat
         [SerializeField] private float noteScale;
         [SerializeField] private float noteOpeningSpeed;
 
-        private Vector3 oldPosition;
+        private bool inventoryAnimationActive;
         private PlayerData playerData;
         private LevelHandler levelHandler;
 
@@ -110,8 +110,16 @@ namespace Krisnat
         #region Open or Close UI Animation
         public void OpenCloseUIAnimation(GameObject menu, float targetSize, float duration, bool openClose)
         {
-            if(openClose) StartCoroutine(OpenUIAnimationCoroutine(menu, targetSize, duration));
-            else StartCoroutine(CloseUIAnimationCoroutine(menu, targetSize, duration));
+            if (openClose)
+            {
+                inventoryAnimationActive = true;
+                StartCoroutine(OpenUIAnimationCoroutine(menu, targetSize, duration));
+            }
+            else
+            {
+                inventoryAnimationActive = true;
+                StartCoroutine(CloseUIAnimationCoroutine(menu, targetSize, duration));
+            }
         }
 
         private IEnumerator OpenUIAnimationCoroutine(GameObject menu, float targetSize, float duration)
@@ -129,6 +137,7 @@ namespace Krisnat
             }
 
             menu.transform.localScale = targetScale;
+            inventoryAnimationActive = false;
         }
 
         private IEnumerator CloseUIAnimationCoroutine(GameObject menu, float targetSize, float duration)
@@ -146,6 +155,7 @@ namespace Krisnat
             }
 
             menu.transform.localScale = initialScale;
+            inventoryAnimationActive = false;
             menu.SetActive(false);
         }
         #endregion
@@ -157,6 +167,7 @@ namespace Krisnat
         }
         public void OpenCloseUI(GameObject ui, float initialScale, float openingSpeed, bool stopAttack, bool stopAllInputs, bool openOrClose, GameObject[] uiToClose)
         {
+            if (inventoryAnimationActive) return;
             if (openOrClose)
             {
                 ui.SetActive(true);

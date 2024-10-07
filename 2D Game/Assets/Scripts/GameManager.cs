@@ -21,6 +21,7 @@ namespace Core
         [SerializeField] private GameObject playerGO;
         [SerializeField] private Bardent.CoreSystem.Death death;
         [SerializeField] private new Transform camera;
+        [SerializeField] private string s;
 
         private Player player;
         private LevelHandler levelHandler;
@@ -41,6 +42,19 @@ namespace Core
 
             player = playerGO?.GetComponent<Player>();
             levelHandler = playerGO?.GetComponent<LevelHandler>();
+        }
+
+        private void Start()
+        {
+            foreach(char c in s)
+            {
+                switch(c)
+                {
+                    case 'I':
+
+                        return;
+                }
+            }
         }
         #endregion
 

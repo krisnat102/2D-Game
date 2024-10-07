@@ -33,11 +33,16 @@ namespace Spells
         private List<Spell> abilitiesBar;
         private Spell lastCastSpell;
         private Spell lastCastAbility;
+        private PlayerData playerData;
 
         public bool AbilityCooldown1 { get => abilityCooldown; set => abilityCooldown = value; }
         #endregion
 
         #region Unity Methods
+        void Start()
+        {
+            playerData = transform.GetComponent<Player>().PlayerData;
+        }
         private void Update()
         {
             spellsBar = SpellManager.Instance.SpellsBar;
@@ -245,6 +250,7 @@ namespace Spells
                     Instantiate(abilitiesBar[activeAbility].spellEffect, castingPoint.position, castingPoint.rotation);
 
                     Stats.Instance.Stam.CurrentValue -= abilitiesBar[activeAbility].cost;
+                    Stats.Instance.Stam.StopRegen(playerData.stamRecoveryTime);
 
                     AbilityCooldown1 = true;
                     lastCastAbility = abilitiesBar[activeAbility];

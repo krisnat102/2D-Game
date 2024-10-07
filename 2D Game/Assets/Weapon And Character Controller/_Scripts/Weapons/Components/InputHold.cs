@@ -72,6 +72,9 @@ namespace Bardent.Weapons.Components
 
                 AudioManager.Instance.BowSoundEffect.Play();
 
+                //Stats.Instance.Stam.CurrentValue -= cost;
+                //Stas.Instance.Stam.StopRegen(playerData.stamRecoveryTime);
+
                 foreach (var data in currentAttackData.inputHoldAttackDatas)
                 {
                     if (data.Projectile != null)
