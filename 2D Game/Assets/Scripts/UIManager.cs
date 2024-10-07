@@ -67,9 +67,9 @@ namespace Krisnat
         private void Update()
         {
             if(levelUpCost) levelUpCost.text = "Cost - " + levelHandler?.LevelUpCost.ToString();
-            if (levelTextLevelUpInterface) levelTextLevelUpInterface.text = "Level - " + playerData.PlayerLevel.ToString();
+            if (levelTextLevelUpInterface) levelTextLevelUpInterface.text = "Level - " + playerData?.PlayerLevel.ToString();
 
-            levelText.text = playerData.PlayerLevel.ToString();
+            levelText.text = playerData?.PlayerLevel.ToString();
             hpText.text = Stats.Instance.Health.MaxValue.ToString();
             manaText.text = Stats.Instance.Mana.MaxValue.ToString();
             stamText.text = Stats.Instance.Stam.MaxValue.ToString();

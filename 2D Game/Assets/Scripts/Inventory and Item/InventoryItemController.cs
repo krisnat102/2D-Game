@@ -17,7 +17,7 @@ namespace Inventory
         private Image itemImage;
         private TMP_Text itemName, itemPrice, itemValue, itemWeight, itemArmor, itemMagicRes, itemDescription, weaponAttack;
         private GameObject description;
-        private bool equipmentMenuActive = false;
+        //private bool equipmentMenuActive = false;
         private Item item;
 
         public Image SelectedItemIndicator { get => selectedItemIndicator; private set => selectedItemIndicator = value; }
@@ -39,7 +39,7 @@ namespace Inventory
             GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
 
             ItemController itemController = button.GetComponentInParent<ItemController>();
-            Item item = itemController.GetItem();
+            item = itemController.GetItem();
 
             if (item.Equipped == true) return;
 
@@ -146,7 +146,7 @@ namespace Inventory
         {
             GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
             ItemController itemController = button?.GetComponent<ItemController>();
-            Item item = itemController.GetItem();
+            item = itemController.GetItem();
 
             GameObject descriptionExtension = InventoryManager.Instance.GetEquipmentMenu();
             Animator descriptionAnimator = InventoryManager.Instance.GetEquipmentMenuAnimator();
@@ -218,14 +218,14 @@ namespace Inventory
                     useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Equip";
                 }
 
-                descriptionExtension.SetActive(true);
+                /*descriptionExtension.SetActive(true);
                 if (equipmentMenuActive == false)
                 {
                     descriptionAnimator.SetTrigger("Open");
                     descriptionAnimator.SetBool("OpenClose", true);
 
                     equipmentMenuActive = true;
-                }
+                }*/
             }
             else
             {
@@ -234,11 +234,11 @@ namespace Inventory
                 itemMagicRes.gameObject.SetActive(false);
                 weaponAttack.gameObject.SetActive(false);
 
-                descriptionAnimator.SetTrigger("Close");
+                /*descriptionAnimator.SetTrigger("Close");
                 descriptionAnimator.SetBool("OpenClose", false);
 
                 Invoke("CloseEquipmentMenu", equipmentCloseTime);
-                equipmentMenuActive = false;
+                equipmentMenuActive = false;*/
             }
             if (InventoryManager.Instance.Shop)
             {
@@ -247,11 +247,11 @@ namespace Inventory
             }
         }
 
-        private void CloseEquipmentMenu()
+        /*private void CloseEquipmentMenu()
         {
             GameObject descriptionExtension = InventoryManager.Instance.GetEquipmentMenu();
             descriptionExtension.SetActive(false);
+        }*/
+                #endregion
+            }
         }
-        #endregion
-    }
-}
