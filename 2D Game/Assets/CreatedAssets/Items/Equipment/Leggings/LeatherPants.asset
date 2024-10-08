@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b860ad291538dac4f9496d8a9a1d7c60, type: 3}
-  m_Name: New Item 71
+  m_Name: LeatherPants
   m_EditorClassIdentifier: 
   id: 74
-  itemName: 
+  itemName: Leather Pants
   value: 0
-  cost: 0
+  cost: 30
   usable: 1
   icon: {fileID: 21300000, guid: 6288338eadd0ec44098b032ba6331e9c, type: 3}
   itemClass: 1
-  itemDescription: 
+  itemDescription: Sturdy and practical
   equipment: 1
-  armor: 0
-  weight: 0
-  magicRes: 0
+  armor: 4
+  weight: 3
+  magicRes: 2
   equipmentType: 4
   weaponData: {fileID: 0}
   weaponType: 0
