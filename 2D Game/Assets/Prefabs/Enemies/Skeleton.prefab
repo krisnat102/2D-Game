@@ -347,7 +347,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1656468544769814459}
-  playerTrans: {fileID: 0}
   IgnoreMe:
     serializedVersion: 2
     m_Bits: 7471159
@@ -432,7 +431,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -104, y: -116}
+  m_AnchoredPosition: {x: -104, y: -123}
   m_SizeDelta: {x: 348.86325, y: 54.917862}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6196468261644810455
@@ -1069,7 +1068,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1656468544769814459}
-  playerTrans: {fileID: 0}
   IgnoreMe:
     serializedVersion: 2
     m_Bits: 7471671
