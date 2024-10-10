@@ -354,6 +354,7 @@ public class Enemy : MonoBehaviour
 
                 if (ContainsParam(animator, "Hurt")) animator.SetTrigger("Hurt");
 
+
                 if (ContainsParam(animator, "hurt")) animator.SetBool("hurt", true);
                 if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
                 StartCoroutine(StartIdleCoroutine(0.25f, "hurt"));
@@ -528,7 +529,7 @@ public class Enemy : MonoBehaviour
     }
 
     #endregion
-
+    
     #region Spawners
     private void AttackSpawn(bool bossRanged)
     {
