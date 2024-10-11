@@ -468,7 +468,7 @@ public class Enemy : MonoBehaviour
         if (Data.moveWhenAttacking)
         {
             StartCoroutine(ChangeBoolCoroutine(Data.movementDelay, newValue => rooted = newValue[0], new[] { false }));
-            StartCoroutine(MovementCoroutine(Data.movementDelay, Data.direction, Data.velocity));
+            StartCoroutine(MovementCoroutine(Data.movementDelay, -Data.direction * new Vector2(FacingDirection * -1, 0), Data.velocity));
         }
     }
 

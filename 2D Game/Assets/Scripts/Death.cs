@@ -15,7 +15,6 @@ public class Death : MonoBehaviour
     [Header("Behaviour")]
     [SerializeField] private bool destroy = true;
     [SerializeField] private GameObject objectToSpawnBeforeDeath;
-    [SerializeField] private bool fade;
     [SerializeField] private float fadeTime;
 
     [Header("Types")]
@@ -87,7 +86,7 @@ public class Death : MonoBehaviour
         //gameObject.SetActive(false);
         startFade = true;
 
-        if (fade)
+        if (fadeTime != 0)
         {
             return;
         }
