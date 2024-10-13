@@ -1,12 +1,7 @@
 using Inventory;
 using Krisnat;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public class Death : MonoBehaviour

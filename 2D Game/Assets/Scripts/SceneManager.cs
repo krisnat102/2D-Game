@@ -1,5 +1,4 @@
 using Inventory;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,5 +19,7 @@ namespace Krisnat
                 InventoryManager.Instance.EquipItem(item);
             }
         }
+
+        
     }
 }
