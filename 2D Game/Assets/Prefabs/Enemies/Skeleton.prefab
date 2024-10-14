@@ -741,7 +741,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.38165212, y: -0.20554876}
+  m_Offset: {x: -0.38165212, y: -0.1974653}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -752,7 +752,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.401155, y: 0.7803736}
+  m_Size: {x: 0.401155, y: 0.76420665}
   m_EdgeRadius: 0
 --- !u!58 &5043809607806589971
 CircleCollider2D:
@@ -786,9 +786,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.36305237, y: -0.4088168}
+  m_Offset: {x: -0.38073426, y: -0.3810299}
   serializedVersion: 2
-  m_Radius: 0.19245672
+  m_Radius: 0.20053959
 --- !u!82 &4252676777875645981
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1224,7 +1224,7 @@ PrefabInstance:
     - target: {fileID: 4143844189351752443, guid: 0710ad3f266bbf640af8a670dcc4bfd9,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4143844189351752443, guid: 0710ad3f266bbf640af8a670dcc4bfd9,
         type: 3}

@@ -87,7 +87,7 @@ public class Death : MonoBehaviour
         }
 
         Die();
-    } 
+    }
 
     public void Die()
     {

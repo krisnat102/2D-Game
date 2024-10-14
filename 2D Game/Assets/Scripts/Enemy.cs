@@ -355,6 +355,16 @@ public class Enemy : MonoBehaviour
                     dmgNumber.color = damagePopupGradient.Evaluate(Mathf.Clamp01(damage / 100));
                     dmgNumber.fontSize += Mathf.Round(damage / fontSizeToDamageScaler);
                 }
+                if (Data.bloodEffect)
+                {
+                    Instantiate(Data.bloodEffect, new Vector3(transform.position.x + UnityEngine.Random.Range(-1,1) + Data.bloodOffset.x, transform.position.y + UnityEngine.Random.Range(-1, 1) + Data.bloodOffset.y, transform.position.z), Quaternion.identity);
+                }
+
+                if (hp <= 0 && !Data.dummy)
+                {
+                    Die();
+                    return;
+                }
 
                 if (ContainsParam(animator, "Hurt")) animator.SetTrigger("Hurt");
 
@@ -371,17 +381,8 @@ public class Enemy : MonoBehaviour
                     StartCoroutine(ChangeBoolCoroutine(0.1f, newValue => immune = newValue[0], new[] { false }));
                 }
 
-                if (Data.bloodEffect)
-                {
-                    Instantiate(Data.bloodEffect, new Vector3(transform.position.x + UnityEngine.Random.Range(-1,1) + Data.bloodOffset.x, transform.position.y + UnityEngine.Random.Range(-1, 1) + Data.bloodOffset.y, transform.position.z), Quaternion.identity);
-                }
-
                 TakeKnockback(damage + knockback);
             }
-        }
-        if (hp <= 0 && !Data.dummy)
-        {
-            Die();
         }
     }
     private void TakeKnockback(float damage)

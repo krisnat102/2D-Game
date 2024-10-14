@@ -19,10 +19,8 @@ namespace Krisnat
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            Debug.Log(1);
             if (collision.GetComponent<Player>())
             {
-                Debug.Log(2);
                 if (previousBattle && !previousBattle.End) return;
 
                 foreach(Enemy enemy in encounter)

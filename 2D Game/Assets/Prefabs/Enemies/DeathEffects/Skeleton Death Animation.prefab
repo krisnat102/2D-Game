@@ -120,9 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationLength: 10
-  destroy: 1
+  destroy: 0
   objectToSpawnBeforeDeath: {fileID: 0}
-  fade: 1
   fadeTime: 1
   ui: 0
   uiCanvasGroup: 0
