@@ -1,25 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Krisnat
 {
     public class Battle : MonoBehaviour
     {
-        [SerializeField] private List<Enemy> encounter;
         [SerializeField] private Battle previousBattle;
+        private List<Enemy> encounter;
 
         public bool End { get; private set; }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void Start()
         {
-            if (collision.gameObject.GetComponent<Player>())
+            encounter = GetComponentsInChildren<Enemy>(true).ToList();
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            Debug.Log(1);
+            if (collision.GetComponent<Player>())
             {
+                Debug.Log(2);
                 if (previousBattle && !previousBattle.End) return;
 
                 foreach(Enemy enemy in encounter)
                 {
-                    enemy.gameObject.SetActive(true);
+                    if (!enemy.Dead)
+                    {
+                        enemy.gameObject.SetActive(true);
+                        Debug.Log(enemy.name);
+                    }
                 }
             }
         }
@@ -28,10 +40,10 @@ namespace Krisnat
         {
             foreach (Enemy enemy in encounter)
             {
-
+                if (!enemy.Dead) return;
             }
 
-                End = true;
+            End = true;
         }
     }
 }

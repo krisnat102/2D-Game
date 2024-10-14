@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 199
-  m_Sprite: {fileID: 1490831727, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}
+  m_Sprite: {fileID: -1649858197, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationLength: 180
-  fade: 1
+  destroy: 1
+  objectToSpawnBeforeDeath: {fileID: 0}
   fadeTime: 2
   ui: 0
   uiCanvasGroup: 0

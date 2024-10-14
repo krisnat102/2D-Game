@@ -77,7 +77,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1706801803178361981}
-  playerTrans: {fileID: 0}
   IgnoreMe:
     serializedVersion: 2
     m_Bits: 7471671
@@ -310,7 +309,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1706801803178361981}
-  playerTrans: {fileID: 0}
   IgnoreMe:
     serializedVersion: 2
     m_Bits: 7471671
@@ -501,7 +499,6 @@ MonoBehaviour:
   animationLength: 1
   destroy: 0
   objectToSpawnBeforeDeath: {fileID: 0}
-  fade: 0
   fadeTime: 0
   ui: 0
   uiCanvasGroup: 0
@@ -769,7 +766,6 @@ MonoBehaviour:
   animationLength: 0.2
   destroy: 0
   objectToSpawnBeforeDeath: {fileID: 4233705056694724574}
-  fade: 0
   fadeTime: 0
   ui: 0
   uiCanvasGroup: 0
@@ -819,7 +815,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1706801803178361981}
-  playerTrans: {fileID: 0}
   IgnoreMe:
     serializedVersion: 2
     m_Bits: 7471671
@@ -920,6 +915,7 @@ Transform:
   - {fileID: 6915088000484058762}
   - {fileID: 2950665211081794890}
   - {fileID: 3217559222102547614}
+  - {fileID: 118187907885575579}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9086961906831249532
@@ -1075,6 +1071,7 @@ MonoBehaviour:
   rangedAttackSound: {fileID: 7058875194061302556}
   bossMusicPlayer: {fileID: 428168111173868043}
   data: {fileID: 11400000, guid: d36c039d6c3ffc1428b724867dc367a8, type: 2}
+  deathEffect: {fileID: 7899386223109220175}
   bossSpecialProjectile: {fileID: 4253039206153173924}
   playerTrans: {fileID: 0}
   groundCollider: {fileID: 0}
@@ -1716,6 +1713,107 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1001 &2051436928875126434
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1436799216610881126}
+    m_Modifications:
+    - target: {fileID: 631033441188813942, guid: 300aca216a33d6941b80bf60552e2e0e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1649858197, guid: 3548fcfc44e534c459d780f68b4a3624,
+        type: 3}
+    - target: {fileID: 2151533433782563641, guid: 300aca216a33d6941b80bf60552e2e0e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: 300aca216a33d6941b80bf60552e2e0e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: 300aca216a33d6941b80bf60552e2e0e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: 300aca216a33d6941b80bf60552e2e0e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: 300aca216a33d6941b80bf60552e2e0e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: 300aca216a33d6941b80bf60552e2e0e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: 300aca216a33d6941b80bf60552e2e0e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: 300aca216a33d6941b80bf60552e2e0e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: 300aca216a33d6941b80bf60552e2e0e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: 300aca216a33d6941b80bf60552e2e0e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: 300aca216a33d6941b80bf60552e2e0e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: 300aca216a33d6941b80bf60552e2e0e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8203424293245319661, guid: 300aca216a33d6941b80bf60552e2e0e,
+        type: 3}
+      propertyPath: m_Name
+      value: StoneGolemDeath
+      objectReference: {fileID: 0}
+    - target: {fileID: 8203424293245319661, guid: 300aca216a33d6941b80bf60552e2e0e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 300aca216a33d6941b80bf60552e2e0e, type: 3}
+--- !u!4 &118187907885575579 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2151533433782563641, guid: 300aca216a33d6941b80bf60552e2e0e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2051436928875126434}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7899386223109220175 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8203424293245319661, guid: 300aca216a33d6941b80bf60552e2e0e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2051436928875126434}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2101864130278223137
 PrefabInstance:
   m_ObjectHideFlags: 0

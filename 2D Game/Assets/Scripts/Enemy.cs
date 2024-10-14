@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Other")]
     public EnemyData data;
+    [SerializeField] private GameObject deathEffect;
     [SerializeField] private GameObject bossSpecialProjectile;
     [SerializeField] private Transform playerTrans;
     [SerializeField] private BoxCollider2D groundCollider;
@@ -88,11 +89,14 @@ public class Enemy : MonoBehaviour
     public EnemyAttackAI AttackAIRange { get => attackAIRange; private set => attackAIRange = value; }
     public EnemyAttackAI DashAIRange { get => dashAIRange; private set => dashAIRange = value; }
     public bool SpecialRangedAttackCooldown { get => specialRangedAttackCooldown; private set => specialRangedAttackCooldown = value; }
+    public bool Dead { get; private set; }
     #endregion
 
     #region Unity Methods
     private void Update()
     {
+        if (Dead) gameObject.SetActive(false);
+
         if (Data.dummy) return;
 
         if (DashAIRange && DashAIRange.InRange && Data.canDash && !dashCooldown && !attackCooldown && !Data.boss) Dash();
@@ -406,8 +410,6 @@ public class Enemy : MonoBehaviour
 
         coins.GetComponent<ParticleSystem>().Emit(coinsDropped);
 
-        Instantiate(Data.deathEffect, transform.position, Quaternion.identity).GetComponent<Death>();
-
         if (Data.boss) Core.GameManager.Instance.DeactivateObject(4, hpBar.gameObject);
 
         if (Data.itemDrop)
@@ -423,7 +425,14 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        Destroy(gameObject);
+        Dead = true;
+        gameObject.SetActive(false);
+
+        if (deathEffect)
+        {
+            deathEffect.SetActive(true);
+            deathEffect.transform.parent = null;
+        }
     }
 
     public void Attack(bool meleeRanged)

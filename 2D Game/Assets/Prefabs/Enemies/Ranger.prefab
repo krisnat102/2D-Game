@@ -413,6 +413,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef5b85464dc3bb44c9586312d8bd3c66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  directedParabola: 0
+  directed: 0
+  randomized: 0
+  flip: 0
+  accuracy: 0
 --- !u!1 &4715727150742174628
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,6 +494,7 @@ Transform:
   - {fileID: 4594310950827200347}
   - {fileID: 8039578564034905977}
   - {fileID: 7941306348212628540}
+  - {fileID: 2252217606421660090}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4715727150763637698
@@ -785,12 +791,18 @@ MonoBehaviour:
   fontSizeToDamageScaler: 1
   detectAIRange: {fileID: 4715727151536337906}
   attackAIRange: {fileID: 6881677303310164175}
+  cancelRangedAIRange: {fileID: 0}
   dashAIRange: {fileID: 8955305406128183212}
   leftPatrolBarrier: {fileID: 8039578564034905977}
   rightPatrolBarrier: {fileID: 7941306348212628540}
-  data: {fileID: 11400000, guid: 4e3fe04727db610498d50918f9c54095, type: 2}
   attackSound: {fileID: 4715727150763637696}
+  rangedAttackSound: {fileID: 0}
+  bossMusicPlayer: {fileID: 0}
+  data: {fileID: 11400000, guid: 4e3fe04727db610498d50918f9c54095, type: 2}
+  deathEffect: {fileID: 8305439628730223470}
+  bossSpecialProjectile: {fileID: 0}
   playerTrans: {fileID: 0}
+  groundCollider: {fileID: 0}
 --- !u!50 &6708969765188566197
 Rigidbody2D:
   serializedVersion: 4
@@ -864,7 +876,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 4715727150742174635}
-  playerTrans: {fileID: 0}
   IgnoreMe:
     serializedVersion: 2
     m_Bits: 7471159
@@ -1182,7 +1193,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 4715727150742174635}
-  playerTrans: {fileID: 0}
   IgnoreMe:
     serializedVersion: 2
     m_Bits: 7471159
@@ -1353,7 +1363,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 4715727150742174635}
-  playerTrans: {fileID: 0}
   IgnoreMe:
     serializedVersion: 2
     m_Bits: 7471159
@@ -1403,6 +1412,101 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 7.052772, y: 2.4506903}
   m_EdgeRadius: 0
+--- !u!1001 &187659940722684547
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4715727150763637697}
+    m_Modifications:
+    - target: {fileID: 2151533433782563641, guid: d4597ceb8300e93488e0de151c0e3e73,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: d4597ceb8300e93488e0de151c0e3e73,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: d4597ceb8300e93488e0de151c0e3e73,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: d4597ceb8300e93488e0de151c0e3e73,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: d4597ceb8300e93488e0de151c0e3e73,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: d4597ceb8300e93488e0de151c0e3e73,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: d4597ceb8300e93488e0de151c0e3e73,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: d4597ceb8300e93488e0de151c0e3e73,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: d4597ceb8300e93488e0de151c0e3e73,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: d4597ceb8300e93488e0de151c0e3e73,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: d4597ceb8300e93488e0de151c0e3e73,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151533433782563641, guid: d4597ceb8300e93488e0de151c0e3e73,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8203424293245319661, guid: d4597ceb8300e93488e0de151c0e3e73,
+        type: 3}
+      propertyPath: m_Name
+      value: RangerDeath
+      objectReference: {fileID: 0}
+    - target: {fileID: 8203424293245319661, guid: d4597ceb8300e93488e0de151c0e3e73,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d4597ceb8300e93488e0de151c0e3e73, type: 3}
+--- !u!4 &2252217606421660090 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2151533433782563641, guid: d4597ceb8300e93488e0de151c0e3e73,
+    type: 3}
+  m_PrefabInstance: {fileID: 187659940722684547}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8305439628730223470 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8203424293245319661, guid: d4597ceb8300e93488e0de151c0e3e73,
+    type: 3}
+  m_PrefabInstance: {fileID: 187659940722684547}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8648527542283843564
 PrefabInstance:
   m_ObjectHideFlags: 0
