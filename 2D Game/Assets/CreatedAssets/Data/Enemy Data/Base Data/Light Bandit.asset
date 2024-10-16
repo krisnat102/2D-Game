@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Light Bandit
   m_EditorClassIdentifier: 
   level: 1
-  enemyName: Heavy Bandit
+  enemyName: Light Bandit
   maxHP: 60
   attackSpeed: 1
   speed: 200
@@ -24,6 +24,7 @@ MonoBehaviour:
   offsetY: -1
   damageType: 1
   attackAnimationLength: 0.3
+  damageTriggerTime: 0.3
   HitBox:
     serializedVersion: 2
     x: -0.4
@@ -33,6 +34,11 @@ MonoBehaviour:
   DetectableLayers:
     serializedVersion: 2
     m_Bits: 1024
+  rootWhenAttacking: 1
+  moveWhenAttacking: 0
+  direction: {x: 0, y: 0}
+  velocity: 0
+  movementDelay: 0
   canDash: 0
   dashCooldown: 0
   dashStrength: 0
@@ -45,10 +51,10 @@ MonoBehaviour:
   spellDrop: {fileID: 0}
   patrolPauseTime: 4
   patrolSpeed: 10
+  dummy: 0
   lookAtPlayer: 1
   flipWhenPlayerIsRight: 0
   facingDirection: 1
-  rootWhenAttacking: 1
   fixRotationWhenAttacking: 0
   patrol: 1
   boss: 0
@@ -60,9 +66,10 @@ MonoBehaviour:
   specialRangedAttackCooldown: 0
   bossMusic: {fileID: 0}
   wakeUpTime: 0
-  deathEffect: {fileID: 2479263185497603450, guid: 613baaf495681e7479f8b9b49ddfe35f,
-    type: 3}
   bloodEffect: {fileID: 7515634647306772147, guid: b6be51001a0800f4abd4e30fe133548b,
+    type: 3}
+  bloodOffset: {x: 0, y: 0}
+  deathEffect: {fileID: 2479263185497603450, guid: 613baaf495681e7479f8b9b49ddfe35f,
     type: 3}
   ranged: 0
   impactEffect: {fileID: 0}

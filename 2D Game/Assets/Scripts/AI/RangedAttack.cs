@@ -50,11 +50,13 @@ public class RangedAttack : MonoBehaviour
             arrowRB.velocity = new Vector2(direction.x + randomIndex, direction.y + randomIndex).normalized * enemy.Data.rangedSpeed;
         }
         else arrowRB.velocity = direction * enemy.Data.rangedSpeed;
+
+        transform.parent = null;
     }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.tag != "Enemy" && hitInfo.tag != "Item" && hitInfo.tag != "Climbable" && hitInfo.tag != "AttackRange" && hitInfo.tag != "BackgroundObject" && hitInfo.tag != "PickupRange")
+        if (hitInfo.tag != "Enemy" && hitInfo.tag != "Item" && hitInfo.tag != "Climbable" && hitInfo.tag != "AttackRange" && hitInfo.tag != "BackgroundObject" && hitInfo.tag != "PickupRange" && hitInfo.tag != "Event")
         {
             Player player = hitInfo.GetComponent<Player>();
             if (player)

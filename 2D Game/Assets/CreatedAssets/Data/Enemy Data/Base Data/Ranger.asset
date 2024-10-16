@@ -23,7 +23,7 @@ MonoBehaviour:
   offsetX2: 1.2
   offsetY: -1
   damageType: 0
-  attackAnimationLength: 0.3
+  attackAnimationLength: 0.45
   damageTriggerTime: 0.3
   HitBox:
     serializedVersion: 2
@@ -51,6 +51,7 @@ MonoBehaviour:
   spellDrop: {fileID: 0}
   patrolPauseTime: 0
   patrolSpeed: 0
+  dummy: 0
   lookAtPlayer: 1
   flipWhenPlayerIsRight: 0
   facingDirection: 0
@@ -65,9 +66,10 @@ MonoBehaviour:
   specialRangedAttackCooldown: 0
   bossMusic: {fileID: 0}
   wakeUpTime: 0
-  deathEffect: {fileID: 8203424293245319661, guid: d4597ceb8300e93488e0de151c0e3e73,
-    type: 3}
   bloodEffect: {fileID: 7515634647306772147, guid: b6be51001a0800f4abd4e30fe133548b,
+    type: 3}
+  bloodOffset: {x: 0, y: 0}
+  deathEffect: {fileID: 8203424293245319661, guid: d4597ceb8300e93488e0de151c0e3e73,
     type: 3}
   ranged: 1
   impactEffect: {fileID: 327621282901348051, guid: c0b641e096985a84089d34a72eb3e26f,

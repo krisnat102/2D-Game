@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NightBorne
   m_EditorClassIdentifier: 
   level: 1
-  enemyName: Heavy Bandit
+  enemyName: Nightborne
   maxHP: 120
   attackSpeed: 1
   speed: 200
@@ -51,6 +51,7 @@ MonoBehaviour:
   spellDrop: {fileID: 0}
   patrolPauseTime: 4
   patrolSpeed: 10
+  dummy: 0
   lookAtPlayer: 1
   flipWhenPlayerIsRight: 0
   facingDirection: 0
@@ -65,9 +66,10 @@ MonoBehaviour:
   specialRangedAttackCooldown: 0
   bossMusic: {fileID: 0}
   wakeUpTime: 0
-  deathEffect: {fileID: 5593984272972194576, guid: 17a78a1fae94f5944a833dbf3d774e5e,
-    type: 3}
   bloodEffect: {fileID: 7515634647306772147, guid: b6be51001a0800f4abd4e30fe133548b,
+    type: 3}
+  bloodOffset: {x: 0, y: 0}
+  deathEffect: {fileID: 5593984272972194576, guid: 17a78a1fae94f5944a833dbf3d774e5e,
     type: 3}
   ranged: 0
   impactEffect: {fileID: 0}
