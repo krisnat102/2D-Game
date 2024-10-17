@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Death : MonoBehaviour
 {
-    [SerializeField] private float animationLength = 1f;
+    [SerializeField] private float animationLength;
     [Header("Behaviour")]
     [SerializeField] private bool destroy = true;
     [SerializeField] private GameObject objectToSpawnBeforeDeath;

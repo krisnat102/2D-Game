@@ -25,6 +25,8 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
 
     const float GroundedRadius = .2f;
 
+    public bool IsGrounded { get => isGrounded; private set => isGrounded = value; }
+
     #endregion
 
     public void Start()
@@ -49,9 +51,9 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
         {
             if (colliders[i].gameObject != gameObject)
             {
-                isGrounded = true;
+                IsGrounded = true;
             }
-            else isGrounded = false;
+            else IsGrounded = false;
         }
 
         int horizontalMove;
@@ -98,7 +100,7 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized; // calculates direction
         Vector2 force = direction * dataAI.speed * Time.deltaTime;
 
-        if (dataAI.jumpEnabled && isGrounded) //jump
+        if (dataAI.jumpEnabled && IsGrounded) //jump
         {
             if (direction.y > dataAI.jumpNodeHeightRequirement)
             {

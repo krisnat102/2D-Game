@@ -28,7 +28,6 @@ namespace Krisnat
                     if (!enemy.Dead)
                     {
                         enemy.gameObject.SetActive(true);
-                        Debug.Log(enemy.name);
                     }
                 }
             }

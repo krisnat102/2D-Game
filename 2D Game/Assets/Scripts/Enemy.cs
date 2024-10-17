@@ -103,6 +103,8 @@ public class Enemy : MonoBehaviour
         else if (AttackAIRange.InRange && !Data.ranged && !Data.boss) Attack(true);
         else if (AttackAIRange.InSight && Data.ranged && !Data.boss) Attack(false);
 
+        #region Facing Direction
+
         if (Data.lookAtPlayer && DetectAIRange.Alerted && !isDashing)
         {
             if (Data.facingDirection)
@@ -131,6 +133,10 @@ public class Enemy : MonoBehaviour
 
         FacingDirection = transform.localScale.x > 0 ? 1 : -1;
 
+        #endregion
+
+        #region AI
+
         if (enemyAI != null)
         {
             if (DetectAIRange.Alerted || AttackAIRange.Alerted)
@@ -147,6 +153,7 @@ public class Enemy : MonoBehaviour
             }
             else aiPath.enabled = false;
         }
+        
 
         if (rooted)
         {
@@ -201,8 +208,10 @@ public class Enemy : MonoBehaviour
                 animator.SetBool("sleep", true);
             }
         }
+        #endregion
 
-        if (isPatrolling)
+        #region Patrol
+        if (isPatrolling && enemyAI.IsGrounded)
         {
             if ((transform.position.x <= leftPatrolBarrierPositionX || transform.position.x >= rightPatrolBarrierPositionX) && !stopPatrol)
             {
@@ -234,6 +243,9 @@ public class Enemy : MonoBehaviour
                 rb.velocity = new Vector2(-Data.patrolSpeed, 0);
             }
         }
+        #endregion
+
+        #region Follow Player Y Position
 
         if (matchPlayerY && !aiPath.enabled)
         {
@@ -250,6 +262,10 @@ public class Enemy : MonoBehaviour
                 rb.velocity = new Vector2(0, -6);
             }
         }
+
+        #endregion
+
+        #region Animations
 
         if (!Data.boss)
         {
@@ -282,6 +298,8 @@ public class Enemy : MonoBehaviour
                 if (ContainsParam(animator, "attack")) animator.SetBool("attack", true);
             }
         }
+
+        #endregion
 
         if (fixRotation) transform.localScale = new Vector2(previousRotationX, transform.localScale.y);
 
