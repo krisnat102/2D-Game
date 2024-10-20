@@ -24,7 +24,7 @@ MonoBehaviour:
   offsetY: -1
   damageType: 0
   attackAnimationLength: 0.3
-  damageTriggerTime: 0.3
+  damageTriggerTime: 0.67
   HitBox:
     serializedVersion: 2
     x: 0
@@ -72,6 +72,7 @@ MonoBehaviour:
   deathEffect: {fileID: 8203424293245319661, guid: 6e63785d1b2a0c840aaf40ef047882a6,
     type: 3}
   ranged: 1
+  aimDelay: 0.05
   impactEffect: {fileID: 327621282901348051, guid: 6f26da2382b8aa64392312a21eb22c01,
     type: 3}
   rangedDamage: 15

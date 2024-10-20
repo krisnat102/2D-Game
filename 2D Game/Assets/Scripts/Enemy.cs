@@ -544,7 +544,7 @@ public class Enemy : MonoBehaviour
         if (dashCooldown || sleeping) return;
 
         if (ContainsParam(animator, "dash")) animator.SetBool("dash", true);
-        StartCoroutine(StartIdleCoroutine(0.25f, "dash"));
+        StartCoroutine(StartIdleCoroutine(Data.dashDuration, "dash"));
 
         dashCooldown = true;
         //StartCoroutine(DashCooldownCoroutine(Data.dashCooldown));
@@ -575,7 +575,7 @@ public class Enemy : MonoBehaviour
 
             if (attackProjectile.activeInHierarchy == false)
             {
-                StartCoroutine(SetObjectActiveCoroutine(0.2f, attackProjectile));
+                attackProjectile.SetActive(true);
             }
 
         }
