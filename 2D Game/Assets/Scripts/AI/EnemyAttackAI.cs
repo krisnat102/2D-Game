@@ -65,12 +65,12 @@ public class EnemyAttackAI : MonoBehaviour
             }
         }
 
-        if (InRange && enemy.data.flipWhenPlayerIsRight && playerTrans.position.x > enemy.transform.position.x && flipTracker)
+        if (InRange && enemy.Data.flipWhenPlayerIsRight && playerTrans.position.x > enemy.transform.position.x && flipTracker)
         {
             Flip();
             flipTracker = false;
         }
-        if (InRange && enemy.data.flipWhenPlayerIsRight && playerTrans.position.x < enemy.transform.position.x && !flipTracker)
+        if (InRange && enemy.Data.flipWhenPlayerIsRight && playerTrans.position.x < enemy.transform.position.x && !flipTracker)
         {
             Flip();
             flipTracker = true;

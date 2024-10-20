@@ -90,6 +90,8 @@ public class EnemyData : ScriptableObject
     [Header("Ranged")]
     public bool ranged = false;
     [HideInInspector]
+    public float aimDelay = 0.1f;
+    [HideInInspector]
     public GameObject impactEffect;
     [HideInInspector]
     public float rangedDamage;
@@ -116,6 +118,7 @@ public class Enemy_Editor : Editor
         {
             script.impactEffect = EditorGUILayout.ObjectField("Impact Effect", script.impactEffect, typeof(GameObject)) as GameObject;
             script.rangedDamage = EditorGUILayout.FloatField("Damage", script.rangedDamage);
+            script.aimDelay = EditorGUILayout.FloatField("Aim Delay", script.aimDelay);
             script.rangedSpeed = EditorGUILayout.FloatField("Projectile Speed", script.rangedSpeed);
             script.distanceOffset = EditorGUILayout.FloatField("Distance Offset", script.distanceOffset);
         }

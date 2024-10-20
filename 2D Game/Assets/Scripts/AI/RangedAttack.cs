@@ -24,15 +24,15 @@ public class RangedAttack : MonoBehaviour
 
         arrowRB = GetComponent<Rigidbody2D>();
         
-        float offset = Mathf.Abs(enemy.PlayerTrans.position.x - transform.position.x) / enemy.Data.distanceOffset;
+        float offset = Mathf.Abs(enemy.OldPlayerPosition.x - transform.position.x) / enemy.Data.distanceOffset;
 
         if (directedParabola)
         {
-            direction = new Vector2(enemy.PlayerTrans.position.x - transform.position.x, enemy.PlayerTrans.position.y - transform.position.y + offset).normalized;
+            direction = new Vector2(enemy.OldPlayerPosition.x - transform.position.x, enemy.OldPlayerPosition.y - transform.position.y + offset).normalized;
         }
         else if (directed)
         {
-            direction = new Vector2(enemy.PlayerTrans.position.x - transform.position.x, enemy.PlayerTrans.position.y - transform.position.y).normalized;
+            direction = new Vector2(enemy.OldPlayerPosition.x - transform.position.x, enemy.OldPlayerPosition.y - transform.position.y).normalized;
         }
         else
         {
@@ -61,7 +61,7 @@ public class RangedAttack : MonoBehaviour
             Player player = hitInfo.GetComponent<Player>();
             if (player)
             {
-                player.Core.GetCoreComponent<DamageReceiver>().Damage(enemy.data.rangedDamage * enemy.EnemyLevelScale, enemy.data.damageType);
+                player.Core.GetCoreComponent<DamageReceiver>().Damage(enemy.Data.rangedDamage * enemy.EnemyLevelScale, enemy.Data.damageType);
             }
             if (enemy.Data.impactEffect) Instantiate(enemy.Data.impactEffect, transform.position, Quaternion.identity);
 

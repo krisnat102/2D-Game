@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private AudioSource bossMusicPlayer;
 
     [Header("Other")]
-    public EnemyData data;
+    [SerializeField] private EnemyData data;
     [SerializeField] private GameObject deathEffect;
     [SerializeField] private GameObject bossSpecialProjectile;
     [SerializeField] private Transform playerTrans;
@@ -65,6 +65,7 @@ public class Enemy : MonoBehaviour
     private float previousRotationX;
     private Vector2 offset;
     private Vector2 previousPosition;
+    private Vector2 oldPlayerPosition;
     private EnemyAI enemyAI;
     private AIPath aiPath;
     private Rigidbody2D rb;
@@ -90,6 +91,7 @@ public class Enemy : MonoBehaviour
     public EnemyAttackAI DashAIRange { get => dashAIRange; private set => dashAIRange = value; }
     public bool SpecialRangedAttackCooldown { get => specialRangedAttackCooldown; private set => specialRangedAttackCooldown = value; }
     public bool Dead { get; private set; }
+    public Vector2 OldPlayerPosition { get => oldPlayerPosition; private set => oldPlayerPosition = value; }
     #endregion
 
     #region Unity Methods
@@ -269,34 +271,44 @@ public class Enemy : MonoBehaviour
 
         if (!Data.boss)
         {
-            if (rb.velocity.x != 0 && !attacking)
+            if (!attacking && ContainsParam(animator, "idle"))
             {
-                if (ContainsParam(animator, "run")) animator.SetBool("run", true);
-                if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
-            }
-            else if (!attacking)
-            {
-                if (ContainsParam(animator, "run")) animator.SetBool("run", false);
-                if (ContainsParam(animator, "idle")) animator.SetBool("idle", true);
-            }
-            if (rb.velocity.y != 0 && !attacking)
-            {
-                if (ContainsParam(animator, "jump")) animator.SetBool("jump", true);
-                if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
-            }
-            else if (!attacking)
-            {
-                if (ContainsParam(animator, "jump")) animator.SetBool("jump", false);
-                if (ContainsParam(animator, "idle")) animator.SetBool("idle", true);
+                if (ContainsParam(animator, "run"))
+                {
+                    if (rb.velocity.x != 0)
+                    {
+                        animator.SetBool("run", true);
+                        animator.SetBool("idle", false);
+                    }
+                    else
+                    {
+                        animator.SetBool("run", false);
+                        animator.SetBool("idle", true);
+                    }
+                }
+                
+                if (ContainsParam(animator, "jump"))
+                {
+                    if (rb.velocity.y != 0)
+                    {
+                        animator.SetBool("jump", true);
+                        animator.SetBool("idle", false);
+                    }
+                    else
+                    {
+                        animator.SetBool("jump", false);
+                        animator.SetBool("idle", true);
+                    }
+                }
             }
 
-            if (attacking)
-            {
+            if (attacking) {
                 if (ContainsParam(animator, "jump")) animator.SetBool("jump", false);
                 if (ContainsParam(animator, "run")) animator.SetBool("run", false);
                 if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
                 if (ContainsParam(animator, "attack")) animator.SetBool("attack", true);
             }
+
         }
 
         #endregion
@@ -384,9 +396,6 @@ public class Enemy : MonoBehaviour
                     return;
                 }
 
-                if (ContainsParam(animator, "Hurt")) animator.SetTrigger("Hurt");
-
-
                 if (ContainsParam(animator, "hurt")) animator.SetBool("hurt", true);
                 if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
                 StartCoroutine(StartIdleCoroutine(0.25f, "hurt"));
@@ -466,20 +475,18 @@ public class Enemy : MonoBehaviour
         //StartCoroutine(AttackCooldownCoroutine(Data.attackSpeed));
         StartCoroutine(ChangeBoolCoroutine(Data.attackSpeed, newValue => attackCooldown = newValue[0], new[] { false }));
 
-        if (ContainsParam(animator, "Attack")) animator.SetTrigger("Attack");
-
         if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
+
+        StartCoroutine(AttackSpawnCoroutine(Data.damageTriggerTime, meleeRanged));
 
         if (meleeRanged)
         {
-            StartCoroutine(AttackSpawnCoroutine(Data.damageTriggerTime));
-
             if (ContainsParam(animator, "attack")) animator.SetBool("attack", true);
         }
         else if (!meleeRanged && AttackAIRange.InSight)
         {
-            StartCoroutine(AttackSpawnBossRangedCoroutine(Data.damageTriggerTime));
-
+            OldPlayerPosition = playerTrans.position;
+            StartCoroutine(AimDelayCoroutine(Data.attackSpeed - Data.aimDelay));
             if (ContainsParam(animator, "ranged")) animator.SetBool("ranged", true);
 
             if (rangedAttackSound) StartCoroutine(PlayRangedAttackSoundCoroutine(Data.rangedAttackSoundDelay));
@@ -536,7 +543,8 @@ public class Enemy : MonoBehaviour
     {
         if (dashCooldown || sleeping) return;
 
-        animator.SetTrigger("Dash");
+        if (ContainsParam(animator, "dash")) animator.SetBool("dash", true);
+        StartCoroutine(StartIdleCoroutine(0.25f, "dash"));
 
         dashCooldown = true;
         //StartCoroutine(DashCooldownCoroutine(Data.dashCooldown));
@@ -570,7 +578,6 @@ public class Enemy : MonoBehaviour
                 StartCoroutine(SetObjectActiveCoroutine(0.2f, attackProjectile));
             }
 
-            return;
         }
         else if (Data.bossProjectile && bossRanged && FirePoint2)
         {
@@ -579,7 +586,8 @@ public class Enemy : MonoBehaviour
             if (cancelRangedAIRange.InRange)
             {
                 if (ContainsParam(animator, "ranged")) animator.SetBool("ranged", false);
-                if (ContainsParam(animator, "attack")) animator.SetBool("attack", false);
+
+                AttackHelper();
 
                 return;
             } 
@@ -603,17 +611,9 @@ public class Enemy : MonoBehaviour
             transform.position.x + (Data.HitBox.center.x * FacingDirection * -1),
             transform.position.y + Data.HitBox.center.y
         );
-
-        attackSound?.Play();
-
         detected = Physics2D.OverlapBoxAll(offset, Data.HitBox.size, 0f, Data.DetectableLayers);
-        
-        attacking = false;
 
-        if (data.fixRotationWhenAttacking) fixRotation = false;
-
-        if (ContainsParam(animator, "idle")) animator.SetBool("idle", true);
-        if (ContainsParam(animator, "attack")) animator.SetBool("attack", false);
+        AttackHelper();
 
         if (detected.Length == 0) return;
 
@@ -666,15 +666,16 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(time);
         boolSetter(newValue);
     }
-    IEnumerator AttackSpawnBossRangedCoroutine(float delay)
+    IEnumerator AttackSpawnCoroutine(float delay, bool type)
     {
         yield return new WaitForSeconds(delay);
-        AttackSpawn(true);
+        AttackSpawn(type);
     }
-    IEnumerator AttackSpawnCoroutine(float delay)
+
+    IEnumerator AimDelayCoroutine(float delay)
     {
         yield return new WaitForSeconds(delay);
-        AttackSpawn(false);
+        OldPlayerPosition = playerTrans.position;
     }
 
     IEnumerator SpecialRangedAttackSpawnCoroutine(float delay)
@@ -721,6 +722,20 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         rb.velocity = Vector2.zero;
+    }
+    #endregion
+
+    #region Helper Methods
+    private void AttackHelper()
+    {
+        if (ContainsParam(animator, "idle")) animator.SetBool("idle", true);
+        if (ContainsParam(animator, "attack")) animator.SetBool("attack", false);
+
+        attacking = false;
+
+        attackSound?.Play();
+
+        if (data.fixRotationWhenAttacking) fixRotation = false;
     }
     #endregion
 
