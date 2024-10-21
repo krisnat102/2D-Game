@@ -302,7 +302,7 @@ public class Enemy : MonoBehaviour
                 }
             }
 
-            if (attacking) {
+            if (animator.GetBool("attack")) {
                 if (ContainsParam(animator, "jump")) animator.SetBool("jump", false);
                 if (ContainsParam(animator, "run")) animator.SetBool("run", false);
                 if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
@@ -468,6 +468,8 @@ public class Enemy : MonoBehaviour
         if (attackCooldown || sleeping) return;
 
         attacking = true;
+
+        AttackAnimationHelper();
 
         if (Data.fixRotationWhenAttacking) fixRotation = true;
 
@@ -696,12 +698,6 @@ public class Enemy : MonoBehaviour
         rangedAttackSound.Play();
     }
 
-    IEnumerator SetObjectActiveCoroutine(float delay, GameObject objectToSetActive)
-    {
-        yield return new WaitForSeconds(delay);
-        objectToSetActive.SetActive(true);
-    }
-
     IEnumerator StartIdleCoroutine(float delay, string boolToDisable)
     {
         yield return new WaitForSeconds(delay);
@@ -728,14 +724,16 @@ public class Enemy : MonoBehaviour
     #region Helper Methods
     private void AttackHelper()
     {
-        if (ContainsParam(animator, "idle")) animator.SetBool("idle", true);
-        if (ContainsParam(animator, "attack")) animator.SetBool("attack", false);
-
-        attacking = false;
-
         attackSound?.Play();
 
-        if (data.fixRotationWhenAttacking) fixRotation = false;
+        if (Data.fixRotationWhenAttacking) fixRotation = false;
+    }
+
+    private void AttackAnimationHelper()
+    {
+        StartCoroutine(StartIdleCoroutine(Data.attackAnimationLength, "attack"));
+
+        attacking = false;
     }
     #endregion
 

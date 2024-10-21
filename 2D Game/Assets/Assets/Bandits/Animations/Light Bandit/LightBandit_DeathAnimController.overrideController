@@ -1,0 +1,13 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: LightBandit_DeathAnimController
+  m_Controller: {fileID: 9100000, guid: 236bd4bab9391574b9c1418a6ca92e87, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 55faae349fdbe41439e1783692386ec5, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e38cb418ab88f9346b0ebccb770105ee, type: 2}

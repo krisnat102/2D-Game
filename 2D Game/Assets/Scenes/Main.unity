@@ -69560,7 +69560,6 @@ MonoBehaviour:
   animationLength: 3.5
   destroy: 0
   objectToSpawnBeforeDeath: {fileID: 0}
-  fade: 1
   fadeTime: 1
   ui: 1
   uiCanvasGroup: 0
@@ -77799,6 +77798,16 @@ PrefabInstance:
       propertyPath: TriggerModule.primitives.Array.data[0]
       value: 
       objectReference: {fileID: 1028281677}
+    - target: {fileID: 3221316277637357432, guid: 2594cf213d0bcfc449f7f40e0dc57516,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221316277637357432, guid: 2594cf213d0bcfc449f7f40e0dc57516,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3327966286233161930, guid: 2594cf213d0bcfc449f7f40e0dc57516,
         type: 3}
       propertyPath: playerTrans
@@ -77823,6 +77832,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LightBandit
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499116942018295165, guid: 2594cf213d0bcfc449f7f40e0dc57516,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4840909459786244085, guid: 2594cf213d0bcfc449f7f40e0dc57516,
         type: 3}
@@ -78305,7 +78319,7 @@ PrefabInstance:
     - target: {fileID: 7273218283433648993, guid: f922ca3b6ee87474db025b9327359bbb,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8016343760922348855, guid: f922ca3b6ee87474db025b9327359bbb,
         type: 3}

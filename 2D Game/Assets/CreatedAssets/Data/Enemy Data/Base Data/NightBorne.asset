@@ -15,7 +15,7 @@ MonoBehaviour:
   level: 1
   enemyName: Nightborne
   maxHP: 120
-  attackSpeed: 1
+  attackSpeed: 1.2
   speed: 200
   damage: 22
   knockbackModifier: 20
@@ -72,6 +72,7 @@ MonoBehaviour:
   deathEffect: {fileID: 5593984272972194576, guid: 17a78a1fae94f5944a833dbf3d774e5e,
     type: 3}
   ranged: 0
+  aimDelay: 0.1
   impactEffect: {fileID: 0}
   rangedDamage: 0
   rangedSpeed: 0
