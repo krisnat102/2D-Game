@@ -35,6 +35,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   rootWhenAttacking: 1
+  commitDirectionWhenAttacking: 1
   moveWhenAttacking: 1
   direction: {x: 7, y: 0}
   velocity: 50
@@ -66,7 +67,7 @@ MonoBehaviour:
   specialRangedAttackCooldown: 0
   bossMusic: {fileID: 0}
   wakeUpTime: 0
-  bloodEffect: {fileID: 7515634647306772147, guid: b6be51001a0800f4abd4e30fe133548b,
+  bloodEffect: {fileID: 7515634647306772147, guid: f49121551cc85bb47902d511bca3f905,
     type: 3}
   bloodOffset: {x: 0, y: 0}
   deathEffect: {fileID: 252134265550320091, guid: 0710ad3f266bbf640af8a670dcc4bfd9,

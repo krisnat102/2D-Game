@@ -80,7 +80,7 @@ namespace Spells
                 }
                 else
                 {
-                    Destroy(gameObject);
+                    gameObject.SetActive(false);
                 }
             }
         }

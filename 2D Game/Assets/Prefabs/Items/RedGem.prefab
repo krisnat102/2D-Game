@@ -286,7 +286,7 @@ Animator:
   m_GameObject: {fileID: 5132546226004538021}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1161009f080647f4e8b02ae84695107f, type: 2}
+  m_Controller: {fileID: 9100000, guid: 43f02ed556c3b394fb40ce0a00c3be82, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -368,9 +368,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: de6d08cc9bf434545b33e2407bbacf2d, type: 2}
   forSale: 0
-  price: 0
   chest: 0
+  openTime: 0
+  price: 0
   offset: 0.2
+  note: 0
+  noteText: 
+  noteUIPreset: {fileID: 0}
 --- !u!1 &5973766389468152110
 GameObject:
   m_ObjectHideFlags: 0

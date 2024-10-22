@@ -2,6 +2,7 @@ using UnityEngine.Audio;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
 
 public class AudioManager : MonoBehaviour
 {
@@ -99,6 +100,8 @@ public class AudioManager : MonoBehaviour
         {
             musicMixer.SetFloat("volume", -80);
             sfxMixer.SetFloat("volume", -80);
+            Debug.Log(musicSave);
+            Debug.Log(sfxSave);
         }
         else
         {
@@ -110,32 +113,24 @@ public class AudioManager : MonoBehaviour
     }
     public void MusicAudio(float volume)
     {
+        musicSave = volume;
+
         if (!muteTracker)
         {
             musicMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
 
-            musicSave = volume;
-
             SaveAudioSettings();
         }
-        else
-        {
-            musicSave = volume;
-        } 
     }
     public void SFXAudio(float volume)
     {
+        sfxSave = volume;
+
         if (!muteTracker)
         {
             sfxMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
 
-            sfxSave = volume;
-
             SaveAudioSettings();
-        }
-        else
-        {
-            sfxSave = volume;
         }
     }
         #endregion

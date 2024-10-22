@@ -96,7 +96,7 @@ Animator:
   m_GameObject: {fileID: 252134265550320091}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 25a974c4f3a0d434fbe4e58c4cbd3795, type: 2}
+  m_Controller: {fileID: 22100000, guid: 8deb0790c6616aa40aaccaf6bb1c237f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f3b9dbedd198143aa0ac9e1796d6b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationLength: 10
+  animationLength: 5
   destroy: 0
   objectToSpawnBeforeDeath: {fileID: 0}
   fadeTime: 1

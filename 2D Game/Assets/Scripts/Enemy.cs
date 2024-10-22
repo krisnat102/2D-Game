@@ -8,6 +8,7 @@ using Spells;
 using System.Collections;
 using Krisnat;
 using System;
+using UnityEditor.Experimental.GraphView;
 
 public class Enemy : MonoBehaviour
 {
@@ -63,6 +64,7 @@ public class Enemy : MonoBehaviour
     private float leftPatrolBarrierPositionX;
     private float rightPatrolBarrierPositionX;
     private float previousRotationX;
+    private float previousLocalScaleX;
     private Vector2 offset;
     private Vector2 previousPosition;
     private Vector2 oldPlayerPosition;
@@ -107,7 +109,7 @@ public class Enemy : MonoBehaviour
 
         #region Facing Direction
 
-        if (Data.lookAtPlayer && DetectAIRange.Alerted && !isDashing)
+        if (Data.lookAtPlayer && DetectAIRange.Alerted && !isDashing && !(Data.commitDirectionWhenAttacking && attacking))
         {
             if (Data.facingDirection)
             {
@@ -131,6 +133,12 @@ public class Enemy : MonoBehaviour
                     transform.localScale = new Vector3(1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 }
             }
+        }
+
+        if (attacking && Data.commitDirectionWhenAttacking)
+        {
+            transform.localScale = new Vector3(previousLocalScaleX, transform.localScale.y, transform.localScale.z);
+            previousLocalScaleX = transform.localScale.x;
         }
 
         FacingDirection = transform.localScale.x > 0 ? 1 : -1;
@@ -336,6 +344,7 @@ public class Enemy : MonoBehaviour
         if (leftPatrolBarrier) leftPatrolBarrierPositionX = leftPatrolBarrier.transform.position.x;
         isPatrolling = Data.patrol;
         cameraShake = CameraShake.instance;
+        previousLocalScaleX = transform.localScale.x;
         #endregion
         
         if (Data.dummy) return;
@@ -387,7 +396,7 @@ public class Enemy : MonoBehaviour
                 }
                 if (Data.bloodEffect)
                 {
-                    Instantiate(Data.bloodEffect, new Vector3(transform.position.x + UnityEngine.Random.Range(-1,1) + Data.bloodOffset.x, transform.position.y + UnityEngine.Random.Range(-1, 1) + Data.bloodOffset.y, transform.position.z), Quaternion.identity);
+                    Instantiate(Data.bloodEffect, new Vector3(transform.position.x + UnityEngine.Random.Range(-1,1)/5 + Data.bloodOffset.x, transform.position.y + UnityEngine.Random.Range(-1, 1)/5 + Data.bloodOffset.y, transform.position.z), Quaternion.identity);
                 }
 
                 if (hp <= 0 && !Data.dummy)
@@ -418,7 +427,7 @@ public class Enemy : MonoBehaviour
 
         float knockback = damage * Data.knockbackModifier;
 
-        if (playerTrans.position.x < transform.position.x + 0.5f)
+        if (playerTrans.position.x < transform.position.x)
         {
             rb.AddForce(transform.up * knockback, ForceMode2D.Force);
             rb.AddForce(transform.right * knockback, ForceMode2D.Force);
@@ -459,6 +468,7 @@ public class Enemy : MonoBehaviour
         if (deathEffect)
         {
             deathEffect.SetActive(true);
+            deathEffect.transform.localScale = transform.localScale;
             deathEffect.transform.parent = null;
         }
     }
@@ -733,7 +743,7 @@ public class Enemy : MonoBehaviour
     {
         StartCoroutine(StartIdleCoroutine(Data.attackAnimationLength, "attack"));
 
-        attacking = false;
+        StartCoroutine(ChangeBoolCoroutine(Data.attackAnimationLength, newValue => attacking = newValue[0], new[] { false }));
     }
     #endregion
 

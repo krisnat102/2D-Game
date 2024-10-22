@@ -7,5 +7,7 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ArcaneArcher_DeathAnimatorController
-  m_Controller: {fileID: 0}
-  m_Clips: []
+  m_Controller: {fileID: 9100000, guid: 81f1eeaf611373948bdf87cd3aff32b4, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 0ced9a253da0cca428c73f8edf384018, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d2937f05dcb4eb94a9bff3e0548d9db4, type: 2}

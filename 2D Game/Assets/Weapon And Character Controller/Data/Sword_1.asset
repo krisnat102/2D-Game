@@ -51,13 +51,13 @@ MonoBehaviour:
         name: KnockBackData
         attackData:
         - name: Attack 1
-          <Angle>k__BackingField: {x: 1, y: 1}
+          <Angle>k__BackingField: {x: -1, y: 1}
           <Strength>k__BackingField: 10
         - name: Attack 2
-          <Angle>k__BackingField: {x: 1, y: 1}
+          <Angle>k__BackingField: {x: -1, y: 1}
           <Strength>k__BackingField: 10
         - name: Attack 3
-          <Angle>k__BackingField: {x: 1, y: 3}
+          <Angle>k__BackingField: {x: -1, y: 3}
           <Strength>k__BackingField: 20
     - rid: 2516071382426845184
       type: {class: PoiseDamageData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}

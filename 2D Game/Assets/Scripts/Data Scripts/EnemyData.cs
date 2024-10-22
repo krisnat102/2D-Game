@@ -34,6 +34,7 @@ public class EnemyData : ScriptableObject
 
     [Header("Attack Behaviour")]
     public bool rootWhenAttacking;
+    public bool commitDirectionWhenAttacking;
     public bool moveWhenAttacking;
     public Vector2 direction;
     public float velocity;

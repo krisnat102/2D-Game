@@ -77,7 +77,7 @@ namespace Inventory
                 ForSale();
 
                 InventoryManager.Instance.Add(item, true);
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
 
@@ -103,7 +103,6 @@ namespace Inventory
         {
             yield return new WaitForSeconds(time);
             InventoryManager.Instance.Add(item, boolean);
-
         }
     }
 }
