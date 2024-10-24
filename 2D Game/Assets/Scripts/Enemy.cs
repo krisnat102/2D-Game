@@ -8,7 +8,6 @@ using Spells;
 using System.Collections;
 using Krisnat;
 using System;
-using UnityEditor.Experimental.GraphView;
 
 public class Enemy : MonoBehaviour
 {
@@ -221,36 +220,39 @@ public class Enemy : MonoBehaviour
         #endregion
 
         #region Patrol
-        if (isPatrolling && enemyAI.IsGrounded)
+        if (isPatrolling)
         {
-            if ((transform.position.x <= leftPatrolBarrierPositionX || transform.position.x >= rightPatrolBarrierPositionX) && !stopPatrol)
+            if (!(enemyAI && !enemyAI.IsGrounded))
             {
-                rooted = true;
-                stopPatrol = true;
-                
-                //StartCoroutine(StopRootedCoroutine(Data.patrolPauseTime));
-                StartCoroutine(ChangeBoolCoroutine(Data.patrolPauseTime, newValue => rooted = newValue[0], new[] { false }));
-                //StartCoroutine(StartPatrolCoroutine(Data.patrolPauseTime + 1));
-                StartCoroutine(ChangeBoolCoroutine(Data.patrolPauseTime + 1, newValue => stopPatrol = newValue[0], new[] { false }));
-
-                patrollingDirection = !patrollingDirection;
-
-                if (transform.position.x >= rightPatrolBarrierPositionX && transform.localScale.x < 0)
+                if ((transform.position.x <= leftPatrolBarrierPositionX || transform.position.x >= rightPatrolBarrierPositionX) && !stopPatrol)
                 {
-                    StartCoroutine(FlipCoroutine(Data.patrolPauseTime));
+                    rooted = true;
+                    stopPatrol = true;
+
+                    //StartCoroutine(StopRootedCoroutine(Data.patrolPauseTime));
+                    StartCoroutine(ChangeBoolCoroutine(Data.patrolPauseTime, newValue => rooted = newValue[0], new[] { false }));
+                    //StartCoroutine(StartPatrolCoroutine(Data.patrolPauseTime + 1));
+                    StartCoroutine(ChangeBoolCoroutine(Data.patrolPauseTime + 1, newValue => stopPatrol = newValue[0], new[] { false }));
+
+                    patrollingDirection = !patrollingDirection;
+
+                    if (transform.position.x >= rightPatrolBarrierPositionX && transform.localScale.x < 0)
+                    {
+                        StartCoroutine(FlipCoroutine(Data.patrolPauseTime));
+                    }
+                    else if (transform.position.x <= leftPatrolBarrierPositionX && transform.localScale.x > 0)
+                    {
+                        StartCoroutine(FlipCoroutine(Data.patrolPauseTime));
+                    }
                 }
-                else if (transform.position.x <= leftPatrolBarrierPositionX && transform.localScale.x > 0)
+                if (patrollingDirection && !rooted)
                 {
-                    StartCoroutine(FlipCoroutine(Data.patrolPauseTime));
+                    rb.velocity = new Vector2(Data.patrolSpeed, 0);
                 }
-            }
-            if (patrollingDirection && !rooted)
-            {
-                rb.velocity = new Vector2(Data.patrolSpeed, 0);
-            }
-            else if (!rooted)
-            {
-                rb.velocity = new Vector2(-Data.patrolSpeed, 0);
+                else if (!rooted)
+                {
+                    rb.velocity = new Vector2(-Data.patrolSpeed, 0);
+                }
             }
         }
         #endregion

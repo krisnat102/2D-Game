@@ -15,7 +15,7 @@ MonoBehaviour:
   level: 1
   enemyName: Eagle
   maxHP: 45
-  attackSpeed: 1
+  attackSpeed: 1.4
   speed: 200
   damage: 20
   knockbackModifier: 25
@@ -24,6 +24,7 @@ MonoBehaviour:
   offsetY: 1
   damageType: 1
   attackAnimationLength: 0.3
+  damageTriggerTime: 0.3
   HitBox:
     serializedVersion: 2
     x: 0.2
@@ -33,6 +34,12 @@ MonoBehaviour:
   DetectableLayers:
     serializedVersion: 2
     m_Bits: 1024
+  rootWhenAttacking: 1
+  commitDirectionWhenAttacking: 0
+  moveWhenAttacking: 0
+  direction: {x: 0, y: 0}
+  velocity: 0
+  movementDelay: 0
   canDash: 0
   dashCooldown: 0
   dashStrength: 0
@@ -41,15 +48,15 @@ MonoBehaviour:
   maxCoinsDropped: 34
   itemDropChance: 1
   spellDropChance: 0
-  itemDrop: {fileID: 11400000, guid: 13d00a2078f201747b00e801dd92ffdf, type: 2}
+  itemDrop: {fileID: 0}
   spellDrop: {fileID: 0}
   patrolPauseTime: 2
   patrolSpeed: 8
-  lookAtPlayer: 0
+  dummy: 0
+  lookAtPlayer: 1
   flipWhenPlayerIsRight: 1
   facingDirection: 1
-  rootWhenAttacking: 0
-  fixRotationWhenAttacking: 0
+  fixRotationWhenAttacking: 1
   patrol: 1
   boss: 0
   bossProjectile: {fileID: 0}
@@ -60,11 +67,13 @@ MonoBehaviour:
   specialRangedAttackCooldown: 0
   bossMusic: {fileID: 0}
   wakeUpTime: 0
-  deathEffect: {fileID: 489641561373093210, guid: 95e6e7e3a2c75aa48a778d33175c94e8,
-    type: 3}
   bloodEffect: {fileID: 7515634647306772147, guid: b6be51001a0800f4abd4e30fe133548b,
     type: 3}
+  bloodOffset: {x: 0, y: 0}
+  deathEffect: {fileID: 489641561373093210, guid: 95e6e7e3a2c75aa48a778d33175c94e8,
+    type: 3}
   ranged: 0
+  aimDelay: 0.1
   impactEffect: {fileID: 0}
   rangedDamage: 0
   rangedSpeed: 0

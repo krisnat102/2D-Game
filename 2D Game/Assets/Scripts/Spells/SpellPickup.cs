@@ -76,7 +76,7 @@ namespace Spells
 
                 if (chest)
                 {
-                    animator?.SetTrigger("Open");
+                    animator?.SetTrigger("open");
                 }
                 else
                 {
