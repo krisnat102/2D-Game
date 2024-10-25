@@ -479,11 +479,10 @@ public class Enemy : MonoBehaviour
 
         StartCoroutine(AttackSpawnCoroutine(Data.damageTriggerTime, meleeRanged));
 
-        if (meleeRanged)
-        {
-            if (ContainsParam(animator, "attack")) animator.SetBool("attack", true);
-        }
-        else if (!meleeRanged && AttackAIRange.InSight)
+        
+        if (ContainsParam(animator, "attack")) animator.SetBool("attack", true);
+        
+        if (!meleeRanged && AttackAIRange.InSight)
         {
             OldPlayerPosition = playerTrans.position;
             StartCoroutine(AimDelayCoroutine(Data.attackSpeed - Data.aimDelay));
@@ -618,9 +617,11 @@ public class Enemy : MonoBehaviour
         }
 
         offset.Set(
-            transform.position.x + (Data.HitBox.center.x * FacingDirection * -1 * calibrate),
+            transform.position.x + (Data.HitBox.center.x * FacingDirection * calibrate * - 1),
             transform.position.y + Data.HitBox.center.y
         );
+        
+
         detected = Physics2D.OverlapBoxAll(offset, Data.HitBox.size, 0f, Data.DetectableLayers);
 
         AttackHelper();

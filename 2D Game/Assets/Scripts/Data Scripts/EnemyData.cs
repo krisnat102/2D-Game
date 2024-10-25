@@ -33,6 +33,8 @@ public class EnemyData : ScriptableObject
     public LayerMask DetectableLayers;
 
     [Header("Attack Behaviour")]
+    public bool fixRotationWhenAttacking;
+    public bool fixLeftAttack;
     public bool rootWhenAttacking;
     public bool commitDirectionWhenAttacking;
     public bool moveWhenAttacking;
@@ -64,7 +66,6 @@ public class EnemyData : ScriptableObject
     public bool dummy = false;
     public bool lookAtPlayer;
     public bool facingDirection;
-    public bool fixRotationWhenAttacking;
     public bool patrol;
 
     [Header("Boss")]

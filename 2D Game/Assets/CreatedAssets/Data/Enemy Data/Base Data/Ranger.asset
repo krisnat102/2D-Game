@@ -23,7 +23,7 @@ MonoBehaviour:
   offsetX2: 1.2
   offsetY: -1
   damageType: 0
-  attackAnimationLength: 0.45
+  attackAnimationLength: 0.9
   damageTriggerTime: 0.8
   HitBox:
     serializedVersion: 2
@@ -34,7 +34,10 @@ MonoBehaviour:
   DetectableLayers:
     serializedVersion: 2
     m_Bits: 0
+  fixRotationWhenAttacking: 0
+  fixLeftAttack: 0
   rootWhenAttacking: 0
+  commitDirectionWhenAttacking: 0
   moveWhenAttacking: 0
   direction: {x: 0, y: 0}
   velocity: 0
@@ -53,9 +56,7 @@ MonoBehaviour:
   patrolSpeed: 0
   dummy: 0
   lookAtPlayer: 1
-  flipWhenPlayerIsRight: 0
-  facingDirection: 0
-  fixRotationWhenAttacking: 0
+  facingDirection: 1
   patrol: 0
   boss: 0
   bossProjectile: {fileID: 0}
