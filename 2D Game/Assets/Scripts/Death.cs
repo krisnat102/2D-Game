@@ -9,6 +9,8 @@ public class Death : MonoBehaviour
     [SerializeField] private float animationLength;
     [Header("Behaviour")]
     [SerializeField] private bool destroy = true;
+    [SerializeField] private bool adaptSize = true;
+    [SerializeField] private bool adaptDirection = true;
     [SerializeField] private GameObject objectToSpawnBeforeDeath;
     [SerializeField] private float fadeTime;
 
@@ -23,6 +25,9 @@ public class Death : MonoBehaviour
     private PopUpUI popUp;
     private bool startFade = false;
     private TMP_Text text;
+
+    public bool AdaptSize { get => adaptSize; private set => adaptSize = value; }
+    public bool AdaptDirection { get => adaptDirection; private set => adaptDirection = value; }
 
     private void OnEnable()
     {

@@ -289,8 +289,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.12
-      minScalar: 0.08
+      scalar: 0.08
+      minScalar: 0.05
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -981,9 +981,9 @@ ParticleSystem:
       time: 0
       countCurve:
         serializedVersion: 2
-        minMaxState: 0
+        minMaxState: 3
         scalar: 0
-        minScalar: 30
+        minScalar: 0
         maxCurve:
           serializedVersion: 2
           m_Curve:
@@ -3849,7 +3849,7 @@ ParticleSystem:
         m_RotationOrder: 4
     minKillSpeed: 0
     maxKillSpeed: 10000
-    radiusScale: 5
+    radiusScale: 2
     collidesWith:
       serializedVersion: 2
       m_Bits: 4096
@@ -4858,7 +4858,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 333
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0

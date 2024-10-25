@@ -121,6 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationLength: 1.5
   destroy: 0
+  adaptSize: 0
   objectToSpawnBeforeDeath: {fileID: 0}
   fadeTime: 0
   ui: 0

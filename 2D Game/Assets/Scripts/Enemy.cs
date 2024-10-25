@@ -120,10 +120,13 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if (attacking && Data.commitDirectionWhenAttacking)
+        if (!attacking || !Data.commitDirectionWhenAttacking)
+        {
+            previousLocalScaleX = transform.localScale.x;
+        }
+        else
         {
             transform.localScale = new Vector3(previousLocalScaleX, transform.localScale.y, transform.localScale.z);
-            previousLocalScaleX = transform.localScale.x;
         }
 
         FacingDirection = transform.localScale.x > 0 ? 1 : -1;
@@ -431,9 +434,6 @@ public class Enemy : MonoBehaviour
     #region Actions
     private void Die()
     {
-        var coins = Instantiate(coinBurstParticleEffect.gameObject, transform.position, Quaternion.identity, particleContainer);
-
-        coins.GetComponent<ParticleSystem>().Emit(coinsDropped);
 
         if (Data.boss) Core.GameManager.Instance.DeactivateObject(4, hpBar.gameObject);
 
@@ -453,10 +453,18 @@ public class Enemy : MonoBehaviour
         Dead = true;
         gameObject.SetActive(false);
 
+        if(Data.maxCoinsDropped > 0)
+        {
+            var coins = GetComponentInChildren<CoinPickup>()?.gameObject;
+            coins.transform.parent = null;
+            coins.GetComponent<ParticleSystem>().Emit(coinsDropped);
+        }
+
         if (deathEffect)
         {
             deathEffect.SetActive(true);
-            deathEffect.transform.localScale = transform.localScale;
+            if (deathEffect.GetComponent<Death>().AdaptSize) deathEffect.transform.localScale = transform.localScale;
+            if (deathEffect.GetComponent<Death>().AdaptDirection) deathEffect.transform.localScale = new Vector2(deathEffect.transform.localScale.x * FacingDirection, deathEffect.transform.localScale.y);
             deathEffect.transform.parent = null;
         }
     }

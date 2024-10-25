@@ -34,7 +34,7 @@ MonoBehaviour:
   DetectableLayers:
     serializedVersion: 2
     m_Bits: 1024
-  fixRotationWhenAttacking: 1
+  fixRotationWhenAttacking: 0
   fixLeftAttack: 0
   rootWhenAttacking: 1
   commitDirectionWhenAttacking: 1

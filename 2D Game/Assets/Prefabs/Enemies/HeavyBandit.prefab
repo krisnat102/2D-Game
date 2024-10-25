@@ -265,7 +265,7 @@ RectTransform:
   m_Father: {fileID: 2530514759063741673}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -0, y: -0.33}
   m_SizeDelta: {x: -5.29599, y: -7.2547646}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -693,7 +693,6 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8825784662667367347}
   - {fileID: 3855256884526065895}
   - {fileID: 4748306808191338905}
   - {fileID: 5311271199019808452}
@@ -701,6 +700,7 @@ Transform:
   - {fileID: 8661937444344185991}
   - {fileID: 7451294829710987069}
   - {fileID: 1681028550079728255}
+  - {fileID: 8825784662667367347}
   - {fileID: 5649038165207979262}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1191,6 +1191,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CoinsBurst
+      objectReference: {fileID: 0}
+    - target: {fileID: 6683564807514147188, guid: 944564c67a0fb5a4697b7f2e5d6867e0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
