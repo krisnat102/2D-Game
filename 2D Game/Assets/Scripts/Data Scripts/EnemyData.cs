@@ -63,7 +63,6 @@ public class EnemyData : ScriptableObject
     [Header("Behaviour")]
     public bool dummy = false;
     public bool lookAtPlayer;
-    public bool flipWhenPlayerIsRight;
     public bool facingDirection;
     public bool fixRotationWhenAttacking;
     public bool patrol;

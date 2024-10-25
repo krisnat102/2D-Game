@@ -110,27 +110,13 @@ public class Enemy : MonoBehaviour
 
         if (Data.lookAtPlayer && DetectAIRange.Alerted && !isDashing && !(Data.commitDirectionWhenAttacking && attacking))
         {
-            if (Data.facingDirection)
+            if (playerTrans.position.x < transform.position.x)
             {
-                if (playerTrans.position.x < transform.position.x)
-                {
-                    transform.localScale = new Vector3(1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-                }
-                else if (playerTrans.position.x > transform.position.x)
-                {
-                    transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-                }
+                transform.localScale = new Vector3((Data.facingDirection ? 1 : -1) * -1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
             }
-            else
+            else if (playerTrans.position.x > transform.position.x)
             {
-                if (playerTrans.position.x < transform.position.x)
-                {
-                    transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-                }
-                else if (playerTrans.position.x > transform.position.x)
-                {
-                    transform.localScale = new Vector3(1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-                }
+                transform.localScale = new Vector3((Data.facingDirection ? 1 : -1) * 1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
             }
         }
 
@@ -621,8 +607,18 @@ public class Enemy : MonoBehaviour
         
         if(data.boss) cameraShake.ShakeCamera(0.5f, 1.2f);
 
+        int calibrate = 1;
+        if (FacingDirection == 1 && Data.fixRotationWhenAttacking)
+        {
+            calibrate = -1;
+        }
+        else if(Data.fixRotationWhenAttacking)
+        {
+            calibrate = 1;
+        }
+
         offset.Set(
-            transform.position.x + (Data.HitBox.center.x * FacingDirection * -1),
+            transform.position.x + (Data.HitBox.center.x * FacingDirection * -1 * calibrate),
             transform.position.y + Data.HitBox.center.y
         );
         detected = Physics2D.OverlapBoxAll(offset, Data.HitBox.size, 0f, Data.DetectableLayers);

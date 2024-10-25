@@ -35,7 +35,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   rootWhenAttacking: 1
-  commitDirectionWhenAttacking: 0
+  commitDirectionWhenAttacking: 1
   moveWhenAttacking: 0
   direction: {x: 0, y: 0}
   velocity: 0
@@ -54,8 +54,7 @@ MonoBehaviour:
   patrolSpeed: 8
   dummy: 0
   lookAtPlayer: 1
-  flipWhenPlayerIsRight: 1
-  facingDirection: 1
+  facingDirection: 0
   fixRotationWhenAttacking: 1
   patrol: 1
   boss: 0

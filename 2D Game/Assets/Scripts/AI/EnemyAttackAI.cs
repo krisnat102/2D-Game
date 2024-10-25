@@ -65,17 +65,6 @@ public class EnemyAttackAI : MonoBehaviour
                 else InSight = false;
             }
         }
-
-        if (InRange && enemy.Data.flipWhenPlayerIsRight && playerTrans.position.x > enemy.transform.position.x && flipTracker)
-        {
-            Flip();
-            flipTracker = false;
-        }
-        if (InRange && enemy.Data.flipWhenPlayerIsRight && playerTrans.position.x < enemy.transform.position.x && !flipTracker)
-        {
-            Flip();
-            flipTracker = true;
-        }
     }
     private void Start()
     {
