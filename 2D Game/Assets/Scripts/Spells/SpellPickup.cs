@@ -74,6 +74,8 @@ namespace Spells
                 itemPopUp.GetComponentsInChildren<Image>()[1].sprite = spell.icon;
                 itemPopUp.GetComponentInChildren<TMP_Text>().text = spell.spellName;
 
+                isPickedUp = true;
+
                 if (chest)
                 {
                     animator?.SetTrigger("open");

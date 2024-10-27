@@ -75,8 +75,6 @@ public class Enemy : MonoBehaviour
     private Player player;
     private Transform firePoint;
     private GameObject arrow;
-    private ParticleSystem coinBurstParticleEffect;
-    private Transform particleContainer;
     private CameraShake cameraShake;
     #endregion
 
@@ -323,10 +321,8 @@ public class Enemy : MonoBehaviour
         #region Variable Getting and Finding
         enemyAI = GetComponentInChildren<EnemyAI>();
         aiPath = GetComponentInChildren<AIPath>();
-        coinBurstParticleEffect = GetComponentInChildren<ParticleSystem>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
-        particleContainer = GameObject.FindGameObjectWithTag("ParticleContainer").transform;
         flip = ContainsParam(animator, "Flip");
         FirePoint = gameObject.transform.Find("FirePoint");
         FirePoint2 = gameObject.transform.Find("FirePoint2");
@@ -458,6 +454,7 @@ public class Enemy : MonoBehaviour
             var coins = GetComponentInChildren<CoinPickup>()?.gameObject;
             coins.transform.parent = null;
             coins.GetComponent<ParticleSystem>().Emit(coinsDropped);
+            Debug.Log(coinsDropped);
         }
 
         if (deathEffect)

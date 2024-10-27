@@ -57,10 +57,12 @@ namespace Spells
             GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
             SpellController spellController = button.GetComponent<SpellController>();
 
+            var spell = spellController.GetSpell();
+
             Destroy(gameObject);
 
-            SpellManager.Instance.SpellsBar.Remove(spellController.GetSpell());
-            Debug.Log(spellController.GetSpell().name);
+            SpellManager.Instance.SpellsBar.Remove(spell);
+            SpellManager.Instance.AbilitiesBar.Remove(spell);
         }
 
         public void Description()

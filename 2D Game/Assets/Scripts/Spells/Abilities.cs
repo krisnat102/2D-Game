@@ -34,8 +34,12 @@ namespace Spells
         private Spell lastCastSpell;
         private Spell lastCastAbility;
         private PlayerData playerData;
+        #endregion
 
+        #region Properties
         public bool AbilityCooldown1 { get => abilityCooldown; set => abilityCooldown = value; }
+        public List<Spell> SpellsBar { get => spellsBar; private set => spellsBar = value; }
+        public List<Spell> AbilitiesBar { get => abilitiesBar; private set => abilitiesBar = value; }
         #endregion
 
         #region Unity Methods
@@ -45,8 +49,8 @@ namespace Spells
         }
         private void Update()
         {
-            spellsBar = SpellManager.Instance.SpellsBar;
-            abilitiesBar = SpellManager.Instance.AbilitiesBar;
+            SpellsBar = SpellManager.Instance.SpellsBar;
+            AbilitiesBar = SpellManager.Instance.AbilitiesBar;
 
             if (PlayerInputHandler.Instance.NormInputX < 0)
             {
@@ -58,9 +62,9 @@ namespace Spells
             }
 
             #region Spell Casting
-            if (spellsBar.Count > activeSpell)
+            if (SpellsBar.Count > activeSpell)
             {
-                if (PlayerInputHandler.Instance.SpellInput && Stats.Instance.Mana.CurrentValue >= spellsBar[activeSpell].cost && spellCooldown == false)
+                if (PlayerInputHandler.Instance.SpellInput && Stats.Instance.Mana.CurrentValue >= SpellsBar[activeSpell].cost && spellCooldown == false)
                     Spell();
             }
             if (PlayerInputHandler.Instance.SwitchSpell1Input)
@@ -83,9 +87,9 @@ namespace Spells
             #endregion
 
             #region Ability Casting
-            if (abilitiesBar.Count > activeAbility)
+            if (AbilitiesBar.Count > activeAbility)
             {
-                if (PlayerInputHandler.Instance.AbilityInput && Stats.Instance.Stam.CurrentValue >= abilitiesBar[activeAbility].cost && AbilityCooldown1 == false)
+                if (PlayerInputHandler.Instance.AbilityInput && Stats.Instance.Stam.CurrentValue >= AbilitiesBar[activeAbility].cost && AbilityCooldown1 == false)
                     Ability();
             }
             if (PlayerInputHandler.Instance.SwitchAbility1Input)
@@ -108,75 +112,75 @@ namespace Spells
             #endregion
 
             #region Spells UI
-            if (spellsBar.Count > activeSpell)
-                if (spellsBar[activeSpell] != null)
+            if (SpellsBar.Count > activeSpell)
+                if (SpellsBar[activeSpell] != null)
                 {
-                    mainSpell.sprite = spellsBar[activeSpell].icon;
+                    mainSpell.sprite = SpellsBar[activeSpell].icon;
                     mainSpell.gameObject.SetActive(true);
                 }
 
-            if (spellsBar.Count > activeSpell - 1 && activeSpell != 0)
+            if (SpellsBar.Count > activeSpell - 1 && activeSpell != 0)
             {
-                if (spellsBar[activeSpell - 1] != null && spellsBar.Count > activeSpell - 1)
+                if (SpellsBar[activeSpell - 1] != null && SpellsBar.Count > activeSpell - 1)
                 {
-                    sideSpell1.sprite = spellsBar[activeSpell - 1].icon;
+                    sideSpell1.sprite = SpellsBar[activeSpell - 1].icon;
                     sideSpell1.gameObject.SetActive(true);
                 }
             }
-            else if (spellsBar.Count == 7)
+            else if (SpellsBar.Count == 7)
             {
-                sideSpell1.sprite = spellsBar[7].icon;
+                sideSpell1.sprite = SpellsBar[7].icon;
                 sideSpell1.gameObject.SetActive(true);
             }
 
-            if (spellsBar.Count > activeSpell + 1 && activeSpell != 7)
+            if (SpellsBar.Count > activeSpell + 1 && activeSpell != 7)
             {
-                if (spellsBar[activeSpell + 1] != null && spellsBar.Count > activeSpell + 1)
+                if (SpellsBar[activeSpell + 1] != null && SpellsBar.Count > activeSpell + 1)
                 {
-                    sideSpell2.sprite = spellsBar[activeSpell + 1].icon;
+                    sideSpell2.sprite = SpellsBar[activeSpell + 1].icon;
                     sideSpell2.gameObject.SetActive(true);
                 }
             }
-            else if (spellsBar.Count == 7)
+            else if (SpellsBar.Count == 7)
             {
-                sideSpell2.sprite = spellsBar[0].icon;
+                sideSpell2.sprite = SpellsBar[0].icon;
                 sideSpell2.gameObject.SetActive(true);
             }
             #endregion
 
             #region Abilities UI
-            if (abilitiesBar.Count > activeAbility)
-                if (abilitiesBar[activeAbility] != null)
+            if (AbilitiesBar.Count > activeAbility)
+                if (AbilitiesBar[activeAbility] != null)
                 {
-                    mainAbility.sprite = abilitiesBar[activeAbility].icon;
+                    mainAbility.sprite = AbilitiesBar[activeAbility].icon;
                     mainAbility.gameObject.SetActive(true);
                 }
 
-            if (abilitiesBar.Count > activeAbility - 1 && activeAbility != 0)
+            if (AbilitiesBar.Count > activeAbility - 1 && activeAbility != 0)
             {
-                if (abilitiesBar[activeAbility - 1] != null && abilitiesBar.Count > activeAbility - 1)
+                if (AbilitiesBar[activeAbility - 1] != null && AbilitiesBar.Count > activeAbility - 1)
                 {
-                    sideAbility1.sprite = abilitiesBar[activeAbility - 1].icon;
+                    sideAbility1.sprite = AbilitiesBar[activeAbility - 1].icon;
                     sideAbility1.gameObject.SetActive(true);
                 }
             }
-            else if (abilitiesBar.Count == 7)
+            else if (AbilitiesBar.Count == 7)
             {
-                sideAbility1.sprite = abilitiesBar[7].icon;
+                sideAbility1.sprite = AbilitiesBar[7].icon;
                 sideAbility1.gameObject.SetActive(true);
             }
 
-            if (abilitiesBar.Count > activeAbility + 1 && activeAbility != 7)
+            if (AbilitiesBar.Count > activeAbility + 1 && activeAbility != 7)
             {
-                if (abilitiesBar[activeAbility + 1] != null && abilitiesBar.Count > activeAbility + 1)
+                if (AbilitiesBar[activeAbility + 1] != null && AbilitiesBar.Count > activeAbility + 1)
                 {
-                    sideAbility2.sprite = abilitiesBar[activeAbility + 1].icon;
+                    sideAbility2.sprite = AbilitiesBar[activeAbility + 1].icon;
                     sideAbility2.gameObject.SetActive(true);
                 }
             }
-            else if (abilitiesBar.Count == 7)
+            else if (AbilitiesBar.Count == 7)
             {
-                sideAbility2.sprite = abilitiesBar[0].icon;
+                sideAbility2.sprite = AbilitiesBar[0].icon;
                 sideAbility2.gameObject.SetActive(true);
             }
             #endregion
@@ -197,33 +201,33 @@ namespace Spells
         #region Spell And Ability Casting Methods
         void Spell()
         {
-            if (spellsBar[activeSpell] != null && Stats.Instance.Mana.CurrentValue >= spellsBar[activeSpell].cost)
+            if (SpellsBar[activeSpell] != null && Stats.Instance.Mana.CurrentValue >= SpellsBar[activeSpell].cost)
             {
                 //Vector2 offset = new Vector2(OffsetX, OffsetY);
-                if (spellsBar[activeSpell].useOffset)
+                if (SpellsBar[activeSpell].useOffset)
                 {
                     if (side)
                     {
-                        newPosition = (Vector2)castingPoint.position + spellsBar[activeSpell].offset;
+                        newPosition = (Vector2)castingPoint.position + SpellsBar[activeSpell].offset;
                     }
                     else
                     {
-                        newPosition = (Vector2)castingPoint.position + new Vector2(-spellsBar[activeSpell].offset.x, spellsBar[activeSpell].offset.y);
+                        newPosition = (Vector2)castingPoint.position + new Vector2(-SpellsBar[activeSpell].offset.x, SpellsBar[activeSpell].offset.y);
                     }
                     //new ObjectPool(spellsBar[activeSpell].spellEffect, newPosition, castingPoint.rotation, 5, 10);
-                    Instantiate(spellsBar[activeSpell].spellEffect, newPosition, castingPoint.rotation);
+                    Instantiate(SpellsBar[activeSpell].spellEffect, newPosition, castingPoint.rotation);
                 }
                 else
                 {
-                    Instantiate(spellsBar[activeSpell].spellEffect, castingPoint.position, castingPoint.rotation);
+                    Instantiate(SpellsBar[activeSpell].spellEffect, castingPoint.position, castingPoint.rotation);
                     //new ObjectPool(spellsBar[activeSpell].spellEffect, castingPoint.position, castingPoint.rotation, 5, 10);
                 }
 
-                Stats.Instance.Mana.CurrentValue -= spellsBar[activeSpell].cost;
+                Stats.Instance.Mana.CurrentValue -= SpellsBar[activeSpell].cost;
 
                 spellCooldown = true;
-                lastCastSpell = spellsBar[activeSpell];
-                Invoke("SpellCooldown", spellsBar[activeSpell].cooldown);
+                lastCastSpell = SpellsBar[activeSpell];
+                Invoke("SpellCooldown", SpellsBar[activeSpell].cooldown);
                 spellCooldownImg.gameObject.SetActive(true);
                 spellCooldownImg.fillAmount = 1;
             }
@@ -232,29 +236,29 @@ namespace Spells
         {
             Grappler grappler = gameObject.GetComponent<Grappler>();
 
-            if (abilitiesBar[activeAbility] != null)
+            if (AbilitiesBar[activeAbility] != null)
             {
-                if (abilitiesBar[activeAbility].name == "grappling hook")
+                if (AbilitiesBar[activeAbility].name == "grappling hook")
                 {
                     grappler.enabled = true;
 
                     AbilityCooldown1 = true;
-                    Invoke("AbilityCooldown", abilitiesBar[activeAbility].cooldown);
+                    Invoke("AbilityCooldown", AbilitiesBar[activeAbility].cooldown);
                     abilityCooldownImg.gameObject.SetActive(true);
                     abilityCooldownImg.fillAmount = 1;
                 }
-                else if (Stats.Instance.Stam.CurrentValue >= abilitiesBar[activeAbility].cost)
+                else if (Stats.Instance.Stam.CurrentValue >= AbilitiesBar[activeAbility].cost)
                 {
                     //Vector2 offset = new Vector2(OffsetX2, OffsetY2);
 
-                    Instantiate(abilitiesBar[activeAbility].spellEffect, castingPoint.position, castingPoint.rotation);
+                    Instantiate(AbilitiesBar[activeAbility].spellEffect, castingPoint.position, castingPoint.rotation);
 
-                    Stats.Instance.Stam.CurrentValue -= abilitiesBar[activeAbility].cost;
+                    Stats.Instance.Stam.CurrentValue -= AbilitiesBar[activeAbility].cost;
                     Stats.Instance.Stam.StopRegen(playerData.stamRecoveryTime);
 
                     AbilityCooldown1 = true;
-                    lastCastAbility = abilitiesBar[activeAbility];
-                    Invoke("AbilityCooldown", abilitiesBar[activeAbility].cooldown);
+                    lastCastAbility = AbilitiesBar[activeAbility];
+                    Invoke("AbilityCooldown", AbilitiesBar[activeAbility].cooldown);
                     abilityCooldownImg.gameObject.SetActive(true);
                     abilityCooldownImg.fillAmount = 1;
 

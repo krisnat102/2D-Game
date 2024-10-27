@@ -80,7 +80,7 @@ namespace Spells
             if (PlayerInputHandler.Instance.SpellInventoryInput)
             {
                 PlayerInputHandler.Instance.UseSpellInventoryInput();
-                if (!inventory.activeInHierarchy && !spellInventory.activeInHierarchy)
+                if (!inventory.activeInHierarchy && !spellInventory.activeInHierarchy && !characterTab.activeInHierarchy)
                 {
                     OpenCloseSpellInventory(true);
                     ListSpells();
