@@ -257,6 +257,7 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.started && !StopAllInputs)
         {
             UseInput = true;
+            Debug.Log(1);
         }
         if (context.canceled && !StopAllInputs)
         {

@@ -24,6 +24,7 @@ namespace Bardent.CoreSystem
             {
                 ParticleManager.StartParticles(particle);
             }
+
             if (deathScreen != null)
             {
                 deathScreen.SetActive(true);
