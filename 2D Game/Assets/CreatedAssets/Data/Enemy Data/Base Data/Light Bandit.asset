@@ -37,7 +37,7 @@ MonoBehaviour:
   fixRotationWhenAttacking: 0
   fixLeftAttack: 0
   rootWhenAttacking: 1
-  commitDirectionWhenAttacking: 0
+  commitDirectionWhenAttacking: 1
   moveWhenAttacking: 0
   direction: {x: 0, y: 0}
   velocity: 0

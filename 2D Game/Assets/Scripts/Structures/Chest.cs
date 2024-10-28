@@ -12,7 +12,7 @@ namespace Interactables
 
         private Animator animator;
 
-        private bool openned = false;
+        private bool opened = false;
 
         private void OnTriggerStay2D(Collider2D collision)
         {
@@ -20,7 +20,7 @@ namespace Interactables
             {
                 OpenChest();
 
-                openned = true;
+                opened = true;
 
                 PlayerInputHandler.Instance.UseUseInput();
             }
@@ -28,13 +28,13 @@ namespace Interactables
 
         private void OpenChest()
         {
-            if (openned == false && item != null)
+            if (opened == false && item != null)
             {
                 InventoryManager.Instance.Add(item, true);
 
                 animator.SetTrigger("Open");
             }
-            else if (openned == false && spell != null)
+            else if (opened == false && spell != null)
             {
                 SpellManager.Instance.Add(spell);
 

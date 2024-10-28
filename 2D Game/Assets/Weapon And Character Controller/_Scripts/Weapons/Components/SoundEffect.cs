@@ -6,8 +6,10 @@ namespace Bardent.Weapons.Components
     {
         private void HandleAttackSoundEffect()
         {
-            if (weaponData.Type == WeaponType.Sword)
+            if (weaponData.Type == WeaponType.Sword && currentAttackData.Delay != 0)
                 Invoke("PlaySoundEffect", currentAttackData.Delay);
+            else if (weaponData.Type == WeaponType.Sword)
+                PlaySoundEffect();
         }
 
         private void PlaySoundEffect() => AudioManager.Instance.SwordSoundEffect.Play();

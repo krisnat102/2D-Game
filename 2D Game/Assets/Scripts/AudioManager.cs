@@ -105,8 +105,8 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            musicMixer.SetFloat("volume", musicSave);
-            sfxMixer.SetFloat("volume", sfxSave);
+            musicMixer.SetFloat("volume", Mathf.Log10(musicSave) * 20);
+            sfxMixer.SetFloat("volume", Mathf.Log10(sfxSave) * 20);
         }
 
         SaveAudioSettings();

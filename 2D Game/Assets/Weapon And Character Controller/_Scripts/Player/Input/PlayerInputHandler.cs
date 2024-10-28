@@ -69,6 +69,11 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        Instance = this;
+    }
+
     private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -197,6 +202,7 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.started && !StopAllInputs)
         {
             SpellInventoryInput = true;
+            Debug.Log(SpellInventoryInput);
         }
         if (context.canceled && !StopAllInputs)
         {
@@ -257,7 +263,6 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.started && !StopAllInputs)
         {
             UseInput = true;
-            Debug.Log(1);
         }
         if (context.canceled && !StopAllInputs)
         {

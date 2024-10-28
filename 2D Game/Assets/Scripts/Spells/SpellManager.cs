@@ -79,6 +79,7 @@ namespace Spells
         {
             if (PlayerInputHandler.Instance.SpellInventoryInput)
             {
+                Debug.Log(1);
                 PlayerInputHandler.Instance.UseSpellInventoryInput();
                 if (!inventory.activeInHierarchy && !spellInventory.activeInHierarchy && !characterTab.activeInHierarchy)
                 {
