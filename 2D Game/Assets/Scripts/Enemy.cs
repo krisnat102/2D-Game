@@ -127,7 +127,8 @@ public class Enemy : MonoBehaviour
             transform.localScale = new Vector3(previousLocalScaleX, transform.localScale.y, transform.localScale.z);
         }
 
-        FacingDirection = transform.localScale.x > 0 ? 1 : -1;
+        //FacingDirection = transform.localScale.x > 0 ? 1 : -1;
+        FacingDirection = (int) Mathf.Sign(transform.localScale.x);
 
         #endregion
 
@@ -430,7 +431,6 @@ public class Enemy : MonoBehaviour
     #region Actions
     private void Die()
     {
-
         if (Data.boss) Core.GameManager.Instance.DeactivateObject(4, hpBar.gameObject);
 
         if (Data.itemDrop)
@@ -454,14 +454,12 @@ public class Enemy : MonoBehaviour
             var coins = GetComponentInChildren<CoinPickup>()?.gameObject;
             coins.transform.parent = null;
             coins.GetComponent<ParticleSystem>().Emit(coinsDropped);
-            Debug.Log(coinsDropped);
         }
 
         if (deathEffect)
         {
             deathEffect.SetActive(true);
             if (deathEffect.GetComponent<Death>().AdaptSize) deathEffect.transform.localScale = transform.localScale;
-            if (deathEffect.GetComponent<Death>().AdaptDirection) deathEffect.transform.localScale = new Vector2(deathEffect.transform.localScale.x * FacingDirection, deathEffect.transform.localScale.y);
             deathEffect.transform.parent = null;
         }
     }

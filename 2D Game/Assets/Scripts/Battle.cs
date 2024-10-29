@@ -22,13 +22,7 @@ namespace Krisnat
             {
                 if (previousBattle && !previousBattle.End) return;
 
-                foreach(Enemy enemy in encounter)
-                {
-                    if (!enemy.Dead)
-                    {
-                        enemy.gameObject.SetActive(true);
-                    }
-                }
+                IfBattleOver();
             }
         }
 
@@ -36,7 +30,11 @@ namespace Krisnat
         {
             foreach (Enemy enemy in encounter)
             {
-                if (!enemy.Dead) return;
+                if (!enemy.Dead)
+                {
+                    enemy.gameObject.SetActive(true);
+                    return;
+                }
             }
 
             End = true;
