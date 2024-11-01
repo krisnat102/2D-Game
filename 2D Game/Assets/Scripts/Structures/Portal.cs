@@ -6,6 +6,8 @@ namespace Krisnat
     {
         [SerializeField] private string sceneToLoad;
         [SerializeField] private Vector3 distanceTravel;
+        [SerializeField] private Battle afterBattle;
+
         public void OnTriggerStay2D(Collider2D collision)
         {
             if (PlayerInputHandler.Instance.UseInput)
