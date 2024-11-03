@@ -21,10 +21,12 @@ namespace Core
         [SerializeField] private GameObject playerGO;
         [SerializeField] private Bardent.CoreSystem.Death death;
         [SerializeField] private new Transform camera;
-        [SerializeField] private string s;
 
         private Player player;
         private LevelHandler levelHandler;
+        private InventoryManager inventoryManager;
+        private SpellManager spellManager;
+        private Stats stats;
 
         public bool GamePaused { get => gamePaused; set => gamePaused = value; }
 
@@ -46,15 +48,9 @@ namespace Core
 
         private void Start()
         {
-            foreach(char c in s)
-            {
-                switch(c)
-                {
-                    case 'I':
-
-                        return;
-                }
-            }
+            inventoryManager = InventoryManager.Instance;
+            spellManager = SpellManager.Instance;
+            stats = Stats.Instance;
         }
         #endregion
 
@@ -81,63 +77,64 @@ namespace Core
             List<Spell> loadSpells = new();
             List<Spell> loadActiveSpells = new();
             List<Spell> loadActiveAbilities = new();
-            InventoryManager.Instance.ClearInventory();
-            SpellManager.Instance.ClearInventory();
-            SpellManager.Instance.ClearActiveBar();
+            inventoryManager.ClearInventory();
+            spellManager.ClearInventory();
+            spellManager.ClearActiveBar();
 
             foreach (int id in data.itemsId)
             {
-                loadItems.AddRange(InventoryManager.Instance.AllItems.Where(item => item.id == id).ToList());
+                loadItems.AddRange(inventoryManager.AllItems.Where(item => item.id == id).ToList());
             }
             foreach (int id in data.equippedItemsId)
             {
-                loadEquippedItems.AddRange(InventoryManager.Instance.AllItems.Where(item => item.id == id).ToList());
+                loadEquippedItems.AddRange(inventoryManager.AllItems.Where(item => item.id == id).ToList());
             }
             foreach (int id in data.spellsId)
             {
-                loadSpells.AddRange(SpellManager.Instance.AllSpells.Where(spell => spell.id == id).ToList());
+                loadSpells.AddRange(spellManager.AllSpells.Where(spell => spell.id == id).ToList());
             }
             foreach (int id in data.activeSpellsId)
             {
-                loadActiveSpells.AddRange(SpellManager.Instance.AllSpells.Where(spell => spell.id == id).ToList());
+                loadActiveSpells.AddRange(spellManager.AllSpells.Where(spell => spell.id == id).ToList());
             }
             foreach (int id in data.activeAbilitiesId)
             {
-                loadActiveAbilities.AddRange(SpellManager.Instance.AllSpells.Where(spell => spell.id == id).ToList());
+                loadActiveAbilities.AddRange(spellManager.AllSpells.Where(spell => spell.id == id).ToList());
             }
 
-            foreach (int id in InventoryManager.Instance.EquippedItemsIds())
+            player.PlayerData.SetLevel(data.level);
+            stats.Health.SetMaxStat(data.maxHealth);
+            stats.Mana.SetMaxStat(data.maxMana);
+            stats.Stam.SetMaxStat(data.maxStam);
+            stats.Health.SetCurrentStat(data.currentHealth);
+            stats.Mana.SetCurrentStat(data.currentMana);
+            stats.Stam.SetCurrentStat(data.currentStam);
+            levelHandler.SetStrength(data.strength);
+            levelHandler.SetDexterity(data.dexterity);
+            levelHandler.SetIntelligence(data.intelligence);
+            inventoryManager.SetCoins(data.coins, false);
+            inventoryManager.Add(loadItems);
+            spellManager.Add(loadSpells);
+
+            foreach (int id in inventoryManager.EquippedItemsIds())
             {
-                foreach(Item item in InventoryManager.Instance.AllItems.Where(item => item.id == id))
+                foreach(Item item in inventoryManager.AllItems.Where(item => item.id == id))
                 {
-                    InventoryManager.Instance.UnequipItem(item);
+                    inventoryManager.UnequipItem(item);
                 }
             }
             foreach(Item item in loadEquippedItems)
             {
-                InventoryManager.Instance.EquipItem(item);
+                inventoryManager.EquipItem(item);
             }
 
-            player.PlayerData.SetLevel(data.level);
-            Stats.Instance.Health.SetMaxStat(data.maxHealth);
-            Stats.Instance.Mana.SetMaxStat(data.maxMana);
-            Stats.Instance.Stam.SetMaxStat(data.maxStam);
-            Stats.Instance.Health.SetCurrentStat(data.currentHealth);
-            Stats.Instance.Mana.SetCurrentStat(data.currentMana);
-            Stats.Instance.Stam.SetCurrentStat(data.currentStam);
-            levelHandler.SetStrength(data.strength);
-            levelHandler.SetDexterity(data.dexterity);
-            levelHandler.SetIntelligence(data.intelligence);
-            InventoryManager.Instance.SetCoins(data.coins, false);
-            InventoryManager.Instance.Add(loadItems);
-            SpellManager.Instance.Add(loadSpells);
             foreach(Spell spell in loadActiveSpells)
             {
-                SpellManager.Instance.SpellsBar.Add(spell);
+                spellManager.SpellsBar.Add(spell);
             }
             foreach (Spell spell in loadActiveAbilities)
             {
-                SpellManager.Instance.AbilitiesBar.Add(spell);
+                spellManager.AbilitiesBar.Add(spell);
             }
 
             var playerTransform = player.transform;

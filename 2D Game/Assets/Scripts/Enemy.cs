@@ -406,6 +406,8 @@ public class Enemy : MonoBehaviour
                 }
 
                 TakeKnockback(damage + knockback);
+
+                if(DetectAIRange) DetectAIRange.Alerted = true;
             }
         }
     }
@@ -446,9 +448,6 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        Dead = true;
-        gameObject.SetActive(false);
-
         if(Data.maxCoinsDropped > 0)
         {
             var coins = GetComponentInChildren<CoinPickup>()?.gameObject;
@@ -459,9 +458,13 @@ public class Enemy : MonoBehaviour
         if (deathEffect)
         {
             deathEffect.SetActive(true);
+                deathEffect.transform.parent = null;
             if (deathEffect.GetComponent<Death>().AdaptSize) deathEffect.transform.localScale = transform.localScale;
-            deathEffect.transform.parent = null;
+            if (deathEffect.GetComponent<Death>().AdaptDirection) deathEffect.transform.localScale = new Vector2(deathEffect.transform.localScale.y * FacingDirection, deathEffect.transform.localScale.y);
         }
+
+        Dead = true;
+        gameObject.SetActive(false);
     }
 
     public void Attack(bool meleeRanged)

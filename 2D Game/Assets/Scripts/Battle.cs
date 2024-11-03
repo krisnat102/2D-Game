@@ -7,6 +7,7 @@ namespace Krisnat
     public class Battle : MonoBehaviour
     {
         [SerializeField] private Battle previousBattle;
+        [SerializeField] private GameObject objectToEnable;
         private List<Enemy> encounter;
 
         public bool End { get; private set; }
@@ -38,6 +39,10 @@ namespace Krisnat
             }
 
             End = true;
+
+            if(objectToEnable) objectToEnable.SetActive(true);
+
+            gameObject.SetActive(false);
         }
     }
 }

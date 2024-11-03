@@ -6,15 +6,16 @@ namespace Krisnat
     {
         [SerializeField] private string sceneToLoad;
         [SerializeField] private Vector3 distanceTravel;
-        [SerializeField] private Battle afterBattle;
 
         public void OnTriggerStay2D(Collider2D collision)
         {
-            if (PlayerInputHandler.Instance.UseInput)
+            var player = collision.GetComponent<Player>();
+
+            if (PlayerInputHandler.Instance.UseInput && player)
             {
                 if(sceneToLoad == "" && distanceTravel != Vector3.zero)
                 {
-                    collision.transform.position += distanceTravel;
+                    player.transform.position += distanceTravel;
                     return;
                 }
                 //if(sceneToLoad == "MainMenu") collision.GetComponent<Player>().gameObject.SetActive(false);

@@ -195,14 +195,14 @@ namespace Inventory
                 //(done 2 times because of a bug with the item count upon first opening on inv)
                 ListItems();
                 ListItems();
-                Core.GameManager.Instance.ChangeBool(0.25f, newValue => Core.GameManager.Instance.GamePaused = newValue[0], true);
+                //Core.GameManager.Instance.ChangeBool(0.25f, newValue => Core.GameManager.Instance.GamePaused = newValue[0], true);
             }
             else
             {
                 GameObject[] uiToClose = new GameObject[2];
                 uiToClose[0] = SpellInventory; uiToClose[1] = CharacterTab;
                 UIManager.Instance.OpenCloseUI(Inventory, inventoryScale, inventoryClosingSpeed, true, false, false, uiToClose);
-                Core.GameManager.Instance.GamePaused = false;
+                //Core.GameManager.Instance.GamePaused = false;
             }
         }
         
@@ -220,6 +220,7 @@ namespace Inventory
                 uiToClose[0] = SpellInventory; uiToClose[1] = Inventory;
                 UIManager.Instance.OpenCloseUI(CharacterTab, characterTabScale, characterTabClosingSpeed, true, false, false, uiToClose);
                 Core.GameManager.Instance.GamePaused = false;
+                description.SetActive(false);
             }
         }
         #endregion
@@ -602,12 +603,12 @@ namespace Inventory
         #endregion
 
         #region Buttons
-        public void EquipedEquipmentBn()
+        public void EquippedEquipmentBn()
         {
             UseButton.GetComponentInChildren<TextMeshProUGUI>().text = "Unequip";
         }
 
-
+        #region Button Filters
         public void ConsumableInvBn()
         {
             if (filter == Filter.ConsumableInv)
@@ -674,7 +675,11 @@ namespace Inventory
 
             ListItems();
         }
+        #endregion
 
+        #endregion
+
+        #region Getters
         public Animator GetEquipmentMenuAnimator()
         {
             return equipmentMenuAnimator;

@@ -202,7 +202,6 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.started && !StopAllInputs)
         {
             SpellInventoryInput = true;
-            Debug.Log(SpellInventoryInput);
         }
         if (context.canceled && !StopAllInputs)
         {

@@ -2,10 +2,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Core;
 using Inventory;
 using Krisnat;
-using UnityEngine.UIElements;
 
 namespace Spells
 {
@@ -79,7 +77,6 @@ namespace Spells
         {
             if (PlayerInputHandler.Instance.SpellInventoryInput)
             {
-                Debug.Log(1);
                 PlayerInputHandler.Instance.UseSpellInventoryInput();
                 if (!inventory.activeInHierarchy && !spellInventory.activeInHierarchy && !characterTab.activeInHierarchy)
                 {
@@ -263,6 +260,7 @@ namespace Spells
                 GameObject[] uiToClose = new GameObject[2];
                 uiToClose[0] = inventory; uiToClose[1] = characterTab;
                 UIManager.Instance.OpenCloseUI(spellInventory, spellInventoryScale, inventoryCloseTime, true, false, false, uiToClose);
+                description.SetActive(false);
             }
         }
         #endregion

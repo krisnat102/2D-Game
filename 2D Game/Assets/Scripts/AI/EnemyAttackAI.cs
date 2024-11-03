@@ -18,7 +18,7 @@ public class EnemyAttackAI : MonoBehaviour
     public bool InRange { get => inRange; private set => inRange = value; }
     public bool InSight { get => inSight; private set => inSight = value; }
     public bool InRangeOfSight { get => inRangeOfSight; private set => inRangeOfSight = value; }
-    public bool Alerted { get; private set; } 
+    public bool Alerted { get; set; } 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

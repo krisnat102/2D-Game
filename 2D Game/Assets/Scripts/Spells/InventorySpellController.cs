@@ -28,6 +28,19 @@ namespace Spells
             Destroy(gameObject);
         }
 
+        public void RemoveActiveSpell()
+        {
+            GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+            SpellController spellController = button.GetComponent<SpellController>();
+
+            var spell = spellController.GetSpell();
+
+            Destroy(gameObject);
+
+            SpellManager.Instance.SpellsBar.Remove(spell);
+            SpellManager.Instance.AbilitiesBar.Remove(spell);
+        }
+
         public void AddSpell(Spell newSpell)
         {
             spell = newSpell;
@@ -50,19 +63,6 @@ namespace Spells
                 SpellManager.Instance.AbilitiesBar.Add(spell);
                 SpellManager.Instance.ListActiveSpells();
             }
-        }
-
-        public void RemoveActiveSpell()
-        {
-            GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
-            SpellController spellController = button.GetComponent<SpellController>();
-
-            var spell = spellController.GetSpell();
-
-            Destroy(gameObject);
-
-            SpellManager.Instance.SpellsBar.Remove(spell);
-            SpellManager.Instance.AbilitiesBar.Remove(spell);
         }
 
         public void Description()
