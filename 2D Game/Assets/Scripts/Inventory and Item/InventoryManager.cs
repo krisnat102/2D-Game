@@ -139,6 +139,14 @@ namespace Inventory
                 {
                     OpenCloseInventory(true);
                 }
+                else if (CharacterTabActiveInHierarchy)
+                {
+                    OpenCloseCharacterTab(false);
+                }
+                else if (SpellInventoryActiveInHierarchy)
+                {
+                    SpellManager.Instance.OpenCloseSpellInventory(false);
+                }
                 else
                 {
                     OpenCloseInventory(false);
@@ -150,6 +158,14 @@ namespace Inventory
                 if (!InventoryActiveInHierarchy && !SpellInventoryActiveInHierarchy && !CharacterTabActiveInHierarchy)
                 {
                     OpenCloseCharacterTab(true);
+                }
+                else if(InventoryActiveInHierarchy)
+                {
+                    OpenCloseInventory(false);
+                }
+                else if (SpellInventoryActiveInHierarchy)
+                {
+                    SpellManager.Instance.OpenCloseSpellInventory(false);
                 }
                 else
                 {

@@ -83,6 +83,14 @@ namespace Spells
                     OpenCloseSpellInventory(true);
                     ListSpells();
                 }
+                else if (characterTab.activeInHierarchy)
+                {
+                    InventoryManager.Instance.OpenCloseCharacterTab(false);
+                }
+                else if (inventory.activeInHierarchy)
+                {
+                    InventoryManager.Instance.OpenCloseInventory(false);
+                }
                 else
                 {
                     OpenCloseSpellInventory(false);
