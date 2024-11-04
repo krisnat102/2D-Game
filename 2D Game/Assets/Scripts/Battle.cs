@@ -34,9 +34,9 @@ namespace Krisnat
                 if (!enemy.Dead)
                 {
                     enemy.gameObject.SetActive(true);
-                    return;
                 }
             }
+            if (!encounter.All(obj => obj.Dead)) return;
 
             End = true;
 
