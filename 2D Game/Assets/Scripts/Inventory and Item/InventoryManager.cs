@@ -7,6 +7,7 @@ using UnityEditor;
 using Spells;
 using UnityEngine.UI;
 using System.Collections;
+using static UnityEditor.Progress;
 
 namespace Inventory
 {
@@ -303,17 +304,18 @@ namespace Inventory
                 .SelectMany(g => g.Skip(1))
                 .ToList();
 
+            //clears the inventory before opening so that items dont duplicate
             if (currentItems != null)
             {
                 currentItems.Clear();
             }
-
-            //clears the inventory before opening so that items dont duplicate
             currentItems = new();
 
-            foreach (Transform item in itemContent)
+            foreach (Transform trans in itemContent)
             {
-                currentItems.Add(item.GetComponent<ItemController>().GetItem());
+                Item item = trans.GetComponent<ItemController>().GetItem();
+                currentItems.Add(item);
+                item.SetItemCount(1);
             }
 
             if (currentItems != null)
@@ -354,7 +356,7 @@ namespace Inventory
 
                 if (enableRemove.isOn)
                 {
-                    var removeButton = trans.GetComponentInChildren<Button>();
+                    var removeButton = Core.GameManager.Instance.GetComponentOnlyInChildren<Button>(trans);
                     removeButton.gameObject.SetActive(true);
                 }
             }

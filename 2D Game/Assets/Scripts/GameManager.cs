@@ -203,6 +203,22 @@ namespace Core
             }*/
             return loadedAssets;
         }
+
+        public T GetComponentOnlyInChildren<T>(Transform transform) where T : Component
+        {
+            // Iterate through all direct and nested children of this object
+            foreach (Transform child in transform)
+            {
+                // Use GetComponentInChildren on each child, which will ignore the parent (this object)
+                T foundComponent = child.GetComponentInChildren<T>(true);
+                if (foundComponent != null)
+                {
+                    return foundComponent;
+                }
+            }
+            return null; // Return null if no component is found in any children
+        }
+
         public void DeactivateObject(float duration, GameObject objectToDeactivate) => StartCoroutine(DeactivateObjectCoroutine(duration, objectToDeactivate));
         public void ChangeBool(float duration, Action<bool[]> boolSetter, bool newValue) => StartCoroutine(ChangeBoolCoroutine(duration, boolSetter, new[] { newValue }));
 
