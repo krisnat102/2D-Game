@@ -6,6 +6,7 @@ using Krisnat;
 using UnityEditor;
 using Spells;
 using UnityEngine.UI;
+using System.Collections;
 
 namespace Inventory
 {
@@ -50,8 +51,7 @@ namespace Inventory
 
         private Filter filter = default;
         private float totalArmor, totalMagicRes, totalWeight;
-        private List<Item> distinctItems, duplicates = new();
-        private List<Item> allItems = new();
+        private List<Item> distinctItems, duplicates, currentItems, allItems = new List<Item>();
         private float inventoryScale, characterTabScale;
         private Animator purseAnimator;
         //private bool inventoryOpenAnimationTracker;
@@ -210,7 +210,7 @@ namespace Inventory
                 //TODO: Optimize this awful code out of the game
                 //(done 2 times because of a bug with the item count upon first opening on inv)
                 ListItems();
-                ListItems();
+                //ListItems();
                 //Core.GameManager.Instance.ChangeBool(0.25f, newValue => Core.GameManager.Instance.GamePaused = newValue[0], true);
             }
             else
@@ -303,12 +303,37 @@ namespace Inventory
                 .SelectMany(g => g.Skip(1))
                 .ToList();
 
+            if (currentItems != null)
+            {
+                currentItems.Clear();
+            }
+
             //clears the inventory before opening so that items dont duplicate
+            currentItems = new();
+
             foreach (Transform item in itemContent)
             {
-                item.gameObject.SetActive(true);
-                item.GetComponent<ItemController>().GetItem().SetItemCount(1);
-                Destroy(item.gameObject);
+                currentItems.Add(item.GetComponent<ItemController>().GetItem());
+            }
+
+            if (currentItems != null)
+            {
+                foreach (var item in DistinctItems.Except(currentItems))
+                {
+                    GameObject obj = CreateItem(item);
+                }
+
+                foreach (var item in currentItems.Except(DistinctItems))
+                {
+                    GameObject obj = CreateItem(item);
+                }
+            }
+            else
+            {
+                foreach (var item in DistinctItems)
+                {
+                    GameObject obj = CreateItem(item);
+                }
             }
 
             //adds the items to the inventory
@@ -319,58 +344,70 @@ namespace Inventory
                     if (item.name == duplicateItem.name)
                         item.IncreaseItemCount();
                 }
+            }
 
-                GameObject obj = Instantiate(inventoryItem, itemContent);
-
-                obj.SetActive(true);
-
-                obj.name = item.name;
-
-                ItemController itemController = obj.GetComponent<ItemController>();
-                itemController.SetItem(item);
-
-                var itemName = obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
-                var itemCount = obj.transform.Find("ItemCount").GetComponent<TextMeshProUGUI>();
-                var itemIcon = obj.transform.Find("ItemIcon").GetComponent<UnityEngine.UI.Image>();
-                var removeButton = obj.transform.Find("RemoveButton").GetComponent<UnityEngine.UI.Button>();
-
-                itemName.text = item.itemName;
+            foreach (Transform trans in itemContent)
+            {
+                var item = trans.GetComponent<ItemController>().GetItem();
+                var itemCount = trans.GetComponentInChildren<SearchAssist>().GetComponent<TextMeshProUGUI>();
                 itemCount.text = (item.ItemCount > 1 ? "x" + item.ItemCount.ToString() : "");
-                itemIcon.sprite = item.icon;
-
-                if (filter == Filter.ConsumableInv)
-                    if (item.itemClass != Item.ItemClass.Consumable)
-                    {
-                        obj.SetActive(false);
-                    }
-                if (filter == Filter.WeaponInv)
-                    if (item.itemClass != Item.ItemClass.Weapon)
-                    {
-                        obj.SetActive(false);
-                    }
-                if (filter == Filter.EquipmentInv)
-                    if (item.itemClass != Item.ItemClass.Equipment)
-                    {
-                        obj.SetActive(false);
-                    }
-                if (filter == Filter.QuestInv)
-                    if (item.itemClass != Item.ItemClass.Quest)
-                    {
-                        obj.SetActive(false);
-                    }
-                if (filter == Filter.MiscInv)
-                    if (item.itemClass != Item.ItemClass.Misc)
-                    {
-                        obj.SetActive(false);
-                    }
 
                 if (enableRemove.isOn)
                 {
+                    var removeButton = trans.GetComponentInChildren<Button>();
                     removeButton.gameObject.SetActive(true);
                 }
             }
 
             SetInventoryItems();
+        }
+
+        private GameObject CreateItem(Item item)
+        {
+            GameObject obj = Instantiate(inventoryItem, itemContent);
+
+            obj.SetActive(true);
+
+            obj.name = item.name;
+
+            ItemController itemController = obj.GetComponent<ItemController>();
+            itemController.SetItem(item);
+
+            var itemName = obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
+            //var itemCount = obj.transform.Find("ItemCount").GetComponent<TextMeshProUGUI>();
+            var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
+
+            itemName.text = item.itemName;
+            //itemCount.text = (item.ItemCount > 1 ? "x" + item.ItemCount.ToString() : "");
+            itemIcon.sprite = item.icon;
+
+            if (filter == Filter.ConsumableInv)
+                if (item.itemClass != Item.ItemClass.Consumable)
+                {
+                    obj.SetActive(false);
+                }
+            if (filter == Filter.WeaponInv)
+                if (item.itemClass != Item.ItemClass.Weapon)
+                {
+                    obj.SetActive(false);
+                }
+            if (filter == Filter.EquipmentInv)
+                if (item.itemClass != Item.ItemClass.Equipment)
+                {
+                    obj.SetActive(false);
+                }
+            if (filter == Filter.QuestInv)
+                if (item.itemClass != Item.ItemClass.Quest)
+                {
+                    obj.SetActive(false);
+                }
+            if (filter == Filter.MiscInv)
+                if (item.itemClass != Item.ItemClass.Misc)
+                {
+                    obj.SetActive(false);
+                }
+
+            return obj;
         }
 
         private void EnableItemRemove()
