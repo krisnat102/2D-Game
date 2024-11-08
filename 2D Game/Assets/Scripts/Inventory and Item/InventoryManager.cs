@@ -211,8 +211,7 @@ namespace Inventory
                 //TODO: Optimize this awful code out of the game
                 //(done 2 times because of a bug with the item count upon first opening on inv)
                 ListItems();
-                //ListItems();
-                //Core.GameManager.Instance.ChangeBool(0.25f, newValue => Core.GameManager.Instance.GamePaused = newValue[0], true);
+                ListItems();
             }
             else
             {
@@ -289,6 +288,12 @@ namespace Inventory
         public void Remove(Item item)
         {
             Items.Remove(item);
+            item.DecreaseItemCount();
+        }
+        public void DeleteItem(Item item)
+        {
+            Items.Remove(item);
+            item.SetItemCount(0);
         }
         public void ClearInventory()
         {
@@ -315,7 +320,8 @@ namespace Inventory
             {
                 Item item = trans.GetComponent<ItemController>().GetItem();
                 currentItems.Add(item);
-                item.SetItemCount(1);
+                if(item.ItemCount != 0) item.SetItemCount(1);
+                else Destroy(trans);
             }
 
             if (currentItems != null)

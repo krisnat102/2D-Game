@@ -45,7 +45,6 @@ namespace Inventory
 
             InventoryManager.Instance.Remove(item);
 
-            Destroy(gameObject);
             InventoryManager.Instance.ListItems();
         }
         public void RemoveItem2(Item item)
