@@ -60,9 +60,8 @@ namespace Spells
                     Destroy(gameObject);
                 }
             }
-
         }
-
+         
         private void OnTriggerEnter2D(Collider2D hitInfo)
         {
             //if (hitInfo.tag != "Player" && hitInfo.tag != "Item" && hitInfo.tag != "Climbable" && hitInfo.tag != "AttackRange" && hitInfo.tag != "BackgroundObject" && hitInfo.tag != "PickupRange")
@@ -85,7 +84,7 @@ namespace Spells
                         Instantiate(enemy.Data.bloodEffect, transform.position, Quaternion.identity);
                     }
                 }
-                if (destroyOnTouch && !shuriken)
+                if (destroyOnTouch)
                 {
                     DestroyObject();
                 }
@@ -105,13 +104,17 @@ namespace Spells
 
         private void DestroyObject()
         {
-            if (spell.spellDeath != null) Instantiate(spell.spellDeath, transform.position, Quaternion.identity);
+            if (spell.spellDeath != null)
+            {
+                Instantiate(spell.spellDeath, transform.position, Quaternion.identity);
+            }
 
             stuckShuriken = true;
 
             if (spell.name != "Shuriken")
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
+                //Destroy(gameObject);
             }
         }
 
