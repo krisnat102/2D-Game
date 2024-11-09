@@ -10,11 +10,12 @@ using Spells;
 using UnityEditor;
 using UnityEngine;
 
-namespace Core
+namespace CoreClass
 {
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
+        public static Vector3 checkpoint;
         private bool gamePaused = false;
 
         [SerializeField] private GameObject deathScreen;
@@ -29,6 +30,7 @@ namespace Core
         private Stats stats;
 
         public bool GamePaused { get => gamePaused; set => gamePaused = value; }
+        public GameObject Player { get => playerGO; private set => playerGO = value; }
 
         #region Unity Methods
         private void Update()
@@ -51,6 +53,15 @@ namespace Core
             inventoryManager = InventoryManager.Instance;
             spellManager = SpellManager.Instance;
             stats = Stats.Instance;
+
+            LoadPlayer();
+
+            //if(playerGO) LoadPlayer();
+            if (checkpoint != Vector3.zero && player)
+            {
+                playerGO.transform.position = checkpoint;
+                camera.position = checkpoint;
+            }
         }
         #endregion
 
@@ -60,8 +71,6 @@ namespace Core
             UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
 
             death.IsDead = false;
-
-            LoadPlayer();
         }
 
         public void SavePlayer()
@@ -137,10 +146,10 @@ namespace Core
                 spellManager.AbilitiesBar.Add(spell);
             }
 
-            var playerTransform = player.transform;
+            //var playerTransform = player.transform;
 
-            playerTransform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
-            camera.position = new Vector3(data.position[0], data.position[1], data.position[2]);
+            //playerTransform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
+            //camera.position = new Vector3(data.position[0], data.position[1], data.position[2]);
         }
         #endregion
 

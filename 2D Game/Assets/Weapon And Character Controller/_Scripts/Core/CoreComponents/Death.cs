@@ -30,6 +30,7 @@ namespace Bardent.CoreSystem
                 deathScreen.SetActive(true);
             }
 
+            CoreClass.GameManager.Instance.SavePlayer();
             Core.transform.parent.gameObject.SetActive(false);
             IsDead = true;
         }

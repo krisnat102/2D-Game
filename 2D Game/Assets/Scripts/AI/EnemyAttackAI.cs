@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using Core;
+using CoreClass;
 using System.Runtime.InteropServices;
 using UnityEditor.Build;
 public class EnemyAttackAI : MonoBehaviour

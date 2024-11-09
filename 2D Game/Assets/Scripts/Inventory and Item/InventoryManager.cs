@@ -6,8 +6,6 @@ using Krisnat;
 using UnityEditor;
 using Spells;
 using UnityEngine.UI;
-using System.Collections;
-using static UnityEditor.Progress;
 
 namespace Inventory
 {
@@ -115,7 +113,7 @@ namespace Inventory
         }
         private void Start()
         {
-            AllItems = Core.GameManager.Instance.GetCustomAssets<Item>("Item", "CreatedAssets");
+            AllItems = CoreClass.GameManager.Instance.GetCustomAssets<Item>("Item", "CreatedAssets");
 
             inventoryScale = inventory.transform.localScale.x;
             characterTabScale = characterTab.transform.localScale.x;
@@ -228,14 +226,14 @@ namespace Inventory
             if (openOrClose)
             {
                 UIManager.Instance.OpenCloseUI(CharacterTab, characterTabScale, characterTabOpeningSpeed, true, false, true);
-                Core.GameManager.Instance.ChangeBool(0.25f, newValue => Core.GameManager.Instance.GamePaused = newValue[0], true);
+                CoreClass.GameManager.Instance.ChangeBool(0.25f, newValue => CoreClass.GameManager.Instance.GamePaused = newValue[0], true);
             }
             else
             {
                 GameObject[] uiToClose = new GameObject[2];
                 uiToClose[0] = SpellInventory; uiToClose[1] = Inventory;
                 UIManager.Instance.OpenCloseUI(CharacterTab, characterTabScale, characterTabClosingSpeed, true, false, false, uiToClose);
-                Core.GameManager.Instance.GamePaused = false;
+                CoreClass.GameManager.Instance.GamePaused = false;
                 description.SetActive(false);
             }
         }
@@ -299,6 +297,10 @@ namespace Inventory
         {
             Items.Clear();
             ListItems();
+            foreach (Transform trans in itemContent)
+            {
+                Destroy(trans.gameObject);
+            }
         }
 
         public void ListItems()
@@ -362,7 +364,7 @@ namespace Inventory
 
                 if (enableRemove.isOn)
                 {
-                    var removeButton = Core.GameManager.Instance.GetComponentOnlyInChildren<Button>(trans);
+                    var removeButton = CoreClass.GameManager.Instance.GetComponentOnlyInChildren<Button>(trans);
                     removeButton.gameObject.SetActive(true);
                 }
             }

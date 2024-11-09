@@ -7287,7 +7287,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 3233f6a7061631d45a0382399ba55a7e,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 6fae31f56c716544cb143198b04a3966, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5e80dd3ff1ea4ec4a959d082587898f0, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -8419,6 +8419,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 523801592269571194, guid: f25dfcf981691f74285b34831161a6b2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4149538986696161853, guid: f25dfcf981691f74285b34831161a6b2,
         type: 3}
       propertyPath: m_Pivot.x
@@ -8523,6 +8528,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Crossfade
+      objectReference: {fileID: 0}
+    - target: {fileID: 6763874661230396599, guid: f25dfcf981691f74285b34831161a6b2,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

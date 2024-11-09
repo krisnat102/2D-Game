@@ -1,7 +1,7 @@
 ﻿using Inventory;
 using Spells;
 using UnityEngine;
-using Core;
+using CoreClass;
 
 namespace Interactables
 {

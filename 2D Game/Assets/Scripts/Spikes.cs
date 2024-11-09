@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using Core;
+using CoreClass;
 using Bardent.CoreSystem;
 using UnityEditor.PackageManager;
 

@@ -433,7 +433,7 @@ public class Enemy : MonoBehaviour
     #region Actions
     private void Die()
     {
-        if (Data.boss) Core.GameManager.Instance.DeactivateObject(4, hpBar.gameObject);
+        if (Data.boss) CoreClass.GameManager.Instance.DeactivateObject(4, hpBar.gameObject);
 
         if (Data.itemDrop)
         {

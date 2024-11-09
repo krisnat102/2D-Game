@@ -1,6 +1,6 @@
 using UnityEngine;
 using System;
-using Core;
+using CoreClass;
 using Krisnat;
 
 namespace Spells

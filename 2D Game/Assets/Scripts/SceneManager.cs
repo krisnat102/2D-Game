@@ -9,14 +9,21 @@ namespace Krisnat
         [SerializeField] private List<Item> itemsToStartWith;
         [SerializeField] private List<Item> itemsToEquip;
 
+        private static bool triggered = true;
+
         private void Start()
         {
-            InventoryManager.Instance.Add(itemsToStartWith);
-            InventoryManager.Instance.Add(itemsToEquip);
-
-            foreach(Item item in itemsToEquip) 
+            if (!triggered)
             {
-                InventoryManager.Instance.EquipItem(item);
+                InventoryManager.Instance.Add(itemsToStartWith);
+                InventoryManager.Instance.Add(itemsToEquip);
+
+                foreach (Item item in itemsToEquip)
+                {
+                    InventoryManager.Instance.EquipItem(item);
+                }
+
+                triggered = true;
             }
         }
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 using Spells;
-using Core;
+using CoreClass;
 using Bardent.CoreSystem;
 
 public class Grappler : MonoBehaviour

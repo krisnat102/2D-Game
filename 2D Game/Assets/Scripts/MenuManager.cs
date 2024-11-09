@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
-using UnityEngine.SceneManagement;
 using Krisnat.Assets.Scripts;
 using Krisnat;
 using Inventory;
@@ -70,11 +69,11 @@ public class MenuManager : MonoBehaviour
     {
         Screen.fullScreen = fullScreenToggle.isOn;
 
-        if (Core.GameManager.Instance != null && Core.GameManager.Instance.GamePaused)
+        if (CoreClass.GameManager.Instance != null && CoreClass.GameManager.Instance.GamePaused)
         {
             Time.timeScale = 0f;
         }
-        else if (Core.GameManager.Instance != null)
+        else if (CoreClass.GameManager.Instance != null)
         {
             Time.timeScale = 1;
         }
@@ -89,7 +88,8 @@ public class MenuManager : MonoBehaviour
             && !UIManager.Instance.LevelUpInterface.activeInHierarchy
             )
         {
-            PlayerInputHandler.Instance.UseMenuInput();
+            InventoryManager.Instance.ClearInventory();
+            PlayerInputHandler.Instance.UseMenuInput(); 
 
             if (!menu.activeInHierarchy)
             {
@@ -115,7 +115,7 @@ public class MenuManager : MonoBehaviour
                 settings.SetActive(false);
                 miniMenu.SetActive(true);
             }
-            Core.GameManager.Instance.GamePaused = true;
+            CoreClass.GameManager.Instance.GamePaused = true;
             PlayerInputHandler.Instance.StopAllInputs = true;
         }
         else
@@ -126,7 +126,7 @@ public class MenuManager : MonoBehaviour
     private void CloseMenu()
     { 
         menu.SetActive(false);
-        Core.GameManager.Instance.GamePaused = false;
+        CoreClass.GameManager.Instance.GamePaused = false;
         PlayerInputHandler.Instance.StopAllInputs = false;
         PlayerInputHandler.Instance.StopAttack = false;
     }

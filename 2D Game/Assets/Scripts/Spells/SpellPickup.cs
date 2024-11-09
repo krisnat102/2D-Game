@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using Core;
+using CoreClass;
 using Inventory;
 using TMPro;
 using UnityEngine.UI;

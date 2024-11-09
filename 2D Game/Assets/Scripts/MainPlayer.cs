@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Core;
+using CoreClass;
 
 public class MainPlayer : MonoBehaviour
 {
