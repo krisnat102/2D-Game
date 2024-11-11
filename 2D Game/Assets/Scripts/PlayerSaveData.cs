@@ -40,7 +40,7 @@ namespace Krisnat.Assets.Scripts
             //dexterity = levelHandler.DexterityCounter;
             //intelligence = levelHandler.IntelligenceCounter;
 
-            coins = InventoryManager.Instance.Coins;
+            //coins = InventoryManager.Instance.Coins;
             
             spellsId = SpellManager.Instance.Spells.Select(spell => spell.id).ToArray();
             activeSpellsId = SpellManager.Instance.SpellsBar.Select(spell => spell.id).ToArray();

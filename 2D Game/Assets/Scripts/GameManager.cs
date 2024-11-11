@@ -111,10 +111,21 @@ namespace CoreClass
                 loadActiveAbilities.AddRange(spellManager.AllSpells.Where(spell => spell.id == id).ToList());
             }
 
+            /*player.PlayerData.SetLevel(data.level);
+            stats.Health.SetMaxStat(data.maxHealth);
+            stats.Mana.SetMaxStat(data.maxMana);
+            stats.Stam.SetMaxStat(data.maxStam);
+            stats.Health.SetCurrentStat(data.currentHealth);
+            stats.Mana.SetCurrentStat(data.currentMana);
+            stats.Stam.SetCurrentStat(data.currentStam);
+            levelHandler.SetStrength(data.strength);
+            levelHandler.SetDexterity(data.dexterity);
+            levelHandler.SetIntelligence(data.intelligence);*/
+            //inventoryManager.SetCoins(data.coins, false);
             stats.Health.SetCurrentStat(stats.Health.MaxValue);
             stats.Mana.SetCurrentStat(stats.Mana.MaxValue);
             stats.Stam.SetCurrentStat(stats.Stam.MaxValue);
-            inventoryManager.SetCoins(data.coins, false);
+            inventoryManager.SetCoins(inventoryManager.Coins / 3, false);
             inventoryManager.Add(loadItems);
             spellManager.Add(loadSpells);
 

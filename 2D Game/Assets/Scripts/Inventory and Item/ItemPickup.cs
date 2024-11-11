@@ -24,6 +24,7 @@ namespace Inventory
         private bool isPickedUp = false;
         private GameObject itemPrice;
         private Animator animator;
+        private Canvas canvas;
 
         public static List<PopUpUI> itemPopUps = new();
 
@@ -43,8 +44,12 @@ namespace Inventory
                     itemPrice.GetComponentInChildren<Image>().gameObject.transform.position += new Vector3(offset, 0);
                 }
             }
-            if (chest) animator = GetComponent<Animator>();
+            if (chest)
+            {
+                canvas = GetComponentInChildren<Canvas>();
+            }
         }
+        
 
         public  void Pickup()
         {
@@ -68,6 +73,7 @@ namespace Inventory
             else if(!isPickedUp && chest) {
                 ForSale();
 
+                canvas.gameObject.SetActive(false);
                 isPickedUp = true;
                 StartCoroutine(AddItem(item, true, openTime));
                 animator.SetTrigger("open");

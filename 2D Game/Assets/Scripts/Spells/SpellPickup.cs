@@ -18,7 +18,29 @@ namespace Spells
 
         private bool isPickedUp = false;
         private Animator animator;
+        private Canvas canvas;
         private GameObject itemPrice;
+
+        private void Start()
+        {
+            animator = GetComponent<Animator>();
+            canvas = GetComponentInChildren<Canvas>();
+
+            if (forSale)
+            {
+                itemPrice = canvas?.GetComponent<Transform>()?.Find("ItemPrice")?.gameObject;
+                itemPrice.SetActive(true);
+                itemPrice.GetComponentInChildren<TMP_Text>().text = price.ToString();
+                if (price < 10)
+                {
+                    itemPrice.GetComponentInChildren<Image>().gameObject.transform.position -= new Vector3(offset, 0);
+                }
+                else if (price > 99)
+                {
+                    itemPrice.GetComponentInChildren<Image>().gameObject.transform.position += new Vector3(offset, 0);
+                }
+            }
+        }
 
         public void Pickup()
         {
@@ -79,30 +101,11 @@ namespace Spells
                 if (chest)
                 {
                     animator?.SetTrigger("open");
+                    canvas?.gameObject.SetActive(false);
                 }
                 else
                 {
                     gameObject.SetActive(false);
-                }
-            }
-        }
-
-        private void Start()
-        {
-            animator = GetComponent<Animator>();
-
-            if (forSale)
-            {
-                itemPrice = GetComponentInChildren<Canvas>()?.GetComponent<Transform>()?.Find("ItemPrice")?.gameObject;
-                itemPrice.SetActive(true);
-                itemPrice.GetComponentInChildren<TMP_Text>().text = price.ToString();
-                if (price < 10)
-                {
-                    itemPrice.GetComponentInChildren<Image>().gameObject.transform.position -= new Vector3(offset, 0);
-                }
-                else if (price > 99)
-                {
-                    itemPrice.GetComponentInChildren<Image>().gameObject.transform.position += new Vector3(offset, 0);
                 }
             }
         }

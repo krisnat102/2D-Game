@@ -1,7 +1,6 @@
 ﻿using Inventory;
 using Spells;
 using UnityEngine;
-using CoreClass;
 
 namespace Interactables
 {
@@ -23,6 +22,8 @@ namespace Interactables
                 opened = true;
 
                 PlayerInputHandler.Instance.UseUseInput();
+
+                transform.GetChild(0).gameObject.SetActive(false);
             }
         }
 
@@ -32,13 +33,13 @@ namespace Interactables
             {
                 InventoryManager.Instance.Add(item, true);
 
-                animator.SetTrigger("Open");
+                animator.SetTrigger("open");
             }
             else if (opened == false && spell != null)
             {
                 SpellManager.Instance.Add(spell);
 
-                animator.SetTrigger("Open");
+                animator.SetTrigger("open");
             }
         }
 
