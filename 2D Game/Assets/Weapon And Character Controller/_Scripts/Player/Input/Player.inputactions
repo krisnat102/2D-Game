@@ -132,6 +132,24 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Test1",
+                    "type": "Button",
+                    "id": "10bbf76d-ef5b-4dd2-8398-c296930e8a65",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Test2",
+                    "type": "Button",
+                    "id": "84214b85-10c5-4c4e-b4fb-211a670540e8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "SwitchSpell1",
                     "type": "Button",
                     "id": "16c200ab-b273-4713-8787-e516839ab941",
@@ -555,7 +573,7 @@
                 {
                     "name": "",
                     "id": "b604a727-3c65-40dd-b2a3-adff5ea5a25a",
-                    "path": "<Gamepad>/leftStick/down",
+                    "path": "<Gamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -604,6 +622,28 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "CharacterTab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f5e0c97e-1b36-46b1-b582-3bf52129758b",
+                    "path": "<Keyboard>/o",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Test1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fe9e232b-bc53-4638-8b4e-d25cc206651b",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Test2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

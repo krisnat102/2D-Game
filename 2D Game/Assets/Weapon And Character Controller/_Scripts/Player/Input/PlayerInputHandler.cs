@@ -54,6 +54,8 @@ public class PlayerInputHandler : MonoBehaviour
     public bool SwitchSpell2Input { get; private set; }
     public bool SwitchAbility1Input { get; private set; }
     public bool SwitchAbility2Input { get; private set; }
+    public bool Test1Input { get; private set; }
+    public bool Test2Input { get; private set; }
     public Vector2 MousePosition { get; private set; }
 
     public bool[] AttackInputs { get; private set; }
@@ -317,6 +319,30 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
+    public void OnTest1Input(InputAction.CallbackContext context)
+    {
+        if (context.started && !StopAllInputs)
+        {
+            Test1Input = true;
+        }
+        if (context.canceled && !StopAllInputs)
+        {
+            Test1Input = false;
+        }
+    }
+
+    public void OnTest2Input(InputAction.CallbackContext context)
+    {
+        if (context.started && !StopAllInputs)
+        {
+            Test2Input = true;
+        }
+        if (context.canceled && !StopAllInputs)
+        {
+            Test2Input = false;
+        }
+    }
+
     public void MousePositionInput(InputAction.CallbackContext context)
     {
         MousePosition = context.ReadValue<Vector2>();
@@ -335,6 +361,8 @@ public class PlayerInputHandler : MonoBehaviour
     public void UseSwitchSpell2Input() => SwitchSpell2Input = false;
     public void UseSwitchAbility1Input() => SwitchAbility1Input = false;
     public void UseSwitchAbility2Input() => SwitchAbility2Input = false;
+    public void UseTest1Input() => Test1Input = false;
+    public void UseTest2Input() => Test2Input = false;
     #endregion
 
     #region CheckInputs

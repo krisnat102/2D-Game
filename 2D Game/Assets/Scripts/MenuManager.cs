@@ -88,7 +88,6 @@ public class MenuManager : MonoBehaviour
             && !UIManager.Instance.LevelUpInterface.activeInHierarchy
             )
         {
-            InventoryManager.Instance.ClearInventory();
             PlayerInputHandler.Instance.UseMenuInput(); 
 
             if (!menu.activeInHierarchy)
