@@ -1,7 +1,4 @@
-﻿using Inventory;
-using System.Collections.Generic;
-using System.Linq;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +17,7 @@ namespace Spells
         private GameObject description;
 
         public Image SelectedItemIndicator { get => selectedItemIndicator; private set => selectedItemIndicator = value; }
+        public GameObject Description1 { get => description; private set => description = value; }
 
         public void RemoveSpell()
         {
@@ -70,8 +68,8 @@ namespace Spells
             GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
             SpellController spellController = button.GetComponent<SpellController>();
 
-            description = SpellManager.Instance.description1;
-            description.SetActive(true);
+            Description1 = SpellManager.Instance.description1;
+            Description1.SetActive(true);
 
             spellImage = SpellManager.Instance.spellImage1;
             spellName = SpellManager.Instance.spellName1;
