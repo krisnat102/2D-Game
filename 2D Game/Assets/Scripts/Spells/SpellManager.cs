@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Inventory;
 using Krisnat;
+using UnityEngine.UIElements;
+using System.Linq;
 
 namespace Spells
 {
@@ -12,18 +14,18 @@ namespace Spells
         public static SpellManager Instance;
         #region Private Variables
 
-        [SerializeField] private Transform spellContent;
+        [SerializeField] private Transform spellContent, abilityContent;
         [SerializeField] private GameObject inventorySpell;
 
-        [SerializeField] private Transform spellContentBar;
+        [SerializeField] private Transform spellContentBar, abilityContentBar;
         [SerializeField] private GameObject activeSpell;
 
         [SerializeField] private float inventoryOpenTime = 0.3f;
         [SerializeField] private float inventoryCloseTime = 0.3f;
 
         [Header("Spell Description")]
-        [SerializeField] private Button useButton;
-        [SerializeField] private Image spellImage;
+        [SerializeField] private UnityEngine.UI.Button useButton;
+        [SerializeField] private UnityEngine.UI.Image spellImage;
         [SerializeField] private TMP_Text spellName, spellDescription, spellValue, spellPrice;
         [SerializeField] private GameObject description;
 
@@ -40,8 +42,8 @@ namespace Spells
         public List<Spell> AbilitiesBar { get => abilitiesBar; private set => abilitiesBar = value; }
 
 
-        public Button useButton1;
-        public Image spellImage1;
+        public UnityEngine.UI.Button useButton1;
+        public UnityEngine.UI.Image spellImage1;
         public TMP_Text spellName1, spellDescription1, spellValue1, spellPrice1;
         public GameObject description1;
         #endregion
@@ -132,9 +134,21 @@ namespace Spells
         {
             oldSpells.Clear();
 
+            spells = spells.Distinct().ToList();
+
             foreach (Transform trans in spellContent)
             {
-                oldSpells.Add(trans.GetComponent<SpellController>().GetSpell());
+                Spell spell = trans.GetComponent<SpellController>().GetSpell();
+
+                if (oldSpells.Contains(spell))
+                {
+                    Destroy(trans.gameObject);
+                }
+                else
+                {
+                    oldSpells.Add(spell);
+                    if (!spells.Contains(spell)) Destroy(trans.gameObject);
+                }
             }
 
             //adds the items to the inventory
@@ -162,7 +176,17 @@ namespace Spells
 
         private GameObject CreateSpell(Spell spell)
         {
-            GameObject obj = Instantiate(inventorySpell, spellContent);
+            Debug.Log(spell.spellName);
+            GameObject obj;
+
+            if (spell.spell)
+            {
+                obj = Instantiate(inventorySpell, spellContent);
+            }
+            else
+            {
+                obj = Instantiate(inventorySpell, abilityContent);
+            }
 
             obj.SetActive(true);
 
@@ -174,7 +198,7 @@ namespace Spells
             spellController.SetSpell(spell);
 
             var spellName = obj.transform.Find("SpellName").GetComponent<Text>();
-            var spellImage = obj.transform.Find("SpellIcon").GetComponent<Image>();
+            var spellImage = obj.transform.Find("SpellIcon").GetComponent<UnityEngine.UI.Image>();
 
             spellName.text = spell.spellName;
             spellImage.sprite = spell.icon;
@@ -214,7 +238,7 @@ namespace Spells
                     spellController.SetSpell(spell);
 
                     var spellName = obj.transform.Find("SpellName").GetComponent<Text>();
-                    var spellIcon = obj.transform.Find("SpellIcon").GetComponent<Image>();
+                    var spellIcon = obj.transform.Find("SpellIcon").GetComponent<UnityEngine.UI.Image>();
 
                     if (spellName != null && spellIcon != null)
                     {
@@ -240,7 +264,7 @@ namespace Spells
                     spellController.SetSpell(spell);
 
                     var spellName = obj.transform.Find("SpellName").GetComponent<Text>();
-                    var spellIcon = obj.transform.Find("SpellIcon").GetComponent<Image>();
+                    var spellIcon = obj.transform.Find("SpellIcon").GetComponent<UnityEngine.UI.Image>();
 
                     if (spellName != null && spellIcon != null)
                     {

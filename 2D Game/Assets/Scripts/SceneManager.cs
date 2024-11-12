@@ -1,4 +1,5 @@
 using Inventory;
+using Spells;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,6 +38,7 @@ namespace Krisnat
         private void Test2()
         {
             InventoryManager.Instance.ClearInventory();
+            SpellManager.Instance.ClearInventory();
         }
     }
 }
