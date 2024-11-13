@@ -31,7 +31,7 @@ namespace Spells
         private GameObject spellInventory, inventory, characterTab;
         private float spellInventoryScale;
         private bool spellAbilityTab;
-        private List<Spell> spells, oldSpells, spellsBar, abilitiesBar = new();
+        private List<Spell> spells, oldSpells, spellsBar, abilitiesBar, oldSpellsBar, oldAbilitiesBar = new();
         #endregion
 
         #region Public Variables
@@ -39,6 +39,8 @@ namespace Spells
         public List<Spell> Spells { get => spells; private set => spells = value; }
         public List<Spell> SpellsBar { get => spellsBar; private set => spellsBar = value; }
         public List<Spell> AbilitiesBar { get => abilitiesBar; private set => abilitiesBar = value; }
+        public List<Spell> OldSpellsBar { get => oldSpellsBar; private set => oldSpellsBar = value; }
+        public List<Spell> OldAbilitiesBar { get => oldAbilitiesBar; private set => oldAbilitiesBar = value; }
 
 
         public Button useButton1;
@@ -75,6 +77,8 @@ namespace Spells
             spellInventory = InventoryManager.Instance.SpellInventory;
             characterTab = InventoryManager.Instance.CharacterTab;
             spellInventoryScale = spellInventory.transform.localScale.x;
+
+            oldSpellsBar = new();
         }
 
         public void Update()
@@ -131,65 +135,17 @@ namespace Spells
 
         public void ListSpells()
         {
-            //oldSpells.Clear();
-
             spells = spells.Distinct().ToList();
-            /*if (spellAbilityTab)
-            {
-                foreach (Transform trans in spellContent)
-                {
-                    Spell spell = trans.GetComponent<SpellController>().GetSpell();
 
-                    if (oldSpells.Contains(spell))
-                    {
-                        Debug.Log(spell.name + 1);
-                        Destroy(trans.gameObject);
-                    }
-                    else
-                    {
-                        Debug.Log(spell.name + 2);
-                        oldSpells.Add(spell);
-                        if (!spells.Contains(spell)) oldSpells.Add(spell);
-                    }
-                }
-            }
-            else
-            {
-                foreach (Transform trans in abilityContent)
-                {
-                    Spell spell = trans.GetComponent<SpellController>().GetSpell();
-
-                    if (!spells.Contains(spell)) oldSpells.Add(spell);
-                }
-            }*/
-
-            //adds the items to the inventory
             foreach (var spell in Spells)
             {
-                GameObject obj;
-
                 if (!oldSpells.Contains(spell))
                 {
-                    Debug.Log(spell.name + 1);
-                    obj = CreateSpell(spell);
+                    CreateSpell(spell);
                     oldSpells.Add(spell);
                 }
             }
-
-            //SetInventorySpells();
         }
-
-        /*public void SetInventorySpells()
-        {
-            {
-                System.Array.Resize(ref InventorySpells, Spells.Count);
-
-                for (int i = 0; i < Spells.Count; i++)
-                {
-                    InventorySpells[i].AddSpell(Spells[i]);
-                }
-            }
-        }*/
 
         private GameObject CreateSpell(Spell spell)
         {
@@ -206,8 +162,6 @@ namespace Spells
 
             obj.SetActive(true);
 
-            //InventorySpells = spellContent.GetComponentsInChildren<InventorySpellController>();
-
             obj.name = spell.name;
 
             SpellController spellController = obj.GetComponent<SpellController>();
@@ -219,80 +173,58 @@ namespace Spells
             spellName.text = spell.spellName;
             spellImage.sprite = spell.icon;
 
-            /*if (spellAbilityTab)
-                if (!spell.spell)
-                {
-                    obj.SetActive(false);
-                }
-            if (!spellAbilityTab)
-                if (spell.spell)
-                {
-                    obj.SetActive(false);
-                }*/
-
             return obj;
         }
 
 
         public void ListActiveSpells()
         {
-            //clears the inventory before opening so that items dont duplicate
-            foreach (Transform spell in spellContentBar)
-            {
-                Destroy(spell.gameObject);
-            }
             if (spellAbilityTab)
             {
-                //adds the items to the inventory
+                SpellsBar = SpellsBar.Distinct().ToList();
+
                 foreach (var spell in SpellsBar)
                 {
-                    GameObject obj = Instantiate(activeSpell, spellContentBar);
-
-                    obj.SetActive(true);
-
-                    SpellController spellController = obj.GetComponent<SpellController>();
-                    spellController.SetSpell(spell);
-
-                    var spellName = obj.transform.Find("SpellName").GetComponent<Text>();
-                    var spellIcon = obj.transform.Find("SpellIcon").GetComponent<Image>();
-
-                    if (spellName != null && spellIcon != null)
+                    if (!oldSpellsBar.Contains(spell))
                     {
-                        spellName.text = spell.spellName;
-                        spellIcon.sprite = spell.icon;
-                    }
-
-                    if (!spell.spell)
-                    {
-                        obj.SetActive(false);
+                        CreateActiveSpell(spell);
+                        oldSpellsBar.Add(spell);
                     }
                 }
             }
-            else if (!spellAbilityTab)
+            else
             {
+                AbilitiesBar = AbilitiesBar.Distinct().ToList();
+
                 foreach (var spell in AbilitiesBar)
                 {
-                    GameObject obj = Instantiate(activeSpell, spellContentBar);
-
-                    obj.SetActive(true);
-
-                    SpellController spellController = obj.GetComponent<SpellController>();
-                    spellController.SetSpell(spell);
-
-                    var spellName = obj.transform.Find("SpellName").GetComponent<Text>();
-                    var spellIcon = obj.transform.Find("SpellIcon").GetComponent<Image>();
-
-                    if (spellName != null && spellIcon != null)
+                    if (!oldAbilitiesBar.Contains(spell))
                     {
-                        spellName.text = spell.spellName;
-                        spellIcon.sprite = spell.icon;
-                    }
-
-                    if (spell.spell)
-                    {
-                        obj.SetActive(false);
+                        CreateActiveSpell(spell);
+                        oldAbilitiesBar.Add(spell);
                     }
                 }
+            }
+        }
+
+        private void CreateActiveSpell(Spell spell)
+        {
+            GameObject obj;
+            if(spell.spell) obj = Instantiate(activeSpell, spellContentBar);
+            else obj = Instantiate(activeSpell, abilityContentBar);
+
+            obj.SetActive(true);
+
+            SpellController spellController = obj.GetComponent<SpellController>();
+            spellController.SetSpell(spell);
+
+            var spellName = obj.transform.Find("SpellName").GetComponent<Text>();
+            var spellIcon = obj.transform.Find("SpellIcon").GetComponent<Image>();
+
+            if (spellName != null && spellIcon != null)
+            {
+                spellName.text = spell.spellName;
+                spellIcon.sprite = spell.icon;
             }
         }
 

@@ -100,6 +100,12 @@ namespace Spells
                 }
                 //else they will be handled by some other script or just left as they are
             }
+            else if (hitInfo.gameObject.layer == groundLayerMask)
+            {
+                rb.simulated = false;
+                rotationSpeed = 0;
+                Invoke("DestroyObject", stuckTime);
+            }
         }
 
         private void DestroyObject()

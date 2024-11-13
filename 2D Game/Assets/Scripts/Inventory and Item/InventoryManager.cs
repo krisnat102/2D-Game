@@ -321,35 +321,42 @@ namespace Inventory
             foreach (Transform trans in itemContent)
             {
                 Item item = trans.GetComponent<ItemController>().GetItem();
-                currentItems.Add(item);
-                if(item.ItemCount != 0) item.SetItemCount(1);
-                else Destroy(trans);
+                if (item.ItemCount != 0)
+                {
+                    item.SetItemCount(1);
+                    currentItems.Add(item);
+                }
+                else
+                {
+                    Destroy(trans.gameObject);
+                    if(items.Contains(item)) items.Remove(item);
+                }
             }
 
             if (currentItems != null)
             {
-                foreach (var item in DistinctItems.Except(currentItems))
+                foreach (Item item in DistinctItems.Except(currentItems))
                 {
                     GameObject obj = CreateItem(item);
                 }
 
-                foreach (var item in currentItems.Except(DistinctItems))
+                foreach (Item item in currentItems.Except(DistinctItems))
                 {
                     GameObject obj = CreateItem(item);
                 }
             }
             else
             {
-                foreach (var item in DistinctItems)
+                foreach (Item item in DistinctItems)
                 {
                     GameObject obj = CreateItem(item);
                 }
             }
 
             //adds the items to the inventory
-            foreach (var item in DistinctItems)
+            foreach (Item item in DistinctItems)
             {
-                foreach (var duplicateItem in Duplicates)
+                foreach (Item duplicateItem in Duplicates)
                 {
                     if (item.name == duplicateItem.name)
                         item.IncreaseItemCount();
@@ -358,7 +365,7 @@ namespace Inventory
 
             foreach (Transform trans in itemContent)
             {
-                var item = trans.GetComponent<ItemController>().GetItem();
+                Item item = trans.GetComponent<ItemController>().GetItem();
                 var itemCount = trans.GetComponentInChildren<SearchAssist>().GetComponent<TextMeshProUGUI>();
                 itemCount.text = (item.ItemCount > 1 ? "x" + item.ItemCount.ToString() : "");
 
@@ -369,7 +376,55 @@ namespace Inventory
                 }
             }
 
-            SetInventoryItems();
+            if(filter == Filter.Default)
+            {
+                foreach (Transform trans in itemContent)
+                {
+                    trans.gameObject.SetActive(true);
+                }
+            }
+            else if (filter == Filter.QuestInv)
+            {
+                foreach(Transform trans in itemContent)
+                {
+                    if(trans.GetComponent<ItemController>().GetItem().itemClass == Item.ItemClass.Quest) trans.gameObject.SetActive(true);
+                    else trans.gameObject.SetActive(false);
+                }
+            }
+            else if (filter == Filter.EquipmentInv)
+            {
+                foreach (Transform trans in itemContent)
+                {
+                    if (trans.GetComponent<ItemController>().GetItem().itemClass == Item.ItemClass.Equipment) trans.gameObject.SetActive(true);
+                    else trans.gameObject.SetActive(false);
+                }
+            }
+            else if (filter == Filter.MiscInv)
+            {
+                foreach (Transform trans in itemContent)
+                {
+                    if (trans.GetComponent<ItemController>().GetItem().itemClass == Item.ItemClass.Misc) trans.gameObject.SetActive(true);
+                    else trans.gameObject.SetActive(false);
+                }
+            }
+            else if (filter == Filter.WeaponInv)
+            {
+                foreach (Transform trans in itemContent)
+                {
+                    if (trans.GetComponent<ItemController>().GetItem().itemClass == Item.ItemClass.Weapon) trans.gameObject.SetActive(true);
+                    else trans.gameObject.SetActive(false);
+                }
+            }
+            else if (filter == Filter.ConsumableInv)
+            {
+                foreach (Transform trans in itemContent)
+                {
+                    if (trans.GetComponent<ItemController>().GetItem().itemClass == Item.ItemClass.Consumable) trans.gameObject.SetActive(true);
+                    else trans.gameObject.SetActive(false);
+                }
+            }
+
+            //SetInventoryItems();
         }
 
         private GameObject CreateItem(Item item)
@@ -426,7 +481,7 @@ namespace Inventory
             {
                 foreach (Transform item in itemContent)
                 {
-                    item.transform.Find("RemoveButton").GetComponent<UnityEngine.UI.Button>().gameObject.SetActive(true);
+                    item.transform.Find("RemoveButton").GetComponent<Button>().gameObject.SetActive(true);
                 }
             }
             else

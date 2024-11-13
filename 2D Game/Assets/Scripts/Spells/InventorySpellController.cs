@@ -35,8 +35,16 @@ namespace Spells
 
             Destroy(gameObject);
 
-            SpellManager.Instance.SpellsBar.Remove(spell);
-            SpellManager.Instance.AbilitiesBar.Remove(spell);
+            if (spell.spell)
+            {
+                SpellManager.Instance.SpellsBar.Remove(spell);
+                SpellManager.Instance.OldSpellsBar.Remove(spell);
+            }
+            else
+            {
+                SpellManager.Instance.AbilitiesBar.Remove(spell);
+                SpellManager.Instance.OldAbilitiesBar.Remove(spell);
+            }
         }
 
         public void AddSpell(Spell newSpell)
