@@ -243,8 +243,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationLength: 10
-  fade: 1
+  destroy: 0
+  adaptSize: 1
+  adaptDirection: 1
+  objectToSpawnBeforeDeath: {fileID: 0}
   fadeTime: 1
+  ui: 0
+  uiCanvasGroup: 0
 --- !u!114 &6119009307338995180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,6 +273,7 @@ MonoBehaviour:
   destroyOnTouch: 0
   dontRotate: 1
   shuriken: 0
+  collisionTimeOffset: 1
   rotationSpeed: 0.1
   stuckTime: 1
   fadeTimer: 1

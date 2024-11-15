@@ -15,6 +15,7 @@ namespace Spells
         [SerializeField] private bool destroyOnTouch;
         [SerializeField] private bool dontRotate;
         [SerializeField] private bool shuriken;
+        [SerializeField] private float collisionTimeOffset = 0.03f;
 
         [Header("Shuriken")]
         [SerializeField] private float rotationSpeed = 0.1f;
@@ -23,8 +24,10 @@ namespace Spells
 
         private Rigidbody2D rb;
         private LevelHandler levelHandler;
+        private GameObject death;
         private bool stuckShuriken = false;
         private float transparency = 1f;
+        private int FacingDirection;
 
         void Awake()
         {
@@ -33,18 +36,14 @@ namespace Spells
 
             rb.velocity = move ? transform.right * spell.speed : rb.velocity = new Vector2(0, 0);
             transform.right = dontRotate ? new Vector2(0, 0) : transform.right;
+            death = GetComponentInChildren<Death>(true)?.gameObject;
         }
 
         private void Update()
         {
-            /*Vector3 range = new Vector3(spell.range, spell.range, 0);
-            if (Math.Abs(Abilities.castPoint.x) + range.x < Math.Abs(transform.position.x) || Math.Abs(Abilities.castPoint.y) + range.y > Math.Abs(transform.position.y))
-            {
-                Invoke("DestroyObject", 0.5f);
+            if (transform.rotation.x != 0 || transform.rotation.y != 0) transform.rotation = new Quaternion(0, 0, transform.rotation.z, transform.rotation.w);
 
-                if(anim != null)
-                    if(ContainsParam(anim, "End")) anim.SetBool("End", true);
-            }*/
+            FacingDirection = (int)Mathf.Sign(transform.localScale.x);
 
             if (shuriken)
             {
@@ -57,7 +56,7 @@ namespace Spells
                 }
                 if (sprite.color.a <= 0)
                 {
-                    Destroy(gameObject);
+                    gameObject.SetActive(false);
                 }
             }
         }
@@ -86,32 +85,41 @@ namespace Spells
                 }
                 if (destroyOnTouch)
                 {
+                    Debug.Log(1);
                     DestroyObject();
                 }
-                else if (hitInfo.gameObject.layer == groundLayerMask)
+                else if ((groundLayerMask.value & (1 << hitInfo.gameObject.layer)) != 0)
                 {
-                    rb.simulated = false;
-                    rotationSpeed = 0;
-                    Invoke("DestroyObject", stuckTime);
+                    Invoke("Stuck", collisionTimeOffset);
                 }
                 else if (shuriken)
                 {
+                    Debug.Log(2);
                     DestroyObject();
                 }
                 //else they will be handled by some other script or just left as they are
             }
             else if ((groundLayerMask.value & (1 << hitInfo.gameObject.layer)) != 0)
             {
-                Debug.Log(1);
-                rb.simulated = false;
-                rotationSpeed = 0;
-                Invoke("DestroyObject", stuckTime);
+                Invoke("Stuck", collisionTimeOffset);
             }
         }
 
+        private void Stuck()
+        {
+            rb.simulated = false;
+            rotationSpeed = 0;
+            Invoke("DestroyObject", stuckTime);
+        }
         private void DestroyObject()
         {
-            if (spell.spellDeath != null)
+            if (death)
+            {
+                if (death.GetComponent<Death>().AdaptSize) death.transform.localScale = transform.localScale;
+                death.SetActive(true);
+                death.transform.parent = null;
+            }
+            else if (spell.spellDeath)
             {
                 Instantiate(spell.spellDeath, transform.position, Quaternion.identity);
             }
@@ -121,17 +129,7 @@ namespace Spells
             if (spell.name != "Shuriken")
             {
                 gameObject.SetActive(false);
-                //Destroy(gameObject);
             }
         }
-
-        /*private bool ContainsParam(Animator _Anim, string _ParamName)
-        {
-            foreach (AnimatorControllerParameter param in _Anim.parameters)
-            {
-                if (param.name == _ParamName) return true;
-            }
-            return false;
-        } checks if a parameter exists in the animator controller*/
     }
 }
