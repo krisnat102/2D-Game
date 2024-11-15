@@ -1,4 +1,4 @@
-using UnityEngine;
+ using UnityEngine;
 using System;
 using CoreClass;
 using Krisnat;
@@ -37,8 +37,8 @@ namespace Spells
 
         private void Update()
         {
-            Vector3 range = new Vector3(spell.range, spell.range, 0);
-            /*if (Math.Abs(Abilities.castPoint.x) + range.x < Math.Abs(transform.position.x) || Math.Abs(Abilities.castPoint.y) + range.y > Math.Abs(transform.position.y))
+            /*Vector3 range = new Vector3(spell.range, spell.range, 0);
+            if (Math.Abs(Abilities.castPoint.x) + range.x < Math.Abs(transform.position.x) || Math.Abs(Abilities.castPoint.y) + range.y > Math.Abs(transform.position.y))
             {
                 Invoke("DestroyObject", 0.5f);
 
@@ -100,8 +100,9 @@ namespace Spells
                 }
                 //else they will be handled by some other script or just left as they are
             }
-            else if (hitInfo.gameObject.layer == groundLayerMask)
+            else if ((groundLayerMask.value & (1 << hitInfo.gameObject.layer)) != 0)
             {
+                Debug.Log(1);
                 rb.simulated = false;
                 rotationSpeed = 0;
                 Invoke("DestroyObject", stuckTime);

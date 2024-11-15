@@ -277,7 +277,7 @@ MonoBehaviour:
     m_Bits: 512
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 0
   move: 0
   destroyOnTouch: 0
   dontRotate: 1
@@ -298,8 +298,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationLength: 0.2
-  fade: 0
+  destroy: 1
+  adaptSize: 1
+  adaptDirection: 1
+  objectToSpawnBeforeDeath: {fileID: 0}
   fadeTime: 0
+  ui: 0
+  uiCanvasGroup: 0
 --- !u!1 &2474861138851934443
 GameObject:
   m_ObjectHideFlags: 0
