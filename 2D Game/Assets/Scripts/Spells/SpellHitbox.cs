@@ -27,7 +27,6 @@ namespace Spells
         private GameObject death;
         private bool stuckShuriken = false;
         private float transparency = 1f;
-        private int FacingDirection;
 
         void Awake()
         {
@@ -42,8 +41,6 @@ namespace Spells
         private void Update()
         {
             if (transform.rotation.x != 0 || transform.rotation.y != 0) transform.rotation = new Quaternion(0, 0, transform.rotation.z, transform.rotation.w);
-
-            FacingDirection = (int)Mathf.Sign(transform.localScale.x);
 
             if (shuriken)
             {
@@ -64,8 +61,10 @@ namespace Spells
         private void OnTriggerEnter2D(Collider2D hitInfo)
         {
             //if (hitInfo.tag != "Player" && hitInfo.tag != "Item" && hitInfo.tag != "Climbable" && hitInfo.tag != "AttackRange" && hitInfo.tag != "BackgroundObject" && hitInfo.tag != "PickupRange")
+            Debug.Log(hitInfo.gameObject.name);
             if ((layerMask.value & (1 << hitInfo.gameObject.layer)) != 0)
             {
+                Debug.Log(1);
                 Enemy enemy = hitInfo.GetComponent<Enemy>();
                 if (enemy)
                 {
@@ -85,7 +84,6 @@ namespace Spells
                 }
                 if (destroyOnTouch)
                 {
-                    Debug.Log(1);
                     DestroyObject();
                 }
                 else if ((groundLayerMask.value & (1 << hitInfo.gameObject.layer)) != 0)
@@ -94,7 +92,6 @@ namespace Spells
                 }
                 else if (shuriken)
                 {
-                    Debug.Log(2);
                     DestroyObject();
                 }
                 //else they will be handled by some other script or just left as they are
