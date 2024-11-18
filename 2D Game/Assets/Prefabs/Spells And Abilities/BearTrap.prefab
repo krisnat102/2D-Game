@@ -155,7 +155,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -172,7 +172,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0073621273, y: -0.02208662}
+  m_Offset: {x: -0.012642026, y: 0.00036239624}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -183,7 +183,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.35001326, y: 0.3962927}
+  m_Size: {x: 0.09754729, y: 0.28517342}
   m_EdgeRadius: 0
 --- !u!61 &3307547654459949695
 BoxCollider2D:
@@ -200,7 +200,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -217,7 +217,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.005363703, y: -0.21788856}
+  m_Offset: {x: -0.005363703, y: -0.13837337}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -228,7 +228,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.18584394, y: 0.00899452}
+  m_Size: {x: 0.18584394, y: 0.0025091171}
   m_EdgeRadius: 0
 --- !u!114 &3400662536610066471
 MonoBehaviour:
@@ -296,7 +296,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   trap: {fileID: 11400000, guid: ddd09cd857a1b9b4d81d64aaa8c595c9, type: 2}
-  holdTime: 2
+  holdTime: 1.5
 --- !u!82 &494480949307905980
 AudioSource:
   m_ObjectHideFlags: 0

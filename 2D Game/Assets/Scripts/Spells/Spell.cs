@@ -8,7 +8,7 @@ namespace Spells
         public string spellName;
         public bool spell;
         public int cost;
-        public int value;
+        public int damage;
         public float speed;
         public float cooldown;
         public float range;

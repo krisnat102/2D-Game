@@ -18,15 +18,20 @@ namespace Spells
 
         private void OnTriggerEnter2D(Collider2D hitInfo)
         {
-            if ((layerMask.value & (1 << hitInfo.gameObject.layer)) != 0 && triggered == false)
+            if ((layerMask.value & (1 << hitInfo.gameObject.layer)) != 0 && triggered == false && hitInfo.tag == "Enemy" && hitInfo.tag != "AttackRange")
             {
-                animator.SetTrigger("closed");
-                triggered = true;
-                holdTarget = true;
-                target = hitInfo.gameObject;
-                target?.GetComponent<Enemy>().TakeDamage(trap.value, 0, false);
-                targetRB = target?.GetComponent<Rigidbody2D>();
-                shutSound.Play();
+                Enemy enemy = hitInfo.GetComponent<Enemy>();
+                if (enemy)
+                {
+                    animator.SetTrigger("closed");
+                    triggered = true;
+                    holdTarget = true;
+                    Invoke("Release", holdTime);
+                    target = hitInfo.gameObject;
+                    target?.GetComponent<Enemy>().TakeDamage(trap.damage, 0, false);
+                    targetRB = target?.GetComponent<Rigidbody2D>();
+                    shutSound.Play();
+                }
             }
             if ((groundLayerMask.value & (1 << hitInfo.gameObject.layer)) != 0)
             {
@@ -44,8 +49,6 @@ namespace Spells
 
                 rb.velocity = new Vector2(0, 0);
                 rb.isKinematic = true;
-
-                Invoke("Release", holdTime);
             }
         }
 
@@ -60,7 +63,7 @@ namespace Spells
         {
             holdTarget = false;
             if (targetRB != null) targetRB.isKinematic = false;
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

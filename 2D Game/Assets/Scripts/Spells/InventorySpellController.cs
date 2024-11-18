@@ -88,9 +88,9 @@ namespace Spells
             spellImage.sprite = spellController.GetSpell().icon;
             spellName.text = spellController.GetSpell().spellName.ToUpper();
             spellDescription.text = spellController.GetSpell().description;
-            if (spellController.GetSpell().value != 0)
+            if (spellController.GetSpell().damage != 0)
             {
-                spellValue.text = "DMG - " + spellController.GetSpell().value.ToString();
+                spellValue.text = "DMG - " + spellController.GetSpell().damage.ToString();
             }
             else spellValue.text = null;
             spellPrice.text = "COST - " + spellController.GetSpell().cost.ToString();

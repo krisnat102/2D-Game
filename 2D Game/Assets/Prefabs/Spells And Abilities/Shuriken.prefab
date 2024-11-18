@@ -129,15 +129,15 @@ MonoBehaviour:
   spell: {fileID: 11400000, guid: a3b34572ef11e8a4c8b5b7ab0fd879e9, type: 2}
   layerMask:
     serializedVersion: 2
-    m_Bits: 4608
+    m_Bits: 512
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 4096
   move: 1
   destroyOnTouch: 1
   dontRotate: 0
-  shuriken: 0
-  collisionTimeOffset: 0.03
+  shuriken: 1
+  collisionTimeOffset: 0
   rotationSpeed: 100
   stuckTime: 1
   fadeTimer: 1

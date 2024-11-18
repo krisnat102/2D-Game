@@ -1,6 +1,4 @@
- using UnityEngine;
-using System;
-using CoreClass;
+using UnityEngine;
 using Krisnat;
 
 namespace Spells
@@ -27,15 +25,20 @@ namespace Spells
         private GameObject death;
         private bool stuckShuriken = false;
         private float transparency = 1f;
+        private float angle;
 
         void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
             levelHandler = FindAnyObjectByType<Player>().GetComponent<LevelHandler>();
 
-            rb.velocity = move ? transform.right * spell.speed : rb.velocity = new Vector2(0, 0);
+            //rb.velocity = move ? transform.right * spell.speed : rb.velocity = new Vector2(0, 0);
+            rb.velocity = move ? transform.right.normalized * spell.speed : Vector2.zero;
             transform.right = dontRotate ? new Vector2(0, 0) : transform.right;
             death = GetComponentInChildren<Death>(true)?.gameObject;
+
+            angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+            Invoke("NullAngle", 0.2f);
         }
 
         private void Update()
@@ -61,20 +64,19 @@ namespace Spells
         private void OnTriggerEnter2D(Collider2D hitInfo)
         {
             //if (hitInfo.tag != "Player" && hitInfo.tag != "Item" && hitInfo.tag != "Climbable" && hitInfo.tag != "AttackRange" && hitInfo.tag != "BackgroundObject" && hitInfo.tag != "PickupRange")
-            Debug.Log(hitInfo.gameObject.name);
+
             if ((layerMask.value & (1 << hitInfo.gameObject.layer)) != 0)
             {
-                Debug.Log(1);
                 Enemy enemy = hitInfo.GetComponent<Enemy>();
                 if (enemy)
                 {
                     if (spell.spell)
                     {
-                        enemy.TakeDamage(spell.value * levelHandler.IntelligenceDamage, 0, false);
+                        enemy.TakeDamage(spell.damage * levelHandler.IntelligenceDamage, 0, false);
                     }
                     else
                     {
-                        enemy.TakeDamage(spell.value * levelHandler.DexterityDamage, 0, false);
+                        enemy.TakeDamage(spell.damage * levelHandler.DexterityDamage, 0, false);
                     }
 
                     if (shuriken)
@@ -82,21 +84,20 @@ namespace Spells
                         Instantiate(enemy.Data.bloodEffect, transform.position, Quaternion.identity);
                     }
                 }
-                if (destroyOnTouch)
+                if (!shuriken)
                 {
-                    DestroyObject();
-                }
-                else if ((groundLayerMask.value & (1 << hitInfo.gameObject.layer)) != 0)
-                {
-                    Invoke("Stuck", collisionTimeOffset);
-                }
-                else if (shuriken)
-                {
-                    DestroyObject();
+                    if (destroyOnTouch)
+                    {
+                        DestroyObject();
+                    }
+                    else if ((groundLayerMask.value & (1 << hitInfo.gameObject.layer)) != 0)
+                    {
+                        Invoke("Stuck", collisionTimeOffset);
+                    }
                 }
                 //else they will be handled by some other script or just left as they are
             }
-            else if ((groundLayerMask.value & (1 << hitInfo.gameObject.layer)) != 0)
+            else if ((groundLayerMask.value & (1 << hitInfo.gameObject.layer)) != 0 && (angle > 77f || angle < 40f) && destroyOnTouch)
             {
                 Invoke("Stuck", collisionTimeOffset);
             }
@@ -128,5 +129,7 @@ namespace Spells
                 gameObject.SetActive(false);
             }
         }
+
+        private void NullAngle() => angle = 0; 
     }
 }
