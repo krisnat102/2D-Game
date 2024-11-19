@@ -478,7 +478,7 @@ Transform:
   - {fileID: 6481338355655135779}
   - {fileID: 6824778548687948625}
   - {fileID: 3765119724960197482}
-  - {fileID: 5298329845058933869}
+  - {fileID: 5640645860537164679}
   - {fileID: 2900584366129478333}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1119,7 +1119,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!1001 &1895521497777074627
+--- !u!1001 &2129874592054937129
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1139,18 +1139,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6037440538041968046, guid: 944564c67a0fb5a4697b7f2e5d6867e0,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: -0.90909094
+      objectReference: {fileID: 0}
+    - target: {fileID: 6037440538041968046, guid: 944564c67a0fb5a4697b7f2e5d6867e0,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.90909094
+      objectReference: {fileID: 0}
+    - target: {fileID: 6037440538041968046, guid: 944564c67a0fb5a4697b7f2e5d6867e0,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6037440538041968046, guid: 944564c67a0fb5a4697b7f2e5d6867e0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.207
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 6037440538041968046, guid: 944564c67a0fb5a4697b7f2e5d6867e0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.8182328
       objectReference: {fileID: 0}
     - target: {fileID: 6037440538041968046, guid: 944564c67a0fb5a4697b7f2e5d6867e0,
         type: 3}
@@ -1160,7 +1170,7 @@ PrefabInstance:
     - target: {fileID: 6037440538041968046, guid: 944564c67a0fb5a4697b7f2e5d6867e0,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6037440538041968046, guid: 944564c67a0fb5a4697b7f2e5d6867e0,
         type: 3}
@@ -1192,16 +1202,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoinsBurst
       objectReference: {fileID: 0}
+    - target: {fileID: 6683564807514147188, guid: 944564c67a0fb5a4697b7f2e5d6867e0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 944564c67a0fb5a4697b7f2e5d6867e0, type: 3}
---- !u!4 &5298329845058933869 stripped
+--- !u!4 &5640645860537164679 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6037440538041968046, guid: 944564c67a0fb5a4697b7f2e5d6867e0,
     type: 3}
-  m_PrefabInstance: {fileID: 1895521497777074627}
+  m_PrefabInstance: {fileID: 2129874592054937129}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8537008322484912701
 PrefabInstance:

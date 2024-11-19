@@ -63,22 +63,35 @@ namespace Spells
                     Spell();
             }
             if (playerInputHandler.SwitchSpell1Input)
+            {
+                playerInputHandler.UseSwitchSpell1Input();
+
                 if (activeSpell != 0)
                 {
                     activeSpell--;
-                    playerInputHandler.UseSwitchSpell1Input();
                 }
-                else activeSpell = 7;
+                else
+                {
+                    activeSpell = 7;
+                }
+            }
             ClearSprites();
 
             if (playerInputHandler.SwitchSpell2Input)
+            {
+                playerInputHandler.UseSwitchSpell2Input();
+
                 if (activeSpell != 7)
                 {
                     activeSpell++;
-                    playerInputHandler.UseSwitchSpell2Input();
                 }
-                else activeSpell = 0;
-            ClearSprites();
+                else
+                {
+                    activeSpell = 0;
+                }
+
+                ClearSprites();
+            }
             #endregion
 
             #region Ability Casting
@@ -110,7 +123,7 @@ namespace Spells
             if (spellManager.SpellsBar.Count > activeSpell)
                 if (spellManager.SpellsBar[activeSpell] != null)
                 {
-                    mainSpell.sprite = spellManager.SpellsBar[activeSpell].icon;
+                    mainSpell.sprite = spellManager.SpellsBar[activeSpell]?.icon;
                     mainSpell.gameObject.SetActive(true);
                 }
 
@@ -118,13 +131,13 @@ namespace Spells
             {
                 if (spellManager.SpellsBar[activeSpell - 1] != null && spellManager.SpellsBar.Count > activeSpell - 1)
                 {
-                    sideSpell1.sprite = spellManager.SpellsBar[activeSpell - 1].icon;
+                    sideSpell1.sprite = spellManager.SpellsBar[activeSpell - 1]?.icon;
                     sideSpell1.gameObject.SetActive(true);
                 }
             }
-            else if (spellManager.SpellsBar.Count == 7)
+            else if (spellManager.SpellsBar.Count == 7 && activeSpell == 0)
             {
-                sideSpell1.sprite = spellManager.SpellsBar[7].icon;
+                sideSpell1.sprite = spellManager.SpellsBar[7]?.icon;
                 sideSpell1.gameObject.SetActive(true);
             }
 
@@ -132,13 +145,13 @@ namespace Spells
             {
                 if (spellManager.SpellsBar[activeSpell + 1] != null && spellManager.SpellsBar.Count > activeSpell + 1)
                 {
-                    sideSpell2.sprite = spellManager.SpellsBar[activeSpell + 1].icon;
+                    sideSpell2.sprite = spellManager.SpellsBar[activeSpell + 1]?.icon;
                     sideSpell2.gameObject.SetActive(true);
                 }
             }
-            else if (spellManager.SpellsBar.Count == 7)
+            else if (spellManager.SpellsBar.Count > 0 && activeSpell == 7)
             {
-                sideSpell2.sprite = spellManager.SpellsBar[0].icon;
+                sideSpell2.sprite = spellManager.SpellsBar[0]?.icon;
                 sideSpell2.gameObject.SetActive(true);
             }
             #endregion

@@ -18,7 +18,7 @@ namespace Spells
 
         private void OnTriggerEnter2D(Collider2D hitInfo)
         {
-            if ((layerMask.value & (1 << hitInfo.gameObject.layer)) != 0 && triggered == false && hitInfo.tag == "Enemy" && hitInfo.tag != "AttackRange")
+            if ((layerMask.value & (1 << hitInfo.gameObject.layer)) != 0 && triggered == false)
             {
                 Enemy enemy = hitInfo.GetComponent<Enemy>();
                 if (enemy)
