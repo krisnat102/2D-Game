@@ -103,11 +103,11 @@ namespace Spells
 
             if (playerInputHandler.SwitchAbility1Input)
             {
-                playerInputHandler.UseSwitchAbility2Input();
-
+                playerInputHandler.UseSwitchAbility1Input();
+                
                 if (activeAbility != 0)
                 {
-                    activeAbility++;
+                    activeAbility--;
                 }
                 else
                 {
