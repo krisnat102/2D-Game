@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
-using CoreClass;
 using Bardent.CoreSystem;
-using UnityEditor.PackageManager;
 
 namespace Interactables
 {

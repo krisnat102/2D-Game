@@ -71,7 +71,7 @@ namespace Spells
         }
         private void Start()
         {
-            AllSpells = CoreClass.GameManager.Instance.GetCustomAssets<Spell>("Spell", "CreatedAssets");
+            AllSpells = CoreClass.GameManager.Instance.GetCustomAssets<Spell>("Spell", "Spells");
 
             inventory = InventoryManager.Instance.Inventory;
             spellInventory = InventoryManager.Instance.SpellInventory;

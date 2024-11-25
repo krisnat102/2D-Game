@@ -5,8 +5,6 @@ namespace Krisnat
 {
     using System.Collections.Generic;
     using UnityEngine;
-    using UnityEngine.UI;
-    using static UnityEditor.Progress;
 
     public class Pickup : MonoBehaviour
     {

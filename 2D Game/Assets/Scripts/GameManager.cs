@@ -21,10 +21,10 @@ namespace CoreClass
         [SerializeField] private GameObject deathScreen;
         [SerializeField] private GameObject playerGO;
         [SerializeField] private Bardent.CoreSystem.Death death;
-        [SerializeField] private new Transform camera;
+        [SerializeField] private Transform camera;
 
         private Player player;
-        private LevelHandler levelHandler;
+        //private LevelHandler levelHandler;
         private InventoryManager inventoryManager;
         private SpellManager spellManager;
         private Stats stats;
@@ -45,7 +45,7 @@ namespace CoreClass
             Instance = this;
 
             player = playerGO?.GetComponent<Player>();
-            levelHandler = playerGO?.GetComponent<LevelHandler>();
+            //levelHandler = playerGO?.GetComponent<LevelHandler>();
         }
 
         private void Start()
@@ -158,6 +158,7 @@ namespace CoreClass
         #endregion
 
         #region General Core Methods
+        #if UNITY_EDITOR
         [MenuItem("Tools/Load Custom Assets")]
         private static void LoadItemNames()
         {
@@ -188,8 +189,9 @@ namespace CoreClass
                 }
             }
         }
+        #endif
 
-        public List<T> GetCustomAssets<T>(string customAssetType, string location) where T : UnityEngine.Object
+        /*public List<T> GetCustomAssets<T>(string customAssetType, string location) where T : UnityEngine.Object
         {
             List<T> loadedAssets = new();
 
@@ -210,10 +212,29 @@ namespace CoreClass
                     loadedAssets.Add(asset);
                 }
             }
-            /*foreach (T item in loadedAssets)
+
+            return loadedAssets;
+        }*/
+
+        public List<T> GetCustomAssets<T>(string customAssetType, string location) where T : UnityEngine.Object
+        {
+            List<T> loadedAssets = new();
+
+            // Load all assets of type T from the specified Resources subfolder
+            string resourcePath = location; // Resources folder path, e.g., "MyAssets/Subfolder"
+            T[] assets = Resources.LoadAll<T>(resourcePath);
+
+            if (assets == null || assets.Length == 0)
             {
-                Debug.Log(item.name);
-            }*/
+                Debug.LogWarning(customAssetType + " not found at " + location);
+                return loadedAssets;
+            }
+
+            foreach (T asset in assets)
+            {
+                loadedAssets.Add(asset);
+            }
+
             return loadedAssets;
         }
 

@@ -12,9 +12,9 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: 2D Game
-  defaultCursor: {fileID: 0}
+  companyName: Ludic Spark
+  productName: Fireborne
+  defaultCursor: {fileID: 2800000, guid: 690a30178afe7e14fa8f7ceb894dc963, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
@@ -158,7 +158,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Standalone: com.DefaultCompany.2D-Game
+    Standalone: com.Ludic-Spark.Fireborne
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -283,7 +283,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 0}
+      m_Icon: {fileID: 2800000, guid: 3676ed20950c7d740b97d5d89a69d580, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0

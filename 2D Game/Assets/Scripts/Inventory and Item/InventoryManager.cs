@@ -113,7 +113,7 @@ namespace Inventory
         }
         private void Start()
         {
-            AllItems = CoreClass.GameManager.Instance.GetCustomAssets<Item>("Item", "CreatedAssets");
+            AllItems = CoreClass.GameManager.Instance.GetCustomAssets<Item>("Item", "Items");
 
             inventoryScale = inventory.transform.localScale.x;
             characterTabScale = characterTab.transform.localScale.x;

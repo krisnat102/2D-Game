@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
-using CoreClass;
 using Inventory;
 using TMPro;
 using UnityEngine.UI;
 using Krisnat;
-using static UnityEditor.Progress;
 
 namespace Spells
 {

@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
-using CoreClass;
-using System.Runtime.InteropServices;
-using UnityEditor.Build;
+
 public class EnemyAttackAI : MonoBehaviour
 {
     [SerializeField] private Transform firePoint;
