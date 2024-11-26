@@ -80,6 +80,7 @@ namespace CoreClass
         public void LoadPlayer()
         {
             PlayerSaveData data = SaveSystem.LoadPlayer();
+            if (data == null) return;
 
             List<Item> loadItems = new();
             List<Item> loadEquippedItems = new();

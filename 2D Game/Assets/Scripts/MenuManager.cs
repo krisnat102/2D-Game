@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance;
-    public bool DamagePopUps { get; private set; }
+    public bool DamagePopUps { get => dagamePopups; private set => dagamePopups = value; }
 
     #region Private Variables
     [SerializeField] private Player player;
@@ -23,6 +23,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Toggle fullScreenToggle, damagePopUpsToggle;
 
     private Resolution[] resolutions;
+    private bool dagamePopups = true;
     #endregion
 
     #region Unity Methods

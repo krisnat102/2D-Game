@@ -14,7 +14,7 @@ namespace Krisnat
         private static bool spellTutorial = false;
         private static bool started = false;
 
-        private void Awake()
+        private void Start()
         {
             if (!started)
             {
