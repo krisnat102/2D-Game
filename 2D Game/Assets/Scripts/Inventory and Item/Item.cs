@@ -46,8 +46,6 @@ namespace Inventory
         public EquipmentType equipmentType;
         [HideInInspector]
         public WeaponDataSO weaponData;
-        [HideInInspector]
-        public WeaponType weaponType;
 
         [HideInInspector]
         public bool consumable;
@@ -84,7 +82,11 @@ namespace Inventory
         }
         #endregion
 
-        #region Setters
+        #region Getters and Setters
+        public WeaponType GetWeaponType()
+        {
+            return weaponData.Type;
+        }
         public void SetEquipped(bool equip)
         {
             Equipped = equip;
@@ -129,7 +131,6 @@ namespace Inventory
                 else
                 {
                     script.weaponData = (WeaponDataSO)EditorGUILayout.ObjectField("Weapon Data", script.weaponData, typeof(WeaponDataSO), false);
-                    script.weaponType = (Item.WeaponType)EditorGUILayout.EnumPopup("Type", script.weaponType);
                     script.weight = EditorGUILayout.FloatField("Weight", script.weight);
                 }
             }

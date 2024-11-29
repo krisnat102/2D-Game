@@ -597,7 +597,7 @@ namespace Inventory
                     GlovesBn.GetComponent<ItemController>().SetItem(item);
                     break;
                 case Item.EquipmentType.Weapon:
-                    switch (item.weaponType)
+                    switch (item.GetWeaponType())
                     {
                         case Item.WeaponType.Sword:
                             foreach (Transform transform in SwordBn.transform)
