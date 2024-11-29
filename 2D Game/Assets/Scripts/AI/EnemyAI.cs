@@ -129,7 +129,12 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
         }
     }
 
-    private bool TargetInDistance() => Vector2.Distance(transform.position, target.transform.position) < dataAI.activateDistance;
+    private bool TargetInDistance() 
+    {
+        if (target && dataAI)
+            return Vector2.Distance(transform.position, target.transform.position) < dataAI.activateDistance;
+        else return false;
+    }
 
     private void OnPathComplete(Path p)
     {
