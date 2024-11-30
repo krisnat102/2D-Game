@@ -31,7 +31,6 @@ namespace Bardent.Weapons
             if (ComponentData.FirstOrDefault(t => t.GetType() == data.GetType()) != null)
                 return;
 
-
             ComponentData.Add(data);
         }
     }

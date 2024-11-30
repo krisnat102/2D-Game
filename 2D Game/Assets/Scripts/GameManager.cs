@@ -140,6 +140,7 @@ namespace CoreClass
             foreach(Item item in loadEquippedItems)
             {
                 inventoryManager.EquipItem(item);
+                item.SetEquipped(true);
             }
 
             foreach(Spell spell in loadActiveSpells)

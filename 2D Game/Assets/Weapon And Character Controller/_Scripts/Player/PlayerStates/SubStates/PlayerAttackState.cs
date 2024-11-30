@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using Bardent.Weapons;
-using UnityEngine;
 
 public class PlayerAttackState : PlayerAbilityState
 {
-    private Bardent.Weapons.Weapon weapon;
+    private Weapon weapon;
 
     private int inputIndex;
 
@@ -15,7 +12,7 @@ public class PlayerAttackState : PlayerAbilityState
         PlayerStateMachine stateMachine,
         PlayerData playerData,
         string animBoolName,
-        Bardent.Weapons.Weapon weapon,
+        Weapon weapon,
         CombatInputs input
     ) : base(player, stateMachine, playerData, animBoolName)
     {
@@ -36,7 +33,6 @@ public class PlayerAttackState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
-
 
         weapon.Enter();
     }

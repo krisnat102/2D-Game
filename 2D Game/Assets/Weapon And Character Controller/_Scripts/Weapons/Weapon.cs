@@ -2,6 +2,7 @@ using System;
 using Bardent.CoreSystem;
 using UnityEngine;
 using Bardent.Utilities;
+using Bardent.Weapons.Components;
 
 namespace Bardent.Weapons
 {
@@ -41,7 +42,7 @@ namespace Bardent.Weapons
 
         public AnimationEventHandler EventHandler { get; private set; }
 
-        public CoreSystem.Core Core { get; private set; }
+        public Core Core { get; private set; }
 
         private int currentAttackCounter;
 
@@ -59,7 +60,7 @@ namespace Bardent.Weapons
             OnEnter?.Invoke();
         }
 
-        public void SetCore(CoreSystem.Core core)
+        public void SetCore(Core core)
         {
             Core = core;
         }

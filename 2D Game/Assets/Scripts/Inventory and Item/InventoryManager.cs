@@ -119,6 +119,8 @@ namespace Inventory
             characterTabScale = characterTab.transform.localScale.x;
 
             purseAnimator = purse.GetComponent<Animator>();
+
+            
         }
 
         public void Update()
@@ -296,11 +298,11 @@ namespace Inventory
         public void ClearInventory()
         {
             Items.Clear();
-            ListItems();
             foreach (Transform trans in itemContent)
             {
                 Destroy(trans.gameObject);
             }
+            ListItems();
         }
 
         public void ListItems()
@@ -546,7 +548,7 @@ namespace Inventory
 
                     if (HelmetBn.GetComponent<ItemController>().GetItem() != null)
                     {
-                        HelmetBn.GetComponent<ItemController>().GetItem().SetEquipped(false);
+                        UnequipItem(HelmetBn.GetComponent<ItemController>().GetItem());
                     }
 
                     HelmetBn.GetComponent<ItemController>().SetItem(item);
@@ -561,7 +563,7 @@ namespace Inventory
 
                     if (ChestplateBn.GetComponent<ItemController>().GetItem() != null)
                     {
-                        ChestplateBn.GetComponent<ItemController>().GetItem().SetEquipped(false);
+                        UnequipItem(ChestplateBn.GetComponent<ItemController>().GetItem());
                     }
 
                     ChestplateBn.GetComponent<ItemController>().SetItem(item);
@@ -576,7 +578,7 @@ namespace Inventory
 
                     if (BootsBn.GetComponent<ItemController>().GetItem() != null)
                     {
-                        BootsBn.GetComponent<ItemController>().GetItem().SetEquipped(false);
+                        UnequipItem(BootsBn.GetComponent<ItemController>().GetItem());
                     }
 
                     BootsBn.GetComponent<ItemController>().SetItem(item);
@@ -591,7 +593,7 @@ namespace Inventory
 
                     if (GlovesBn.GetComponent<ItemController>().GetItem() != null)
                     {
-                        GlovesBn.GetComponent<ItemController>().GetItem().SetEquipped(false);
+                        UnequipItem(GlovesBn.GetComponent<ItemController>().GetItem());
                     }
 
                     GlovesBn.GetComponent<ItemController>().SetItem(item);
@@ -608,7 +610,7 @@ namespace Inventory
 
                             if (SwordBn.GetComponent<ItemController>().GetItem() != null)
                             {
-                                SwordBn.GetComponent<ItemController>().GetItem().SetEquipped(false);
+                                UnequipItem(SwordBn.GetComponent<ItemController>().GetItem());
                             }
 
                             SwordBn.GetComponent<ItemController>().SetItem(item);
@@ -622,7 +624,7 @@ namespace Inventory
 
                             if(BowBn.GetComponent<ItemController>().GetItem() != null)
                             {
-                                BowBn.GetComponent<ItemController>().GetItem().SetEquipped(false);
+                                UnequipItem(BowBn.GetComponent<ItemController>().GetItem());
                             }
 
                             BowBn.GetComponent<ItemController>().SetItem(item);

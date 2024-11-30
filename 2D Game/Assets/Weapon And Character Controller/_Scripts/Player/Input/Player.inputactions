@@ -252,6 +252,61 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "Arrows",
+                    "id": "e2ebf678-366a-463d-921f-14456e9ecd21",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "b4ca871d-c27b-449f-9e07-e3e4659e8290",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "4b43e1c0-2120-410f-92c6-c35fd80a75ed",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "abada1b2-38a8-4139-8892-ac968d68b72f",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "8da84dac-a344-4ec4-aac9-4b1cf660f3d1",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "8084ff11-f5be-49ba-b375-cf376afd1417",
                     "path": "<Gamepad>/leftStick",
@@ -518,7 +573,7 @@
                 {
                     "name": "",
                     "id": "4123b183-77fb-4d89-b34d-c3fe411474d1",
-                    "path": "<Keyboard>/t",
+                    "path": "<Keyboard>/y",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -540,7 +595,7 @@
                 {
                     "name": "",
                     "id": "729c637c-3052-4700-9a61-8e0816c81046",
-                    "path": "<Keyboard>/y",
+                    "path": "<Keyboard>/t",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -562,7 +617,7 @@
                 {
                     "name": "",
                     "id": "7690cf74-5b47-45b9-be04-e62ff392a129",
-                    "path": "<Keyboard>/h",
+                    "path": "<Keyboard>/g",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -584,7 +639,7 @@
                 {
                     "name": "",
                     "id": "b0efd28c-3581-401d-971d-ef21ef48acab",
-                    "path": "<Keyboard>/g",
+                    "path": "<Keyboard>/h",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",

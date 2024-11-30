@@ -10,27 +10,30 @@ namespace Krisnat
         [SerializeField] private List<Item> itemsToStartWith;
         [SerializeField] private List<Item> itemsToEquip;
 
-        private static bool itemTutorial = false;
-        private static bool spellTutorial = false;
+        //private static bool itemTutorial = false;
+        //private static bool spellTutorial = false;
         private static bool started = false;
 
         private void Start()
         {
-            if (!started)
-            {
+            //if (!started)
+            //{
                 ClearInventory();
                 AddItems();
 
                 started = true;
-            }
+
+            InventoryManager.Instance.UnequipItem(itemsToEquip[0]);
+            InventoryManager.Instance.UnequipItem(itemsToEquip[1]);
+            //}
         }
 
         private void Update()
         {
             if (PlayerInputHandler.Instance.Test1Input)
             {
-                //Test1();
-                //PlayerInputHandler.Instance.UseTest1Input();
+                AddItems();
+                PlayerInputHandler.Instance.UseTest1Input();
             }
             if (PlayerInputHandler.Instance.Test2Input)
             {
@@ -54,6 +57,7 @@ namespace Krisnat
         {
             InventoryManager.Instance.ClearInventory();
             SpellManager.Instance.ClearInventory();
+            SpellManager.Instance.ClearActiveBar();
         }
     }
 }

@@ -144,7 +144,7 @@ namespace Bardent.Weapons.Components
                 }
             }
         }
-        private void EndHold() 
+        public void EndHold() 
         {
             attackStarted = false;
             lockMovement = false;
@@ -161,6 +161,11 @@ namespace Bardent.Weapons.Components
 
             if (attackStarted)
             {
+                if (PlayerInputHandler.Instance.AttackInputs[(int)CombatInputs.primary])
+                {
+                    EndHold();
+                }
+
                 attackHoldTime += Time.deltaTime;
 
                 bowSlider.value = attackHoldTime;
