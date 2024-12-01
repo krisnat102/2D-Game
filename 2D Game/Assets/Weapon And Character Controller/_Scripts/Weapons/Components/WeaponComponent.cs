@@ -62,7 +62,8 @@ namespace Bardent.Weapons.Components
         {
             base.HandleEnter();
 
-            currentAttackData = data.AttackData[weapon.CurrentAttackCounter];
+            currentAttackData = data.AttackData[weapon.CurrentAttackCounter]; //[weapon.CurrentAttackCounter]
+
             weaponData = weapon.Data;
         }
 

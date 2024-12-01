@@ -48,13 +48,13 @@ MonoBehaviour:
       data:
         name: InputHoldData
         attackData:
-        - name: 
-          <inputHoldAttackDatas>k__BackingField:
+        - name: Attack 1
+          <inputHoldAttackData>k__BackingField:
           - <Offset>k__BackingField: {x: 0, y: 0}
             <Projectile>k__BackingField: {fileID: -7690693297168986500, guid: 75b1c1fcb724f8a4aa8c23df6d65e469,
               type: 3}
             <Damage>k__BackingField: 12
-            <Speed>k__BackingField: 2200
+            <Speed>k__BackingField: 2750
           <FirstStageChargeTime>k__BackingField: 0.12
           <SecondStageChargeTime>k__BackingField: 0.22
           <ThirdStageChargeTime>k__BackingField: 0.32

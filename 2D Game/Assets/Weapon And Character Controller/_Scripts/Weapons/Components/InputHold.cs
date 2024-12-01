@@ -16,12 +16,14 @@ namespace Bardent.Weapons.Components
         private bool lockMovement = false;
         private bool potentialLockMovement = false;
         private int oldFacingDirection;
+        private int flipped = 0;
         private float attackHoldTime;
         private Animator animator;
         private CoreSystem.Movement movement;
         private Slider bowSlider;
         private CollisionSenses collisionSenses;
         private WeaponDataSO currentWeaponData;
+        private GameObject player;
         private const float COOLDOWN_DURATION = 0.3f;
 
         protected override void HandleEnter()
@@ -62,11 +64,10 @@ namespace Bardent.Weapons.Components
         private void Attack(CombatInputs combatInput)
         {
             if (movement.IsHanging || (movement.IsCrouching && collisionSenses.Ceiling)) return;
+
             if (currentAttackData != null && !cooldown && currentWeaponData.Type == WeaponType.Bow)
             {
                 bowSlider = UIManager.Instance.BowChargeTimeSlider;
-
-                EndHold();
 
                 StartCoroutine(CooldownCoroutine());
 
@@ -75,7 +76,7 @@ namespace Bardent.Weapons.Components
                 //Stats.Instance.Stam.CurrentValue -= cost;
                 //Stas.Instance.Stam.StopRegen(playerData.stamRecoveryTime);
 
-                foreach (var data in currentAttackData.inputHoldAttackDatas)
+                foreach (var data in currentAttackData.inputHoldAttackData)
                 {
                     if (data.Projectile != null)
                     {
@@ -109,6 +110,8 @@ namespace Bardent.Weapons.Components
                     }
                 }
             }
+
+            EndHold();
         }
         private IEnumerator CooldownCoroutine()
         {
@@ -149,7 +152,13 @@ namespace Bardent.Weapons.Components
             attackStarted = false;
             lockMovement = false;
             potentialLockMovement = false;
+
+            flipped = 0;
         }
+        
+        private void FlipPlayer() => movement.Flip();
+        
+
 
         private void Update()
         {
@@ -185,7 +194,18 @@ namespace Bardent.Weapons.Components
             {
                 Core.transform.parent.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             }
-            
+
+            if(lockMovement && PlayerInputHandler.Instance.NormInputX < 0 && movement.FacingDirection == 1 && flipped != -1)
+            {
+                FlipPlayer();
+                flipped = -1;
+            }
+            if (lockMovement && PlayerInputHandler.Instance.NormInputX > 0 && movement.FacingDirection == -1 && flipped != 1)
+            {
+                FlipPlayer();
+                flipped = 1;
+            }
+
         }
         protected override void Awake()
         {
@@ -201,6 +221,14 @@ namespace Bardent.Weapons.Components
             PlayerInputHandler.Instance.OnAttackCancelled += Attack;
             PlayerInputHandler.Instance.OnAttackStarted += StartHold;
         }
+
+        private void Start()
+        {
+            base.Start();
+
+            player = PlayerInputHandler.Instance.gameObject;
+        }
+
         protected override void OnDestroy()
         {
             base.OnDestroy();

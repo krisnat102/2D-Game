@@ -12,19 +12,19 @@ namespace Krisnat
 
         //private static bool itemTutorial = false;
         //private static bool spellTutorial = false;
-        private static bool started = false;
+        //private static bool started = false;
 
         private void Start()
         {
             //if (!started)
             //{
-                ClearInventory();
-                AddItems();
+                //ClearInventory();
+                //AddItems();
 
-                started = true;
+                //started = true;
 
-            InventoryManager.Instance.UnequipItem(itemsToEquip[0]);
-            InventoryManager.Instance.UnequipItem(itemsToEquip[1]);
+            //InventoryManager.Instance.UnequipItem(itemsToEquip[0]);
+            //InventoryManager.Instance.UnequipItem(itemsToEquip[1]);
             //}
         }
 
@@ -32,8 +32,8 @@ namespace Krisnat
         {
             if (PlayerInputHandler.Instance.Test1Input)
             {
-                AddItems();
-                PlayerInputHandler.Instance.UseTest1Input();
+                //AddItems();
+                //PlayerInputHandler.Instance.UseTest1Input();
             }
             if (PlayerInputHandler.Instance.Test2Input)
             {
@@ -49,7 +49,7 @@ namespace Krisnat
 
             foreach (Item item in itemsToEquip)
             {
-                InventoryManager.Instance.EquipItem(item);
+                //InventoryManager.Instance.EquipItem(item);
             }
         }
 

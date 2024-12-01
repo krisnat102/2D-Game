@@ -49,12 +49,11 @@ MonoBehaviour:
         name: InputHoldData
         attackData:
         - name: 
-          <inputHoldAttackDatas>k__BackingField:
-          - <Offset>k__BackingField: {x: 0, y: -0.2}
-            <Projectile>k__BackingField: {fileID: -7690693297168986500, guid: 75b1c1fcb724f8a4aa8c23df6d65e469,
-              type: 3}
-            <Damage>k__BackingField: 25
-            <Speed>k__BackingField: 1200
+          <inputHoldAttackData>k__BackingField:
+          - <Offset>k__BackingField: {x: 0, y: 0}
+            <Projectile>k__BackingField: {fileID: 0}
+            <Damage>k__BackingField: 0
+            <Speed>k__BackingField: 0
           <FirstStageChargeTime>k__BackingField: 0.2
           <SecondStageChargeTime>k__BackingField: 0.3
           <ThirdStageChargeTime>k__BackingField: 0.4
@@ -67,3 +66,4 @@ MonoBehaviour:
         name: SoundEffectData
         attackData:
         - name: Attack 1
+          <Delay>k__BackingField: 0

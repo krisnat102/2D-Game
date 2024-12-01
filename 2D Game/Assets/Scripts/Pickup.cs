@@ -8,6 +8,8 @@ namespace Krisnat
 
     public class Pickup : MonoBehaviour
     {
+        [SerializeField] private GameObject message;
+
         private bool isPickedUp = false;
         private List<Collider2D> potentialItems = new List<Collider2D>();
         private Collider2D oldClosestItem;
@@ -33,6 +35,10 @@ namespace Krisnat
             {
                 potentialItems.Remove(other);
                 other.GetComponent<Transform>().Find("Canvas").Find("PickUpKeyImage").gameObject.SetActive(false);
+                if (itemPickup && itemPickup.Note)
+                {
+                    if(message) message.SetActive(false);
+                }
             }
         }
 

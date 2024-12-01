@@ -1,15 +1,13 @@
-using Bardent.Weapons.Components;
+using Krisnat;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Krisnat
+namespace Bardent.Weapons.Components
 {
     [Serializable]
     public class AttackInputHold : AttackData
     {
-        [field: SerializeField] public InputHoldAttackData[] inputHoldAttackDatas {  get; private set; }
+        [field: SerializeField] public InputHoldAttackData[] inputHoldAttackData {  get; private set; }
         [field: SerializeField] public float FirstStageChargeTime { get; private set; }
         [field: SerializeField] public float SecondStageChargeTime { get; private set; }
         [field: SerializeField] public float ThirdStageChargeTime { get; private set; }

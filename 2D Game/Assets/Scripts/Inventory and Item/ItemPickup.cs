@@ -20,6 +20,7 @@ namespace Inventory
         [TextArea]
         [SerializeField] private string noteText;
         [SerializeField] private GameObject noteUIPreset;
+        [SerializeField] private bool portal;
 
         private bool isPickedUp = false;
         private GameObject itemPrice;
@@ -28,8 +29,11 @@ namespace Inventory
 
         public static List<PopUpUI> itemPopUps = new();
 
+        public bool Note { get => note; private set => note = value; }
+
         private void Awake()
         {
+            if (portal) return;
             if (forSale)
             {
                 itemPrice = GetComponentInChildren<Canvas>()?.GetComponent<Transform>()?.Find("ItemPrice")?.gameObject;
@@ -53,8 +57,9 @@ namespace Inventory
 
         public  void Pickup()
         {
-            if(!UIManager.Instance.NoteOpen) PlayerInputHandler.Instance.UseUseInput();
-            if (note)
+            if (portal) return;
+            if (!UIManager.Instance.NoteOpen) PlayerInputHandler.Instance.UseUseInput();
+            if (Note)
             {
                 if (noteUIPreset)
                 {

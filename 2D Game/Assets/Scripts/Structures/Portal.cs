@@ -13,12 +13,13 @@ namespace Krisnat
 
             if (PlayerInputHandler.Instance.UseInput && player)
             {
-                if(sceneToLoad == "" && distanceTravel != Vector3.zero)
+                if (sceneToLoad == "" && distanceTravel != Vector3.zero)
                 {
                     player.transform.position += distanceTravel;
+
                     return;
                 }
-                //if(sceneToLoad == "MainMenu") collision.GetComponent<Player>().gameObject.SetActive(false);
+                
                 UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad);
 
                 PlayerInputHandler.Instance.UseUseInput();
