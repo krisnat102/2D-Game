@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Bardent.CoreSystem;
 using Inventory;
-using Krisnat;
 using Krisnat.Assets.Scripts;
 using Spells;
 using UnityEditor;
@@ -22,6 +21,7 @@ namespace CoreClass
         [SerializeField] private GameObject playerGO;
         [SerializeField] private Bardent.CoreSystem.Death death;
         [SerializeField] private Transform camera;
+        [SerializeField] private Transform spawnPoint;
 
         private Player player;
         //private LevelHandler levelHandler;
@@ -46,6 +46,8 @@ namespace CoreClass
 
             player = playerGO?.GetComponent<Player>();
             //levelHandler = playerGO?.GetComponent<LevelHandler>();
+
+            if (checkpoint == Vector3.zero) checkpoint = spawnPoint.position;
         }
 
         private void Start()
@@ -151,10 +153,13 @@ namespace CoreClass
                 spellManager.AbilitiesBar.Add(spell);
             }
 
-            //var playerTransform = player.transform;
+            var playerTransform = player.transform;
 
             //playerTransform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
             //camera.position = new Vector3(data.position[0], data.position[1], data.position[2]);
+
+            playerTransform.position = checkpoint;
+            camera.position = checkpoint;
         }
         #endregion
 

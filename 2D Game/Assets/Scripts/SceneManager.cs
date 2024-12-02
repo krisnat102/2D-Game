@@ -22,9 +22,6 @@ namespace Krisnat
                 //AddItems();
 
                 //started = true;
-
-            //InventoryManager.Instance.UnequipItem(itemsToEquip[0]);
-            //InventoryManager.Instance.UnequipItem(itemsToEquip[1]);
             //}
         }
 
@@ -49,7 +46,7 @@ namespace Krisnat
 
             foreach (Item item in itemsToEquip)
             {
-                //InventoryManager.Instance.EquipItem(item);
+                InventoryManager.Instance.EquipItem(item);
             }
         }
 
