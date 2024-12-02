@@ -125,8 +125,8 @@ namespace CoreClass
             stats.Stam.SetCurrentStat(data.currentStam);
             levelHandler.SetStrength(data.strength);
             levelHandler.SetDexterity(data.dexterity);
-            levelHandler.SetIntelligence(data.intelligence);*/
-            //inventoryManager.SetCoins(data.coins, false);
+            levelHandler.SetIntelligence(data.intelligence);
+            inventoryManager.SetCoins(data.coins, false);*/
             stats.Health.SetCurrentStat(stats.Health.MaxValue);
             stats.Mana.SetCurrentStat(stats.Mana.MaxValue);
             stats.Stam.SetCurrentStat(stats.Stam.MaxValue);
@@ -157,11 +157,9 @@ namespace CoreClass
 
             var playerTransform = player.transform;
 
-            //playerTransform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
-            //camera.position = new Vector3(data.position[0], data.position[1], data.position[2]);
-
-            playerTransform.position = checkpoint;
-            camera.position = checkpoint;
+            playerTransform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
+            camera.position = new Vector3(data.position[0], data.position[1], data.position[2]);
+            checkpoint = new Vector3(data.position[0], data.position[1], data.position[2]);
         }
 
         public void LoadPlayer(PlayerSaveData data)

@@ -49,12 +49,11 @@ namespace Krisnat.Assets.Scripts
             itemsId = InventoryManager.Instance.Items.Select(item => item.id).ToArray();
             equippedItemsId = InventoryManager.Instance.EquippedItemsIds();
             itemsTakenId = ItemPickup.itemsTaken.ToArray();
-
             position = new float[3];
 
-            position[0] = player.transform.position.x;
-            position[1] = player.transform.position.y;
-            position[2] = player.transform.position.z;
+            position[0] = CoreClass.GameManager.checkpoint.x;
+            position[1] = CoreClass.GameManager.checkpoint.y;
+            position[2] = CoreClass.GameManager.checkpoint.z;
         }
     }
 }

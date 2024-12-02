@@ -40,12 +40,16 @@ namespace Inventory
         {
             if (portal || note) return;
 
-            if(string.IsNullOrEmpty(itemId)) itemId = System.Guid.NewGuid().ToString();
+            if(string.IsNullOrEmpty(itemId)) itemId = gameObject.name;
 
             PlayerSaveData data = SaveSystem.LoadPlayer();
             if (data != null && data.itemsTakenId != null && data.itemsTakenId.Contains(itemId))
             {
-                gameObject.SetActive(false); // Disable the item if it has been taken
+                foreach(var item in data.itemsTakenId)
+                {
+                    Debug.Log(item);
+                }
+                gameObject.SetActive(false);
             }
 
             if (forSale)

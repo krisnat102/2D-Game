@@ -3,6 +3,8 @@ using Inventory;
 using TMPro;
 using UnityEngine.UI;
 using Krisnat;
+using Krisnat.Assets.Scripts;
+using System.Linq;
 
 namespace Spells
 {
@@ -13,11 +15,23 @@ namespace Spells
         [SerializeField] private int price;
         [SerializeField] private bool chest;
         [SerializeField] private float offset = 0.2f;
+        [SerializeField] private string itemId;
 
         private bool isPickedUp = false;
         private Animator animator;
         private Canvas canvas;
         private GameObject itemPrice;
+
+        private void Awake()
+        {
+            if (string.IsNullOrEmpty(itemId)) itemId = gameObject.name + "z";
+
+            PlayerSaveData data = SaveSystem.LoadPlayer();
+            if (data != null && data.itemsTakenId != null && data.itemsTakenId.Contains(itemId))
+            {
+                gameObject.SetActive(false);
+            }
+        }
 
         private void Start()
         {
@@ -62,6 +76,9 @@ namespace Spells
                 {
                     SpellManager.Instance.Add(spell);
                 }
+
+                ItemPickup.itemsTaken.Add(itemId);
+
                 int resolutionHeight = Screen.currentResolution.height;
 
                 var itemPopUp = Instantiate(UIManager.Instance.ItemPickupPopUp, UIManager.Instance.Canvas.transform).GetComponent<PopUpUI>();

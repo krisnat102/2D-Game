@@ -50,7 +50,7 @@ namespace Inventory
 
         private Filter filter = default;
         private float totalArmor, totalMagicRes, totalWeight;
-        private List<Item> distinctItems, duplicates, currentItems, allItems = new List<Item>();
+        private List<Item> distinctItems, duplicates, currentItems, allItems, equippedItems = new List<Item>();
         private float inventoryScale, characterTabScale;
         private Animator purseAnimator;
         //private bool inventoryOpenAnimationTracker;
@@ -87,6 +87,7 @@ namespace Inventory
         public List<Item> DistinctItems { get => distinctItems; private set => distinctItems = value; }
         public List<Item> Duplicates { get => duplicates; private set => duplicates = value; }
         public List<Item> Items { get => items; private set => items = value; }
+        public List<Item> EquippedItems { get => equippedItems; private set => equippedItems = value; }
         public GameObject Inventory { get => inventory; private set => inventory = value; }
         public GameObject SpellInventory { get => spellInventory; private set => spellInventory = value; }
         public GameObject CharacterTab { get => characterTab; private set => characterTab = value; }
@@ -119,8 +120,6 @@ namespace Inventory
             characterTabScale = characterTab.transform.localScale.x;
 
             purseAnimator = purse.GetComponent<Animator>();
-
-            
         }
 
         public void Update()
@@ -383,6 +382,14 @@ namespace Inventory
                 }
             }
 
+            for (int i = equippedItems.Count - 1; i >= 0; i--) 
+            {
+                if (!DistinctItems.Contains(equippedItems[i]))
+                {
+                    UnequipItem(equippedItems[i]);
+                }
+            }
+
             if(filter == Filter.Default)
             {
                 foreach (Transform trans in itemContent)
@@ -538,6 +545,8 @@ namespace Inventory
         {
             if (!Items.Contains(item)) return;
 
+            equippedItems.Add(item);
+
             item.SetEquipped(true);
 
             AddItemStats(item);
@@ -641,6 +650,8 @@ namespace Inventory
         public void UnequipItem(Item item)
         {
             item.SetEquipped(false);
+
+            if(equippedItems.Contains(item)) equippedItems.Remove(item);
 
             RemoveItemStats(item);
 
