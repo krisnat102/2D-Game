@@ -8,6 +8,9 @@ namespace Bardent.Weapons.Components
     public class AttackInputHold : AttackData
     {
         [field: SerializeField] public InputHoldAttackData[] inputHoldAttackData {  get; private set; }
+        [field: SerializeField] public float AttackCost { get; private set; }
+        [field: SerializeField] public float AttackRecoveryTime { get; private set; }
+        [field: SerializeField] public bool StamCost { get; private set; }
         [field: SerializeField] public float FirstStageChargeTime { get; private set; }
         [field: SerializeField] public float SecondStageChargeTime { get; private set; }
         [field: SerializeField] public float ThirdStageChargeTime { get; private set; }

@@ -35,11 +35,11 @@ MonoBehaviour:
         attackData:
         - name: Attack 1
           <AttackCost>k__BackingField: 5
-          <AttackRecoveryTime>k__BackingField: 0.6
+          <AttackRecoveryTime>k__BackingField: 0.5
           <StamCost>k__BackingField: 1
         - name: Attack 2
           <AttackCost>k__BackingField: 5
-          <AttackRecoveryTime>k__BackingField: 0.6
+          <AttackRecoveryTime>k__BackingField: 0.5
           <StamCost>k__BackingField: 1
     - rid: 2516071312619208705
       type: {class: KnockBackData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}

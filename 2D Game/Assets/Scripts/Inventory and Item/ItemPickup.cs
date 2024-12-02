@@ -1,7 +1,10 @@
+using CoreClass;
 using Krisnat;
+using Krisnat.Assets.Scripts;
 using Spells;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +24,7 @@ namespace Inventory
         [SerializeField] private string noteText;
         [SerializeField] private GameObject noteUIPreset;
         [SerializeField] private bool portal;
+        [SerializeField] private string itemId;
 
         private bool isPickedUp = false;
         private GameObject itemPrice;
@@ -28,12 +32,22 @@ namespace Inventory
         private Canvas canvas;
 
         public static List<PopUpUI> itemPopUps = new();
+        public static List<string> itemsTaken = new();
 
         public bool Note { get => note; private set => note = value; }
 
         private void Awake()
         {
-            if (portal) return;
+            if (portal || note) return;
+
+            if(string.IsNullOrEmpty(itemId)) itemId = System.Guid.NewGuid().ToString();
+
+            PlayerSaveData data = SaveSystem.LoadPlayer();
+            if (data != null && data.itemsTakenId != null && data.itemsTakenId.Contains(itemId))
+            {
+                gameObject.SetActive(false); // Disable the item if it has been taken
+            }
+
             if (forSale)
             {
                 itemPrice = GetComponentInChildren<Canvas>()?.GetComponent<Transform>()?.Find("ItemPrice")?.gameObject;
@@ -74,26 +88,31 @@ namespace Inventory
                 }
 
                 UIManager.Instance.NoteOpen = true;
+                return;
             }
             else if(!isPickedUp && chest) {
-                ForSale();
-
-                canvas.gameObject.SetActive(false);
-                isPickedUp = true;
-                StartCoroutine(AddItem(item, true, openTime));
-                animator.SetTrigger("open");
+                if (ForSale())
+                {
+                    canvas.gameObject.SetActive(false);
+                    isPickedUp = true;
+                    StartCoroutine(AddItem(item, true, openTime));
+                    animator.SetTrigger("open");
+                    itemsTaken.Add(itemId);
+                }
             }
             else if (!isPickedUp && item)
             {
-                ForSale();
-
-                InventoryManager.Instance.Add(item, true);
-                gameObject.SetActive(false);
+                if (ForSale())
+                {
+                    InventoryManager.Instance.Add(item, true);
+                    gameObject.SetActive(false);
+                    itemsTaken.Add(itemId);
+                }
             }
         }
 
 
-        public void ForSale()
+        public bool ForSale()
         {
             if (forSale)
             {
@@ -102,12 +121,14 @@ namespace Inventory
                 {
                     AudioManager.Instance.BuySound.Play();
                     InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - price, false);
+                    return true;
                 }
                 else
                 {
-                    return;
+                    return false;
                 }
             }
+            return true;
         }
 
         IEnumerator AddItem(Item item, bool boolean, float time)

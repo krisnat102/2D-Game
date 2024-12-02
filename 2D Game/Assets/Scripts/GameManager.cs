@@ -20,7 +20,7 @@ namespace CoreClass
         [SerializeField] private GameObject deathScreen;
         [SerializeField] private GameObject playerGO;
         [SerializeField] private Bardent.CoreSystem.Death death;
-        [SerializeField] private Transform camera;
+        [SerializeField] private new Transform camera;
         [SerializeField] private Transform spawnPoint;
 
         private Player player;
@@ -114,6 +114,8 @@ namespace CoreClass
                 loadActiveAbilities.AddRange(spellManager.AllSpells.Where(spell => spell.id == id).ToList());
             }
 
+            if (data.itemsTakenId != null) ItemPickup.itemsTaken = data.itemsTakenId.ToList();
+
             /*player.PlayerData.SetLevel(data.level);
             stats.Health.SetMaxStat(data.maxHealth);
             stats.Mana.SetMaxStat(data.maxMana);
@@ -161,10 +163,76 @@ namespace CoreClass
             playerTransform.position = checkpoint;
             camera.position = checkpoint;
         }
+
+        public void LoadPlayer(PlayerSaveData data)
+        {
+            List<Item> loadItems = new();
+            List<Item> loadEquippedItems = new();
+            List<Spell> loadSpells = new();
+            List<Spell> loadActiveSpells = new();
+            List<Spell> loadActiveAbilities = new();
+            inventoryManager.ClearInventory();
+            spellManager.ClearInventory();
+            spellManager.ClearActiveBar();
+
+            foreach (int id in data.itemsId)
+            {
+                loadItems.AddRange(inventoryManager.AllItems.Where(item => item.id == id).ToList());
+            }
+            foreach (int id in data.equippedItemsId)
+            {
+                loadEquippedItems.AddRange(inventoryManager.AllItems.Where(item => item.id == id).ToList());
+            }
+            foreach (int id in data.spellsId)
+            {
+                loadSpells.AddRange(spellManager.AllSpells.Where(spell => spell.id == id).ToList());
+            }
+            foreach (int id in data.activeSpellsId)
+            {
+                loadActiveSpells.AddRange(spellManager.AllSpells.Where(spell => spell.id == id).ToList());
+            }
+            foreach (int id in data.activeAbilitiesId)
+            {
+                loadActiveAbilities.AddRange(spellManager.AllSpells.Where(spell => spell.id == id).ToList());
+            }
+
+            stats.Health.SetCurrentStat(stats.Health.MaxValue);
+            stats.Mana.SetCurrentStat(stats.Mana.MaxValue);
+            stats.Stam.SetCurrentStat(stats.Stam.MaxValue);
+            inventoryManager.SetCoins(inventoryManager.Coins / 3, false);
+            inventoryManager.Add(loadItems);
+            spellManager.Add(loadSpells);
+
+            foreach (int id in inventoryManager.EquippedItemsIds())
+            {
+                foreach (Item item in inventoryManager.AllItems.Where(item => item.id == id))
+                {
+                    inventoryManager.UnequipItem(item);
+                }
+            }
+            foreach (Item item in loadEquippedItems)
+            {
+                inventoryManager.EquipItem(item);
+            }
+
+            foreach (Spell spell in loadActiveSpells)
+            {
+                spellManager.SpellsBar.Add(spell);
+            }
+            foreach (Spell spell in loadActiveAbilities)
+            {
+                spellManager.AbilitiesBar.Add(spell);
+            }
+
+            var playerTransform = player.transform;
+
+            playerTransform.position = checkpoint;
+            camera.position = checkpoint;
+        }
         #endregion
 
         #region General Core Methods
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         [MenuItem("Tools/Load Custom Assets")]
         private static void LoadItemNames()
         {

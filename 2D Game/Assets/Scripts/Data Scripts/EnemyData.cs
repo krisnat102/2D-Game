@@ -106,7 +106,7 @@ public class EnemyData : ScriptableObject
 [CustomEditor(typeof(EnemyData))]
 public class Enemy_Editor : Editor
 {
-    [System.Obsolete]
+    //[System.Obsolete]
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector(); // for other non-HideInInspector fields

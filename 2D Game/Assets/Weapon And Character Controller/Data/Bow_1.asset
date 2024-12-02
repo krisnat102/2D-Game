@@ -55,6 +55,9 @@ MonoBehaviour:
               type: 3}
             <Damage>k__BackingField: 12
             <Speed>k__BackingField: 2750
+          <AttackCost>k__BackingField: 8
+          <AttackRecoveryTime>k__BackingField: 0.5
+          <StamCost>k__BackingField: 1
           <FirstStageChargeTime>k__BackingField: 0.12
           <SecondStageChargeTime>k__BackingField: 0.22
           <ThirdStageChargeTime>k__BackingField: 0.32

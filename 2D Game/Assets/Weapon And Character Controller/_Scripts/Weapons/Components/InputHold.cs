@@ -25,6 +25,10 @@ namespace Bardent.Weapons.Components
         private WeaponDataSO currentWeaponData;
         private GameObject player;
         private const float COOLDOWN_DURATION = 0.3f;
+        private Stats stats;
+
+        private Stats Stats =>
+            stats ? stats : Core.GetCoreComponent(ref stats);
 
         protected override void HandleEnter()
         {
@@ -113,14 +117,6 @@ namespace Bardent.Weapons.Components
 
             EndHold();
         }
-        private IEnumerator CooldownCoroutine()
-        {
-            cooldown = true;
-
-            yield return new WaitForSeconds(COOLDOWN_DURATION);
-
-            cooldown = false;
-        }
 
         private void StartHold(CombatInputs combatInput)
         {
@@ -154,12 +150,30 @@ namespace Bardent.Weapons.Components
             potentialLockMovement = false;
 
             flipped = 0;
+
+            HandleAttackCost();
         }
-        
+
+        private IEnumerator CooldownCoroutine()
+        {
+            cooldown = true;
+
+            yield return new WaitForSeconds(COOLDOWN_DURATION);
+
+            cooldown = false;
+        }
+
+        private void HandleAttackCost()
+        {
+            if (currentAttackData.StamCost)
+            {
+                Stats.Stam.Decrease(currentAttackData.AttackCost);
+                Stats.Stam.StopRegen(currentAttackData.AttackRecoveryTime);
+            }
+        }
+
         private void FlipPlayer() => movement.Flip();
         
-
-
         private void Update()
         {
             if (movement.FacingDirection != oldFacingDirection)
@@ -222,7 +236,7 @@ namespace Bardent.Weapons.Components
             PlayerInputHandler.Instance.OnAttackStarted += StartHold;
         }
 
-        private void Start()
+        protected override void Start()
         {
             base.Start();
 

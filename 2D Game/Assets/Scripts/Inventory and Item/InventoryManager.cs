@@ -371,10 +371,15 @@ namespace Inventory
                 var itemCount = trans.GetComponentInChildren<SearchAssist>().GetComponent<TextMeshProUGUI>();
                 itemCount.text = (item.ItemCount > 1 ? "x" + item.ItemCount.ToString() : "");
 
+                var removeButton = CoreClass.GameManager.Instance.GetComponentOnlyInChildren<Button>(trans);
+
                 if (enableRemove.isOn)
                 {
-                    var removeButton = CoreClass.GameManager.Instance.GetComponentOnlyInChildren<Button>(trans);
                     removeButton.gameObject.SetActive(true);
+                }
+                else
+                {
+                    removeButton.gameObject.SetActive(false);
                 }
             }
 

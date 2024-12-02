@@ -19,6 +19,7 @@ namespace Krisnat.Assets.Scripts
         public int[] spellsId;
         public int[] activeSpellsId;
         public int[] activeAbilitiesId;
+        public string[] itemsTakenId;
 
         public PlayerSaveData(Player player)
         {
@@ -47,6 +48,7 @@ namespace Krisnat.Assets.Scripts
             activeAbilitiesId = SpellManager.Instance.AbilitiesBar.Select(spell => spell.id).ToArray();
             itemsId = InventoryManager.Instance.Items.Select(item => item.id).ToArray();
             equippedItemsId = InventoryManager.Instance.EquippedItemsIds();
+            itemsTakenId = ItemPickup.itemsTaken.ToArray();
 
             position = new float[3];
 
