@@ -20,6 +20,7 @@ namespace Krisnat.Assets.Scripts
         public int[] activeSpellsId;
         public int[] activeAbilitiesId;
         public string[] itemsTakenId;
+        public bool levelStarted;
 
         public PlayerSaveData(Player player)
         {
@@ -50,10 +51,14 @@ namespace Krisnat.Assets.Scripts
             equippedItemsId = InventoryManager.Instance.EquippedItemsIds();
             itemsTakenId = ItemPickup.itemsTaken.ToArray();
             position = new float[3];
+            levelStarted = CoreClass.GameManager.Instance.LevelStarted;
 
             position[0] = CoreClass.GameManager.checkpoint.x;
             position[1] = CoreClass.GameManager.checkpoint.y;
             position[2] = CoreClass.GameManager.checkpoint.z;
+            //position[0] = CoreClass.GameManager.Instance.SpawnPoint.position.x;
+            //position[1] = CoreClass.GameManager.Instance.SpawnPoint.position.y;
+            //position[2] = CoreClass.GameManager.Instance.SpawnPoint.position.z;
         }
     }
 }

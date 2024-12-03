@@ -29,8 +29,10 @@ namespace CoreClass
         private SpellManager spellManager;
         private Stats stats;
 
+        public bool LevelStarted { get; set; } = false;
         public bool GamePaused { get => gamePaused; set => gamePaused = value; }
         public GameObject Player { get => playerGO; private set => playerGO = value; }
+        public Transform SpawnPoint { get => spawnPoint; private set => spawnPoint = value; }
 
         #region Unity Methods
         private void Update()
@@ -47,7 +49,7 @@ namespace CoreClass
             player = playerGO?.GetComponent<Player>();
             //levelHandler = playerGO?.GetComponent<LevelHandler>();
 
-            if (checkpoint == Vector3.zero) checkpoint = spawnPoint.position;
+            if (checkpoint == Vector3.zero) checkpoint = SpawnPoint.position;
         }
 
         private void Start()
@@ -133,6 +135,7 @@ namespace CoreClass
             inventoryManager.SetCoins(inventoryManager.Coins / 3, false);
             inventoryManager.Add(loadItems);
             spellManager.Add(loadSpells);
+            LevelStarted = data.levelStarted;
 
             foreach (int id in inventoryManager.EquippedItemsIds())
             {
@@ -160,6 +163,7 @@ namespace CoreClass
             playerTransform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
             camera.position = new Vector3(data.position[0], data.position[1], data.position[2]);
             checkpoint = new Vector3(data.position[0], data.position[1], data.position[2]);
+            //checkpoint = spawnPoint.position;
         }
 
         public void LoadPlayer(PlayerSaveData data)

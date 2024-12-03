@@ -16,14 +16,14 @@ namespace Krisnat
 
         private void Start()
         {
-            //if (!started)
-            //{
-            //ClearInventory();
-            //AddItems();
-            //CoreClass.GameManager.Instance.SavePlayer();
+            if (!CoreClass.GameManager.Instance.LevelStarted)
+            {
+                ClearInventory();
+                AddItems();
+                CoreClass.GameManager.Instance.LevelStarted = true;
 
-            //started = true;
-            //}
+                CoreClass.GameManager.Instance.SavePlayer();
+            }
         }
 
         private void Update()
