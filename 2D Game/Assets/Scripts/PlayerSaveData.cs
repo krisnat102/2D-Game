@@ -42,7 +42,7 @@ namespace Krisnat.Assets.Scripts
             //dexterity = levelHandler.DexterityCounter;
             //intelligence = levelHandler.IntelligenceCounter;
 
-            //coins = InventoryManager.Instance.Coins;
+            coins = InventoryManager.Instance.Coins;
             
             spellsId = SpellManager.Instance.Spells.Select(spell => spell.id).ToArray();
             activeSpellsId = SpellManager.Instance.SpellsBar.Select(spell => spell.id).ToArray();
@@ -51,7 +51,6 @@ namespace Krisnat.Assets.Scripts
             equippedItemsId = InventoryManager.Instance.EquippedItemsIds();
             itemsTakenId = ItemPickup.itemsTaken.ToArray();
             position = new float[3];
-            levelStarted = CoreClass.GameManager.Instance.LevelStarted;
 
             position[0] = CoreClass.GameManager.checkpoint.x;
             position[1] = CoreClass.GameManager.checkpoint.y;

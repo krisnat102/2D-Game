@@ -32,10 +32,19 @@ namespace Spells
             rb = GetComponent<Rigidbody2D>();
             levelHandler = FindAnyObjectByType<Player>().GetComponent<LevelHandler>();
 
-            //rb.velocity = move ? transform.right * spell.speed : rb.velocity = new Vector2(0, 0);
-            rb.velocity = move ? transform.right.normalized * spell.speed : Vector2.zero;
-            transform.right = dontRotate ? new Vector2(0, 0) : transform.right;
+
+            Vector2 castDirection = (dontRotate) ? Vector2.zero : transform.right.normalized;
+            rb.velocity = move ? castDirection * spell.speed : Vector2.zero;
             death = GetComponentInChildren<Death>(true)?.gameObject;
+
+            if (dontRotate)
+            {
+                transform.rotation = Quaternion.identity;
+            }
+            else
+            {
+                transform.right = rb.velocity.normalized;
+            }
 
             angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
             Invoke("NullAngle", 0.2f);
@@ -43,7 +52,10 @@ namespace Spells
 
         private void Update()
         {
-            if (transform.rotation.x != 0 || transform.rotation.y != 0) transform.rotation = new Quaternion(0, 0, transform.rotation.z, transform.rotation.w);
+            if (transform.rotation.eulerAngles.x != 0 || transform.rotation.eulerAngles.y != 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z);
+            }
 
             if (shuriken)
             {

@@ -62,15 +62,16 @@ namespace Spells
                 if (playerInputHandler.SpellInput && Stats.Instance.Mana.CurrentValue >= spellManager.SpellsBar[activeSpell].cost && spellCooldown == false)
                     Spell();
             }
+
             if (playerInputHandler.SwitchSpell1Input)
             {
                 playerInputHandler.UseSwitchSpell1Input();
 
-                if (activeSpell != 0)
+                if (activeSpell != 0 && spellManager.SpellsBar.Count >= activeSpell)
                 {
                     activeSpell--;
                 }
-                else
+                else if (activeSpell == 0)
                 {
                     activeSpell = 7;
                 }
@@ -81,15 +82,14 @@ namespace Spells
             {
                 playerInputHandler.UseSwitchSpell2Input();
 
-                if (activeSpell != 7)
+                if (activeSpell != 7 && activeSpell < spellManager.SpellsBar.Count)
                 {
                     activeSpell++;
                 }
-                else
+                else if(activeSpell == 7)
                 {
                     activeSpell = 0;
                 }
-
             }
             ClearSprites();
             #endregion
@@ -105,11 +105,11 @@ namespace Spells
             {
                 playerInputHandler.UseSwitchAbility1Input();
                 
-                if (activeAbility != 0)
+                if (activeAbility != 0 && spellManager.AbilitiesBar.Count >= activeAbility)
                 {
                     activeAbility--;
                 }
-                else
+                else if (activeAbility == 0)
                 {
                     activeAbility = 7;
                 }
@@ -120,11 +120,11 @@ namespace Spells
             {
                 playerInputHandler.UseSwitchAbility2Input();
 
-                if (activeAbility != 7)
+                if (activeAbility != 7 && activeAbility < spellManager.AbilitiesBar.Count)
                 {
                     activeAbility++;
                 }
-                else
+                else if (activeAbility == 7)
                 {
                     activeAbility = 0;
                 }
@@ -144,28 +144,28 @@ namespace Spells
             {
                 if (spellManager.SpellsBar[activeSpell - 1] != null && spellManager.SpellsBar.Count > activeSpell - 1)
                 {
-                    sideSpell1.sprite = spellManager.SpellsBar[activeSpell - 1]?.icon;
-                    sideSpell1.gameObject.SetActive(true);
+                    sideSpell2.sprite = spellManager.SpellsBar[activeSpell - 1]?.icon;
+                    sideSpell2.gameObject.SetActive(true);
                 }
             }
             else if (spellManager.SpellsBar.Count == 7 && activeSpell == 0)
             {
-                sideSpell1.sprite = spellManager.SpellsBar[7]?.icon;
-                sideSpell1.gameObject.SetActive(true);
+                sideSpell2.sprite = spellManager.SpellsBar[7]?.icon;
+                sideSpell2.gameObject.SetActive(true);
             }
 
             if (spellManager.SpellsBar.Count > activeSpell + 1 && activeSpell != 7)
             {
                 if (spellManager.SpellsBar[activeSpell + 1] != null && spellManager.SpellsBar.Count > activeSpell + 1)
                 {
-                    sideSpell2.sprite = spellManager.SpellsBar[activeSpell + 1]?.icon;
-                    sideSpell2.gameObject.SetActive(true);
+                    sideSpell1.sprite = spellManager.SpellsBar[activeSpell + 1]?.icon;
+                    sideSpell1.gameObject.SetActive(true);
                 }
             }
             else if (spellManager.SpellsBar.Count > 0 && activeSpell == 7)
             {
-                sideSpell2.sprite = spellManager.SpellsBar[0]?.icon;
-                sideSpell2.gameObject.SetActive(true);
+                sideSpell1.sprite = spellManager.SpellsBar[0]?.icon;
+                sideSpell1.gameObject.SetActive(true);
             }
             #endregion
 
@@ -181,28 +181,28 @@ namespace Spells
             {
                 if (spellManager.AbilitiesBar[activeAbility - 1] != null && spellManager.AbilitiesBar.Count > activeAbility - 1)
                 {
-                    sideAbility1.sprite = spellManager.AbilitiesBar[activeAbility - 1]?.icon;
-                    sideAbility1.gameObject.SetActive(true);
+                    sideAbility2.sprite = spellManager.AbilitiesBar[activeAbility - 1]?.icon;
+                    sideAbility2.gameObject.SetActive(true);
                 }
             }
             else if (spellManager.AbilitiesBar.Count == 7 && activeAbility == 0)
             {
-                sideAbility1.sprite = spellManager.AbilitiesBar[7]?.icon;
-                sideAbility1.gameObject.SetActive(true);
+                sideAbility2.sprite = spellManager.AbilitiesBar[7]?.icon;
+                sideAbility2.gameObject.SetActive(true);
             }
 
             if (spellManager.AbilitiesBar.Count > activeAbility + 1 && activeAbility != 7)
             {
                 if (spellManager.AbilitiesBar[activeAbility + 1] != null && spellManager.AbilitiesBar.Count > activeAbility + 1)
                 {
-                    sideAbility2.sprite = spellManager.AbilitiesBar[activeAbility + 1]?.icon;
-                    sideAbility2.gameObject.SetActive(true);
+                    sideAbility1.sprite = spellManager.AbilitiesBar[activeAbility + 1]?.icon;
+                    sideAbility1.gameObject.SetActive(true);
                 }
             }
             else if (spellManager.AbilitiesBar.Count > 0 && activeAbility == 7)
             {
-                sideAbility2.sprite = spellManager.AbilitiesBar[0]?.icon;
-                sideAbility2.gameObject.SetActive(true);
+                sideAbility1.sprite = spellManager.AbilitiesBar[0]?.icon;
+                sideAbility1.gameObject.SetActive(true);
             }
             #endregion
 

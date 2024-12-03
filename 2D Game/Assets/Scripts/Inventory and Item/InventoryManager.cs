@@ -227,14 +227,12 @@ namespace Inventory
             if (openOrClose)
             {
                 UIManager.Instance.OpenCloseUI(CharacterTab, characterTabScale, characterTabOpeningSpeed, true, false, true);
-                CoreClass.GameManager.Instance.ChangeBool(0.25f, newValue => CoreClass.GameManager.Instance.GamePaused = newValue[0], true);
             }
             else
             {
                 GameObject[] uiToClose = new GameObject[2];
                 uiToClose[0] = SpellInventory; uiToClose[1] = Inventory;
                 UIManager.Instance.OpenCloseUI(CharacterTab, characterTabScale, characterTabClosingSpeed, true, false, false, uiToClose);
-                CoreClass.GameManager.Instance.GamePaused = false;
                 description.SetActive(false);
             }
         }
