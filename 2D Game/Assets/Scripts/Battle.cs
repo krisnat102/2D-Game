@@ -8,6 +8,7 @@ namespace Krisnat
     {
         [SerializeField] private Battle previousBattle;
         [SerializeField] private GameObject objectToEnable;
+        [SerializeField] private Door doorToUnlock;
         private List<Enemy> encounter;
 
         public bool End { get; private set; }
@@ -41,6 +42,7 @@ namespace Krisnat
             End = true;
 
             if(objectToEnable) objectToEnable.SetActive(true);
+            if (doorToUnlock) doorToUnlock.Open(true);
 
             gameObject.SetActive(false);
         }

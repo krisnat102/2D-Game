@@ -7,7 +7,8 @@ namespace Krisnat
     public class Door : MonoBehaviour, IStructurable
     {
         [Header("Behaviour")]
-        [SerializeField] private bool open;
+        [SerializeField] private bool locked;
+        [SerializeField] private bool openOnStart;
         [SerializeField] private Item key;
 
         [Header("Variable References")]
@@ -23,13 +24,11 @@ namespace Krisnat
         private void Start()
         {
             animator = GetComponent<Animator>();
-            collider = GetComponent<BoxCollider2D>();
+            collider = GetComponentInChildren<BoxCollider2D>();
 
-            if (open)
+            if (openOnStart)
             {
-                opened = true;
-                animator.SetBool("open", true);
-                collider.enabled = false;
+                Open(false);
             }
         }
 
@@ -42,26 +41,32 @@ namespace Krisnat
                 cooldown = true;
                 Invoke(nameof(StopCooldown), 1.5f);
 
-                if (key)
+                if (locked)
                 {
                     uiPopUp.SetActive(true);
 
-                    if (!InventoryManager.Instance.Items.Contains(key))
+                    if (key)
                     {
-                        uiPopUp.GetComponentInChildren<TMP_Text>().text = key.itemName + " Needed";
+                        if (!InventoryManager.Instance.Items.Contains(key))
+                        {
+                            uiPopUp.GetComponentInChildren<TMP_Text>().text = key.itemName + " Needed";
+                            lockedAudio.Play();
+                            return;
+                        }
+
+                        InventoryManager.Instance.Remove(key);
+                        uiPopUp.GetComponentInChildren<TMP_Text>().text = key.itemName + " Used";
+                    }
+                    else
+                    {
+                        uiPopUp.GetComponentInChildren<TMP_Text>().text = "Locked";
                         lockedAudio.Play();
                         return;
                     }
-
-                    InventoryManager.Instance.Remove(key);
-                    uiPopUp.GetComponentInChildren<TMP_Text>().text = key.itemName + " Used";
                 }
 
                 PlayerInputHandler.Instance.UseUseInput();
-                collider.enabled = false;
-                animator.SetBool("open", true);
-                openAudio.Play();
-                opened = true;
+                Open(true);
 
                 if (player.transform.position.x + 0.3f > transform.position.x)
                 {
@@ -69,6 +74,14 @@ namespace Krisnat
                     transform.position += new Vector3(-1.5f, 0);
                 }
             }
+        }
+
+        public void Open(bool playAudio)
+        {
+            collider.enabled = false;
+            animator.SetBool("open", true);
+            if (playAudio) openAudio.Play();
+            opened = true;
         }
 
         private void StopCooldown() => cooldown = false;

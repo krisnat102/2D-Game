@@ -87,7 +87,7 @@ namespace Krisnat
                 damage = 0;
                 if(enemy.Data.bloodEffect) Instantiate(enemy.Data.bloodEffect, transform.position, Quaternion.identity);
             }
-            if (collision.tag == "Ground")
+            if (collision.tag == "Ground" || collision.tag == "Door")
             {
                 rb.simulated = false;
                 Invoke("StartFade", stuckTime);

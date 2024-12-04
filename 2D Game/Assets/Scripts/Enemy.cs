@@ -343,7 +343,7 @@ public class Enemy : MonoBehaviour
         offsetXSave = Data.offsetX;
 
         hp = Data.maxHP * lvlIndex;
-        hpBar.maxValue = Data.maxHP * lvlIndex;
+        if(hpBar) hpBar.maxValue = Data.maxHP * lvlIndex;
 
         coinsDropped = UnityEngine.Random.Range(Data.minCoinsDropped, Data.maxCoinsDropped);
         #endregion
@@ -451,8 +451,8 @@ public class Enemy : MonoBehaviour
         if(Data.maxCoinsDropped > 0)
         {
             var coins = GetComponentInChildren<CoinPickup>()?.gameObject;
-            coins.transform.parent = null;
-            coins.GetComponent<ParticleSystem>().Emit(coinsDropped);
+            if(coins) coins.transform.parent = null;
+            coins?.GetComponent<ParticleSystem>().Emit(coinsDropped);
         }
 
         if (deathEffect)
