@@ -572,7 +572,7 @@ public class Enemy : MonoBehaviour
     #endregion
     
     #region Spawners
-    private void AttackSpawn(bool bossRanged)
+    private void AttackSpawn(bool bossMelee)
     {
         if (arrow && Data.ranged && FirePoint)
         {
@@ -584,7 +584,7 @@ public class Enemy : MonoBehaviour
             }
 
         }
-        else if (Data.bossProjectile && bossRanged && FirePoint2)
+        else if (Data.bossProjectile && !bossMelee && FirePoint2)
         {
             attacking = false;
 

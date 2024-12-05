@@ -498,6 +498,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationLength: 1
   destroy: 0
+  adaptSize: 1
+  adaptDirection: 1
   objectToSpawnBeforeDeath: {fileID: 0}
   fadeTime: 0
   ui: 0
@@ -765,6 +767,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationLength: 0.2
   destroy: 0
+  adaptSize: 1
+  adaptDirection: 1
   objectToSpawnBeforeDeath: {fileID: 4233705056694724574}
   fadeTime: 0
   ui: 0
@@ -1429,7 +1433,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: b0fc275326f5c7f479bc0b065bb3870f,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 6d4fa3c2b06ac09479e8c3e889f802fa, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 250a60435e7ecf24cad4620a89546f80, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.263
   m_Pitch: 1
