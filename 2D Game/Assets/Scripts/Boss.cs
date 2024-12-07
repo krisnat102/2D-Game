@@ -46,7 +46,10 @@ namespace Krisnat
             {
                 if(action == Actions.MeleeAttack)
                 {
-                    if (enemy.AttackAIRange.InRange) MeleeAttack();
+                    if (enemy.AttackAIRange.InRange)
+                    {
+                        MeleeAttack();
+                    }
                 }
             }
 

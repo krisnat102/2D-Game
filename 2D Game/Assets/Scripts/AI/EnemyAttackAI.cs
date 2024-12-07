@@ -47,7 +47,6 @@ public class EnemyAttackAI : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(InRange + gameObject.name);
         if (InRangeOfSight)
         {
             RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, playerTrans.position - firePoint.position, Mathf.Infinity, ~IgnoreMe); //shoots a ray from the fire point to the player

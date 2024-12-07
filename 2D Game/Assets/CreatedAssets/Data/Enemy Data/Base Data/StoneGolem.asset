@@ -34,7 +34,10 @@ MonoBehaviour:
   DetectableLayers:
     serializedVersion: 2
     m_Bits: 1024
+  fixRotationWhenAttacking: 0
+  fixLeftAttack: 0
   rootWhenAttacking: 1
+  commitDirectionWhenAttacking: 0
   moveWhenAttacking: 0
   direction: {x: 0, y: 0}
   velocity: 0
@@ -51,10 +54,9 @@ MonoBehaviour:
   spellDrop: {fileID: 0}
   patrolPauseTime: 0
   patrolSpeed: 0
+  dummy: 0
   lookAtPlayer: 1
-  flipWhenPlayerIsRight: 0
-  facingDirection: 0
-  fixRotationWhenAttacking: 0
+  facingDirection: 1
   patrol: 0
   boss: 1
   bossProjectile: {fileID: 7796753809111118328, guid: a39870c4aad6cf84991ad21e40a2962f,
@@ -66,11 +68,13 @@ MonoBehaviour:
   specialRangedAttackCooldown: 20
   bossMusic: {fileID: 8300000, guid: 5aa633a9f33e07547b59e7bbd680ddbc, type: 3}
   wakeUpTime: 2
-  deathEffect: {fileID: 8203424293245319661, guid: 300aca216a33d6941b80bf60552e2e0e,
-    type: 3}
   bloodEffect: {fileID: 7515634647306772147, guid: 6dc9c141b46ffcc4b9a12f2f255fcf76,
     type: 3}
+  bloodOffset: {x: 0, y: 0}
+  deathEffect: {fileID: 8203424293245319661, guid: 300aca216a33d6941b80bf60552e2e0e,
+    type: 3}
   ranged: 0
+  aimDelay: 0.1
   impactEffect: {fileID: 7515634647306772147, guid: 9727440dcf67ccc4e94ad9612cc84d16,
     type: 3}
   rangedDamage: 25
