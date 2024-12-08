@@ -491,7 +491,7 @@ public class Enemy : MonoBehaviour
         if (!meleeRanged && AttackAIRange.InSight)
         {
             OldPlayerPosition = playerTrans.position;
-            StartCoroutine(AimDelayCoroutine(Data.attackSpeed - Data.aimDelay));
+            StartCoroutine(AimDelayCoroutine(Data.aimDelay));
             if (ContainsParam(animator, "ranged")) animator.SetBool("ranged", true);
 
             if (rangedAttackSound) StartCoroutine(PlayRangedAttackSoundCoroutine(Data.rangedAttackSoundDelay));

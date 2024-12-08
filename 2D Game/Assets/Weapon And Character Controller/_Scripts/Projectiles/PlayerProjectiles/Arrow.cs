@@ -46,6 +46,8 @@ namespace Krisnat
             sprite = GetComponent<SpriteRenderer>();
             levelHandler = Stats.Instance.gameObject.GetComponentInParent<LevelHandler>();
 
+            if(!player) gameObject.SetActive(false);
+
             gravity = rb.gravityScale;
             if(chargeTier != 1) rb.gravityScale = 0f;
 

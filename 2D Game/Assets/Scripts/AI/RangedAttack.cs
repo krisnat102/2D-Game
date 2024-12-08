@@ -23,16 +23,18 @@ public class RangedAttack : MonoBehaviour
         enemy = GetComponentInParent<Enemy>();
 
         arrowRB = GetComponent<Rigidbody2D>();
-        
+
+        Vector2 firePoint = enemy.FirePoint.position;
+
         float offset = Mathf.Abs(enemy.OldPlayerPosition.x - transform.position.x) / enemy.Data.distanceOffset;
 
         if (directedParabola)
         {
-            direction = new Vector2(enemy.OldPlayerPosition.x - transform.position.x, enemy.OldPlayerPosition.y - transform.position.y + offset).normalized;
+            direction = new Vector2(enemy.OldPlayerPosition.x - firePoint.x, enemy.OldPlayerPosition.y - firePoint.y + offset).normalized;
         }
         else if (directed)
         {
-            direction = new Vector2(enemy.OldPlayerPosition.x - transform.position.x, enemy.OldPlayerPosition.y - transform.position.y).normalized;
+            direction = new Vector2(enemy.OldPlayerPosition.x - firePoint.x, enemy.OldPlayerPosition.y - firePoint.y).normalized;
         }
         else
         {
