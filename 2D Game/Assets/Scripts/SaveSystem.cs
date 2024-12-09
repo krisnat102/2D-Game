@@ -6,6 +6,12 @@ namespace Krisnat.Assets.Scripts
 {
     public static class SaveSystem
     {
+        public static bool HasLoadFile()
+        {
+            string path = Application.persistentDataPath + "/player.bob";
+            return File.Exists(path);
+        }
+
         public static void SavePlayer(Player player)
         {
             BinaryFormatter formatter = new();

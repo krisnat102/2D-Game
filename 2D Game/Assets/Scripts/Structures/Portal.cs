@@ -13,6 +13,8 @@ namespace Krisnat
 
             if (PlayerInputHandler.Instance.UseInput && player)
             {
+                PlayerInputHandler.Instance.UseUseInput();
+
                 if (sceneToLoad == "" && distanceTravel != Vector3.zero)
                 {
                     player.transform.position += distanceTravel;
@@ -21,8 +23,6 @@ namespace Krisnat
                 }
                 
                 UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad);
-
-                PlayerInputHandler.Instance.UseUseInput();
             }
         }
     }
