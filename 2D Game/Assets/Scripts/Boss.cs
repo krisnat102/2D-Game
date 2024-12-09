@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Krisnat
 {
@@ -39,6 +38,7 @@ namespace Krisnat
         {
             enemy = GetComponent<Enemy>();
         }
+
         private void Update()
         {
             // Melee Attack
@@ -79,6 +79,7 @@ namespace Krisnat
         Empty,
         MeleeAttack,
         RangedAttack,
+        SpecialAttack,
         SpecialRangedAttack,
         Dash
     }

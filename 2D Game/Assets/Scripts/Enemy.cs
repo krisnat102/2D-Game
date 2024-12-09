@@ -101,8 +101,14 @@ public class Enemy : MonoBehaviour
         if (Data.dummy) return;
 
         if (DashAIRange && DashAIRange.InRange && Data.canDash && !dashCooldown && !attackCooldown && !Data.boss) Dash();
-        else if (AttackAIRange.InRange && !Data.ranged && !Data.boss) Attack(true);
-        else if (AttackAIRange.InSight && Data.ranged && !Data.boss) Attack(false);
+        else if (AttackAIRange.InRange && !Data.ranged && !Data.boss) 
+        { 
+            Attack(true);
+        }
+        else if (AttackAIRange.InSight && Data.ranged && !Data.boss)
+        {
+            Attack(false);
+        }
 
         #region Facing Direction
 
@@ -485,10 +491,10 @@ public class Enemy : MonoBehaviour
 
         StartCoroutine(AttackSpawnCoroutine(Data.damageTriggerTime, meleeRanged));
 
-        
+
         if (ContainsParam(animator, "attack")) animator.SetBool("attack", true);
-        
-        if (!meleeRanged && AttackAIRange.InSight)
+
+        if (!meleeRanged && (DetectAIRange.InSight || AttackAIRange.InSight))
         {
             OldPlayerPosition = playerTrans.position;
             StartCoroutine(AimDelayCoroutine(Data.aimDelay));
@@ -582,7 +588,6 @@ public class Enemy : MonoBehaviour
             {
                 attackProjectile.SetActive(true);
             }
-
         }
         else if (Data.bossProjectile && !bossMelee && FirePoint2)
         {
@@ -592,7 +597,7 @@ public class Enemy : MonoBehaviour
             {
                 if (ContainsParam(animator, "ranged")) animator.SetBool("ranged", false);
 
-                AttackHelper();
+                if (Data.fixRotationWhenAttacking) fixRotation = false;
 
                 return;
             } 

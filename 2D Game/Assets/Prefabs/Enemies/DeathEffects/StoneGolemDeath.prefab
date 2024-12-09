@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 631033441188813942}
   - component: {fileID: 300005056333552389}
   - component: {fileID: -2742701126650918611}
+  - component: {fileID: 3423850389285369269}
   m_Layer: 9
   m_Name: StoneGolemDeath
   m_TagString: Enemy
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 199
+  m_SortingOrder: 399
   m_Sprite: {fileID: -1649858197, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -96,7 +97,7 @@ Animator:
   m_GameObject: {fileID: 8203424293245319661}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f025d0b7004f2fa458f2caff91ba0a36, type: 2}
+  m_Controller: {fileID: 22100000, guid: 1a1c2fcd255bc2f4a9982c9c11aee9b9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -121,7 +122,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationLength: 180
   destroy: 0
+  adaptSize: 1
+  adaptDirection: 1
   objectToSpawnBeforeDeath: {fileID: 0}
   fadeTime: 2
   ui: 0
   uiCanvasGroup: 0
+--- !u!61 &3423850389285369269
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8203424293245319661}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 7736887
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.028378904, y: -0.7701462}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.125, y: 3.125}
+    newSize: {x: 3.2, y: 4.8}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.9492668, y: 1.117901}
+  m_EdgeRadius: 0

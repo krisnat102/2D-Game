@@ -21,32 +21,30 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 1490831727, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}
-    - time: 0.125
       value: {fileID: -510596446, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}
-    - time: 0.25
+    - time: 0.125
       value: {fileID: 1554535779, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}
-    - time: 0.375
+    - time: 0.25
       value: {fileID: 1018576526, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}
-    - time: 0.5
+    - time: 0.375
       value: {fileID: -1649858197, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}
-    - time: 0.625
+    - time: 0.5
       value: {fileID: -1779265359, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}
-    - time: 0.75
+    - time: 0.625
       value: {fileID: 572017771, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}
-    - time: 0.875
+    - time: 0.75
       value: {fileID: 1587729990, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}
-    - time: 1
+    - time: 0.875
       value: {fileID: -1882791056, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}
-    - time: 1.125
+    - time: 1
       value: {fileID: 1308355377, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}
-    - time: 1.375
+    - time: 1.25
       value: {fileID: 1431073783, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}
-    - time: 1.5
+    - time: 1.375
       value: {fileID: 1490831727, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}
-    - time: 1.625
+    - time: 1.5
       value: {fileID: -1838118319, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}
-    - time: 1.75
+    - time: 1.625
       value: {fileID: 1490831727, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}
     - time: 180
       value: {fileID: 1490831727, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}
@@ -72,7 +70,6 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 1490831727, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}
     - {fileID: -510596446, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}
     - {fileID: 1554535779, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}
     - {fileID: 1018576526, guid: 3548fcfc44e534c459d780f68b4a3624, type: 3}

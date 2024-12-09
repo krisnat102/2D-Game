@@ -1,6 +1,7 @@
 using UnityEngine;
 using CoreClass;
 using Bardent.CoreSystem;
+using Krisnat;
 
 public class RangedAttack : MonoBehaviour
 {
@@ -12,9 +13,11 @@ public class RangedAttack : MonoBehaviour
     [Header("Values")]
     [Range(1, 100)]
     [SerializeField] private int accuracy;
+
     private Enemy enemy;
     private Rigidbody2D arrowRB;
-    Vector2 direction;
+    private Transform impactEffectLocation;
+    private Vector2 direction;
 
     void Start()
     {
@@ -23,6 +26,8 @@ public class RangedAttack : MonoBehaviour
         enemy = GetComponentInParent<Enemy>();
 
         arrowRB = GetComponent<Rigidbody2D>();
+
+        impactEffectLocation = GetComponentInChildren<SearchAssist>(true).transform;
 
         Vector2 firePoint = enemy.FirePoint.position;
 
@@ -58,16 +63,19 @@ public class RangedAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.tag != "Enemy" && hitInfo.tag != "Item" && hitInfo.tag != "Climbable" && hitInfo.tag != "AttackRange" && hitInfo.tag != "BackgroundObject" && hitInfo.tag != "PickupRange" && hitInfo.tag != "Event")
+        if (hitInfo.tag != "Enemy" && hitInfo.tag != "Item" && hitInfo.tag != "Climbable" && hitInfo.tag != "AttackRange" && hitInfo.tag != "BackgroundObject" && hitInfo.tag != "PickupRange" && hitInfo.tag != "Event" && hitInfo.tag != "Arrow")
         {
             Player player = hitInfo.GetComponent<Player>();
             if (player)
             {
                 player.Core.GetCoreComponent<DamageReceiver>().Damage(enemy.Data.rangedDamage * enemy.EnemyLevelScale, enemy.Data.damageType);
             }
-            if (enemy.Data.impactEffect) Instantiate(enemy.Data.impactEffect, transform.position, Quaternion.identity);
+            if (enemy.Data.impactEffect)
+            {
+                Instantiate(enemy.Data.impactEffect, impactEffectLocation.position, Quaternion.identity).transform.parent = null;
+            }
 
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
