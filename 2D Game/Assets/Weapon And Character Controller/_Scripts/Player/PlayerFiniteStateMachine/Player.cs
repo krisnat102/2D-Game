@@ -1,10 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Bardent.CoreSystem;
-using Bardent.Weapons;
+﻿using Bardent.CoreSystem;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {

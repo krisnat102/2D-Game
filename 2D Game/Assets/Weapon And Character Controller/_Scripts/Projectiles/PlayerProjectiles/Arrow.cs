@@ -107,7 +107,11 @@ namespace Krisnat
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
-        private float DistanceTravelled() => Mathf.Abs(player.transform.position.x - transform.position.x);
+        private float DistanceTravelled()
+        {
+            if(player) return Mathf.Abs(player.transform.position.x - transform.position.x);
+            return 0f;
+        }
 
         private void StartFade()
         {
