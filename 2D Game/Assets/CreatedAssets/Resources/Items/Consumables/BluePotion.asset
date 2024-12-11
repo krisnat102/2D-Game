@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b860ad291538dac4f9496d8a9a1d7c60, type: 3}
   m_Name: BluePotion
   m_EditorClassIdentifier: 
-  id: 2
+  id: 201
   itemName: Blue Potion
   value: 60
   cost: 20
@@ -25,5 +25,6 @@ MonoBehaviour:
   weight: 0
   magicRes: 0
   equipmentType: 0
+  weaponData: {fileID: 0}
   consumable: 1
   consumableType: 2
