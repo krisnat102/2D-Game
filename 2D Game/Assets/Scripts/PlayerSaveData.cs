@@ -43,7 +43,7 @@ namespace Krisnat.Assets.Scripts
             //intelligence = levelHandler.IntelligenceCounter;
 
             coins = InventoryManager.Instance.Coins;
-            
+
             spellsId = SpellManager.Instance.Spells.Select(spell => spell.id).ToArray();
             activeSpellsId = SpellManager.Instance.SpellsBar.Select(spell => spell.id).ToArray();
             activeAbilitiesId = SpellManager.Instance.AbilitiesBar.Select(spell => spell.id).ToArray();
@@ -58,6 +58,88 @@ namespace Krisnat.Assets.Scripts
             //position[0] = CoreClass.GameManager.Instance.SpawnPoint.position.x;
             //position[1] = CoreClass.GameManager.Instance.SpawnPoint.position.y;
             //position[2] = CoreClass.GameManager.Instance.SpawnPoint.position.z;
+
+            levelStarted = true;
+        }
+
+        public PlayerSaveData(
+            int level,
+            float maxHealth,
+            float currentHealth,
+            float maxStam,
+            float currentStam,
+            float maxMana,
+            float currentMana,
+            int strength,
+            int dexterity,
+            int intelligence,
+            int coins,
+            float[] position,
+            int[] itemsId,
+            int[] equippedItemsId,
+            int[] spellsId,
+            int[] activeSpellsId,
+            int[] activeAbilitiesId,
+            string[] itemsTakenId,
+            bool levelStarted)
+        {
+            this.level = level;
+            this.maxHealth = maxHealth;
+            this.currentHealth = currentHealth;
+            this.maxStam = maxStam;
+            this.currentStam = currentStam;
+            this.maxMana = maxMana;
+            this.currentMana = currentMana;
+            this.strength = strength;
+            this.dexterity = dexterity;
+            this.intelligence = intelligence;
+            this.coins = coins;
+            this.position = position;
+            this.itemsId = itemsId;
+            this.equippedItemsId = equippedItemsId;
+            this.spellsId = spellsId;
+            this.activeSpellsId = activeSpellsId;
+            this.activeAbilitiesId = activeAbilitiesId;
+            this.itemsTakenId = itemsTakenId;
+            this.levelStarted = levelStarted;
+        }
+
+        public static PlayerSaveData CreateDefault()
+        {
+            return new PlayerSaveData(
+                level: 1,
+                maxHealth: 100f,
+                currentHealth: 100f,
+                maxStam: 100f,
+                currentStam: 100f,
+                maxMana: 100f,
+                currentMana: 100f,
+                strength: 1,
+                dexterity: 1,
+                intelligence: 1,
+                coins: 0,
+                position: new float[]
+                {
+                    -8.37f,
+                    16.97f,
+                    0f
+                },
+                itemsId: new int[]
+                {
+                    104,
+                    106
+                },
+                equippedItemsId: new int[]
+                {
+                    104,
+                    106
+                },
+                spellsId: Array.Empty<int>(),
+                activeSpellsId: Array.Empty<int>(),
+                activeAbilitiesId: Array.Empty<int>(),
+                itemsTakenId: Array.Empty<string>(),
+                levelStarted: false
+            );
         }
     }
 }

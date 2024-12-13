@@ -22,7 +22,7 @@ namespace Spells
         private Canvas canvas;
         private GameObject itemPrice;
 
-        private void Awake()
+        private void Start()
         {
             if (string.IsNullOrEmpty(itemId)) itemId = gameObject.name + "z";
 
@@ -31,10 +31,11 @@ namespace Spells
             {
                 gameObject.SetActive(false);
             }
-        }
+            else if (data == null || !data.itemsTakenId.Contains(itemId))
+            {
+                gameObject.SetActive(true);
+            }
 
-        private void Start()
-        {
             animator = GetComponent<Animator>();
             canvas = GetComponentInChildren<Canvas>();
 

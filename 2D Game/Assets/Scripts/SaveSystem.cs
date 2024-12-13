@@ -24,6 +24,15 @@ namespace Krisnat.Assets.Scripts
             stream.Close();
         }
 
+        public static void SaveData(PlayerSaveData data)
+        {
+            BinaryFormatter formatter = new();
+            string path = Application.persistentDataPath + "/player.bob";
+            FileStream stream = new(path, FileMode.Create);
+
+            formatter.Serialize(stream, data);
+            stream.Close();
+        }
 
         public static PlayerSaveData LoadPlayer()
         {
@@ -42,6 +51,32 @@ namespace Krisnat.Assets.Scripts
             {
                 Debug.LogError("Save file not found in" + path);
                 return null;
+            }
+        }
+
+        public static void DeleteAllSaveFiles()
+        {
+            string path = Application.persistentDataPath;
+
+            if (Directory.Exists(path))
+            {
+                DirectoryInfo directory = new DirectoryInfo(path);
+
+                foreach (FileInfo file in directory.GetFiles())
+                {
+                    file.Delete(); // Delete each file
+                }
+
+                foreach (DirectoryInfo dir in directory.GetDirectories())
+                {
+                    dir.Delete(true); // Delete each subdirectory and its contents
+                }
+
+                Debug.Log("All save files deleted successfully.");
+            }
+            else
+            {
+                Debug.LogWarning("Persistent data path directory does not exist.");
             }
         }
     }

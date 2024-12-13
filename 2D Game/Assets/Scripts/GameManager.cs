@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Bardent.CoreSystem;
 using Inventory;
+using Krisnat;
 using Krisnat.Assets.Scripts;
 using Spells;
 using UnityEditor;
@@ -24,12 +25,12 @@ namespace CoreClass
         [SerializeField] private Transform spawnPoint;
 
         private Player player;
-        //private LevelHandler levelHandler;
+        private LevelHandler levelHandler;
         private InventoryManager inventoryManager;
         private SpellManager spellManager;
         private Stats stats;
 
-        public bool LevelStarted { get; set; } = false;
+        public static bool levelStarted = false;
         public bool GamePaused { get => gamePaused; set => gamePaused = value; }
         public GameObject Player { get => playerGO; private set => playerGO = value; }
         public Transform SpawnPoint { get => spawnPoint; private set => spawnPoint = value; }
@@ -47,7 +48,7 @@ namespace CoreClass
             Instance = this;
 
             player = playerGO?.GetComponent<Player>();
-            //levelHandler = playerGO?.GetComponent<LevelHandler>();
+            levelHandler = playerGO?.GetComponent<LevelHandler>();
 
             if (checkpoint == Vector3.zero) checkpoint = SpawnPoint.position;
         }
@@ -128,21 +129,21 @@ namespace CoreClass
             inventoryManager.SetCoins(inventoryManager.Coins / 3, false);
             inventoryManager.Add(loadItems);
             spellManager.Add(loadSpells);
-            LevelStarted = data.levelStarted;
+            levelStarted = data.levelStarted;
 
             foreach (int id in inventoryManager.EquippedItemsIds())
             {
-                foreach(Item item in inventoryManager.AllItems.Where(item => item.id == id))
+                foreach (Item item in inventoryManager.AllItems.Where(item => item.id == id))
                 {
                     inventoryManager.UnequipItem(item);
                 }
             }
-            foreach(Item item in loadEquippedItems)
+            foreach (Item item in loadEquippedItems)
             {
                 inventoryManager.EquipItem(item);
             }
 
-            foreach(Spell spell in loadActiveSpells)
+            foreach (Spell spell in loadActiveSpells)
             {
                 spellManager.SpellsBar.Add(spell);
             }
@@ -162,6 +163,8 @@ namespace CoreClass
 
         public void LoadPlayer(PlayerSaveData data)
         {
+            if (data == null) return;
+
             List<Item> loadItems = new();
             List<Item> loadEquippedItems = new();
             List<Spell> loadSpells = new();
@@ -192,10 +195,20 @@ namespace CoreClass
                 loadActiveAbilities.AddRange(spellManager.AllSpells.Where(spell => spell.id == id).ToList());
             }
 
-            stats.Health.SetCurrentStat(stats.Health.MaxValue);
-            stats.Mana.SetCurrentStat(stats.Mana.MaxValue);
-            stats.Stam.SetCurrentStat(stats.Stam.MaxValue);
-            inventoryManager.SetCoins(inventoryManager.Coins / 3, false);
+            player.PlayerData.SetLevel(data.level);
+            stats.Health.SetMaxStat(data.maxHealth);
+            stats.Mana.SetMaxStat(data.maxMana);
+            stats.Stam.SetMaxStat(data.maxStam);
+            stats.Health.SetCurrentStat(data.currentHealth);
+            stats.Mana.SetCurrentStat(data.currentMana);
+            stats.Stam.SetCurrentStat(data.currentStam);
+            levelHandler.SetStrength(data.strength);
+            levelHandler.SetDexterity(data.dexterity);
+            levelHandler.SetIntelligence(data.intelligence);
+            stats.Health.SetCurrentStat(data.maxHealth);
+            stats.Mana.SetCurrentStat(data.maxMana);
+            stats.Stam.SetCurrentStat(data.maxStam);
+            inventoryManager.SetCoins(data.coins, false);
             inventoryManager.Add(loadItems);
             spellManager.Add(loadSpells);
 
@@ -222,8 +235,8 @@ namespace CoreClass
 
             var playerTransform = player.transform;
 
-            playerTransform.position = checkpoint;
-            camera.position = checkpoint;
+            playerTransform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
+            camera.position = new Vector3(data.position[0], data.position[1], data.position[2]);
         }
         #endregion
 
@@ -259,7 +272,7 @@ namespace CoreClass
                 }
             }
         }
-        #endif
+#endif
 
         /*public List<T> GetCustomAssets<T>(string customAssetType, string location) where T : UnityEngine.Object
         {

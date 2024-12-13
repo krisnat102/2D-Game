@@ -36,20 +36,20 @@ namespace Inventory
 
         public bool Note { get => note; private set => note = value; }
 
-        private void Awake()
+        private void Start()
         {
             if (portal || note) return;
 
-            if(string.IsNullOrEmpty(itemId)) itemId = gameObject.name;
+            if (string.IsNullOrEmpty(itemId)) itemId = gameObject.name;
 
             PlayerSaveData data = SaveSystem.LoadPlayer();
             if (data != null && data.itemsTakenId != null && data.itemsTakenId.Contains(itemId))
             {
-                foreach(var item in data.itemsTakenId)
-                {
-                    Debug.Log(item);
-                }
                 gameObject.SetActive(false);
+            }
+            else if (data == null || !data.itemsTakenId.Contains(itemId))
+            {
+                gameObject.SetActive(true);
             }
 
             if (forSale)
@@ -72,7 +72,6 @@ namespace Inventory
             }
         }
         
-
         public  void Pickup()
         {
             if (portal) return;

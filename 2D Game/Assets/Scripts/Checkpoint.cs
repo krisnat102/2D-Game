@@ -1,3 +1,4 @@
+using Krisnat.Assets.Scripts;
 using UnityEngine;
 
 namespace Krisnat
@@ -6,9 +7,12 @@ namespace Krisnat
     {
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.GetComponent<Player>())
+            var player = collision.GetComponent<Player>();
+
+            if (player)
             {
                 CoreClass.GameManager.checkpoint = transform.position;
+                SaveSystem.SavePlayer(player);
             }
         }
     }

@@ -10,20 +10,27 @@ using UnityEngine.UI;
 public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance;
-    public bool DamagePopUps { get => dagamePopups; private set => dagamePopups = value; }
+    public bool DamagePopUps { get => damagePopups; private set => damagePopups = value; }
 
     #region Private Variables
     [SerializeField] private Player player;
 
+    #region Menu UI
     [SerializeField] private GameObject menu;
     [SerializeField] private GameObject miniMenu;
     [SerializeField] private GameObject settings;
+    [SerializeField] private GameObject playButton;
+    [SerializeField] private GameObject existingSaveButtons;
+    #endregion
 
+    #region Settings
     [SerializeField] private TMP_Dropdown resolutionDropdown, qualityDropdown, fpsDropdown;
     [SerializeField] private Toggle fullScreenToggle, damagePopUpsToggle;
+    #endregion
 
     private Resolution[] resolutions;
-    private bool dagamePopups = true;
+    private bool damagePopups = true;
+    private static bool newGame = false;
     #endregion
 
     #region Unity Methods
@@ -64,6 +71,26 @@ public class MenuManager : MonoBehaviour
 
         LoadVideoSettings();
         LoadGameSettings();
+
+        if (SaveSystem.HasLoadFile() && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            existingSaveButtons.SetActive(true);
+            playButton.SetActive(false);
+        }
+        else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            existingSaveButtons.SetActive(false);
+            playButton.SetActive(true);
+        }
+
+        if (newGame)
+        {
+            SaveSystem.DeleteAllSaveFiles();
+            SaveSystem.SaveData(PlayerSaveData.CreateDefault());
+            CoreClass.GameManager.Instance.LoadPlayer(PlayerSaveData.CreateDefault());
+
+            newGame = false;
+        }
     }
 
     void Update()
@@ -80,7 +107,7 @@ public class MenuManager : MonoBehaviour
         }
 
         if (
-            PlayerInputHandler.Instance != null 
+            PlayerInputHandler.Instance != null
             && PlayerInputHandler.Instance.MenuInput
             && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "MainMenu"
             && !InventoryManager.Instance.InventoryActiveInHierarchy
@@ -89,7 +116,7 @@ public class MenuManager : MonoBehaviour
             && !UIManager.Instance.LevelUpInterface.activeInHierarchy
             )
         {
-            PlayerInputHandler.Instance.UseMenuInput(); 
+            PlayerInputHandler.Instance.UseMenuInput();
 
             if (!menu.activeInHierarchy)
             {
@@ -124,7 +151,7 @@ public class MenuManager : MonoBehaviour
         }
     }
     private void CloseMenu()
-    { 
+    {
         menu.SetActive(false);
         CoreClass.GameManager.Instance.GamePaused = false;
         PlayerInputHandler.Instance.StopAllInputs = false;
@@ -241,7 +268,7 @@ public class MenuManager : MonoBehaviour
     }
     public void ExitGame()
     {
-        if(player != null) SaveSystem.SavePlayer(player);
+        if (player != null) SaveSystem.SavePlayer(player);
         Application.Quit();
 
         Debug.Log("exit");
@@ -254,7 +281,12 @@ public class MenuManager : MonoBehaviour
     }
     public void Play()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1); 
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+    }
+
+    public void NewGame()
+    {
+        newGame = true;
     }
     #endregion
 }
