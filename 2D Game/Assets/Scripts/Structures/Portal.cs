@@ -1,9 +1,11 @@
+using Krisnat.Assets.Scripts;
 using UnityEngine;
 
 namespace Krisnat
 {
     public class Portal : MonoBehaviour, IStructurable
     {
+        [SerializeField] private bool loadNextScene;
         [SerializeField] private string sceneToLoad;
         [SerializeField] private Vector3 distanceTravel;
 
@@ -21,7 +23,16 @@ namespace Krisnat
 
                     return;
                 }
-                
+                CoreClass.GameManager.checkpoint = CoreClass.GameManager.Instance.SpawnPoint.position;
+                SaveSystem.SavePlayer(player);
+
+                if (loadNextScene)
+                {
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
+
+                    return;
+                }
+
                 UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad);
             }
         }
