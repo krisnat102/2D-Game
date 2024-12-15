@@ -22,18 +22,16 @@ namespace Spells
         private Canvas canvas;
         private GameObject itemPrice;
 
+        public string ItemId { get => itemId; set => itemId = value; }
+
         private void Start()
         {
-            if (string.IsNullOrEmpty(itemId)) itemId = gameObject.name + "z";
+            if (string.IsNullOrEmpty(ItemId)) ItemId = gameObject.name + "z";
 
             PlayerSaveData data = SaveSystem.LoadPlayer();
-            if (data != null && data.itemsTakenId != null && data.itemsTakenId.Contains(itemId))
+            if (data != null && data.itemsTakenId != null && data.itemsTakenId.Contains(ItemId))
             {
                 gameObject.SetActive(false);
-            }
-            else if (data == null || !data.itemsTakenId.Contains(itemId))
-            {
-                gameObject.SetActive(true);
             }
 
             animator = GetComponent<Animator>();
@@ -78,7 +76,7 @@ namespace Spells
                     SpellManager.Instance.Add(spell);
                 }
 
-                CoreClass.GameManager.Instance.ItemsTaken.Add(itemId);
+                CoreClass.GameManager.Instance.ItemsTaken.Add(ItemId);
 
                 int resolutionHeight = Screen.currentResolution.height;
 

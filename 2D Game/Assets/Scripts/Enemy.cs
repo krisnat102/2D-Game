@@ -76,20 +76,22 @@ public class Enemy : MonoBehaviour
     private Transform firePoint;
     private GameObject arrow;
     private CameraShake cameraShake;
+    private CoreClass.GameManager gameManager;
     #endregion
 
     #region Properties
+    public bool SpecialRangedAttackCooldown { get => specialRangedAttackCooldown; private set => specialRangedAttackCooldown = value; }
+    public bool Dead { get; private set; }
+    public int FacingDirection { get => facingDirection; private set => facingDirection = value; }
+    public float EnemyLevelScale { get => lvlIndex; private set => lvlIndex = value; }
+    public string BossId { get; private set; }
     public Transform PlayerTrans { get => playerTrans; private set => playerTrans = value; }
     public EnemyData Data { get => data; private set => data = value; }
-    public float EnemyLevelScale { get => lvlIndex; private set => lvlIndex = value; }
-    public int FacingDirection { get => facingDirection; private set => facingDirection = value; }
     public Transform FirePoint { get => firePoint; private set => firePoint = value; }
     public Transform FirePoint2 { get; private set; }
     public EnemyAttackAI DetectAIRange { get => detectAIRange; private set => detectAIRange = value; }
     public EnemyAttackAI AttackAIRange { get => attackAIRange; private set => attackAIRange = value; }
     public EnemyAttackAI DashAIRange { get => dashAIRange; private set => dashAIRange = value; }
-    public bool SpecialRangedAttackCooldown { get => specialRangedAttackCooldown; private set => specialRangedAttackCooldown = value; }
-    public bool Dead { get; private set; }
     public Vector2 OldPlayerPosition { get => oldPlayerPosition; private set => oldPlayerPosition = value; }
     #endregion
 
@@ -112,7 +114,7 @@ public class Enemy : MonoBehaviour
 
         #region Facing Direction
 
-        if (Data.lookAtPlayer && DetectAIRange.Alerted && !isDashing && !(Data.commitDirectionWhenAttacking && attacking))
+        if (playerTrans && Data.lookAtPlayer && DetectAIRange.Alerted && !isDashing && !(Data.commitDirectionWhenAttacking && attacking))
         {
             if (playerTrans.position.x < transform.position.x)
             {
@@ -323,6 +325,11 @@ public class Enemy : MonoBehaviour
         previousPosition = transform.position;
     }
 
+    private void Awake()
+    {
+        if (Data.boss) BossId = gameObject.name;
+    }
+
     private void Start()
     {
         #region Variable Getting and Finding
@@ -339,8 +346,9 @@ public class Enemy : MonoBehaviour
         isPatrolling = Data.patrol;
         cameraShake = CameraShake.instance;
         previousLocalScaleX = transform.localScale.x;
+        gameManager = CoreClass.GameManager.Instance;
         #endregion
-        
+
         if (Data.dummy) return;
         
         #region Calculations
@@ -440,7 +448,13 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         if (Dead) return;
-        if (Data.boss) CoreClass.GameManager.Instance.DeactivateObject(4, hpBar.gameObject);
+        if (Data.boss)
+        {
+            gameManager.DeactivateObject(4, hpBar.gameObject);
+
+            gameManager.BossesKilled.Add(BossId);
+            Debug.Log(3);
+        }
 
         if (Data.itemDrop)
         {

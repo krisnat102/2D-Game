@@ -35,6 +35,7 @@ namespace CoreClass
         public GameObject Player { get => playerGO; private set => playerGO = value; }
         public Transform SpawnPoint { get => spawnPoint; private set => spawnPoint = value; }
         public List<string> ItemsTaken { get; private set; }
+        public List<string> BossesKilled { get; private set; }
 
         #region Unity Methods
         private void Update()
@@ -49,6 +50,7 @@ namespace CoreClass
             Instance = this;
 
             ItemsTaken = new List<string>();
+            BossesKilled = new List<string>();
 
             player = playerGO?.GetComponent<Player>();
             levelHandler = playerGO?.GetComponent<LevelHandler>();
@@ -115,6 +117,9 @@ namespace CoreClass
 
             if (data.itemsTakenId != null) ItemsTaken = data.itemsTakenId.ToList();
             else ItemsTaken.Clear();
+
+            if (data.bossesKilledId != null) BossesKilled = data.bossesKilledId.ToList();
+            else BossesKilled.Clear();
 
             /*player.PlayerData.SetLevel(data.level);
             stats.Health.SetMaxStat(data.maxHealth);
@@ -199,6 +204,12 @@ namespace CoreClass
                 loadActiveAbilities.AddRange(spellManager.AllSpells.Where(spell => spell.id == id).ToList());
             }
 
+            if (data.itemsTakenId != null) ItemsTaken = data.itemsTakenId.ToList();
+            else ItemsTaken.Clear();
+
+            if (data.bossesKilledId != null) BossesKilled = data.bossesKilledId.ToList();
+            else BossesKilled.Clear();
+
             player.PlayerData.SetLevel(data.level);
             stats.Health.SetMaxStat(data.maxHealth);
             stats.Mana.SetMaxStat(data.maxMana);
@@ -236,10 +247,6 @@ namespace CoreClass
             {
                 spellManager.AbilitiesBar.Add(spell);
             }
-
-            if (data.itemsTakenId != null) ItemsTaken = data.itemsTakenId.ToList();
-            else ItemsTaken.Clear();
-            
 
             var playerTransform = player.transform;
 

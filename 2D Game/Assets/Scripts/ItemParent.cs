@@ -1,4 +1,5 @@
 using Inventory;
+using Spells;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,7 +14,11 @@ namespace Krisnat
 
             items = GetComponentsInChildren<ItemPickup>(true).ToList();
 
-            foreach(ItemPickup item in items)
+            List<SpellPickup> spells = new List<SpellPickup>();
+
+            spells = GetComponentsInChildren<SpellPickup>(true).ToList();
+
+            foreach (ItemPickup item in items)
             {
                 if (CoreClass.GameManager.Instance.ItemsTaken.Contains(item.ItemId))
                 {
@@ -22,6 +27,19 @@ namespace Krisnat
                 else
                 {
                     item.gameObject.SetActive(true);
+                }
+            }
+
+            foreach (SpellPickup spell in spells)
+            {
+                if (CoreClass.GameManager.Instance.ItemsTaken.Contains(spell.ItemId))
+                {
+                    spell.gameObject.SetActive(false);
+                    Debug.Log(1 + "" + spell.ItemId);
+                }
+                else
+                {
+                    spell.gameObject.SetActive(true);
                 }
             }
         }

@@ -262,8 +262,8 @@ public class MenuManager : MonoBehaviour
     }
     public void MainMenu()
     {
-        SaveSystem.SavePlayer(player);
-        Destroy(player.gameObject);
+        if (player != null) SaveSystem.SavePlayer(player);
+        //Destroy(player.gameObject);
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
     public void ExitGame()

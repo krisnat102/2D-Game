@@ -6,6 +6,7 @@ namespace Krisnat
 {
     public class Battle : MonoBehaviour
     {
+        [SerializeField] private bool bossBattle;
         [SerializeField] private Battle previousBattle;
         [SerializeField] private GameObject objectToEnable;
         [SerializeField] private Door doorToUnlock;
@@ -16,6 +17,29 @@ namespace Krisnat
         private void Start()
         {
             encounter = GetComponentsInChildren<Enemy>(true).ToList();
+
+            if (bossBattle)
+            {
+                Enemy boss = GetComponentInChildren<Enemy>();
+
+                if (CoreClass.GameManager.Instance.BossesKilled.Contains(boss.BossId))
+                {
+                    boss.gameObject.SetActive(false);
+                    End = true;
+                }
+                else boss.gameObject.SetActive(true);
+            }
+        }
+
+        private void Update()
+        {
+            if(End)
+            {
+                if (objectToEnable) objectToEnable.SetActive(true);
+                if (doorToUnlock) doorToUnlock.Open(true);
+
+                gameObject.SetActive(false);
+            }
         }
 
         private void OnTriggerStay2D(Collider2D collision)
@@ -40,11 +64,6 @@ namespace Krisnat
             if (!encounter.All(obj => obj.Dead)) return;
 
             End = true;
-
-            if(objectToEnable) objectToEnable.SetActive(true);
-            if (doorToUnlock) doorToUnlock.Open(true);
-
-            gameObject.SetActive(false);
         }
     }
 }

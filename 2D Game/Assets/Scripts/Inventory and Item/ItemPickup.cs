@@ -1,7 +1,5 @@
-using CoreClass;
 using Krisnat;
 using Krisnat.Assets.Scripts;
-using Spells;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +44,8 @@ namespace Inventory
             PlayerSaveData data = SaveSystem.LoadPlayer();
             if (data != null && data.itemsTakenId != null && data.itemsTakenId.Contains(ItemId))
             {
-                //gameObject.SetActive(false);
+                gameObject.SetActive(false);
+                return;
             }
 
             if (forSale)

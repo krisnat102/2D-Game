@@ -18,7 +18,6 @@ public class BackgroundMove : MonoBehaviour
         length = gameObject.GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
-
     void Update()
     {
         float temp = (cam.transform.position.x * (1 - parallaxEffect));

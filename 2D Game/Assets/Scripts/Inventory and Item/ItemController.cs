@@ -9,7 +9,7 @@ namespace Inventory
 
         public Item GetItem()
         {
-            return this.item;
+            return item;
         }
 
         public void SetItem(Item item)

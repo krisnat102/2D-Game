@@ -91,7 +91,13 @@ namespace Krisnat
             }
             if (collision.tag == "Ground" || collision.tag == "Door")
             {
+                float angle = Mathf.Atan2(rb.velocity.normalized.y,rb.velocity.normalized.x) * Mathf.Rad2Deg;
+
+                rb.velocity = Vector2.zero;
                 rb.simulated = false;
+
+                transform.rotation = Quaternion.Euler(0, 0, angle);
+
                 Invoke("StartFade", stuckTime);
             }
         }
