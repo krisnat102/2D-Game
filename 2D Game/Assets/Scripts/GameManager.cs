@@ -34,6 +34,7 @@ namespace CoreClass
         public bool GamePaused { get => gamePaused; set => gamePaused = value; }
         public GameObject Player { get => playerGO; private set => playerGO = value; }
         public Transform SpawnPoint { get => spawnPoint; private set => spawnPoint = value; }
+        public List<string> ItemsTaken { get; private set; }
 
         #region Unity Methods
         private void Update()
@@ -46,6 +47,8 @@ namespace CoreClass
         private void Awake()
         {
             Instance = this;
+
+            ItemsTaken = new List<string>();
 
             player = playerGO?.GetComponent<Player>();
             levelHandler = playerGO?.GetComponent<LevelHandler>();
@@ -110,7 +113,8 @@ namespace CoreClass
                 loadActiveAbilities.AddRange(spellManager.AllSpells.Where(spell => spell.id == id).ToList());
             }
 
-            if (data.itemsTakenId != null) ItemPickup.itemsTaken = data.itemsTakenId.ToList();
+            if (data.itemsTakenId != null) ItemsTaken = data.itemsTakenId.ToList();
+            else ItemsTaken.Clear();
 
             /*player.PlayerData.SetLevel(data.level);
             stats.Health.SetMaxStat(data.maxHealth);
@@ -232,6 +236,10 @@ namespace CoreClass
             {
                 spellManager.AbilitiesBar.Add(spell);
             }
+
+            if (data.itemsTakenId != null) ItemsTaken = data.itemsTakenId.ToList();
+            else ItemsTaken.Clear();
+            
 
             var playerTransform = player.transform;
 

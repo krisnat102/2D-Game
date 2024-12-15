@@ -35,21 +35,18 @@ namespace Inventory
         public static List<string> itemsTaken = new();
 
         public bool Note { get => note; private set => note = value; }
+        public string ItemId { get => itemId; private set => itemId = value; }
 
         private void Start()
         {
             if (portal || note) return;
 
-            if (string.IsNullOrEmpty(itemId)) itemId = gameObject.name;
+            if (string.IsNullOrEmpty(ItemId)) ItemId = gameObject.name;
 
             PlayerSaveData data = SaveSystem.LoadPlayer();
-            if (data != null && data.itemsTakenId != null && data.itemsTakenId.Contains(itemId))
+            if (data != null && data.itemsTakenId != null && data.itemsTakenId.Contains(ItemId))
             {
-                gameObject.SetActive(false);
-            }
-            else if (data == null || !data.itemsTakenId.Contains(itemId))
-            {
-                gameObject.SetActive(true);
+                //gameObject.SetActive(false);
             }
 
             if (forSale)
@@ -100,7 +97,7 @@ namespace Inventory
                     isPickedUp = true;
                     StartCoroutine(AddItem(item, true, openTime));
                     animator.SetTrigger("open");
-                    itemsTaken.Add(itemId);
+                    CoreClass.GameManager.Instance.ItemsTaken.Add(ItemId);
                 }
             }
             else if (!isPickedUp && item)
@@ -109,7 +106,7 @@ namespace Inventory
                 {
                     InventoryManager.Instance.Add(item, true);
                     gameObject.SetActive(false);
-                    itemsTaken.Add(itemId);
+                    CoreClass.GameManager.Instance.ItemsTaken.Add(ItemId);
                 }
             }
         }

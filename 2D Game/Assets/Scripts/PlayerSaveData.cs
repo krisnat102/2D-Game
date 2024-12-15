@@ -49,7 +49,7 @@ namespace Krisnat.Assets.Scripts
             activeAbilitiesId = SpellManager.Instance.AbilitiesBar.Select(spell => spell.id).ToArray();
             itemsId = InventoryManager.Instance.Items.Select(item => item.id).ToArray();
             equippedItemsId = InventoryManager.Instance.EquippedItemsIds();
-            itemsTakenId = ItemPickup.itemsTaken.ToArray();
+            itemsTakenId = CoreClass.GameManager.Instance.ItemsTaken.ToArray();
             position = new float[3];
 
             position[0] = CoreClass.GameManager.checkpoint.x;

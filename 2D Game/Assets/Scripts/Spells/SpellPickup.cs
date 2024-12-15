@@ -78,7 +78,7 @@ namespace Spells
                     SpellManager.Instance.Add(spell);
                 }
 
-                ItemPickup.itemsTaken.Add(itemId);
+                CoreClass.GameManager.Instance.ItemsTaken.Add(itemId);
 
                 int resolutionHeight = Screen.currentResolution.height;
 
