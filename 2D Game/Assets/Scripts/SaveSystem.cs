@@ -1,5 +1,6 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEditor;
 using UnityEngine;
 
 namespace Krisnat.Assets.Scripts
@@ -49,11 +50,13 @@ namespace Krisnat.Assets.Scripts
             }
             else
             {
-                Debug.LogError("Save file not found in" + path);
+                Debug.LogWarning("Save file not found in" + path);
                 return null;
             }
         }
-
+#if UNITY_EDITOR
+        [MenuItem("Tools/DeleteSaveFile")]
+#endif
         public static void DeleteAllSaveFiles()
         {
             string path = Application.persistentDataPath;

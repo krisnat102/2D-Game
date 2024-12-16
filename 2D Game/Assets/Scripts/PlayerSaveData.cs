@@ -13,12 +13,10 @@ namespace Krisnat.Assets.Scripts
         public float maxHealth, currentHealth, maxStam, currentStam, maxMana, currentMana;
         public int strength, dexterity, intelligence;
         public int coins;
+        public int currentLevel;
         public float[] position;
-        public int[] itemsId;
-        public int[] equippedItemsId;
-        public int[] spellsId;
-        public int[] activeSpellsId;
-        public int[] activeAbilitiesId;
+        public int[] itemsId, equippedItemsId, spellsId;
+        public int[] activeSpellsId, activeAbilitiesId;
         public string[] itemsTakenId, bossesKilledId;
         public bool levelStarted;
 
@@ -51,6 +49,7 @@ namespace Krisnat.Assets.Scripts
             equippedItemsId = InventoryManager.Instance.EquippedItemsIds();
             itemsTakenId = CoreClass.GameManager.Instance.ItemsTaken.ToArray();
             bossesKilledId = CoreClass.GameManager.Instance.BossesKilled.ToArray();
+            currentLevel = MenuManager.Instance.CurrentLevel;
             position = new float[3];
 
             position[0] = CoreClass.GameManager.checkpoint.x;
@@ -75,6 +74,7 @@ namespace Krisnat.Assets.Scripts
             int dexterity,
             int intelligence,
             int coins,
+            int currentLevel,
             float[] position,
             int[] itemsId,
             int[] equippedItemsId,
@@ -96,6 +96,7 @@ namespace Krisnat.Assets.Scripts
             this.dexterity = dexterity;
             this.intelligence = intelligence;
             this.coins = coins;
+            this.currentLevel = currentLevel;
             this.position = position;
             this.itemsId = itemsId;
             this.equippedItemsId = equippedItemsId;
@@ -121,6 +122,7 @@ namespace Krisnat.Assets.Scripts
                 dexterity: 1,
                 intelligence: 1,
                 coins: 0,
+                currentLevel: 1,
                 position: new float[]
                 {
                     -8.37f,

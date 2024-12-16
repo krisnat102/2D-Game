@@ -32,10 +32,11 @@ namespace CoreClass
 
         public static bool levelStarted = false;
         public bool GamePaused { get => gamePaused; set => gamePaused = value; }
-        public GameObject Player { get => playerGO; private set => playerGO = value; }
+        public GameObject PlayerGO { get => playerGO; private set => playerGO = value; }
         public Transform SpawnPoint { get => spawnPoint; private set => spawnPoint = value; }
         public List<string> ItemsTaken { get; private set; }
         public List<string> BossesKilled { get; private set; }
+        public Player Player { get => player; private set => player = value; }
 
         #region Unity Methods
         private void Update()
@@ -52,7 +53,7 @@ namespace CoreClass
             ItemsTaken = new List<string>();
             BossesKilled = new List<string>();
 
-            player = playerGO?.GetComponent<Player>();
+            Player = playerGO?.GetComponent<Player>();
             levelHandler = playerGO?.GetComponent<LevelHandler>();
 
             if (checkpoint == Vector3.zero) checkpoint = SpawnPoint.position;
@@ -78,11 +79,12 @@ namespace CoreClass
 
         public void SavePlayer()
         {
-            SaveSystem.SavePlayer(player);
+            SaveSystem.SavePlayer(Player);
         }
         public void LoadPlayer()
         {
             PlayerSaveData data = SaveSystem.LoadPlayer();
+
             if (data == null) return;
 
             List<Item> loadItems = new();
@@ -138,6 +140,7 @@ namespace CoreClass
             inventoryManager.SetCoins(inventoryManager.Coins / 3, false);
             inventoryManager.Add(loadItems);
             spellManager.Add(loadSpells);
+            MenuManager.Instance.CurrentLevel = data.currentLevel;
             levelStarted = data.levelStarted;
 
             foreach (int id in inventoryManager.EquippedItemsIds())
@@ -161,7 +164,7 @@ namespace CoreClass
                 spellManager.AbilitiesBar.Add(spell);
             }
 
-            var playerTransform = player.transform;
+            var playerTransform = Player.transform;
             Vector3 checkpointPosition = new Vector3(data.position[0], data.position[1], data.position[2]);
 
             playerTransform.position = checkpointPosition;
@@ -210,7 +213,7 @@ namespace CoreClass
             if (data.bossesKilledId != null) BossesKilled = data.bossesKilledId.ToList();
             else BossesKilled.Clear();
 
-            player.PlayerData.SetLevel(data.level);
+            Player.PlayerData.SetLevel(data.level);
             stats.Health.SetMaxStat(data.maxHealth);
             stats.Mana.SetMaxStat(data.maxMana);
             stats.Stam.SetMaxStat(data.maxStam);
@@ -226,6 +229,7 @@ namespace CoreClass
             inventoryManager.SetCoins(data.coins, false);
             inventoryManager.Add(loadItems);
             spellManager.Add(loadSpells);
+            MenuManager.Instance.CurrentLevel = data.currentLevel;
 
             foreach (int id in inventoryManager.EquippedItemsIds())
             {
@@ -248,7 +252,7 @@ namespace CoreClass
                 spellManager.AbilitiesBar.Add(spell);
             }
 
-            var playerTransform = player.transform;
+            var playerTransform = Player.transform;
 
             playerTransform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
             camera.position = new Vector3(data.position[0], data.position[1], data.position[2]);

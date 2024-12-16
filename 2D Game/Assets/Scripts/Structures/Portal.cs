@@ -8,6 +8,11 @@ namespace Krisnat
         [SerializeField] private bool loadNextScene;
         [SerializeField] private string sceneToLoad;
         [SerializeField] private Vector3 distanceTravel;
+        private LevelLoader levelLoader;
+        private void Start()
+        {
+            levelLoader = GetComponent<LevelLoader>();
+        }
 
         public void OnTriggerStay2D(Collider2D collision)
         {
@@ -28,12 +33,20 @@ namespace Krisnat
 
                 if (loadNextScene)
                 {
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
+                    if(levelLoader) levelLoader.LoadNextLevel();
+                    else UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
 
                     return;
                 }
-
-                UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad);
+                
+                if (levelLoader)
+                {
+                    levelLoader.LoadLevel(sceneToLoad);
+                }
+                else
+                {
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad);
+                }
             }
         }
     }

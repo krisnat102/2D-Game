@@ -11,6 +11,7 @@ public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance;
     public bool DamagePopUps { get => damagePopups; private set => damagePopups = value; }
+    public int CurrentLevel { get; set; }
 
     #region Private Variables
     [SerializeField] private Player player;
@@ -41,6 +42,8 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
+        LoadLoadedLevel();
+
         resolutions = Screen.resolutions;
 
         resolutionDropdown.ClearOptions();
@@ -131,6 +134,16 @@ public class MenuManager : MonoBehaviour
     #endregion
 
     #region Other Methods
+    private void LoadLoadedLevel()
+    {
+        PlayerSaveData data = SaveSystem.LoadPlayer();
+
+        if (data == null) return;
+
+        CurrentLevel = data.currentLevel;
+        Debug.Log(CurrentLevel);
+    }
+
     public void OpenCloseMenu(bool openOrClose)
     {
         if (openOrClose)
@@ -264,7 +277,7 @@ public class MenuManager : MonoBehaviour
     {
         if (player != null) SaveSystem.SavePlayer(player);
         //Destroy(player.gameObject);
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
     public void ExitGame()
     {

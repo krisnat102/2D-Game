@@ -453,7 +453,6 @@ public class Enemy : MonoBehaviour
             gameManager.DeactivateObject(4, hpBar.gameObject);
 
             gameManager.BossesKilled.Add(BossId);
-            Debug.Log(3);
         }
 
         if (Data.itemDrop)
