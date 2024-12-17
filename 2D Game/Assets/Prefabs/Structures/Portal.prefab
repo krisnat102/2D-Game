@@ -56,6 +56,7 @@ MonoBehaviour:
   noteText: 
   noteUIPreset: {fileID: 0}
   portal: 1
+  itemId: 
 --- !u!61 &5955657287485360970
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -291,6 +292,7 @@ GameObject:
   - component: {fileID: 3763622896558036086}
   - component: {fileID: 7545925579539751330}
   - component: {fileID: 5390577634276650247}
+  - component: {fileID: 3825025670418991977}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Untagged
@@ -354,8 +356,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 100
-  m_Sprite: {fileID: -275433726, guid: c11bad3de040b9f4e97e3b96ae5cb0a5, type: 3}
+  m_SortingOrder: 399
+  m_Sprite: {fileID: 1877686510, guid: c11bad3de040b9f4e97e3b96ae5cb0a5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -376,7 +378,7 @@ Animator:
   m_GameObject: {fileID: 5398766208917279995}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9925301a33ff14246893cdbce8c917f6, type: 2}
+  m_Controller: {fileID: 9100000, guid: e669a3468cf73324f91e808e046c03f9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -444,5 +446,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4283f47db013a4b8f31625ef3e3455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadNextScene: 1
   sceneToLoad: 
-  distanceTravel: {x: 100, y: 0, z: 0}
+  distanceTravel: {x: 0, y: 0, z: 0}
+--- !u!114 &3825025670418991977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5398766208917279995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc2e156ce7e581e4faef3d7f9aa89dba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transition: {fileID: 0}
+  transitionTime: 1
