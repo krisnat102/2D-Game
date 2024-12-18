@@ -54,7 +54,7 @@ namespace Krisnat
                             return;
                         }
 
-                        InventoryManager.Instance.Remove(key);
+                        //InventoryManager.Instance.Remove(key);
                         uiPopUp.GetComponentInChildren<TMP_Text>().text = key.itemName + " Used";
                     }
                     else

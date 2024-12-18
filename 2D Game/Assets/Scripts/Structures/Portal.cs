@@ -1,4 +1,6 @@
+using Inventory;
 using Krisnat.Assets.Scripts;
+using TMPro;
 using UnityEngine;
 
 namespace Krisnat
@@ -8,7 +10,12 @@ namespace Krisnat
         [SerializeField] private bool loadNextScene;
         [SerializeField] private string sceneToLoad;
         [SerializeField] private Vector3 distanceTravel;
+        [SerializeField] private Item key;
+        [SerializeField] private GameObject uiPopUp;
+
         private LevelLoader levelLoader;
+        private bool locked = true;
+
         private void Start()
         {
             levelLoader = GetComponent<LevelLoader>();
@@ -21,6 +28,21 @@ namespace Krisnat
             if (PlayerInputHandler.Instance.UseInput && player)
             {
                 PlayerInputHandler.Instance.UseUseInput();
+
+                if (locked && key)
+                {
+                    uiPopUp.SetActive(true);
+
+                    if (!InventoryManager.Instance.Items.Contains(key))
+                    {
+                        uiPopUp.GetComponentInChildren<TMP_Text>().text = key.itemName + " Needed";
+                        return;
+                    }
+
+                    //InventoryManager.Instance.Remove(key);
+                    uiPopUp.GetComponentInChildren<TMP_Text>().text = key.itemName + " Used";
+                    locked = false;
+                }
 
                 if (sceneToLoad == "" && distanceTravel != Vector3.zero)
                 {
