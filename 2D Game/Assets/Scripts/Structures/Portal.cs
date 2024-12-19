@@ -2,6 +2,7 @@ using Inventory;
 using Krisnat.Assets.Scripts;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Windows;
 
 namespace Krisnat
 {
@@ -15,10 +16,16 @@ namespace Krisnat
 
         private LevelLoader levelLoader;
         private bool locked = true;
+        private int buildIndexToLoad = 128;
 
         private void Start()
         {
             levelLoader = GetComponent<LevelLoader>();
+
+            if(int.TryParse(sceneToLoad, out _)){
+                buildIndexToLoad = int.Parse(sceneToLoad);
+            }
+                Debug.Log(buildIndexToLoad);
         }
 
         public void OnTriggerStay2D(Collider2D collision)
@@ -63,11 +70,13 @@ namespace Krisnat
                 
                 if (levelLoader)
                 {
-                    levelLoader.LoadLevel(sceneToLoad);
+                    if (buildIndexToLoad != 128) levelLoader.LoadLevel(buildIndexToLoad);
+                    else levelLoader.LoadLevel(sceneToLoad);
                 }
                 else
                 {
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad);
+                    if (buildIndexToLoad != 128) UnityEngine.SceneManagement.SceneManager.LoadScene(buildIndexToLoad);
+                    else UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad);
                 }
             }
         }

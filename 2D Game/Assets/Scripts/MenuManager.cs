@@ -141,7 +141,6 @@ public class MenuManager : MonoBehaviour
         if (data == null) return;
 
         CurrentLevel = data.currentLevel;
-        Debug.Log(CurrentLevel);
     }
 
     public void OpenCloseMenu(bool openOrClose)

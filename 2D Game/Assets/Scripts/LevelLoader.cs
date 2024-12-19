@@ -17,8 +17,8 @@ namespace Krisnat
             CoreClass.GameManager.Instance.GamePaused = false;
         }
 
-        public void LoadLevel(int buildIndex) => LoadLevelCoroutine(buildIndex);
-        public void LoadLevel(string sceneName) => LoadLevelCoroutine(sceneName);
+        public void LoadLevel(int buildIndex) => StartCoroutine(LoadLevelCoroutine(buildIndex));
+        public void LoadLevel(string sceneName) => StartCoroutine(LoadLevelCoroutine(sceneName));
 
         public void LoadLoadedLevel()
         {
