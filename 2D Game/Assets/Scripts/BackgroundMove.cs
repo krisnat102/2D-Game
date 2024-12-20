@@ -11,7 +11,7 @@ public class BackgroundMove : MonoBehaviour
 
     void Start()
     {
-        cam = GameObject.Find("CM vcam1");
+        cam = GameObject.Find("Main Camera");
 
         startPos = transform.position.x;
 

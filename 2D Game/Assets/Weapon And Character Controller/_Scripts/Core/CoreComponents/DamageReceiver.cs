@@ -8,6 +8,7 @@ namespace Bardent.CoreSystem
 
         private Stats stats;
         private ParticleManager particleManager;
+        private AudioSource damageAudio;
 
         public void Damage(float rawAmount, bool physical)
         {
@@ -20,6 +21,7 @@ namespace Bardent.CoreSystem
                 stats.Health.Decrease(stats.CalculateMagicalDamageReduction(rawAmount));
             }
 
+            damageAudio.Play();
             particleManager.StartParticlesWithRandomRotation(damageParticles);
         }
 
@@ -27,6 +29,7 @@ namespace Bardent.CoreSystem
         {
             base.Awake();
 
+            damageAudio = GetComponent<AudioSource>();
             stats = Core.GetCoreComponent<Stats>();
             particleManager = Core.GetCoreComponent<ParticleManager>();
         }

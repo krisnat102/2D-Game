@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Sound")]
     [SerializeField] private AudioSource attackSound;
+    [SerializeField] private AudioSource damageSound;
     [SerializeField] private AudioSource rangedAttackSound;
     [SerializeField] private AudioSource bossMusicPlayer;
 
@@ -405,6 +406,10 @@ public class Enemy : MonoBehaviour
                 {
                     Die();
                     return;
+                }
+                else if (damageSound)
+                {
+                    damageSound.Play();
                 }
 
                 if (ContainsParam(animator, "hurt")) animator.SetBool("hurt", true);

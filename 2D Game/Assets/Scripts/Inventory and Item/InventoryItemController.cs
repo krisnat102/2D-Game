@@ -147,8 +147,8 @@ namespace Inventory
             ItemController itemController = button?.GetComponent<ItemController>();
             item = itemController.GetItem();
 
-            GameObject descriptionExtension = InventoryManager.Instance.GetEquipmentMenu();
-            Animator descriptionAnimator = InventoryManager.Instance.GetEquipmentMenuAnimator();
+            //GameObject descriptionExtension = InventoryManager.Instance.GetEquipmentMenu();
+            //Animator descriptionAnimator = InventoryManager.Instance.GetEquipmentMenuAnimator();
 
             description = InventoryManager.Instance.Description;
             description.SetActive(true);
@@ -195,6 +195,8 @@ namespace Inventory
 
                 if (item.equipmentType != Item.EquipmentType.Weapon)
                 {
+                    weaponAttack.gameObject.SetActive(false);
+
                     itemArmor.gameObject.SetActive(true);
                     itemMagicRes.gameObject.SetActive(true);
 
@@ -203,6 +205,9 @@ namespace Inventory
                 }
                 else
                 {
+                    itemArmor.gameObject.SetActive(false);
+                    itemMagicRes.gameObject.SetActive(false);
+
                     weaponAttack.gameObject.SetActive(true);
 
                     weaponAttack.text = "ATTACK - " + item.value.ToString();

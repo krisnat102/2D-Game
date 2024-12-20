@@ -369,14 +369,51 @@ namespace Inventory
                 itemCount.text = (item.ItemCount > 1 ? "x" + item.ItemCount.ToString() : "");
 
                 var removeButton = CoreClass.GameManager.Instance.GetComponentOnlyInChildren<Button>(trans);
-
-                if (enableRemove.isOn)
+                
+                if (enableRemove.isOn && item.itemClass != Item.ItemClass.Quest && !item.Equipped)
                 {
                     removeButton.gameObject.SetActive(true);
                 }
                 else
                 {
                     removeButton.gameObject.SetActive(false);
+                }
+                
+                if (Shop)
+                {
+                    if (item.itemClass == Item.ItemClass.Quest || item.Equipped)
+                    {
+                        trans.gameObject.SetActive(false);
+                    }
+                }
+                else if (filter == Filter.Default)
+                {
+                    trans.gameObject.SetActive(true);  
+                }
+                else if (filter == Filter.QuestInv)
+                {
+                    if (item.itemClass == Item.ItemClass.Quest) trans.gameObject.SetActive(true);
+                    else trans.gameObject.SetActive(false);
+                }
+                else if (filter == Filter.EquipmentInv)
+                {
+                    if (item.itemClass == Item.ItemClass.Equipment) trans.gameObject.SetActive(true);
+                    else trans.gameObject.SetActive(false);
+                }
+                else if (filter == Filter.MiscInv)
+                {
+                    if (item.itemClass == Item.ItemClass.Misc) trans.gameObject.SetActive(true);
+                    else trans.gameObject.SetActive(false);
+                }
+                else if (filter == Filter.WeaponInv)
+                {
+                    if (item.itemClass == Item.ItemClass.Weapon) trans.gameObject.SetActive(true);
+                    else trans.gameObject.SetActive(false);
+                }
+                else if (filter == Filter.ConsumableInv)
+                {
+                    if (item.itemClass == Item.ItemClass.Consumable) trans.gameObject.SetActive(true);
+                    else trans.gameObject.SetActive(false);
                 }
             }
 
@@ -385,54 +422,6 @@ namespace Inventory
                 if (!DistinctItems.Contains(equippedItems[i]))
                 {
                     UnequipItem(equippedItems[i]);
-                }
-            }
-
-            if(filter == Filter.Default)
-            {
-                foreach (Transform trans in itemContent)
-                {
-                    trans.gameObject.SetActive(true);
-                }
-            }
-            else if (filter == Filter.QuestInv)
-            {
-                foreach(Transform trans in itemContent)
-                {
-                    if(trans.GetComponent<ItemController>().GetItem().itemClass == Item.ItemClass.Quest) trans.gameObject.SetActive(true);
-                    else trans.gameObject.SetActive(false);
-                }
-            }
-            else if (filter == Filter.EquipmentInv)
-            {
-                foreach (Transform trans in itemContent)
-                {
-                    if (trans.GetComponent<ItemController>().GetItem().itemClass == Item.ItemClass.Equipment) trans.gameObject.SetActive(true);
-                    else trans.gameObject.SetActive(false);
-                }
-            }
-            else if (filter == Filter.MiscInv)
-            {
-                foreach (Transform trans in itemContent)
-                {
-                    if (trans.GetComponent<ItemController>().GetItem().itemClass == Item.ItemClass.Misc) trans.gameObject.SetActive(true);
-                    else trans.gameObject.SetActive(false);
-                }
-            }
-            else if (filter == Filter.WeaponInv)
-            {
-                foreach (Transform trans in itemContent)
-                {
-                    if (trans.GetComponent<ItemController>().GetItem().itemClass == Item.ItemClass.Weapon) trans.gameObject.SetActive(true);
-                    else trans.gameObject.SetActive(false);
-                }
-            }
-            else if (filter == Filter.ConsumableInv)
-            {
-                foreach (Transform trans in itemContent)
-                {
-                    if (trans.GetComponent<ItemController>().GetItem().itemClass == Item.ItemClass.Consumable) trans.gameObject.SetActive(true);
-                    else trans.gameObject.SetActive(false);
                 }
             }
 
@@ -491,9 +480,14 @@ namespace Inventory
         {
             if (enableRemove.isOn)
             {
-                foreach (Transform item in itemContent)
+                foreach (Transform trans in itemContent)
                 {
-                    item.transform.Find("RemoveButton").GetComponent<Button>().gameObject.SetActive(true);
+                    Item item = trans.GetComponent<ItemController>().GetItem();
+                    if (item.itemClass == Item.ItemClass.Quest || item.Equipped)
+                    {
+                        trans.transform.Find("RemoveButton").GetComponent<Button>().gameObject.SetActive(false);
+                    }
+                    else trans.transform.Find("RemoveButton").GetComponent<Button>().gameObject.SetActive(true);
                 }
             }
             else

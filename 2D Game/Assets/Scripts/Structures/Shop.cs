@@ -5,22 +5,41 @@ namespace Krisnat
 {
     public class Shop : MonoBehaviour, IStructurable 
     {
+        private AudioSource openAudio;
+
+        private void Start()
+        {
+            openAudio = GetComponent<AudioSource>();
+        }
+
         public void OnTriggerStay2D(Collider2D collision)
         {
             var player = collision.GetComponent<Player>();
-            if (PlayerInputHandler.Instance.UseInput && player != null)
+
+            if (PlayerInputHandler.Instance.UseInput && player)
             {
+                PlayerInputHandler.Instance.UseUseInput();
+
                 if (!InventoryManager.Instance.InventoryActiveInHierarchy)
                 {
-                    InventoryManager.Instance.OpenCloseInventory(true);
+                    openAudio.Play();
                     InventoryManager.Instance.Shop = true;
+                    InventoryManager.Instance.OpenCloseInventory(true);
                 }
                 else
                 {
-                    InventoryManager.Instance.OpenCloseInventory(false);
                     InventoryManager.Instance.Shop = false;
+                    InventoryManager.Instance.OpenCloseInventory(false);
                 }
-                PlayerInputHandler.Instance.UseUseInput();
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if(InventoryManager.Instance.InventoryActiveInHierarchy && InventoryManager.Instance.Shop)
+            {
+                InventoryManager.Instance.Shop = false;
+                InventoryManager.Instance.OpenCloseInventory(false);
             }
         }
     }
