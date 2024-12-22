@@ -458,6 +458,9 @@ public class Enemy : MonoBehaviour
             gameManager.DeactivateObject(4, hpBar.gameObject);
 
             gameManager.BossesKilled.Add(BossId);
+
+            AudioManager.Instance.UnPauseMusic();
+            bossMusicPlayer.Stop();
         }
 
         if (Data.itemDrop)

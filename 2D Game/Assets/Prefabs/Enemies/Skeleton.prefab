@@ -671,7 +671,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 50
+  m_SortingOrder: 376
   m_Sprite: {fileID: 125270774, guid: e9b301c9d8ec6c64d841c4fe7aebe358, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -803,13 +803,13 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: dc044861b3587274f85277bb45f8fcc2, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.25
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 123
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -900,13 +900,13 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: df3e6c0780471bc488490512ac0fded0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.74
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 123
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -1345,6 +1345,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 3743678875702271446, guid: 0710ad3f266bbf640af8a670dcc4bfd9,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 375
+      objectReference: {fileID: 0}
     - target: {fileID: 4143844189351752443, guid: 0710ad3f266bbf640af8a670dcc4bfd9,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1439,7 +1444,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 9ae737f750e313b46b22b57857061137, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.387
+  m_Volume: 0.8
   m_Pitch: 0.7
   Loop: 0
   Mute: 0

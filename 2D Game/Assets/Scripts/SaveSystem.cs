@@ -1,4 +1,5 @@
 using System.IO;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEditor;
 using UnityEngine;
@@ -7,6 +8,8 @@ namespace Krisnat.Assets.Scripts
 {
     public static class SaveSystem
     {
+        private static readonly object fileLock = new();
+
         public static bool HasLoadFile()
         {
             string path = Application.persistentDataPath + "/player.bob";
@@ -15,48 +18,69 @@ namespace Krisnat.Assets.Scripts
 
         public static void SavePlayer(Player player)
         {
-            BinaryFormatter formatter = new();
-            string path = Application.persistentDataPath + "/player.bob";
-            FileStream stream = new(path, FileMode.Create);
+            lock (fileLock)
+            {
+                string path = Application.persistentDataPath + "/player.bob";
 
-            PlayerSaveData data = new(player);
+                PlayerSaveData data = new(player);
+                BinaryFormatter formatter = new();
 
-            formatter.Serialize(stream, data);
-            stream.Close();
+                using (FileStream stream = new(path, FileMode.Create, FileAccess.Write, FileShare.None))
+                {
+                    formatter.Serialize(stream, data);
+                }
+            }
         }
 
         public static void SaveData(PlayerSaveData data)
         {
-            BinaryFormatter formatter = new();
             string path = Application.persistentDataPath + "/player.bob";
-            FileStream stream = new(path, FileMode.Create);
+            BinaryFormatter formatter = new();
 
-            formatter.Serialize(stream, data);
-            stream.Close();
+            using (FileStream stream = new(path, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                formatter.Serialize(stream, data);
+            }
         }
+
 
         public static PlayerSaveData LoadPlayer()
         {
             string path = Application.persistentDataPath + "/player.bob";
+
             if (File.Exists(path))
             {
-                BinaryFormatter formatter = new();
-                FileStream stream = new(path, FileMode.Open);
+                FileInfo fileInfo = new(path);
 
-                PlayerSaveData data = formatter.Deserialize(stream) as PlayerSaveData;
-                stream.Close();
+                if (fileInfo.Length == 0) // Check if the file is empty
+                {
+                    return null;
+                }
 
-                return data;
+                try
+                {
+                    BinaryFormatter formatter = new();
+
+                    using (FileStream stream = new(path, FileMode.Open, FileAccess.Read, FileShare.Read))
+                    {
+                        return formatter.Deserialize(stream) as PlayerSaveData;
+                    }
+                }
+                catch (SerializationException ex)
+                {
+                    return null;
+                }
             }
             else
             {
-                Debug.LogWarning("Save file not found in" + path);
+                Debug.LogWarning("Save file not found in " + path);
                 return null;
             }
         }
+
 #if UNITY_EDITOR
         [MenuItem("Tools/DeleteSaveFile")]
-#endif
+        #endif
         public static void DeleteAllSaveFiles()
         {
             string path = Application.persistentDataPath;

@@ -34,7 +34,7 @@ namespace Krisnat
             transition.SetTrigger("Start");
             if (buildIndex != 0) MenuManager.Instance.CurrentLevel = buildIndex;
 
-            if (CoreClass.GameManager.Instance && CoreClass.GameManager.Instance.Player) SaveSystem.SavePlayer(CoreClass.GameManager.Instance.Player);
+            if (CoreClass.GameManager.Instance && CoreClass.GameManager.Instance.Player) CoreClass.GameManager.Instance.SavePlayer();
 
             yield return new WaitForSeconds(transitionTime);
 
