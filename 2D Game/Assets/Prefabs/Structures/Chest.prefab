@@ -603,6 +603,8 @@ MonoBehaviour:
   note: 0
   noteText: 
   noteUIPreset: {fileID: 0}
+  portal: 0
+  itemId: 
 --- !u!114 &8087752676522306325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -632,3 +634,4 @@ MonoBehaviour:
   price: 0
   chest: 0
   offset: 0.2
+  itemId: 

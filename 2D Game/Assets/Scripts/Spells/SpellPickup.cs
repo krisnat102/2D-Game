@@ -22,7 +22,7 @@ namespace Spells
         private Canvas canvas;
         private GameObject itemPrice;
 
-        public string ItemId { get => itemId; set => itemId = value; }
+        public string ItemId { get => itemId; private set => itemId = value; }
 
         private void Start()
         {

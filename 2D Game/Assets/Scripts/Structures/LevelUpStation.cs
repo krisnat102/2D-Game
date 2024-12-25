@@ -1,3 +1,5 @@
+using Krisnat.Assets.Scripts;
+using System.Linq;
 using UnityEngine;
 
 namespace Krisnat
@@ -6,8 +8,24 @@ namespace Krisnat
     {
         [SerializeField] private float openingAnimationDuration = 0.2f;
         [SerializeField] private float closingAnimationDuration = 0.2f;
+        [SerializeField] private string bonfireId;
         [SerializeField] private GameObject fire;
+        [SerializeField] private Transform spawnPoint;
         private bool triggered;
+
+        public string BonfireId { get => bonfireId; private set => bonfireId = value; }
+
+        private void Start()
+        {
+            if (string.IsNullOrEmpty(BonfireId)) BonfireId = gameObject.name;
+
+            PlayerSaveData data = SaveSystem.LoadPlayer();
+            if (data != null && data.bonfiresLitId != null && data.bonfiresLitId.Contains(BonfireId))
+            {
+                triggered = true;
+                fire.SetActive(true);
+            }
+        }
 
         public void OnTriggerStay2D(Collider2D collision)
         {
@@ -34,7 +52,13 @@ namespace Krisnat
                 {
                     fire.SetActive(true);
                     triggered = true;
+                    CoreClass.GameManager.Instance.BonfiresLit.Add(BonfireId);
                 }
+
+                //Saving the game, position and level
+                CoreClass.GameManager.checkpoint = spawnPoint.position;
+                MenuManager.Instance.CurrentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+                SaveSystem.SavePlayer(player);
 
                 PlayerInputHandler.Instance.UseUseInput();
             }

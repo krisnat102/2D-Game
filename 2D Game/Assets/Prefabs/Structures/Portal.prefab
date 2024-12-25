@@ -449,6 +449,8 @@ MonoBehaviour:
   loadNextScene: 1
   sceneToLoad: 
   distanceTravel: {x: 0, y: 0, z: 0}
+  key: {fileID: 0}
+  uiPopUp: {fileID: 0}
 --- !u!114 &3825025670418991977
 MonoBehaviour:
   m_ObjectHideFlags: 0

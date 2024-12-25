@@ -36,6 +36,7 @@ namespace CoreClass
         public Transform SpawnPoint { get => spawnPoint; private set => spawnPoint = value; }
         public List<string> ItemsTaken { get; private set; }
         public List<string> BossesKilled { get; private set; }
+        public List<string> BonfiresLit { get; private set; }
         public Player Player { get => player; private set => player = value; }
 
         #region Unity Methods
@@ -52,6 +53,7 @@ namespace CoreClass
 
             ItemsTaken = new List<string>();
             BossesKilled = new List<string>();
+            BonfiresLit = new List<string>();
 
             Player = playerGO?.GetComponent<Player>();
             levelHandler = playerGO?.GetComponent<LevelHandler>();
@@ -122,6 +124,9 @@ namespace CoreClass
 
             if (data.bossesKilledId != null) BossesKilled = data.bossesKilledId.ToList();
             else BossesKilled.Clear();
+
+            if (data.bonfiresLitId != null) BonfiresLit = data.bonfiresLitId.ToList();
+            else BonfiresLit.Clear();
 
             /*player.PlayerData.SetLevel(data.level);
             stats.Health.SetMaxStat(data.maxHealth);
