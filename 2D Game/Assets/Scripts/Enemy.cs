@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EnemyData data;
     [SerializeField] private GameObject deathEffect;
     [SerializeField] private GameObject bossSpecialProjectile;
-    [SerializeField] private Transform playerTrans;
+    [SerializeField] private GameObject sleepingObj;
     [SerializeField] private BoxCollider2D groundCollider;
 
     private int coinsDropped;
@@ -74,6 +74,7 @@ public class Enemy : MonoBehaviour
     private Animator animator;
     private Collider2D[] detected;
     private Player player;
+    private Transform playerTrans;
     private Transform firePoint;
     private GameObject arrow;
     private CameraShake cameraShake;
@@ -348,6 +349,7 @@ public class Enemy : MonoBehaviour
         cameraShake = CameraShake.instance;
         previousLocalScaleX = transform.localScale.x;
         gameManager = CoreClass.GameManager.Instance;
+        playerTrans = PlayerInputHandler.Instance.gameObject.transform;
         #endregion
 
         if (Data.dummy) return;
@@ -733,6 +735,13 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         Flip();
+    }
+
+    IEnumerator WakeUpCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        sleeping = false;
+        sleepingObj.SetActive(true);
     }
 
     IEnumerator PlayRangedAttackSoundCoroutine(float delay)

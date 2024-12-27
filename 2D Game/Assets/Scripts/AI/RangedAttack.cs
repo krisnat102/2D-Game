@@ -63,7 +63,7 @@ public class RangedAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.tag != "Enemy" && hitInfo.tag != "Item" && hitInfo.tag != "Climbable" && hitInfo.tag != "AttackRange" && hitInfo.tag != "BackgroundObject" && hitInfo.tag != "PickupRange" && hitInfo.tag != "Event" && hitInfo.tag != "Arrow")
+        if (hitInfo.tag != "Enemy" && hitInfo.tag != "Item" && hitInfo.tag != "AttackRange" && hitInfo.tag != "BackgroundObject" && hitInfo.tag != "PickupRange" && hitInfo.tag != "Event" && hitInfo.tag != "Arrow")
         {
             Player player = hitInfo.GetComponent<Player>();
             if (player)

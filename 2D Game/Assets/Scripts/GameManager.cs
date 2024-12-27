@@ -37,6 +37,7 @@ namespace CoreClass
         public List<string> ItemsTaken { get; private set; }
         public List<string> BossesKilled { get; private set; }
         public List<string> BonfiresLit { get; private set; }
+        public List<string> Battles { get; private set; }
         public Player Player { get => player; private set => player = value; }
 
         #region Unity Methods
@@ -54,6 +55,7 @@ namespace CoreClass
             ItemsTaken = new List<string>();
             BossesKilled = new List<string>();
             BonfiresLit = new List<string>();
+            Battles = new List<string>();
 
             Player = playerGO?.GetComponent<Player>();
             levelHandler = playerGO?.GetComponent<LevelHandler>();
@@ -127,6 +129,9 @@ namespace CoreClass
 
             if (data.bonfiresLitId != null) BonfiresLit = data.bonfiresLitId.ToList();
             else BonfiresLit.Clear();
+
+            if (data.battlesId != null) Battles = data.battlesId.ToList();
+            else Battles.Clear();
 
             /*player.PlayerData.SetLevel(data.level);
             stats.Health.SetMaxStat(data.maxHealth);
@@ -217,6 +222,12 @@ namespace CoreClass
 
             if (data.bossesKilledId != null) BossesKilled = data.bossesKilledId.ToList();
             else BossesKilled.Clear();
+
+            if (data.bonfiresLitId != null) BonfiresLit = data.bonfiresLitId.ToList();
+            else BonfiresLit.Clear();
+
+            if (data.battlesId != null) Battles = data.battlesId.ToList();
+            else Battles.Clear();
 
             Player.PlayerData.SetLevel(data.level);
             stats.Health.SetMaxStat(data.maxHealth);

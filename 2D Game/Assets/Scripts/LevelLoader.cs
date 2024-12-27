@@ -29,7 +29,6 @@ namespace Krisnat
 
         public IEnumerator LoadLevelCoroutine(int buildIndex)
         {
-            Debug.Log(buildIndex);
             StartCoroutine(DestroyPlayer(transitionTime - 0.1f));
             transition.SetTrigger("Start");
             if (buildIndex != 0) MenuManager.Instance.CurrentLevel = buildIndex;

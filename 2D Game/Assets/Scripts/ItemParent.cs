@@ -35,7 +35,6 @@ namespace Krisnat
                 if (CoreClass.GameManager.Instance.ItemsTaken.Contains(spell.ItemId))
                 {
                     spell.gameObject.SetActive(false);
-                    Debug.Log(1 + "" + spell.ItemId);
                 }
                 else
                 {

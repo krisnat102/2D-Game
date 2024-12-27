@@ -187,7 +187,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -544,7 +544,6 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 1117637d0e1206f41be5b45d15a32ea5, type: 2}
   deathEffect: {fileID: 5592788960639220870}
   bossSpecialProjectile: {fileID: 0}
-  playerTrans: {fileID: 0}
   groundCollider: {fileID: 0}
 --- !u!82 &8435544955756322061
 AudioSource:
@@ -963,10 +962,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d8c6340d3651a44b3c5eda576c86f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePoint: {fileID: 2350393881328445392}
+  firePoint: {fileID: 0}
   IgnoreMe:
     serializedVersion: 2
-    m_Bits: 7733815
+    m_Bits: 7742007
   flip: 1
 --- !u!1 &4823883384620763526
 GameObject:
@@ -1016,7 +1015,7 @@ MonoBehaviour:
   firePoint: {fileID: 2350393881328445392}
   IgnoreMe:
     serializedVersion: 2
-    m_Bits: 7733815
+    m_Bits: 7742007
   flip: 0
 --- !u!61 &3762439836771473364
 BoxCollider2D:
@@ -1271,6 +1270,11 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 371
       objectReference: {fileID: 0}
+    - target: {fileID: 489641561373093208, guid: 95e6e7e3a2c75aa48a778d33175c94e8,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 489641561373093210, guid: 95e6e7e3a2c75aa48a778d33175c94e8,
         type: 3}
       propertyPath: m_Name
@@ -1366,7 +1370,8 @@ AudioSource:
   m_GameObject: {fileID: 5592788960639220870}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: b0fc275326f5c7f479bc0b065bb3870f,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: e17661aaa08a48c4a83434dd7e06a299, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -1375,10 +1380,10 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 129
+  Priority: 118
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 15
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -1413,7 +1418,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

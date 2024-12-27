@@ -17,7 +17,7 @@ namespace Krisnat.Assets.Scripts
         public float[] position;
         public int[] itemsId, equippedItemsId, spellsId;
         public int[] activeSpellsId, activeAbilitiesId;
-        public string[] itemsTakenId, bossesKilledId, bonfiresLitId;
+        public string[] itemsTakenId, bossesKilledId, bonfiresLitId, battlesId;
         public bool levelStarted;
 
         public PlayerSaveData(Player player)
@@ -50,6 +50,7 @@ namespace Krisnat.Assets.Scripts
             itemsTakenId = CoreClass.GameManager.Instance.ItemsTaken.ToArray();
             bossesKilledId = CoreClass.GameManager.Instance.BossesKilled.ToArray();
             bonfiresLitId = CoreClass.GameManager.Instance.BonfiresLit.ToArray();
+            battlesId = CoreClass.GameManager.Instance.Battles.ToArray();
             currentLevel = MenuManager.Instance.CurrentLevel;
             position = new float[3];
 
@@ -85,6 +86,7 @@ namespace Krisnat.Assets.Scripts
             string[] itemsTakenId,
             string[] bossesKilledId,
             string[] bonfiresLitId,
+            string[] battlesId,
             bool levelStarted)
         {
             this.level = level;
@@ -108,6 +110,7 @@ namespace Krisnat.Assets.Scripts
             this.itemsTakenId = itemsTakenId;
             this.bossesKilledId = bossesKilledId;
             this.bonfiresLitId = bonfiresLitId;
+            this.battlesId = battlesId;
             this.levelStarted = levelStarted;
         }
 
@@ -148,6 +151,7 @@ namespace Krisnat.Assets.Scripts
                 itemsTakenId: Array.Empty<string>(),
                 bossesKilledId: Array.Empty<string>(),
                 bonfiresLitId: Array.Empty<string>(),
+                battlesId: Array.Empty<string>(),
                 levelStarted: false
             );
         }

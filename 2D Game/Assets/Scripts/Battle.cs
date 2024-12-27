@@ -1,3 +1,4 @@
+using Krisnat.Assets.Scripts;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,6 +7,8 @@ namespace Krisnat
 {
     public class Battle : MonoBehaviour
     {
+        [SerializeField] private Battle finalBattle;
+        [SerializeField] private string battleId;
         [SerializeField] private bool bossBattle;
         [SerializeField] private Battle previousBattle;
         [SerializeField] private GameObject objectToEnable;
@@ -13,10 +16,22 @@ namespace Krisnat
         private List<Enemy> encounter;
 
         public bool End { get; private set; }
+        public string BattleId { get => battleId; private set => battleId = value; }
 
         private void Start()
         {
             encounter = GetComponentsInChildren<Enemy>(true).ToList();
+
+            if (!finalBattle)
+            {
+                if (string.IsNullOrEmpty(BattleId)) BattleId = gameObject.name;
+
+                PlayerSaveData data = SaveSystem.LoadPlayer();
+                if (data != null && data.bonfiresLitId != null && data.bonfiresLitId.Contains(BattleId))
+                {
+                    End = true;
+                }
+            }
 
             if (bossBattle)
             {
@@ -33,12 +48,19 @@ namespace Krisnat
 
         private void Update()
         {
-            if(End)
+            if (finalBattle && finalBattle.End)
+            {
+                End = true;
+            }
+
+            if (End)
             {
                 if (objectToEnable) objectToEnable.SetActive(true);
                 if (doorToUnlock) doorToUnlock.Open(true);
 
                 gameObject.SetActive(false);
+                
+                if(!finalBattle) CoreClass.GameManager.Instance.Battles.Add(BattleId);
             }
         }
 

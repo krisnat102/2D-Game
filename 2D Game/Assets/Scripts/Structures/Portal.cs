@@ -25,7 +25,6 @@ namespace Krisnat
             if(int.TryParse(sceneToLoad, out _)){
                 buildIndexToLoad = int.Parse(sceneToLoad);
             }
-                Debug.Log(buildIndexToLoad);
         }
 
         public void OnTriggerStay2D(Collider2D collision)

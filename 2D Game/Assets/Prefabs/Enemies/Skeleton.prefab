@@ -349,7 +349,7 @@ MonoBehaviour:
   firePoint: {fileID: 1656468544769814459}
   IgnoreMe:
     serializedVersion: 2
-    m_Bits: 7471159
+    m_Bits: 7742007
   flip: 0
 --- !u!61 &4216066080878477934
 BoxCollider2D:
@@ -651,7 +651,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1075,7 +1075,6 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: dd0eb91bc266a7b4786a685dd8d1459a, type: 2}
   deathEffect: {fileID: 8122934081789687665}
   bossSpecialProjectile: {fileID: 0}
-  playerTrans: {fileID: 0}
   groundCollider: {fileID: 0}
 --- !u!114 &4242657409397444448
 MonoBehaviour:
@@ -1171,7 +1170,7 @@ MonoBehaviour:
   firePoint: {fileID: 1656468544769814459}
   IgnoreMe:
     serializedVersion: 2
-    m_Bits: 7471671
+    m_Bits: 7742007
   flip: 0
 --- !u!61 &3718985749931600857
 BoxCollider2D:
@@ -1350,6 +1349,11 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 375
       objectReference: {fileID: 0}
+    - target: {fileID: 3743678875702271446, guid: 0710ad3f266bbf640af8a670dcc4bfd9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 4143844189351752443, guid: 0710ad3f266bbf640af8a670dcc4bfd9,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1444,16 +1448,16 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 9ae737f750e313b46b22b57857061137, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.8
+  m_Volume: 0.85
   m_Pitch: 0.7
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 118
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 15
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -1488,7 +1492,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

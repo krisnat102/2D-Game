@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4629451914127175978}
   - component: {fileID: 1114835808212776212}
   - component: {fileID: 8286695302145092115}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: MessageHolder
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -176,7 +176,8 @@ MonoBehaviour:
   price: 0
   offset: 0.12
   note: 1
-  noteText: Slay the great beast at the end of each realt to increase thy power
+  noteText: Slay the great beast awaiting at the end of each realm to increase thy
+    power
   noteUIPreset: {fileID: 0}
   portal: 0
   itemId: 
@@ -201,7 +202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6106151179128882505}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ItemPrice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +241,7 @@ GameObject:
   - component: {fileID: 7052393795701587970}
   - component: {fileID: 6462678892549284502}
   - component: {fileID: 6845772511574342758}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: CoinImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -315,7 +316,7 @@ GameObject:
   - component: {fileID: 4303696830072234564}
   - component: {fileID: 1837017634774686053}
   - component: {fileID: 4321265126343466629}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: PriceText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -452,7 +453,7 @@ GameObject:
   - component: {fileID: 5589726120409031755}
   - component: {fileID: 7507017574801980139}
   - component: {fileID: 357829283639426751}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5309,7 +5310,7 @@ GameObject:
   - component: {fileID: 8410889313877177639}
   - component: {fileID: 5875860164561507708}
   - component: {fileID: 2112937207447935410}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: PickUpKeyImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5383,7 +5384,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7561662852300049771}
   - component: {fileID: 9088421018679101358}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5420,9 +5421,9 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.489
-  m_Color: {r: 1, g: 0.78777796, b: 0.7607843, a: 1}
-  m_Intensity: 0.34
+  m_FalloffIntensity: 0.7
+  m_Color: {r: 1, g: 0.44463345, b: 0.3726415, a: 1}
+  m_Intensity: 0.5
   m_LightVolumeIntensity: 0
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -5467,7 +5468,7 @@ GameObject:
   - component: {fileID: 4577957086311942247}
   - component: {fileID: 2546799329203555774}
   - component: {fileID: 7911357756845337624}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

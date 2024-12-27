@@ -255,14 +255,10 @@ namespace Spells
         }
         void Ability()
         {
-            Grappler grappler = gameObject.GetComponent<Grappler>();
-
             if (spellManager.AbilitiesBar[activeAbility] != null)
             {
                 if (spellManager.AbilitiesBar[activeAbility].name == "grappling hook")
                 {
-                    grappler.enabled = true;
-
                     AbilityCooldown1 = true;
                     Invoke("AbilityCooldown", spellManager.AbilitiesBar[activeAbility].cooldown);
                     abilityCooldownImg.gameObject.SetActive(true);
@@ -282,8 +278,6 @@ namespace Spells
                     Invoke("AbilityCooldown", spellManager.AbilitiesBar[activeAbility].cooldown);
                     abilityCooldownImg.gameObject.SetActive(true);
                     abilityCooldownImg.fillAmount = 1;
-
-                    grappler.enabled = false;
                 }
             }
         }

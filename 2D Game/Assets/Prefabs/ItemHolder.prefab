@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5993457938352487205}
   - component: {fileID: 3046468075022245069}
   - component: {fileID: 8936086117416874444}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: PriceText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 5565661106004909518}
   - component: {fileID: 418600410156487958}
   - component: {fileID: 1143973624757098530}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ItemHolder
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -315,6 +315,8 @@ MonoBehaviour:
   note: 0
   noteText: 
   noteUIPreset: {fileID: 0}
+  portal: 0
+  itemId: 
 --- !u!114 &418600410156487958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,6 +346,7 @@ MonoBehaviour:
   price: 0
   chest: 0
   offset: 0.2
+  itemId: 
 --- !u!1 &1310284978158071259
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,7 +359,7 @@ GameObject:
   - component: {fileID: 1310284978158071238}
   - component: {fileID: 1310284978158071237}
   - component: {fileID: 1310284978158071239}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5212,7 +5215,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1310284978159291477}
   - component: {fileID: 1310284978159291478}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5295,7 +5298,7 @@ GameObject:
   - component: {fileID: 9104587649328190280}
   - component: {fileID: 6912582590387495356}
   - component: {fileID: 7314194593739891984}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: CoinImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5371,7 +5374,7 @@ GameObject:
   - component: {fileID: 7116366488960923036}
   - component: {fileID: 2953063557594534840}
   - component: {fileID: 3237488954702487961}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5471,7 +5474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4721012195982965008}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ItemPrice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5510,7 +5513,7 @@ GameObject:
   - component: {fileID: 2319647473793454684}
   - component: {fileID: 5065463730336232924}
   - component: {fileID: 1554077067609474439}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: PickUpKeyImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}

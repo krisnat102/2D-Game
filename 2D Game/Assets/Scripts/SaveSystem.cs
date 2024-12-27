@@ -66,7 +66,7 @@ namespace Krisnat.Assets.Scripts
                         return formatter.Deserialize(stream) as PlayerSaveData;
                     }
                 }
-                catch (SerializationException ex)
+                catch
                 {
                     return null;
                 }

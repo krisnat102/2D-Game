@@ -67,7 +67,7 @@ public class EnemyAttackAI : MonoBehaviour
     private void Start()
     {
         enemy = transform.parent.GetComponent<Enemy>();
-        playerTrans = enemy.PlayerTrans;
+        playerTrans = PlayerInputHandler.Instance.gameObject.transform;
     }
 
     private void Flip()
