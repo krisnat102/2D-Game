@@ -27,6 +27,7 @@ namespace Krisnat
                 if (string.IsNullOrEmpty(BattleId)) BattleId = gameObject.name;
 
                 PlayerSaveData data = SaveSystem.LoadPlayer();
+                Debug.Log(data.bonfiresLitId[5]);
                 if (data != null && data.bonfiresLitId != null && data.bonfiresLitId.Contains(BattleId))
                 {
                     End = true;
@@ -59,8 +60,9 @@ namespace Krisnat
                 if (doorToUnlock) doorToUnlock.Open(true);
 
                 gameObject.SetActive(false);
-                
-                if(!finalBattle) CoreClass.GameManager.Instance.Battles.Add(BattleId);
+                SaveSystem.LoadPlayer();
+
+                if (!finalBattle) CoreClass.GameManager.Instance.Battles.Add(BattleId);
             }
         }
 
