@@ -690,9 +690,9 @@ Transform:
   m_GameObject: {fileID: 8989253198140129543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.642761, y: 0.54999924, z: -0.053464383}
-  m_LocalScale: {x: 2, y: 2, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: -0.053464383}
+  m_LocalScale: {x: 1, y: 1, z: 0.6666667}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3855256884526065895}
   - {fileID: 4748306808191338905}
@@ -1170,6 +1170,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 9972b22af0715d1408a556a245ecc72e, type: 2}
   deathEffect: {fileID: 5649038165207979259}
   bossSpecialProjectile: {fileID: 0}
+  sleepingObj: {fileID: 0}
   groundCollider: {fileID: 0}
 --- !u!114 &3148571480967354991
 MonoBehaviour:

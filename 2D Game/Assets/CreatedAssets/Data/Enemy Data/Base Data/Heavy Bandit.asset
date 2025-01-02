@@ -16,7 +16,7 @@ MonoBehaviour:
   enemyName: Heavy Bandit
   maxHP: 100
   attackSpeed: 1
-  speed: 200
+  speed: 150
   damage: 20
   knockbackModifier: 20
   offsetX: 1.2
@@ -28,9 +28,9 @@ MonoBehaviour:
   HitBox:
     serializedVersion: 2
     x: -0.4
-    y: 0.7
-    width: 2.61
-    height: 2.2
+    y: 0.41
+    width: 1.24
+    height: 1.06
   DetectableLayers:
     serializedVersion: 2
     m_Bits: 1024

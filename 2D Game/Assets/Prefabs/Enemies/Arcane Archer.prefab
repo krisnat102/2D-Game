@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1012123712752172688}
@@ -152,7 +152,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.25, y: 0.15625}
+    oldSize: {x: 0.59375, y: 0.15625}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -293,7 +293,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.00043630067, z: 0, w: 0.99999994}
   m_LocalPosition: {x: 53.4, y: -0.154, z: 0.38}
-  m_LocalScale: {x: -1.8, y: 1.8, z: 1}
+  m_LocalScale: {x: -1.33, y: 1.33, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6415413532594251906}
@@ -713,6 +713,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 6ef00c80b5d1fc343a4f0ff19d7c453e, type: 2}
   deathEffect: {fileID: 6962652125249217060}
   bossSpecialProjectile: {fileID: 0}
+  sleepingObj: {fileID: 0}
   groundCollider: {fileID: 0}
 --- !u!50 &1602055709578027125
 Rigidbody2D:

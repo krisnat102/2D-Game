@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: playerData
   m_EditorClassIdentifier: 
   stamRecoveryTime: 0.5
-  movementVelocity: 10
+  movementVelocity: 7
   jumpVelocity: 15
   amountOfJumps: 1
   jumpCost: 10
-  wallJumpVelocity: 20
+  wallJumpVelocity: 15
   wallJumpTime: 0.4
   wallJumpAngle: {x: 1, y: 2}
   coyoteTime: 0.2
@@ -31,7 +31,7 @@ MonoBehaviour:
   maxHoldTime: 1
   holdTimeScale: 0.25
   dashTime: 0.2
-  dashVelocity: 30
+  dashVelocity: 25
   drag: 10
   dashEndYMultiplier: 0.2
   distBetweenAfterImages: 0.5
