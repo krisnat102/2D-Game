@@ -196,7 +196,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -289,9 +289,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 13d00a2078f201747b00e801dd92ffdf, type: 2}
   forSale: 0
-  price: 0
   chest: 0
+  openTime: 0
+  price: 0
   offset: 0.2
+  note: 0
+  noteText: 
+  noteUIPreset: {fileID: 0}
+  portal: 0
+  itemId: 
 --- !u!1 &4423403584188106393
 GameObject:
   m_ObjectHideFlags: 0

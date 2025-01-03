@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,6 +64,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
   cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
@@ -75,6 +77,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -87,6 +90,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -99,6 +103,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -430,24 +448,23 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Sword_Base_2: 1569427461
-      Sword_Base_10: 336947727
-      Sword_Base_6: -557817314
-      Sword_Base_14: 1390541888
-      Sword_Base_4: -1126096671
-      Sword_Base_8: 1279819539
-      Sword_Base_3: -1415960981
-      Sword_Base_12: -1938507920
-      Sword_Base_11: 1169498820
-      Sword_Base_7: 1365209591
-      Sword_Base_9: 350885758
-      Sword_Base_13: -1806657079
       Sword_Base_0: 1433432307
       Sword_Base_1: -160760381
+      Sword_Base_10: 336947727
+      Sword_Base_11: 1169498820
+      Sword_Base_12: -1938507920
+      Sword_Base_13: -1806657079
+      Sword_Base_14: 1390541888
+      Sword_Base_2: 1569427461
+      Sword_Base_3: -1415960981
+      Sword_Base_4: -1126096671
       Sword_Base_5: -2125814139
-  spritePackingTag: 
+      Sword_Base_6: -557817314
+      Sword_Base_7: 1365209591
+      Sword_Base_8: 1279819539
+      Sword_Base_9: 350885758
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

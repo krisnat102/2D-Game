@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6221478487405752402
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11, y: 244}
-  m_SizeDelta: {x: 213.4, y: 140.6}
+  m_AnchoredPosition: {x: -6.25, y: 82.7}
+  m_SizeDelta: {x: 119.5, y: 78.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8968546964355560096
 CanvasRenderer:
@@ -90,7 +90,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2801747973406461784
 RectTransform:
   m_ObjectHideFlags: 0
@@ -109,7 +109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -47, y: -73.89999}
+  m_AnchoredPosition: {x: -16, y: 34.4}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3578630774548754961
@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 3578630774548754963}
   - component: {fileID: 3578630774548754962}
   - component: {fileID: 3578630774548755054}
+  - component: {fileID: 6409718121113607266}
   m_Layer: 0
   m_Name: Ray of Frost Scroll
   m_TagString: Item
@@ -142,8 +143,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.51, y: -1.35, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 0.7}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4776464815395645031}
   m_Father: {fileID: 0}
@@ -168,7 +169,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -236,7 +237,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.6666666, y: 1.6666666}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 2.24, y: 1.92}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -274,6 +275,21 @@ MonoBehaviour:
   price: 0
   chest: 0
   offset: 0.2
+  itemId: 
+--- !u!114 &6409718121113607266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3578630774548754961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd9930aaa33b7ab458ce3dd1d27f287c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amp: 0.07
+  frequency: 2
 --- !u!1 &5227535031841610595
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,8 +324,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 167, y: -225.5}
-  m_SizeDelta: {x: 180.4, y: 127.68}
+  m_AnchoredPosition: {x: 13, y: -167}
+  m_SizeDelta: {x: 80.7, y: 57.1}
   m_Pivot: {x: 0.18391502, y: 0.33295247}
 --- !u!222 &4417635144795212875
 CanvasRenderer:
@@ -410,7 +426,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 954
   m_TargetDisplay: 0
 --- !u!114 &5334735908972667187
 MonoBehaviour:
@@ -546,8 +562,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 200
-  m_fontSizeBase: 200
+  m_fontSize: 100
+  m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

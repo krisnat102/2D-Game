@@ -27,7 +27,7 @@ namespace Krisnat
                 if (string.IsNullOrEmpty(BattleId)) BattleId = gameObject.name;
 
                 PlayerSaveData data = SaveSystem.LoadPlayer();
-                Debug.Log(data.bonfiresLitId[5]);
+
                 if (data != null && data.bonfiresLitId != null && data.bonfiresLitId.Contains(BattleId))
                 {
                     End = true;

@@ -596,7 +596,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.1, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4069912303191954316}
@@ -1075,6 +1075,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: dd0eb91bc266a7b4786a685dd8d1459a, type: 2}
   deathEffect: {fileID: 8122934081789687665}
   bossSpecialProjectile: {fileID: 0}
+  sleepingObj: {fileID: 0}
   groundCollider: {fileID: 0}
 --- !u!114 &4242657409397444448
 MonoBehaviour:

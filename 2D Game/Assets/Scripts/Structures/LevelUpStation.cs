@@ -63,5 +63,16 @@ namespace Krisnat
                 PlayerInputHandler.Instance.UseUseInput();
             }
         }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            var player = collision.GetComponent<Player>();
+            var levelUpUI = UIManager.Instance.LevelUpInterface;
+
+            if (player && levelUpUI && levelUpUI.activeInHierarchy)
+            {
+                UIManager.Instance.OpenCloseUIAnimation(levelUpUI, 0.05f, closingAnimationDuration, false);
+            }
+        }
     }
 }

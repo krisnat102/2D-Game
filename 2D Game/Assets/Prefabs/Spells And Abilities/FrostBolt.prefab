@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7122031244096216666}
   - component: {fileID: 7122031244096216667}
   - component: {fileID: 7122031244096216670}
-  - component: {fileID: 7122031244096216665}
   - component: {fileID: 7122031244096216664}
+  - component: {fileID: 9199944536869888155}
   m_Layer: 0
   m_Name: FrostBolt
   m_TagString: Untagged
@@ -137,7 +137,34 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!60 &7122031244096216665
+--- !u!114 &7122031244096216664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7122031244096216671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfda3067fe48304b93847308682c3cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spell: {fileID: 11400000, guid: 11e017910ec90e14db8e07b7d2bcbe41, type: 2}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  move: 1
+  destroyOnTouch: 1
+  dontRotate: 0
+  shuriken: 0
+  collisionTimeOffset: 0.005
+  rotationSpeed: 0.1
+  stuckTime: 0
+  fadeTimer: 1
+--- !u!60 &9199944536869888155
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,14 +193,14 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.4, y: 1.6}
+    oldSize: {x: 1.5, y: 1}
     newSize: {x: 0.48, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -181,53 +208,16 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.7084991, y: 0.11459906}
-      - {x: -0.7237493, y: -0.13892269}
-      - {x: -0.7187997, y: -0.22044007}
-      - {x: -0.6993488, y: -0.19934888}
-      - {x: -0.7062094, y: -0.20140901}
-      - {x: -0.7020572, y: -0.21084207}
-      - {x: -0.5789216, y: -0.19732672}
-      - {x: -0.41100058, y: -0.20643562}
-      - {x: -0.25940657, y: -0.18721358}
-      - {x: -0.13355038, y: -0.15033557}
-      - {x: -0.03046854, y: -0.12189078}
-      - {x: 0.10757309, y: -0.060615435}
-      - {x: 0.15430586, y: -0.040849753}
-      - {x: 0.059269898, y: 0.026127223}
-      - {x: -0.0102268495, y: 0.054742776}
-      - {x: -0.04102239, y: 0.06905167}
-      - {x: -0.07289757, y: 0.08772212}
-      - {x: -0.3612664, y: 0.15026954}
-      - {x: -0.70767015, y: 0.15977742}
+    - - {x: -0.41150284, y: 0.12714195}
+      - {x: -0.4436798, y: -0.17033386}
+      - {x: -0.29385185, y: -0.18964195}
+      - {x: -0.2078495, y: -0.18563652}
+      - {x: -0.10211277, y: -0.18501663}
+      - {x: 0.1761775, y: -0.10528755}
+      - {x: 0.3819685, y: -0.014520645}
+      - {x: 0.00965023, y: 0.11880875}
+      - {x: -0.32486534, y: 0.14068794}
   m_UseDelaunayMesh: 0
---- !u!114 &7122031244096216664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7122031244096216671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cfda3067fe48304b93847308682c3cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spell: {fileID: 11400000, guid: 11e017910ec90e14db8e07b7d2bcbe41, type: 2}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 512
-  groundLayerMask:
-    serializedVersion: 2
-    m_Bits: 4096
-  move: 1
-  destroyOnTouch: 1
-  dontRotate: 0
-  shuriken: 0
-  collisionTimeOffset: 0.005
-  rotationSpeed: 0.1
-  stuckTime: 0
-  fadeTimer: 1
 --- !u!1001 &3160246837156245053
 PrefabInstance:
   m_ObjectHideFlags: 0

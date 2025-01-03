@@ -65,7 +65,6 @@ namespace Inventory
 
         private void DecreaseItem(Item item)
         {
-            item.DecreaseItemCount();
             InventoryManager.Instance.Remove(item);
 
             if (item.ItemCount == 0)

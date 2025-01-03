@@ -162,7 +162,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.028, y: 0, z: 1.6612225}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1620560478860096211}
@@ -276,7 +276,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.4, y: 0.41}
+    oldSize: {x: 1.25, y: 1.28125}
     newSize: {x: 0.4, y: 0.41}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -544,6 +544,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 1117637d0e1206f41be5b45d15a32ea5, type: 2}
   deathEffect: {fileID: 5592788960639220870}
   bossSpecialProjectile: {fileID: 0}
+  sleepingObj: {fileID: 0}
   groundCollider: {fileID: 0}
 --- !u!82 &8435544955756322061
 AudioSource:
@@ -558,8 +559,8 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 229a926e5f9ed41468fd8f10b520258d, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.873
+  m_Pitch: 1.11
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -655,8 +656,8 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 9eb3de410b80b764f952dcd7b7f28b00, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.85
-  m_Pitch: 1
+  m_Volume: 0.772
+  m_Pitch: 1.13
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -962,7 +963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d8c6340d3651a44b3c5eda576c86f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePoint: {fileID: 0}
+  firePoint: {fileID: 2350393881328445392}
   IgnoreMe:
     serializedVersion: 2
     m_Bits: 7742007

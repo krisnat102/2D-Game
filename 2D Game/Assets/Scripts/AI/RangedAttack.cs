@@ -31,11 +31,9 @@ public class RangedAttack : MonoBehaviour
 
         Vector2 firePoint = enemy.FirePoint.position;
 
-        float offset = Mathf.Abs(enemy.OldPlayerPosition.x - transform.position.x) / enemy.Data.distanceOffset;
-
         if (directedParabola)
         {
-            direction = new Vector2(enemy.OldPlayerPosition.x - firePoint.x, enemy.OldPlayerPosition.y - firePoint.y + offset).normalized;
+            direction = CalculateParabola() * enemy.Data.rangedSpeed;
         }
         else if (directed)
         {
@@ -102,5 +100,30 @@ public class RangedAttack : MonoBehaviour
             }
         }
         else transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
+    private Vector2 CalculateParabola()
+    {
+        Vector2 firePoint = enemy.FirePoint.position;
+
+        float g = Mathf.Abs(Physics2D.gravity.y); // Gravity magnitude
+        float distance = enemy.OldPlayerPosition.x - firePoint.x; // Horizontal distance
+        float heightDifference = enemy.OldPlayerPosition.y - firePoint.y; // Vertical distance
+
+        // Adjust initial speed to control the trajectory
+        float initialSpeed = 10f;
+
+        // Calculate the time to reach the target horizontally
+        float time = Mathf.Abs(distance) / initialSpeed;
+
+        // Recalculate vertical velocity using the correct height difference
+        float Vy = (heightDifference / time) + (0.5f * g * time);
+        Vy *= enemy.Data.distanceOffset;
+
+        // Create the velocity vector
+        Vector2 velocity = new Vector2(initialSpeed * Mathf.Sign(distance), Vy);
+
+        // Normalize or use directly
+        return velocity.normalized;
     }
 }

@@ -442,7 +442,7 @@ RectTransform:
   m_Father: {fileID: 7764358399076653701}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -0, y: -0.33}
   m_SizeDelta: {x: -5.29599, y: -7.2547646}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -540,7 +540,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5208345444342046040
 Transform:
   m_ObjectHideFlags: 0
@@ -551,7 +551,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 54.48, y: 0.29, z: 0.38238418}
-  m_LocalScale: {x: -2.2, y: 2.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4211981834737645034}
@@ -1032,6 +1032,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 0ca51e952a305004c8caf9b2bec93d89, type: 2}
   deathEffect: {fileID: 4312294329149645101}
   bossSpecialProjectile: {fileID: 0}
+  sleepingObj: {fileID: 0}
   groundCollider: {fileID: 0}
 --- !u!114 &4077956901317807324
 MonoBehaviour:

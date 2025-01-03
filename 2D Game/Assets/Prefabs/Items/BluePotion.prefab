@@ -321,7 +321,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -10.908, y: 7.229, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3196103970223705459}
@@ -436,7 +436,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.5, y: 0.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -471,9 +471,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 42f4f402eb9cb7d4ebec3de625c524bb, type: 2}
   forSale: 0
-  price: 0
   chest: 0
+  openTime: 0
+  price: 0
   offset: 0.2
+  note: 0
+  noteText: 
+  noteUIPreset: {fileID: 0}
+  portal: 0
+  itemId: 
 --- !u!1 &8819452830213724659
 GameObject:
   m_ObjectHideFlags: 0
