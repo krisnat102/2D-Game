@@ -58,8 +58,9 @@ MonoBehaviour:
           <AttackCost>k__BackingField: 8
           <AttackRecoveryTime>k__BackingField: 0.5
           <StamCost>k__BackingField: 1
-          <FirstStageChargeTime>k__BackingField: 0.12
-          <SecondStageChargeTime>k__BackingField: 0.22
+          <MinimalHoldTime>k__BackingField: 0.12
+          <FirstStageChargeTime>k__BackingField: 0.2
+          <SecondStageChargeTime>k__BackingField: 0.26
           <ThirdStageChargeTime>k__BackingField: 0.32
           <FinalStageChargeTime>k__BackingField: 0.42
           <PerfectShotChargeTimeLowerRange>k__BackingField: 0.52

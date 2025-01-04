@@ -1,8 +1,6 @@
 using UnityEngine.Audio;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Rendering;
 
 public class AudioManager : MonoBehaviour
 {
@@ -28,13 +26,6 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource bowSoundEffect;
 
     private bool muteTracker;
-    #endregion
-
-    #region Method Variables
-    public AudioSource BuySound { get => buySound; private set => buySound = value; }
-    public AudioSource CoinPickupSound { get => coinPickupSound; private set => coinPickupSound = value; }
-    public AudioSource SwordSoundEffect { get => swordSoundEffect; private set => swordSoundEffect = value; }
-    public AudioSource BowSoundEffect { get => bowSoundEffect; private set => bowSoundEffect = value; }
     #endregion
 
     #region Unity Methods
@@ -133,5 +124,31 @@ public class AudioManager : MonoBehaviour
             SaveAudioSettings();
         }
     }
-        #endregion
+    #endregion
+
+    #region Players
+    public void PlayBuySound(float lowerPitch, float higherPitch)
+    {
+        buySound.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        buySound.Play();
     }
+
+    public void PlayCoinPickupSound(float lowerPitch, float higherPitch)
+    {
+        coinPickupSound.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        coinPickupSound.Play();
+    }
+
+    public void PlaySwordSound(float lowerPitch, float higherPitch)
+    {
+        swordSoundEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        swordSoundEffect.Play();
+    }
+
+    public void PlayBowSound(float lowerPitch, float higherPitch)
+    {
+        bowSoundEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        bowSoundEffect.Play();
+    }
+    #endregion
+}

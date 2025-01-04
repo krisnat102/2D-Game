@@ -71,11 +71,17 @@ namespace Bardent.Weapons.Components
 
             if (currentAttackData != null && !cooldown && currentWeaponData.Type == WeaponType.Bow)
             {
+                if (attackHoldTime < currentAttackData.MinimalHoldTime)
+                {
+                    EndHold();
+                    return;
+                }
+
                 bowSlider = UIManager.Instance.BowChargeTimeSlider;
 
                 StartCoroutine(CooldownCoroutine());
 
-                AudioManager.Instance.BowSoundEffect.Play();
+                AudioManager.Instance.PlayBowSound(0.9f, 1.1f);
 
                 //Stats.Instance.Stam.CurrentValue -= cost;
                 //Stas.Instance.Stam.StopRegen(playerData.stamRecoveryTime);
@@ -85,6 +91,7 @@ namespace Bardent.Weapons.Components
                     if (data.Projectile != null)
                     {
                         var projectile = Instantiate(data.Projectile).GetComponent<Arrow>();
+                        
 
                         switch (attackHoldTime)
                         {

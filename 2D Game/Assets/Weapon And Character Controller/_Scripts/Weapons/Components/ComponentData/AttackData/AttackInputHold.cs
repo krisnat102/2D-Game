@@ -11,6 +11,7 @@ namespace Bardent.Weapons.Components
         [field: SerializeField] public float AttackCost { get; private set; }
         [field: SerializeField] public float AttackRecoveryTime { get; private set; }
         [field: SerializeField] public bool StamCost { get; private set; }
+        [field: SerializeField] public float MinimalHoldTime { get; private set; }
         [field: SerializeField] public float FirstStageChargeTime { get; private set; }
         [field: SerializeField] public float SecondStageChargeTime { get; private set; }
         [field: SerializeField] public float ThirdStageChargeTime { get; private set; }

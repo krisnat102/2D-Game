@@ -62,7 +62,7 @@ namespace Spells
                     InventoryManager.Instance.StartCoinAnimation();
                     if (InventoryManager.Instance.Coins >= price)
                     {
-                        AudioManager.Instance.BuySound.Play();
+                        AudioManager.Instance.PlayBuySound(0.9f, 1.1f);
                         SpellManager.Instance.Add(spell);
                         InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - price, false);
                     }
