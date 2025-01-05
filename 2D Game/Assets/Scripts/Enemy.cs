@@ -346,7 +346,7 @@ public class Enemy : MonoBehaviour
         if (rightPatrolBarrier) rightPatrolBarrierPositionX = rightPatrolBarrier.transform.position.x;
         if (leftPatrolBarrier) leftPatrolBarrierPositionX = leftPatrolBarrier.transform.position.x;
         isPatrolling = Data.patrol;
-        cameraShake = CameraShake.instance;
+        cameraShake = CameraShake.Instance;
         previousLocalScaleX = transform.localScale.x;
         gameManager = CoreClass.GameManager.Instance;
         playerTrans = PlayerInputHandler.Instance.gameObject.transform;
@@ -411,6 +411,7 @@ public class Enemy : MonoBehaviour
                 }
                 else if (damageSound)
                 {
+                    damageSound.pitch = UnityEngine.Random.Range(Data.pitchVarianceDamage[0], Data.pitchVarianceDamage[1]);
                     damageSound.Play();
                 }
 
@@ -747,6 +748,8 @@ public class Enemy : MonoBehaviour
     IEnumerator PlayRangedAttackSoundCoroutine(float delay)
     {
         yield return new WaitForSeconds(delay);
+
+        rangedAttackSound.pitch = UnityEngine.Random.Range(Data.pitchVarianceRangedAttack[0], Data.pitchVarianceRangedAttack[1]);
         rangedAttackSound.Play();
     }
 
@@ -776,7 +779,11 @@ public class Enemy : MonoBehaviour
     #region Helper Methods
     private void AttackHelper()
     {
-        attackSound?.Play();
+        if (attackSound)
+        {
+            attackSound.pitch = UnityEngine.Random.Range(Data.pitchVarianceAttack[0], Data.pitchVarianceAttack[1]);
+            attackSound.Play();
+        }
 
         if (Data.fixRotationWhenAttacking) fixRotation = false;
     }

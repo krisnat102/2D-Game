@@ -90,7 +90,7 @@ namespace Inventory
                 DecreaseItem(item);
 
                 InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins + item.cost, false);
-                AudioManager.Instance.PlayCoinPickupSound(0.9f, 1.1f);
+                AudioManager.Instance.PlayCoinPickupSound(0.8f, 1.2f);
                 return;
             }
 

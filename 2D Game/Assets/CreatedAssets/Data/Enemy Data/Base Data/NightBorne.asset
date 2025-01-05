@@ -52,6 +52,15 @@ MonoBehaviour:
   spellDropChance: 0
   itemDrop: {fileID: 0}
   spellDrop: {fileID: 0}
+  pitchVarianceAttack:
+  - 0.85
+  - 1.25
+  pitchVarianceRangedAttack:
+  - 0
+  - 0
+  pitchVarianceDamage:
+  - 0.6
+  - 1
   patrolPauseTime: 4
   patrolSpeed: 10
   dummy: 0

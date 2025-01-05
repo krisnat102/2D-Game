@@ -58,6 +58,11 @@ public class EnemyData : ScriptableObject
     public Item itemDrop;
     public Spell spellDrop;
 
+    [Header("Audio")]
+    public float[] pitchVarianceAttack = new float[2];
+    public float[] pitchVarianceRangedAttack = new float[2];
+    public float[] pitchVarianceDamage = new float[2];
+
     [Header("Patrol")]
     public float patrolPauseTime;
     public float patrolSpeed;

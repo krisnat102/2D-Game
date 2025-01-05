@@ -24,13 +24,13 @@ namespace Krisnat
 
             if (!finalBattle)
             {
+                Debug.Log(CoreClass.GameManager.Instance.Battles[0]);
                 if (string.IsNullOrEmpty(BattleId)) BattleId = gameObject.name;
 
-                PlayerSaveData data = SaveSystem.LoadPlayer();
-
-                if (data != null && data.bonfiresLitId != null && data.bonfiresLitId.Contains(BattleId))
+                if (CoreClass.GameManager.Instance.Battles.Contains(BattleId))
                 {
-                    End = true;
+                    EndBattle();
+                    Debug.Log(1);
                 }
             }
 
@@ -41,7 +41,7 @@ namespace Krisnat
                 if (CoreClass.GameManager.Instance.BossesKilled.Contains(boss.BossId))
                 {
                     boss.gameObject.SetActive(false);
-                    End = true;
+                    EndBattle();
                 }
                 else boss.gameObject.SetActive(true);
             }
@@ -49,20 +49,9 @@ namespace Krisnat
 
         private void Update()
         {
-            if (finalBattle && finalBattle.End)
+            if (finalBattle && finalBattle.End && !End)
             {
-                End = true;
-            }
-
-            if (End)
-            {
-                if (objectToEnable) objectToEnable.SetActive(true);
-                if (doorToUnlock) doorToUnlock.Open(true);
-
-                gameObject.SetActive(false);
-                SaveSystem.LoadPlayer();
-
-                if (!finalBattle) CoreClass.GameManager.Instance.Battles.Add(BattleId);
+                EndBattle();
             }
         }
 
@@ -87,7 +76,22 @@ namespace Krisnat
             }
             if (!encounter.All(obj => obj.Dead)) return;
 
+            EndBattle();
+        }
+
+        private void EndBattle()
+        {
             End = true;
+            if (objectToEnable) objectToEnable.SetActive(true);
+            if (doorToUnlock) doorToUnlock.Open(true);
+
+            gameObject.SetActive(false);
+            SaveSystem.LoadPlayer();
+
+            if (!finalBattle)
+            {
+                CoreClass.GameManager.Instance.Battles.Add(BattleId);
+            }
         }
     }
 }

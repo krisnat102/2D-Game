@@ -116,6 +116,25 @@ namespace Krisnat.Assets.Scripts
 
         public static PlayerSaveData CreateDefault()
         {
+            float[] spawnPosition;
+            if (CoreClass.GameManager.Instance)
+            {
+                spawnPosition = new float[]
+                {
+                    CoreClass.GameManager.Instance.SpawnPoint.position.x,
+                    CoreClass.GameManager.Instance.SpawnPoint.position.y,
+                    CoreClass.GameManager.Instance.SpawnPoint.position.z
+                };
+            }
+            else
+            {
+                spawnPosition = new float[]
+                {
+                    5,
+                    -2.3f,
+                    0f
+                };
+            }
             return new PlayerSaveData(
                 level: 1,
                 maxHealth: 100f,
@@ -129,12 +148,7 @@ namespace Krisnat.Assets.Scripts
                 intelligence: 1,
                 coins: 0,
                 currentLevel: 1,
-                position: new float[]
-                {
-                    -8.37f,
-                    16.97f,
-                    0f
-                },
+                position: spawnPosition,
                 itemsId: new int[]
                 {
                     104,
