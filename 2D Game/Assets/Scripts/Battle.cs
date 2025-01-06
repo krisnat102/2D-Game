@@ -24,13 +24,11 @@ namespace Krisnat
 
             if (!finalBattle)
             {
-                Debug.Log(CoreClass.GameManager.Instance.Battles[0]);
                 if (string.IsNullOrEmpty(BattleId)) BattleId = gameObject.name;
 
                 if (CoreClass.GameManager.Instance.Battles.Contains(BattleId))
                 {
                     EndBattle();
-                    Debug.Log(1);
                 }
             }
 
