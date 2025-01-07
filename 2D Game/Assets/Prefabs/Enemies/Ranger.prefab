@@ -745,7 +745,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8510602485451524672
 Transform:
   m_ObjectHideFlags: 0
@@ -1272,7 +1272,7 @@ Transform:
   m_GameObject: {fileID: 5658661800023472738}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.046, y: -0.149, z: -0}
+  m_LocalPosition: {x: 0.183, y: 0.066, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1316,8 +1316,8 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0.14
-  m_PointLightOuterRadius: 1
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 0.66
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -1591,7 +1591,7 @@ PrefabInstance:
     - target: {fileID: 2151533433782563641, guid: d4597ceb8300e93488e0de151c0e3e73,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.089
+      value: -0.099
       objectReference: {fileID: 0}
     - target: {fileID: 2151533433782563641, guid: d4597ceb8300e93488e0de151c0e3e73,
         type: 3}
@@ -1641,7 +1641,7 @@ PrefabInstance:
     - target: {fileID: 8203424293245319661, guid: d4597ceb8300e93488e0de151c0e3e73,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

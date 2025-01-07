@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 201917306390933134}
   - component: {fileID: 4884112257356513390}
   - component: {fileID: 300834781376292935}
-  - component: {fileID: 1482723496187811630}
   - component: {fileID: -1030786744839681751}
   - component: {fileID: 2619312599294634071}
   m_Layer: 0
@@ -122,18 +121,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.2824428, y: -0.013193846}
+  m_Offset: {x: 0.028867245, y: 0.0033932626}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.68, y: 1.1}
+    oldSize: {x: 2.75, y: 0.6875}
     newSize: {x: 1.26, y: 1.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.471145, y: 1.1110499}
+  m_Size: {x: 2.8193464, y: 0.7594685}
   m_EdgeRadius: 0
 --- !u!50 &300834781376292935
 Rigidbody2D:
@@ -162,103 +161,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!82 &1482723496187811630
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 201917306390933128}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: b0fc275326f5c7f479bc0b065bb3870f,
-    type: 2}
-  m_audioClip: {fileID: 8300000, guid: c85bc4acfd7ccb544b77e9d1af39ac06, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 30
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &-1030786744839681751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,7 +182,7 @@ MonoBehaviour:
     m_Bits: 0
   move: 0
   destroyOnTouch: 0
-  dontRotate: 1
+  dontRotate: 0
   shuriken: 0
   collisionTimeOffset: 0
   rotationSpeed: 0
@@ -298,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f3b9dbedd198143aa0ac9e1796d6b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationLength: 0.2
+  animationLength: 0.25
   destroy: 1
   adaptSize: 1
   adaptDirection: 1
@@ -317,7 +219,7 @@ GameObject:
   - component: {fileID: 1022403182350036862}
   - component: {fileID: 7224545721945292037}
   m_Layer: 0
-  m_Name: FireboltLight
+  m_Name: LightningLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -351,11 +253,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ComponentVersion: 1
-  m_LightType: 3
+  m_LightType: 1
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.606
-  m_Color: {r: 0.99215686, g: 0.53249377, b: 0, a: 1}
-  m_Intensity: 0.5
+  m_Color: {r: 0.20392159, g: 0.56078434, b: 0.85098046, a: 1}
+  m_Intensity: 0.34
   m_LightVolumeIntensity: 0
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -372,19 +274,21 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0
   m_LocalBounds:
-    m_Center: {x: 0, y: -0.00000011920929, z: 0}
-    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
+    m_Center: {x: -0.12050003, y: -0.0010000169, z: 0}
+    m_Extent: {x: 1.5464001, y: 0.65830004, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 1
-  m_PointLightOuterRadius: 3
+  m_PointLightInnerRadius: 0.4
+  m_PointLightOuterRadius: 1.22
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
   m_ShapeLightFalloffSize: 0.5
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
-  - {x: -0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: 0.5, z: 0}
-  - {x: -0.5, y: 0.5, z: 0}
+  - {x: -1.1671271, y: -0.12575793, z: 0}
+  - {x: -0.08778083, y: -0.15904264, z: 0}
+  - {x: 0.927124, y: -0.109486565, z: 0}
+  - {x: 0.8620386, y: 0.12575792, z: 0}
+  - {x: -0.06744158, y: 0.14604598, z: 0}
+  - {x: -0.955599, y: 0.15830065, z: 0}

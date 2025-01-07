@@ -16,7 +16,7 @@ MonoBehaviour:
   spellName: Lightning Bolt
   spell: 1
   cost: 20
-  damage: 40
+  damage: 30
   speed: 0
   cooldown: 6
   range: 50
@@ -26,4 +26,4 @@ MonoBehaviour:
   spellDeath: {fileID: 0}
   description: 
   useOffset: 1
-  offset: {x: 2, y: 0}
+  offset: {x: 1.18, y: 0}

@@ -1,4 +1,5 @@
 using Krisnat.Assets.Scripts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -28,7 +29,7 @@ namespace Krisnat
 
                 if (CoreClass.GameManager.Instance.Battles.Contains(BattleId))
                 {
-                    EndBattle();
+                    EndBattle(false);
                 }
             }
 
@@ -39,17 +40,18 @@ namespace Krisnat
                 if (CoreClass.GameManager.Instance.BossesKilled.Contains(boss.BossId))
                 {
                     boss.gameObject.SetActive(false);
-                    EndBattle();
+                    EndBattle(false);
                 }
                 else boss.gameObject.SetActive(true);
             }
         }
 
+
         private void Update()
         {
             if (finalBattle && finalBattle.End && !End)
             {
-                EndBattle();
+                EndBattle(false);
             }
         }
 
@@ -74,14 +76,14 @@ namespace Krisnat
             }
             if (!encounter.All(obj => obj.Dead)) return;
 
-            EndBattle();
+            EndBattle(true);
         }
 
-        private void EndBattle()
+        private void EndBattle(bool playDoorAudio)
         {
             End = true;
             if (objectToEnable) objectToEnable.SetActive(true);
-            if (doorToUnlock) doorToUnlock.Open(true);
+            if (doorToUnlock) doorToUnlock.Open(playDoorAudio);
 
             gameObject.SetActive(false);
             SaveSystem.LoadPlayer();

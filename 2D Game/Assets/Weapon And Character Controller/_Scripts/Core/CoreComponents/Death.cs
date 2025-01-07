@@ -1,3 +1,4 @@
+using Inventory;
 using UnityEngine;
 
 namespace Bardent.CoreSystem
@@ -29,7 +30,7 @@ namespace Bardent.CoreSystem
             {
                 deathScreen.SetActive(true);
             }
-
+            InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins / 3, false);
             CoreClass.GameManager.Instance.SavePlayer();
             Core.transform.parent.gameObject.SetActive(false);
             IsDead = true;

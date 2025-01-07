@@ -167,11 +167,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef5b85464dc3bb44c9586312d8bd3c66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directedParabola: 1
-  directed: 0
+  directedParabola: 0
+  directed: 1
   randomized: 0
   flip: 1
-  accuracy: 50
+  accuracy: 10
 --- !u!68 &2376661692192944107
 EdgeCollider2D:
   m_ObjectHideFlags: 0

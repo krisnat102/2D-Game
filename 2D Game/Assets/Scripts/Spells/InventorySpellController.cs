@@ -56,7 +56,7 @@ namespace Spells
         {
             GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
             SpellController spellController = button.GetComponent<SpellController>();
-            Spell spell = spellController.GetSpell();
+            spell = spellController.GetSpell();
 
             if (SpellManager.Instance.SpellsBar.Count < ActiveSpellsMax && !SpellManager.Instance.SpellsBar.Contains(spell) && spell.spell)
             {

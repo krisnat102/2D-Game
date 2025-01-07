@@ -20,10 +20,9 @@ public class AudioManager : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] private AudioSource music;
-    [SerializeField] private AudioSource buySound;
-    [SerializeField] private AudioSource coinPickupSound;
-    [SerializeField] private AudioSource swordSoundEffect;
-    [SerializeField] private AudioSource bowSoundEffect;
+    [SerializeField] private AudioSource buySound, coinPickupSound;
+    [SerializeField] private AudioSource swordSoundEffect, bowSoundEffect;
+    [SerializeField] private AudioSource fireballLaunchEffect, lightningEffect;
 
     private bool muteTracker;
     #endregion
@@ -149,6 +148,18 @@ public class AudioManager : MonoBehaviour
     {
         bowSoundEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
         bowSoundEffect.Play();
+    }
+
+    public void PlayFireballLaunchSound(float lowerPitch, float higherPitch)
+    {
+        fireballLaunchEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        fireballLaunchEffect.Play();
+    }
+
+    public void PlayLightningSound(float lowerPitch, float higherPitch)
+    {
+        lightningEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        lightningEffect.Play();
     }
     #endregion
 }

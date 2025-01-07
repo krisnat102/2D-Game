@@ -26,6 +26,7 @@ namespace Spells
         private bool stuckShuriken = false;
         private float transparency = 1f;
         private float angle;
+        private bool wallCollider = false;
 
         void Awake()
         {
@@ -48,6 +49,7 @@ namespace Spells
 
             angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
             Invoke("NullAngle", 0.2f);
+            Invoke("WallColliderOn", 0.01f);
         }
 
         private void Update()
@@ -109,7 +111,7 @@ namespace Spells
                 }
                 //else they will be handled by some other script or just left as they are
             }
-            else if ((groundLayerMask.value & (1 << hitInfo.gameObject.layer)) != 0 && (angle > 77f || angle < 40f) && destroyOnTouch)
+            else if ((groundLayerMask.value & (1 << hitInfo.gameObject.layer)) != 0 && wallCollider && destroyOnTouch)
             {
                 Invoke("Stuck", collisionTimeOffset);
             }
@@ -142,6 +144,8 @@ namespace Spells
             }
         }
 
-        private void NullAngle() => angle = 0; 
+        private void NullAngle() => angle = 0;
+
+        private void WallColliderOn() => wallCollider = true;
     }
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Bardent.CoreSystem;
+using UnityEditor.Experimental.GraphView;
 
 namespace Spells
 {
@@ -222,63 +223,69 @@ namespace Spells
         #region Spell And Ability Casting Methods
         void Spell()
         {
-            if (spellManager.SpellsBar[activeSpell] != null && Stats.Instance.Mana.CurrentValue >= spellManager.SpellsBar[activeSpell].cost)
+            Spell spell = spellManager.SpellsBar[activeSpell];
+
+            if (spell != null && Stats.Instance.Mana.CurrentValue >= spell.cost)
             {
                 //Vector2 offset = new Vector2(OffsetX, OffsetY);
-                if (spellManager.SpellsBar[activeSpell].useOffset)
+                if (spell.useOffset)
                 {
                     if (side)
                     {
-                        newPosition = (Vector2)castingPoint.position + spellManager.SpellsBar[activeSpell].offset;
+                        newPosition = (Vector2)castingPoint.position + spell.offset;
                     }
                     else
                     {
-                        newPosition = (Vector2)castingPoint.position + new Vector2(-spellManager.SpellsBar[activeSpell].offset.x, spellManager.SpellsBar[activeSpell].offset.y);
+                        newPosition = (Vector2)castingPoint.position + new Vector2(-spell.offset.x, spell.offset.y);
                     }
                     //new ObjectPool(spellsBar[activeSpell].spellEffect, newPosition, castingPoint.rotation, 5, 10);
-                    Instantiate(spellManager.SpellsBar[activeSpell].spellEffect, newPosition, castingPoint.rotation);
+                    Instantiate(spell.spellEffect, newPosition, castingPoint.rotation);
                 }
                 else
                 {
-                    Instantiate(spellManager.SpellsBar[activeSpell].spellEffect, castingPoint.position, castingPoint.rotation);
+                    Instantiate(spell.spellEffect, castingPoint.position, castingPoint.rotation);
                     //new ObjectPool(spellsBar[activeSpell].spellEffect, castingPoint.position, castingPoint.rotation, 5, 10);
                 }
 
-                Stats.Instance.Mana.CurrentValue -= spellManager.SpellsBar[activeSpell].cost;
+                Stats.Instance.Mana.CurrentValue -= spell.cost;
 
                 spellCooldown = true;
-                lastCastSpell = spellManager.SpellsBar[activeSpell];
-                Invoke("SpellCooldown", spellManager.SpellsBar[activeSpell].cooldown);
+                lastCastSpell = spell;
+                Invoke("SpellCooldown", spell.cooldown);
                 spellCooldownImg.gameObject.SetActive(true);
                 spellCooldownImg.fillAmount = 1;
+                PlaySpellSFX(spell);
             }
         }
         void Ability()
         {
-            if (spellManager.AbilitiesBar[activeAbility] != null)
+            Spell ability = spellManager.AbilitiesBar[activeAbility];
+
+            if (ability != null)
             {
-                if (spellManager.AbilitiesBar[activeAbility].name == "grappling hook")
+                if (ability.name == "grappling hook")
                 {
                     AbilityCooldown1 = true;
-                    Invoke("AbilityCooldown", spellManager.AbilitiesBar[activeAbility].cooldown);
+                    Invoke("AbilityCooldown", ability.cooldown);
                     abilityCooldownImg.gameObject.SetActive(true);
                     abilityCooldownImg.fillAmount = 1;
                 }
-                else if (Stats.Instance.Stam.CurrentValue >= spellManager.AbilitiesBar[activeAbility].cost)
+                else if (Stats.Instance.Stam.CurrentValue >= ability.cost)
                 {
                     //Vector2 offset = new Vector2(OffsetX2, OffsetY2);
 
-                    Instantiate(spellManager.AbilitiesBar[activeAbility].spellEffect, castingPoint.position, castingPoint.rotation);
+                    Instantiate(ability.spellEffect, castingPoint.position, castingPoint.rotation);
 
-                    Stats.Instance.Stam.CurrentValue -= spellManager.AbilitiesBar[activeAbility].cost;
+                    Stats.Instance.Stam.CurrentValue -= ability.cost;
                     Stats.Instance.Stam.StopRegen(playerData.stamRecoveryTime);
 
                     AbilityCooldown1 = true;
-                    lastCastAbility = spellManager.AbilitiesBar[activeAbility];
-                    Invoke("AbilityCooldown", spellManager.AbilitiesBar[activeAbility].cooldown);
+                    lastCastAbility = ability;
+                    Invoke("AbilityCooldown", ability.cooldown);
                     abilityCooldownImg.gameObject.SetActive(true);
                     abilityCooldownImg.fillAmount = 1;
                 }
+                PlaySpellSFX(ability);
             }
         }
 
@@ -314,5 +321,25 @@ namespace Spells
             sideAbility2.gameObject.SetActive(false);
         }
         #endregion
+
+        private void PlaySpellSFX(Spell spell)
+        {
+            AudioManager audioM = AudioManager.Instance;
+            switch (spell.name)
+            {
+                case "Firebolt":
+                    audioM.PlayFireballLaunchSound(1.1f, 1.5f);
+                    break;
+                case "Frostbolt":
+                    audioM.PlayBowSound(1.0f, 1.4f);
+                    break;
+                case "Lightning Bolt":
+                    audioM.PlayLightningSound(0.8f, 1.2f);
+                    break;
+                case "Shuriken":
+                    audioM.PlayBowSound(0.8f, 1.2f);
+                    break;
+            }
+        }
     }
 }

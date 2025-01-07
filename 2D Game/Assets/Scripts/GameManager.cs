@@ -147,7 +147,7 @@ namespace CoreClass
             stats.Health.SetCurrentStat(stats.Health.MaxValue);
             stats.Mana.SetCurrentStat(stats.Mana.MaxValue);
             stats.Stam.SetCurrentStat(stats.Stam.MaxValue);
-            inventoryManager.SetCoins(inventoryManager.Coins / 3, false);
+            inventoryManager.SetCoins(data.coins, false);
             inventoryManager.Add(loadItems);
             spellManager.Add(loadSpells);
             MenuManager.Instance.CurrentLevel = data.currentLevel;
