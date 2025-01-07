@@ -31,6 +31,7 @@ public class MenuManager : MonoBehaviour
 
     private Resolution[] resolutions;
     private bool damagePopups = true;
+    private bool oldGamePaused;
     private static bool newGame = false;
     #endregion
 
@@ -99,15 +100,18 @@ public class MenuManager : MonoBehaviour
     void Update()
     {
         Screen.fullScreen = fullScreenToggle.isOn;
+        if(CoreClass.GameManager.Instance != null){
+            if (oldGamePaused != CoreClass.GameManager.Instance.GamePaused && CoreClass.GameManager.Instance.GamePaused)
+            {
+                Time.timeScale = 0f;
+            }
+            else if(oldGamePaused != CoreClass.GameManager.Instance.GamePaused)
+            {
+                Time.timeScale = 1;
+            }
+            oldGamePaused = CoreClass.GameManager.Instance.GamePaused;
+        }
 
-        if (CoreClass.GameManager.Instance != null && CoreClass.GameManager.Instance.GamePaused)
-        {
-            Time.timeScale = 0f;
-        }
-        else if (CoreClass.GameManager.Instance != null)
-        {
-            Time.timeScale = 1;
-        }
 
         if (
             PlayerInputHandler.Instance != null

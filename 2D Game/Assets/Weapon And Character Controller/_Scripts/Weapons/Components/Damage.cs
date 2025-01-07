@@ -1,6 +1,7 @@
 ﻿using Bardent.CoreSystem;
 using Krisnat;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Bardent.Weapons.Components
 {
@@ -14,13 +15,15 @@ namespace Bardent.Weapons.Components
         {
             foreach (var item in colliders)
             {
+                float damage = currentAttackData.Amount * levelHandler.StrengthDamage;
                 if (item.TryGetComponent(out Enemy enemy))
                 {
-                    enemy.TakeDamage(currentAttackData.Amount * levelHandler.StrengthDamage, 0, false);
+                    enemy.TakeDamage(damage, 0, false);
+                    FrameFreeze.Instance.FreezeFrame(damage / 200);
                 }
                 else if (item.TryGetComponent(out IDamageable damageable))
                 {
-                    damageable.Damage(currentAttackData.Amount * levelHandler.StrengthDamage, true);
+                    damageable.Damage(damage, true);
                 }
             }
         }
