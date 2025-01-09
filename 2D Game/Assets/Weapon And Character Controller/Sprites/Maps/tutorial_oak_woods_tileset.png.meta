@@ -962,6 +962,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: tutorial_oak_woods_tileset_40
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6d818a03e3097c4b9d9618f8f01db19
+      internalID: 1326226781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1008,6 +1029,7 @@ TextureImporter:
       tutorial_oak_woods_tileset_38: -352583159
       tutorial_oak_woods_tileset_39: -285475831
       tutorial_oak_woods_tileset_4: 1742519076
+      tutorial_oak_woods_tileset_40: 1326226781
       tutorial_oak_woods_tileset_5: -628165483
       tutorial_oak_woods_tileset_6: 1994657635
       tutorial_oak_woods_tileset_7: -1718392544

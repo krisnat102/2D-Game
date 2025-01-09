@@ -120,7 +120,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 50accbd91e7819747b930b2f3bf462fa, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.05
+  m_Volume: 0.306
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -366,7 +366,7 @@ MonoBehaviour:
   groundCheck: {fileID: 5660528884936524129}
   wallCheck: {fileID: 4817204179201066334}
   ledgeCheckHorizontal: {fileID: 4977279974406180941}
-  ledgeCheckVertical: {fileID: 0}
+  ledgeCheckVertical: {fileID: 4977279974406180941}
   ceilingCheck: {fileID: 4747483806871184407}
   groundCheckRadius: 0.3
   wallCheckDistance: 0.5

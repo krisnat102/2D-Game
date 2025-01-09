@@ -18,6 +18,7 @@ namespace Krisnat
             audioSource = GetComponent<AudioSource>();
 
             if(audioSource) audioSource.pitch = Random.Range(lowPitchBoundary, highPitchBoundary);
+            Debug.Log(audioSource.pitch);
         }
     }
 }

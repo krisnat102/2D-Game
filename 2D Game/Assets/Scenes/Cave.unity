@@ -11269,12 +11269,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 560866235}
   m_CullTransparentMesh: 0
---- !u!4 &563851920 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4977279974406180941, guid: df025bf70c985294a9b5993f50d12878,
-    type: 3}
-  m_PrefabInstance: {fileID: 3981267797721065128}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &565632407 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6560869233675077722, guid: df025bf70c985294a9b5993f50d12878,
@@ -13274,12 +13268,12 @@ PrefabInstance:
     - target: {fileID: 3221316277637357432, guid: 2594cf213d0bcfc449f7f40e0dc57516,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3221316277637357432, guid: 2594cf213d0bcfc449f7f40e0dc57516,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3626806086241545230, guid: 2594cf213d0bcfc449f7f40e0dc57516,
         type: 3}
@@ -13294,7 +13288,7 @@ PrefabInstance:
     - target: {fileID: 4499116942018295165, guid: 2594cf213d0bcfc449f7f40e0dc57516,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4840909459786244085, guid: 2594cf213d0bcfc449f7f40e0dc57516,
         type: 3}
@@ -56121,11 +56115,6 @@ PrefabInstance:
       propertyPath: message
       value: 
       objectReference: {fileID: 1751550085}
-    - target: {fileID: 7823768926691505371, guid: df025bf70c985294a9b5993f50d12878,
-        type: 3}
-      propertyPath: ledgeCheckVertical
-      value: 
-      objectReference: {fileID: 563851920}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -56139,6 +56128,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1248237577583049915, guid: 9131100930d382640be36df3e8b191d8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.777071
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348658247906166416, guid: 9131100930d382640be36df3e8b191d8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.777071
+      objectReference: {fileID: 0}
     - target: {fileID: 1744348908897264564, guid: 9131100930d382640be36df3e8b191d8,
         type: 3}
       propertyPath: m_Follow
