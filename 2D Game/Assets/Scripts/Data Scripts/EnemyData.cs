@@ -39,6 +39,7 @@ public class EnemyData : ScriptableObject
     public bool commitDirectionWhenAttacking;
     public bool moveWhenAttacking;
     public Vector2 direction;
+    public Rect cancelMove;
     public float velocity;
     public float movementDelay;
 

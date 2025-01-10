@@ -539,6 +539,22 @@ public class Enemy : MonoBehaviour
 
         if (Data.moveWhenAttacking)
         {
+            offset.Set(
+            transform.position.x + (Data.cancelMove.center.x * FacingDirection * -1),
+            transform.position.y + Data.HitBox.center.y
+            );
+
+            detected = Physics2D.OverlapBoxAll(offset, Data.HitBox.size, 0f, Data.DetectableLayers);
+
+            foreach (Collider2D obj in detected)
+            {
+                player = obj.gameObject.GetComponent<Player>();
+
+                if (player)
+                {
+                    return;
+                }
+            }
             StartCoroutine(ChangeBoolCoroutine(Data.movementDelay, newValue => rooted = newValue[0], new[] { false }));
             StartCoroutine(MovementCoroutine(Data.movementDelay, -Data.direction * new Vector2(FacingDirection * -1, 0), Data.velocity));
         }
