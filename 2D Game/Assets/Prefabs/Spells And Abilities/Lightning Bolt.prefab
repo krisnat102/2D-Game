@@ -183,7 +183,8 @@ MonoBehaviour:
     m_Bits: 0
   move: 0
   destroyOnTouch: 0
-  dontRotate: 0
+  doNotRotate: 0
+  flip: 1
   shuriken: 0
   collisionTimeOffset: 0
   rotationSpeed: 0

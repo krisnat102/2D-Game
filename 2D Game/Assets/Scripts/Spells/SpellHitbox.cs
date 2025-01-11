@@ -11,7 +11,8 @@ namespace Spells
         [Header("Spell Function")]
         [SerializeField] private bool move;
         [SerializeField] private bool destroyOnTouch;
-        [SerializeField] private bool dontRotate;
+        [SerializeField] private bool doNotRotate;
+        [SerializeField] private bool flip;
         [SerializeField] private bool shuriken;
         [SerializeField] private float collisionTimeOffset = 0.03f;
 
@@ -22,6 +23,7 @@ namespace Spells
 
         private Rigidbody2D rb;
         private LevelHandler levelHandler;
+        private Abilities abilities;
         private GameObject death;
         private bool stuckShuriken = false;
         private float transparency = 1f;
@@ -32,19 +34,25 @@ namespace Spells
         {
             rb = GetComponent<Rigidbody2D>();
             levelHandler = FindAnyObjectByType<Player>().GetComponent<LevelHandler>();
+            abilities = levelHandler.gameObject.GetComponent<Abilities>();
 
-
-            Vector2 castDirection = (dontRotate) ? Vector2.zero : transform.right.normalized;
+            Vector2 castDirection = (doNotRotate) ? Vector2.zero : transform.right.normalized;
             rb.velocity = move ? castDirection * spell.speed : Vector2.zero;
             death = GetComponentInChildren<Death>(true)?.gameObject;
 
-            if (dontRotate)
+            if (doNotRotate)
             {
                 transform.rotation = Quaternion.identity;
             }
             else
             {
                 transform.right = rb.velocity.normalized;
+            }
+
+            if (flip)
+            {
+                int facingDir = abilities ? 1 : -1;
+                transform.localScale = new Vector3(transform.localScale.x * facingDir, transform.localScale.y, transform.localScale.z);
             }
 
             angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;

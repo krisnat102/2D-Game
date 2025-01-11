@@ -36,7 +36,8 @@ namespace Spells
         #endregion
 
         #region Properties
-        public bool AbilityCooldown1 { get => abilityCooldown; set => abilityCooldown = value; }
+        public bool AbilityCooldownTracker { get => abilityCooldown; set => abilityCooldown = value; }
+        public bool Side { get => side; private set => side = value; }
         #endregion
 
         #region Unity Methods
@@ -50,11 +51,11 @@ namespace Spells
         {
             if (playerInputHandler.NormInputX < 0)
             {
-                side = false;
+                Side = false;
             }
             if (playerInputHandler.NormInputX > 0)
             {
-                side = true;
+                Side = true;
             }
 
             #region Spell Casting
@@ -98,7 +99,7 @@ namespace Spells
             #region Ability Casting
             if (spellManager.AbilitiesBar.Count > activeAbility)
             {
-                if (playerInputHandler.AbilityInput && Stats.Instance.Stam.CurrentValue >= spellManager.AbilitiesBar[activeAbility].cost && AbilityCooldown1 == false)
+                if (playerInputHandler.AbilityInput && Stats.Instance.Stam.CurrentValue >= spellManager.AbilitiesBar[activeAbility].cost && AbilityCooldownTracker == false)
                     Ability();
             }
 
@@ -230,7 +231,7 @@ namespace Spells
                 //Vector2 offset = new Vector2(OffsetX, OffsetY);
                 if (spell.useOffset)
                 {
-                    if (side)
+                    if (Side)
                     {
                         newPosition = (Vector2)castingPoint.position + spell.offset;
                     }
@@ -265,7 +266,7 @@ namespace Spells
             {
                 if (ability.name == "grappling hook")
                 {
-                    AbilityCooldown1 = true;
+                    AbilityCooldownTracker = true;
                     Invoke("AbilityCooldown", ability.cooldown);
                     abilityCooldownImg.gameObject.SetActive(true);
                     abilityCooldownImg.fillAmount = 1;
@@ -279,7 +280,7 @@ namespace Spells
                     Stats.Instance.Stam.CurrentValue -= ability.cost;
                     Stats.Instance.Stam.StopRegen(playerData.stamRecoveryTime);
 
-                    AbilityCooldown1 = true;
+                    AbilityCooldownTracker = true;
                     lastCastAbility = ability;
                     Invoke("AbilityCooldown", ability.cooldown);
                     abilityCooldownImg.gameObject.SetActive(true);
@@ -295,7 +296,7 @@ namespace Spells
         }
         private void AbilityCooldown()
         {
-            AbilityCooldown1 = false;
+            AbilityCooldownTracker = false;
             abilityCooldownImg.gameObject.SetActive(false);
         }
         #endregion

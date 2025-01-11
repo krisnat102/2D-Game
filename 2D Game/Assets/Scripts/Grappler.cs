@@ -60,7 +60,7 @@ public class Grappler : MonoBehaviour
         // Shot rope on mouse position
         if (hitInfo)
         {
-            if (Input.GetButton("Ability") && checker && hitInfo.collider.gameObject.tag == "Ground" && Stats.Instance.Stam.CurrentValue >= grapplingHook.cost && abilities.AbilityCooldown1 == false)
+            if (Input.GetButton("Ability") && checker && hitInfo.collider.gameObject.tag == "Ground" && Stats.Instance.Stam.CurrentValue >= grapplingHook.cost && abilities.AbilityCooldownTracker == false)
             {
                 Stats.Instance.Stam.Decrease(grapplingHook.cost);
 
