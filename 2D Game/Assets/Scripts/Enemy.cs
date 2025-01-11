@@ -838,9 +838,15 @@ public class Enemy : MonoBehaviour
         transform.position.x + (Data.HitBox.center.x * FacingDirection * -1),
         transform.position.y + Data.HitBox.center.y
         );
+        Vector2 cancelMove = new Vector2(
+        transform.position.x + (Data.cancelMove.center.x * FacingDirection * -1),
+        transform.position.y + Data.cancelMove.center.y
+        );
+
         //Vector3 adjustedCenter = transform.position + new Vector3(Data.HitBox.center.x * FacingDirection * -1, Data.HitBox.center.y, 0f);
         //Gizmos.DrawWireCube(adjustedCenter, Data.HitBox.size);
         Gizmos.DrawWireCube(offset, Data.HitBox.size);
+        Gizmos.DrawWireCube(cancelMove, Data.cancelMove.size);
     }
     #endregion
 }

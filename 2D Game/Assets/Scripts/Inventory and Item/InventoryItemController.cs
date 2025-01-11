@@ -81,58 +81,66 @@ namespace Inventory
         public void UseItem()
         {
             GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
-            ItemController itemController = button.GetComponent<ItemController>();
-            Item item = itemController.GetItem();
 
-            if (button.GetComponentInChildren<TextMeshProUGUI>().text == "Sell")
+            try
             {
-                if (item.equipment && item.Equipped) return;
-                DecreaseItem(item);
+                ItemController itemController = button.GetComponent<ItemController>();
+                Item item = itemController.GetItem();
 
-                InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins + item.cost, false);
-                AudioManager.Instance.PlayCoinPickupSound(0.8f, 1.2f);
-                return;
-            }
-
-            if (item.consumable && item.ItemCount > 0)
-            {
-                switch (item.consumableType)
+                if (button.GetComponentInChildren<TextMeshProUGUI>().text == "Sell")
                 {
-                    case Item.ConsumableType.Heal:
-                        if (Stats.Instance.Health.CurrentValue != Stats.Instance.Health.MaxValue)
-                        {
-                            DecreaseItem(item);
+                    if (item.equipment && item.Equipped) return;
+                    DecreaseItem(item);
 
-                            Stats.Instance.Health.Increase(item.value);
-                        }
-                        break;
-                    case Item.ConsumableType.ManaHeal:
-                        if (Stats.Instance.Mana.CurrentValue != Stats.Instance.Mana.MaxValue)
-                        {
-                            DecreaseItem(item);
+                    InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins + item.cost, false);
+                    AudioManager.Instance.PlayCoinPickupSound(0.8f, 1.2f);
+                    return;
+                }
 
-                            Stats.Instance.Mana.Increase(item.value);
-                        }
-                        break;
+                if (item.consumable && item.ItemCount > 0)
+                {
+                    switch (item.consumableType)
+                    {
+                        case Item.ConsumableType.Heal:
+                            if (Stats.Instance.Health.CurrentValue != Stats.Instance.Health.MaxValue)
+                            {
+                                DecreaseItem(item);
+
+                                Stats.Instance.Health.Increase(item.value);
+                            }
+                            break;
+                        case Item.ConsumableType.ManaHeal:
+                            if (Stats.Instance.Mana.CurrentValue != Stats.Instance.Mana.MaxValue)
+                            {
+                                DecreaseItem(item);
+
+                                Stats.Instance.Mana.Increase(item.value);
+                            }
+                            break;
+                    }
+                }
+                else if (itemController.GetItem().equipment && item.ItemCount > 0)
+                {
+                    switch (button.GetComponentInChildren<TextMeshProUGUI>().text)
+                    {
+                        case "Equip":
+                            InventoryManager.Instance.EquipItem(itemController.GetItem());
+
+                            Description();
+                            break;
+
+                        case "Unequip":
+                            //description = InventoryManager.Instance.Description;
+                            InventoryManager.Instance.UnequipItem(itemController.GetItem());
+
+                            Description();
+                            break;
+                    }
                 }
             }
-            else if (itemController.GetItem().equipment && item.ItemCount > 0)
+            catch
             {
-                switch (button.GetComponentInChildren<TextMeshProUGUI>().text)
-                {
-                    case "Equip":
-                        InventoryManager.Instance.EquipItem(itemController.GetItem());
-
-                        Description();
-                        break;
-
-                    case "Unequip":
-                        //description = InventoryManager.Instance.Description;
-                        InventoryManager.Instance.UnequipItem(itemController.GetItem());
-
-                        Description();
-                        break;
-                }
+                Debug.LogWarning("Equip failed");
             }
         }
 
@@ -144,110 +152,119 @@ namespace Inventory
         {
             GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
             ItemController itemController = button?.GetComponent<ItemController>();
-            item = itemController.GetItem();
-
-            //GameObject descriptionExtension = InventoryManager.Instance.GetEquipmentMenu();
-            //Animator descriptionAnimator = InventoryManager.Instance.GetEquipmentMenuAnimator();
-
-            description = InventoryManager.Instance.Description;
-            description.SetActive(true);
-
-            itemImage = InventoryManager.Instance.ItemImage;
-            itemName = InventoryManager.Instance.ItemName;
-            itemDescription = InventoryManager.Instance.ItemDescription;
-            itemValue = InventoryManager.Instance.ItemValue;
-            itemPrice = InventoryManager.Instance.ItemPrice;
-            itemWeight = InventoryManager.Instance.ItemWeight;
-            itemArmor = InventoryManager.Instance.ItemArmor;
-            itemMagicRes = InventoryManager.Instance.ItemMagicRes;
-            weaponAttack = InventoryManager.Instance.WeaponAttack;
-
-            itemImage.sprite = item.icon;
-            itemName.text = item.itemName.ToUpper();
-            itemDescription.text = item.itemDescription;
-            if (item.value != 0 && item.equipmentType != Item.EquipmentType.Weapon)
+            try
             {
-                itemValue.gameObject.SetActive(true);
-                itemValue.text = "VALUE - " + item.value.ToString();
-            }
-            else itemValue.gameObject.SetActive(false);
-            itemPrice.text = "PRICE - " + item.cost.ToString();
+                item = itemController.GetItem();
 
-            useButton = InventoryManager.Instance.UseButton;
-            ItemController useButtonItemController = useButton.GetComponent<ItemController>();
-            useButtonItemController.SetItem(item);
+                //GameObject descriptionExtension = InventoryManager.Instance.GetEquipmentMenu();
+                //Animator descriptionAnimator = InventoryManager.Instance.GetEquipmentMenuAnimator();
 
-            if (item.usable)
-                useButton.gameObject.SetActive(true);
-            else useButton.gameObject.SetActive(false);
+                description = InventoryManager.Instance.Description;
+                description.SetActive(true);
 
-            if (item.consumable)
-            {
-                useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Use";
-            }
+                itemImage = InventoryManager.Instance.ItemImage;
+                itemName = InventoryManager.Instance.ItemName;
+                itemDescription = InventoryManager.Instance.ItemDescription;
+                itemValue = InventoryManager.Instance.ItemValue;
+                itemPrice = InventoryManager.Instance.ItemPrice;
+                itemWeight = InventoryManager.Instance.ItemWeight;
+                itemArmor = InventoryManager.Instance.ItemArmor;
+                itemMagicRes = InventoryManager.Instance.ItemMagicRes;
+                weaponAttack = InventoryManager.Instance.WeaponAttack;
 
-            if (item.equipment)
-            {
+                itemImage.sprite = item.icon;
+                itemName.text = item.itemName.ToUpper();
+                itemDescription.text = item.itemDescription;
+                if (item.value != 0 && item.equipmentType != Item.EquipmentType.Weapon)
+                {
+                    itemValue.gameObject.SetActive(true);
+                    itemValue.text = "VALUE - " + item.value.ToString();
+                }
+                else itemValue.gameObject.SetActive(false);
+                itemPrice.text = "PRICE - " + item.cost.ToString();
+
+                useButton = InventoryManager.Instance.UseButton;
+                ItemController useButtonItemController = useButton.GetComponent<ItemController>();
+                useButtonItemController.SetItem(item);
+
+                if (item.usable)
+                    useButton.gameObject.SetActive(true);
+                else useButton.gameObject.SetActive(false);
+
+                if (item.consumable)
+                {
+                    useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Use";
+                }
+
+                if (item.equipment)
+                {
                     itemWeight.gameObject.SetActive(true);
 
                     itemWeight.text = "WEIGHT - " + item.weight.ToString();
 
-                if (item.equipmentType != Item.EquipmentType.Weapon)
-                {
-                    weaponAttack.gameObject.SetActive(false);
+                    if (item.equipmentType != Item.EquipmentType.Weapon)
+                    {
+                        weaponAttack.gameObject.SetActive(false);
 
-                    itemArmor.gameObject.SetActive(true);
-                    itemMagicRes.gameObject.SetActive(true);
+                        itemArmor.gameObject.SetActive(true);
+                        itemMagicRes.gameObject.SetActive(true);
 
-                    itemArmor.text = "ARMOR - " + item.armor.ToString();
-                    itemMagicRes.text = "MAGIC RES - " + item.magicRes.ToString();
+                        itemArmor.text = "ARMOR - " + item.armor.ToString();
+                        itemMagicRes.text = "MAGIC RES - " + item.magicRes.ToString();
+                    }
+                    else
+                    {
+                        itemArmor.gameObject.SetActive(false);
+                        itemMagicRes.gameObject.SetActive(false);
+
+                        weaponAttack.gameObject.SetActive(true);
+
+                        weaponAttack.text = "ATTACK - " + item.value.ToString();
+                    }
+
+                    if (item.Equipped)
+                    {
+                        useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Unequip";
+                    }
+                    else
+                    {
+                        useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Equip";
+                    }
+
+                    /*descriptionExtension.SetActive(true);
+                    if (equipmentMenuActive == false)
+                    {
+                        descriptionAnimator.SetTrigger("Open");
+                        descriptionAnimator.SetBool("OpenClose", true);
+
+                        equipmentMenuActive = true;
+                    }*/
                 }
                 else
                 {
+                    itemWeight.gameObject.SetActive(false);
                     itemArmor.gameObject.SetActive(false);
                     itemMagicRes.gameObject.SetActive(false);
+                    weaponAttack.gameObject.SetActive(false);
 
-                    weaponAttack.gameObject.SetActive(true);
+                    /*descriptionAnimator.SetTrigger("Close");
+                    descriptionAnimator.SetBool("OpenClose", false);
 
-                    weaponAttack.text = "ATTACK - " + item.value.ToString();
+                    Invoke("CloseEquipmentMenu", equipmentCloseTime);
+                    equipmentMenuActive = false;*/
                 }
-
-                if (item.Equipped)
+                if (InventoryManager.Instance.Shop)
                 {
-                    useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Unequip";
+                    useButton.gameObject.SetActive(true);
+                    useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Sell";
                 }
-                else
-                {
-                    useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Equip";
-                }
-
-                /*descriptionExtension.SetActive(true);
-                if (equipmentMenuActive == false)
-                {
-                    descriptionAnimator.SetTrigger("Open");
-                    descriptionAnimator.SetBool("OpenClose", true);
-
-                    equipmentMenuActive = true;
-                }*/
             }
-            else
+            catch
             {
-                itemWeight.gameObject.SetActive(false);
-                itemArmor.gameObject.SetActive(false);
-                itemMagicRes.gameObject.SetActive(false);
-                weaponAttack.gameObject.SetActive(false);
-
-                /*descriptionAnimator.SetTrigger("Close");
-                descriptionAnimator.SetBool("OpenClose", false);
-
-                Invoke("CloseEquipmentMenu", equipmentCloseTime);
-                equipmentMenuActive = false;*/
+                Debug.LogWarning("Item not found");
+                Description();
             }
-            if (InventoryManager.Instance.Shop)
-            {
-                useButton.gameObject.SetActive(true);
-                useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Sell";
-            }
+            
         }
 
         /*private void CloseEquipmentMenu()

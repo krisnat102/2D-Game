@@ -40,6 +40,12 @@ MonoBehaviour:
   commitDirectionWhenAttacking: 1
   moveWhenAttacking: 1
   direction: {x: 7, y: 0}
+  cancelMove:
+    serializedVersion: 2
+    x: -0.88
+    y: -0.63
+    width: 1
+    height: 1
   velocity: 50
   movementDelay: 0.35
   canDash: 0

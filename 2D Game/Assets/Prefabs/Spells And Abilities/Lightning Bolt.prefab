@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 300834781376292935}
   - component: {fileID: -1030786744839681751}
   - component: {fileID: 2619312599294634071}
+  - component: {fileID: 3736369551017024667}
   m_Layer: 0
   m_Name: Lightning Bolt
   m_TagString: Untagged
@@ -208,6 +209,27 @@ MonoBehaviour:
   fadeTime: 0
   ui: 0
   uiCanvasGroup: 0
+--- !u!95 &3736369551017024667
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201917306390933128}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8aa3eff1d7a561144859f28e5e3f6c46, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2474861138851934443
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,8 +296,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0
   m_LocalBounds:
-    m_Center: {x: -0.12050003, y: -0.0010000169, z: 0}
-    m_Extent: {x: 1.5464001, y: 0.65830004, z: 0}
+    m_Center: {x: -0.12040001, y: -0.00074997544, z: 0}
+    m_Extent: {x: 1.5469, y: 0.65825, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.4
