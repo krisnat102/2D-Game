@@ -19,7 +19,7 @@ namespace Bardent.Weapons.Components
                 if (item.TryGetComponent(out Enemy enemy))
                 {
                     enemy.TakeDamage(damage, 0, false);
-                    FrameFreeze.Instance.FreezeFrame(damage / 200);
+                    FrameFreeze.Instance.FreezeFrame(damage / FrameFreeze.Instance.AttackFreezeLength);
                 }
                 else if (item.TryGetComponent(out IDamageable damageable))
                 {

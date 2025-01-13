@@ -8,6 +8,11 @@ namespace Krisnat
     {
         public static FrameFreeze Instance;
 
+        [SerializeField] private int attackFreezeLength;
+
+        [Tooltip("The lower the number, the longer the freeze")]
+        public int AttackFreezeLength {  get => attackFreezeLength; private set => attackFreezeLength = value; }
+
         private void Awake()
         {
             Instance = this;

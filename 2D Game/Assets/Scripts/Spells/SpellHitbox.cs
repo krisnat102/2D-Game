@@ -51,7 +51,7 @@ namespace Spells
 
             if (flip)
             {
-                int facingDir = abilities ? 1 : -1;
+                int facingDir = abilities.Side ? 1 : -1;
                 transform.localScale = new Vector3(transform.localScale.x * facingDir, transform.localScale.y, transform.localScale.z);
             }
 

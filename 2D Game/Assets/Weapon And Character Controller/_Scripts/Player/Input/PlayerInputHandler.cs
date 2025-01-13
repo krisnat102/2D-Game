@@ -133,6 +133,7 @@ public class PlayerInputHandler : MonoBehaviour
         NormInputX = Mathf.RoundToInt(RawMovementInput.x);
         NormInputY = Mathf.RoundToInt(RawMovementInput.y);
 
+        if (!MenuManager.Instance.DashAimingMouse) DashDirectionInput = new Vector2Int(NormInputX, NormInputY);
     }
 
     public void OnJumpInput(InputAction.CallbackContext context)
@@ -188,7 +189,7 @@ public class PlayerInputHandler : MonoBehaviour
                 RawDashDirectionInput = cam.ScreenToWorldPoint((Vector3)RawDashDirectionInput) - transform.position;
             }
 
-            DashDirectionInput = Vector2Int.RoundToInt(RawDashDirectionInput.normalized);
+            if (MenuManager.Instance.DashAimingMouse) DashDirectionInput = Vector2Int.RoundToInt(RawDashDirectionInput.normalized);
         }
     }
     public void OnInventoryInput(InputAction.CallbackContext context)

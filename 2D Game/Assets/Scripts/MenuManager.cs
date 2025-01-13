@@ -11,6 +11,7 @@ public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance;
     public bool DamagePopUps { get => damagePopups; private set => damagePopups = value; }
+    public bool DashAimingMouse { get => damagePopups; private set => damagePopups = value; }
     public int CurrentLevel { get; set; }
 
     #region Private Variables
@@ -26,7 +27,7 @@ public class MenuManager : MonoBehaviour
 
     #region Settings
     [SerializeField] private TMP_Dropdown resolutionDropdown, qualityDropdown, fpsDropdown;
-    [SerializeField] private Toggle fullScreenToggle, damagePopUpsToggle;
+    [SerializeField] private Toggle fullScreenToggle, damagePopUpsToggle, dashAimingMouseToggle;
     #endregion
 
     private Resolution[] resolutions;
@@ -207,6 +208,12 @@ public class MenuManager : MonoBehaviour
             damagePopUpsToggle.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("DamagePopUp"));
             DamagePopUps = damagePopUpsToggle.isOn;
         }
+
+        if (PlayerPrefs.HasKey("DamagePopUp"))
+        {
+            dashAimingMouseToggle.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("DashAimingType"));
+            DashAimingMouse = dashAimingMouseToggle.isOn;
+        }
     }
 
     public void SetQuality(int qualityIndex)
@@ -266,6 +273,13 @@ public class MenuManager : MonoBehaviour
     {
         DamagePopUps = value;
         PlayerPrefs.SetInt("DamagePopUp", value ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    public void SetDashAimingType(bool value)
+    {
+        DashAimingMouse = value;
+        PlayerPrefs.SetInt("DashAimingType", value ? 1 : 0);
         PlayerPrefs.Save();
     }
     #endregion
