@@ -369,7 +369,7 @@ MonoBehaviour:
   ledgeCheckVertical: {fileID: 4977279974406180941}
   ceilingCheck: {fileID: 4747483806871184407}
   groundCheckRadius: 0.3
-  wallCheckDistance: 0.5
+  wallCheckDistance: 0.1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 4096
@@ -2072,7 +2072,7 @@ Transform:
   m_GameObject: {fileID: 8588868731750143022}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.099, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

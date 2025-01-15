@@ -135,28 +135,28 @@ namespace Spells
             #endregion
 
             #region Spells UI
-            if (spellManager.SpellsBar.Count > activeSpell)
+            if (spellManager.SpellsBar.Count > activeSpell && mainSpell)
                 if (spellManager.SpellsBar[activeSpell] != null)
                 {
                     mainSpell.sprite = spellManager.SpellsBar[activeSpell]?.icon;
-                    mainSpell.gameObject.SetActive(true);
+                    mainSpell?.gameObject.SetActive(true);
                 }
 
-            if (spellManager.SpellsBar.Count > activeSpell - 1 && activeSpell != 0)
+            if (spellManager.SpellsBar.Count > activeSpell - 1 && activeSpell != 0 && sideSpell2)
             {
                 if (spellManager.SpellsBar[activeSpell - 1] != null && spellManager.SpellsBar.Count > activeSpell - 1)
                 {
                     sideSpell2.sprite = spellManager.SpellsBar[activeSpell - 1]?.icon;
-                    sideSpell2.gameObject.SetActive(true);
+                    sideSpell2?.gameObject.SetActive(true);
                 }
             }
-            else if (spellManager.SpellsBar.Count == 7 && activeSpell == 0)
+            else if (spellManager.SpellsBar.Count == 7 && activeSpell == 0 && sideSpell2)
             {
                 sideSpell2.sprite = spellManager.SpellsBar[7]?.icon;
                 sideSpell2.gameObject.SetActive(true);
             }
 
-            if (spellManager.SpellsBar.Count > activeSpell + 1 && activeSpell != 7)
+            if (spellManager.SpellsBar.Count > activeSpell + 1 && activeSpell != 7 && sideSpell1)
             {
                 if (spellManager.SpellsBar[activeSpell + 1] != null && spellManager.SpellsBar.Count > activeSpell + 1)
                 {
@@ -164,7 +164,7 @@ namespace Spells
                     sideSpell1.gameObject.SetActive(true);
                 }
             }
-            else if (spellManager.SpellsBar.Count > 0 && activeSpell == 7)
+            else if (spellManager.SpellsBar.Count > 0 && activeSpell == 7 && sideSpell1)
             {
                 sideSpell1.sprite = spellManager.SpellsBar[0]?.icon;
                 sideSpell1.gameObject.SetActive(true);
@@ -172,14 +172,14 @@ namespace Spells
             #endregion
 
             #region Abilities UI
-            if (spellManager.AbilitiesBar.Count > activeAbility)
+            if (spellManager.AbilitiesBar.Count > activeAbility && mainAbility)
                 if (spellManager.AbilitiesBar[activeAbility] != null)
                 {
                     mainAbility.sprite = spellManager.AbilitiesBar[activeAbility]?.icon;
                     mainAbility.gameObject.SetActive(true);
                 }
 
-            if (spellManager.AbilitiesBar.Count > activeAbility - 1 && activeAbility != 0)
+            if (spellManager.AbilitiesBar.Count > activeAbility - 1 && activeAbility != 0  && sideAbility2)
             {
                 if (spellManager.AbilitiesBar[activeAbility - 1] != null && spellManager.AbilitiesBar.Count > activeAbility - 1)
                 {
@@ -187,13 +187,13 @@ namespace Spells
                     sideAbility2.gameObject.SetActive(true);
                 }
             }
-            else if (spellManager.AbilitiesBar.Count == 7 && activeAbility == 0)
+            else if (spellManager.AbilitiesBar.Count == 7 && activeAbility == 0 && sideAbility2)
             {
                 sideAbility2.sprite = spellManager.AbilitiesBar[7]?.icon;
                 sideAbility2.gameObject.SetActive(true);
             }
 
-            if (spellManager.AbilitiesBar.Count > activeAbility + 1 && activeAbility != 7)
+            if (spellManager.AbilitiesBar.Count > activeAbility + 1 && activeAbility != 7 && sideAbility1)
             {
                 if (spellManager.AbilitiesBar[activeAbility + 1] != null && spellManager.AbilitiesBar.Count > activeAbility + 1)
                 {
@@ -201,7 +201,7 @@ namespace Spells
                     sideAbility1.gameObject.SetActive(true);
                 }
             }
-            else if (spellManager.AbilitiesBar.Count > 0 && activeAbility == 7)
+            else if (spellManager.AbilitiesBar.Count > 0 && activeAbility == 7 && sideAbility1)
             {
                 sideAbility1.sprite = spellManager.AbilitiesBar[0]?.icon;
                 sideAbility1.gameObject.SetActive(true);

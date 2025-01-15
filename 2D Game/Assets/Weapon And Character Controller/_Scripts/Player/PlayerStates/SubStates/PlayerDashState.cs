@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerDashState : PlayerAbilityState
 {
@@ -86,6 +87,7 @@ public class PlayerDashState : PlayerAbilityState
             }
             else
             {
+                //dashDirection = new Vector2(dashDirection.x, dashDirection.y + 0.005f);
                 Movement?.SetVelocity(playerData.dashVelocity, dashDirection);
                 CheckIfShouldPlaceAfterImage();
 

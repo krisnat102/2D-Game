@@ -95,7 +95,8 @@ public class PlayerGroundedState : PlayerState
         }
         else if (dashInput && player.DashState.CheckIfCanDash() && !isTouchingCeiling && Stats.Stam.CurrentValue > 0.5f)
         {
-            stateMachine.ChangeState(player.DashState);
+            if (player.InputHandler.DashDirectionInput.y != 0) stateMachine.ChangeState(player.DashState);
+            else stateMachine.ChangeState(player.RollState);
         }
     }
 

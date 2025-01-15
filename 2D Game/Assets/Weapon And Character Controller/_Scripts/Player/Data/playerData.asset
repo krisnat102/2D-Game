@@ -27,13 +27,13 @@ MonoBehaviour:
   wallClimbCost: 12
   startOffset: {x: 0.4, y: 0.9}
   stopOffset: {x: 0.4, y: 0.75}
-  dashCooldown: 0.5
+  dashCooldown: 2
   maxHoldTime: 1
   holdTimeScale: 0.25
-  dashTime: 0.2
-  dashVelocity: 25
+  dashTime: 0.3
+  dashVelocity: 20
   drag: 10
-  dashEndYMultiplier: 0.2
+  dashEndYMultiplier: 0
   distBetweenAfterImages: 0.5
   dashCost: 20
   crouchMovementVelocity: 5

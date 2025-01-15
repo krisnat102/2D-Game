@@ -194,6 +194,17 @@ namespace Inventory
                 if (item.consumable)
                 {
                     useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Use";
+                    itemValue.gameObject.SetActive(true);
+
+                    switch (item.consumableType)
+                    {
+                        case Item.ConsumableType.Heal:
+                            itemValue.text = "HEAL - " + item.value.ToString();
+                            break;
+                        case Item.ConsumableType.ManaHeal:
+                            itemValue.text = "HEAL - " + item.value.ToString();
+                            break;
+                    }
                 }
 
                 if (item.equipment)

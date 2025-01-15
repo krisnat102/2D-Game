@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6684929901192448983}
   - component: {fileID: 5051135755799443179}
   - component: {fileID: 8394194292753847921}
+  - component: {fileID: 4595693657260092099}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -51,6 +52,7 @@ MonoBehaviour:
   playerGO: {fileID: 0}
   death: {fileID: 0}
   camera: {fileID: 0}
+  spawnPoint: {fileID: 0}
 --- !u!114 &6684929901192448983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,11 +69,14 @@ MonoBehaviour:
   menu: {fileID: 0}
   miniMenu: {fileID: 0}
   settings: {fileID: 0}
+  playButton: {fileID: 0}
+  existingSaveButtons: {fileID: 0}
   resolutionDropdown: {fileID: 0}
   qualityDropdown: {fileID: 0}
   fpsDropdown: {fileID: 0}
   fullScreenToggle: {fileID: 0}
   damagePopUpsToggle: {fileID: 0}
+  dashAimingMouseToggle: {fileID: 0}
 --- !u!114 &5051135755799443179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,13 +109,14 @@ MonoBehaviour:
   intLevelUpText: {fileID: 0}
   levelUpClosingDuration: 0.2
   bowChargeTimeSlider: {fileID: 0}
-  itemPickupPopUp: {fileID: 0}
-  moveDuration: 0
-  moveDistance: 0
+  itemPickupPopUp: {fileID: 2129565579540532992, guid: a755190821da1ac4d8c44af17d1a55dd,
+    type: 3}
+  moveDuration: 0.3
+  moveDistance: 70
   noteUI: {fileID: 0}
   noteText: {fileID: 0}
-  noteScale: 0
-  noteOpeningSpeed: 0
+  noteScale: 1
+  noteOpeningSpeed: 0.3
 --- !u!114 &8394194292753847921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,4 +130,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemsToStartWith: []
-  itemsToEquip: []
+  itemsToEquip:
+  - {fileID: 11400000, guid: e54dc2810f1b4c44389c39229cd6ca53, type: 2}
+  - {fileID: 11400000, guid: 6b77790175636064bbca27a71ef04082, type: 2}
+--- !u!114 &4595693657260092099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6684929901192448982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 869d88ba1bad838419a154783c364f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackFreezeLength: 175
