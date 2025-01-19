@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4762922251502492109
 RectTransform:
   m_ObjectHideFlags: 0
@@ -179,6 +179,9 @@ MonoBehaviour:
   selectedItemIndicator: {fileID: 7960773382590814105}
   itemCount: {fileID: 6778631032154959489}
   equipmentCloseTime: 0.57
+  selling: 0
+  priceText: {fileID: 0}
+  profitMargin: 0
 --- !u!114 &8170417135543206314
 MonoBehaviour:
   m_ObjectHideFlags: 0

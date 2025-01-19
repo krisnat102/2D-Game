@@ -1,4 +1,5 @@
 using Inventory;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Krisnat
@@ -6,10 +7,19 @@ namespace Krisnat
     public class Shop : MonoBehaviour, IStructurable 
     {
         private AudioSource openAudio;
+        private InventoryManager inventoryManager;
+
+        [SerializeField] private List<Item> itemsForSale = new List<Item>();
 
         private void Start()
         {
             openAudio = GetComponent<AudioSource>();
+            inventoryManager = InventoryManager.Instance;
+
+            foreach(Item item in itemsForSale)
+            {
+                inventoryManager.CreateShopItem(item);
+            }
         }
 
         public void OnTriggerStay2D(Collider2D collision)
@@ -20,26 +30,26 @@ namespace Krisnat
             {
                 PlayerInputHandler.Instance.UseUseInput();
 
-                if (!InventoryManager.Instance.InventoryActiveInHierarchy)
+                if (!inventoryManager.InventoryActiveInHierarchy)
                 {
                     openAudio.Play();
-                    InventoryManager.Instance.Shop = true;
-                    InventoryManager.Instance.OpenCloseInventory(true);
+                    inventoryManager.Shop = true;
+                    inventoryManager.OpenCloseInventory(true);
                 }
                 else
                 {
-                    InventoryManager.Instance.Shop = false;
-                    InventoryManager.Instance.OpenCloseInventory(false);
+                    inventoryManager.Shop = false;
+                    inventoryManager.OpenCloseInventory(false);
                 }
             }
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            if(InventoryManager.Instance.InventoryActiveInHierarchy && InventoryManager.Instance.Shop)
+            if(inventoryManager.InventoryActiveInHierarchy && inventoryManager.Shop)
             {
-                InventoryManager.Instance.Shop = false;
-                InventoryManager.Instance.OpenCloseInventory(false);
+                inventoryManager.Shop = false;
+                inventoryManager.OpenCloseInventory(false);
             }
         }
     }

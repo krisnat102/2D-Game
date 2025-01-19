@@ -14,15 +14,11 @@ namespace Inventory
         public static InventoryManager Instance;
 
         #region Private Variables
-        [SerializeField] private List<Item> items = new();
 
+        [Header("Inventory References")]
         [SerializeField] private Transform itemContent;
         [SerializeField] private GameObject inventoryItem;
-
         [SerializeField] private Toggle enableRemove;
-
-        [SerializeField] private InventoryItemController[] inventoryItems;
-
         [SerializeField] private GameObject inventory, spellInventory, characterTab;
 
         [Header("Animations")]
@@ -34,14 +30,20 @@ namespace Inventory
 
         [Header("Equipment MiniMenu")]
         [SerializeField] private Animator equipmentMenuAnimator;
-        [SerializeField] private GameObject equipmentMenu;
+        [SerializeField] private GameObject equipmentMenu, equipmentButtons;
         [SerializeField] private Button helmetBn, chestplateBn, glovesBn, bootsBn, swordBn, bowBn;
 
         [Header("Item Description")]
         [SerializeField] private Button useButton;
         [SerializeField] private Image itemImage;
         [SerializeField] private TMP_Text itemName, itemDescription, itemValue, itemPrice, itemWeight, itemArmor, itemMagicRes, weaponAttack;
+
         [SerializeField] private GameObject description;
+
+        [Header("Shop")]
+        [SerializeField] private GameObject shopInterface;
+        [SerializeField] private GameObject inventoryShopItem;
+        [SerializeField] private Transform shopItemContent;
 
         [Header("Coins")]
         [SerializeField] private GameObject purse;
@@ -50,6 +52,7 @@ namespace Inventory
 
         private Filter filter = default;
         private float totalArmor, totalMagicRes, totalWeight;
+        private List<Item> items = new();
         private List<Item> distinctItems, duplicates, currentItems, allItems, equippedItems = new List<Item>();
         private float inventoryScale, characterTabScale;
         private Animator purseAnimator;
@@ -207,6 +210,12 @@ namespace Inventory
             {
                 UIManager.Instance.OpenCloseUI(Inventory, inventoryScale, inventoryOpeningSpeed, true, false, true);
 
+                if (Shop)
+                {
+                    shopInterface.SetActive(true);
+                    equipmentButtons.SetActive(false);
+                } 
+
                 //TODO: Optimize this awful code out of the game
                 //(done 2 times because of a bug with the item count upon first opening on inv)
                 ListItems();
@@ -217,6 +226,9 @@ namespace Inventory
                 GameObject[] uiToClose = new GameObject[2];
                 uiToClose[0] = SpellInventory; uiToClose[1] = CharacterTab;
                 UIManager.Instance.OpenCloseUI(Inventory, inventoryScale, inventoryClosingSpeed, true, false, false, uiToClose);
+
+                shopInterface.SetActive(false);
+                equipmentButtons.SetActive(true);
                 //Core.GameManager.Instance.GamePaused = false;
             }
         }
@@ -476,6 +488,27 @@ namespace Inventory
             return obj;
         }
 
+        public GameObject CreateShopItem(Item item)
+        {
+            GameObject obj = Instantiate(inventoryShopItem, shopItemContent);
+
+            obj.SetActive(true);
+
+            obj.name = item.name;
+
+            ItemController itemController = obj.GetComponent<ItemController>();
+            itemController.SetItem(item);
+
+            //var itemCount = obj.transform.Find("ItemCount").GetComponent<TextMeshProUGUI>();
+            var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
+
+            itemName.text = item.itemName;
+            //itemCount.text = (item.ItemCount > 1 ? "x" + item.ItemCount.ToString() : "");
+            itemIcon.sprite = item.icon;
+
+            return obj;
+        }
+
         private void EnableItemRemove()
         {
             if (enableRemove.isOn)
@@ -500,22 +533,18 @@ namespace Inventory
             ListItems();
         }
 
-        private void SetInventoryItems()
-        {
-            inventoryItems = itemContent.GetComponentsInChildren<InventoryItemController>();
-            System.Array.Resize(ref inventoryItems, DistinctItems.Count);
-
-            for (int i = 0; i < DistinctItems.Count; i++)
-            {
-                inventoryItems[i].AddItem(DistinctItems[i]);
-            }
-        }
-
         public void DisableSelectedIndicators()
         {
             foreach(Transform item in itemContent)
             {
                 item.GetComponent<InventoryItemController>().SelectedItemIndicator.gameObject.SetActive(false);
+            }
+            if (Shop)
+            {
+                foreach (Transform item in shopItemContent)
+                {
+                    item.GetComponent<InventoryItemController>().SelectedItemIndicator.gameObject.SetActive(false);
+                }
             }
         }
 
