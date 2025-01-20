@@ -320,7 +320,6 @@ namespace Inventory
                 .Where(g => g.Count() > 1)
                 .SelectMany(g => g.Skip(1))
                 .ToList();
-
             //clears the inventory before opening so that items dont duplicate
             if (currentItems != null)
             {
@@ -331,7 +330,6 @@ namespace Inventory
             foreach (Transform trans in itemContent)
             {
                 Item item = trans.GetComponent<ItemController>().GetItem();
-                Debug.Log(item.name);
                 if (item.ItemCount != 0)
                 {
                     item.SetItemCount(1);
@@ -349,11 +347,13 @@ namespace Inventory
                 foreach (Item item in DistinctItems.Except(currentItems))
                 {
                     GameObject obj = CreateItem(item);
+                    item.SetItemCount(1);
                 }
 
                 foreach (Item item in currentItems.Except(DistinctItems))
                 {
                     GameObject obj = CreateItem(item);
+                    item.SetItemCount(1);
                 }
             }
             else
@@ -361,6 +361,7 @@ namespace Inventory
                 foreach (Item item in DistinctItems)
                 {
                     GameObject obj = CreateItem(item);
+                    item.SetItemCount(1);
                 }
             }
 

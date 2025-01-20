@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using Bardent.CoreSystem;
 using Krisnat;
+using Interactables;
 
 namespace Inventory
 {
@@ -41,7 +42,7 @@ namespace Inventory
         private void Start()
         {
             item = GetComponent<ItemController>().GetItem();
-            cost = CalculateCost(item);
+            cost = item.GetSaleCost();
 
             if (selling)
             {
@@ -105,20 +106,21 @@ namespace Inventory
             {
                 ItemController itemController = button.GetComponent<ItemController>();
                 Item item = itemController.GetItem();
-                cost = CalculateCost(item);
 
                 if (button.GetComponentInChildren<TextMeshProUGUI>().text == "Sell")
                 {
                     if (item.equipment && item.Equipped) return;
                     DecreaseItem(item);
 
-                    InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins + cost, false);
+                    InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins + item.cost, false);
                     AudioManager.Instance.PlayCoinPickupSound(0.8f, 1.2f);
                     return;
                 }
 
                 if (button.GetComponentInChildren<TextMeshProUGUI>().text == "Buy")
                 {
+                    cost = item.GetSaleCost();
+
                     if (InventoryManager.Instance.Coins < cost)
                     {
                         CameraShake.Instance.ShakeCamera(0.3f, 1.7f);
@@ -180,14 +182,6 @@ namespace Inventory
             }
         }
 
-        private int CalculateCost(Item item)
-        {
-            int itemCost;
-            itemCost = item.cost;
-            if (selling) itemCost = (int)Mathf.Floor(item.cost * profitMargin); //price goes up when the item is for sale
-            return itemCost;
-        }
-
         public void DisableSelectedIndicators() => InventoryManager.Instance.DisableSelectedIndicators();
         #endregion
 
@@ -199,7 +193,7 @@ namespace Inventory
             try
             {
                 item = itemController.GetItem();
-                cost = CalculateCost(item);
+                cost = item.GetSaleCost();
 
                 description = InventoryManager.Instance.Description;
                 description.SetActive(true);

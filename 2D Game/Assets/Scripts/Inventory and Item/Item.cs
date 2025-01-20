@@ -87,6 +87,10 @@ namespace Inventory
         {
             return weaponData.Type;
         }
+        public int GetSaleCost()
+        {
+            return (int)Mathf.Floor(cost * 1.4f);
+        }
         public void SetEquipped(bool equip)
         {
             Equipped = equip;
