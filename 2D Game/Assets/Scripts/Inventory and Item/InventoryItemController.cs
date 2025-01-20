@@ -57,6 +57,7 @@ namespace Inventory
             GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
 
             ItemController itemController = button.GetComponentInParent<ItemController>();
+            item = itemController.GetItem();
             //item = itemController.GetItem();
 
             if (item.Equipped == true) return;
@@ -102,6 +103,10 @@ namespace Inventory
 
             try
             {
+                ItemController itemController = button.GetComponent<ItemController>();
+                Item item = itemController.GetItem();
+                cost = CalculateCost(item);
+
                 if (button.GetComponentInChildren<TextMeshProUGUI>().text == "Sell")
                 {
                     if (item.equipment && item.Equipped) return;
@@ -123,8 +128,9 @@ namespace Inventory
                     InventoryManager.Instance.Add(item, false);
 
                     InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - cost, false);
+                    InventoryManager.Instance.ListItems();
                     AudioManager.Instance.PlayBuySound(0.8f, 1.2f);
-                    transform.gameObject.SetActive(false);
+                    //transform.gameObject.SetActive(false);
                     return;
                 }
 
@@ -179,7 +185,9 @@ namespace Inventory
         {
             int itemCost;
             itemCost = item.cost;
+            Debug.Log(itemCost + "a");
             if (selling) itemCost = (int)Mathf.Floor(item.cost * profitMargin); //price goes up when the item is for sale
+            Debug.Log(itemCost);
             return itemCost;
         }
 
@@ -189,8 +197,13 @@ namespace Inventory
         #region UI Methods
         public void Description()
         {
+            GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+            ItemController itemController = button?.GetComponent<ItemController>();
             try
             {
+                item = itemController.GetItem();
+                cost = CalculateCost(item);
+
                 description = InventoryManager.Instance.Description;
                 description.SetActive(true);
 

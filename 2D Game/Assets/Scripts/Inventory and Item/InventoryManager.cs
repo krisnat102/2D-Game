@@ -52,7 +52,7 @@ namespace Inventory
 
         private Filter filter = default;
         private float totalArmor, totalMagicRes, totalWeight;
-        private List<Item> items = new();
+        private List<Item> items = new List<Item>();
         private List<Item> distinctItems, duplicates, currentItems, allItems, equippedItems = new List<Item>();
         private float inventoryScale, characterTabScale;
         private Animator purseAnimator;
@@ -233,7 +233,6 @@ namespace Inventory
             }
         }
         
-
         public void OpenCloseCharacterTab(bool openOrClose)
         {
             if (openOrClose)
