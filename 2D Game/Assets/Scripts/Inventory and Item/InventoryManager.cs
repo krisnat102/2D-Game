@@ -331,6 +331,7 @@ namespace Inventory
             foreach (Transform trans in itemContent)
             {
                 Item item = trans.GetComponent<ItemController>().GetItem();
+                Debug.Log(item.name);
                 if (item.ItemCount != 0)
                 {
                     item.SetItemCount(1);

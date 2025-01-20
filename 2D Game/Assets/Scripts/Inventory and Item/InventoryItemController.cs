@@ -32,7 +32,7 @@ namespace Inventory
         #region Unity Methods
         private void Update()
         {
-            if (GetComponent<ItemController>().GetItem().ItemCount <= 0)
+            if (GetComponent<ItemController>().GetItem().ItemCount <= 0 && !selling)
             {
                 Destroy(gameObject);
             }
@@ -69,7 +69,7 @@ namespace Inventory
         public void RemoveItem2(Item item)
         {
             InventoryManager.Instance.Remove(item);
-
+            Debug.Log(item.name);
             GameObject itemToDelete = GameObject.Find(item.name);
             if (itemToDelete != null) Destroy(itemToDelete);
             else Debug.Log("not found item to delete");
@@ -121,7 +121,7 @@ namespace Inventory
                 {
                     if (InventoryManager.Instance.Coins < cost)
                     {
-                        CameraShake.Instance.ShakeCamera(0.4f, 2);
+                        CameraShake.Instance.ShakeCamera(0.3f, 1.7f);
 
                         return;
                     }
@@ -130,7 +130,6 @@ namespace Inventory
                     InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - cost, false);
                     InventoryManager.Instance.ListItems();
                     AudioManager.Instance.PlayBuySound(0.8f, 1.2f);
-                    //transform.gameObject.SetActive(false);
                     return;
                 }
 
@@ -185,9 +184,7 @@ namespace Inventory
         {
             int itemCost;
             itemCost = item.cost;
-            Debug.Log(itemCost + "a");
             if (selling) itemCost = (int)Mathf.Floor(item.cost * profitMargin); //price goes up when the item is for sale
-            Debug.Log(itemCost);
             return itemCost;
         }
 

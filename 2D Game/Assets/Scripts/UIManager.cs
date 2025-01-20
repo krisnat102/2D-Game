@@ -118,7 +118,7 @@ namespace Krisnat
             else
             {
                 inventoryAnimationActive = true;
-                StartCoroutine(CloseUIAnimationCoroutine(menu, targetSize, duration));
+                if (menu) StartCoroutine(CloseUIAnimationCoroutine(menu, targetSize, duration));
             }
         }
 
@@ -193,7 +193,7 @@ namespace Krisnat
                 {
                     foreach (var uiElement in uiToClose)
                     {
-                        uiElement.SetActive(false);
+                        uiElement?.SetActive(false);
                     }
                 }
             }
