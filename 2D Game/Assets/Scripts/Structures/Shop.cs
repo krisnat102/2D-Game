@@ -10,6 +10,7 @@ namespace Krisnat
         private InventoryManager inventoryManager;
 
         [SerializeField] private List<Item> itemsForSale = new List<Item>();
+        [SerializeField] private Transform shopItemContent;
 
         private void Start()
         {
@@ -18,7 +19,7 @@ namespace Krisnat
 
             foreach(Item item in itemsForSale)
             {
-                inventoryManager.CreateShopItem(item);
+                inventoryManager.CreateShopItem(item, shopItemContent);
             }
         }
 
@@ -35,6 +36,7 @@ namespace Krisnat
                     openAudio.Play();
                     inventoryManager.Shop = true;
                     inventoryManager.OpenCloseInventory(true);
+                    shopItemContent.gameObject.SetActive(true);
                 }
                 else
                 {
@@ -50,6 +52,7 @@ namespace Krisnat
             {
                 inventoryManager.Shop = false;
                 inventoryManager.OpenCloseInventory(false);
+                shopItemContent.gameObject.SetActive(false);
             }
         }
     }

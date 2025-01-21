@@ -43,7 +43,8 @@ namespace Inventory
         [Header("Shop")]
         [SerializeField] private GameObject shopInterface;
         [SerializeField] private GameObject inventoryShopItem;
-        [SerializeField] private Transform shopItemContent;
+        [SerializeField] private List<Transform> shopItemContents = new();
+        
 
         [Header("Coins")]
         [SerializeField] private GameObject purse;
@@ -229,8 +230,15 @@ namespace Inventory
 
                 shopInterface.SetActive(false);
                 equipmentButtons.SetActive(true);
-                //Core.GameManager.Instance.GamePaused = false;
-            }
+                if (Shop)
+                {
+                    foreach(Transform shopItemContent in shopItemContents)
+                    {
+                        shopItemContent.gameObject.SetActive(false);
+                    }
+                }
+                    //Core.GameManager.Instance.GamePaused = false;
+                }
         }
         
         public void OpenCloseCharacterTab(bool openOrClose)
@@ -489,9 +497,9 @@ namespace Inventory
             return obj;
         }
 
-        public GameObject CreateShopItem(Item item)
+        public GameObject CreateShopItem(Item item, Transform transContent)
         {
-            GameObject obj = Instantiate(inventoryShopItem, shopItemContent);
+            GameObject obj = Instantiate(inventoryShopItem, transContent);
 
             obj.SetActive(true);
 
@@ -542,9 +550,12 @@ namespace Inventory
             }
             if (Shop)
             {
-                foreach (Transform item in shopItemContent)
+                foreach(Transform shopItemContent in shopItemContents)
                 {
-                    item.GetComponent<InventoryItemController>().SelectedItemIndicator.gameObject.SetActive(false);
+                    foreach (Transform item in shopItemContent)
+                    {
+                        item.GetComponent<InventoryItemController>().SelectedItemIndicator.gameObject.SetActive(false);
+                    }
                 }
             }
         }
