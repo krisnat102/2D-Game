@@ -20,7 +20,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] private AudioSource music;
-    [SerializeField] private AudioSource buySound, coinPickupSound;
+    [SerializeField] private AudioSource buySound, coinPickupSound, tradeRefusedSound;
     [SerializeField] private AudioSource swordSoundEffect, bowSoundEffect;
     [SerializeField] private AudioSource fireballLaunchEffect, lightningEffect;
 
@@ -136,6 +136,12 @@ public class AudioManager : MonoBehaviour
     {
         coinPickupSound.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
         coinPickupSound.Play();
+    }
+
+    public void PlayTradeRefusedSound(float lowerPitch, float higherPitch)
+    {
+        tradeRefusedSound.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        tradeRefusedSound.Play();
     }
 
     public void PlaySwordSound(float lowerPitch, float higherPitch)

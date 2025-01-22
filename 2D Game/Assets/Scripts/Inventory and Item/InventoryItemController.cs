@@ -124,6 +124,7 @@ namespace Inventory
                     if (InventoryManager.Instance.Coins < cost)
                     {
                         CameraShake.Instance.ShakeCamera(0.3f, 1.7f);
+                        AudioManager.Instance.PlayTradeRefusedSound(0.5f, 0.6f);
 
                         return;
                     }
@@ -312,6 +313,8 @@ namespace Inventory
                     useButton.gameObject.SetActive(true);
                     useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Buy";
                 }
+
+                DisableSelectedIndicators();
             }
             catch
             {

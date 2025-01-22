@@ -224,21 +224,18 @@ namespace Inventory
             }
             else
             {
+                foreach(Transform shopItemContent in shopItemContents)
+                {
+                    shopItemContent?.gameObject.SetActive(false);
+                }
+
                 GameObject[] uiToClose = new GameObject[2];
                 uiToClose[0] = SpellInventory; uiToClose[1] = CharacterTab;
                 UIManager.Instance.OpenCloseUI(Inventory, inventoryScale, inventoryClosingSpeed, true, false, false, uiToClose);
 
                 shopInterface.SetActive(false);
                 equipmentButtons.SetActive(true);
-                if (Shop)
-                {
-                    foreach(Transform shopItemContent in shopItemContents)
-                    {
-                        shopItemContent.gameObject.SetActive(false);
-                    }
-                }
-                    //Core.GameManager.Instance.GamePaused = false;
-                }
+            }
         }
         
         public void OpenCloseCharacterTab(bool openOrClose)
@@ -445,8 +442,6 @@ namespace Inventory
                     UnequipItem(equippedItems[i]);
                 }
             }
-
-            //SetInventoryItems();
         }
 
         private GameObject CreateItem(Item item)
@@ -461,11 +456,9 @@ namespace Inventory
             itemController.SetItem(item);
 
             var itemName = obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
-            //var itemCount = obj.transform.Find("ItemCount").GetComponent<TextMeshProUGUI>();
             var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
 
             itemName.text = item.itemName;
-            //itemCount.text = (item.ItemCount > 1 ? "x" + item.ItemCount.ToString() : "");
             itemIcon.sprite = item.icon;
 
             if (filter == Filter.ConsumableInv)
@@ -508,11 +501,9 @@ namespace Inventory
             ItemController itemController = obj.GetComponent<ItemController>();
             itemController.SetItem(item);
 
-            //var itemCount = obj.transform.Find("ItemCount").GetComponent<TextMeshProUGUI>();
             var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
 
             itemName.text = item.itemName;
-            //itemCount.text = (item.ItemCount > 1 ? "x" + item.ItemCount.ToString() : "");
             itemIcon.sprite = item.icon;
 
             return obj;
