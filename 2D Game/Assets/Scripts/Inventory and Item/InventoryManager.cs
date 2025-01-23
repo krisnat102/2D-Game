@@ -224,17 +224,20 @@ namespace Inventory
             }
             else
             {
-                foreach(Transform shopItemContent in shopItemContents)
+                if (shopItemContents.Count > 0 && shopItemContents[0])
                 {
-                    shopItemContent?.gameObject.SetActive(false);
+                    foreach (Transform shopItemContent in shopItemContents)
+                    {
+                        shopItemContent?.gameObject.SetActive(false);
+                    }
                 }
 
                 GameObject[] uiToClose = new GameObject[2];
                 uiToClose[0] = SpellInventory; uiToClose[1] = CharacterTab;
                 UIManager.Instance.OpenCloseUI(Inventory, inventoryScale, inventoryClosingSpeed, true, false, false, uiToClose);
 
-                shopInterface.SetActive(false);
-                equipmentButtons.SetActive(true);
+                if (shopInterface) shopInterface.SetActive(false);
+                if (equipmentButtons) equipmentButtons.SetActive(true);
             }
         }
         

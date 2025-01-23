@@ -25,12 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6974382459076998432}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6974382459076998431
 MonoBehaviour:
@@ -44,13 +45,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac46fc44cc9a4dd43b1bd864bfb330ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Items: []
-  ItemContent: {fileID: 0}
-  InventoryItem: {fileID: 0}
-  EnableRemove: {fileID: 0}
-  InventoryItems: []
-  Inventory: {fileID: 0}
-  SpellInventory: {fileID: 0}
+  itemContent: {fileID: 0}
+  inventoryItem: {fileID: 0}
+  enableRemove: {fileID: 0}
+  inventory: {fileID: 0}
+  spellInventory: {fileID: 0}
+  characterTab: {fileID: 0}
+  inventoryOpeningSpeed: 0.2
+  inventoryClosingSpeed: 0.2
+  characterTabOpeningSpeed: 0.2
+  characterTabClosingSpeed: 0.2
+  equipmentMenuAnimator: {fileID: 0}
+  equipmentMenu: {fileID: 0}
+  equipmentButtons: {fileID: 0}
+  helmetBn: {fileID: 0}
+  chestplateBn: {fileID: 0}
+  glovesBn: {fileID: 0}
+  bootsBn: {fileID: 0}
+  swordBn: {fileID: 0}
+  bowBn: {fileID: 0}
+  useButton: {fileID: 0}
+  itemImage: {fileID: 0}
+  itemName: {fileID: 0}
+  itemDescription: {fileID: 0}
+  itemValue: {fileID: 0}
+  itemPrice: {fileID: 0}
+  itemWeight: {fileID: 0}
+  itemArmor: {fileID: 0}
+  itemMagicRes: {fileID: 0}
+  weaponAttack: {fileID: 0}
+  description: {fileID: 0}
+  shopInterface: {fileID: 0}
+  inventoryShopItem: {fileID: 0}
+  shopItemContents:
+  - {fileID: 0}
+  - {fileID: 0}
+  purse: {fileID: 0}
+  coinCounter: {fileID: 0}
+  levelUpCoinCounter: {fileID: 0}
+  inventoryCoinCounter: {fileID: 0}
+  purseAnimationDistance: 200
+  purseAnimationDuration: 0.4
+  purseAnimationTimeOnScreen: 2.5
 --- !u!114 &76648772342980793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,13 +99,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc54cbc733e32840ad5d93ec53572ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Spells: []
-  SpellContent: {fileID: 0}
-  InventorySpell: {fileID: 2074373540294830318, guid: 0c4eb4dbd6df63346bd34712bf0ed197,
+  spellContent: {fileID: 0}
+  abilityContent: {fileID: 0}
+  inventorySpell: {fileID: 0}
+  spellContentBar: {fileID: 0}
+  abilityContentBar: {fileID: 0}
+  activeSpell: {fileID: 2074373540294830318, guid: 6375c4f527dc72c43832b34579b4b78c,
     type: 3}
-  InventorySpells: []
-  SpellInventory: {fileID: 0}
-  Inventory: {fileID: 0}
-  SpellContentBar: {fileID: 0}
-  ActiveSpell: {fileID: 2074373540294830318, guid: 6375c4f527dc72c43832b34579b4b78c,
-    type: 3}
+  inventoryOpenTime: 0.2
+  inventoryCloseTime: 0.2
+  useButton: {fileID: 0}
+  spellImage: {fileID: 0}
+  spellName: {fileID: 0}
+  spellDescription: {fileID: 0}
+  spellValue: {fileID: 0}
+  spellPrice: {fileID: 0}
+  description: {fileID: 0}
+  useButton1: {fileID: 0}
+  spellImage1: {fileID: 0}
+  spellName1: {fileID: 0}
+  spellDescription1: {fileID: 0}
+  spellValue1: {fileID: 0}
+  spellPrice1: {fileID: 0}
+  description1: {fileID: 0}

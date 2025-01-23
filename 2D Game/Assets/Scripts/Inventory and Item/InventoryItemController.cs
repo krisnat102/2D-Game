@@ -25,6 +25,7 @@ namespace Inventory
         private GameObject description;
         //private bool equipmentMenuActive = false;
         private Item item;
+        private Item oldDescriptionItem;
         private int cost;
 
         public Image SelectedItemIndicator { get => selectedItemIndicator; private set => selectedItemIndicator = value; }
@@ -314,7 +315,9 @@ namespace Inventory
                     useButton.GetComponentInChildren<TextMeshProUGUI>().text = "Buy";
                 }
 
-                DisableSelectedIndicators();
+                if (!oldDescriptionItem) oldDescriptionItem = item;
+                else if(oldDescriptionItem  != item) DisableSelectedIndicators();
+                oldDescriptionItem = item;
             }
             catch
             {

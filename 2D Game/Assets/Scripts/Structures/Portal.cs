@@ -37,7 +37,7 @@ namespace Krisnat
 
                 if (locked && key)
                 {
-                    uiPopUp.SetActive(true);
+                    uiPopUp?.SetActive(true);
 
                     if (!InventoryManager.Instance.Items.Contains(key))
                     {

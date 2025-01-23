@@ -241,7 +241,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 602727568}
   m_HandleRect: {fileID: 602727567}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1413,9 +1413,9 @@ RectTransform:
   m_Children:
   - {fileID: 2086504996}
   - {fileID: 751084416}
-  - {fileID: 1699353954}
   - {fileID: 815060411}
   - {fileID: 5864749424672069629}
+  - {fileID: 1699353954}
   m_Father: {fileID: 1107036914}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -8402,6 +8402,7 @@ MonoBehaviour:
   music: {fileID: 0}
   buySound: {fileID: 0}
   coinPickupSound: {fileID: 0}
+  tradeRefusedSound: {fileID: 0}
   swordSoundEffect: {fileID: 0}
   bowSoundEffect: {fileID: 0}
   fireballLaunchEffect: {fileID: 0}
