@@ -25,20 +25,20 @@ namespace Krisnat.Assets.Scripts
             var levelHandler = player.GetComponent<LevelHandler>();
             var stats = player.Core.GetCoreComponent<Stats>();
 
-            //level = player.PlayerData.PlayerLevel;
+            level = player.PlayerData.PlayerLevel;
 
-            //maxHealth = stats.Health.MaxValue;
+            maxHealth = stats.Health.MaxValue;
             //currentHealth = stats.Health.CurrentValue;
 
-            //maxStam = stats.Stam.MaxValue;
+            maxStam = stats.Stam.MaxValue;
             //currentStam = stats.Stam.CurrentValue;
 
-            //maxMana = stats.Mana.MaxValue;
+            maxMana = stats.Mana.MaxValue;
             //currentMana = stats.Mana.CurrentValue;
 
-            //strength = levelHandler.StrengthCounter;
-            //dexterity = levelHandler.DexterityCounter;
-            //intelligence = levelHandler.IntelligenceCounter;
+            strength = levelHandler.StrengthCounter;
+            dexterity = levelHandler.DexterityCounter;
+            intelligence = levelHandler.IntelligenceCounter;
 
             coins = InventoryManager.Instance.Coins;
 

@@ -133,16 +133,16 @@ namespace CoreClass
             if (data.battlesId != null) Battles = data.battlesId.ToList();
             else Battles.Clear();
 
-            /*player.PlayerData.SetLevel(data.level);
+            //stats.Health.SetCurrentStat(data.currentHealth);
+            //stats.Mana.SetCurrentStat(data.currentMana);
+            //stats.Stam.SetCurrentStat(data.currentStam);
+            player.PlayerData.SetLevel(data.level);
             stats.Health.SetMaxStat(data.maxHealth);
             stats.Mana.SetMaxStat(data.maxMana);
             stats.Stam.SetMaxStat(data.maxStam);
-            stats.Health.SetCurrentStat(data.currentHealth);
-            stats.Mana.SetCurrentStat(data.currentMana);
-            stats.Stam.SetCurrentStat(data.currentStam);
             levelHandler.SetStrength(data.strength);
             levelHandler.SetDexterity(data.dexterity);
-            levelHandler.SetIntelligence(data.intelligence);*/
+            levelHandler.SetIntelligence(data.intelligence);
             inventoryManager.SetCoins(data.coins, false);
             stats.Health.SetCurrentStat(stats.Health.MaxValue);
             stats.Mana.SetCurrentStat(stats.Mana.MaxValue);

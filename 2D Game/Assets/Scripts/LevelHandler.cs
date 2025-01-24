@@ -32,16 +32,18 @@ namespace Krisnat
         #endregion
 
         #region Unity Methods
-        private void Awake()
+        private void Start()
         {
-            stats = GetComponentInChildren<Bardent.CoreSystem.Core>().GetComponentInChildren<Stats>();
-            player = GetComponent<Player>();
+            stats = PlayerInputHandler.Instance.GetComponentInChildren<Stats>();
+            player = PlayerInputHandler.Instance.GetComponent<Player>();
 
             playerData = player.PlayerData;
+            LevelUpCost = initialLevelUpCost * playerData.PlayerLevel;
+
+            InventoryManager.Instance.SetCoins(10000, false);
         }
         private void Update()
         {
-            LevelUpCost = initialLevelUpCost * playerData.PlayerLevel / 2;
             StrengthDamage = 1 + StrengthCounter / 10;
             DexterityDamage = 1 + DexterityCounter / 10;
             IntelligenceDamage = 1 + IntelligenceCounter / 10;
@@ -86,6 +88,7 @@ namespace Krisnat
             stats.Mana.LevelUpStat(subStatsIncrease);
 
             playerData.LevelUp();
+            LevelUpCost = initialLevelUpCost * playerData.PlayerLevel;
             InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - LevelUpCost, false);
         }
 

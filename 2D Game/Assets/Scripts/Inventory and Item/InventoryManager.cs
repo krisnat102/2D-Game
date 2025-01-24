@@ -66,6 +66,7 @@ namespace Inventory
         public bool InventoryActiveInHierarchy { get; private set; }
         public bool SpellInventoryActiveInHierarchy { get; private set; }
         public bool CharacterTabActiveInHierarchy { get; private set; }
+        public bool LevelUpUIActiveInHierarchy { get; private set; }
         public bool Shop { get; set; }
         public Button HelmetBn { get => helmetBn; private set => helmetBn = value; }
         public Button ChestplateBn { get => chestplateBn; private set => chestplateBn = value; }
@@ -124,6 +125,8 @@ namespace Inventory
             characterTabScale = characterTab.transform.localScale.x;
 
             purseAnimator = purse.GetComponent<Animator>();
+
+            StartCoinAnimation();
         }
 
         public void Update()
@@ -131,6 +134,7 @@ namespace Inventory
             InventoryActiveInHierarchy = Inventory.activeInHierarchy;
             SpellInventoryActiveInHierarchy = SpellInventory.activeInHierarchy;
             CharacterTabActiveInHierarchy = CharacterTab.activeInHierarchy;
+            LevelUpUIActiveInHierarchy = UIManager.Instance.LevelUpInterface.activeInHierarchy;
 
             coinCounter.text = Coins.ToString();
             inventoryCoinCounter.text = Coins.ToString();
@@ -139,7 +143,7 @@ namespace Inventory
             if (PlayerInputHandler.Instance.InventoryInput)
             {
                 PlayerInputHandler.Instance.UseInventoryInput();
-                if (!InventoryActiveInHierarchy && !SpellInventoryActiveInHierarchy && !CharacterTabActiveInHierarchy)
+                if (!InventoryActiveInHierarchy && !SpellInventoryActiveInHierarchy && !CharacterTabActiveInHierarchy && !LevelUpUIActiveInHierarchy)
                 {
                     OpenCloseInventory(true);
                 }
@@ -159,7 +163,7 @@ namespace Inventory
             if (PlayerInputHandler.Instance.CharacterTabInput)
             {
                 PlayerInputHandler.Instance.UseCharacterTabInput();
-                if (!InventoryActiveInHierarchy && !SpellInventoryActiveInHierarchy && !CharacterTabActiveInHierarchy)
+                if (!InventoryActiveInHierarchy && !SpellInventoryActiveInHierarchy && !CharacterTabActiveInHierarchy && !LevelUpUIActiveInHierarchy)
                 {
                     OpenCloseCharacterTab(true);
                 }

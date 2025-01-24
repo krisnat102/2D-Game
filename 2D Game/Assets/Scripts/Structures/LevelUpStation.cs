@@ -41,11 +41,11 @@ namespace Krisnat
                     {
                         levelUpUI.SetActive(true);
                         levelUpUI.transform.localScale = new Vector3(0.05f, 0.05f, levelUpUI.transform.localScale.z);
-                        UIManager.Instance.OpenCloseUIAnimation(levelUpUI, scale, openingAnimationDuration, true);
+                        UIManager.Instance.OpenCloseUIAnimation(levelUpUI, scale, openingAnimationDuration, true, true, false);
                     }
                     else
                     {
-                        UIManager.Instance.OpenCloseUIAnimation(levelUpUI, 0.05f, closingAnimationDuration, false);
+                        UIManager.Instance.OpenCloseUIAnimation(levelUpUI, 0.05f, closingAnimationDuration, false, true, false);
                     }
                 }
                 else
@@ -71,7 +71,7 @@ namespace Krisnat
 
             if (player && levelUpUI && levelUpUI.activeInHierarchy)
             {
-                UIManager.Instance.OpenCloseUIAnimation(levelUpUI, 0.05f, closingAnimationDuration, false);
+                UIManager.Instance.OpenCloseUIAnimation(levelUpUI, 0.05f, closingAnimationDuration, false, true, false);
             }
         }
     }

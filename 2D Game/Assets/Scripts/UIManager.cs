@@ -59,6 +59,10 @@ namespace Krisnat
         private void Awake()
         {
             Instance = this;
+        }
+
+        private void Start()
+        {
             playerData = Stats.Instance?.gameObject.GetComponentInParent<Player>().PlayerData;
             levelHandler = Stats.Instance?.gameObject.GetComponentInParent<LevelHandler>();
             NoteOpen = false;
@@ -86,7 +90,7 @@ namespace Krisnat
 
             if (PlayerInputHandler.Instance.MenuInput && LevelUpInterface.activeInHierarchy)
             {
-                OpenCloseUIAnimation(LevelUpInterface, 0.05f, levelUpClosingDuration, false);
+                OpenCloseUIAnimation(LevelUpInterface, 0.05f, levelUpClosingDuration, false, true, false);
                 PlayerInputHandler.Instance.UseMenuInput();
             }
 
@@ -108,17 +112,23 @@ namespace Krisnat
         #region Core UI Methods
 
         #region Open or Close UI Animation
-        public void OpenCloseUIAnimation(GameObject menu, float targetSize, float duration, bool openClose)
+        public void OpenCloseUIAnimation(GameObject menu, float targetSize, float duration, bool openClose, bool stopAttack, bool stopAllInputs)
         {
             if (openClose)
             {
                 inventoryAnimationActive = true;
                 StartCoroutine(OpenUIAnimationCoroutine(menu, targetSize, duration));
+
+                if (stopAttack) PlayerInputHandler.Instance.StopAttack = true;
+                if (stopAllInputs) PlayerInputHandler.Instance.StopAllInputs = true;
             }
             else
             {
                 inventoryAnimationActive = true;
-                if (menu) StartCoroutine(CloseUIAnimationCoroutine(menu, targetSize, duration));
+                StartCoroutine(CloseUIAnimationCoroutine(menu, targetSize, duration));
+
+                if (stopAttack) PlayerInputHandler.Instance.StopAttack = false;
+                if (stopAllInputs) PlayerInputHandler.Instance.StopAllInputs = false;
             }
         }
 
@@ -172,14 +182,14 @@ namespace Krisnat
             {
                 ui.SetActive(true);
                 ui.transform.localScale = new Vector3(0.05f, 0.05f, ui.transform.localScale.z);
-                OpenCloseUIAnimation(ui, initialScale, openingSpeed, true);
+                OpenCloseUIAnimation(ui, initialScale, openingSpeed, true, false, false);
 
                 if (stopAttack) PlayerInputHandler.Instance.StopAttack = true;
                 if (stopAllInputs) PlayerInputHandler.Instance.StopAllInputs = true;
             }
             else
             {
-                OpenCloseUIAnimation(ui, 0.05f, openingSpeed, false);
+                OpenCloseUIAnimation(ui, 0.05f, openingSpeed, false, false, false);
 
                 if (stopAttack) PlayerInputHandler.Instance.StopAttack = false;
                 if (stopAllInputs) PlayerInputHandler.Instance.StopAllInputs = false;

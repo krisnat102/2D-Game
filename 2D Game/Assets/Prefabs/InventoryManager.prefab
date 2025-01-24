@@ -77,9 +77,7 @@ MonoBehaviour:
   description: {fileID: 0}
   shopInterface: {fileID: 0}
   inventoryShopItem: {fileID: 0}
-  shopItemContents:
-  - {fileID: 0}
-  - {fileID: 0}
+  shopItemContents: []
   purse: {fileID: 0}
   coinCounter: {fileID: 0}
   levelUpCoinCounter: {fileID: 0}

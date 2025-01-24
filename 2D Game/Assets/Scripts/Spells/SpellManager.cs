@@ -28,7 +28,7 @@ namespace Spells
         [SerializeField] private TMP_Text spellName, spellDescription, spellValue, spellPrice;
         [SerializeField] private GameObject description;
 
-        private GameObject spellInventory, inventory, characterTab;
+        private GameObject spellInventory, inventory, characterTab, levelUpUI;
         private float spellInventoryScale;
         private bool spellAbilityTab;
         private List<Spell> spells, oldSpells, spellsBar, abilitiesBar, oldSpellsBar, oldAbilitiesBar = new();
@@ -76,6 +76,7 @@ namespace Spells
             inventory = InventoryManager.Instance.Inventory;
             spellInventory = InventoryManager.Instance.SpellInventory;
             characterTab = InventoryManager.Instance.CharacterTab;
+            levelUpUI = UIManager.Instance.LevelUpInterface;
             spellInventoryScale = spellInventory.transform.localScale.x;
 
             oldSpellsBar = new();
@@ -86,7 +87,7 @@ namespace Spells
             if (PlayerInputHandler.Instance.SpellInventoryInput)
             {
                 PlayerInputHandler.Instance.UseSpellInventoryInput();
-                if (!inventory.activeInHierarchy && !spellInventory.activeInHierarchy && !characterTab.activeInHierarchy)
+                if (!inventory.activeInHierarchy && !spellInventory.activeInHierarchy && !characterTab.activeInHierarchy && !levelUpUI.activeInHierarchy)
                 {
                     OpenCloseSpellInventory(true);
                     ListSpells();
