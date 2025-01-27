@@ -42,6 +42,7 @@ namespace Krisnat
                         levelUpUI.SetActive(true);
                         levelUpUI.transform.localScale = new Vector3(0.05f, 0.05f, levelUpUI.transform.localScale.z);
                         UIManager.Instance.OpenCloseUIAnimation(levelUpUI, scale, openingAnimationDuration, true, true, false);
+                        UIManager.Instance.UpdateLevelUpUI();
                     }
                     else
                     {

@@ -1,5 +1,6 @@
 using UnityEngine;
 using Krisnat;
+using Bardent.CoreSystem;
 
 namespace Spells
 {
@@ -33,8 +34,6 @@ namespace Spells
         void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
-            levelHandler = FindAnyObjectByType<Player>().GetComponent<LevelHandler>();
-            abilities = levelHandler.gameObject.GetComponent<Abilities>();
 
             Vector2 castDirection = (doNotRotate) ? Vector2.zero : transform.right.normalized;
             rb.velocity = move ? castDirection * spell.speed : Vector2.zero;
@@ -58,6 +57,12 @@ namespace Spells
             angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
             Invoke("NullAngle", 0.2f);
             Invoke("WallColliderOn", 0.01f);
+        }
+
+        private void Start()
+        {
+            levelHandler = CoreClass.GameManager.Instance.GetComponent<LevelHandler>();
+            abilities = Stats.Instance.gameObject.GetComponent<Abilities>();
         }
 
         private void Update()

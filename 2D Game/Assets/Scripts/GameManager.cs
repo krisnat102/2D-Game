@@ -58,7 +58,7 @@ namespace CoreClass
             Battles = new List<string>();
 
             Player = playerGO?.GetComponent<Player>();
-            levelHandler = playerGO?.GetComponent<LevelHandler>();
+            levelHandler = CoreClass.GameManager.Instance.GetComponent<LevelHandler>();
 
             if (checkpoint == Vector3.zero) checkpoint = SpawnPoint.position;
         }
@@ -181,6 +181,8 @@ namespace CoreClass
             camera.position = checkpointPosition;
             checkpoint = checkpointPosition;
             //checkpoint = spawnPoint.position;
+
+            stats.UpdateStatBars();
         }
 
         public void LoadPlayer(PlayerSaveData data)
@@ -272,6 +274,8 @@ namespace CoreClass
 
             playerTransform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
             camera.position = new Vector3(data.position[0], data.position[1], data.position[2]);
+
+            stats.UpdateStatBars();
         }
         #endregion
 

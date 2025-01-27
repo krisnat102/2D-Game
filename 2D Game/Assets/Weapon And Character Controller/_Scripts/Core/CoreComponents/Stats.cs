@@ -37,9 +37,9 @@ namespace Bardent.CoreSystem
             }
 
             if (HpBar == null || ManaBar == null || StamBar == null) return;
-            HpBar.maxValue = Health.CurrentValue;
-            ManaBar.maxValue = Mana.CurrentValue;
-            StamBar.maxValue = Stam.CurrentValue;
+            HpBar.maxValue = Health.MaxValue;
+            ManaBar.maxValue = Mana.MaxValue;
+            StamBar.maxValue = Stam.MaxValue;
         }
 
 
@@ -69,6 +69,14 @@ namespace Bardent.CoreSystem
             float finalDamage = damage / Mathf.Pow(2, defense / damage);
 
             return Mathf.Round(finalDamage);
+        }
+
+        public void UpdateStatBars()
+        {
+            if (HpBar == null || ManaBar == null || StamBar == null) return;
+            HpBar.maxValue = Health.MaxValue;
+            ManaBar.maxValue = Mana.MaxValue;
+            StamBar.maxValue = Stam.MaxValue;
         }
     }
 }

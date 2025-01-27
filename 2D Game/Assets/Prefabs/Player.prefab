@@ -593,7 +593,6 @@ GameObject:
   - component: {fileID: 393773765602640564}
   - component: {fileID: 7036709886413582276}
   - component: {fileID: 4419208575607903093}
-  - component: {fileID: 4852469772837072685}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -1185,21 +1184,6 @@ MonoBehaviour:
   sideAbility1: {fileID: 0}
   sideAbility2: {fileID: 0}
   abilityCooldownImg: {fileID: 0}
---- !u!114 &4852469772837072685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2942618688319559364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0b89dd907e09bb45832bc815a2e7e2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialLevelUpCost: 50
-  mainStatIncrease: 5
-  subStatsIncrease: 5
 --- !u!1 &3154104933180956209
 GameObject:
   m_ObjectHideFlags: 0

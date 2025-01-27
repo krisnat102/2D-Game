@@ -1,13 +1,14 @@
 using Bardent.CoreSystem;
 using Inventory;
 using UnityEngine;
+using static Cinemachine.DocumentationSortingAttribute;
 
 namespace Krisnat
 {
     public class LevelHandler : MonoBehaviour
     {
         #region Private Variables
-        [SerializeField] private int initialLevelUpCost;
+        [SerializeField] private float levelUpModifier = 1.5f;
         [SerializeField] private float mainStatIncrease;
         [SerializeField] private float subStatsIncrease;
 
@@ -34,19 +35,23 @@ namespace Krisnat
         #region Unity Methods
         private void Start()
         {
-            stats = PlayerInputHandler.Instance.GetComponentInChildren<Stats>();
-            player = PlayerInputHandler.Instance.GetComponent<Player>();
+            stats = Stats.Instance;
+            player = Stats.Instance?.GetComponentInParent<Player>();
 
-            playerData = player.PlayerData;
-            LevelUpCost = initialLevelUpCost * playerData.PlayerLevel;
+            playerData = player?.PlayerData;
 
-            InventoryManager.Instance.SetCoins(10000, false);
+            //for testing
+            //playerData.SetLevel(1);
+            if(playerData) LevelUpCost = CalculateLevelUpCost(playerData.PlayerLevel);
+
+            //for testing
+            //InventoryManager.Instance.SetCoins(10000, false);
         }
         private void Update()
         {
-            StrengthDamage = 1 + StrengthCounter / 10;
-            DexterityDamage = 1 + DexterityCounter / 10;
-            IntelligenceDamage = 1 + IntelligenceCounter / 10;
+            StrengthDamage = 1 + StrengthCounter / 10f;
+            DexterityDamage = 1 + DexterityCounter / 10f;
+            IntelligenceDamage = 1 + IntelligenceCounter / 10f;
         }
         #endregion
 
@@ -54,7 +59,6 @@ namespace Krisnat
         public void LevelUpStrengthBn()
         {
             if (InventoryManager.Instance.Coins < LevelUpCost) return;
-
             stats.Health.LevelUpStat(mainStatIncrease);
             StrengthCounter++;
 
@@ -63,7 +67,6 @@ namespace Krisnat
         public void LevelUpDexterityBn()
         {
             if (InventoryManager.Instance.Coins < LevelUpCost) return;
-
             stats.Stam.LevelUpStat(mainStatIncrease);
             DexterityCounter++;
 
@@ -72,7 +75,6 @@ namespace Krisnat
         public void LevelUpIntelligenceBn()
         {
             if (InventoryManager.Instance.Coins < LevelUpCost) return;
-
             stats.Mana.LevelUpStat(mainStatIncrease);
             IntelligenceCounter++;
 
@@ -88,9 +90,13 @@ namespace Krisnat
             stats.Mana.LevelUpStat(subStatsIncrease);
 
             playerData.LevelUp();
-            LevelUpCost = initialLevelUpCost * playerData.PlayerLevel;
+            LevelUpCost = CalculateLevelUpCost(playerData.PlayerLevel);
             InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - LevelUpCost, false);
+            Stats.Instance.UpdateStatBars();
+            UIManager.Instance.UpdateLevelUpUI();
         }
+
+        public int CalculateLevelUpCost(int level) => (int)((Mathf.Floor(0.02f * Mathf.Pow(level, 3) + 3.06f * Mathf.Pow(level, 2))) * levelUpModifier);
 
         public void SetStrength(int strength) => StrengthCounter = strength;
         public void SetDexterity(int dexterity) => DexterityCounter = dexterity;

@@ -64,13 +64,13 @@ namespace Krisnat
         private void Start()
         {
             playerData = Stats.Instance?.gameObject.GetComponentInParent<Player>().PlayerData;
-            levelHandler = Stats.Instance?.gameObject.GetComponentInParent<LevelHandler>();
+            levelHandler = CoreClass.GameManager.Instance.gameObject.GetComponent<LevelHandler>();
             NoteOpen = false;
         }
 
         private void Update()
         {
-            if(levelUpCost) levelUpCost.text = "Cost - " + levelHandler?.LevelUpCost.ToString();
+            if (levelUpCost) levelUpCost.text = "Cost - " + levelHandler.CalculateLevelUpCost(playerData.PlayerLevel + 1);
             if (levelTextLevelUpInterface) levelTextLevelUpInterface.text = "Level - " + playerData?.PlayerLevel.ToString();
 
             levelText.text = playerData?.PlayerLevel.ToString();
@@ -80,13 +80,6 @@ namespace Krisnat
             armorText.text = InventoryManager.Instance.TotalArmor.ToString();
             magicResText.text = InventoryManager.Instance.TotalMagicRes.ToString();
             weightText.text = InventoryManager.Instance.TotalWeight.ToString() + "/50";
-
-            hpLevelUpText.text = "HP - " + Stats.Instance.Health.MaxValue.ToString();
-            manaLevelUpText.text = "Mana - " + Stats.Instance.Mana.MaxValue.ToString();
-            stamLevelUpText.text = "Stam - " + Stats.Instance.Stam.MaxValue.ToString();
-            strLevelUpText.text = "STR - " + levelHandler.StrengthCounter.ToString();
-            dexLevelUpText.text = "DEX - " + levelHandler.DexterityCounter.ToString();
-            intLevelUpText.text = "INT - " + levelHandler.IntelligenceCounter.ToString();
 
             if (PlayerInputHandler.Instance.MenuInput && LevelUpInterface.activeInHierarchy)
             {
@@ -110,6 +103,18 @@ namespace Krisnat
         #endregion
 
         #region Core UI Methods
+
+        #region Update UI Methods
+        public void UpdateLevelUpUI()
+        {
+            hpLevelUpText.text = "HP - " + Stats.Instance.Health.MaxValue;
+            manaLevelUpText.text = "Mana - " + Stats.Instance.Mana.MaxValue;
+            stamLevelUpText.text = "Stam - " + Stats.Instance.Stam.MaxValue;
+            strLevelUpText.text = "STR - " + levelHandler.StrengthCounter;
+            dexLevelUpText.text = "DEX - " + levelHandler.DexterityCounter;
+            intLevelUpText.text = "INT - " + levelHandler.IntelligenceCounter;
+        }
+        #endregion
 
         #region Open or Close UI Animation
         public void OpenCloseUIAnimation(GameObject menu, float targetSize, float duration, bool openClose, bool stopAttack, bool stopAllInputs)

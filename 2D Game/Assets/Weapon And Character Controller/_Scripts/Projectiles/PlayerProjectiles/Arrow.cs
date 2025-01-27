@@ -44,7 +44,7 @@ namespace Krisnat
             rb = GetComponent<Rigidbody2D>();
             player = core?.GetComponentInParent<Player>();
             sprite = GetComponent<SpriteRenderer>();
-            levelHandler = Stats.Instance.gameObject.GetComponentInParent<LevelHandler>();
+            levelHandler = CoreClass.GameManager.Instance.gameObject.GetComponent<LevelHandler>();
 
             if(!player) gameObject.SetActive(false);
 

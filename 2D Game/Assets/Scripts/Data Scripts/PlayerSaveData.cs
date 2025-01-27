@@ -22,7 +22,7 @@ namespace Krisnat.Assets.Scripts
 
         public PlayerSaveData(Player player)
         {
-            var levelHandler = player.GetComponent<LevelHandler>();
+            var levelHandler = CoreClass.GameManager.Instance.gameObject.GetComponent<LevelHandler>();
             var stats = player.Core.GetCoreComponent<Stats>();
 
             level = player.PlayerData.PlayerLevel;
