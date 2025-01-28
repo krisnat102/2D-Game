@@ -1,3 +1,4 @@
+using Bardent.CoreSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,11 +35,15 @@ public class PlayerDashState : PlayerAbilityState
         player.DashDirectionIndicator.gameObject.SetActive(true);
 
         Stats.Stam.Decrease(playerData.dashCost);
+
+        core.GetCoreComponent<DamageReceiver>().Invincible = true;
     }
 
     public override void Exit()
     {
         base.Exit();
+
+        core.GetCoreComponent<DamageReceiver>().Invincible = false;
 
         if (Movement?.CurrentVelocity.y > 0)
         {

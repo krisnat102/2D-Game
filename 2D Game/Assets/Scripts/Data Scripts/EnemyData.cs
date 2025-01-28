@@ -10,7 +10,6 @@ using UnityEditor;
 public class EnemyData : ScriptableObject
 {
     [Header("General Stats")]
-    public int level = 1;
     public string enemyName;
     public float maxHP = 100f;
     [Tooltip("Higher value is lower attack speed")]

@@ -15,19 +15,19 @@ public class RangedAttack : MonoBehaviour
     [SerializeField] private int accuracy;
 
     private Enemy enemy;
+    private DamageReceiver dmgReceiver;
     private Rigidbody2D arrowRB;
     private Transform impactEffectLocation;
     private Vector2 direction;
 
     void Start()
     {
-        System.Random random = new System.Random();
-
+        dmgReceiver = PlayerInputHandler.Instance.GetComponentInChildren<DamageReceiver>();
         enemy = GetComponentInParent<Enemy>();
-
         arrowRB = GetComponent<Rigidbody2D>();
-
         impactEffectLocation = GetComponentInChildren<SearchAssist>(true).transform;
+
+        System.Random random = new System.Random();
 
         Vector2 firePoint = enemy.FirePoint.position;
 
@@ -66,14 +66,15 @@ public class RangedAttack : MonoBehaviour
             Player player = hitInfo.GetComponent<Player>();
             if (player)
             {
-                player.Core.GetCoreComponent<DamageReceiver>().Damage(enemy.Data.rangedDamage * enemy.EnemyLevelScale, enemy.Data.damageType);
+                dmgReceiver.Damage(enemy.Data.rangedDamage * enemy.EnemyLevelScale, enemy.Data.damageType);
             }
-            if (enemy.Data.impactEffect)
+
+            if (enemy.Data.impactEffect && !dmgReceiver.Invincible)
             {
                 Instantiate(enemy.Data.impactEffect, impactEffectLocation.position, Quaternion.identity).transform.parent = null;
             }
 
-            gameObject.SetActive(false);
+            if (!dmgReceiver.Invincible) gameObject.SetActive(false);
         }
     }
 
@@ -126,4 +127,5 @@ public class RangedAttack : MonoBehaviour
         // Normalize or use directly
         return velocity.normalized;
     }
+
 }

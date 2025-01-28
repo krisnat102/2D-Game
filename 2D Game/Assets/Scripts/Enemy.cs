@@ -12,6 +12,9 @@ using System;
 public class Enemy : MonoBehaviour
 {
     #region Private Variables
+    [Header("Stats")]
+    [SerializeField] private int level = 1;
+
     [Header("Hp Bar")]
     [SerializeField] private Slider hpBar;
     [SerializeField] private Gradient hpBarGradient;
@@ -355,7 +358,7 @@ public class Enemy : MonoBehaviour
         if (Data.dummy) return;
         
         #region Calculations
-        lvlIndex = Data.level * 0.1f + 0.9f;
+        lvlIndex = level * 0.1f + 0.9f;
 
         offsetXSave = Data.offsetX;
 
@@ -437,7 +440,7 @@ public class Enemy : MonoBehaviour
     {
         if (Data.dummy) return;
 
-        float knockback = damage * Data.knockbackModifier;
+        float knockback = damage * Data.knockbackModifier / Mathf.Sqrt(level);
 
         if (playerTrans.position.x < transform.position.x)
         {

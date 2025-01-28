@@ -2,16 +2,21 @@ using UnityEngine;
 
 namespace Bardent.CoreSystem
 {
-    public class DamageReceiver : CoreComponent, IDamageable
+    public class DamageReceiver : CoreComponent
     {
         [SerializeField] private GameObject damageParticles;
 
         private Stats stats;
         private ParticleManager particleManager;
         private AudioSource damageAudio;
+        private bool invincible;
+
+        public bool Invincible { get => invincible; set => invincible = value; }
 
         public void Damage(float rawAmount, bool physical)
         {
+            if (Invincible) return;
+
             if (physical)
             {
                 stats.Health.Decrease(stats.CalculatePhysicalDamageReduction(rawAmount));
