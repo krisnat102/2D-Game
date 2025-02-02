@@ -16,6 +16,10 @@ namespace Spells
         [SerializeField] private bool chest;
         [SerializeField] private float offset = 0.2f;
         [SerializeField] private string itemId;
+        [SerializeField] private Animator deathAnim;
+        [SerializeField] private float animTime;
+        [SerializeField] private GameObject pickUpEffect;
+        [SerializeField] private AudioSource pickUpAudio;
 
         private bool isPickedUp = false;
         private Animator animator;
@@ -57,60 +61,22 @@ namespace Spells
         {
             if (!isPickedUp && spell != null)
             {
-                if (forSale)
+                if (pickUpAudio)
                 {
-                    InventoryManager.Instance.StartCoinAnimation();
-                    if (InventoryManager.Instance.Coins >= price)
-                    {
-                        AudioManager.Instance.PlayBuySound(0.8f, 1.2f);
-                        SpellManager.Instance.Add(spell);
-                        InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - price, false);
-                    }
-                    else
-                    {
-                        return;
-                    }
-                }
-                else
-                {
-                    SpellManager.Instance.Add(spell);
+                    pickUpAudio.gameObject.transform.parent = CoreClass.GameManager.Instance.Audios;
+                    pickUpAudio.pitch = Random.Range(0.8f, 1.2f);
+                    pickUpAudio.Play();
                 }
 
-                CoreClass.GameManager.Instance.ItemsTaken.Add(ItemId);
-
-                int resolutionHeight = Screen.currentResolution.height;
-
-                var itemPopUp = Instantiate(UIManager.Instance.ItemPickupPopUp, UIManager.Instance.Canvas.transform).GetComponent<PopUpUI>();
-
-                foreach (var ui in ItemPickup.itemPopUps)
+                if (deathAnim)
                 {
-                    ui.GoUp();
+                    deathAnim.SetTrigger("take");
+                    Invoke("PickupSpell", animTime);
+
+                    return;
                 }
 
-                ItemPickup.itemPopUps.Add(itemPopUp);
-
-                switch (resolutionHeight)
-                {
-                    case <= 720:
-                        itemPopUp.transform.position = itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -350, 0);
-                        break;
-                    case <= 1080:
-                        itemPopUp.transform.position = itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -400, 0);
-                        break;
-                    case <= 1440:
-                        itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -450, 0);
-                        break;
-                    case <= 2160:
-                        itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -500, 0);
-                        break;
-                    case > 2160:
-                        itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -550, 0);
-                        break;
-                }
-                itemPopUp.GetComponentsInChildren<Image>()[1].sprite = spell.icon;
-                itemPopUp.GetComponentInChildren<TMP_Text>().text = spell.spellName;
-
-                isPickedUp = true;
+                PickupSpell();
 
                 if (chest)
                 {
@@ -122,6 +88,77 @@ namespace Spells
                     gameObject.SetActive(false);
                 }
             }
+        }
+
+        private void PickupSpell()
+        {
+            if (forSale)
+            {
+                InventoryManager.Instance.StartCoinAnimation();
+                if (InventoryManager.Instance.Coins >= price)
+                {
+                    AudioManager.Instance.PlayBuySound(0.8f, 1.2f);
+                    SpellManager.Instance.Add(spell);
+                    InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - price, false);
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                SpellManager.Instance.Add(spell);
+            }
+
+            CoreClass.GameManager.Instance.ItemsTaken.Add(ItemId);
+
+            int resolutionHeight = Screen.currentResolution.height;
+
+            var itemPopUp = Instantiate(UIManager.Instance.ItemPickupPopUp, UIManager.Instance.Canvas.transform).GetComponent<PopUpUI>();
+
+            foreach (var ui in ItemPickup.itemPopUps)
+            {
+                ui.GoUp();
+            }
+
+            ItemPickup.itemPopUps.Add(itemPopUp);
+
+            switch (resolutionHeight)
+            {
+                case <= 720:
+                    itemPopUp.transform.position = itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -350, 0);
+                    break;
+                case <= 1080:
+                    itemPopUp.transform.position = itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -400, 0);
+                    break;
+                case <= 1440:
+                    itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -450, 0);
+                    break;
+                case <= 2160:
+                    itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -500, 0);
+                    break;
+                case > 2160:
+                    itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -550, 0);
+                    break;
+            }
+            itemPopUp.GetComponentsInChildren<Image>()[1].sprite = spell.icon;
+            itemPopUp.GetComponentInChildren<TMP_Text>().text = spell.spellName;
+
+            isPickedUp = true;
+
+            if (deathAnim) Disable();
+        }
+
+        private void Disable()
+        {
+            if (pickUpEffect)
+            {
+                pickUpEffect.SetActive(true);
+                pickUpEffect.transform.parent = CoreClass.GameManager.Instance.Particles;
+            }
+
+            gameObject.SetActive(false);
         }
     }
 }

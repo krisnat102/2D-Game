@@ -23,6 +23,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource buySound, coinPickupSound, tradeRefusedSound;
     [SerializeField] private AudioSource swordSoundEffect, bowSoundEffect;
     [SerializeField] private AudioSource fireballLaunchEffect, lightningEffect;
+    [SerializeField] private AudioSource equipmentSoundEffect, eatSoundEffect, potionDrinkSoundEffect;
 
     private bool muteTracker;
     #endregion
@@ -166,6 +167,24 @@ public class AudioManager : MonoBehaviour
     {
         lightningEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
         lightningEffect.Play();
+    }
+
+    public void PlayEquipmentSound(float lowerPitch, float higherPitch)
+    {
+        equipmentSoundEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        equipmentSoundEffect.Play();
+    }
+
+    public void PlayEatSound(float lowerPitch, float higherPitch)
+    {
+        eatSoundEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        eatSoundEffect.Play();
+    }
+
+    public void PlayPotionDrinkSound(float lowerPitch, float higherPitch)
+    {
+        potionDrinkSoundEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        potionDrinkSoundEffect.Play();
     }
     #endregion
 }

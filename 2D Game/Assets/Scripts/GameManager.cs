@@ -39,6 +39,8 @@ namespace CoreClass
         public List<string> BonfiresLit { get; private set; }
         public List<string> Battles { get; private set; }
         public Player Player { get => player; private set => player = value; }
+        public Transform Particles { get; private set; }
+        public Transform Audios { get; private set; }
 
         #region Unity Methods
         private void Update()
@@ -59,6 +61,8 @@ namespace CoreClass
 
             Player = playerGO?.GetComponent<Player>();
             levelHandler = CoreClass.GameManager.Instance.GetComponent<LevelHandler>();
+            Particles = GameObject.FindGameObjectWithTag("ParticleContainer").transform;
+            Audios = GameObject.FindGameObjectWithTag("AudioContainer").transform;
 
             if (checkpoint == Vector3.zero) checkpoint = SpawnPoint.position;
         }

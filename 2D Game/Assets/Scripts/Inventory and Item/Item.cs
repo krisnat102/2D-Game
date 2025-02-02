@@ -51,6 +51,8 @@ namespace Inventory
         public bool consumable;
         [HideInInspector]
         public ConsumableType consumableType;
+        [HideInInspector]
+        public ConsumableSoundEffect consumableSoundEffect;
 
         public enum ItemClass
         {
@@ -79,6 +81,12 @@ namespace Inventory
             None,
             Heal,
             ManaHeal
+        }
+        public enum ConsumableSoundEffect
+        {
+            None,
+            Food,
+            Potion
         }
         #endregion
 
@@ -143,6 +151,7 @@ namespace Inventory
             if (script.consumable)
             {
                 script.consumableType = (Item.ConsumableType)EditorGUILayout.EnumPopup("Type", script.consumableType);
+                script.consumableSoundEffect = (Item.ConsumableSoundEffect)EditorGUILayout.EnumPopup("Sound Effect", script.consumableSoundEffect);
             }
         }
     }

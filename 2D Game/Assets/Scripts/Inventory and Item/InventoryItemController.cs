@@ -158,9 +158,20 @@ namespace Inventory
                             }
                             break;
                     }
+
+                    switch (item.consumableSoundEffect)
+                    {
+                        case Item.ConsumableSoundEffect.Food:
+                            AudioManager.Instance.PlayEatSound(0.8f, 1.2f);
+                            break;
+                        case Item.ConsumableSoundEffect.Potion:
+                            AudioManager.Instance.PlayPotionDrinkSound(0.8f, 1.2f);
+                            break;
+                    }
                 }
                 else if (item.equipment && item.ItemCount > 0)
                 {
+                    AudioManager.Instance.PlayEquipmentSound(0.8f, 1.2f);
                     switch (button.GetComponentInChildren<TextMeshProUGUI>().text)
                     {
                         case "Equip":
