@@ -26,6 +26,8 @@ public class PlayerDashState : PlayerAbilityState
         CanDash = false;
         player.InputHandler.UseDashInput();
 
+        AudioManager.Instance.PlayDodgeRollSound(0.8f, 1.2f);
+
         isHolding = true;
         dashDirection = Vector2.right * Movement.FacingDirection;
 

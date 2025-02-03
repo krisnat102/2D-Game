@@ -1,5 +1,6 @@
 using Krisnat;
 using Krisnat.Assets.Scripts;
+using Spells;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,10 @@ namespace Inventory
         [SerializeField] private GameObject noteUIPreset;
         [SerializeField] private bool portal;
         [SerializeField] private string itemId;
+        [SerializeField] private Animator deathAnim;
+        [SerializeField] private float animTime;
+        [SerializeField] private GameObject pickUpEffect;
+        [SerializeField] private AudioSource pickUpAudio;
 
         private bool isPickedUp = false;
         private GameObject itemPrice;
@@ -72,6 +77,14 @@ namespace Inventory
         {
             if (portal) return;
             if (!UIManager.Instance.NoteOpen) PlayerInputHandler.Instance.UseUseInput();
+
+            if (pickUpAudio && !UIManager.Instance.NoteOpen)
+            {
+                if (!chest && !Note) pickUpAudio.gameObject.transform.parent = CoreClass.GameManager.Instance.Audios;
+                pickUpAudio.pitch = Random.Range(0.75f, 1.25f);
+                pickUpAudio.Play();
+            }
+
             if (Note)
             {
                 if (noteUIPreset)
@@ -89,7 +102,30 @@ namespace Inventory
                 UIManager.Instance.NoteOpen = true;
                 return;
             }
-            else if(!isPickedUp && chest) {
+            else if (item)
+            {
+                if (deathAnim)
+                {
+                    deathAnim.SetTrigger("take");
+                    Invoke("PickUpItem", animTime);
+
+                    return;
+                }
+
+                PickUpItem();
+
+                if (chest)
+                {
+                    animator?.SetTrigger("open");
+                    canvas?.gameObject.SetActive(false);
+                }
+            }
+        }
+
+        private void PickUpItem()
+        {
+            if (!isPickedUp && chest)
+            {
                 if (ForSale())
                 {
                     canvas.gameObject.SetActive(false);
@@ -104,12 +140,22 @@ namespace Inventory
                 if (ForSale())
                 {
                     InventoryManager.Instance.Add(item, true);
-                    gameObject.SetActive(false);
+                    Disable();
                     CoreClass.GameManager.Instance.ItemsTaken.Add(ItemId);
                 }
             }
         }
 
+        private void Disable()
+        {
+            if (pickUpEffect)
+            {
+                pickUpEffect.SetActive(true);
+                pickUpEffect.transform.parent = CoreClass.GameManager.Instance.Particles;
+            }
+
+            gameObject.SetActive(false);
+        }
 
         public bool ForSale()
         {

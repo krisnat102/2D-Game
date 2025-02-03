@@ -86,13 +86,14 @@ GameObject:
   - component: {fileID: 1322269861355575156}
   - component: {fileID: 5643788399464199161}
   - component: {fileID: 7972781410016206500}
+  - component: {fileID: 7643160618480766762}
   m_Layer: 0
   m_Name: PickUpKeyImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1322269861355575156
 RectTransform:
   m_ObjectHideFlags: 0
@@ -109,7 +110,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11, y: 244}
+  m_AnchoredPosition: {x: 4.7, y: 62}
   m_SizeDelta: {x: 213.4, y: 140.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5643788399464199161
@@ -140,7 +141,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8036f47501579744b8f3cfda105e3a5b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 063e19ddac175c84e9a9a61cd3c5d7f1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -150,6 +151,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7643160618480766762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4450276091852164298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd9930aaa33b7ab458ce3dd1d27f287c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amp: 0.04
+  frequency: 2.1
 --- !u!1 &5474757480702351308
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,7 +193,7 @@ RectTransform:
   m_GameObject: {fileID: 5474757480702351308}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.004166666, y: 0.0058333324, z: 1}
+  m_LocalScale: {x: 0.005, y: 0.0069999998, z: 1.2000002}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1861566417530742618}

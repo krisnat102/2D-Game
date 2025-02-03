@@ -21,7 +21,7 @@ public class AudioManager : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private AudioSource music;
     [SerializeField] private AudioSource buySound, coinPickupSound, tradeRefusedSound;
-    [SerializeField] private AudioSource swordSoundEffect, bowSoundEffect;
+    [SerializeField] private AudioSource swordSoundEffect, bowSoundEffect, dodgeRollSoundEffect;
     [SerializeField] private AudioSource fireballLaunchEffect, lightningEffect;
     [SerializeField] private AudioSource equipmentSoundEffect, eatSoundEffect, potionDrinkSoundEffect;
 
@@ -155,6 +155,12 @@ public class AudioManager : MonoBehaviour
     {
         bowSoundEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
         bowSoundEffect.Play();
+    }
+
+    public void PlayDodgeRollSound(float lowerPitch, float higherPitch)
+    {
+        dodgeRollSoundEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        dodgeRollSoundEffect.Play();
     }
 
     public void PlayFireballLaunchSound(float lowerPitch, float higherPitch)

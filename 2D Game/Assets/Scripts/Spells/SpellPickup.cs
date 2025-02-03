@@ -63,7 +63,7 @@ namespace Spells
             {
                 if (pickUpAudio)
                 {
-                    pickUpAudio.gameObject.transform.parent = CoreClass.GameManager.Instance.Audios;
+                    if(!chest) pickUpAudio.gameObject.transform.parent = CoreClass.GameManager.Instance.Audios;
                     pickUpAudio.pitch = Random.Range(0.8f, 1.2f);
                     pickUpAudio.Play();
                 }
@@ -82,10 +82,6 @@ namespace Spells
                 {
                     animator?.SetTrigger("open");
                     canvas?.gameObject.SetActive(false);
-                }
-                else
-                {
-                    gameObject.SetActive(false);
                 }
             }
         }
@@ -147,7 +143,7 @@ namespace Spells
 
             isPickedUp = true;
 
-            if (deathAnim) Disable();
+            if (!chest) Disable();
         }
 
         private void Disable()

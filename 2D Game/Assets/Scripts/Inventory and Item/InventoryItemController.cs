@@ -147,6 +147,16 @@ namespace Inventory
                                 DecreaseItem(item);
 
                                 Stats.Instance.Health.Increase(item.value);
+
+                                switch (item.consumableSoundEffect)
+                                {
+                                    case Item.ConsumableSoundEffect.Food:
+                                        AudioManager.Instance.PlayEatSound(0.8f, 1.2f);
+                                        break;
+                                    case Item.ConsumableSoundEffect.Potion:
+                                        AudioManager.Instance.PlayPotionDrinkSound(0.8f, 1.2f);
+                                        break;
+                                }
                             }
                             break;
                         case Item.ConsumableType.ManaHeal:
@@ -155,17 +165,17 @@ namespace Inventory
                                 DecreaseItem(item);
 
                                 Stats.Instance.Mana.Increase(item.value);
-                            }
-                            break;
-                    }
 
-                    switch (item.consumableSoundEffect)
-                    {
-                        case Item.ConsumableSoundEffect.Food:
-                            AudioManager.Instance.PlayEatSound(0.8f, 1.2f);
-                            break;
-                        case Item.ConsumableSoundEffect.Potion:
-                            AudioManager.Instance.PlayPotionDrinkSound(0.8f, 1.2f);
+                                switch (item.consumableSoundEffect)
+                                {
+                                    case Item.ConsumableSoundEffect.Food:
+                                        AudioManager.Instance.PlayEatSound(0.8f, 1.2f);
+                                        break;
+                                    case Item.ConsumableSoundEffect.Potion:
+                                        AudioManager.Instance.PlayPotionDrinkSound(0.8f, 1.2f);
+                                        break;
+                                }
+                            }
                             break;
                     }
                 }
