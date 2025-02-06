@@ -62,7 +62,7 @@ namespace CoreClass
             Player = playerGO?.GetComponent<Player>();
             levelHandler = CoreClass.GameManager.Instance.GetComponent<LevelHandler>();
             Particles = GameObject.FindGameObjectWithTag("ParticleContainer").transform;
-            Audios = GameObject.FindGameObjectWithTag("AudioContainer").transform;
+            Audios = GameObject.FindGameObjectWithTag("AudioContainer")?.transform;
 
             if (checkpoint == Vector3.zero) checkpoint = SpawnPoint.position;
         }

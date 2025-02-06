@@ -337,7 +337,10 @@ namespace Inventory
                 }
 
                 if (!oldDescriptionItem) oldDescriptionItem = item;
-                else if(oldDescriptionItem  != item) DisableSelectedIndicators();
+                else if (oldDescriptionItem != item)
+                {
+                    DisableSelectedIndicators();
+                }
                 oldDescriptionItem = item;
             }
             catch

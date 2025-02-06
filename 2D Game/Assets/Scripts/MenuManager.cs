@@ -46,6 +46,15 @@ public class MenuManager : MonoBehaviour
     {
         LoadLoadedLevel();
 
+        if (newGame)
+        {
+            SaveSystem.DeleteAllSaveFiles();
+            SaveSystem.SaveData(PlayerSaveData.CreateDefault());
+            CoreClass.GameManager.Instance.LoadPlayer(PlayerSaveData.CreateDefault());
+
+            newGame = false;
+        }
+
         resolutions = Screen.resolutions;
 
         resolutionDropdown.ClearOptions();
@@ -86,15 +95,6 @@ public class MenuManager : MonoBehaviour
         {
             existingSaveButtons.SetActive(false);
             playButton.SetActive(true);
-        }
-
-        if (newGame)
-        {
-            SaveSystem.DeleteAllSaveFiles();
-            SaveSystem.SaveData(PlayerSaveData.CreateDefault());
-            CoreClass.GameManager.Instance.LoadPlayer(PlayerSaveData.CreateDefault());
-
-            newGame = false;
         }
     }
 
@@ -139,6 +139,13 @@ public class MenuManager : MonoBehaviour
     #endregion
 
     #region Other Methods
+    public void PlayButtonSFX()
+    {
+        GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        if (!button) return;
+        AudioManager.Instance.PlayButtonSound(0.6f, 0.8f);
+    }
+
     private void LoadLoadedLevel()
     {
         PlayerSaveData data = SaveSystem.LoadPlayer();

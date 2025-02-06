@@ -1,6 +1,7 @@
 using UnityEngine.Audio;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class AudioManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] private AudioSource music;
+    [SerializeField] private AudioSource buttonSound;
     [SerializeField] private AudioSource buySound, coinPickupSound, tradeRefusedSound;
     [SerializeField] private AudioSource swordSoundEffect, bowSoundEffect, dodgeRollSoundEffect;
     [SerializeField] private AudioSource fireballLaunchEffect, lightningEffect;
@@ -127,6 +129,11 @@ public class AudioManager : MonoBehaviour
     #endregion
 
     #region Players
+    public void PlayButtonSound(float lowerPitch, float higherPitch)
+    {
+        buttonSound.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        buttonSound.Play();
+    }
     public void PlayBuySound(float lowerPitch, float higherPitch)
     {
         buySound.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
