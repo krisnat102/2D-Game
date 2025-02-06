@@ -93,8 +93,6 @@ public class AudioManager : MonoBehaviour
         {
             musicMixer.SetFloat("volume", -80);
             sfxMixer.SetFloat("volume", -80);
-            Debug.Log(musicSave);
-            Debug.Log(sfxSave);
         }
         else
         {

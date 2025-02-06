@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     public PlayerWallJumpState WallJumpState { get; private set; }
     public PlayerLedgeClimbState LedgeClimbState { get; private set; }
     public PlayerDashState DashState { get; private set; }
-    public PlayerDashState RollState { get; private set; }
+    public PlayerRollState RollState { get; private set; }
     public PlayerCrouchIdleState CrouchIdleState { get; private set; }
     public PlayerCrouchMoveState CrouchMoveState { get; private set; }
     public PlayerAttackState PrimaryAttackState { get; private set; }
@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
         WallJumpState = new PlayerWallJumpState(this, StateMachine, PlayerData, "inAir");
         LedgeClimbState = new PlayerLedgeClimbState(this, StateMachine, PlayerData, "ledgeClimbState");
         DashState = new PlayerDashState(this, StateMachine, PlayerData, "inAir");
-        RollState = new PlayerDashState(this, StateMachine, PlayerData, "roll");
+        RollState = new PlayerRollState(this, StateMachine, PlayerData, "roll");
         CrouchIdleState = new PlayerCrouchIdleState(this, StateMachine, PlayerData, "crouchIdle");
         CrouchMoveState = new PlayerCrouchMoveState(this, StateMachine, PlayerData, "crouchMove");
         PrimaryAttackState = new PlayerAttackState(this, StateMachine, PlayerData, "attack", primaryWeapon, CombatInputs.primary);

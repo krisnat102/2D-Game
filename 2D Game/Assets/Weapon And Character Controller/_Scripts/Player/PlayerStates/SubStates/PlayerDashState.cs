@@ -1,8 +1,5 @@
 using Bardent.CoreSystem;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlayerDashState : PlayerAbilityState
 {
@@ -19,6 +16,7 @@ public class PlayerDashState : PlayerAbilityState
     public PlayerDashState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
+
     public override void Enter()
     {
         base.Enter();
@@ -26,7 +24,7 @@ public class PlayerDashState : PlayerAbilityState
         CanDash = false;
         player.InputHandler.UseDashInput();
 
-        AudioManager.Instance.PlayDodgeRollSound(0.8f, 1.2f);
+        AudioManager.Instance.PlayBowSound(0.8f, 1f);
 
         isHolding = true;
         dashDirection = Vector2.right * Movement.FacingDirection;
@@ -37,22 +35,17 @@ public class PlayerDashState : PlayerAbilityState
         player.DashDirectionIndicator.gameObject.SetActive(true);
 
         Stats.Stam.Decrease(playerData.dashCost);
-
-        core.GetCoreComponent<DamageReceiver>().Invincible = true;
+        Stats.Stam.StopRegen(playerData.stamRecoveryTime);
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        core.GetCoreComponent<DamageReceiver>().Invincible = false;
-
         if (Movement?.CurrentVelocity.y > 0)
         {
             Movement?.SetVelocityY(Movement.CurrentVelocity.y * playerData.dashEndYMultiplier);
         }
-
-        Stats.Stam.StopRegen(playerData.stamRecoveryTime);
     }
 
     public override void LogicUpdate()

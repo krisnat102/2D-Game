@@ -46,6 +46,12 @@ public class PlayerData : ScriptableObject
     public float distBetweenAfterImages = 0.5f;
     public float dashCost = 20f;
 
+    [Header("Roll State")]
+    public float rollCooldown = 0.5f;
+    public float rollVelocity = 30f;
+    public float rollTime = 0.2f;
+    public float rollCost = 20f;
+
     [Header("Crouch States")]
     public float crouchMovementVelocity = 5f;
     public float crouchColliderHeight = 0.8f;

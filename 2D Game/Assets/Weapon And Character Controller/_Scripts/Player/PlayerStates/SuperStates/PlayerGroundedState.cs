@@ -55,6 +55,7 @@ public class PlayerGroundedState : PlayerState
 
         player.JumpState.ResetAmountOfJumpsLeft();
         player.DashState.ResetCanDash();
+        player.RollState.ResetCanRoll();
     }
 
     public override void Exit()
@@ -93,10 +94,13 @@ public class PlayerGroundedState : PlayerState
         {
             stateMachine.ChangeState(player.WallGrabState);
         }
-        else if (dashInput && player.DashState.CheckIfCanDash() && !isTouchingCeiling && Stats.Stam.CurrentValue > 0.5f)
+        else if (dashInput && player.DashState.CheckIfCanDash() && !isTouchingCeiling && Stats.Stam.CurrentValue > 0.5f && player.InputHandler.DashDirectionInput.y != 0)
         {
-            if (player.InputHandler.DashDirectionInput.y != 0) stateMachine.ChangeState(player.DashState);
-            else stateMachine.ChangeState(player.RollState);
+            stateMachine.ChangeState(player.DashState);
+        }
+        else if (dashInput && player.RollState.CheckIfCanRoll() && Stats.Stam.CurrentValue > 0.5f && player.InputHandler.DashDirectionInput.y == 0)
+        {
+            stateMachine.ChangeState(player.RollState);
         }
     }
 

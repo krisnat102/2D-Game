@@ -322,6 +322,7 @@ namespace Spells
         }
         #endregion
 
+        #region Audio Methods
         private void PlaySpellSFX(Spell spell)
         {
             AudioManager audioM = AudioManager.Instance;
@@ -341,5 +342,6 @@ namespace Spells
                     break;
             }
         }
+        #endregion
     }
 }
