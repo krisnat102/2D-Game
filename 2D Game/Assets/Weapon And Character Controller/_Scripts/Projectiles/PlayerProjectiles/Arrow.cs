@@ -1,8 +1,5 @@
 using Bardent.CoreSystem;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.U2D;
 
 namespace Krisnat
 {
@@ -15,23 +12,27 @@ namespace Krisnat
 
         private float damage;
         private float speed;
+        private int piercing;
         private float gravity;
         private float transparency = 1f;
         private int chargeTier;
         private int direction;
         private bool arrowStuck = false;
+        private bool hitGround;
         private Vector2 offset;
-        private Bardent.CoreSystem.Core core;
+        private Enemy previousEnemy;
+        private Core core;
         private Player player;
         private Rigidbody2D rb;
         private SpriteRenderer sprite;
         private LevelHandler levelHandler;
         #endregion
 
-        public void SetArrowStats(float damage, float speed, int direction, Vector2 offset, Bardent.CoreSystem.Core core, int chargeTier)
+        public void SetArrowStats(float damage, float speed, int piercing, int direction, Vector2 offset, Bardent.CoreSystem.Core core, int chargeTier)
         {
             this.damage = damage;
             this.speed = speed;
+            this.piercing = piercing;
             this.direction = direction;
             this.core = core;
             this.offset = offset;
@@ -57,9 +58,10 @@ namespace Krisnat
 
             if(player != null) transform.position = player.transform.position + (Vector3) offset;
         }
+
         private void Update()
         {
-            RotationFixer();
+            if (!hitGround) RotationFixer();
 
             if(DistanceTravelled() > range)
             {
@@ -83,15 +85,26 @@ namespace Krisnat
         {
             var enemy = collision.GetComponent<Enemy>();
 
-            if(enemy != null)
+            if(enemy != null && (!previousEnemy || previousEnemy != enemy))
             {
+                previousEnemy = enemy;
+
                 enemy.TakeDamage(damage * levelHandler.DexterityDamage, 0, true);
-                damage = 0;
-                if(enemy.Data.bloodEffect) Instantiate(enemy.Data.bloodEffect, transform.position, Quaternion.identity);
+
+                if(enemy.Data.bloodEffect && damage != 0) Instantiate(enemy.Data.bloodEffect, transform.position, Quaternion.identity);
+
+                piercing--;
+
+                if (piercing == 0)
+                {
+                    gameObject.SetActive(false);
+                }
             }
             if (collision.tag == "Ground" || collision.tag == "Door")
             {
                 float angle = Mathf.Atan2(rb.velocity.normalized.y,rb.velocity.normalized.x) * Mathf.Rad2Deg;
+
+                hitGround = true;
 
                 rb.velocity = Vector2.zero;
                 rb.simulated = false;

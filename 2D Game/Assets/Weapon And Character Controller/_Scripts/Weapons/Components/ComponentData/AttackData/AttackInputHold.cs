@@ -26,6 +26,7 @@ namespace Bardent.Weapons.Components
         [field: SerializeField] public Vector2 Offset { get; private set; }
         [field: SerializeField] public Arrow Projectile { get; private set; }
         [field: SerializeField] public float Damage { get; private set; }
+        [field: SerializeField] public int Piercing { get; private set; }
         [field: SerializeField] public float Speed { get; private set; }
     }
 }

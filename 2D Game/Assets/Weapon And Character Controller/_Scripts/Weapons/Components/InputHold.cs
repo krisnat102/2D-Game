@@ -92,30 +92,29 @@ namespace Bardent.Weapons.Components
                     {
                         var projectile = Instantiate(data.Projectile).GetComponent<Arrow>();
                         
-
                         switch (attackHoldTime)
                         {
                             case var holdTime when holdTime < currentAttackData.PerfectShotChargeTimeUpperRange && holdTime > currentAttackData.PerfectShotChargeTimeLowerRange:
-                                projectile.SetArrowStats(data.Damage * 1.5f, data.Speed * 1.1f, movement.FacingDirection, data.Offset, Core, 6);
+                                projectile.SetArrowStats(data.Damage * 1.5f, data.Speed * 1.1f, data.Piercing, movement.FacingDirection, data.Offset, Core, 6);
                                 break;
                             case var holdTime when holdTime < currentAttackData.FirstStageChargeTime:
-                                projectile.SetArrowStats(data.Damage / 5f, data.Speed / 5f, movement.FacingDirection, data.Offset, Core, 1);
+                                projectile.SetArrowStats(data.Damage / 5f, data.Speed / 5f, data.Piercing, movement.FacingDirection, data.Offset, Core, 1);
                                 break;
 
                             case var holdTime when holdTime < currentAttackData.SecondStageChargeTime && holdTime > currentAttackData.FirstStageChargeTime:
-                                projectile.SetArrowStats(data.Damage / 3.5f, data.Speed / 2f, movement.FacingDirection, data.Offset, Core, 2);
+                                projectile.SetArrowStats(data.Damage / 3.5f, data.Speed / 2f, data.Piercing, movement.FacingDirection, data.Offset, Core, 2);
                                 break;
 
                             case var holdTime when holdTime < currentAttackData.ThirdStageChargeTime && holdTime > currentAttackData.SecondStageChargeTime:
-                                projectile.SetArrowStats(data.Damage / 2f, data.Speed / 1.5f, movement.FacingDirection, data.Offset, Core, 3);
+                                projectile.SetArrowStats(data.Damage / 2f, data.Speed / 1.5f, data.Piercing, movement.FacingDirection, data.Offset, Core, 3);
                                 break;
 
                             case var holdTime when holdTime < currentAttackData.FinalStageChargeTime && holdTime > currentAttackData.ThirdStageChargeTime:
-                                projectile.SetArrowStats(data.Damage / 1.5f, data.Speed / 1.2f, movement.FacingDirection, data.Offset, Core, 4);
+                                projectile.SetArrowStats(data.Damage / 1.5f, data.Speed / 1.2f, data.Piercing, movement.FacingDirection, data.Offset, Core, 4);
                                 break;
 
                             case var holdTime when holdTime > currentAttackData.FinalStageChargeTime:
-                                projectile.SetArrowStats(data.Damage, data.Speed, movement.FacingDirection, data.Offset, Core, 5);
+                                projectile.SetArrowStats(data.Damage, data.Speed, data.Piercing, movement.FacingDirection, data.Offset, Core, 5);
                                 break;
                         }
                     }
