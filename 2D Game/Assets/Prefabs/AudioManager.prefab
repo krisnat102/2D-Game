@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2690625510320772284}
   - component: {fileID: 2690625510320772285}
+  - component: {fileID: 8623021732987307272}
   - component: {fileID: 2690625510320772227}
   - component: {fileID: 2262989942500180727}
   - component: {fileID: 93545950424201655}
@@ -61,12 +62,13 @@ MonoBehaviour:
   Music: {fileID: 0}
   SFX: {fileID: 0}
   Mute: {fileID: 0}
+  generalSound: {fileID: 8623021732987307272}
   music: {fileID: 2690625510320772227}
   buttonSound: {fileID: 2262989942500180727}
   buySound: {fileID: 93545950424201655}
   coinPickupSound: {fileID: 5254656631188024671}
   tradeRefusedSound: {fileID: 2261823169693663895}
-  swordSoundEffect: {fileID: 2968678233989505760}
+  weaponSound: {fileID: 2968678233989505760}
   bowSoundEffect: {fileID: 2809169225048359128}
   dodgeRollSoundEffect: {fileID: 1254771940415314219}
   fireballLaunchEffect: {fileID: 2545023771115157115}
@@ -74,6 +76,103 @@ MonoBehaviour:
   equipmentSoundEffect: {fileID: 2261823169693663895}
   eatSoundEffect: {fileID: 400285076688778154}
   potionDrinkSoundEffect: {fileID: 4351465987987774583}
+--- !u!82 &8623021732987307272
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2690625510320772286}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: b0fc275326f5c7f479bc0b065bb3870f,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!82 &2690625510320772227
 AudioSource:
   m_ObjectHideFlags: 0
@@ -473,7 +572,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: b0fc275326f5c7f479bc0b065bb3870f,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 3441214318a32754cb22f75059a0374b, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.148
   m_Pitch: 1

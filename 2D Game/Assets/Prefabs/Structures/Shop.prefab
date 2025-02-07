@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2705499521424395002}
   - component: {fileID: 6664022802016056190}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: Light 2D (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4212162000543977974}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: Light1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 7299091646154611965}
   - component: {fileID: 1945397872106233431}
   - component: {fileID: 5965226925769333862}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: Shop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,6 +262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a56ec7ad67fafd4085491d67d23cce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemsForSale: []
+  shopItemContent: {fileID: 0}
 --- !u!95 &1945397872106233431
 Animator:
   serializedVersion: 5
@@ -389,7 +391,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 501683543605227555}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: Light1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -423,7 +425,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1968337004376639176}
   - component: {fileID: 186457268333893850}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -505,7 +507,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1250101628070286446}
   - component: {fileID: 9089714141212490285}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,7 +589,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4388728841972163010}
   - component: {fileID: 4955192942445420686}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: Light 2D (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1848728741029630767}
   - component: {fileID: 6120127149700700840}
   - component: {fileID: 6616937814780583068}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: PickUpKeyImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 2785708313302746845}
   - component: {fileID: 2495876864602293331}
   - component: {fileID: 4459454635904788114}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2991852084331246670}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: ItemPrice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 3205980203001339591}
   - component: {fileID: 7234799356635838026}
   - component: {fileID: 3048400964751612270}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: PriceText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 6165714438206658152}
   - component: {fileID: 3685065010035228122}
   - component: {fileID: 7797598478279939128}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: CoinImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 5552643846648881461}
   - component: {fileID: 8087752676522306325}
   - component: {fileID: 6433036801112810679}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: Chest
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -573,7 +573,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 1.3333334}
+    oldSize: {x: 1.5, y: 1}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -605,6 +605,10 @@ MonoBehaviour:
   noteUIPreset: {fileID: 0}
   portal: 0
   itemId: 
+  deathAnim: {fileID: 0}
+  animTime: 0
+  pickUpEffect: {fileID: 0}
+  pickUpAudio: {fileID: 0}
 --- !u!114 &8087752676522306325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -635,3 +639,7 @@ MonoBehaviour:
   chest: 0
   offset: 0.2
   itemId: 
+  deathAnim: {fileID: 0}
+  animTime: 0
+  pickUpEffect: {fileID: 0}
+  pickUpAudio: {fileID: 0}

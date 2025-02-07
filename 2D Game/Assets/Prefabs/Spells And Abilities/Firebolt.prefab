@@ -201,10 +201,11 @@ MonoBehaviour:
     m_Bits: 512
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 12288
   move: 1
   destroyOnTouch: 1
-  dontRotate: 0
+  doNotRotate: 0
+  flip: 0
   shuriken: 0
   collisionTimeOffset: 0.03
   rotationSpeed: 0.1

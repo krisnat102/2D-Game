@@ -20,10 +20,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private Toggle Mute;
 
     [Header("Sounds")]
+    [SerializeField] private AudioSource generalSound;
     [SerializeField] private AudioSource music;
     [SerializeField] private AudioSource buttonSound;
     [SerializeField] private AudioSource buySound, coinPickupSound, tradeRefusedSound;
-    [SerializeField] private AudioSource swordSoundEffect, bowSoundEffect, dodgeRollSoundEffect;
+    [SerializeField] private AudioSource weaponSound, bowSoundEffect, dodgeRollSoundEffect;
     [SerializeField] private AudioSource fireballLaunchEffect, lightningEffect;
     [SerializeField] private AudioSource equipmentSoundEffect, eatSoundEffect, potionDrinkSoundEffect;
 
@@ -126,7 +127,13 @@ public class AudioManager : MonoBehaviour
     }
     #endregion
 
-    #region Players
+    #region Audio Players
+    public void PlayWeaponSound(AudioClip SFX, float lowerPitch, float higherPitch)
+    {
+        weaponSound.clip = SFX;
+        weaponSound.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        weaponSound.Play();
+    }
     public void PlayButtonSound(float lowerPitch, float higherPitch)
     {
         buttonSound.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
@@ -148,12 +155,6 @@ public class AudioManager : MonoBehaviour
     {
         tradeRefusedSound.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
         tradeRefusedSound.Play();
-    }
-
-    public void PlaySwordSound(float lowerPitch, float higherPitch)
-    {
-        swordSoundEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
-        swordSoundEffect.Play();
     }
 
     public void PlayBowSound(float lowerPitch, float higherPitch)

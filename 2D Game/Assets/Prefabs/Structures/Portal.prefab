@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8426637955528308133}
   - component: {fileID: 1685015313460751071}
   - component: {fileID: 5955657287485360970}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: Pickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,6 +57,10 @@ MonoBehaviour:
   noteUIPreset: {fileID: 0}
   portal: 1
   itemId: 
+  deathAnim: {fileID: 0}
+  animTime: 0
+  pickUpEffect: {fileID: 0}
+  pickUpAudio: {fileID: 0}
 --- !u!61 &5955657287485360970
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -114,7 +118,7 @@ GameObject:
   - component: {fileID: 4928740080887758719}
   - component: {fileID: 1901481239926221430}
   - component: {fileID: 862978771160730649}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6973162836924610276}
   - component: {fileID: 1134117962406833007}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +302,7 @@ GameObject:
   - component: {fileID: 3148621516877360551}
   - component: {fileID: 2510011020087181542}
   - component: {fileID: 2625472283670420553}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: PickUpKeyImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -391,7 +395,7 @@ GameObject:
   - component: {fileID: 5390577634276650247}
   - component: {fileID: 3825025670418991977}
   - component: {fileID: 7097252166789025472}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: Portal
   m_TagString: Untagged
   m_Icon: {fileID: 0}

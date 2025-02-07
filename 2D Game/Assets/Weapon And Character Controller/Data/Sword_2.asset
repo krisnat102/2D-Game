@@ -137,5 +137,9 @@ MonoBehaviour:
         attackData:
         - name: Attack 1
           <Delay>k__BackingField: 0.07
+          <SFX>k__BackingField: {fileID: 8300000, guid: 3441214318a32754cb22f75059a0374b,
+            type: 3}
         - name: Attack 2
           <Delay>k__BackingField: 0.1
+          <SFX>k__BackingField: {fileID: 8300000, guid: 3441214318a32754cb22f75059a0374b,
+            type: 3}

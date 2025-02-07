@@ -332,7 +332,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5567739613218054317
 RectTransform:
   m_ObjectHideFlags: 0
@@ -594,6 +594,10 @@ MonoBehaviour:
   noteUIPreset: {fileID: 0}
   portal: 0
   itemId: 
+  deathAnim: {fileID: 0}
+  animTime: 0
+  pickUpEffect: {fileID: 0}
+  pickUpAudio: {fileID: 0}
 --- !u!1 &9100572936944773448
 GameObject:
   m_ObjectHideFlags: 0
