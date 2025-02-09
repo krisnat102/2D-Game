@@ -126,7 +126,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 7742519
+    m_Bits: 7734327
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -201,7 +201,7 @@ MonoBehaviour:
     m_Bits: 512
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 12288
+    m_Bits: 45056
   move: 1
   destroyOnTouch: 1
   doNotRotate: 0
