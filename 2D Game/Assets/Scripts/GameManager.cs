@@ -7,7 +7,9 @@ using Inventory;
 using Krisnat;
 using Krisnat.Assets.Scripts;
 using Spells;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace CoreClass
@@ -17,6 +19,8 @@ namespace CoreClass
         public static GameManager Instance;
         public static Vector3 checkpoint;
         private bool gamePaused = false;
+
+        [SerializeField] private List<Item> startingItems;
 
         [SerializeField] private GameObject deathScreen;
         [SerializeField] private GameObject playerGO;
@@ -41,6 +45,7 @@ namespace CoreClass
         public Player Player { get => player; private set => player = value; }
         public Transform Particles { get; private set; }
         public Transform Audios { get; private set; }
+        public List<Item> StartingItems { get => startingItems; private set => startingItems = value; }
 
         #region Unity Methods
         private void Update()

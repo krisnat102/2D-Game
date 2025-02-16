@@ -3,7 +3,9 @@ using UnityEngine;
 using TMPro;
 using System.Linq;
 using Krisnat;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using Spells;
 using UnityEngine.UI;
 

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using Bardent.Weapons;
 
-
 #if UNITY_EDITOR
 using UnityEditor;
 #endif

@@ -176,7 +176,7 @@ public class Enemy : MonoBehaviour
             if (ContainsParam(animator, "combat")) animator.SetBool("combat", true);
             isPatrolling = false;
 
-            if (Data.boss && !hpBar.gameObject.activeInHierarchy)
+            if (!hpBar.gameObject.activeInHierarchy)
             {
                 hpBar.gameObject.SetActive(true);
             }

@@ -6,6 +6,7 @@ namespace Interactables
     public class Spikes : MonoBehaviour
     {
         [SerializeField] private float damage;
+        [SerializeField] private float damageFrequency = 1f;
         [SerializeField] private bool damageType;
         [SerializeField] private bool damageEnemies;
 
@@ -20,7 +21,7 @@ namespace Interactables
             {
                 player.Core.GetCoreComponent<DamageReceiver>().Damage(damage, damageType);
                 canDamagePlayer = false;
-                Invoke(nameof(ResetDamageCooldown), 0.3f);
+                Invoke(nameof(ResetDamageCooldown), damageFrequency);
             }
             else if (enemy && damageEnemies)
             {

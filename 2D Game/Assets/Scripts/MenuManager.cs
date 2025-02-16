@@ -50,9 +50,15 @@ public class MenuManager : MonoBehaviour
         {
             SaveSystem.DeleteAllSaveFiles();
             SaveSystem.SaveData(PlayerSaveData.CreateDefault());
-            CoreClass.GameManager.Instance.LoadPlayer(PlayerSaveData.CreateDefault());
-
+            CoreClass.GameManager.Instance.LoadPlayer();
             newGame = false;
+
+            InventoryManager.Instance.Add(CoreClass.GameManager.Instance.StartingItems);
+
+            foreach(var item in CoreClass.GameManager.Instance.StartingItems)
+            {
+                InventoryManager.Instance.EquipItem(item);
+            }
         }
 
         resolutions = Screen.resolutions;
@@ -323,6 +329,7 @@ public class MenuManager : MonoBehaviour
 
     public void NewGame()
     {
+        SaveSystem.DeleteAllSaveFiles();
         newGame = true;
     }
     #endregion

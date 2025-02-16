@@ -25227,6 +25227,11 @@ PrefabInstance:
       propertyPath: uiPopUp
       value: 
       objectReference: {fileID: 1006461655}
+    - target: {fileID: 6694913197515165582, guid: bc77b19df38915b4086e17b18511e97c,
+        type: 3}
+      propertyPath: sceneToLoad
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 9027781490353653349, guid: bc77b19df38915b4086e17b18511e97c,
         type: 3}
       propertyPath: m_Name
