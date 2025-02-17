@@ -58,7 +58,7 @@ namespace Krisnat
         #region Level Up Buttons
         public void LevelUpStrengthBn()
         {
-            if (InventoryManager.Instance.Coins < LevelUpCost) return;
+            if (InventoryManager.Instance.Coins < CalculateLevelUpCost(playerData.PlayerLevel + 1)) return;
             stats.Health.LevelUpStat(mainStatIncrease);
             StrengthCounter++;
 
@@ -66,7 +66,7 @@ namespace Krisnat
         }
         public void LevelUpDexterityBn()
         {
-            if (InventoryManager.Instance.Coins < LevelUpCost) return;
+            if (InventoryManager.Instance.Coins < CalculateLevelUpCost(playerData.PlayerLevel + 1)) return;
             stats.Stam.LevelUpStat(mainStatIncrease);
             DexterityCounter++;
 
@@ -74,7 +74,7 @@ namespace Krisnat
         }
         public void LevelUpIntelligenceBn()
         {
-            if (InventoryManager.Instance.Coins < LevelUpCost) return;
+            if (InventoryManager.Instance.Coins < CalculateLevelUpCost(playerData.PlayerLevel + 1)) return;
             stats.Mana.LevelUpStat(mainStatIncrease);
             IntelligenceCounter++;
 

@@ -28,6 +28,8 @@ namespace Inventory
         [SerializeField] private float animTime;
         [SerializeField] private GameObject pickUpEffect;
         [SerializeField] private AudioSource pickUpAudio;
+        [SerializeField] private float lowerPitchRange = 0.75f;
+        [SerializeField] private float higherPitchRange = 1.25f;
 
         private bool isPickedUp = false;
         private GameObject itemPrice;
@@ -81,7 +83,7 @@ namespace Inventory
             if (pickUpAudio && !UIManager.Instance.NoteOpen)
             {
                 if (!chest && !Note) pickUpAudio.gameObject.transform.parent = CoreClass.GameManager.Instance.Audios;
-                pickUpAudio.pitch = Random.Range(0.75f, 1.25f);
+                pickUpAudio.pitch = Random.Range(lowerPitchRange, higherPitchRange);
                 pickUpAudio.Play();
             }
 

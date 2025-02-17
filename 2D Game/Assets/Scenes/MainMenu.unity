@@ -1333,9 +1333,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 492599421}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: NewGame
+      - m_Target: {fileID: 7893484904859637409}
+        m_TargetAssemblyTypeName: Krisnat.LevelLoader, Assembly-CSharp
+        m_MethodName: LoadNextLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1345,9 +1345,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 7893484904859637409}
-        m_TargetAssemblyTypeName: Krisnat.LevelLoader, Assembly-CSharp
-        m_MethodName: LoadNextLevel
+      - m_Target: {fileID: 492599421}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: NewGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8520,12 +8520,13 @@ MonoBehaviour:
   Music: {fileID: 1702382647}
   SFX: {fileID: 938077228}
   Mute: {fileID: 315154185}
+  generalSound: {fileID: 0}
   music: {fileID: 1379617353577674437}
   buttonSound: {fileID: 1379617353577674440}
   buySound: {fileID: 0}
   coinPickupSound: {fileID: 0}
   tradeRefusedSound: {fileID: 0}
-  swordSoundEffect: {fileID: 0}
+  weaponSound: {fileID: 0}
   bowSoundEffect: {fileID: 0}
   dodgeRollSoundEffect: {fileID: 0}
   fireballLaunchEffect: {fileID: 0}

@@ -74,7 +74,6 @@ namespace Krisnat.Assets.Scripts
             }
             else
             {
-                Debug.LogWarning("Save file not found in " + path);
                 return null;
             }
         }

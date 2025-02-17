@@ -44,8 +44,6 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        LoadLoadedLevel();
-
         if (newGame)
         {
             SaveSystem.DeleteAllSaveFiles();
@@ -53,13 +51,15 @@ public class MenuManager : MonoBehaviour
             CoreClass.GameManager.Instance.LoadPlayer();
             newGame = false;
 
-            InventoryManager.Instance.Add(CoreClass.GameManager.Instance.StartingItems);
+            /*InventoryManager.Instance.Add(CoreClass.GameManager.Instance.StartingItems);
 
             foreach(var item in CoreClass.GameManager.Instance.StartingItems)
             {
                 InventoryManager.Instance.EquipItem(item);
-            }
+            }*/
         }
+
+        LoadLoadedLevel();
 
         resolutions = Screen.resolutions;
 
@@ -156,7 +156,11 @@ public class MenuManager : MonoBehaviour
     {
         PlayerSaveData data = SaveSystem.LoadPlayer();
 
-        if (data == null) return;
+        if (data == null)
+        {
+            CurrentLevel = 1;
+            return;
+        }
 
         CurrentLevel = data.currentLevel;
     }
@@ -329,8 +333,8 @@ public class MenuManager : MonoBehaviour
 
     public void NewGame()
     {
-        SaveSystem.DeleteAllSaveFiles();
         newGame = true;
+        SaveSystem.DeleteAllSaveFiles();
     }
     #endregion
 }

@@ -301,6 +301,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 201917306390933133}
     m_Modifications:
+    - target: {fileID: 7760104382576202261, guid: f688d8fbbd48e5b4f98da503f5bded33,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 35
+      objectReference: {fileID: 0}
     - target: {fileID: 9018320000383621700, guid: f688d8fbbd48e5b4f98da503f5bded33,
         type: 3}
       propertyPath: m_Name
