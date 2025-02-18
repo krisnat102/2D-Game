@@ -90,7 +90,7 @@ namespace Spells
                 if (!inventory.activeInHierarchy && !spellInventory.activeInHierarchy && !characterTab.activeInHierarchy && !levelUpUI.activeInHierarchy)
                 {
                     OpenCloseSpellInventory(true);
-                    ListSpells();
+                    SpellsTabBn();
                 }
                 else if (characterTab.activeInHierarchy)
                 {
@@ -265,6 +265,10 @@ namespace Spells
             ListActiveSpells();
             DisableSelectedIndicators();
             description1.SetActive(false);
+            spellContent.parent.gameObject.SetActive(true);
+            spellContentBar.parent.gameObject.SetActive(true);
+            abilityContent.parent.gameObject.SetActive(false);
+            abilityContentBar.parent.gameObject.SetActive(false);
         }
         public void AbilitiesTabBn()
         {
@@ -273,6 +277,10 @@ namespace Spells
             ListActiveSpells();
             DisableSelectedIndicators();
             description1.SetActive(false);
+            spellContent.parent.gameObject.SetActive(false);
+            spellContentBar.parent.gameObject.SetActive(false);
+            abilityContent.parent.gameObject.SetActive(true);
+            abilityContentBar.parent.gameObject.SetActive(true);
         }
         #endregion
     }

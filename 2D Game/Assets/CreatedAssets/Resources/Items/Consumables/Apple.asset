@@ -17,7 +17,7 @@ MonoBehaviour:
   value: 10
   cost: 4
   usable: 1
-  icon: {fileID: 21300000, guid: 2e6d6c9c5dbaafc46a6ec0e88d08e844, type: 3}
+  icon: {fileID: 21300000, guid: 7f5c8206a5c4ee84bbb86cfaa3c6f9f6, type: 3}
   itemClass: 0
   itemDescription: A tasty looking apple
   equipment: 0
@@ -28,3 +28,4 @@ MonoBehaviour:
   weaponData: {fileID: 0}
   consumable: 1
   consumableType: 1
+  consumableSoundEffect: 0
