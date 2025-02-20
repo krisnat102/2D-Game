@@ -20,6 +20,7 @@ namespace Krisnat
         private bool arrowStuck = false;
         private bool hitGround;
         private Vector2 offset;
+        private Vector2 lastVelocity;
         private Enemy previousEnemy;
         private Core core;
         private Player player;
@@ -59,9 +60,13 @@ namespace Krisnat
             if(player != null) transform.position = player.transform.position + (Vector3) offset;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            if (!hitGround) RotationFixer();
+            if (!hitGround)
+            {
+                RotationFixer();
+                lastVelocity = rb.velocity;
+            }
 
             if(DistanceTravelled() > range)
             {
@@ -76,7 +81,7 @@ namespace Krisnat
 
                 if(transparency <= 0f)
                 {
-                    Destroy(gameObject);
+                    gameObject.SetActive(false);
                 }
             }
         }
@@ -102,7 +107,7 @@ namespace Krisnat
             }
             if (collision.tag == "Ground" || collision.tag == "Door")
             {
-                float angle = Mathf.Atan2(rb.velocity.normalized.y,rb.velocity.normalized.x) * Mathf.Rad2Deg;
+                float angle = Mathf.Atan2(lastVelocity.normalized.y, lastVelocity.normalized.x) * Mathf.Rad2Deg;
 
                 hitGround = true;
 

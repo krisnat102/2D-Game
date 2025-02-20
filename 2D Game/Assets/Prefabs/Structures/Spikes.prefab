@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 3482499991018304796}
   m_Layer: 0
   m_Name: Spikes
-  m_TagString: Untagged
+  m_TagString: BackgroundObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  damageFrequency: 1
   damageType: 0
   damageEnemies: 1
 --- !u!61 &3482499991018304796
