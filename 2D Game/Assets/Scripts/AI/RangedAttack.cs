@@ -118,7 +118,7 @@ public class RangedAttack : MonoBehaviour
         float time = Mathf.Abs(distance) / initialSpeed;
 
         // Recalculate vertical velocity using the correct height difference
-        float Vy = (heightDifference / time) + (0.5f * g * time);
+        float Vy = (1.4f * heightDifference / time) + (0.5f * g * time);
         Vy *= enemy.Data.distanceOffset;
 
         // Create the velocity vector

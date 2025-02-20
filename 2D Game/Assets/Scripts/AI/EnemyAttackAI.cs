@@ -36,6 +36,7 @@ public class EnemyAttackAI : MonoBehaviour
         if (player)
         {
             InRange = false;
+            InSight = false;
             if (flipTracker == false)
             {
                 Flip();

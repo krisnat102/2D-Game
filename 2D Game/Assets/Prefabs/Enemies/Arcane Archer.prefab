@@ -104,7 +104,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -131,7 +131,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 401408
+    m_Bits: 393216
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -1515,7 +1515,7 @@ MonoBehaviour:
   firePoint: {fileID: 3004276809161636892}
   IgnoreMe:
     serializedVersion: 2
-    m_Bits: 7742007
+    m_Bits: 7758391
   flip: 0
 --- !u!61 &9045796327832882604
 BoxCollider2D:
@@ -1549,7 +1549,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.014289856, y: -0.15963888}
+  m_Offset: {x: 6.202529, y: -0.15963888}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1560,7 +1560,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 35.89537, y: 8.336501}
+  m_Size: {x: 19.922617, y: 8.336501}
   m_EdgeRadius: 0
 --- !u!1 &7369021166119927745
 GameObject:
