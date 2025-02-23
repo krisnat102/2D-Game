@@ -33,7 +33,7 @@ public class MenuManager : MonoBehaviour
     private Resolution[] resolutions;
     private bool damagePopups = true;
     private bool oldGamePaused;
-    private static bool newGame = false;
+    public static bool newGame = false;
     #endregion
 
     #region Unity Methods
@@ -51,12 +51,12 @@ public class MenuManager : MonoBehaviour
             CoreClass.GameManager.Instance.LoadPlayer();
             newGame = false;
 
-            /*InventoryManager.Instance.Add(CoreClass.GameManager.Instance.StartingItems);
+            InventoryManager.Instance.Add(CoreClass.GameManager.Instance.StartingItems);
 
-            foreach(var item in CoreClass.GameManager.Instance.StartingItems)
-            {
-                InventoryManager.Instance.EquipItem(item);
-            }*/
+            //foreach(var item in CoreClass.GameManager.Instance.StartingItems)
+            //{
+                //InventoryManager.Instance.EquipItem(item);
+            //}
         }
 
         LoadLoadedLevel();
@@ -141,6 +141,11 @@ public class MenuManager : MonoBehaviour
                 OpenCloseMenu(false);
             }
         }
+    }
+
+    public void DeleteSaves()
+    {
+        SaveSystem.DeleteAllSaveFiles();
     }
     #endregion
 
@@ -334,7 +339,6 @@ public class MenuManager : MonoBehaviour
     public void NewGame()
     {
         newGame = true;
-        SaveSystem.DeleteAllSaveFiles();
     }
     #endregion
 }

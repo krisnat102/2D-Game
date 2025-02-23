@@ -22,6 +22,7 @@ namespace Krisnat
 
         public void LoadLoadedLevel()
         {
+            Debug.Log(MenuManager.Instance.CurrentLevel);
             StartCoroutine(LoadLevelCoroutine(MenuManager.Instance.CurrentLevel));
         }
 

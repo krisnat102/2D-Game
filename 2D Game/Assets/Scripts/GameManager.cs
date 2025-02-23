@@ -79,6 +79,13 @@ namespace CoreClass
             stats = Stats.Instance;
 
             LoadPlayer();
+
+            if (MenuManager.newGame)
+            {
+                InventoryManager.Instance.Add(startingItems);
+                InventoryManager.Instance.EquipItem(startingItems[0]);
+                InventoryManager.Instance.EquipItem(startingItems[1]);
+            }
         }
         #endregion
 
