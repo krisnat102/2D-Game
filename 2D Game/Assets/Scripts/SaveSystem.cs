@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 #if UNITY_EDITOR
@@ -78,7 +80,7 @@ namespace Krisnat.Assets.Scripts
             }
         }
 
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
         [MenuItem("Tools/DeleteSaveFile")]
         #endif
         public static void DeleteAllSaveFiles()

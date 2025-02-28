@@ -22,12 +22,13 @@ namespace Krisnat
 
         public void LoadLoadedLevel()
         {
-            Debug.Log(MenuManager.Instance.CurrentLevel);
+            if (MenuManager.Instance.CurrentLevel == 0) MenuManager.Instance.CurrentLevel = 1;
             StartCoroutine(LoadLevelCoroutine(MenuManager.Instance.CurrentLevel));
         }
 
         public IEnumerator LoadLevelCoroutine(int buildIndex)
         {
+            yield return new WaitForSeconds(0.1f);
             StartCoroutine(DestroyPlayer(transitionTime - 0.1f));
             transition.SetTrigger("Start");
             if (buildIndex != 0) MenuManager.Instance.CurrentLevel = buildIndex;
