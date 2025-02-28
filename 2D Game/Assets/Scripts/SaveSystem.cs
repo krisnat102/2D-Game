@@ -82,7 +82,7 @@ namespace Krisnat.Assets.Scripts
 
         #if UNITY_EDITOR
         [MenuItem("Tools/DeleteSaveFile")]
-        #endif
+#endif
         public static void DeleteAllSaveFiles()
         {
             string path = Application.persistentDataPath;
@@ -93,12 +93,27 @@ namespace Krisnat.Assets.Scripts
 
                 foreach (FileInfo file in directory.GetFiles())
                 {
-                    file.Delete(); // Delete each file
+                    try
+                    {
+                        file.Attributes = FileAttributes.Normal; // Remove read-only attribute
+                        file.Delete();
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.LogError($"Failed to delete file {file.Name}: {ex.Message}");
+                    }
                 }
 
                 foreach (DirectoryInfo dir in directory.GetDirectories())
                 {
-                    dir.Delete(true); // Delete each subdirectory and its contents
+                    try
+                    {
+                        dir.Delete(true);
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.LogError($"Failed to delete directory {dir.Name}: {ex.Message}");
+                    }
                 }
 
                 Debug.Log("All save files deleted successfully.");
@@ -108,5 +123,6 @@ namespace Krisnat.Assets.Scripts
                 Debug.LogWarning("Persistent data path directory does not exist.");
             }
         }
+
     }
 }

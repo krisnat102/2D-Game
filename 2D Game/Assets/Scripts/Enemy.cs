@@ -393,6 +393,7 @@ public class Enemy : MonoBehaviour
             {
                 if (GetComponentInChildren<Canvas>() && damagePopup && MenuManager.Instance.DamagePopUps)
                 {
+                    Debug.Log()
                     Vector3 popUpOffset;
                     if (!multipleDamageSources) popUpOffset = new Vector3(damagePopupOffset.x + UnityEngine.Random.Range(-2f, 1f), damagePopupOffset.y);
                     else popUpOffset = Vector3.zero;

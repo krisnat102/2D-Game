@@ -44,19 +44,16 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
+        LoadGameSettings();
+        LoadVideoSettings();
+
         if (newGame)
         {
             SaveSystem.DeleteAllSaveFiles();
-            SaveSystem.SaveData(PlayerSaveData.CreateDefault());
-            CoreClass.GameManager.Instance.LoadPlayer();
+            var save = PlayerSaveData.CreateDefault();
+            SaveSystem.SaveData(save);
+            CoreClass.GameManager.Instance.LoadPlayer(save);
             newGame = false;
-
-            InventoryManager.Instance.Add(CoreClass.GameManager.Instance.StartingItems);
-
-            //foreach(var item in CoreClass.GameManager.Instance.StartingItems)
-            //{
-                //InventoryManager.Instance.EquipItem(item);
-            //}
         }
 
         LoadLoadedLevel();
@@ -89,9 +86,6 @@ public class MenuManager : MonoBehaviour
             resolutionDropdown.RefreshShownValue();
         }
 
-        LoadVideoSettings();
-        LoadGameSettings();
-
         if (SaveSystem.HasLoadFile() && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "MainMenu")
         {
             existingSaveButtons.SetActive(true);
@@ -106,6 +100,14 @@ public class MenuManager : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(PlayerPrefs.GetInt("DamagePopUp"));
+
+        if (PlayerPrefs.HasKey("DamagePopUp") && (DamagePopUps ? 1 : 0) != PlayerPrefs.GetInt("DamagePopUp"))
+        {
+            DamagePopUps = Convert.ToBoolean(PlayerPrefs.GetInt("DamagePopUp"));
+            Debug.Log(1);
+        }
+
         Screen.fullScreen = fullScreenToggle.isOn;
         if(CoreClass.GameManager.Instance != null){
             if (oldGamePaused != CoreClass.GameManager.Instance.GamePaused && CoreClass.GameManager.Instance.GamePaused)
@@ -230,8 +232,8 @@ public class MenuManager : MonoBehaviour
             damagePopUpsToggle.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("DamagePopUp"));
             DamagePopUps = damagePopUpsToggle.isOn;
         }
-
-        if (PlayerPrefs.HasKey("DamagePopUp"))
+        //Dash Aiming Type
+        if (PlayerPrefs.HasKey("DashAimingType"))
         {
             dashAimingMouseToggle.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("DashAimingType"));
             DashAimingMouse = dashAimingMouseToggle.isOn;
