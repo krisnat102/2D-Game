@@ -36,15 +36,14 @@ namespace Krisnat
         private void Start()
         {
             stats = Stats.Instance;
-            player = Stats.Instance?.GetComponentInParent<Player>();
+            player = stats?.GetComponentInParent<Player>();
 
             playerData = player?.PlayerData;
 
-            //for testing
-            //playerData.SetLevel(1);
-            if(playerData) LevelUpCost = CalculateLevelUpCost(playerData.PlayerLevel);
+            if (playerData) LevelUpCost = CalculateLevelUpCost(playerData.PlayerLevel);
 
             //for testing
+            //playerData.SetLevel(1);
             //InventoryManager.Instance.SetCoins(10000, false);
         }
         private void Update()
@@ -52,6 +51,8 @@ namespace Krisnat
             StrengthDamage = 1 + StrengthCounter / 10f;
             DexterityDamage = 1 + DexterityCounter / 10f;
             IntelligenceDamage = 1 + IntelligenceCounter / 10f;
+
+            //Debug.Log(StrengthDamage);
         }
         #endregion
 

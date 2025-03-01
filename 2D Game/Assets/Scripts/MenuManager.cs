@@ -100,12 +100,9 @@ public class MenuManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(PlayerPrefs.GetInt("DamagePopUp"));
-
         if (PlayerPrefs.HasKey("DamagePopUp") && (DamagePopUps ? 1 : 0) != PlayerPrefs.GetInt("DamagePopUp"))
         {
             DamagePopUps = Convert.ToBoolean(PlayerPrefs.GetInt("DamagePopUp"));
-            Debug.Log(1);
         }
 
         Screen.fullScreen = fullScreenToggle.isOn;
