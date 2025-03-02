@@ -36,7 +36,7 @@ namespace Spells
             rb = GetComponent<Rigidbody2D>();
 
             Vector2 castDirection = (doNotRotate) ? Vector2.zero : transform.right.normalized;
-            rb.velocity = move ? castDirection * spell.speed : Vector2.zero;
+            rb.velocity = move ? castDirection * spell.speed : Vector2.zero * Time.deltaTime;
             death = GetComponentInChildren<Death>(true)?.gameObject;
 
             if (doNotRotate)

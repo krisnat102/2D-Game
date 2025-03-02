@@ -105,6 +105,11 @@ public class MenuManager : MonoBehaviour
             DamagePopUps = Convert.ToBoolean(PlayerPrefs.GetInt("DamagePopUp"));
         }
 
+        if (PlayerPrefs.HasKey("DashAimingType") && (DashAimingMouse ? 1 : 0) != PlayerPrefs.GetInt("DashAimingType"))
+        {
+            DashAimingMouse = Convert.ToBoolean(PlayerPrefs.GetInt("DashAimingType"));
+        }
+
         Screen.fullScreen = fullScreenToggle.isOn;
         if(CoreClass.GameManager.Instance != null){
             if (oldGamePaused != CoreClass.GameManager.Instance.GamePaused && CoreClass.GameManager.Instance.GamePaused)

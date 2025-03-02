@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2121936274c14654a9abc6a3ee4178f7, type: 3}
   m_Name: Skeleton
   m_EditorClassIdentifier: 
-  level: 1
   enemyName: Skeleton
   maxHP: 30
   attackSpeed: 1.9
@@ -28,9 +27,9 @@ MonoBehaviour:
   HitBox:
     serializedVersion: 2
     x: -0.87
-    y: 0.63
+    y: 1.66
     width: 1.18
-    height: -1.25
+    height: -2.29
   DetectableLayers:
     serializedVersion: 2
     m_Bits: 1024
@@ -92,4 +91,22 @@ MonoBehaviour:
   impactEffect: {fileID: 0}
   rangedDamage: 0
   rangedSpeed: 0
-  distanceOffset: 0
+  projectileMaxHeight: 0
+  trajectoryAnimationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  axisCorrectionAnimationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  projectileSpeedAnimationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
