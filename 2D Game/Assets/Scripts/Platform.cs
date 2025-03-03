@@ -5,7 +5,7 @@ namespace Interactables
 {
     public class Platform : MonoBehaviour
     {
-        Collider2D platform;
+        CompositeCollider2D platform;
 
         [SerializeField] private Transform player;
 
@@ -13,7 +13,7 @@ namespace Interactables
 
         private void Start()
         {
-            platform = GetComponent<Collider2D>();
+            platform = GetComponent<CompositeCollider2D>();
         }
 
         private void Update()
