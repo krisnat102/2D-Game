@@ -835,10 +835,20 @@ public class Enemy : MonoBehaviour
     {
         if (Data.dummy) return;
 
+        int calibrate = 1;
+        if (FacingDirection == 1 && Data.fixRotationWhenAttacking)
+        {
+            calibrate = -1;
+        }
+        else if (Data.fixRotationWhenAttacking)
+        {
+            calibrate = 1;
+        }
+
         Gizmos.color = UnityEngine.Color.red;
         offset.Set(
-        transform.position.x + (Data.HitBox.center.x * FacingDirection * -1),
-        transform.position.y + Data.HitBox.center.y
+            transform.position.x + (Data.HitBox.center.x * FacingDirection * calibrate * -1),
+            transform.position.y + Data.HitBox.center.y
         );
         Vector2 cancelMove = new Vector2(
         transform.position.x + (Data.cancelMove.center.x * FacingDirection * -1),

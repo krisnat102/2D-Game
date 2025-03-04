@@ -27,9 +27,9 @@ MonoBehaviour:
   HitBox:
     serializedVersion: 2
     x: -0.87
-    y: 1.66
-    width: 1.18
-    height: -2.29
+    y: 0.62
+    width: 1.16
+    height: -1.3
   DetectableLayers:
     serializedVersion: 2
     m_Bits: 1024
@@ -91,22 +91,4 @@ MonoBehaviour:
   impactEffect: {fileID: 0}
   rangedDamage: 0
   rangedSpeed: 0
-  projectileMaxHeight: 0
-  trajectoryAnimationCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  axisCorrectionAnimationCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  projectileSpeedAnimationCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  distanceOffset: 0

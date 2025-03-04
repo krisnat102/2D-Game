@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Krisnat;
+using UnityEngine;
 
 public class EnemyAttackAI : MonoBehaviour
 {
@@ -12,11 +13,12 @@ public class EnemyAttackAI : MonoBehaviour
     private bool flipTracker;
     private Transform playerTrans;
     private Enemy enemy;
+    private EnemyGroup group;
 
     public bool InRange { get => inRange; private set => inRange = value; }
     public bool InSight { get => inSight; private set => inSight = value; }
     public bool InRangeOfSight { get => inRangeOfSight; private set => inRangeOfSight = value; }
-    public bool Alerted { get; set; } 
+    public bool Alerted { get; set; }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -60,6 +62,8 @@ public class EnemyAttackAI : MonoBehaviour
                 {
                     InSight = true;
                     Alerted = true;
+
+                    if (group) group.Alert();
                 }
                 else InSight = false;
             }
@@ -69,6 +73,7 @@ public class EnemyAttackAI : MonoBehaviour
     {
         enemy = transform.parent.GetComponent<Enemy>();
         playerTrans = PlayerInputHandler.Instance.gameObject.transform;
+        group = GetComponentInParent<EnemyGroup>();
     }
 
     private void Flip()
