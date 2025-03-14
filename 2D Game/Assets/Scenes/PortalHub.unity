@@ -325,6 +325,11 @@ PrefabInstance:
       objectReference: {fileID: 294866890}
     - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
         type: 3}
+      propertyPath: mute
+      value: 
+      objectReference: {fileID: 294866890}
+    - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
+        type: 3}
       propertyPath: Music
       value: 
       objectReference: {fileID: 2065361463}
@@ -333,6 +338,16 @@ PrefabInstance:
       propertyPath: music
       value: 
       objectReference: {fileID: 1817940319}
+    - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
+        type: 3}
+      propertyPath: sfxSlider
+      value: 
+      objectReference: {fileID: 943362929}
+    - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
+        type: 3}
+      propertyPath: musicSlider
+      value: 
+      objectReference: {fileID: 2065361463}
     - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
         type: 3}
       propertyPath: coinPickupSound

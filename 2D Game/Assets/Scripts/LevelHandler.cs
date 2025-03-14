@@ -1,5 +1,6 @@
 using Bardent.CoreSystem;
 using Inventory;
+using System;
 using UnityEngine;
 using static Cinemachine.DocumentationSortingAttribute;
 
@@ -35,12 +36,18 @@ namespace Krisnat
         #region Unity Methods
         private void Start()
         {
-            stats = Stats.Instance;
-            player = stats?.GetComponentInParent<Player>();
+            try
+            {
+                stats = Stats.Instance;
+                player = stats?.GetComponentInParent<Player>();
 
-            playerData = player?.PlayerData;
+                playerData = player?.PlayerData;
 
-            if (playerData) LevelUpCost = CalculateLevelUpCost(playerData.PlayerLevel);
+                if (playerData) LevelUpCost = CalculateLevelUpCost(playerData.PlayerLevel);
+            }
+            catch
+            {
+            }
 
             //for testing
             //playerData.SetLevel(1);
