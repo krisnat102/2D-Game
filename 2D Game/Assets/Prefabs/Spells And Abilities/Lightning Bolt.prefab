@@ -78,8 +78,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5199
-  m_Sprite: {fileID: 21300000, guid: c40e17948a7db4a4c8f8cd72ebb69637, type: 3}
+  m_SortingOrder: 6105
+  m_Sprite: {fileID: -2088305284, guid: ece99fb6c512b614a93fd32ac0e0a2a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -122,18 +122,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.028867245, y: 0.0033932626}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.75, y: 0.6875}
+    oldSize: {x: 1, y: 2}
     newSize: {x: 1.26, y: 1.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.8193464, y: 0.7594685}
+  m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
 --- !u!50 &300834781376292935
 Rigidbody2D:
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationLength: 0.25
-  destroy: 1
+  destroy: 0
   adaptSize: 1
   adaptDirection: 1
   objectToSpawnBeforeDeath: {fileID: 0}
@@ -220,7 +220,7 @@ Animator:
   m_GameObject: {fileID: 201917306390933128}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8aa3eff1d7a561144859f28e5e3f6c46, type: 2}
+  m_Controller: {fileID: 9100000, guid: d9c0b90092656324ba1b31e13db63d11, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
