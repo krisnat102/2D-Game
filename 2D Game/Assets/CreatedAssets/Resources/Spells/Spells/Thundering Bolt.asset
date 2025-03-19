@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c662f382e836a45bb83c6a13508d95, type: 3}
+  m_Name: Thundering Bolt
+  m_EditorClassIdentifier: 
+  id: 4
+  spellName: Thundering Bolt
+  spell: 1
+  cost: 20
+  damage: 5
+  speed: 18
+  cooldown: 4
+  range: 60
+  icon: {fileID: 21300000, guid: 0b544c27b28937f438ccb55342c1f9cd, type: 3}
+  spellEffect: {fileID: 4207838977363604795, guid: f5f7fae5789f06247b0859dd686b28e2,
+    type: 3}
+  spellDeath: {fileID: 868991636443939076, guid: d43161c831ee6fb4b9e045cdb8a3441b,
+    type: 3}
+  spellHitSummon: {fileID: 201917306390933128, guid: 5eae075d46a0bbd41aac7cb2cd2f430d,
+    type: 3}
+  spellHitSummonDamage: 25
+  spellHitSummonDelay: 0.3
+  description: The calm before the storm
+  useOffset: 0
+  offset: {x: 0, y: 0}

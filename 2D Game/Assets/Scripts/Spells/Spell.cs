@@ -15,6 +15,10 @@ namespace Spells
         public Sprite icon;
         public GameObject spellEffect;
         public GameObject spellDeath;
+        [Header("Hit Summon")]
+        public GameObject spellHitSummon;
+        public float spellHitSummonDamage;
+        public float spellHitSummonDelay;
         [TextArea]
         public string description;
         public bool useOffset;

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81c662f382e836a45bb83c6a13508d95, type: 3}
   m_Name: BearTrap
   m_EditorClassIdentifier: 
-  id: 4
+  id: 104
   spellName: Bear Trap
   spell: 0
   cost: 40
@@ -24,6 +24,9 @@ MonoBehaviour:
   spellEffect: {fileID: 6747920266382756057, guid: 80f42cd7eded9a249b994dfa5766169f,
     type: 3}
   spellDeath: {fileID: 0}
+  spellHitSummon: {fileID: 0}
+  spellHitSummonDamage: 0
+  spellHitSummonDelay: 0
   description: Can hold down even the mightiest of bears
   useOffset: 0
   offset: {x: 0, y: 0}

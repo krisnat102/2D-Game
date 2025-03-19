@@ -11,11 +11,13 @@ namespace Spells
 
         [Header("Spell Function")]
         [SerializeField] private bool move;
-        [SerializeField] private bool destroyOnTouch;
-        [SerializeField] private bool doNotRotate;
         [SerializeField] private bool flip;
+        [SerializeField] private bool doNotRotate;
+        [SerializeField] private bool destroyOnTouch;
         [SerializeField] private bool shuriken;
+        [SerializeField] private bool spellHitSummon;
         [SerializeField] private float collisionTimeOffset = 0.03f;
+        [SerializeField] private GameObject deathEffect;
 
         [Header("Shuriken")]
         [SerializeField] private float rotationSpeed = 0.1f;
@@ -25,10 +27,10 @@ namespace Spells
         private Rigidbody2D rb;
         private LevelHandler levelHandler;
         private Abilities abilities;
-        private GameObject death;
         private bool stuckShuriken = false;
         private float transparency = 1f;
         private float angle;
+        private int spellDirection;
         private bool wallCollider = false;
 
         void Awake()
@@ -36,8 +38,9 @@ namespace Spells
             rb = GetComponent<Rigidbody2D>();
 
             Vector2 castDirection = (doNotRotate) ? Vector2.zero : transform.right.normalized;
+            spellDirection = (doNotRotate || castDirection.x == 0) ? 1 : (int)Mathf.Sign(transform.right.x);
+
             rb.velocity = move ? castDirection * spell.speed : Vector2.zero * Time.deltaTime;
-            death = GetComponentInChildren<Death>(true)?.gameObject;
 
             if (doNotRotate)
             {
@@ -48,12 +51,6 @@ namespace Spells
                 transform.right = rb.velocity.normalized;
             }
 
-            if (flip)
-            {
-                int facingDir = abilities.Side ? 1 : -1;
-                transform.localScale = new Vector3(transform.localScale.x * facingDir, transform.localScale.y, transform.localScale.z);
-            }
-
             angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
             Invoke("NullAngle", 0.2f);
             Invoke("WallColliderOn", 0.01f);
@@ -62,7 +59,13 @@ namespace Spells
         private void Start()
         {
             levelHandler = CoreClass.GameManager.Instance.GetComponent<LevelHandler>();
-            abilities = Stats.Instance.gameObject.GetComponent<Abilities>();
+            abilities = Abilities.instance;
+
+            if (flip)
+            {
+                int facingDir = abilities.Side ? 1 : -1;
+                transform.localScale = new Vector3(transform.localScale.x * facingDir, transform.localScale.y, transform.localScale.z);
+            }
         }
 
         private void Update()
@@ -99,7 +102,13 @@ namespace Spells
                 {
                     if (spell.spell)
                     {
-                        enemy.TakeDamage(spell.damage * levelHandler.IntelligenceDamage, 0, false);
+                        if(spellHitSummon) enemy.TakeDamage(spell.spellHitSummonDamage * levelHandler.IntelligenceDamage, 0, false);
+                        else enemy.TakeDamage(spell.damage * levelHandler.IntelligenceDamage, 0, false);
+
+                        if (spell.spellHitSummon && !spellHitSummon)
+                        {
+                            Invoke("SummonHitEffect", spell.spellHitSummonDelay);
+                        }
                     }
                     else
                     {
@@ -138,11 +147,11 @@ namespace Spells
         }
         private void DestroyObject()
         {
-            if (death)
+            if (deathEffect)
             {
-                if (death.GetComponent<Death>().AdaptSize) death.transform.localScale = transform.localScale;
-                death.SetActive(true);
-                death.transform.parent = null;
+                deathEffect.transform.localScale = transform.localScale;
+                deathEffect.SetActive(true);
+                deathEffect.transform.parent = null;
             }
             else if (spell.spellDeath)
             {
@@ -160,5 +169,13 @@ namespace Spells
         private void NullAngle() => angle = 0;
 
         private void WallColliderOn() => wallCollider = true;
+
+        private void SummonHitEffect()
+        {
+            //int facingDir = Abilities.instance.Side ? 1 : -1;
+            float offsetX = 0.4f * spellDirection;
+            Vector2 spawnPosition = new Vector2(transform.position.x + offsetX, transform.position.y + 0.4f);
+            Instantiate(spell.spellHitSummon, spawnPosition, Quaternion.identity);
+        }
     }
 }

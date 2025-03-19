@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81c662f382e836a45bb83c6a13508d95, type: 3}
   m_Name: Shuriken
   m_EditorClassIdentifier: 
-  id: 6
+  id: 106
   spellName: Shuriken
   spell: 0
   cost: 25
@@ -24,6 +24,9 @@ MonoBehaviour:
   spellEffect: {fileID: 7122031244096216671, guid: 657b3e9ec6ab2864392ab766fb6bb53f,
     type: 3}
   spellDeath: {fileID: 0}
+  spellHitSummon: {fileID: 0}
+  spellHitSummonDamage: 0
+  spellHitSummonDelay: 0
   description: A deadly shinobi weapon
   useOffset: 0
   offset: {x: 0, y: 0}

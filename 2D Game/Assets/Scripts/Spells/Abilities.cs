@@ -7,6 +7,8 @@ namespace Spells
     public class Abilities : MonoBehaviour
     {
         #region Variables
+        public static Abilities instance;
+
         [SerializeField] private Transform castingPoint;
 
         [Header("Active Spell Holders")]
@@ -40,6 +42,11 @@ namespace Spells
         #endregion
 
         #region Unity Methods
+        private void Awake()
+        {
+            instance = this;
+        }
+
         void Start()
         {
             playerData = transform.GetComponent<Player>().PlayerData;
