@@ -341,8 +341,11 @@ namespace Spells
                 case "Frostbolt":
                     audioM.PlayBowSound(1.0f, 1.4f);
                     break;
-                case "Lightning Bolt":
+                case "Lightning":
                     audioM.PlayLightningSound(0.8f, 1.2f);
+                    break;
+                case "Thunder Bolt":
+                    audioM.PlayLightningSound(1f, 1.4f);
                     break;
                 case "Shuriken":
                     audioM.PlayBowSound(0.8f, 1.2f);
