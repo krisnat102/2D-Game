@@ -81,7 +81,7 @@ namespace Bardent.Weapons.Components
 
                 StartCoroutine(CooldownCoroutine());
 
-                AudioManager.Instance.PlayBowSound(0.8f, 1.2f);
+                AudioManager.Instance.PlayWhooshSound(0.8f, 1.2f);
 
                 //Stats.Instance.Stam.CurrentValue -= cost;
                 //Stas.Instance.Stam.StopRegen(playerData.stamRecoveryTime);

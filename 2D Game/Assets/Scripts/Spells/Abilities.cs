@@ -339,16 +339,16 @@ namespace Spells
                     audioM.PlayFireballLaunchSound(1.1f, 1.5f);
                     break;
                 case "Frostbolt":
-                    audioM.PlayBowSound(1.0f, 1.4f);
+                    audioM.PlayWhooshSound(1.0f, 1.4f);
                     break;
                 case "Lightning":
                     audioM.PlayLightningSound(0.8f, 1.2f);
                     break;
-                case "Thunder Bolt":
-                    audioM.PlayLightningSound(1f, 1.4f);
+                case "Thundering Bolt":
+                    audioM.PlayWhooshSound(1f, 1.4f);
                     break;
                 case "Shuriken":
-                    audioM.PlayBowSound(0.8f, 1.2f);
+                    audioM.PlayWhooshSound(0.8f, 1.2f);
                     break;
             }
         }

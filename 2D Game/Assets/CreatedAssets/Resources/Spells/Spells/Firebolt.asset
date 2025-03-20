@@ -25,6 +25,9 @@ MonoBehaviour:
     type: 3}
   spellDeath: {fileID: 9018320000383621700, guid: f688d8fbbd48e5b4f98da503f5bded33,
     type: 3}
+  spellHitSummon: {fileID: 0}
+  spellHitSummonDamage: 0
+  spellHitSummonDelay: 0
   description: A fast moving ball of fiery destruction
   useOffset: 0
   offset: {x: 0, y: 0}

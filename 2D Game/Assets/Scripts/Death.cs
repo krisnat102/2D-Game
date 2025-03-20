@@ -25,7 +25,7 @@ public class Death : MonoBehaviour
     private PopUpUI popUp;
     private bool startFade = false;
     private TMP_Text text;
-    private AudioSource childAudio;
+    private AudioSource[] childAudio;
 
     public bool AdaptSize { get => adaptSize; private set => adaptSize = value; }
     public bool AdaptDirection { get => adaptDirection; private set => adaptDirection = value; }
@@ -38,11 +38,11 @@ public class Death : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
         popUp = GetComponent<PopUpUI>();
         text = GetComponentInChildren<TMP_Text>();
-        childAudio = GetComponentInChildren<AudioSource>();
+        childAudio = GetComponentsInChildren<AudioSource>();
 
-        if (childAudio)
+        if (childAudio.Length != 0)
         {
-            childAudio.transform.parent = null;
+            childAudio[0].transform.parent = null;
         }
     }
     private void Update()

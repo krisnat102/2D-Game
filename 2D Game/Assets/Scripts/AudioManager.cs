@@ -24,9 +24,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource music;
     [SerializeField] private AudioSource buttonSound;
     [SerializeField] private AudioSource buySound, coinPickupSound, tradeRefusedSound;
-    [SerializeField] private AudioSource weaponSound, bowSoundEffect, dodgeRollSoundEffect;
+    [SerializeField] private AudioSource heartbeatSound;
+    [SerializeField] private AudioSource weaponSound, whooshSoundEffect, dodgeRollSoundEffect;
     [SerializeField] private AudioSource fireballLaunchEffect, lightningEffect;
-    [SerializeField] private AudioSource equipmentSoundEffect, eatSoundEffect, potionDrinkSoundEffect;
+    [SerializeField] private AudioSource eatSoundEffect, potionDrinkSoundEffect;
+    [SerializeField] private AudioSource[] equipmentSoundEffect;
 
     private bool muteTracker;
     #endregion
@@ -128,6 +130,11 @@ public class AudioManager : MonoBehaviour
     #endregion
 
     #region Audio Players
+    public void PlayHeartbeatSound(float lowerPitch, float higherPitch)
+    {
+        heartbeatSound.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        heartbeatSound.Play();
+    }
     public void PlayWeaponSound(AudioClip SFX, float lowerPitch, float higherPitch)
     {
         weaponSound.clip = SFX;
@@ -157,10 +164,10 @@ public class AudioManager : MonoBehaviour
         tradeRefusedSound.Play();
     }
 
-    public void PlayBowSound(float lowerPitch, float higherPitch)
+    public void PlayWhooshSound(float lowerPitch, float higherPitch)
     {
-        bowSoundEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
-        bowSoundEffect.Play();
+        whooshSoundEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        whooshSoundEffect.Play();
     }
 
     public void PlayDodgeRollSound(float lowerPitch, float higherPitch)
@@ -178,13 +185,7 @@ public class AudioManager : MonoBehaviour
     public void PlayLightningSound(float lowerPitch, float higherPitch)
     {
         lightningEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
-        lightningEffect.Play();
-    }
-
-    public void PlayEquipmentSound(float lowerPitch, float higherPitch)
-    {
-        equipmentSoundEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
-        equipmentSoundEffect.Play();
+        lightningEffect.Play(); 
     }
 
     public void PlayEatSound(float lowerPitch, float higherPitch)
@@ -198,5 +199,14 @@ public class AudioManager : MonoBehaviour
         potionDrinkSoundEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
         potionDrinkSoundEffect.Play();
     }
+
+    public void PlayEquipmentSound(float lowerPitch, float higherPitch)
+    {
+        int randomSFX = Mathf.RoundToInt(UnityEngine.Random.Range(0, equipmentSoundEffect.Length));
+        equipmentSoundEffect[randomSFX].pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        equipmentSoundEffect[randomSFX].Play();
+    }
+
+    public void StopHeartbeatSound() => heartbeatSound.Stop();
     #endregion
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Krisnat
@@ -11,13 +9,22 @@ namespace Krisnat
         [Range(0.5f, 5f)]
         [SerializeField] private float highPitchBoundary = 1f;
 
-        private AudioSource audioSource;
+        private AudioSource[] audioSources;
 
         private void OnEnable()
         {
-            audioSource = GetComponent<AudioSource>();
+            audioSources = GetComponents<AudioSource>();
 
-            if(audioSource) audioSource.pitch = Random.Range(lowPitchBoundary, highPitchBoundary);
+            if (audioSources.Length > 0)
+            {
+                foreach (AudioSource source in audioSources)
+                {
+                    source.pitch = Random.Range(lowPitchBoundary, highPitchBoundary);
+                }
+            }
+
+            int randomSFX = Mathf.RoundToInt(Random.Range(0, audioSources.Length));
+            audioSources[randomSFX].Play();
         }
     }
 }

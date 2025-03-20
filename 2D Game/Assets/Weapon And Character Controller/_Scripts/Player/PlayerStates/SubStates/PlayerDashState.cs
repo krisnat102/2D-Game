@@ -24,7 +24,7 @@ public class PlayerDashState : PlayerAbilityState
         CanDash = false;
         player.InputHandler.UseDashInput();
 
-        AudioManager.Instance.PlayBowSound(0.8f, 1f);
+        AudioManager.Instance.PlayWhooshSound(0.8f, 1f);
 
         isHolding = true;
         dashDirection = Vector2.right * Movement.FacingDirection;

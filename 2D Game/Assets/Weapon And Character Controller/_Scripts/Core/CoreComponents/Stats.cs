@@ -21,6 +21,8 @@ namespace Bardent.CoreSystem
         [SerializeField] private Slider ManaBar;
         [SerializeField] private Slider StamBar;
 
+        private bool lowHP;
+
         protected override void Awake()
         {
             base.Awake();
@@ -48,6 +50,19 @@ namespace Bardent.CoreSystem
             foreach (Stat stat in stats)
             {
                 stat.Regen();
+            }
+
+            if (Health.CurrentValue < 20 && !lowHP)
+            {
+                lowHP = true;
+                Invoke("StartHpRegen", 5f);
+                AudioManager.Instance.PlayHeartbeatSound(0.8f, 0.8f);
+            }
+            else if(Health.CurrentValue >= 20)
+            {
+                lowHP = false;
+                Health.StopRegen();
+                AudioManager.Instance.StopHeartbeatSound();
             }
 
             if (HpBar == null || ManaBar == null || StamBar == null) return;
@@ -78,5 +93,7 @@ namespace Bardent.CoreSystem
             ManaBar.maxValue = Mana.MaxValue;
             StamBar.maxValue = Stam.MaxValue;
         }
+
+        private void StartHpRegen() => Health.StartRegen();
     }
 }

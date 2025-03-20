@@ -323,6 +323,8 @@ MonoBehaviour:
   animTime: 0
   pickUpEffect: {fileID: 4499144343618420963}
   pickUpAudio: {fileID: 5309374026096014401}
+  lowerPitchRange: 0.75
+  higherPitchRange: 1.25
 --- !u!114 &418600410156487958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5847,27 +5849,27 @@ PrefabInstance:
     - target: {fileID: 7705768583829248856, guid: b6be51001a0800f4abd4e30fe133548b,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.03
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 7705768583829248856, guid: b6be51001a0800f4abd4e30fe133548b,
         type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 1.3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7705768583829248856, guid: b6be51001a0800f4abd4e30fe133548b,
         type: 3}
       propertyPath: InitialModule.startSize.minScalar
-      value: 0.015
+      value: 0.025
       objectReference: {fileID: 0}
     - target: {fileID: 7705768583829248856, guid: b6be51001a0800f4abd4e30fe133548b,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 0.2
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 7705768583829248856, guid: b6be51001a0800f4abd4e30fe133548b,
         type: 3}
       propertyPath: InitialModule.startSpeed.minScalar
-      value: 0.7
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7705768583829248856, guid: b6be51001a0800f4abd4e30fe133548b,
         type: 3}
@@ -5882,7 +5884,7 @@ PrefabInstance:
     - target: {fileID: 7705768583829248856, guid: b6be51001a0800f4abd4e30fe133548b,
         type: 3}
       propertyPath: InitialModule.startLifetime.minScalar
-      value: 0.15
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7705768583829248856, guid: b6be51001a0800f4abd4e30fe133548b,
         type: 3}
