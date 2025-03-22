@@ -42,6 +42,11 @@ namespace Bardent.CoreSystem
             HpBar.maxValue = Health.MaxValue;
             ManaBar.maxValue = Mana.MaxValue;
             StamBar.maxValue = Stam.MaxValue;
+
+            if (Health.CurrentValue >= 20)
+            {
+                Krisnat.VignetteController.instance.SetVignette(0);
+            }
         }
 
 
@@ -57,12 +62,14 @@ namespace Bardent.CoreSystem
                 lowHP = true;
                 Invoke("StartHpRegen", 5f);
                 AudioManager.Instance.PlayHeartbeatSound(0.8f, 0.8f);
+                Krisnat.VignetteController.instance.ChangeVignette(0.5f, 2);
             }
-            else if(Health.CurrentValue >= 20)
+            else if(Health.CurrentValue >= 20 && lowHP)
             {
                 lowHP = false;
                 Health.StopRegen();
                 AudioManager.Instance.StopHeartbeatSound();
+                Krisnat.VignetteController.instance.ChangeVignette(0, 1);
             }
 
             if (HpBar == null || ManaBar == null || StamBar == null) return;

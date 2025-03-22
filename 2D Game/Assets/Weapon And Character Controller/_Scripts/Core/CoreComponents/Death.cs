@@ -11,6 +11,8 @@ namespace Bardent.CoreSystem
         [SerializeField] private GameObject deathScreen;
         [SerializeField] private float deathDepth;
 
+        private AudioSource deathSFX;
+
         private ParticleManager ParticleManager =>
             particleManager ? particleManager : Core.GetCoreComponent(ref particleManager);
 
@@ -19,11 +21,16 @@ namespace Bardent.CoreSystem
         private Stats Stats => stats ? stats : Core.GetCoreComponent(ref stats);
         private Stats stats;
 
+        private void Start()
+        {
+            deathSFX = GetComponentInChildren<AudioSource>();
+        }
+
         public void Die()
         {
             foreach (var particle in deathParticles)
             {
-                ParticleManager.StartParticles(particle);
+                ParticleManager.StartParticles(particle, transform.position, transform.rotation);
             }
 
             if (deathScreen != null)
@@ -32,6 +39,8 @@ namespace Bardent.CoreSystem
             }
             InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins / 3, false);
             CoreClass.GameManager.Instance.SavePlayer();
+            deathSFX.gameObject.transform.parent = CoreClass.GameManager.Instance.Audios;
+            deathSFX.Play();
             Core.transform.parent.gameObject.SetActive(false);
             IsDead = true;
         }

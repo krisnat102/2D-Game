@@ -1,7 +1,11 @@
 using Inventory;
 using Krisnat;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class Death : MonoBehaviour
@@ -26,6 +30,7 @@ public class Death : MonoBehaviour
     private bool startFade = false;
     private TMP_Text text;
     private AudioSource[] childAudio;
+    private List<Light2D> lights;
 
     public bool AdaptSize { get => adaptSize; private set => adaptSize = value; }
     public bool AdaptDirection { get => adaptDirection; private set => adaptDirection = value; }
@@ -39,10 +44,16 @@ public class Death : MonoBehaviour
         popUp = GetComponent<PopUpUI>();
         text = GetComponentInChildren<TMP_Text>();
         childAudio = GetComponentsInChildren<AudioSource>();
+        lights = GetComponentsInChildren<Light2D>().ToList();
 
         if (childAudio.Length != 0)
         {
-            childAudio[0].transform.parent = null;
+            childAudio[0].transform.parent = CoreClass.GameManager.Instance.Audios;
+        }
+
+        foreach (var light in lights)
+        {
+            StartCoroutine(FadeLight(light, 0, animationLength));
         }
     }
     private void Update()
@@ -115,5 +126,20 @@ public class Death : MonoBehaviour
             transparency = 0;
             gameObject.SetActive(false);
         }
+    }
+
+    private IEnumerator FadeLight(Light2D light ,float targetIntensity, float duration)
+    {
+        float startIntensity = light.intensity;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            light.intensity = Mathf.Lerp(startIntensity, targetIntensity, elapsedTime / duration);
+            yield return null;
+        }
+
+        light.intensity = targetIntensity; // Ensure final value is set
     }
 }

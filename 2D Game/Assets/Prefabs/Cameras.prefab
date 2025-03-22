@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7592950320868794017}
   - component: {fileID: 275753977715735119}
   - component: {fileID: 742920874667836135}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 4785887516427456525}
   - component: {fileID: 3182966571305345353}
   - component: {fileID: 1404017661711337989}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ Transform:
   m_GameObject: {fileID: 1811298065646077057}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.907668, y: 11.30707, z: -9.999551}
+  m_LocalPosition: {x: -6.0953345, y: 5.8291407, z: -9.999101}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -151,7 +151,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.68551975, g: 0.745283, b: 0.7317881, a: 0}
+  m_BackGroundColor: {r: 0.52156866, g: 0.59607846, b: 0.77647066, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 1
@@ -257,7 +257,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -289,7 +289,8 @@ GameObject:
   - component: {fileID: 1248237577583049915}
   - component: {fileID: 1744348908897264564}
   - component: {fileID: 3743666900767513495}
-  m_Layer: 0
+  - component: {fileID: 4253653352925359788}
+  m_Layer: 6
   m_Name: Player Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +306,7 @@ Transform:
   m_GameObject: {fileID: 3284620395676286794}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.907668, y: 11.30707, z: -9.999551}
+  m_LocalPosition: {x: -6.0953345, y: 5.8291407, z: -9.999101}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -365,6 +366,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shakeIntensity: 1.5
   shakeTime: 0.5
+--- !u!114 &4253653352925359788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3284620395676286794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 449ef5ebbe24720439ec31d15f7b6f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FocusTracksTarget: 0
+  m_FocusTracking: 4
+  m_FocusTarget: {fileID: 0}
+  m_FocusOffset: 0
+  m_Profile: {fileID: 11400000, guid: 47deb3a20ef7d6d49b842d19f3fe29c0, type: 2}
 --- !u!1 &6040114355333174885
 GameObject:
   m_ObjectHideFlags: 0

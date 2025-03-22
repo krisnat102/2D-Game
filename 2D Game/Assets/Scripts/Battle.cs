@@ -71,6 +71,11 @@ namespace Krisnat
             {
                 if (!enemy.Dead)
                 {
+                    var alertness = GetComponentsInChildren<EnemyAttackAI>(true).ToList();
+                    foreach (var alert in alertness)
+                    {
+                        alert.Alerted = true;
+                    }
                     enemy.gameObject.SetActive(true);
                 }
             }

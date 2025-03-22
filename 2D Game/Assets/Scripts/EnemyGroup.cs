@@ -7,7 +7,6 @@ namespace Krisnat
 {
     public class EnemyGroup : MonoBehaviour
     {
-        private List<Enemy> enemies;
         private List<EnemyAttackAI> enemyAwareness;
 
         private void Start()

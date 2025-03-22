@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8394194292753847921}
   - component: {fileID: 4595693657260092099}
   - component: {fileID: 2924980856585170986}
+  - component: {fileID: 899934558910319828}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -49,6 +50,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f75632e8d76a294a921e7b235a998b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingItems:
+  - {fileID: 11400000, guid: 6b77790175636064bbca27a71ef04082, type: 2}
+  - {fileID: 11400000, guid: e54dc2810f1b4c44389c39229cd6ca53, type: 2}
   deathScreen: {fileID: 0}
   playerGO: {fileID: 0}
   death: {fileID: 0}
@@ -159,6 +163,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b89dd907e09bb45832bc815a2e7e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialLevelUpCost: 25
+  levelUpModifier: 1.5
   mainStatIncrease: 8
   subStatsIncrease: 2
+--- !u!114 &899934558910319828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6684929901192448982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307688d2bec69304b869a5b8c4b78dd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: {fileID: 0}
