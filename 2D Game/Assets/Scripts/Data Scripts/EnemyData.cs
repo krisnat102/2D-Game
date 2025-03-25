@@ -16,6 +16,7 @@ public class EnemyData : ScriptableObject
     public float attackSpeed = 1f;
     public float speed = 200f;
     public float damage = 20f;
+    public float actionCooldown = 0.5f;
     public float knockbackModifier = 5f;
 
     [Header("Offsets")]

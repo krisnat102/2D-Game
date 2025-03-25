@@ -187,6 +187,8 @@ public class MenuManager : MonoBehaviour
             }
             CoreClass.GameManager.Instance.GamePaused = true;
             PlayerInputHandler.Instance.StopAllInputs = true;
+
+            AudioManager.Instance.PlayMenuSound(1f, 1.2f);
         }
         else
         {
@@ -195,6 +197,7 @@ public class MenuManager : MonoBehaviour
     }
     private void CloseMenu()
     {
+        AudioManager.Instance.PlayMenuSound(0.7f, 0.9f);
         menu.SetActive(false);
         CoreClass.GameManager.Instance.GamePaused = false;
         PlayerInputHandler.Instance.StopAllInputs = false;

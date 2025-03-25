@@ -14,11 +14,13 @@ namespace Krisnat
         #region Actions
         public void MeleeAttack()
         {
+            //Debug.Log("melee");
             enemy.Attack(true);
         }
 
         public void RangedAttack()
         {
+            //Debug.Log("ranged");
             enemy.Attack(false);
         }
 
@@ -29,6 +31,7 @@ namespace Krisnat
 
         public void SpecialRangedAttack()
         {
+            //Debug.Log("specRanged");
             enemy.SpecialRangedAttack();
         }
         #endregion
@@ -41,33 +44,29 @@ namespace Krisnat
 
         private void Update()
         {
-            // Melee Attack
+            if (enemy.ActionCooldown) return;
+            
             foreach (var action in actions)
             {
-                if(action == Actions.MeleeAttack)
-                {
-                    if (enemy.AttackAIRange.InRange)
-                    {
-                        MeleeAttack();
-                    }
-                }
-            }
-
-            // Special Ranged Attack
-            foreach (var action in actions)
-            {
+                //Special Ranged Attack
                 if (action == Actions.SpecialRangedAttack)
                 {
                     if (enemy.DetectAIRange.InSight && !enemy.AttackAIRange.InRange && !enemy.SpecialRangedAttackCooldown) SpecialRangedAttack();
                 }
-            }
 
-            // Ranged attack
-            foreach (var action in actions)
-            {
+                // Melee Attack
+                if (action == Actions.MeleeAttack)
+                {
+                    if (enemy.AttackAIRange.InRange && !enemy.AttackCooldown)
+                    {
+                        MeleeAttack();
+                    }
+                }
+
+                //Ranged Attack
                 if (action == Actions.RangedAttack)
                 {
-                    if (enemy.DetectAIRange.InSight && !enemy.AttackAIRange.InRange && enemy.SpecialRangedAttackCooldown) RangedAttack();
+                    if (enemy.DetectAIRange.InSight && !enemy.AttackAIRange.InRange && !enemy.AttackCooldown) RangedAttack();
                 }
             }
         }

@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2121936274c14654a9abc6a3ee4178f7, type: 3}
   m_Name: StoneGolem
   m_EditorClassIdentifier: 
-  level: 1
   enemyName: Stone Golem
   maxHP: 500
   attackSpeed: 1.4
   speed: 200
   damage: 30
+  actionCooldown: 0.5
   knockbackModifier: 5
   offsetX: 1.2
   offsetX2: 1.2
   offsetY: -1
   damageType: 0
-  attackAnimationLength: 0.9
-  damageTriggerTime: 0.9
+  attackAnimationLength: 1.1
+  damageTriggerTime: 0.92
   HitBox:
     serializedVersion: 2
     x: -2.6

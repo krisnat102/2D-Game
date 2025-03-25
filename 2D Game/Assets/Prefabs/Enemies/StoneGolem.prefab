@@ -79,7 +79,7 @@ MonoBehaviour:
   firePoint: {fileID: 1706801803178361981}
   IgnoreMe:
     serializedVersion: 2
-    m_Bits: 7742007
+    m_Bits: 7797367
   flip: 0
 --- !u!61 &9156020409018370768
 BoxCollider2D:
@@ -483,6 +483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  damageFrequency: 1
   damageType: 0
   damageEnemies: 0
 --- !u!114 &8169462635592132664
@@ -822,7 +823,7 @@ MonoBehaviour:
   firePoint: {fileID: 1706801803178361981}
   IgnoreMe:
     serializedVersion: 2
-    m_Bits: 7742007
+    m_Bits: 7797303
   flip: 1
 --- !u!61 &4763153723547536956
 BoxCollider2D:
@@ -1083,6 +1084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab9904e6a95017147a2295b5998719f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 1
   hpBar: {fileID: 0}
   hpBarGradient:
     serializedVersion: 2

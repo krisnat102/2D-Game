@@ -22,7 +22,7 @@ public class AudioManager : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private AudioSource generalSound;
     [SerializeField] private AudioSource music;
-    [SerializeField] private AudioSource buttonSound;
+    [SerializeField] private AudioSource buttonSound, menuSound;
     [SerializeField] private AudioSource buySound, coinPickupSound, tradeRefusedSound;
     [SerializeField] private AudioSource heartbeatSound;
     [SerializeField] private AudioSource weaponSound, whooshSoundEffect, dodgeRollSoundEffect;
@@ -145,6 +145,11 @@ public class AudioManager : MonoBehaviour
     {
         buttonSound.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
         buttonSound.Play();
+    }
+    public void PlayMenuSound(float lowerPitch, float higherPitch)
+    {
+        menuSound.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        menuSound.Play();
     }
     public void PlayBuySound(float lowerPitch, float higherPitch)
     {

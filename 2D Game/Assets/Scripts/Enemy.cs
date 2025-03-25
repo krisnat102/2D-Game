@@ -85,6 +85,7 @@ public class Enemy : MonoBehaviour
     #endregion
 
     #region Properties
+    public bool ActionCooldown { get; private set; }
     public bool SpecialRangedAttackCooldown { get => specialRangedAttackCooldown; private set => specialRangedAttackCooldown = value; }
     public bool Dead { get; private set; }
     public int FacingDirection { get => facingDirection; private set => facingDirection = value; }
@@ -98,6 +99,7 @@ public class Enemy : MonoBehaviour
     public EnemyAttackAI AttackAIRange { get => attackAIRange; private set => attackAIRange = value; }
     public EnemyAttackAI DashAIRange { get => dashAIRange; private set => dashAIRange = value; }
     public Vector2 OldPlayerPosition { get => oldPlayerPosition; private set => oldPlayerPosition = value; }
+    public bool AttackCooldown { get => attackCooldown; private set => attackCooldown = value; }
     #endregion
 
     #region Unity Methods
@@ -107,7 +109,7 @@ public class Enemy : MonoBehaviour
 
         if (Data.dummy) return;
 
-        if (DashAIRange && DashAIRange.InRange && Data.canDash && !dashCooldown && !attackCooldown && !Data.boss) Dash();
+        if (DashAIRange && DashAIRange.InRange && Data.canDash && !dashCooldown && !AttackCooldown && !Data.boss) Dash();
         else if (AttackAIRange.InRange && !Data.ranged && !Data.boss) 
         { 
             Attack(true);
@@ -504,7 +506,7 @@ public class Enemy : MonoBehaviour
 
     public void Attack(bool meleeRanged)
     {
-        if (attackCooldown || sleeping) return;
+        if (AttackCooldown || sleeping || ActionCooldown) return;
 
         attacking = true;
 
@@ -512,9 +514,11 @@ public class Enemy : MonoBehaviour
 
         if (Data.fixRotationWhenAttacking) fixRotation = true;
 
-        attackCooldown = true;
-        //StartCoroutine(AttackCooldownCoroutine(Data.attackSpeed));
-        StartCoroutine(ChangeBoolCoroutine(Data.attackSpeed, newValue => attackCooldown = newValue[0], new[] { false }));
+        AttackCooldown = true;
+        StartCoroutine(ChangeBoolCoroutine(Data.attackSpeed, newValue => AttackCooldown = newValue[0], new[] { false }));
+
+        ActionCooldown = true;
+        StartCoroutine(ChangeBoolCoroutine(Data.attackSpeed + Data.specialRangedAttackChargeTime, newValue => ActionCooldown = newValue[0], new[] { false }));
 
         if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
 
@@ -534,9 +538,7 @@ public class Enemy : MonoBehaviour
 
         if (Data.rootWhenAttacking)
         {
-            //StartCoroutine(StartRootedCoroutine(0.1f));
             StartCoroutine(ChangeBoolCoroutine(0.1f, newValue => rooted = newValue[0], new[] { true }));
-            //StartCoroutine(StopRootedCoroutine(Data.attackAnimationLength + 0.1f));
             StartCoroutine(ChangeBoolCoroutine(Data.attackAnimationLength + 0.1f, newValue => rooted = newValue[0], new[] { false }));
         }
 
@@ -558,6 +560,7 @@ public class Enemy : MonoBehaviour
                     return;
                 }
             }
+
             StartCoroutine(ChangeBoolCoroutine(Data.movementDelay, newValue => rooted = newValue[0], new[] { false }));
             StartCoroutine(MovementCoroutine(Data.movementDelay, -Data.direction * new Vector2(FacingDirection * -1, 0), Data.velocity));
         }
@@ -565,20 +568,21 @@ public class Enemy : MonoBehaviour
 
     public void SpecialRangedAttack()
     {
-        if (attackCooldown || SpecialRangedAttackCooldown || sleeping) return;
+        if (AttackCooldown || SpecialRangedAttackCooldown || sleeping || ActionCooldown) return;
 
         if (groundCollider) groundCollider.isTrigger = true;
 
-        SpecialRangedAttackCooldown = true;
-        attackCooldown = true;
+        ActionCooldown = true;
+        StartCoroutine(ChangeBoolCoroutine(Data.attackSpeed + Data.specialRangedAttackChargeTime, newValue => ActionCooldown = newValue[0], new[] { false }));
 
-        //StartCoroutine(SpecialRangedAttackCooldownCoroutine(Data.specialRangedAttackCooldown));
-        StartCoroutine(ChangeBoolCoroutine(Data.specialRangedAttackCooldown, newValue => specialRangedAttackCooldown = newValue[0], new[] { false }));
-        //StartCoroutine(AttackCooldownCoroutine(Data.attackSpeed + Data.specialRangedAttackChargeTime));
-        StartCoroutine(ChangeBoolCoroutine(Data.attackSpeed + Data.specialRangedAttackChargeTime, newValue => attackCooldown = newValue[0], new[] { false }));
+        SpecialRangedAttackCooldown = true;
+        StartCoroutine(ChangeBoolCoroutine(Data.specialRangedAttackCooldown, newValue => SpecialRangedAttackCooldown = newValue[0], new[] { false }));
+
+        AttackCooldown = true;
+        StartCoroutine(ChangeBoolCoroutine(Data.actionCooldown, newValue => AttackCooldown = newValue[0], new[] { false }));
+
         StartCoroutine(SpecialRangedAttackSpawnCoroutine(Data.specialRangedAttackChargeTime));
 
-        //StartCoroutine(StopRootedCoroutine(Data.specialRangedAttackChargeTime + Data.specialRangedAttackChargeExecutionTime));
         StartCoroutine(ChangeBoolCoroutine(Data.specialRangedAttackChargeTime + Data.specialRangedAttackChargeExecutionTime, newValue => rooted = newValue[0], new[] { false }));
 
         if (ContainsParam(animator, "idle")) animator.SetBool("idle", false);
@@ -587,31 +591,27 @@ public class Enemy : MonoBehaviour
         if (aiPath)
         {
             aiPath.enabled = false;
-            //StartCoroutine(EnableAIPathCoroutine(Data.specialRangedAttackChargeTime + Data.specialRangedAttackChargeExecutionTime));
             StartCoroutine(ChangeBoolCoroutine(Data.specialRangedAttackChargeTime + Data.specialRangedAttackChargeExecutionTime, newValue => aiPath.enabled = newValue[0], new[] { true }));
+
             matchPlayerY = true;
-            //StartCoroutine(StopMatchPlayerYCoroutine(Data.specialRangedAttackChargeTime));
             StartCoroutine(ChangeBoolCoroutine(Data.specialRangedAttackChargeTime, newValue => matchPlayerY = newValue[0], new[] { false }));
         }
     }
 
     public void Dash()
     {
-        if (dashCooldown || sleeping) return;
+        if (dashCooldown || sleeping || ActionCooldown) return;
 
         if (ContainsParam(animator, "dash")) animator.SetBool("dash", true);
         StartCoroutine(StartIdleCoroutine(Data.dashDuration, "dash"));
 
         dashCooldown = true;
-        //StartCoroutine(DashCooldownCoroutine(Data.dashCooldown));
         StartCoroutine(ChangeBoolCoroutine(Data.dashCooldown, newValue => dashCooldown = newValue[0], new[] { false }));
 
-        attackCooldown = true;
-        //StartCoroutine(AttackCooldownCoroutine(Data.attackSpeed));
-        StartCoroutine(ChangeBoolCoroutine(Data.attackSpeed, newValue => attackCooldown = newValue[0], new[] { false }));
+        ActionCooldown = true;
+        StartCoroutine(ChangeBoolCoroutine(Data.actionCooldown, newValue => ActionCooldown = newValue[0], new[] { false }));
 
         isDashing = true;
-        //StartCoroutine(StopDashCoroutine(Data.dashDuration));
         StartCoroutine(ChangeBoolCoroutine(Data.dashDuration, newValue => isDashing = newValue[0], new[] { false }));
         StartCoroutine(StopMomentumCoroutine(Data.dashDuration));
 
