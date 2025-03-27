@@ -12,6 +12,8 @@ namespace Inventory
 {
     public class ItemPickup : MonoBehaviour
     {
+        #region Variables
+        #region Private Variables
         [SerializeField] private Item item;
         [SerializeField] private bool forSale;
         [SerializeField] private bool chest;
@@ -35,13 +37,20 @@ namespace Inventory
         private GameObject itemPrice;
         private Animator animator;
         private Canvas canvas;
+        #endregion
 
+        #region Static Variables
         public static List<PopUpUI> itemPopUps = new();
         public static List<string> itemsTaken = new();
+        #endregion
 
+        #region Properties
         public bool Note { get => note; private set => note = value; }
         public string ItemId { get => itemId; private set => itemId = value; }
+        #endregion
+        #endregion
 
+        #region Unity Methods
         private void Start()
         {
             if (portal || note) return;
@@ -74,8 +83,9 @@ namespace Inventory
                 canvas = GetComponentInChildren<Canvas>();
             }
         }
-        
-        public  void Pickup()
+        #endregion
+
+        public void Pickup()
         {
             if (portal) return;
             if (!UIManager.Instance.NoteOpen) PlayerInputHandler.Instance.UseUseInput();

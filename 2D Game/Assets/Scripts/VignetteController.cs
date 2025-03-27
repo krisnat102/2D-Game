@@ -34,7 +34,7 @@ namespace Krisnat
 
         public void SetVignette(float targetIntensity)
         {
-            vignette.intensity.value = targetIntensity;
+            if(vignette) vignette.intensity.value = targetIntensity;
         }
 
         private IEnumerator IncreaseVignette(float targetIntensity, float duration)

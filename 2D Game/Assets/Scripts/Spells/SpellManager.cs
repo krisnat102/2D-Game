@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using Inventory;
 using Krisnat;
 using System.Linq;
+using System.Collections;
 
 namespace Spells
 {
@@ -281,6 +282,42 @@ namespace Spells
             spellContentBar.parent.gameObject.SetActive(false);
             abilityContent.parent.gameObject.SetActive(true);
             abilityContentBar.parent.gameObject.SetActive(true);
+        }
+        #endregion
+
+        #region UI
+        public void SpellTakenPopUp(Spell spell)
+        {
+            InventoryManager.Instance.UIPopUpCooldownTracker = InventoryManager.Instance.UIPopUpCooldown;
+
+            StartCoroutine(InventoryManager.Instance.ReduceCooldownOverTime());
+
+            var canvasTransform = UIManager.Instance.Canvas.transform;
+            var itemPopUp = Instantiate(UIManager.Instance.ItemPickupPopUp, canvasTransform).GetComponent<PopUpUI>();
+
+            foreach (var ui in ItemPickup.itemPopUps)
+            {
+                ui.GoUp();
+            }
+
+            ItemPickup.itemPopUps.Add(itemPopUp);
+
+            float yOffset = Mathf.Lerp(-350, -550, (Screen.currentResolution.height - 720f) / (2160f - 720f));
+            yOffset = Mathf.Clamp(yOffset, -550, -350);
+
+            itemPopUp.transform.position = canvasTransform.position + new Vector3(0, yOffset, 0);
+
+            var images = itemPopUp.GetComponentsInChildren<Image>();
+            if (images.Length > 1) images[1].sprite = spell.icon;
+
+            var textComponent = itemPopUp.GetComponentInChildren<TMP_Text>();
+            if (textComponent != null) textComponent.text = spell.spellName;
+        }
+
+        public IEnumerator SpellPopupRoutine(Spell spell, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            SpellTakenPopUp(spell);
         }
         #endregion
     }

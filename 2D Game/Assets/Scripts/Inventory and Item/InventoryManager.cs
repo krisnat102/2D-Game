@@ -8,6 +8,7 @@ using UnityEditor;
 #endif
 using Spells;
 using UnityEngine.UI;
+using System.Collections;
 
 namespace Inventory
 {
@@ -39,7 +40,6 @@ namespace Inventory
         [SerializeField] private Button useButton;
         [SerializeField] private Image itemImage;
         [SerializeField] private TMP_Text itemName, itemDescription, itemValue, itemPrice, itemWeight, itemArmor, itemMagicRes, weaponAttack;
-
         [SerializeField] private GameObject description;
 
         [Header("Shop")]
@@ -47,11 +47,13 @@ namespace Inventory
         [SerializeField] private GameObject inventoryShopItem;
         [SerializeField] private List<Transform> shopItemContents = new();
         
-
         [Header("Coins")]
         [SerializeField] private GameObject purse;
         [SerializeField] private TMP_Text coinCounter, levelUpCoinCounter, inventoryCoinCounter; 
         [SerializeField] private float purseAnimationDistance, purseAnimationDuration, purseAnimationTimeOnScreen;
+
+        [Header("UI")]
+        [SerializeField] private float uiPopUpCooldown = 0.4f;
 
         private Filter filter = default;
         private float totalArmor, totalMagicRes, totalWeight;
@@ -70,6 +72,10 @@ namespace Inventory
         public bool CharacterTabActiveInHierarchy { get; private set; }
         public bool LevelUpUIActiveInHierarchy { get; private set; }
         public bool Shop { get; set; }
+        public float TotalArmor { get => totalArmor; private set => totalArmor = value; }
+        public float TotalMagicRes { get => totalMagicRes; private set => totalMagicRes = value; }
+        public float TotalWeight { get => totalWeight; private set => totalWeight = value; }
+        public float UIPopUpCooldownTracker { get; set; }
         public Button HelmetBn { get => helmetBn; private set => helmetBn = value; }
         public Button ChestplateBn { get => chestplateBn; private set => chestplateBn = value; }
         public Button GlovesBn { get => glovesBn; private set => glovesBn = value; }
@@ -87,9 +93,6 @@ namespace Inventory
         public TMP_Text ItemMagicRes { get => itemMagicRes; private set => itemMagicRes = value; }
         public TMP_Text WeaponAttack { get => weaponAttack; private set => weaponAttack = value; }
         public GameObject Description { get => description; private set => description = value; }
-        public float TotalArmor { get => totalArmor; private set => totalArmor = value; }
-        public float TotalMagicRes { get => totalMagicRes; private set => totalMagicRes = value; }
-        public float TotalWeight { get => totalWeight; private set => totalWeight = value; }
         public List<Item> AllItems { get => allItems; private set => allItems = value; }
         public List<Item> DistinctItems { get => distinctItems; private set => distinctItems = value; }
         public List<Item> Duplicates { get => duplicates; private set => duplicates = value; }
@@ -98,6 +101,7 @@ namespace Inventory
         public GameObject Inventory { get => inventory; private set => inventory = value; }
         public GameObject SpellInventory { get => spellInventory; private set => spellInventory = value; }
         public GameObject CharacterTab { get => characterTab; private set => characterTab = value; }
+        public float UIPopUpCooldown { get => uiPopUpCooldown; private set => uiPopUpCooldown = value; }
         #endregion
 
         #region Enums
@@ -270,53 +274,28 @@ namespace Inventory
 
             if (uiSpawner)
             {
-                int resolutionHeight = Screen.currentResolution.height;
-
-                var itemPopUp = Instantiate(UIManager.Instance.ItemPickupPopUp, UIManager.Instance.Canvas.transform).GetComponent<PopUpUI>();
-
-                foreach (var ui in ItemPickup.itemPopUps)
-                {
-                    ui.GoUp();
-                }
-
-                ItemPickup.itemPopUps.Add(itemPopUp);
-
-                switch (resolutionHeight)
-                {
-                    case <= 720:
-                        itemPopUp.transform.position = itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -350, 0);
-                        break;
-                    case <= 1080:
-                        itemPopUp.transform.position = itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -400, 0);
-                        break;
-                    case <= 1440:
-                        itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -450, 0);
-                        break;
-                    case <= 2160:
-                        itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -500, 0);
-                        break;
-                    case > 2160:
-                        itemPopUp.transform.position = UIManager.Instance.Canvas.transform.position + new Vector3(0, -550, 0);
-                        break;
-                }
-                itemPopUp.GetComponentsInChildren<Image>()[1].sprite = item.icon;
-                itemPopUp.GetComponentInChildren<TMP_Text>().text = item.itemName;
+                if (UIPopUpCooldownTracker == 0) ItemTakenPopUp(item);
+                else StartCoroutine(ItemPopupRoutine(item, UIPopUpCooldownTracker));
             }
         }
+
         public void Add(List<Item> itemsToAdd)
         {
             Items.AddRange(itemsToAdd);
         }
+
         public void Remove(Item item)
         {
             Items.Remove(item);
             item.DecreaseItemCount();
         }
+
         public void DeleteItem(Item item)
         {
             Items.Remove(item);
             item.SetItemCount(0);
         }
+
         public void ClearInventory()
         {
             Items.Clear();
@@ -884,6 +863,54 @@ namespace Inventory
         {
             purseAnimator.SetTrigger("open");
         }
+        #endregion
+
+        #region UI
+        public void ItemTakenPopUp(Item item)
+        {
+            UIPopUpCooldownTracker = UIPopUpCooldown;
+
+            StartCoroutine(ReduceCooldownOverTime());
+
+            var canvasTransform = UIManager.Instance.Canvas.transform;
+            var itemPopUp = Instantiate(UIManager.Instance.ItemPickupPopUp, canvasTransform).GetComponent<PopUpUI>();
+
+            foreach (var ui in ItemPickup.itemPopUps)
+            {
+                ui.GoUp();
+            }
+
+            ItemPickup.itemPopUps.Add(itemPopUp);
+
+            float yOffset = Mathf.Lerp(-350, -550, (Screen.currentResolution.height - 720f) / (2160f - 720f));
+            yOffset = Mathf.Clamp(yOffset, -550, -350);
+
+            itemPopUp.transform.position = canvasTransform.position + new Vector3(0, yOffset, 0);
+
+            var images = itemPopUp.GetComponentsInChildren<Image>();
+            if (images.Length > 1) images[1].sprite = item.icon;
+
+            var textComponent = itemPopUp.GetComponentInChildren<TMP_Text>();
+            if (textComponent != null) textComponent.text = item.itemName;
+        }
+
+        private IEnumerator ItemPopupRoutine(Item item, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            ItemTakenPopUp(item);
+        }
+
+        public IEnumerator ReduceCooldownOverTime()
+        {
+            while (UIPopUpCooldownTracker > 0)
+            {
+                yield return null;
+                UIPopUpCooldownTracker -= Time.deltaTime;
+            }
+
+            UIPopUpCooldownTracker = 0;
+        }
+
         #endregion
     }
 }
