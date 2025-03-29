@@ -67,7 +67,7 @@ namespace Krisnat
         public void LevelUpStrengthBn()
         {
             if (InventoryManager.Instance.Coins < CalculateLevelUpCost(playerData.PlayerLevel + 1)) return;
-            stats.Health.LevelUpStat(mainStatIncrease);
+            stats.health.LevelUpStat(mainStatIncrease);
             StrengthCounter++;
 
             UniversalStatsIncrease();
@@ -75,7 +75,7 @@ namespace Krisnat
         public void LevelUpDexterityBn()
         {
             if (InventoryManager.Instance.Coins < CalculateLevelUpCost(playerData.PlayerLevel + 1)) return;
-            stats.Stam.LevelUpStat(mainStatIncrease);
+            stats.stam.LevelUpStat(mainStatIncrease);
             DexterityCounter++;
 
             UniversalStatsIncrease();
@@ -83,7 +83,7 @@ namespace Krisnat
         public void LevelUpIntelligenceBn()
         {
             if (InventoryManager.Instance.Coins < CalculateLevelUpCost(playerData.PlayerLevel + 1)) return;
-            stats.Mana.LevelUpStat(mainStatIncrease);
+            stats.mana.LevelUpStat(mainStatIncrease);
             IntelligenceCounter++;
 
             UniversalStatsIncrease();
@@ -93,9 +93,9 @@ namespace Krisnat
         #region Methods
         private void UniversalStatsIncrease()
         {
-            stats.Health.LevelUpStat(subStatsIncrease);
-            stats.Stam.LevelUpStat(subStatsIncrease);
-            stats.Mana.LevelUpStat(subStatsIncrease);
+            stats.health.LevelUpStat(subStatsIncrease);
+            stats.stam.LevelUpStat(subStatsIncrease);
+            stats.mana.LevelUpStat(subStatsIncrease);
 
             playerData.LevelUp();
             LevelUpCost = CalculateLevelUpCost(playerData.PlayerLevel);

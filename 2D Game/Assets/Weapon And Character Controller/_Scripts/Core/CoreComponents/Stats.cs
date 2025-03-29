@@ -10,16 +10,25 @@ namespace Bardent.CoreSystem
     {
         public static Stats Instance;
 
-        [field: SerializeField] public Stat Health { get; private set; }
-        [field: SerializeField] public Stat Poise { get; private set; }
-        [field: SerializeField] public Stat Stam { get; private set; }
-        [field: SerializeField] public Stat Mana { get; private set; }
+        [field: SerializeField] public Stat health { get; private set; }
+        [field: SerializeField] public Stat poise { get; private set; }
+        [field: SerializeField] public Stat stam { get; private set; }
+        [field: SerializeField] public Stat mana { get; private set; }
         List<Stat> stats = new();
 
         [Header("UI")]
-        [SerializeField] private Slider HpBar;
-        [SerializeField] private Slider ManaBar;
-        [SerializeField] private Slider StamBar;
+        [Header("HP")]
+        [SerializeField] private Slider hpBar;
+        [SerializeField] private Slider easeHpBar;
+        [SerializeField] private float easeHpSpeed;
+        [Header("Mana")]
+        [SerializeField] private Slider manaBar;
+        [SerializeField] private Slider easeManapBar;
+        [SerializeField] private float easeManaSpeed;
+        [Header("Stam")]
+        [SerializeField] private Slider stamBar;
+        [SerializeField] private Slider easeStamBar;
+        [SerializeField] private float easeStamSpeed;
 
         private bool lowHP;
 
@@ -30,7 +39,7 @@ namespace Bardent.CoreSystem
 
             stats.AddRange(new List<Stat>
             {
-                Health, Poise, Stam, Mana
+                health, poise, stam, mana
             });
 
             foreach (Stat stat in stats)
@@ -38,17 +47,22 @@ namespace Bardent.CoreSystem
                 stat.Init();
             }
 
-            if (HpBar == null || ManaBar == null || StamBar == null) return;
-            HpBar.maxValue = Health.MaxValue;
-            ManaBar.maxValue = Mana.MaxValue;
-            StamBar.maxValue = Stam.MaxValue;
-
-            if (Health.CurrentValue >= 20)
+            if (health.CurrentValue >= 20)
             {
                 Krisnat.VignetteController.instance.SetVignette(0);
             }
         }
 
+        private void Start()
+        {
+            if (!hpBar || !manaBar || !stamBar || !easeHpBar) return;
+            hpBar.maxValue = health.MaxValue;
+            manaBar.maxValue = mana.MaxValue;
+            stamBar.maxValue = stam.MaxValue;
+            easeHpBar.maxValue = hpBar.maxValue;
+            easeManapBar.maxValue = manaBar.maxValue;
+            easeStamBar.maxValue = stamBar.maxValue;
+        }
 
         private void Update()
         {
@@ -57,25 +71,39 @@ namespace Bardent.CoreSystem
                 stat.Regen();
             }
 
-            if (Health.CurrentValue < 20 && !lowHP)
+            if (health.CurrentValue < 20 && !lowHP)
             {
                 lowHP = true;
                 Invoke("StartHpRegen", 5f);
                 AudioManager.Instance.PlayHeartbeatSound(0.8f, 0.8f);
                 Krisnat.VignetteController.instance.ChangeVignette(0.5f, 2);
             }
-            else if(Health.CurrentValue >= 20 && lowHP)
+            else if(health.CurrentValue >= 20 && lowHP)
             {
                 lowHP = false;
-                Health.StopRegen();
+                health.StopRegen();
                 AudioManager.Instance.StopHeartbeatSound();
                 Krisnat.VignetteController.instance.ChangeVignette(0, 1);
             }
 
-            if (HpBar == null || ManaBar == null || StamBar == null) return;
-            HpBar.value = Health.CurrentValue;
-            ManaBar.value = Mana.CurrentValue;
-            StamBar.value = Stam.CurrentValue;
+            if (hpBar == null || manaBar == null || stamBar == null) return;
+
+            hpBar.value = health.CurrentValue;
+            manaBar.value = mana.CurrentValue;
+            stamBar.value = stam.CurrentValue;
+
+            if (hpBar.value != easeHpBar.value)
+            {
+                easeHpBar.value = Mathf.Lerp(easeHpBar.value, hpBar.value, easeHpSpeed);
+            }
+            if (manaBar.value != easeManapBar.value)
+            {
+                easeManapBar.value = Mathf.Lerp(easeManapBar.value, manaBar.value, easeManaSpeed);
+            }
+            if (stamBar.value != easeStamBar.value)
+            {
+                easeStamBar.value = Mathf.Lerp(easeStamBar.value, stamBar.value, easeStamSpeed);
+            }
         }
 
         public float CalculatePhysicalDamageReduction(float damage)
@@ -95,12 +123,12 @@ namespace Bardent.CoreSystem
 
         public void UpdateStatBars()
         {
-            if (HpBar == null || ManaBar == null || StamBar == null) return;
-            HpBar.maxValue = Health.MaxValue;
-            ManaBar.maxValue = Mana.MaxValue;
-            StamBar.maxValue = Stam.MaxValue;
+            if (hpBar == null || manaBar == null || stamBar == null) return;
+            hpBar.maxValue = health.MaxValue;
+            manaBar.maxValue = mana.MaxValue;
+            stamBar.maxValue = stam.MaxValue;
         }
 
-        private void StartHpRegen() => Health.StartRegen();
+        private void StartHpRegen() => health.StartRegen();
     }
 }

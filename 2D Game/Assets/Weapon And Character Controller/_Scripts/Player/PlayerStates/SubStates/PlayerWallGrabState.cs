@@ -28,7 +28,7 @@ public class PlayerWallGrabState : PlayerTouchingWallState
     public override void Enter()
     {
         base.Enter();
-        Stats.Stam.StopRegen();
+        Stats.stam.StopRegen();
 
         holdPosition = player.transform.position;
 
@@ -38,7 +38,7 @@ public class PlayerWallGrabState : PlayerTouchingWallState
     public override void Exit()
     {
         base.Exit();
-        Stats.Stam.StartRegen();
+        Stats.stam.StartRegen();
     }
 
     public override void LogicUpdate()

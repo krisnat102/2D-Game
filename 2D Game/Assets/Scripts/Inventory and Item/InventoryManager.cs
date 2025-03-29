@@ -566,94 +566,106 @@ namespace Inventory
             switch (item.equipmentType)
             {
                 case Item.EquipmentType.Helmet:
+                    var bnHelmet = HelmetBn.GetComponent<ItemController>();
+
+                    if (bnHelmet.GetItem() != null)
+                    {
+                        UnequipItem(bnHelmet.GetItem());
+                    }
+
                     foreach (Transform transform in HelmetBn.transform)
                     {
                         transform.GetComponent<Image>().gameObject.SetActive(true);
                         transform.GetComponent<Image>().sprite = item.icon;
                     }
 
-                    if (HelmetBn.GetComponent<ItemController>().GetItem() != null)
-                    {
-                        UnequipItem(HelmetBn.GetComponent<ItemController>().GetItem());
-                    }
-
-                    HelmetBn.GetComponent<ItemController>().SetItem(item);
+                    bnHelmet.SetItem(item);
                     break;
 
                 case Item.EquipmentType.Chestplate:
+                    var bnChestplate = HelmetBn.GetComponent<ItemController>();
+
+                    if (bnChestplate.GetItem() != null)
+                    {
+                        UnequipItem(bnChestplate.GetItem());
+                    }
+
                     foreach (Transform transform in ChestplateBn.transform)
                     {
                         transform.GetComponent<Image>().gameObject.SetActive(true);
                         transform.GetComponent<Image>().sprite = item.icon;
                     }
 
-                    if (ChestplateBn.GetComponent<ItemController>().GetItem() != null)
-                    {
-                        UnequipItem(ChestplateBn.GetComponent<ItemController>().GetItem());
-                    }
-
-                    ChestplateBn.GetComponent<ItemController>().SetItem(item);
+                    bnChestplate.SetItem(item);
                     break;
 
                 case Item.EquipmentType.Leggings:
+                    var bnLeggings = BootsBn.GetComponent<ItemController>();
+
+                    if (bnLeggings.GetItem() != null)
+                    {
+                        UnequipItem(bnLeggings.GetItem());
+                    }
+
                     foreach (Transform transform in BootsBn.transform)
                     {
                         transform.GetComponent<Image>().gameObject.SetActive(true);
                         transform.GetComponent<Image>().sprite = item.icon;
                     }
 
-                    if (BootsBn.GetComponent<ItemController>().GetItem() != null)
-                    {
-                        UnequipItem(BootsBn.GetComponent<ItemController>().GetItem());
-                    }
-
-                    BootsBn.GetComponent<ItemController>().SetItem(item);
+                    bnLeggings.SetItem(item);
                     break;
 
                 case Item.EquipmentType.Gloves:
+                    var bnGloves = GlovesBn.GetComponent<ItemController>();
+
+                    if (bnGloves.GetItem() != null)
+                    {
+                        UnequipItem(bnGloves.GetItem());
+                    }
+
                     foreach (Transform transform in GlovesBn.transform)
                     {
                         transform.GetComponent<Image>().gameObject.SetActive(true);
                         transform.GetComponent<Image>().sprite = item.icon;
                     }
 
-                    if (GlovesBn.GetComponent<ItemController>().GetItem() != null)
-                    {
-                        UnequipItem(GlovesBn.GetComponent<ItemController>().GetItem());
-                    }
-
-                    GlovesBn.GetComponent<ItemController>().SetItem(item);
+                    bnGloves.SetItem(item);
                     break;
                 case Item.EquipmentType.Weapon:
                     switch (item.GetWeaponType())
                     {
                         case Item.WeaponType.Sword:
+                            var bnSword = SwordBn.GetComponent<ItemController>();
+
+                            if (bnSword.GetItem() != null)
+                            {
+                                UnequipItem(bnSword.GetItem());
+                            }
+
                             foreach (Transform transform in SwordBn.transform)
                             {
                                 transform.GetComponent<Image>().gameObject.SetActive(true);
                                 transform.GetComponent<Image>().sprite = item.icon;
                             }
 
-                            if (SwordBn.GetComponent<ItemController>().GetItem() != null)
-                            {
-                                UnequipItem(SwordBn.GetComponent<ItemController>().GetItem());
-                            }
-
-                            SwordBn.GetComponent<ItemController>().SetItem(item);
+                            bnSword.SetItem(item);
                             break;
                         case Item.WeaponType.Bow:
+                            var bnBow = BowBn.GetComponent<ItemController>();
+
+                            if (bnBow.GetItem() != null)
+                            {
+                                UnequipItem(bnBow.GetItem());
+                            }
+
                             foreach (Transform transform in BowBn.transform)
                             {
                                 transform.GetComponent<Image>().gameObject.SetActive(true);
                                 transform.GetComponent<Image>().sprite = item.icon;
                             }
 
-                            if(BowBn.GetComponent<ItemController>().GetItem() != null)
-                            {
-                                UnequipItem(BowBn.GetComponent<ItemController>().GetItem());
-                            }
-
-                            BowBn.GetComponent<ItemController>().SetItem(item);
+                            bnBow.SetItem(item);
                             break;
                     }
                     break;

@@ -28,8 +28,8 @@ public class PlayerRollState : PlayerAbilityState
         isHolding = true;
         rollDirection = Vector2.right * Movement.FacingDirection;
 
-        Stats.Stam.Decrease(playerData.rollCost);
-        Stats.Stam.StopRegen(playerData.stamRecoveryTime);
+        Stats.stam.Decrease(playerData.rollCost);
+        Stats.stam.StopRegen(playerData.stamRecoveryTime);
 
         core.GetCoreComponent<DamageReceiver>().Invincible = true;
     }

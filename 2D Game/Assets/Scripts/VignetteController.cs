@@ -12,7 +12,7 @@ namespace Krisnat
 
         public bool Active { get; private set; }
 
-        public Volume volume;  // Assign your Volume in the Inspector
+        public Volume volume; 
         private Vignette vignette;
         private float activeVignetteThreshold;
 

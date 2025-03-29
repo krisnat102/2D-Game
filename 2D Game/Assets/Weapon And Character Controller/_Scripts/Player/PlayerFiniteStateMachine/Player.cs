@@ -4,6 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     #region State Variables
+    public static Player instance;
     public PlayerStateMachine StateMachine { get; private set; }
 
     public PlayerIdleState IdleState { get; private set; }
@@ -49,6 +50,8 @@ public class Player : MonoBehaviour
     #region Unity Callback Functions
     private void Awake()
     {
+        instance = this;
+
         Core = GetComponentInChildren<Bardent.CoreSystem.Core>();
 
         primaryWeapon = transform.Find("PrimaryWeapon").GetComponent<Bardent.Weapons.Weapon>();

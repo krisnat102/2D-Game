@@ -60,6 +60,7 @@ namespace Bardent.CoreSystem.StatsSystem
         public void LevelUpStat(float levelUpValue) => MaxValue += levelUpValue;
 
         public void SetMaxStat(float maxStat) => MaxValue = maxStat;
+        
         public void SetCurrentStat(float currentStat) => CurrentValue = currentStat;
     }
 }

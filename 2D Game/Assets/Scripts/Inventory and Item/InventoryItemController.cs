@@ -142,11 +142,11 @@ namespace Inventory
                     switch (item.consumableType)
                     {
                         case Item.ConsumableType.Heal:
-                            if (Stats.Instance.Health.CurrentValue != Stats.Instance.Health.MaxValue)
+                            if (Stats.Instance.health.CurrentValue != Stats.Instance.health.MaxValue)
                             {
                                 DecreaseItem(item);
 
-                                Stats.Instance.Health.Increase(item.value);
+                                Stats.Instance.health.Increase(item.value);
 
                                 switch (item.consumableSoundEffect)
                                 {
@@ -160,11 +160,11 @@ namespace Inventory
                             }
                             break;
                         case Item.ConsumableType.ManaHeal:
-                            if (Stats.Instance.Mana.CurrentValue != Stats.Instance.Mana.MaxValue)
+                            if (Stats.Instance.mana.CurrentValue != Stats.Instance.mana.MaxValue)
                             {
                                 DecreaseItem(item);
 
-                                Stats.Instance.Mana.Increase(item.value);
+                                Stats.Instance.mana.Increase(item.value);
 
                                 switch (item.consumableSoundEffect)
                                 {
@@ -186,7 +186,7 @@ namespace Inventory
                     {
                         case "Equip":
                             InventoryManager.Instance.EquipItem(item);
-
+                            Debug.Log(1);
                             Description();
                             break;
 
@@ -357,5 +357,5 @@ namespace Inventory
             descriptionExtension.SetActive(false);
         }*/
                 #endregion
-            }
-        }
+    }
+}

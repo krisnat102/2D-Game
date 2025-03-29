@@ -1,6 +1,5 @@
 using UnityEngine;
 using Krisnat;
-using Bardent.CoreSystem;
 
 namespace Spells
 {

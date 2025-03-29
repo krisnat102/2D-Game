@@ -21,7 +21,7 @@ public class PlayerJumpState : PlayerAbilityState
         amountOfJumpsLeft--;
         player.InAirState.SetIsJumping();
 
-        Stats.Stam.Decrease(playerData.jumpCost);
+        Stats.stam.Decrease(playerData.jumpCost);
     }
 
     public bool CanJump()
@@ -43,6 +43,6 @@ public class PlayerJumpState : PlayerAbilityState
     public override void Exit()
     {
         base.Exit();
-        Stats.Stam.StopRegen(playerData.stamRecoveryTime);
+        Stats.stam.StopRegen(playerData.stamRecoveryTime);
     }
 }

@@ -53,7 +53,7 @@ namespace Bardent.CoreSystem
             }
         }
 
-        private void OnEnable() => Stats.Health.OnCurrentValueZero += Die;
-        private void OnDisable() => Stats.Health.OnCurrentValueZero -= Die;
+        private void OnEnable() => Stats.health.OnCurrentValueZero += Die;
+        private void OnDisable() => Stats.health.OnCurrentValueZero -= Die;
     }
 }

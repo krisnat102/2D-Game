@@ -27,13 +27,13 @@ namespace Krisnat.Assets.Scripts
 
             level = player.PlayerData.PlayerLevel;
 
-            maxHealth = stats.Health.MaxValue;
+            maxHealth = stats.health.MaxValue;
             //currentHealth = stats.Health.CurrentValue;
 
-            maxStam = stats.Stam.MaxValue;
+            maxStam = stats.stam.MaxValue;
             //currentStam = stats.Stam.CurrentValue;
 
-            maxMana = stats.Mana.MaxValue;
+            maxMana = stats.mana.MaxValue;
             //currentMana = stats.Mana.CurrentValue;
 
             strength = levelHandler.StrengthCounter;

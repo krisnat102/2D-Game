@@ -20,7 +20,7 @@ public class AttackHit : MonoBehaviour
         {
             Player player = hitInfo.transform.GetComponent<Player>(); //checks if it hit the player
 
-            player.Core.GetCoreComponent<Stats>().Health.Decrease(damage);
+            player.Core.GetCoreComponent<Stats>().health.Decrease(damage);
 
             Destroy(gameObject);
         }

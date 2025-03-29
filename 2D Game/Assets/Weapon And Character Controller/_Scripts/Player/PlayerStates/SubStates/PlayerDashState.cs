@@ -34,8 +34,8 @@ public class PlayerDashState : PlayerAbilityState
 
         player.DashDirectionIndicator.gameObject.SetActive(true);
 
-        Stats.Stam.Decrease(playerData.dashCost);
-        Stats.Stam.StopRegen(playerData.stamRecoveryTime);
+        Stats.stam.Decrease(playerData.dashCost);
+        Stats.stam.StopRegen(playerData.stamRecoveryTime);
     }
 
     public override void Exit()

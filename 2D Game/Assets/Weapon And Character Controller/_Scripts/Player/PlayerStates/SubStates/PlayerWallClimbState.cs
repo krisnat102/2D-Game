@@ -12,14 +12,14 @@ public class PlayerWallClimbState : PlayerTouchingWallState
     public override void Enter()
     {
         base.Enter();
-        Stats.Stam.StopRegen();
+        Stats.stam.StopRegen();
     }
 
     public override void Exit()
     {
         base.Exit();
-        Stats.Stam.StartRegen();
-        Stats.Stam.StopRegen(playerData.stamRecoveryTime);
+        Stats.stam.StartRegen();
+        Stats.stam.StopRegen(playerData.stamRecoveryTime);
     }
 
     public override void LogicUpdate()
@@ -35,13 +35,13 @@ public class PlayerWallClimbState : PlayerTouchingWallState
                 stateMachine.ChangeState(player.WallGrabState);
             }
 
-            if (Stats.Stam.CurrentValue < 0.5)
+            if (Stats.stam.CurrentValue < 0.5)
             {
                 stateMachine.ChangeState(player.InAirState);
             }
         }
 
         float stamDecrease = playerData.wallClimbCost * Time.deltaTime;
-        Stats.Stam.Decrease(stamDecrease);
+        Stats.stam.Decrease(stamDecrease);
     }
 }

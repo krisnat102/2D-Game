@@ -48,7 +48,7 @@ public class Enemy1 : Entity
         stunState = new E1_StunState(this, stateMachine, "stun", stunStateData, this);
         deadState = new E1_DeadState(this, stateMachine, "dead", deadStateData, this);
 
-        stats.Poise.OnCurrentValueZero += HandlePoiseZero;
+        stats.poise.OnCurrentValueZero += HandlePoiseZero;
     }
 
     private void HandlePoiseZero()
@@ -64,7 +64,7 @@ public class Enemy1 : Entity
 
     private void OnDestroy()
     {
-        stats.Poise.OnCurrentValueZero -= HandlePoiseZero;
+        stats.poise.OnCurrentValueZero -= HandlePoiseZero;
     }
 
     public override void OnDrawGizmos()

@@ -63,7 +63,7 @@ namespace Krisnat
 
         private void Start()
         {
-            playerData = Stats.Instance?.gameObject.GetComponentInParent<Player>().PlayerData;
+            playerData = Player.instance.PlayerData;
             levelHandler = CoreClass.GameManager.Instance.gameObject.GetComponent<LevelHandler>();
             NoteOpen = false;
         }
@@ -74,9 +74,9 @@ namespace Krisnat
             if (levelTextLevelUpInterface) levelTextLevelUpInterface.text = "Level - " + playerData?.PlayerLevel.ToString();
 
             levelText.text = playerData?.PlayerLevel.ToString();
-            hpText.text = Stats.Instance.Health.MaxValue.ToString();
-            manaText.text = Stats.Instance.Mana.MaxValue.ToString();
-            stamText.text = Stats.Instance.Stam.MaxValue.ToString();
+            hpText.text = Stats.Instance.health.MaxValue.ToString();
+            manaText.text = Stats.Instance.mana.MaxValue.ToString();
+            stamText.text = Stats.Instance.stam.MaxValue.ToString();
             armorText.text = InventoryManager.Instance.TotalArmor.ToString();
             magicResText.text = InventoryManager.Instance.TotalMagicRes.ToString();
             weightText.text = InventoryManager.Instance.TotalWeight.ToString() + "/50";
@@ -107,9 +107,9 @@ namespace Krisnat
         #region Update UI Methods
         public void UpdateLevelUpUI()
         {
-            hpLevelUpText.text = "HP - " + Stats.Instance.Health.MaxValue;
-            manaLevelUpText.text = "Mana - " + Stats.Instance.Mana.MaxValue;
-            stamLevelUpText.text = "Stam - " + Stats.Instance.Stam.MaxValue;
+            hpLevelUpText.text = "HP - " + Stats.Instance.health.MaxValue;
+            manaLevelUpText.text = "Mana - " + Stats.Instance.mana.MaxValue;
+            stamLevelUpText.text = "Stam - " + Stats.Instance.stam.MaxValue;
             strLevelUpText.text = "STR - " + levelHandler.StrengthCounter;
             dexLevelUpText.text = "DEX - " + levelHandler.DexterityCounter;
             intLevelUpText.text = "INT - " + levelHandler.IntelligenceCounter;

@@ -19,11 +19,11 @@ namespace Bardent.CoreSystem
 
             if (physical)
             {
-                stats.Health.Decrease(stats.CalculatePhysicalDamageReduction(rawAmount));
+                stats.health.Decrease(stats.CalculatePhysicalDamageReduction(rawAmount));
             }
             else
             {
-                stats.Health.Decrease(stats.CalculateMagicalDamageReduction(rawAmount));
+                stats.health.Decrease(stats.CalculateMagicalDamageReduction(rawAmount));
             }
 
             damageAudio.Play();

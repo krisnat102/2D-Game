@@ -875,6 +875,7 @@ PrefabInstance:
     - {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7, type: 3}
     - {fileID: 8394194292753847921, guid: 8ca25b3807d5df8439b2cac892605be7, type: 3}
     - {fileID: 6684929901192448980, guid: 8ca25b3807d5df8439b2cac892605be7, type: 3}
+    - {fileID: 899934558910319828, guid: 8ca25b3807d5df8439b2cac892605be7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -8535,17 +8536,20 @@ MonoBehaviour:
   generalSound: {fileID: 0}
   music: {fileID: 0}
   buttonSound: {fileID: 1379617353577674440}
+  menuSound: {fileID: 0}
   buySound: {fileID: 0}
   coinPickupSound: {fileID: 0}
   tradeRefusedSound: {fileID: 0}
+  heartbeatSound: {fileID: 0}
   weaponSound: {fileID: 0}
-  bowSoundEffect: {fileID: 0}
+  whooshSoundEffect: {fileID: 0}
   dodgeRollSoundEffect: {fileID: 0}
   fireballLaunchEffect: {fileID: 0}
   lightningEffect: {fileID: 0}
-  equipmentSoundEffect: {fileID: 0}
   eatSoundEffect: {fileID: 0}
   potionDrinkSoundEffect: {fileID: 0}
+  equipmentSoundEffect:
+  - {fileID: 0}
 --- !u!82 &1379617353577674440
 AudioSource:
   m_ObjectHideFlags: 0

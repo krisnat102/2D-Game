@@ -67,7 +67,7 @@ namespace Spells
             #region Spell Casting
             if (spellManager.SpellsBar.Count > activeSpell)
             {
-                if (playerInputHandler.SpellInput && Stats.Instance.Mana.CurrentValue >= spellManager.SpellsBar[activeSpell].cost && spellCooldown == false)
+                if (playerInputHandler.SpellInput && Stats.Instance.mana.CurrentValue >= spellManager.SpellsBar[activeSpell].cost && spellCooldown == false)
                     Spell();
             }
 
@@ -105,7 +105,7 @@ namespace Spells
             #region Ability Casting
             if (spellManager.AbilitiesBar.Count > activeAbility)
             {
-                if (playerInputHandler.AbilityInput && Stats.Instance.Stam.CurrentValue >= spellManager.AbilitiesBar[activeAbility].cost && AbilityCooldownTracker == false)
+                if (playerInputHandler.AbilityInput && Stats.Instance.stam.CurrentValue >= spellManager.AbilitiesBar[activeAbility].cost && AbilityCooldownTracker == false)
                     Ability();
             }
 
@@ -232,7 +232,7 @@ namespace Spells
         {
             Spell spell = spellManager.SpellsBar[activeSpell];
 
-            if (spell != null && Stats.Instance.Mana.CurrentValue >= spell.cost)
+            if (spell != null && Stats.Instance.mana.CurrentValue >= spell.cost)
             {
                 //Vector2 offset = new Vector2(OffsetX, OffsetY);
                 if (spell.useOffset)
@@ -254,7 +254,7 @@ namespace Spells
                     //new ObjectPool(spellsBar[activeSpell].spellEffect, castingPoint.position, castingPoint.rotation, 5, 10);
                 }
 
-                Stats.Instance.Mana.CurrentValue -= spell.cost;
+                Stats.Instance.mana.CurrentValue -= spell.cost;
 
                 spellCooldown = true;
                 lastCastSpell = spell;
@@ -277,14 +277,14 @@ namespace Spells
                     abilityCooldownImg.gameObject.SetActive(true);
                     abilityCooldownImg.fillAmount = 1;
                 }
-                else if (Stats.Instance.Stam.CurrentValue >= ability.cost)
+                else if (Stats.Instance.stam.CurrentValue >= ability.cost)
                 {
                     //Vector2 offset = new Vector2(OffsetX2, OffsetY2);
 
                     Instantiate(ability.spellEffect, castingPoint.position, castingPoint.rotation);
 
-                    Stats.Instance.Stam.CurrentValue -= ability.cost;
-                    Stats.Instance.Stam.StopRegen(playerData.stamRecoveryTime);
+                    Stats.Instance.stam.CurrentValue -= ability.cost;
+                    Stats.Instance.stam.StopRegen(playerData.stamRecoveryTime);
 
                     AbilityCooldownTracker = true;
                     lastCastAbility = ability;

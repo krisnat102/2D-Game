@@ -173,8 +173,8 @@ namespace Bardent.Weapons.Components
         {
             if (currentAttackData != null && currentAttackData.StamCost)
             {
-                Stats.Stam.Decrease(currentAttackData.AttackCost);
-                Stats.Stam.StopRegen(currentAttackData.AttackRecoveryTime);
+                Stats.stam.Decrease(currentAttackData.AttackCost);
+                Stats.stam.StopRegen(currentAttackData.AttackRecoveryTime);
             }
         }
 

@@ -19,7 +19,7 @@ public class PlayerWallJumpState : PlayerAbilityState
         Movement?.CheckIfShouldFlip(wallJumpDirection);
         player.JumpState.DecreaseAmountOfJumpsLeft();
 
-        Stats.Stam.Decrease(playerData.jumpCost);
+        Stats.stam.Decrease(playerData.jumpCost);
     }
 
     public override void LogicUpdate()
@@ -50,6 +50,6 @@ public class PlayerWallJumpState : PlayerAbilityState
     public override void Exit()
     {
         base.Exit();
-        Stats.Stam.StopRegen(playerData.stamRecoveryTime);
+        Stats.stam.StopRegen(playerData.stamRecoveryTime);
     }
 }
