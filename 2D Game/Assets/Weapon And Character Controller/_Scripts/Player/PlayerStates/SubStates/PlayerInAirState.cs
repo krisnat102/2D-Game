@@ -101,11 +101,11 @@ public class PlayerInAirState : PlayerState
 
         CheckJumpMultiplier();
 
-        if (player.InputHandler.AttackInputs[(int)CombatInputs.primary] && Stats.stam.CurrentValue > 0)
+        if (player.InputHandler.AttackInputs[(int)CombatInputs.primary] && Stats.stam.CurrentValue > 5)
         {
             stateMachine.ChangeState(player.PrimaryAttackState);
         }
-        else if (player.InputHandler.AttackInputs[(int)CombatInputs.secondary] && Stats.stam.CurrentValue > 0)
+        else if (player.InputHandler.AttackInputs[(int)CombatInputs.secondary] && Stats.stam.CurrentValue > 5)
         {
             stateMachine.ChangeState(player.SecondaryAttackState);
         }
@@ -124,7 +124,7 @@ public class PlayerInAirState : PlayerState
             player.WallJumpState.DetermineWallJumpDirection(isTouchingWall);
             stateMachine.ChangeState(player.WallJumpState);
         }
-        else if (jumpInput && player.JumpState.CanJump() && Stats.stam.CurrentValue > 0)
+        else if (jumpInput && player.JumpState.CanJump())
         {
             stateMachine.ChangeState(player.JumpState);
         }
@@ -136,7 +136,7 @@ public class PlayerInAirState : PlayerState
         {
             stateMachine.ChangeState(player.WallSlideState);
         }
-        else if (dashInput && player.DashState.CheckIfCanDash() && Stats.stam.CurrentValue > 0)
+        else if (dashInput && player.DashState.CheckIfCanDash())
         {
             stateMachine.ChangeState(player.DashState);
         }

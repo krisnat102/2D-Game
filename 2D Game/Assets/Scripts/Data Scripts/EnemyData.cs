@@ -17,7 +17,12 @@ public class EnemyData : ScriptableObject
     public float speed = 200f;
     public float damage = 20f;
     public float actionCooldown = 0.5f;
+
+    [Header("Knockback")]
+    [Tooltip("Higher value is higher knockback")]
     public float knockbackModifier = 5f;
+    [Tooltip("Higher value is lower horizontal knockback")]
+    public float knockbackWeight = 2f;
 
     [Header("Offsets")]
     public float offsetX = 1.2f;

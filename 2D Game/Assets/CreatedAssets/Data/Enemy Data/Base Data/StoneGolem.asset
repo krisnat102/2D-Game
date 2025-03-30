@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: StoneGolem
   m_EditorClassIdentifier: 
   enemyName: Stone Golem
-  maxHP: 500
+  maxHP: 1
   attackSpeed: 1.4
   speed: 200
   damage: 30
   actionCooldown: 0.5
-  knockbackModifier: 5
+  knockbackModifier: 0
+  knockbackWeight: 10
   offsetX: 1.2
   offsetX2: 1.2
   offsetY: -1

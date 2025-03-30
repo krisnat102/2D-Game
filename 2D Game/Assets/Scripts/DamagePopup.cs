@@ -14,6 +14,7 @@ namespace Krisnat
 
         void Update()
         {
+            if (!enemy) return;
             if (followCharacter)
             {
                 transform.position += new Vector3(0, moveYSpeed) * Time.deltaTime;
@@ -24,7 +25,7 @@ namespace Krisnat
                 transform.position = new Vector3(startingXPosition, startingYPosition, transform.position.z);
             }
 
-            if (enemy.FacingDirection != oldFacingDirection)
+            if (enemy && enemy.FacingDirection != oldFacingDirection)
             {
                 Flip();
             }
@@ -36,6 +37,11 @@ namespace Krisnat
             startingXPosition = transform.position.x;
             startingYPosition = transform.position.y;
             enemy = GetComponentInParent<Enemy>();
+            if (!enemy)
+            {
+                transform.parent.localScale = new Vector2(Mathf.Abs(transform.parent.localScale.x), transform.parent.localScale.y);
+                return;
+            }
 
             oldFacingDirection = enemy.FacingDirection;
 

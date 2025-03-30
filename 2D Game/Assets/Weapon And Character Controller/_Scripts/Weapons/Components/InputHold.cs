@@ -23,7 +23,6 @@ namespace Bardent.Weapons.Components
         private Slider bowSlider;
         private CollisionSenses collisionSenses;
         private WeaponDataSO currentWeaponData;
-        private GameObject player;
         private const float COOLDOWN_DURATION = 0.3f;
         private Stats stats;
 
@@ -69,7 +68,7 @@ namespace Bardent.Weapons.Components
         {
             if (movement.IsHanging || (movement.IsCrouching && collisionSenses.Ceiling)) return;
 
-            if (currentAttackData != null && !cooldown && currentWeaponData.Type == WeaponType.Bow)
+            if (currentAttackData != null && !cooldown && currentWeaponData.Type == WeaponType.Bow && Stats.stam.CurrentValue > 5)
             {
                 if (attackHoldTime < currentAttackData.MinimalHoldTime)
                 {
@@ -82,9 +81,6 @@ namespace Bardent.Weapons.Components
                 StartCoroutine(CooldownCoroutine());
 
                 AudioManager.Instance.PlayWhooshSound(0.8f, 1.2f);
-
-                //Stats.Instance.Stam.CurrentValue -= cost;
-                //Stas.Instance.Stam.StopRegen(playerData.stamRecoveryTime);
 
                 foreach (var data in currentAttackData.inputHoldAttackData)
                 {
@@ -119,8 +115,10 @@ namespace Bardent.Weapons.Components
                         }
                     }
                 }
-            }
 
+                HandleAttackCost();
+            }
+            
             EndHold();
         }
 
@@ -156,8 +154,6 @@ namespace Bardent.Weapons.Components
             potentialLockMovement = false;
 
             flipped = 0;
-
-            HandleAttackCost();
         }
 
         private IEnumerator CooldownCoroutine()
@@ -240,13 +236,6 @@ namespace Bardent.Weapons.Components
             eventHandler.OnMinHoldPassed += HandleMinHoldPassed;
             PlayerInputHandler.Instance.OnAttackCancelled += Attack;
             PlayerInputHandler.Instance.OnAttackStarted += StartHold;
-        }
-
-        protected override void Start()
-        {
-            base.Start();
-
-            player = PlayerInputHandler.Instance.gameObject;
         }
 
         protected override void OnDestroy()

@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2121936274c14654a9abc6a3ee4178f7, type: 3}
   m_Name: Heavy Bandit
   m_EditorClassIdentifier: 
-  level: 1
   enemyName: Heavy Bandit
   maxHP: 100
   attackSpeed: 1
   speed: 125
   damage: 20
-  knockbackModifier: 20
+  actionCooldown: 0.5
+  knockbackModifier: 15
+  knockbackWeight: 2
   offsetX: 1.2
   offsetX2: 1.2
   offsetY: -1
@@ -40,6 +41,12 @@ MonoBehaviour:
   commitDirectionWhenAttacking: 1
   moveWhenAttacking: 0
   direction: {x: 0, y: 0}
+  cancelMove:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
   velocity: 0
   movementDelay: 0
   canDash: 0

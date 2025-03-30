@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using Inventory;
+using Krisnat;
 
 namespace Bardent.CoreSystem
 {
@@ -31,6 +32,7 @@ namespace Bardent.CoreSystem
         [SerializeField] private float easeStamSpeed;
 
         private bool lowHP;
+        private GameObject hpHandle, manaHandle, stamHandle;
 
         protected override void Awake()
         {
@@ -62,6 +64,9 @@ namespace Bardent.CoreSystem
             easeHpBar.maxValue = hpBar.maxValue;
             easeManapBar.maxValue = manaBar.maxValue;
             easeStamBar.maxValue = stamBar.maxValue;
+            hpHandle = hpBar.GetComponentInChildren<SearchAssist>().gameObject;
+            manaHandle = manaBar.GetComponentInChildren<SearchAssist>().gameObject;
+            stamHandle = stamBar.GetComponentInChildren<SearchAssist>().gameObject;
         }
 
         private void Update()
@@ -94,16 +99,25 @@ namespace Bardent.CoreSystem
 
             if (hpBar.value != easeHpBar.value)
             {
-                easeHpBar.value = Mathf.Lerp(easeHpBar.value, hpBar.value, easeHpSpeed);
+                easeHpBar.value = Mathf.Lerp(easeHpBar.value, hpBar.value - 2, easeHpSpeed);
             }
             if (manaBar.value != easeManapBar.value)
             {
-                easeManapBar.value = Mathf.Lerp(easeManapBar.value, manaBar.value, easeManaSpeed);
+                easeManapBar.value = Mathf.Lerp(easeManapBar.value, manaBar.value - 2, easeManaSpeed);
             }
             if (stamBar.value != easeStamBar.value)
             {
-                easeStamBar.value = Mathf.Lerp(easeStamBar.value, stamBar.value, easeStamSpeed);
+                easeStamBar.value = Mathf.Lerp(easeStamBar.value, stamBar.value - 2, easeStamSpeed);
             }
+
+            if (hpBar.value < hpBar.maxValue / 100) hpHandle.SetActive(false);
+            else hpHandle.SetActive(true);
+
+            if (manaBar.value < manaBar.maxValue / 100) manaHandle.SetActive(false);
+            else manaHandle.SetActive(true);
+
+            if (stamBar.value < stamBar.maxValue / 100) stamHandle.SetActive(false);
+            else stamHandle.SetActive(true);
         }
 
         public float CalculatePhysicalDamageReduction(float damage)

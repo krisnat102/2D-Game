@@ -117,7 +117,7 @@ public class PlayerDashState : PlayerAbilityState
 
     public bool CheckIfCanDash()
     {
-        return CanDash && Time.time >= lastDashTime + playerData.dashCooldown;
+        return CanDash && Time.time >= lastDashTime + playerData.dashCooldown && Stats.stam.CurrentValue >= playerData.dashCost;
     }
 
     public void ResetCanDash() => CanDash = true;

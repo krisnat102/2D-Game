@@ -81,7 +81,7 @@ public class PlayerGroundedState : PlayerState
         {
             stateMachine.ChangeState(player.SecondaryAttackState);
         }
-        else if (jumpInput && player.JumpState.CanJump() && !isTouchingCeiling && Stats.stam.CurrentValue > 0.5f)
+        else if (jumpInput && player.JumpState.CanJump() && !isTouchingCeiling)
         {
             stateMachine.ChangeState(player.JumpState);
         }
@@ -94,11 +94,11 @@ public class PlayerGroundedState : PlayerState
         {
             stateMachine.ChangeState(player.WallGrabState);
         }
-        else if (dashInput && player.DashState.CheckIfCanDash() && !isTouchingCeiling && Stats.stam.CurrentValue > 0.5f && player.InputHandler.DashDirectionInput.y != 0)
+        else if (dashInput && player.DashState.CheckIfCanDash() && !isTouchingCeiling && player.InputHandler.DashDirectionInput.y != 0)
         {
             stateMachine.ChangeState(player.DashState);
         }
-        else if (dashInput && player.RollState.CheckIfCanRoll() && Stats.stam.CurrentValue > 0.5f && player.InputHandler.DashDirectionInput.y == 0)
+        else if (dashInput && player.RollState.CheckIfCanRoll() && player.InputHandler.DashDirectionInput.y == 0)
         {
             stateMachine.ChangeState(player.RollState);
         }

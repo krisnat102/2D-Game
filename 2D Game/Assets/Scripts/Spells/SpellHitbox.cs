@@ -5,6 +5,7 @@ namespace Spells
 {
     public class SpellHitbox : MonoBehaviour
     {
+        #region Variables
         [SerializeField] private Spell spell;
         [SerializeField] private LayerMask layerMask, groundLayerMask;
 
@@ -17,6 +18,7 @@ namespace Spells
         [SerializeField] private bool spellHitSummon;
         [SerializeField] private float collisionTimeOffset = 0.03f;
         [SerializeField] private GameObject deathEffect;
+        [SerializeField] private Rect hitBox;
 
         [Header("Shuriken")]
         [SerializeField] private float rotationSpeed = 0.1f;
@@ -31,7 +33,9 @@ namespace Spells
         private float angle;
         private int spellDirection;
         private bool wallCollider = false;
+        #endregion
 
+        #region Unity Methods
         void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -137,7 +141,9 @@ namespace Spells
                 Invoke("Stuck", collisionTimeOffset);
             }
         }
+        #endregion
 
+        #region Object Manager Methods
         private void Stuck()
         {
             rb.simulated = false;
@@ -168,7 +174,35 @@ namespace Spells
         private void NullAngle() => angle = 0;
 
         private void WallColliderOn() => wallCollider = true;
+        #endregion
 
+        #region Spell Methods
+        private void SpawnEffect()
+        {
+            var offset = new Vector2();
+            offset.Set(
+            transform.position.x + hitBox.center.x,
+            transform.position.y + hitBox.center.y
+            );
+
+            var detected = Physics2D.OverlapBoxAll(offset, hitBox.size, 0f, layerMask);
+
+            if (detected.Length == 0) return;
+
+            foreach (Collider2D obj in detected)
+            {
+                var enemy = obj.gameObject.GetComponent<Enemy>();
+
+                if (enemy)
+                {
+                    if (spellHitSummon) enemy.TakeDamage(spell.spellHitSummonDamage * levelHandler.IntelligenceDamage, 0, false);
+                    else enemy.TakeDamage(spell.damage * levelHandler.IntelligenceDamage, 0, false);
+                }
+            }
+        }
+        #endregion
+
+        #region Hit Effect
         private void SummonHitEffect()
         {
             //int facingDir = Abilities.instance.Side ? 1 : -1;
@@ -176,5 +210,20 @@ namespace Spells
             Vector2 spawnPosition = new Vector2(transform.position.x + offsetX, transform.position.y + 0.4f);
             Instantiate(spell.spellHitSummon, spawnPosition, Quaternion.identity);
         }
+        #endregion
+
+        #region Gizmos
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            var offset = new Vector2();
+            offset.Set(
+            transform.position.x + hitBox.center.x,
+            transform.position.y + hitBox.center.y
+            );
+
+            Gizmos.DrawWireCube(offset, hitBox.size);
+        }
+        #endregion
     }
 }

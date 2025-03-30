@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2619312599294634071}
   - component: {fileID: 3736369551017024667}
   - component: {fileID: 4129481907418426420}
-  - component: {fileID: 1126900396212580028}
   - component: {fileID: 835237280333468060}
   m_Layer: 0
   m_Name: Thundering Bolt
@@ -119,6 +118,12 @@ MonoBehaviour:
   spellHitSummon: 1
   collisionTimeOffset: 0
   deathEffect: {fileID: 0}
+  hitBox:
+    serializedVersion: 2
+    x: -0.63
+    y: -1.25
+    width: 1.25
+    height: 2.48
   rotationSpeed: 0
   stuckTime: 0
   fadeTimer: 0
@@ -190,51 +195,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &1126900396212580028
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 201917306390933128}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.25, y: 2.5}
-    newSize: {x: 1, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.25, y: 2.5}
-  m_EdgeRadius: 0
 --- !u!61 &835237280333468060
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -346,8 +306,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0
   m_LocalBounds:
-    m_Center: {x: -0.12024999, y: -0.00084999204, z: 0}
-    m_Extent: {x: 1.54585, y: 0.65835, z: 0}
+    m_Center: {x: -0.119700015, y: -0.00079998374, z: 0}
+    m_Extent: {x: 1.5465, y: 0.65900004, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.4

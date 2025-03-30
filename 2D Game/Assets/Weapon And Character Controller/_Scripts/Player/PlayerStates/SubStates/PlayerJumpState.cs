@@ -26,7 +26,7 @@ public class PlayerJumpState : PlayerAbilityState
 
     public bool CanJump()
     {
-        if (amountOfJumpsLeft > 0)
+        if (amountOfJumpsLeft > 0 && Stats.stam.CurrentValue >= playerData.jumpCost)
         {
             return true;
         }

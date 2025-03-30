@@ -97,7 +97,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 201917306390933128}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -182,11 +182,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   move: 0
-  destroyOnTouch: 0
-  doNotRotate: 0
   flip: 1
+  doNotRotate: 0
+  destroyOnTouch: 0
   shuriken: 0
+  spellHitSummon: 0
   collisionTimeOffset: 0
+  deathEffect: {fileID: 0}
+  hitBox:
+    serializedVersion: 2
+    x: -1.4
+    y: -0.39
+    width: 2.85
+    height: 0.79
   rotationSpeed: 0
   stuckTime: 0
   fadeTimer: 0
@@ -297,8 +305,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0
   m_LocalBounds:
-    m_Center: {x: -0.12040001, y: -0.00074997544, z: 0}
-    m_Extent: {x: 1.5469, y: 0.65825, z: 0}
+    m_Center: {x: -0.12005001, y: -0.00034999847, z: 0}
+    m_Extent: {x: 1.54725, y: 0.65815, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.4

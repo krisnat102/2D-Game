@@ -79,6 +79,7 @@ public class Enemy : MonoBehaviour
     private Player player;
     private Transform playerTrans;
     private Transform firePoint;
+    private Transform canvas;
     private GameObject arrow;
     private CameraShake cameraShake;
     private CoreClass.GameManager gameManager;
@@ -355,6 +356,7 @@ public class Enemy : MonoBehaviour
         previousLocalScaleX = transform.localScale.x;
         gameManager = CoreClass.GameManager.Instance;
         playerTrans = PlayerInputHandler.Instance.gameObject.transform;
+        canvas = GetComponentInChildren<Canvas>().transform;
         #endregion
 
         if (Data.dummy) return;
@@ -399,10 +401,17 @@ public class Enemy : MonoBehaviour
                     if (!multipleDamageSources) popUpOffset = new Vector3(damagePopupOffset.x + UnityEngine.Random.Range(-2f, 1f), damagePopupOffset.y);
                     else popUpOffset = Vector3.zero;
 
-                    var dmgNumber = Instantiate(damagePopup, transform.position + popUpOffset, Quaternion.identity, GetComponentInChildren<Canvas>().transform).GetComponent<TextMeshProUGUI>();
+                    var dmgNumber = Instantiate(damagePopup, transform.position + popUpOffset, Quaternion.identity, canvas).GetComponent<TextMeshProUGUI>();
                     dmgNumber.text = damage.ToString();
                     dmgNumber.color = damagePopupGradient.Evaluate(Mathf.Clamp01(damage / 100));
                     dmgNumber.fontSize += Mathf.Round(damage / fontSizeToDamageScaler);
+
+                    if (hp <= 0)
+                    {
+                        dmgNumber.transform.localScale = new Vector2(Mathf.Abs(dmgNumber.transform.localScale.x), dmgNumber.transform.localScale.y);
+                        hpBar?.gameObject.SetActive(false);
+                        canvas.transform.SetParent(CoreClass.GameManager.Instance.UIs);
+                    }
                 }
                 if (Data.bloodEffect)
                 {
@@ -446,7 +455,7 @@ public class Enemy : MonoBehaviour
 
         if (playerTrans.position.x < transform.position.x)
         {
-            rb.AddForce(transform.up * knockback, ForceMode2D.Force);
+            rb.AddForce(transform.up * knockback / data.knockbackWeight, ForceMode2D.Force);
             rb.AddForce(transform.right * knockback, ForceMode2D.Force);
         }
         else

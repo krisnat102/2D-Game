@@ -45,6 +45,7 @@ namespace CoreClass
         public Player Player { get => player; private set => player = value; }
         public Transform Particles { get; private set; }
         public Transform Audios { get; private set; }
+        public Transform UIs { get; private set; }
         public List<Item> StartingItems { get => startingItems; private set => startingItems = value; }
 
         #region Unity Methods
@@ -68,6 +69,7 @@ namespace CoreClass
             levelHandler = CoreClass.GameManager.Instance.GetComponent<LevelHandler>();
             Particles = GameObject.FindGameObjectWithTag("ParticleContainer").transform;
             Audios = GameObject.FindGameObjectWithTag("AudioContainer")?.transform;
+            UIs = GameObject.FindGameObjectWithTag("UIContainer")?.transform;
 
             if (checkpoint == Vector3.zero) checkpoint = SpawnPoint.position;
         }

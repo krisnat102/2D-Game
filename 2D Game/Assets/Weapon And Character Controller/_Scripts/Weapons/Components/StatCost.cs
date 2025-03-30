@@ -1,5 +1,4 @@
 ﻿using Bardent.CoreSystem;
-using UnityEngine;
 
 namespace Bardent.Weapons.Components
 {

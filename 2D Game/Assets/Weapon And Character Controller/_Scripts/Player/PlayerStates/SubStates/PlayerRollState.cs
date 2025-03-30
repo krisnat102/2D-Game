@@ -112,7 +112,7 @@ public class PlayerRollState : PlayerAbilityState
 
     public bool CheckIfCanRoll()
     {
-        return CanRoll && Time.time >= lastRollTime + playerData.rollCooldown;
+        return CanRoll && Time.time >= lastRollTime + playerData.rollCooldown && Stats.stam.CurrentValue >= playerData.rollCost;
     }
 
     public void ResetCanRoll() => CanRoll = true;

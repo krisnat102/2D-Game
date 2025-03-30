@@ -26,7 +26,7 @@ namespace Bardent.CoreSystem
                 stats.health.Decrease(stats.CalculateMagicalDamageReduction(rawAmount));
             }
 
-            damageAudio.Play();
+            damageAudio?.Play();
             Krisnat.CameraShake.Instance.ShakeCamera(0.15f, rawAmount / 10);
             particleManager.StartParticlesWithRandomRotation(damageParticles);
         }
