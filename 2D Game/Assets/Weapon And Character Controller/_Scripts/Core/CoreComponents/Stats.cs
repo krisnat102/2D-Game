@@ -48,15 +48,15 @@ namespace Bardent.CoreSystem
             {
                 stat.Init();
             }
-
-            if (health.CurrentValue >= 20)
-            {
-                Krisnat.VignetteController.instance.SetVignette(0);
-            }
         }
 
         private void Start()
         {
+            if (health.CurrentValue >= 20)
+            {
+                Krisnat.VignetteController.instance.SetVignette(0);
+            }
+
             if (!hpBar || !manaBar || !stamBar || !easeHpBar) return;
             hpBar.maxValue = health.MaxValue;
             manaBar.maxValue = mana.MaxValue;
