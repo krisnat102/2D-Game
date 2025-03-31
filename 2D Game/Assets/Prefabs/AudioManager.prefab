@@ -69,7 +69,7 @@ MonoBehaviour:
   generalSound: {fileID: 8623021732987307272}
   music: {fileID: 2690625510320772227}
   buttonSound: {fileID: 2262989942500180727}
-  menuSound: {fileID: 0}
+  menuSound: {fileID: 675507419161049303}
   buySound: {fileID: 93545950424201655}
   coinPickupSound: {fileID: 5254656631188024671}
   tradeRefusedSound: {fileID: 2968678233989505760}
@@ -389,7 +389,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 0214593bd587e2c428db5282678f75ac, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 0.275
   m_Pitch: 1
   Loop: 0
   Mute: 0
