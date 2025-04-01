@@ -46,7 +46,6 @@ namespace Krisnat
             AudioClip clip = null;
 
             FSMaterial material = SurfaceSelect();
-            Debug.Log("Detected Material: " + material);
 
             switch (material)
             {

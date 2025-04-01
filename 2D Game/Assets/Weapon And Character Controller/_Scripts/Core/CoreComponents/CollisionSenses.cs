@@ -39,6 +39,7 @@ namespace Bardent.CoreSystem
         public float GroundCheckRadius { get => groundCheckRadius; set => groundCheckRadius = value; }
         public float WallCheckDistance { get => wallCheckDistance; set => wallCheckDistance = value; }
         public LayerMask WhatIsGround { get => whatIsGround; set => whatIsGround = value; }
+        public LayerMask WhatIsPlatform { get => whatIsPlatform; set => whatIsPlatform = value; }
 
 
         [SerializeField] private Transform groundCheck;
@@ -51,6 +52,7 @@ namespace Bardent.CoreSystem
         [SerializeField] private float wallCheckDistance;
 
         [SerializeField] private LayerMask whatIsGround;
+        [SerializeField] private LayerMask whatIsPlatform;
 
         #endregion
 
@@ -61,7 +63,7 @@ namespace Bardent.CoreSystem
 
         public bool Ground
         {
-            get => Physics2D.OverlapCircle(GroundCheck.position, groundCheckRadius, whatIsGround);
+            get => Physics2D.OverlapCircle(GroundCheck.position, groundCheckRadius, whatIsGround) || Physics2D.OverlapCircle(GroundCheck.position, groundCheckRadius, whatIsPlatform);
         }
 
         public bool WallFront

@@ -373,6 +373,9 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 45056
+  whatIsPlatform:
+    serializedVersion: 2
+    m_Bits: 65536
 --- !u!1 &2202092400563942066
 GameObject:
   m_ObjectHideFlags: 0
@@ -1762,29 +1765,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38b855a94ad4b374daa7555873414221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Health>k__BackingField:
-    <MaxValue>k__BackingField: 30
-    <Regenerative>k__BackingField: 0
-    recoveryRate: 0.5
-    recoveryTransitionSpeed: 0
-  <Poise>k__BackingField:
-    <MaxValue>k__BackingField: 100
-    <Regenerative>k__BackingField: 1
-    recoveryRate: 0
-    recoveryTransitionSpeed: 0
-  <Stam>k__BackingField:
-    <MaxValue>k__BackingField: 100
-    <Regenerative>k__BackingField: 1
-    recoveryRate: 25
-    recoveryTransitionSpeed: 0.75
-  <Mana>k__BackingField:
+  <health>k__BackingField:
     <MaxValue>k__BackingField: 100
     <Regenerative>k__BackingField: 0
     recoveryRate: 0
     recoveryTransitionSpeed: 1
-  HpBar: {fileID: 0}
-  ManaBar: {fileID: 0}
-  StamBar: {fileID: 0}
+  <poise>k__BackingField:
+    <MaxValue>k__BackingField: 0
+    <Regenerative>k__BackingField: 0
+    recoveryRate: 0
+    recoveryTransitionSpeed: 1
+  <stam>k__BackingField:
+    <MaxValue>k__BackingField: 100
+    <Regenerative>k__BackingField: 1
+    recoveryRate: 18
+    recoveryTransitionSpeed: 1
+  <mana>k__BackingField:
+    <MaxValue>k__BackingField: 100
+    <Regenerative>k__BackingField: 0
+    recoveryRate: 0
+    recoveryTransitionSpeed: 1
+  hpBar: {fileID: 0}
+  easeHpBar: {fileID: 0}
+  easeHpSpeed: 0.1
+  manaBar: {fileID: 0}
+  easeManapBar: {fileID: 0}
+  easeManaSpeed: 0.1
+  stamBar: {fileID: 0}
+  easeStamBar: {fileID: 0}
+  easeStamSpeed: 0.1
 --- !u!1 &5072873581741798326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1916,11 +1925,12 @@ AudioSource:
   m_GameObject: {fileID: 5785675671366550560}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
+  OutputAudioMixerGroup: {fileID: 24300002, guid: b0fc275326f5c7f479bc0b065bb3870f,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: b76a95b0b86d4e949b6cd0c7457fa276, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.547
+  m_Pitch: 0.9
   Loop: 0
   Mute: 0
   Spatialize: 0

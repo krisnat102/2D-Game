@@ -1,31 +1,31 @@
-﻿using UnityEngine;
-
-
-namespace Interactables
+﻿namespace Interactables
 {
+    using UnityEngine;
+
     public class Platform : MonoBehaviour
     {
-        CompositeCollider2D platform;
+        private Collider2D playerCollider;
+        [SerializeField] private float dropTime = 0.3f;
 
-        [SerializeField] private Transform player;
-
-        [SerializeField] float offset = 1f;
-
-        private void Start()
+        void Start()
         {
-            platform = GetComponent<CompositeCollider2D>();
+            playerCollider = GetComponent<Collider2D>();
         }
 
-        private void Update()
+        void Update()
         {
-            if (player.position.y < transform.position.y + offset)
+            if (PlayerInputHandler.Instance.NormInputY == -1)
             {
-                platform.enabled = false;
+                StartCoroutine(DropThroughPlatform());
             }
-            else
-            {
-                platform.enabled = true;
-            }
+        }
+
+        private System.Collections.IEnumerator DropThroughPlatform()
+        {
+            playerCollider.enabled = false;
+            yield return new WaitForSeconds(dropTime);
+            playerCollider.enabled = true;
         }
     }
+
 }
