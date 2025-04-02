@@ -61,21 +61,18 @@ public class RangedAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.tag != "Enemy" && hitInfo.tag != "Item" && hitInfo.tag != "AttackRange" && hitInfo.tag != "BackgroundObject" && hitInfo.tag != "PickupRange" && hitInfo.tag != "Event" && hitInfo.tag != "Arrow")
+        Player player = hitInfo.GetComponent<Player>();
+        if (player)
         {
-            Player player = hitInfo.GetComponent<Player>();
-            if (player)
-            {
-                dmgReceiver.Damage(enemy.Data.rangedDamage * enemy.EnemyLevelScale, enemy.Data.damageType);
-            }
-
-            if (enemy.Data.impactEffect && !dmgReceiver.Invincible)
-            {
-                Instantiate(enemy.Data.impactEffect, impactEffectLocation.position, Quaternion.identity).transform.parent = null;
-            }
-
-            if (!dmgReceiver.Invincible) gameObject.SetActive(false);
+            dmgReceiver.Damage(enemy.Data.rangedDamage * enemy.EnemyLevelScale, enemy.Data.damageType);
         }
+
+        if (enemy.Data.impactEffect && !dmgReceiver.Invincible)
+        {
+            Instantiate(enemy.Data.impactEffect, impactEffectLocation.position, Quaternion.identity).transform.parent = null;
+        }
+
+        if (!dmgReceiver.Invincible) gameObject.SetActive(false);
     }
 
     private void Update()

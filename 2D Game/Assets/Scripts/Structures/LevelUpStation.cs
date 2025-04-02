@@ -12,11 +12,14 @@ namespace Krisnat
         [SerializeField] private GameObject fire;
         [SerializeField] private Transform spawnPoint;
         private bool triggered;
+        private AudioSource openSFX;
 
         public string BonfireId { get => bonfireId; private set => bonfireId = value; }
 
         private void Start()
         {
+            openSFX = GetComponent<AudioSource>();
+
             if (string.IsNullOrEmpty(BonfireId)) BonfireId = gameObject.name;
 
             PlayerSaveData data = SaveSystem.LoadPlayer();
@@ -51,6 +54,7 @@ namespace Krisnat
                 }
                 else
                 {
+                    openSFX.Play();
                     fire.SetActive(true);
                     triggered = true;
                     CoreClass.GameManager.Instance.BonfiresLit.Add(BonfireId);
