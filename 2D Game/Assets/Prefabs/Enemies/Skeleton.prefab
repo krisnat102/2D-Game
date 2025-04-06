@@ -431,8 +431,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -30.3, y: -152.8}
-  m_SizeDelta: {x: 348.86325, y: 54.917862}
+  m_AnchoredPosition: {x: -1.05, y: -152.8}
+  m_SizeDelta: {x: 465.91, y: 54.92}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6196468261644810455
 MonoBehaviour:
@@ -518,9 +518,9 @@ RectTransform:
   m_Father: {fileID: 6784563209634557958}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -53.68, y: 43.029}
-  m_SizeDelta: {x: 119.7, y: -25.19}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -54, y: 43.029}
+  m_SizeDelta: {x: 2.6, y: -25.19}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4410161169521915533
 CanvasRenderer:
@@ -1206,7 +1206,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 2.111626, y: -0.88068795}
+  m_Offset: {x: 2.7229693, y: -0.88068795}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1217,7 +1217,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 18.843771, y: 5.342667}
+  m_Size: {x: 13.219423, y: 5.342667}
   m_EdgeRadius: 0
 --- !u!1001 &5259277331331630927
 PrefabInstance:
@@ -1341,6 +1341,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton Death Animation
       objectReference: {fileID: 0}
+    - target: {fileID: 3229400549792299601, guid: 0710ad3f266bbf640af8a670dcc4bfd9,
+        type: 3}
+      propertyPath: lowerAnimLimit
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 3229400549792299601, guid: 0710ad3f266bbf640af8a670dcc4bfd9,
+        type: 3}
+      propertyPath: upperAnimLimit
+      value: 1.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3229400549792299601, guid: 0710ad3f266bbf640af8a670dcc4bfd9,
+        type: 3}
+      propertyPath: animRandomSpeed
+      value: 
+      objectReference: {fileID: 472400643808542518}
     - target: {fileID: 4143844189351752443, guid: 0710ad3f266bbf640af8a670dcc4bfd9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1396,6 +1411,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0710ad3f266bbf640af8a670dcc4bfd9, type: 3}
+--- !u!95 &472400643808542518 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8452124709028886940, guid: 0710ad3f266bbf640af8a670dcc4bfd9,
+    type: 3}
+  m_PrefabInstance: {fileID: 8342275395162752682}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5351493585504629841 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4143844189351752443, guid: 0710ad3f266bbf640af8a670dcc4bfd9,

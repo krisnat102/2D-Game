@@ -17,6 +17,10 @@ public class Death : MonoBehaviour
     [SerializeField] private bool adaptDirection = true;
     [SerializeField] private GameObject objectToSpawnBeforeDeath;
     [SerializeField] private float fadeTime;
+    [Header("Animation")]
+    [SerializeField] private Animator animRandomSpeed;
+    [SerializeField] private float upperAnimLimit;
+    [SerializeField] private float lowerAnimLimit;
 
     [Header("Types")]
     [SerializeField] private bool ui;
@@ -54,6 +58,11 @@ public class Death : MonoBehaviour
         foreach (var light in lights)
         {
             StartCoroutine(FadeLight(light, 0, animationLength));
+        }
+
+        if (animRandomSpeed)
+        {
+            animRandomSpeed.speed = Random.Range(lowerAnimLimit, upperAnimLimit);
         }
     }
     private void Update()

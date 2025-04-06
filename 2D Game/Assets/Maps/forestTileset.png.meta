@@ -487,8 +487,8 @@ TextureImporter:
         y: 64
         width: 256
         height: 264
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.4999051, y: 0.54554784}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1109,6 +1109,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: forestTileset_47
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 64
+        width: 67
+        height: 6
+      alignment: 9
+      pivot: {x: 0.5127756, y: 2.688638}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 386dd125f4c86704dbd6ae29deea6be1
+      internalID: -1390792676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forestTileset_48
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 64
+        width: 19
+        height: 4
+      alignment: 9
+      pivot: {x: 0.522105, y: 4.0000095}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64a26fe4ca0754140bc63dc3a78ab894
+      internalID: -1009670664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1162,6 +1204,8 @@ TextureImporter:
       forestTileset_44: -2017255348
       forestTileset_45: 1815366945
       forestTileset_46: -1382809018
+      forestTileset_47: -1390792676
+      forestTileset_48: -1009670664
       forestTileset_5: 87578435
       forestTileset_6: -1358394999
       forestTileset_7: -709172226
