@@ -29,6 +29,9 @@ public class EnemyData : ScriptableObject
     public float offsetX2 = 1.2f;
     public float offsetY = -1f;
 
+    [Header("UI")]
+    public float hpBarDelay = 0f;
+
     [Header("Attack")]
     [Tooltip("True is physical damage, false is magical")]
     public bool damageType;

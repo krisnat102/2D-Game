@@ -55,8 +55,6 @@ public class Enemy : MonoBehaviour
     private bool isPatrolling;
     private bool stopPatrol;
     private bool patrollingDirection = true;
-    private bool flip;
-    private bool childFlip;
     private bool rooted;
     private bool sleeping;
     private bool fixRotation;
@@ -167,7 +165,6 @@ public class Enemy : MonoBehaviour
             else aiPath.enabled = false;
         }
         
-
         if (rooted)
         {
             rb.velocity = Vector3.zero;
@@ -181,7 +178,7 @@ public class Enemy : MonoBehaviour
 
             if (!hpBar.gameObject.activeInHierarchy)
             {
-                hpBar.gameObject.SetActive(true);
+                StartCoroutine(HpBarDelayCoroutine(Data.hpBarDelay));
             }
             if (bossMusicPlayer && bossMusicTracker)
             {
@@ -189,9 +186,16 @@ public class Enemy : MonoBehaviour
                 AudioManager.Instance.PauseMusic();
                 bossMusicPlayer.Play();
             }
-            if(ContainsParam(animator, "sleep") && ContainsParam(animator, "wakeUp") && animator.GetBool("sleep"))
+            if (!alerted)
             {
-                animator.SetBool("wakeUp", true);
+                //StartCoroutine(SpecialRangedAttackCooldownCoroutine(Data.specialRangedAttackCooldown));
+                StartCoroutine(ChangeBoolCoroutine(Data.specialRangedAttackCooldown, newValue => specialRangedAttackCooldown = newValue[0], new[] { false }));
+
+                alerted = true;
+            }
+            if (alerted && ContainsParam(animator, "sleep") && animator.GetBool("sleep"))
+            {
+                if(ContainsParam(animator, "wakeUp")) animator.SetBool("wakeUp", true);
                 animator.SetBool("sleep", false);
                 rooted = true;
                 immune = true;
@@ -203,20 +207,14 @@ public class Enemy : MonoBehaviour
                 StartCoroutine(ChangeBoolCoroutine(Data.wakeUpTime, newValue => sleeping = newValue[0], new[] { false }));
                 StartCoroutine(StartIdleCoroutine(Data.wakeUpTime - 0.2f, "wakeUp"));
             }
-
-            if (!alerted)
-            {
-                //StartCoroutine(SpecialRangedAttackCooldownCoroutine(Data.specialRangedAttackCooldown));
-                StartCoroutine(ChangeBoolCoroutine(Data.specialRangedAttackCooldown, newValue => specialRangedAttackCooldown = newValue[0], new[] { false }));
-
-                alerted = true;
-            }
         }
-        else
+
+        if (!alerted)
         {
             if(ContainsParam(animator, "sleep") && ContainsParam(animator, "idle"))
             {
                 sleeping = true;
+                rooted = true;
                 animator.SetBool("idle", false);
                 animator.SetBool("sleep", true);
             }
@@ -278,7 +276,6 @@ public class Enemy : MonoBehaviour
                 rb.velocity = new Vector2(0, -6);
             }
         }
-
         #endregion
 
         #region Animations
@@ -345,7 +342,6 @@ public class Enemy : MonoBehaviour
         aiPath = GetComponentInChildren<AIPath>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
-        flip = ContainsParam(animator, "Flip");
         FirePoint = gameObject.transform.Find("FirePoint");
         FirePoint2 = gameObject.transform.Find("FirePoint2");
         arrow = GetComponentInChildren<RangedAttack>(true)?.gameObject;
@@ -746,11 +742,16 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(delay);
         AttackSpawn(type);
     }
-
+    
     IEnumerator AimDelayCoroutine(float delay)
     {
         yield return new WaitForSeconds(delay);
         OldPlayerPosition = playerTrans.position;
+    }
+    IEnumerator HpBarDelayCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        hpBar.gameObject.SetActive(true);
     }
 
     IEnumerator SpecialRangedAttackSpawnCoroutine(float delay)
