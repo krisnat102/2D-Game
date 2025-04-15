@@ -79,8 +79,8 @@ MonoBehaviour:
   firePoint: {fileID: 1706801803178361981}
   IgnoreMe:
     serializedVersion: 2
-    m_Bits: 7797367
-  flip: 0
+    m_Bits: 7742007
+  flip: 1
 --- !u!61 &9156020409018370768
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -504,6 +504,9 @@ MonoBehaviour:
   adaptDirection: 1
   objectToSpawnBeforeDeath: {fileID: 0}
   fadeTime: 0
+  animRandomSpeed: {fileID: 0}
+  upperAnimLimit: 0
+  lowerAnimLimit: 0
   ui: 0
   uiCanvasGroup: 0
 --- !u!82 &8824634161766385505
@@ -773,6 +776,9 @@ MonoBehaviour:
   adaptDirection: 1
   objectToSpawnBeforeDeath: {fileID: 4233705056694724574}
   fadeTime: 0
+  animRandomSpeed: {fileID: 0}
+  upperAnimLimit: 0
+  lowerAnimLimit: 0
   ui: 0
   uiCanvasGroup: 0
 --- !u!1 &4430609690839354200

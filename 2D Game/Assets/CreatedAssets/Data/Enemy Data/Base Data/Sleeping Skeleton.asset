@@ -75,6 +75,7 @@ MonoBehaviour:
   lookAtPlayer: 1
   facingDirection: 1
   patrol: 0
+  wakeUpTime: 1
   boss: 0
   bossProjectile: {fileID: 0}
   rangedAttackSoundDelay: 0
@@ -83,7 +84,6 @@ MonoBehaviour:
   specialRangedAttackChargeExecutionTime: 0
   specialRangedAttackCooldown: 0
   bossMusic: {fileID: 0}
-  wakeUpTime: 0
   bloodEffect: {fileID: 7515634647306772147, guid: f49121551cc85bb47902d511bca3f905,
     type: 3}
   bloodOffset: {x: 0, y: 0}

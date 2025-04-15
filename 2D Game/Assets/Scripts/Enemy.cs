@@ -197,13 +197,16 @@ public class Enemy : MonoBehaviour
             {
                 if(ContainsParam(animator, "wakeUp")) animator.SetBool("wakeUp", true);
                 animator.SetBool("sleep", false);
+
                 rooted = true;
-                immune = true;
-                //StartCoroutine(StopRootedCoroutine(Data.wakeUpTime));
                 StartCoroutine(ChangeBoolCoroutine(Data.wakeUpTime, newValue => rooted = newValue[0], new[] { false }));
-                //StartCoroutine(StopImmuneCoroutine(Data.wakeUpTime));
+
+                immune = true;
                 StartCoroutine(ChangeBoolCoroutine(Data.wakeUpTime, newValue => immune = newValue[0], new[] { false }));
-                //StartCoroutine(StopSleepingCoroutine(Data.wakeUpTime));
+
+                fixRotation = true;
+                StartCoroutine(ChangeBoolCoroutine(Data.wakeUpTime, newValue => fixRotation = newValue[0], new[] { false }));
+                
                 StartCoroutine(ChangeBoolCoroutine(Data.wakeUpTime, newValue => sleeping = newValue[0], new[] { false }));
                 StartCoroutine(StartIdleCoroutine(Data.wakeUpTime - 0.2f, "wakeUp"));
             }
@@ -360,14 +363,19 @@ public class Enemy : MonoBehaviour
         #region Calculations
         lvlIndex = level * 0.1f + 0.9f;
 
+        sleeping = Data.wakeUpTime > 0;
+
         offsetXSave = Data.offsetX;
 
         hp = Data.maxHP * lvlIndex;
         if(hpBar) hpBar.maxValue = Data.maxHP * lvlIndex;
 
         coinsDropped = UnityEngine.Random.Range(Data.minCoinsDropped, Data.maxCoinsDropped);
+
+        SpecialRangedAttackCooldown = true;
+        StartCoroutine(ChangeBoolCoroutine(Data.specialRangedAttackCooldown, newValue => SpecialRangedAttackCooldown = newValue[0], new[] { false }));
         #endregion
-        
+
         TakeDamage(0, 0, false);
     }
     #endregion

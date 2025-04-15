@@ -81,6 +81,7 @@ public class EnemyData : ScriptableObject
     public bool lookAtPlayer;
     public bool facingDirection;
     public bool patrol;
+    public float wakeUpTime;
 
     [Header("Boss")]
     public bool boss;
@@ -91,7 +92,6 @@ public class EnemyData : ScriptableObject
     public float specialRangedAttackChargeExecutionTime;
     public float specialRangedAttackCooldown;
     public AudioClip bossMusic;
-    public float wakeUpTime;
 
     [Header("Blood")]
     public GameObject bloodEffect;
