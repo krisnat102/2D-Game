@@ -25,7 +25,7 @@ MonoBehaviour:
   offsetY: -1
   hpBarDelay: 1.5
   damageType: 1
-  attackAnimationLength: 1
+  attackAnimationLength: 1.2
   damageTriggerTime: 1.06
   HitBox:
     serializedVersion: 2
@@ -75,7 +75,7 @@ MonoBehaviour:
   lookAtPlayer: 1
   facingDirection: 1
   patrol: 0
-  wakeUpTime: 1
+  wakeUpTime: 1.5
   boss: 0
   bossProjectile: {fileID: 0}
   rangedAttackSoundDelay: 0

@@ -99,6 +99,7 @@ public class Enemy : MonoBehaviour
     public EnemyAttackAI DashAIRange { get => dashAIRange; private set => dashAIRange = value; }
     public Vector2 OldPlayerPosition { get => oldPlayerPosition; private set => oldPlayerPosition = value; }
     public bool AttackCooldown { get => attackCooldown; private set => attackCooldown = value; }
+    public bool Sleeping { get => sleeping; private set => sleeping = value; }
     #endregion
 
     #region Unity Methods
@@ -195,32 +196,13 @@ public class Enemy : MonoBehaviour
             }
             if (alerted && ContainsParam(animator, "sleep") && animator.GetBool("sleep"))
             {
-                if(ContainsParam(animator, "wakeUp")) animator.SetBool("wakeUp", true);
-                animator.SetBool("sleep", false);
-
-                rooted = true;
-                StartCoroutine(ChangeBoolCoroutine(Data.wakeUpTime, newValue => rooted = newValue[0], new[] { false }));
-
-                immune = true;
-                StartCoroutine(ChangeBoolCoroutine(Data.wakeUpTime, newValue => immune = newValue[0], new[] { false }));
-
-                fixRotation = true;
-                StartCoroutine(ChangeBoolCoroutine(Data.wakeUpTime, newValue => fixRotation = newValue[0], new[] { false }));
-                
-                StartCoroutine(ChangeBoolCoroutine(Data.wakeUpTime, newValue => sleeping = newValue[0], new[] { false }));
-                StartCoroutine(StartIdleCoroutine(Data.wakeUpTime - 0.2f, "wakeUp"));
+                WakeUp();
             }
         }
 
-        if (!alerted)
+        if (!alerted && ContainsParam(animator, "sleep"))
         {
-            if(ContainsParam(animator, "sleep") && ContainsParam(animator, "idle"))
-            {
-                sleeping = true;
-                rooted = true;
-                animator.SetBool("idle", false);
-                animator.SetBool("sleep", true);
-            }
+            FallAsleep();
         }
         #endregion
 
@@ -363,7 +345,7 @@ public class Enemy : MonoBehaviour
         #region Calculations
         lvlIndex = level * 0.1f + 0.9f;
 
-        sleeping = Data.wakeUpTime > 0;
+        Sleeping = Data.wakeUpTime > 0;
 
         offsetXSave = Data.offsetX;
 
@@ -519,7 +501,7 @@ public class Enemy : MonoBehaviour
 
     public void Attack(bool meleeRanged)
     {
-        if (AttackCooldown || sleeping || ActionCooldown) return;
+        if (AttackCooldown || Sleeping || ActionCooldown) return;
 
         attacking = true;
 
@@ -581,7 +563,7 @@ public class Enemy : MonoBehaviour
 
     public void SpecialRangedAttack()
     {
-        if (AttackCooldown || SpecialRangedAttackCooldown || sleeping || ActionCooldown) return;
+        if (AttackCooldown || SpecialRangedAttackCooldown || Sleeping || ActionCooldown) return;
 
         if (groundCollider) groundCollider.isTrigger = true;
 
@@ -613,7 +595,7 @@ public class Enemy : MonoBehaviour
 
     public void Dash()
     {
-        if (dashCooldown || sleeping || ActionCooldown) return;
+        if (dashCooldown || Sleeping || ActionCooldown) return;
 
         if (ContainsParam(animator, "dash")) animator.SetBool("dash", true);
         StartCoroutine(StartIdleCoroutine(Data.dashDuration, "dash"));
@@ -739,6 +721,35 @@ public class Enemy : MonoBehaviour
 
     #endregion
 
+    #region General Methods
+    public void WakeUp()
+    {
+        if (ContainsParam(animator, "wakeUp")) animator.SetBool("wakeUp", true);
+        if (ContainsParam(animator, "wakeUpSpeed")) animator.SetFloat("wakeUpSpeed", UnityEngine.Random.Range(0.8f, 1.2f));
+        animator.SetBool("sleep", false);
+
+        rooted = true;
+        StartCoroutine(ChangeBoolCoroutine(Data.wakeUpTime, newValue => rooted = newValue[0], new[] { false }));
+
+        immune = true;
+        StartCoroutine(ChangeBoolCoroutine(Data.wakeUpTime, newValue => immune = newValue[0], new[] { false }));
+
+        fixRotation = true;
+        StartCoroutine(ChangeBoolCoroutine(Data.wakeUpTime, newValue => fixRotation = newValue[0], new[] { false }));
+
+        StartCoroutine(ChangeBoolCoroutine(Data.wakeUpTime, newValue => Sleeping = newValue[0], new[] { false }));
+        StartCoroutine(StartIdleCoroutine(Data.wakeUpTime - 0.2f, "wakeUp"));
+    }
+
+    private void FallAsleep()
+    {
+        Sleeping = true;
+        rooted = true;
+        animator.SetBool("idle", false);
+        if (ContainsParam(animator, "sleep")) animator.SetBool("sleep", true);
+    }
+    #endregion
+
     #region Coroutines
     IEnumerator ChangeBoolCoroutine(float time, Action<bool[]> boolSetter, bool[] newValue)
     {
@@ -777,7 +788,7 @@ public class Enemy : MonoBehaviour
     IEnumerator WakeUpCoroutine(float delay)
     {
         yield return new WaitForSeconds(delay);
-        sleeping = false;
+        Sleeping = false;
         sleepingObj.SetActive(true);
     }
 

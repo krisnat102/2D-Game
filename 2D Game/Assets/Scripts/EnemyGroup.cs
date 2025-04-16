@@ -16,9 +16,15 @@ namespace Krisnat
 
         public void Alert()
         {
-            foreach (var enemy in enemyAwareness)
+            foreach (var enemyAI in enemyAwareness)
             {
-                enemy.Alerted = true;
+                enemyAI.Alerted = true;
+                var enemy = enemyAI.GetComponentInParent<Enemy>();
+
+                if (enemy && enemy.Sleeping)
+                {
+                    enemy.WakeUp();
+                }
             }
         }
     }
