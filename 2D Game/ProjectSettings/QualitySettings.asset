@@ -142,7 +142,8 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 0}
+    customRenderPipeline: {fileID: 11400000, guid: 77b34468efb15574ba3a60a131d176a4,
+      type: 2}
     terrainQualityOverrides: 0
     terrainPixelError: 1
     terrainDetailDensityScale: 1
@@ -161,10 +162,10 @@ QualitySettings:
     PS4: 2
     PSM: 2
     PSP2: 0
-    Server: 0
-    Standalone: 2
+    Server: 1
+    Standalone: 1
     Tizen: 0
-    WebGL: 1
+    WebGL: 0
     WiiU: 2
     Windows Store Apps: 2
     XboxOne: 2

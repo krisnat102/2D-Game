@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2121936274c14654a9abc6a3ee4178f7, type: 3}
+  m_Name: Slime
+  m_EditorClassIdentifier: 
+  enemyName: Slime
+  maxHP: 40
+  attackSpeed: 1.5
+  speed: 15
+  damage: 15
+  actionCooldown: 0.5
+  knockbackModifier: 20
+  knockbackWeight: 1.24
+  hpBarDelay: 0
+  damageType: 1
+  attackAnimationLength: 0.6
+  damageTriggerTime: 0.5
+  HitBox:
+    serializedVersion: 2
+    x: -0.31
+    y: 0.62
+    width: 1.13
+    height: -0.98
+  DetectableLayers:
+    serializedVersion: 2
+    m_Bits: 1024
+  fixRotationWhenAttacking: 0
+  fixLeftAttack: 0
+  rootWhenAttacking: 1
+  commitDirectionWhenAttacking: 1
+  moveWhenAttacking: 1
+  direction: {x: -1, y: 0}
+  cancelMove:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  velocity: 150
+  movementDelay: 0.35
+  canDash: 0
+  dashCooldown: 0
+  dashStrength: 0
+  dashDuration: 0
+  minCoinsDropped: 9
+  maxCoinsDropped: 12
+  itemDropChance: 0.075
+  spellDropChance: 0
+  itemDrop: {fileID: 11400000, guid: 42f4f402eb9cb7d4ebec3de625c524bb, type: 2}
+  spellDrop: {fileID: 0}
+  pitchVarianceAttack:
+  - 0.8
+  - 1.2
+  pitchVarianceRangedAttack:
+  - 0
+  - 0
+  pitchVarianceDamage:
+  - 0.8
+  - 1.2
+  patrolPauseTime: 4
+  patrolSpeed: 10
+  dummy: 0
+  lookAtPlayer: 1
+  facingDirection: 0
+  patrol: 0
+  wakeUpTime: 0
+  boss: 0
+  bossProjectile: {fileID: 0}
+  rangedAttackSoundDelay: 0
+  bossSpecialProjectile: {fileID: 0}
+  specialRangedAttackChargeTime: 0
+  specialRangedAttackChargeExecutionTime: 0
+  specialRangedAttackCooldown: 0
+  bossMusic: {fileID: 0}
+  bloodEffect: {fileID: 7515634647306772147, guid: 985024b36a0051a47bb21ed062b1a771,
+    type: 3}
+  bloodOffset: {x: 0, y: 0}
+  deathEffect: {fileID: 6288087587547893061, guid: c8022a097bb335747abcea327787b972,
+    type: 3}
+  ranged: 0
+  aimDelay: 0.1
+  impactEffect: {fileID: 0}
+  rangedDamage: 0
+  rangedSpeed: 0
+  distanceOffset: 0

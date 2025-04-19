@@ -24,12 +24,8 @@ public class EnemyData : ScriptableObject
     [Tooltip("Higher value is lower horizontal knockback")]
     public float knockbackWeight = 2f;
 
-    [Header("Offsets")]
-    public float offsetX = 1.2f;
-    public float offsetX2 = 1.2f;
-    public float offsetY = -1f;
-
     [Header("UI")]
+    [Tooltip("How long the delay is for the hp bar to appear")]
     public float hpBarDelay = 0f;
 
     [Header("Attack")]

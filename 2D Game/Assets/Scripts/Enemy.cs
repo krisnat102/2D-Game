@@ -51,6 +51,7 @@ public class Enemy : MonoBehaviour
     private bool attackCooldown = false;
     private bool specialRangedAttackCooldown = true;
     private bool dashCooldown = false;
+    private bool bloodCooldown = false;
     private bool isDashing = false;
     private bool isPatrolling;
     private bool stopPatrol;
@@ -347,8 +348,6 @@ public class Enemy : MonoBehaviour
 
         Sleeping = Data.wakeUpTime > 0;
 
-        offsetXSave = Data.offsetX;
-
         hp = Data.maxHP * lvlIndex;
         if(hpBar) hpBar.maxValue = Data.maxHP * lvlIndex;
 
@@ -399,8 +398,11 @@ public class Enemy : MonoBehaviour
                         canvas.transform.SetParent(CoreClass.GameManager.Instance.UIs);
                     }
                 }
-                if (Data.bloodEffect)
+                if (Data.bloodEffect && !bloodCooldown)
                 {
+                    bloodCooldown = true;
+                    StartCoroutine(ChangeBoolCoroutine(0.2f, newValue => bloodCooldown = newValue[0], new[] { false }));
+
                     Instantiate(Data.bloodEffect, new Vector3(transform.position.x + UnityEngine.Random.Range(-1,1)/5 + Data.bloodOffset.x, transform.position.y + UnityEngine.Random.Range(-1, 1)/5 + Data.bloodOffset.y, transform.position.z), Quaternion.identity);
                 }
 
@@ -433,6 +435,7 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+
     private void TakeKnockback(float damage)
     {
         if (Data.dummy) return;
