@@ -1,10 +1,10 @@
-﻿namespace Interactables
-{
-    using UnityEngine;
+﻿using UnityEngine;
 
+namespace Interactables
+{
     public class Platform : MonoBehaviour
     {
-        private Collider2D playerCollider;
+        [SerializeField] private Collider2D playerCollider;
         [SerializeField] private float dropTime = 0.3f;
 
         void Start()
@@ -14,7 +14,7 @@
 
         void Update()
         {
-            if (PlayerInputHandler.Instance.NormInputY == -1)
+            if (PlayerInputHandler.Instance.NormInputY < 0)
             {
                 StartCoroutine(DropThroughPlatform());
             }
@@ -27,5 +27,4 @@
             playerCollider.enabled = true;
         }
     }
-
 }

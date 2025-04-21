@@ -15,14 +15,12 @@ MonoBehaviour:
   enemyName: Skeleton
   maxHP: 30
   attackSpeed: 1.9
-  speed: 30
+  speed: 300
   damage: 20
   actionCooldown: 0.5
   knockbackModifier: 20
   knockbackWeight: 1
-  offsetX: 1.2
-  offsetX2: 1.2
-  offsetY: -1
+  hpBarDelay: 0
   damageType: 1
   attackAnimationLength: 1
   damageTriggerTime: 0.7
@@ -74,6 +72,7 @@ MonoBehaviour:
   lookAtPlayer: 1
   facingDirection: 1
   patrol: 0
+  wakeUpTime: 0
   boss: 0
   bossProjectile: {fileID: 0}
   rangedAttackSoundDelay: 0
@@ -82,7 +81,6 @@ MonoBehaviour:
   specialRangedAttackChargeExecutionTime: 0
   specialRangedAttackCooldown: 0
   bossMusic: {fileID: 0}
-  wakeUpTime: 0
   bloodEffect: {fileID: 7515634647306772147, guid: f49121551cc85bb47902d511bca3f905,
     type: 3}
   bloodOffset: {x: 0, y: 0}

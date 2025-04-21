@@ -8,7 +8,8 @@ public class EnemyDataAI : ScriptableObject
     public float pathUpdateTime = 0.5f;
 
     [Header("AI Physics")]
-    public float speed = 2000f;
+    public float accelerationSpeed = 2000f;
+    public float maxSpeed = 200f;
     public float nextWaypointDistance = 3f;
     public float jumpNodeHeightRequirement = 0.8f;
     public float jumpModifier = 0.3f;

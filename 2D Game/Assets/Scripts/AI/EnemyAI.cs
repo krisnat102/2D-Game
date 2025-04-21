@@ -98,17 +98,20 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
         //isGrounded = Physics2D.Raycast(transform.position, -Vector3.up, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset); //check if colliding with smth
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized; // calculates direction
-        Vector2 force = direction * dataAI.speed * Time.deltaTime;
+        Vector2 force = direction * dataAI.accelerationSpeed * Time.deltaTime;
 
         if (dataAI.jumpEnabled && IsGrounded) //jump
         {
             if (direction.y > dataAI.jumpNodeHeightRequirement)
             {
-                rb.AddForce(Vector2.up * dataAI.speed * dataAI.jumpModifier);
+                rb.AddForce(Vector2.up * dataAI.accelerationSpeed * dataAI.jumpModifier);
             }
         }
 
-        rb.AddForce(force); //movement
+        if (rb.velocity.magnitude < dataAI.maxSpeed) //movement
+        {
+            rb.AddForce(force);
+        } 
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]); // next waypoint
         if (distance < dataAI.nextWaypointDistance)
