@@ -90,8 +90,18 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
             return;
         }
 
-        if (currentWaypoint >= path.vectorPath.Count) //reached end of path
+        if (currentWaypoint >= path.vectorPath.Count)
         {
+            Vector2 directionToTarget = ((Vector2)target.position - rb.position).normalized;
+            Vector2 finalForce;
+            if (dataAI.minimalFinalForceDistance < Vector2.Distance(rb.position, target.position)) finalForce = directionToTarget * dataAI.accelerationSpeed * Time.deltaTime;
+            else finalForce = Vector2.zero;
+
+            if (rb.velocity.magnitude < dataAI.maxSpeed)
+            {
+                rb.AddForce(finalForce);
+            }
+
             return;
         }
 

@@ -14214,6 +14214,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 578623537}
     m_Modifications:
+    - target: {fileID: 1930974721765624246, guid: e9069d7f1d2540c48a55e75ff5c11a17,
+        type: 3}
+      propertyPath: startEndModifier.exactEndPoint
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3089494946469179173, guid: e9069d7f1d2540c48a55e75ff5c11a17,
+        type: 3}
+      propertyPath: maxVolume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3089494946469179173, guid: e9069d7f1d2540c48a55e75ff5c11a17,
+        type: 3}
+      propertyPath: minVolume
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 4242657409397444448, guid: e9069d7f1d2540c48a55e75ff5c11a17,
         type: 3}
       propertyPath: target
@@ -17946,6 +17961,12 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!1 &744025477 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4499116942018295165, guid: 2594cf213d0bcfc449f7f40e0dc57516,
+    type: 3}
+  m_PrefabInstance: {fileID: 771581517}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &746047051
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18536,7 +18557,7 @@ PrefabInstance:
     - target: {fileID: 4840909459786244085, guid: 2594cf213d0bcfc449f7f40e0dc57516,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.355
+      value: 17.5
       objectReference: {fileID: 0}
     - target: {fileID: 4840909459786244085, guid: 2594cf213d0bcfc449f7f40e0dc57516,
         type: 3}
@@ -18591,7 +18612,15 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4499116942018295165, guid: 2594cf213d0bcfc449f7f40e0dc57516,
+        type: 3}
+      insertIndex: 8
+      addedObject: {fileID: 771581530}
+    - targetCorrespondingSourceObject: {fileID: 4499116942018295165, guid: 2594cf213d0bcfc449f7f40e0dc57516,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 771581529}
   m_SourcePrefab: {fileID: 100100000, guid: 2594cf213d0bcfc449f7f40e0dc57516, type: 3}
 --- !u!4 &771581518 stripped
 Transform:
@@ -18599,6 +18628,186 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 771581517}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &771581529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744025477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b20b48de5c282ae4488196681ff86064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstep: {fileID: 771581530}
+  groundFS: {fileID: 8300000, guid: cc153a4498d83944cbf4af11b959ade7, type: 3}
+  grassFS: {fileID: 8300000, guid: b142f589e056d8d4894e3b39d871e74e, type: 3}
+  rockFS: {fileID: 8300000, guid: 042364ac2b60a2646aa674285e59558f, type: 3}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  grassLayer:
+    serializedVersion: 2
+    m_Bits: 32768
+  rockLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  minVolume: 0.07
+  maxVolume: 0.15
+  minPitch: 0.8
+  maxPitch: 1.2
+--- !u!82 &771581530
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744025477}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: b0fc275326f5c7f479bc0b065bb3870f,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1.15
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 44
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 50
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.012774963
+      value: 0.97517776
+      inSlope: -50.01992
+      outSlope: -50.01992
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.0134954825
+      value: 0.94709015
+      inSlope: -2.526956
+      outSlope: -2.526956
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.12578781
+      value: 0.7112808
+      inSlope: -1.5289508
+      outSlope: -1.5289508
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.7553763
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.26362243
+      value: 0.5011444
+      inSlope: -1.0539845
+      outSlope: -1.0539845
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.9303601
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.45975524
+      value: 0.3179779
+      inSlope: -0.7887425
+      outSlope: -0.7887425
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.51352495
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.6552663
+      value: 0.1799501
+      inSlope: -0.21389583
+      outSlope: -0.21389583
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.78799355
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.69059813
+      value: 0.17318726
+      inSlope: -0.04884758
+      outSlope: -0.04884758
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.02
+      inSlope: -0.020007975
+      outSlope: -0.020007975
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &776234111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51159,6 +51368,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 578623537}
     m_Modifications:
+    - target: {fileID: 4077956901317807324, guid: 66313505770736a4cb2711993b6144ef,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1474426255}
     - target: {fileID: 4164179930207123585, guid: 66313505770736a4cb2711993b6144ef,
         type: 3}
       propertyPath: TriggerModule.primitives.Array.data[0]
@@ -51167,7 +51381,7 @@ PrefabInstance:
     - target: {fileID: 5208345444342046040, guid: 66313505770736a4cb2711993b6144ef,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.28
+      value: 10.35
       objectReference: {fileID: 0}
     - target: {fileID: 5208345444342046040, guid: 66313505770736a4cb2711993b6144ef,
         type: 3}
@@ -53343,7 +53557,7 @@ PrefabInstance:
     - target: {fileID: 516992671041194883, guid: 03e556afcc2810e42bf5899a59d82108,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.042
+      value: 16.96
       objectReference: {fileID: 0}
     - target: {fileID: 516992671041194883, guid: 03e556afcc2810e42bf5899a59d82108,
         type: 3}
@@ -53395,6 +53609,21 @@ PrefabInstance:
       propertyPath: TriggerModule.primitives.Array.data[0]
       value: 
       objectReference: {fileID: 1474426255}
+    - target: {fileID: 3148571480967354991, guid: 03e556afcc2810e42bf5899a59d82108,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1474426255}
+    - target: {fileID: 8212198807882565538, guid: 03e556afcc2810e42bf5899a59d82108,
+        type: 3}
+      propertyPath: maxPitch
+      value: 1.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212198807882565538, guid: 03e556afcc2810e42bf5899a59d82108,
+        type: 3}
+      propertyPath: minPitch
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 8989253198140129543, guid: 03e556afcc2810e42bf5899a59d82108,
         type: 3}
       propertyPath: m_Name
@@ -55917,7 +56146,7 @@ PrefabInstance:
     - target: {fileID: 1620560478860096211, guid: a3f6384058c673846ba368a8e2c51dba,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.2699997
+      value: 16.14
       objectReference: {fileID: 0}
     - target: {fileID: 1620560478860096211, guid: a3f6384058c673846ba368a8e2c51dba,
         type: 3}
@@ -59215,10 +59444,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 578623537}
     m_Modifications:
-    - target: {fileID: 9493710073659371, guid: 53442105814d85f4ea6f1d4546ae58d0, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1.34375
-      objectReference: {fileID: 0}
     - target: {fileID: 4210531197465472523, guid: 53442105814d85f4ea6f1d4546ae58d0,
         type: 3}
       propertyPath: TriggerModule.primitives.Array.data[0]
@@ -59434,11 +59659,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GreenSlime
-      objectReference: {fileID: 0}
-    - target: {fileID: 9046806946143226646, guid: 4cbe5b818bed6b446920542f556e57ba,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

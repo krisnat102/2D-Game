@@ -274,7 +274,7 @@ MonoBehaviour:
   firePoint: {fileID: 3765119724960197482}
   IgnoreMe:
     serializedVersion: 2
-    m_Bits: 7742007
+    m_Bits: 7758455
   flip: 0
 --- !u!61 &5308332177290860295
 BoxCollider2D:
@@ -369,7 +369,7 @@ MonoBehaviour:
   firePoint: {fileID: 3765119724960197482}
   IgnoreMe:
     serializedVersion: 2
-    m_Bits: 7742007
+    m_Bits: 7758455
   flip: 0
 --- !u!61 &2689075543447311777
 BoxCollider2D:
@@ -631,7 +631,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5208345444342046040
 Transform:
   m_ObjectHideFlags: 0
@@ -642,7 +642,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 54.48, y: 0.29, z: 0.38238418}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4211981834737645034}
@@ -1335,7 +1335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b20b48de5c282ae4488196681ff86064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  footstep: {fileID: 37509356564524837, guid: e9069d7f1d2540c48a55e75ff5c11a17, type: 3}
+  footstep: {fileID: -8168883141530035494}
   groundFS: {fileID: 8300000, guid: cc153a4498d83944cbf4af11b959ade7, type: 3}
   grassFS: {fileID: 8300000, guid: b142f589e056d8d4894e3b39d871e74e, type: 3}
   rockFS: {fileID: 8300000, guid: 042364ac2b60a2646aa674285e59558f, type: 3}
@@ -1348,6 +1348,10 @@ MonoBehaviour:
   rockLayer:
     serializedVersion: 2
     m_Bits: 8192
+  minVolume: 0.07
+  maxVolume: 0.14
+  minPitch: 0.7
+  maxPitch: 1
 --- !u!1 &7103892192007662705
 GameObject:
   m_ObjectHideFlags: 0

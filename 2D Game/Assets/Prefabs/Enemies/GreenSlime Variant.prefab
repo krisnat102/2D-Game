@@ -18,6 +18,12 @@ PrefabInstance:
       propertyPath: animationLength
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1348076975666116926, guid: 984c1eb7c6209244ca29954bcf0817de,
+        type: 3}
+      propertyPath: dataAI
+      value: 
+      objectReference: {fileID: 11400000, guid: a9a73e9a80a7ce849aeae4302da32f8a,
+        type: 2}
     - target: {fileID: 1386318285805067913, guid: 984c1eb7c6209244ca29954bcf0817de,
         type: 3}
       propertyPath: m_Sprite
@@ -33,6 +39,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GreenSlime Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 3941070619452417692, guid: 984c1eb7c6209244ca29954bcf0817de,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5547110955581693313, guid: 984c1eb7c6209244ca29954bcf0817de,
         type: 3}
