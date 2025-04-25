@@ -20,9 +20,8 @@ MonoBehaviour:
   actionCooldown: 0.5
   knockbackModifier: 25
   knockbackWeight: 1
-  offsetX: -1.6
-  offsetX2: 1.6
-  offsetY: 1
+  stagger: 1.78
+  hpBarDelay: 0
   damageType: 1
   attackAnimationLength: 0.3
   damageTriggerTime: 0.3
@@ -74,6 +73,7 @@ MonoBehaviour:
   lookAtPlayer: 1
   facingDirection: 0
   patrol: 1
+  wakeUpTime: 0
   boss: 0
   bossProjectile: {fileID: 0}
   rangedAttackSoundDelay: 0
@@ -82,7 +82,6 @@ MonoBehaviour:
   specialRangedAttackChargeExecutionTime: 0
   specialRangedAttackCooldown: 0
   bossMusic: {fileID: 0}
-  wakeUpTime: 0
   bloodEffect: {fileID: 7515634647306772147, guid: b6be51001a0800f4abd4e30fe133548b,
     type: 3}
   bloodOffset: {x: 0, y: 0}

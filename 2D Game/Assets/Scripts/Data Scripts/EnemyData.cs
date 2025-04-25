@@ -23,6 +23,8 @@ public class EnemyData : ScriptableObject
     public float knockbackModifier = 5f;
     [Tooltip("Higher value is lower horizontal knockback")]
     public float knockbackWeight = 2f;
+    [Tooltip("Higher value is lower stagger resistance")]
+    public float stagger = 1f;
 
     [Header("UI")]
     [Tooltip("How long the delay is for the hp bar to appear")]

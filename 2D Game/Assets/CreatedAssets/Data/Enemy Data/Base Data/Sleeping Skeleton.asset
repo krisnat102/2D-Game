@@ -20,9 +20,7 @@ MonoBehaviour:
   actionCooldown: 0.5
   knockbackModifier: 20
   knockbackWeight: 1
-  offsetX: 1.2
-  offsetX2: 1.2
-  offsetY: -1
+  stagger: 2
   hpBarDelay: 1.5
   damageType: 1
   attackAnimationLength: 1.2

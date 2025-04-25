@@ -391,6 +391,8 @@ public class Enemy : MonoBehaviour
                     dmgNumber.color = damagePopupGradient.Evaluate(Mathf.Clamp01(damage / 100));
                     dmgNumber.fontSize += Mathf.Round(damage / fontSizeToDamageScaler);
 
+                    if (data.stagger > 1) rb.velocity = new Vector2(rb.velocity.x / data.stagger, rb.velocity.y);
+
                     if (hp <= 0)
                     {
                         dmgNumber.transform.localScale = new Vector2(Mathf.Abs(dmgNumber.transform.localScale.x), dmgNumber.transform.localScale.y);
