@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Bardent.CoreSystem;
+using Krisnat;
 
 namespace Interactables
 {

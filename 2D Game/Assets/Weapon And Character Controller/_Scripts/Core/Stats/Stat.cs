@@ -42,7 +42,7 @@ namespace Bardent.CoreSystem.StatsSystem
 
             recoveryMultiplier = Mathf.MoveTowards(recoveryMultiplier, 1f, recoveryTransitionSpeed * Time.deltaTime);
 
-            Increase(recoveryRate * recoveryMultiplier * Time.deltaTime);
+            CurrentValue += recoveryRate * recoveryMultiplier * Time.deltaTime;
         }
 
         public void StopRegen(float time)

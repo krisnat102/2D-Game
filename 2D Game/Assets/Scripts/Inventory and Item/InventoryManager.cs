@@ -125,7 +125,7 @@ namespace Inventory
         }
         private void Start()
         {
-            AllItems = CoreClass.GameManager.Instance.GetCustomAssets<Item>("Item", "Items");
+            AllItems = CoreClass.GameManager.instance.GetCustomAssets<Item>("Item", "Items");
 
             inventoryScale = inventory.transform.localScale.x;
             characterTabScale = characterTab.transform.localScale.x;
@@ -374,7 +374,7 @@ namespace Inventory
                 var itemCount = trans.GetComponentInChildren<SearchAssist>().GetComponent<TextMeshProUGUI>();
                 itemCount.text = (item.ItemCount > 1 ? "x" + item.ItemCount.ToString() : "");
 
-                var removeButton = CoreClass.GameManager.Instance.GetComponentOnlyInChildren<Button>(trans);
+                var removeButton = CoreClass.GameManager.instance.GetComponentOnlyInChildren<Button>(trans);
                 
                 if (enableRemove.isOn && item.itemClass != Item.ItemClass.Quest && !item.Equipped)
                 {

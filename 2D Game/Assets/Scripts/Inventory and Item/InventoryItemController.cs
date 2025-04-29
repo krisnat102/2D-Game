@@ -124,7 +124,7 @@ namespace Inventory
 
                     if (InventoryManager.Instance.Coins < cost)
                     {
-                        CameraShake.Instance.ShakeCamera(0.3f, 1f);
+                        CameraShake.instance.ShakeCamera(0.3f, 1f);
                         AudioManager.Instance.PlayTradeRefusedSound(0.6f, 0.8f);
 
                         return;

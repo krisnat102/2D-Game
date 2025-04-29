@@ -1,6 +1,7 @@
 using UnityEngine;
 using Pathfinding;
 using CoreClass;
+using Krisnat;
 
 public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl4I&ab_channel=Etredal
 {
@@ -23,7 +24,7 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
     private Vector3 oldPosition;
     private Enemy enemy;
 
-    const float GroundedRadius = .2f;
+    private const float GroundedRadius = .2f;
 
     public bool IsGrounded { get => isGrounded; private set => isGrounded = value; }
 
@@ -36,7 +37,7 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
-        InvokeRepeating("UpdatePath", 0f, dataAI.pathUpdateTime);
+        InvokeRepeating(nameof(UpdatePath), 0f, dataAI.pathUpdateTime);
     }
 
     private void FixedUpdate()
@@ -108,13 +109,13 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
         //isGrounded = Physics2D.Raycast(transform.position, -Vector3.up, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset); //check if colliding with smth
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized; // calculates direction
-        Vector2 force = direction * dataAI.accelerationSpeed * Time.deltaTime;
+        Vector2 force = direction * (dataAI.accelerationSpeed * Time.deltaTime);
 
         if (dataAI.jumpEnabled && IsGrounded) //jump
         {
             if (direction.y > dataAI.jumpNodeHeightRequirement)
             {
-                rb.AddForce(Vector2.up * dataAI.accelerationSpeed * dataAI.jumpModifier);
+                rb.AddForce(Vector2.up * (dataAI.accelerationSpeed * dataAI.jumpModifier));
             }
         }
 
@@ -129,16 +130,15 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
             currentWaypoint++;
         }
 
-        if (dataAI.directionLookEnabled) //direction graphics
+        if (!dataAI.directionLookEnabled) return; //direction graphics
+        
+        if (rb.velocity.x > 0.05f)
         {
-            if (rb.velocity.x > 0.05f)
-            {
-                transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            }
-            else if (rb.velocity.x < -0.05f)
-            {
-                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            }
+            transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+        else if (rb.velocity.x < -0.05f)
+        {
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
     }
 

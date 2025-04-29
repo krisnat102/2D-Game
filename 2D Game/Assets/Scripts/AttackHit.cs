@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using CoreClass;
 using Bardent.CoreSystem;
+using Krisnat;
 
 public class AttackHit : MonoBehaviour
 {
@@ -10,13 +11,13 @@ public class AttackHit : MonoBehaviour
     void Start()
     {
         enemy = GetComponentInParent<Enemy>();
-        Invoke("FinishAttack", 0.5f);
+        Invoke(nameof(FinishAttack), 0.5f);
         damage = enemy.Data.damage * enemy.EnemyLevelScale;
     }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.tag == "Player")
+        if (hitInfo.CompareTag("Player"))
         {
             Player player = hitInfo.transform.GetComponent<Player>(); //checks if it hit the player
 

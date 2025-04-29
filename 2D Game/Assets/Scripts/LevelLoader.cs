@@ -14,7 +14,7 @@ namespace Krisnat
         {
             StartCoroutine(DestroyPlayer(transitionTime - 0.1f));
             StartCoroutine(LoadLevelCoroutine(0));
-            CoreClass.GameManager.Instance.GamePaused = false;
+            CoreClass.GameManager.instance.GamePaused = false;
         }
 
         public void LoadLevel(int buildIndex) => StartCoroutine(LoadLevelCoroutine(buildIndex));
@@ -33,7 +33,7 @@ namespace Krisnat
             transition.SetTrigger("Start");
             if (buildIndex != 0) MenuManager.Instance.CurrentLevel = buildIndex;
 
-            if (CoreClass.GameManager.Instance && CoreClass.GameManager.Instance.Player) CoreClass.GameManager.Instance.SavePlayer();
+            if (CoreClass.GameManager.instance && CoreClass.GameManager.instance.Player) CoreClass.GameManager.instance.SavePlayer();
 
             yield return new WaitForSeconds(transitionTime);
 
@@ -54,7 +54,7 @@ namespace Krisnat
         IEnumerator DestroyPlayer(float waitTime)
         {
             yield return new WaitForSeconds(waitTime);
-            if(CoreClass.GameManager.Instance && CoreClass.GameManager.Instance.PlayerGO) Destroy(CoreClass.GameManager.Instance.PlayerGO);
+            if(CoreClass.GameManager.instance && CoreClass.GameManager.instance.PlayerGO) Destroy(CoreClass.GameManager.instance.PlayerGO);
         }
     }
 }

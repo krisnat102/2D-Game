@@ -1,4 +1,5 @@
 using UnityEngine;
+// ReSharper disable Unity.PerformanceCriticalCodeInvocation
 
 namespace Bardent.CoreSystem
 {
@@ -17,17 +18,12 @@ namespace Bardent.CoreSystem
         {
             if (Invincible) return;
 
-            if (physical)
-            {
-                stats.health.Decrease(stats.CalculatePhysicalDamageReduction(rawAmount));
-            }
-            else
-            {
-                stats.health.Decrease(stats.CalculateMagicalDamageReduction(rawAmount));
-            }
+            stats.health.Decrease(physical
+                ? stats.CalculatePhysicalDamageReduction(rawAmount)
+                : stats.CalculateMagicalDamageReduction(rawAmount));
 
             damageAudio?.Play();
-            Krisnat.CameraShake.Instance.ShakeCamera(0.15f, rawAmount / 10);
+            Krisnat.CameraShake.instance.ShakeCamera(0.15f, rawAmount / 10);
             particleManager.StartParticlesWithRandomRotation(damageParticles);
         }
 

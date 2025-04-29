@@ -52,7 +52,7 @@ public class MenuManager : MonoBehaviour
             SaveSystem.DeleteAllSaveFiles();
             var save = PlayerSaveData.CreateDefault();
             SaveSystem.SaveData(save);
-            CoreClass.GameManager.Instance.LoadPlayer(save);
+            CoreClass.GameManager.instance.LoadPlayer(save);
             newGame = false;
         }
 
@@ -111,16 +111,16 @@ public class MenuManager : MonoBehaviour
         }
 
         Screen.fullScreen = fullScreenToggle.isOn;
-        if(CoreClass.GameManager.Instance != null){
-            if (oldGamePaused != CoreClass.GameManager.Instance.GamePaused && CoreClass.GameManager.Instance.GamePaused)
+        if(CoreClass.GameManager.instance != null){
+            if (oldGamePaused != CoreClass.GameManager.instance.GamePaused && CoreClass.GameManager.instance.GamePaused)
             {
                 Time.timeScale = 0f;
             }
-            else if(oldGamePaused != CoreClass.GameManager.Instance.GamePaused)
+            else if(oldGamePaused != CoreClass.GameManager.instance.GamePaused)
             {
                 Time.timeScale = 1;
             }
-            oldGamePaused = CoreClass.GameManager.Instance.GamePaused;
+            oldGamePaused = CoreClass.GameManager.instance.GamePaused;
         }
 
 
@@ -185,7 +185,7 @@ public class MenuManager : MonoBehaviour
                 settings.SetActive(false);
                 miniMenu.SetActive(true);
             }
-            CoreClass.GameManager.Instance.GamePaused = true;
+            CoreClass.GameManager.instance.GamePaused = true;
             PlayerInputHandler.Instance.StopAllInputs = true;
 
             AudioManager.Instance.PlayMenuSound(1f, 1.2f);
@@ -199,7 +199,7 @@ public class MenuManager : MonoBehaviour
     {
         AudioManager.Instance.PlayMenuSound(0.7f, 0.9f);
         menu.SetActive(false);
-        CoreClass.GameManager.Instance.GamePaused = false;
+        CoreClass.GameManager.instance.GamePaused = false;
         PlayerInputHandler.Instance.StopAllInputs = false;
         PlayerInputHandler.Instance.StopAttack = false;
     }

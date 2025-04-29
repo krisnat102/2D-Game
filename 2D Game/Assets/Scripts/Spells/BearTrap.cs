@@ -1,9 +1,11 @@
+using Krisnat;
 using UnityEngine;
 
 namespace Spells
 {
     public class BearTrap : MonoBehaviour
     {
+        private static readonly int Closed = Animator.StringToHash("closed");
         [SerializeField] private LayerMask layerMask;
         [SerializeField] private LayerMask groundLayerMask;
         [SerializeField] private Spell trap;
@@ -23,10 +25,10 @@ namespace Spells
                 Enemy enemy = hitInfo.GetComponent<Enemy>();
                 if (enemy)
                 {
-                    animator.SetTrigger("closed");
+                    animator.SetTrigger(Closed);
                     triggered = true;
                     holdTarget = true;
-                    Invoke("Release", holdTime);
+                    Invoke(nameof(Release), holdTime);
                     target = hitInfo.gameObject;
                     target?.GetComponent<Enemy>().TakeDamage(trap.damage, 0, false);
                     targetRB = target?.GetComponent<Rigidbody2D>();
@@ -42,14 +44,13 @@ namespace Spells
 
         private void Update()
         {
-            if (holdTarget && targetRB != null)
-            {
-                targetRB.velocity = new Vector2(0, 0);
-                targetRB.isKinematic = true;
+            if (!holdTarget || !targetRB) return;
+            
+            targetRB.velocity = new Vector2(0, 0);
+            targetRB.isKinematic = true;
 
-                rb.velocity = new Vector2(0, 0);
-                rb.isKinematic = true;
-            }
+            rb.velocity = new Vector2(0, 0);
+            rb.isKinematic = true;
         }
 
         private void Start()

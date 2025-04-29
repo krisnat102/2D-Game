@@ -19,6 +19,7 @@ namespace Krisnat
             foreach (var enemyAI in enemyAwareness)
             {
                 enemyAI.Alerted = true;
+                // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
                 var enemy = enemyAI.GetComponentInParent<Enemy>();
 
                 if (enemy && enemy.Sleeping)

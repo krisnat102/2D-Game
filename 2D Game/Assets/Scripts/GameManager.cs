@@ -16,7 +16,7 @@ namespace CoreClass
 {
     public class GameManager : MonoBehaviour
     {
-        public static GameManager Instance;
+        public static GameManager instance;
         public static Vector3 checkpoint;
         private bool gamePaused = false;
 
@@ -36,6 +36,7 @@ namespace CoreClass
 
         public static bool levelStarted = false;
         public bool GamePaused { get => gamePaused; set => gamePaused = value; }
+        // ReSharper disable once InconsistentNaming
         public GameObject PlayerGO { get => playerGO; private set => playerGO = value; }
         public Transform SpawnPoint { get => spawnPoint; private set => spawnPoint = value; }
         public List<string> ItemsTaken { get; private set; }
@@ -46,7 +47,6 @@ namespace CoreClass
         public Transform Particles { get; private set; }
         public Transform Audios { get; private set; }
         public Transform UIs { get; private set; }
-        public List<Item> StartingItems { get => startingItems; private set => startingItems = value; }
 
         #region Unity Methods
         private void Update()
@@ -58,7 +58,7 @@ namespace CoreClass
         }
         private void Awake()
         {
-            Instance = this;
+            instance = this;
 
             ItemsTaken = new List<string>();
             BossesKilled = new List<string>();
@@ -66,7 +66,7 @@ namespace CoreClass
             Battles = new List<string>();
 
             Player = playerGO?.GetComponent<Player>();
-            levelHandler = CoreClass.GameManager.Instance.GetComponent<LevelHandler>();
+            levelHandler = CoreClass.GameManager.instance.GetComponent<LevelHandler>();
             Particles = GameObject.FindGameObjectWithTag("ParticleContainer").transform;
             Audios = GameObject.FindGameObjectWithTag("AudioContainer")?.transform;
             UIs = GameObject.FindGameObjectWithTag("UIContainer")?.transform;
@@ -81,13 +81,6 @@ namespace CoreClass
             stats = Stats.Instance;
 
             LoadPlayer();
-
-            /*if (MenuManager.newGame)
-            {
-                InventoryManager.Instance.Add(startingItems);
-                InventoryManager.Instance.EquipItem(startingItems[0]);
-                InventoryManager.Instance.EquipItem(startingItems[1]);
-            }*/
         }
         #endregion
 
@@ -101,6 +94,7 @@ namespace CoreClass
 
         public void SavePlayer()
         {
+            // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
             SaveSystem.SavePlayer(Player);
         }
         public void LoadPlayer()
@@ -378,14 +372,15 @@ namespace CoreClass
             return loadedAssets;
         }
 
-        public T GetComponentOnlyInChildren<T>(Transform transform) where T : Component
+        public T GetComponentOnlyInChildren<T>(Transform trans) where T : Component
         {
             // Iterate through all direct and nested children of this object
-            foreach (Transform child in transform)
+            foreach (Transform child in trans)
             {
                 // Use GetComponentInChildren on each child, which will ignore the parent (this object)
+                // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
                 T foundComponent = child.GetComponentInChildren<T>(true);
-                if (foundComponent != null)
+                if (foundComponent)
                 {
                     return foundComponent;
                 }

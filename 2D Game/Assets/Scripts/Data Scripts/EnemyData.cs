@@ -1,6 +1,7 @@
 using UnityEngine;
 using Inventory;
 using Spells;
+using UnityEngine.Serialization;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -11,7 +12,7 @@ public class EnemyData : ScriptableObject
 {
     [Header("General Stats")]
     public string enemyName;
-    public float maxHP = 100f;
+    [FormerlySerializedAs("maxHP")] public float maxHp = 100f;
     [Tooltip("Higher value is lower attack speed")]
     public float attackSpeed = 1f;
     public float speed = 200f;
@@ -35,8 +36,8 @@ public class EnemyData : ScriptableObject
     public bool damageType;
     public float attackAnimationLength = 0.3f;
     public float damageTriggerTime = 0.3f;
-    public Rect HitBox;
-    public LayerMask DetectableLayers;
+    [FormerlySerializedAs("HitBox")] public Rect hitBox;
+    [FormerlySerializedAs("DetectableLayers")] public LayerMask detectableLayers;
 
     [Header("Attack Behaviour")]
     public bool fixRotationWhenAttacking;

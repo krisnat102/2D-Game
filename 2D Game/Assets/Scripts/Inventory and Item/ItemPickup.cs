@@ -92,7 +92,7 @@ namespace Inventory
 
             if (pickUpAudio && !UIManager.Instance.NoteOpen)
             {
-                if (!chest && !Note) pickUpAudio.gameObject.transform.parent = CoreClass.GameManager.Instance.Audios;
+                if (!chest && !Note) pickUpAudio.gameObject.transform.parent = CoreClass.GameManager.instance.Audios;
                 pickUpAudio.pitch = Random.Range(lowerPitchRange, higherPitchRange);
                 pickUpAudio.Play();
             }
@@ -144,7 +144,7 @@ namespace Inventory
                     isPickedUp = true;
                     StartCoroutine(AddItem(item, true, openTime));
                     animator.SetTrigger("open");
-                    CoreClass.GameManager.Instance.ItemsTaken.Add(ItemId);
+                    CoreClass.GameManager.instance.ItemsTaken.Add(ItemId);
                 }
             }
             else if (!isPickedUp && item)
@@ -153,7 +153,7 @@ namespace Inventory
                 {
                     InventoryManager.Instance.Add(item, true);
                     Disable();
-                    CoreClass.GameManager.Instance.ItemsTaken.Add(ItemId);
+                    CoreClass.GameManager.instance.ItemsTaken.Add(ItemId);
                 }
             }
         }
@@ -163,7 +163,7 @@ namespace Inventory
             if (pickUpEffect)
             {
                 pickUpEffect.SetActive(true);
-                pickUpEffect.transform.parent = CoreClass.GameManager.Instance.Particles;
+                pickUpEffect.transform.parent = CoreClass.GameManager.instance.Particles;
             }
 
             gameObject.SetActive(false);

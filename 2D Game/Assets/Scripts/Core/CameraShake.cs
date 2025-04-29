@@ -7,7 +7,7 @@ namespace Krisnat
 {
     public class CameraShake : MonoBehaviour
     {
-        public static CameraShake Instance;
+        public static CameraShake instance;
 
         [SerializeField] private float shakeIntensity = 1f;
         [SerializeField] private float shakeTime = 0.5f;
@@ -15,12 +15,12 @@ namespace Krisnat
         private CinemachineBasicMultiChannelPerlin cbmcp;
         private bool shake;
 
-        public float ShakeIntensity { get => shakeIntensity; set => shakeIntensity = value; }
-        public float ShakeTime { get => shakeTime; set => shakeTime = value; }
+        private float ShakeIntensity { get => shakeIntensity; set => shakeIntensity = value; }
+        private float ShakeTime { get => shakeTime; set => shakeTime = value; }
 
         private void Awake()
         {
-            Instance = this;
+            instance = this;
 
             virtualCam = GetComponent<CinemachineVirtualCamera>();
             cbmcp = virtualCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
@@ -44,17 +44,24 @@ namespace Krisnat
             }
         }
 
-        public void ShakeCamera()
+        private void ShakeCamera()
         {
             cbmcp.m_AmplitudeGain = ShakeIntensity;
             shake = true;
-            Invoke(nameof(StopShake), shakeTime);
+            StartCoroutine(StopShakeAfterDelay());
         }
+        
         public void ShakeCamera(float duration, float intensity)
         {
             ShakeTime = duration;
             ShakeIntensity = intensity;
             ShakeCamera();
+        }
+        
+        private IEnumerator StopShakeAfterDelay()
+        {
+            yield return new WaitForSeconds(ShakeTime);
+            StopShake();
         }
 
         private void StopShake()
