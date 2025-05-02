@@ -9,6 +9,7 @@ using Inventory;
 using Pathfinding;
 using Spells;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,19 +55,19 @@ namespace Krisnat
         private int coinsDropped;
         private float offsetXSave;
         private float hp;
-        private bool immune = false;
-        private bool dashCooldown = false;
-        private bool bloodCooldown = false;
-        private bool isDashing = false;
+        private bool immune;
+        private bool dashCooldown;
+        private bool bloodCooldown;
+        private bool isDashing;
         private bool isPatrolling;
         private bool stopPatrol;
         private bool patrollingDirection = true;
         private bool rooted;
         private bool fixRotation;
-        private bool matchPlayerY = false;
+        private bool matchPlayerY;
         private bool bossMusicTracker = true;
-        private bool attacking = false;
-        private bool alerted = false;
+        private bool attacking;
+        private bool alerted;
         private float leftPatrolBarrierPositionX;
         private float rightPatrolBarrierPositionX;
         private float previousRotationX;
@@ -111,18 +112,18 @@ namespace Krisnat
         public float EnemyLevelScale { get; private set; }
 
         public string BossId { get; private set; }
-        public Transform PlayerTrans { get; private set; }
+        private Transform PlayerTrans { get; set; }
 
-        public EnemyData Data { get => data; private set => data = value; }
+        public EnemyData Data => data;
         public Transform FirePoint { get; private set; }
 
-        public Transform FirePoint2 { get; private set; }
-        public EnemyAttackAI DetectAIRange { get => detectAIRange; private set => detectAIRange = value; }
-        public EnemyAttackAI AttackAIRange { get => attackAIRange; private set => attackAIRange = value; }
-        public EnemyAttackAI DashAIRange { get => dashAIRange; private set => dashAIRange = value; }
+        private Transform FirePoint2 { get; set; }
+        public EnemyAttackAI DetectAIRange => detectAIRange;
+        public EnemyAttackAI AttackAIRange => attackAIRange;
+        private EnemyAttackAI DashAIRange => dashAIRange;
         public Vector2 OldPlayerPosition { get; private set; }
 
-        public bool AttackCooldown { get; private set; } = false;
+        public bool AttackCooldown { get; private set; }
         public bool Sleeping { get; private set; }
 
         #endregion
@@ -408,9 +409,7 @@ namespace Krisnat
                 {
                     if (GetComponentInChildren<Canvas>())
                     {
-                        Vector3 popUpOffset;
-                        if (!multipleDamageSources) popUpOffset = new Vector3(damagePopupOffset.x + UnityEngine.Random.Range(-2f, 1f), damagePopupOffset.y);
-                        else popUpOffset = Vector3.zero;
+                        var popUpOffset = !multipleDamageSources ? new Vector3(damagePopupOffset.x + UnityEngine.Random.Range(-2f, 1f), damagePopupOffset.y) : Vector3.zero;
 
                         var dmgNumber = Instantiate(damagePopup, transform.position + popUpOffset, Quaternion.identity, canvas).GetComponent<TextMeshProUGUI>();
                         dmgNumber.text = damage.ToString(CultureInfo.CurrentCulture);
@@ -647,8 +646,10 @@ namespace Krisnat
             StartCoroutine(StopMomentumCoroutine(Data.dashDuration));
 
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-            if (PlayerTrans.position.x > transform.position.x) rb.AddForce(new Vector2(-Data.dashStrength, 0), ForceMode2D.Impulse);
-            else rb.AddForce(new Vector2(Data.dashStrength, 0), ForceMode2D.Impulse);
+            rb.AddForce(
+                PlayerTrans.position.x > transform.position.x
+                    ? new Vector2(-Data.dashStrength, 0)
+                    : new Vector2(Data.dashStrength, 0), ForceMode2D.Impulse);
         }
 
         #endregion
@@ -750,8 +751,6 @@ namespace Krisnat
 
             if (ContainsParam(animator, "idle")) animator.SetBool(Idle, true);
             if (ContainsParam(animator, "specialRanged")) animator.SetBool(SpecialRanged, false);
-
-            return;
         }
         #endregion
 
@@ -819,13 +818,6 @@ namespace Krisnat
         {
             yield return new WaitForSeconds(delay);
             Flip();
-        }
-
-        private IEnumerator WakeUpCoroutine(float delay)
-        {
-            yield return new WaitForSeconds(delay);
-            Sleeping = false;
-            sleepingObj.SetActive(true);
         }
 
         private IEnumerator PlayRangedAttackSoundCoroutine(float delay)
@@ -909,7 +901,7 @@ namespace Krisnat
                 calibrate = 1;
             }
 
-            Gizmos.color = UnityEngine.Color.red;
+            Gizmos.color = Color.red;
             offset.Set(
                 transform.position.x + (Data.hitBox.center.x * FacingDirection * calibrate * -1),
                 transform.position.y + Data.hitBox.center.y

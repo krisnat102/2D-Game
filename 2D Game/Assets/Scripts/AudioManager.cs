@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Serialization;
 using System.IO;
 using Krisnat;
+// ReSharper disable CheckNamespace
 
 public class AudioManager : MonoBehaviour
 {
@@ -29,8 +30,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource[] equipmentSoundEffect;
 
     private bool muteTracker;
-    private float musicSave = 0;
-    private float sfxSave = 0;
+    private float musicSave;
+    private float sfxSave;
     
     private string SettingsFile => Path.Combine(Application.persistentDataPath, "settings.json");
 
@@ -135,83 +136,83 @@ public class AudioManager : MonoBehaviour
     #region Audio Players
     public void PlayHeartbeatSound(float lowerPitch, float higherPitch)
     {
-        heartbeatSound.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        heartbeatSound.pitch = Random.Range(lowerPitch, higherPitch);
         heartbeatSound.Play();
     }
     public void PlayWeaponSound(AudioClip sfxValue, float lowerPitch, float higherPitch)
     {
         weaponSound.clip = sfxValue;
-        weaponSound.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        weaponSound.pitch = Random.Range(lowerPitch, higherPitch);
         weaponSound.Play();
     }
     public void PlayButtonSound(float lowerPitch, float higherPitch)
     {
-        buttonSound.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        buttonSound.pitch = Random.Range(lowerPitch, higherPitch);
         buttonSound.Play();
     }
     public void PlayMenuSound(float lowerPitch, float higherPitch)
     {
-        menuSound.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        menuSound.pitch = Random.Range(lowerPitch, higherPitch);
         menuSound.Play();
     }
     public void PlayBuySound(float lowerPitch, float higherPitch)
     {
-        buySound.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        buySound.pitch = Random.Range(lowerPitch, higherPitch);
         buySound.Play();
     }
 
     public void PlayCoinPickupSound(float lowerPitch, float higherPitch)
     {
-        coinPickupSound.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        coinPickupSound.pitch = Random.Range(lowerPitch, higherPitch);
         coinPickupSound.Play();
     }
 
     public void PlayTradeRefusedSound(float lowerPitch, float higherPitch)
     {
-        tradeRefusedSound.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        tradeRefusedSound.pitch = Random.Range(lowerPitch, higherPitch);
         tradeRefusedSound.Play();
     }
 
     public void PlayWhooshSound(float lowerPitch, float higherPitch)
     {
-        whooshSoundEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        whooshSoundEffect.pitch = Random.Range(lowerPitch, higherPitch);
         whooshSoundEffect.Play();
     }
 
     public void PlayDodgeRollSound(float lowerPitch, float higherPitch)
     {
-        dodgeRollSoundEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        dodgeRollSoundEffect.pitch = Random.Range(lowerPitch, higherPitch);
         dodgeRollSoundEffect.Play();
     }
 
     public void PlayFireballLaunchSound(float lowerPitch, float higherPitch)
     {
-        fireballLaunchEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        fireballLaunchEffect.pitch = Random.Range(lowerPitch, higherPitch);
         fireballLaunchEffect.Play();
     }
 
     public void PlayLightningSound(float lowerPitch, float higherPitch)
     {
-        lightningEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        lightningEffect.pitch = Random.Range(lowerPitch, higherPitch);
         lightningEffect.Play(); 
     }
 
     public void PlayEatSound(float lowerPitch, float higherPitch)
     {
-        eatSoundEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        eatSoundEffect.pitch = Random.Range(lowerPitch, higherPitch);
         eatSoundEffect.Play();
     }
 
     public void PlayPotionDrinkSound(float lowerPitch, float higherPitch)
     {
-        potionDrinkSoundEffect.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        potionDrinkSoundEffect.pitch = Random.Range(lowerPitch, higherPitch);
         potionDrinkSoundEffect.Play();
     }
 
     public void PlayEquipmentSound(float lowerPitch, float higherPitch)
     {
-        int randomSfx = Mathf.RoundToInt(UnityEngine.Random.Range(0, equipmentSoundEffect.Length));
-        equipmentSoundEffect[randomSfx].pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        int randomSfx = Mathf.RoundToInt(Random.Range(0, equipmentSoundEffect.Length));
+        equipmentSoundEffect[randomSfx].pitch = Random.Range(lowerPitch, higherPitch);
         equipmentSoundEffect[randomSfx].Play();
     }
 

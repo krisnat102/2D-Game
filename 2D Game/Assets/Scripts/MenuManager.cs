@@ -1,12 +1,12 @@
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using Inventory;
 using Krisnat;
 using Krisnat.Assets.Scripts;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+// ReSharper disable CheckNamespace
 
 public class MenuManager : MonoBehaviour
 {
@@ -37,11 +37,7 @@ public class MenuManager : MonoBehaviour
     private Resolution[] resolutions;
     private bool damagePopups = true;
     private bool oldGamePaused;
-    public static bool newGame = false;
-    
-    private string SettingsFile => Path.Combine(Application.persistentDataPath, "settings.json");
-    
-    private SettingsData settingsData = new SettingsData();
+    private static bool newGame;
     #endregion
 
     #region Unity Methods
@@ -110,7 +106,7 @@ public class MenuManager : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("DamagePopUp") && (DamagePopUps ? 1 : 0) != PlayerPrefs.GetInt("DamagePopUp"))
         {
-            DamagePopUps = Convert.ToBoolean(PlayerPrefs.GetInt("DamagePopUp"));
+            //DamagePopUps = Convert.ToBoolean(PlayerPrefs.GetInt("DamagePopUp"));
         }
 
         if (PlayerPrefs.HasKey("DashAimingType") && (DashAimingMouse ? 1 : 0) != PlayerPrefs.GetInt("DashAimingType"))
@@ -133,7 +129,7 @@ public class MenuManager : MonoBehaviour
 
 
         if (
-            PlayerInputHandler.Instance != null
+            PlayerInputHandler.Instance
             && PlayerInputHandler.Instance.MenuInput
             && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "MainMenu"
             && !InventoryManager.Instance.InventoryActiveInHierarchy
@@ -144,14 +140,7 @@ public class MenuManager : MonoBehaviour
         {
             PlayerInputHandler.Instance.UseMenuInput();
 
-            if (!menu.activeInHierarchy)
-            {
-                OpenCloseMenu(true);
-            }
-            else
-            {
-                OpenCloseMenu(false);
-            }
+            OpenCloseMenu(!menu.activeInHierarchy);
         }
     }
 
@@ -215,29 +204,32 @@ public class MenuManager : MonoBehaviour
     #endregion
 
     #region Settings
-    
-    #region Settings Saving System
-    public void LoadVideoSettings()
+    private void LoadVideoSettings()
     {
-        if (File.Exists(SettingsFile))
+        //Quality
+        if (PlayerPrefs.HasKey("Quality"))
         {
-            string json = File.ReadAllText(SettingsFile);
-            settingsData = JsonUtility.FromJson<SettingsData>(json);
-    
-            qualityDropdown.SetValueWithoutNotify(settingsData.qualityIndex);
-            resolutionDropdown.SetValueWithoutNotify(settingsData.resolutionIndex);
-            fpsDropdown.SetValueWithoutNotify(settingsData.fpsIndex);
-            fullScreenToggle.isOn = settingsData.fullscreen;
+            qualityDropdown.SetValueWithoutNotify(PlayerPrefs.GetInt("Quality"));
         }
-        else
+        //Resolution
+        if (PlayerPrefs.HasKey("Resolution"))
         {
-            //Creates a new file if no file exists
-            settingsData = new SettingsData();
+            resolutionDropdown.SetValueWithoutNotify(PlayerPrefs.GetInt("Resolution"));
+        }
+        //FPS
+        if (PlayerPrefs.HasKey("Fps"))
+        {
+            fpsDropdown.SetValueWithoutNotify(PlayerPrefs.GetInt("Fps"));
+        }
+        //FullScreen
+        if (PlayerPrefs.HasKey("FullScreen"))
+        {
+            fullScreenToggle.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("FullScreen"));
         }
     }
-    public void LoadGameSettings()
+    private void LoadGameSettings()
     {
-        //Damage Pop Ups
+        //Damage Popups
         if (PlayerPrefs.HasKey("DamagePopUp"))
         {
             damagePopUpsToggle.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("DamagePopUp"));
@@ -249,59 +241,22 @@ public class MenuManager : MonoBehaviour
             dashAimingMouseToggle.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("DashAimingType"));
             DashAimingMouse = dashAimingMouseToggle.isOn;
         }
-        
-        if (File.Exists(SettingsFile))
-        {
-            string json = File.ReadAllText(SettingsFile);
-            settingsData = JsonUtility.FromJson<SettingsData>(json);
-
-            damagePopUpsToggle.isOn = settingsData.damagePopUps;
-            DamagePopUps =settingsData.damagePopUps;
-            
-            dashAimingMouseToggle.isOn = settingsData.dashAimingMouse;
-            DashAimingMouse = settingsData.dashAimingMouse;
-        }
-        else
-        {
-            //Creates a new file if no file exists
-            settingsData = new SettingsData();
-        }
-    }
-    
-    private void SaveVideoSettings()
-    {
-        settingsData.qualityIndex = qualityDropdown.value;
-        settingsData.resolutionIndex = resolutionDropdown.value;
-        settingsData.fpsIndex = fpsDropdown.value;
-        settingsData.fullscreen = fullScreenToggle.isOn;
-
-        string json = JsonUtility.ToJson(settingsData, true);
-        File.WriteAllText(SettingsFile, json);
-    }
-    #endregion
-
-    #region Settings Setters
-    private void SaveGameSettings()
-    {
-        settingsData.damagePopUps = damagePopUpsToggle.isOn;
-        settingsData.dashAimingMouse = dashAimingMouseToggle.isOn;
-
-        string json = JsonUtility.ToJson(settingsData, true);
-        File.WriteAllText(SettingsFile, json);
     }
 
     public void SetQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
 
-        SaveVideoSettings();
+        PlayerPrefs.SetInt("Quality", qualityIndex);
+        PlayerPrefs.Save();
     }
-    public void SetResolution(int resoulutionIndex)
+    public void SetResolution(int resolutionIndex)
     {
-        Resolution resolution = resolutions[resoulutionIndex];
+        Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
 
-        SaveVideoSettings();
+        PlayerPrefs.SetInt("Resolution", resolutionIndex);
+        PlayerPrefs.Save();
     }
 
     public void SetMaxFramerate(int fpsIndex)
@@ -330,31 +285,30 @@ public class MenuManager : MonoBehaviour
                 break;
         }
 
-        SaveVideoSettings();
+        PlayerPrefs.SetInt("Fps", fpsIndex);
+        PlayerPrefs.Save();
     }
 
     public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
-        
-        SaveVideoSettings();
+        PlayerPrefs.SetInt("FullScreen", isFullscreen ? 1 : 0);
+        PlayerPrefs.Save();
     }
 
     public void SetDamagePopUps(bool value)
     {
         DamagePopUps = value;
-        
-        SaveGameSettings();
+        PlayerPrefs.SetInt("DamagePopUp", value ? 1 : 0);
+        PlayerPrefs.Save();
     }
 
     public void SetDashAimingType(bool value)
     {
         DashAimingMouse = value;
-        
-        SaveGameSettings();
+        PlayerPrefs.SetInt("DashAimingType", value ? 1 : 0);
+        PlayerPrefs.Save();
     }
-    #endregion
-    
     #endregion
 
     #region Menu Buttons
@@ -393,4 +347,3 @@ public class MenuManager : MonoBehaviour
     }
     #endregion
 } 
-
