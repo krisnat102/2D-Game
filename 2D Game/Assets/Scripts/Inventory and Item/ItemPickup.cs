@@ -176,7 +176,7 @@ namespace Inventory
                 InventoryManager.Instance.StartCoinAnimation();
                 if (InventoryManager.Instance.Coins >= price)
                 {
-                    AudioManager.Instance.PlayBuySound(0.8f, 1.2f);
+                    AudioManager.instance.PlayBuySound(0.8f, 1.2f);
                     InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - price, false);
                     return true;
                 }

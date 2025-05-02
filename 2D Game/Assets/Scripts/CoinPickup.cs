@@ -27,7 +27,7 @@ namespace Krisnat
                 particle.remainingLifetime = 0;
                 pickedUp[i] = particle;
             }
-            AudioManager.Instance.PlayCoinPickupSound(0.8f, 1.2f);
+            AudioManager.instance.PlayCoinPickupSound(0.8f, 1.2f);
 
             particleSystem.SetTriggerParticles(ParticleSystemTriggerEventType.Enter, pickedUp);
         }

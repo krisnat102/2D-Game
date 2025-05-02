@@ -62,7 +62,7 @@ namespace Krisnat
 
                 //Saving the game, position and level
                 CoreClass.GameManager.checkpoint = spawnPoint.position;
-                MenuManager.Instance.CurrentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+                MenuManager.instance.CurrentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
                 SaveSystem.SavePlayer(player);
 
                 PlayerInputHandler.Instance.UseUseInput();

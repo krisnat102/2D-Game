@@ -162,7 +162,7 @@ namespace CoreClass
             inventoryManager.SetCoins(data.coins, false);
             inventoryManager.Add(loadItems);
             spellManager.Add(loadSpells);
-            MenuManager.Instance.CurrentLevel = data.currentLevel;
+            MenuManager.instance.CurrentLevel = data.currentLevel;
             levelStarted = data.levelStarted;
 
             foreach (int id in inventoryManager.EquippedItemsIds())
@@ -259,7 +259,7 @@ namespace CoreClass
             inventoryManager.SetCoins(data.coins, false);
             inventoryManager.Add(loadItems);
             spellManager.Add(loadSpells);
-            MenuManager.Instance.CurrentLevel = data.currentLevel;
+            MenuManager.instance.CurrentLevel = data.currentLevel;
 
             foreach (int id in inventoryManager.EquippedItemsIds())
             {

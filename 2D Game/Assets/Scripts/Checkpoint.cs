@@ -12,7 +12,7 @@ namespace Krisnat
             if (player)
             {
                 CoreClass.GameManager.checkpoint = transform.position;
-                MenuManager.Instance.CurrentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+                MenuManager.instance.CurrentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
                 SaveSystem.SavePlayer(player);
             }
         }

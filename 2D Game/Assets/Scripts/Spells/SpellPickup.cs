@@ -2,10 +2,8 @@
 using Inventory;
 using TMPro;
 using UnityEngine.UI;
-using Krisnat;
 using Krisnat.Assets.Scripts;
 using System.Linq;
-using static UnityEditor.Progress;
 
 namespace Spells
 {
@@ -96,7 +94,7 @@ namespace Spells
                 InventoryManager.Instance.StartCoinAnimation();
                 if (InventoryManager.Instance.Coins >= price)
                 {
-                    AudioManager.Instance.PlayBuySound(0.8f, 1.2f);
+                    AudioManager.instance.PlayBuySound(0.8f, 1.2f);
                     SpellManager.Instance.Add(spell);
                     InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - price, false);
                 }

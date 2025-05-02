@@ -114,7 +114,7 @@ namespace Inventory
                     DecreaseItem(item);
 
                     InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins + item.cost, false);
-                    AudioManager.Instance.PlayCoinPickupSound(0.8f, 1.2f);
+                    AudioManager.instance.PlayCoinPickupSound(0.8f, 1.2f);
                     return;
                 }
 
@@ -125,7 +125,7 @@ namespace Inventory
                     if (InventoryManager.Instance.Coins < cost)
                     {
                         CameraShake.instance.ShakeCamera(0.3f, 1f);
-                        AudioManager.Instance.PlayTradeRefusedSound(0.6f, 0.8f);
+                        AudioManager.instance.PlayTradeRefusedSound(0.6f, 0.8f);
 
                         return;
                     }
@@ -133,7 +133,7 @@ namespace Inventory
 
                     InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - cost, false);
                     InventoryManager.Instance.ListItems();
-                    AudioManager.Instance.PlayBuySound(0.8f, 1.2f);
+                    AudioManager.instance.PlayBuySound(0.8f, 1.2f);
                     return;
                 }
 
@@ -151,10 +151,10 @@ namespace Inventory
                                 switch (item.consumableSoundEffect)
                                 {
                                     case Item.ConsumableSoundEffect.Food:
-                                        AudioManager.Instance.PlayEatSound(0.8f, 1.2f);
+                                        AudioManager.instance.PlayEatSound(0.8f, 1.2f);
                                         break;
                                     case Item.ConsumableSoundEffect.Potion:
-                                        AudioManager.Instance.PlayPotionDrinkSound(0.8f, 1.2f);
+                                        AudioManager.instance.PlayPotionDrinkSound(0.8f, 1.2f);
                                         break;
                                 }
                             }
@@ -169,10 +169,10 @@ namespace Inventory
                                 switch (item.consumableSoundEffect)
                                 {
                                     case Item.ConsumableSoundEffect.Food:
-                                        AudioManager.Instance.PlayEatSound(0.8f, 1.2f);
+                                        AudioManager.instance.PlayEatSound(0.8f, 1.2f);
                                         break;
                                     case Item.ConsumableSoundEffect.Potion:
-                                        AudioManager.Instance.PlayPotionDrinkSound(0.8f, 1.2f);
+                                        AudioManager.instance.PlayPotionDrinkSound(0.8f, 1.2f);
                                         break;
                                 }
                             }
@@ -181,7 +181,7 @@ namespace Inventory
                 }
                 else if (item.equipment && item.ItemCount > 0)
                 {
-                    AudioManager.Instance.PlayEquipmentSound(0.8f, 1.2f);
+                    AudioManager.instance.PlayEquipmentSound(0.8f, 1.2f);
                     switch (button.GetComponentInChildren<TextMeshProUGUI>().text)
                     {
                         case "Equip":

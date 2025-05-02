@@ -80,14 +80,14 @@ namespace Bardent.CoreSystem
             {
                 lowHP = true;
                 Invoke("StartHpRegen", 5f);
-                AudioManager.Instance.PlayHeartbeatSound(0.8f, 0.8f);
+                AudioManager.instance.PlayHeartbeatSound(0.8f, 0.8f);
                 Krisnat.VignetteController.instance.ChangeVignette(0.5f, 2);
             }
             else if(health.CurrentValue >= 20 && lowHP)
             {
                 lowHP = false;
                 health.StopRegen();
-                AudioManager.Instance.StopHeartbeatSound();
+                AudioManager.instance.StopHeartbeatSound();
                 Krisnat.VignetteController.instance.ChangeVignette(0, 1);
             }
 

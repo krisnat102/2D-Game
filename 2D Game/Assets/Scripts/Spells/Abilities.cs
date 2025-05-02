@@ -332,7 +332,7 @@ namespace Spells
         #region Audio Methods
         private void PlaySpellSFX(Spell spell)
         {
-            AudioManager audioM = AudioManager.Instance;
+            AudioManager audioM = AudioManager.instance;
             switch (spell.name)
             {
                 case "Firebolt":

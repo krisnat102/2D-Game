@@ -51,7 +51,7 @@ namespace Krisnat.Assets.Scripts
             bossesKilledId = CoreClass.GameManager.instance.BossesKilled.ToArray();
             bonfiresLitId = CoreClass.GameManager.instance.BonfiresLit.ToArray();
             battlesId = CoreClass.GameManager.instance.Battles.ToArray();
-            currentLevel = MenuManager.Instance.CurrentLevel;
+            currentLevel = MenuManager.instance.CurrentLevel;
             position = new float[3];
 
             position[0] = CoreClass.GameManager.checkpoint.x;

@@ -4349,7 +4349,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1379617353577674439}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: SFXAudio
+        m_MethodName: SfxAudio
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6429,7 +6429,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 252.70001, y: 665.2}
+  m_AnchoredPosition: {x: 269, y: 654}
   m_SizeDelta: {x: 368.76868, y: -9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1633118630
@@ -6481,8 +6481,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -8530,11 +8530,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicMixer: {fileID: 24100000, guid: 3233f6a7061631d45a0382399ba55a7e, type: 2}
   sfxMixer: {fileID: 24100000, guid: b0fc275326f5c7f479bc0b065bb3870f, type: 2}
-  Music: {fileID: 1702382647}
-  SFX: {fileID: 938077228}
-  Mute: {fileID: 315154185}
+  music: {fileID: 1702382647}
+  sfx: {fileID: 938077228}
+  mute: {fileID: 315154185}
   generalSound: {fileID: 0}
-  music: {fileID: 0}
+  musicSound: {fileID: 0}
   buttonSound: {fileID: 1379617353577674440}
   menuSound: {fileID: 0}
   buySound: {fileID: 0}

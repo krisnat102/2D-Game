@@ -12,7 +12,7 @@ namespace Bardent.Weapons.Components
                 PlaySoundEffect();
         }
 
-        private void PlaySoundEffect() => AudioManager.Instance.PlayWeaponSound(currentAttackData.SFX, 0.8f, 1.2f);
+        private void PlaySoundEffect() => AudioManager.instance.PlayWeaponSound(currentAttackData.SFX, 0.8f, 1.2f);
 
         protected override void Start()
         {

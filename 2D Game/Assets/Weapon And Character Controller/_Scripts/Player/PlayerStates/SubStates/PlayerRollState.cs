@@ -23,7 +23,7 @@ public class PlayerRollState : PlayerAbilityState
         CanRoll = false;
         player.InputHandler.UseDashInput();
 
-        AudioManager.Instance.PlayDodgeRollSound(0.8f, 1.2f);
+        AudioManager.instance.PlayDodgeRollSound(0.8f, 1.2f);
 
         isHolding = true;
         rollDirection = Vector2.right * Movement.FacingDirection;

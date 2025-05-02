@@ -22,8 +22,8 @@ namespace Krisnat
 
         public void LoadLoadedLevel()
         {
-            if (MenuManager.Instance.CurrentLevel == 0) MenuManager.Instance.CurrentLevel = 1;
-            StartCoroutine(LoadLevelCoroutine(MenuManager.Instance.CurrentLevel));
+            if (MenuManager.instance.CurrentLevel == 0) MenuManager.instance.CurrentLevel = 1;
+            StartCoroutine(LoadLevelCoroutine(MenuManager.instance.CurrentLevel));
         }
 
         public IEnumerator LoadLevelCoroutine(int buildIndex)
@@ -31,7 +31,7 @@ namespace Krisnat
             yield return new WaitForSeconds(0.1f);
             StartCoroutine(DestroyPlayer(transitionTime - 0.1f));
             transition.SetTrigger("Start");
-            if (buildIndex != 0) MenuManager.Instance.CurrentLevel = buildIndex;
+            if (buildIndex != 0) MenuManager.instance.CurrentLevel = buildIndex;
 
             if (CoreClass.GameManager.instance && CoreClass.GameManager.instance.Player) CoreClass.GameManager.instance.SavePlayer();
 
@@ -48,7 +48,7 @@ namespace Krisnat
             yield return new WaitForSeconds(transitionTime);
 
             UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
-            MenuManager.Instance.CurrentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+            MenuManager.instance.CurrentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
         }
 
         IEnumerator DestroyPlayer(float waitTime)

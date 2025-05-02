@@ -80,7 +80,7 @@ namespace Bardent.Weapons.Components
 
                 StartCoroutine(CooldownCoroutine());
 
-                AudioManager.Instance.PlayWhooshSound(0.8f, 1.2f);
+                AudioManager.instance.PlayWhooshSound(0.8f, 1.2f);
 
                 foreach (var data in currentAttackData.inputHoldAttackData)
                 {

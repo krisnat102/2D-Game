@@ -1,27 +1,25 @@
 using UnityEngine.Audio;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
+using UnityEngine.Serialization;
+using System.IO;
+using Krisnat;
 
 public class AudioManager : MonoBehaviour
 {
-    #region Static Variables
-    public static float musicSave = 0;
-    public static float sfxSave = 0;
-    public static AudioManager Instance;
-    #endregion
-
+    public static AudioManager instance;
+    
     #region Private Variables
     [Header("Audio Settings")]
     [SerializeField] private AudioMixer musicMixer;
     [SerializeField] private AudioMixer sfxMixer;
-    [SerializeField] private Slider Music;
-    [SerializeField] private Slider SFX;
-    [SerializeField] private Toggle Mute;
+    [FormerlySerializedAs("Music")] [SerializeField] private Slider music;
+    [FormerlySerializedAs("SFX")] [SerializeField] private Slider sfx;
+    [FormerlySerializedAs("Mute")] [SerializeField] private Toggle mute;
 
     [Header("Sounds")]
     [SerializeField] private AudioSource generalSound;
-    [SerializeField] private AudioSource music;
+    [FormerlySerializedAs("music")] [SerializeField] private AudioSource musicSound;
     [SerializeField] private AudioSource buttonSound, menuSound;
     [SerializeField] private AudioSource buySound, coinPickupSound, tradeRefusedSound;
     [SerializeField] private AudioSource heartbeatSound;
@@ -31,68 +29,75 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource[] equipmentSoundEffect;
 
     private bool muteTracker;
+    private float musicSave = 0;
+    private float sfxSave = 0;
+    
+    private string SettingsFile => Path.Combine(Application.persistentDataPath, "settings.json");
+
+    private SettingsData settings = new SettingsData();
     #endregion
 
     #region Unity Methods
     private void Awake()
     {
-        Instance = this;
+        instance = this;
     }
 
     private void Start()
     {
-        if (musicSave != 0)
-        {
-            Music.value = musicSave;
-        }
-        if (sfxSave != 0)
-        {
-            SFX.value = sfxSave;
-        }
-
         LoadAudioSettings();
     }
     #endregion
 
     #region Settings
-    public void SaveAudioSettings()
-    {
-        PlayerPrefs.SetFloat("MusicVolume", Music.value);
-        PlayerPrefs.SetFloat("SFXVolume", SFX.value);
-        PlayerPrefs.SetInt("Mute", Mute.isOn ? 1 : 0);
-        PlayerPrefs.Save();
-    }
-    public void LoadAudioSettings()
-    {
-        if (PlayerPrefs.HasKey("MusicVolume"))
-        {
-            Music.value = Mathf.InverseLerp(0.0001f, 1f, PlayerPrefs.GetFloat("MusicVolume"));
-            musicMixer.SetFloat("volume", Mathf.Log10(Music.value) * 20);
-        }
 
-        if (PlayerPrefs.HasKey("SFXVolume"))
-        {
-            SFX.value = Mathf.InverseLerp(0.0001f, 1f, PlayerPrefs.GetFloat("SFXVolume"));
-            sfxMixer.SetFloat("volume", Mathf.Log10(SFX.value) * 20);
-        }
+    private void SaveAudioSettings()
+    {
+        settings.musicVolume = musicSave;
+        settings.sfxVolume = sfxSave;
+        settings.mute = mute.isOn;
 
-        if (PlayerPrefs.HasKey("Mute"))
-        {
-            Mute.isOn = PlayerPrefs.GetInt("Mute") == 1;
-        }
+        string json = JsonUtility.ToJson(settings, true);
+        File.WriteAllText(SettingsFile, json);
     }
+
+    private void LoadAudioSettings()
+    {
+        if (File.Exists(SettingsFile))
+        {
+            string json = File.ReadAllText(SettingsFile);
+            settings = JsonUtility.FromJson<SettingsData>(json);
+    
+            musicSave = settings.musicVolume;
+            sfxSave = settings.sfxVolume;
+            mute.isOn = settings.mute;
+        }
+        else
+        {
+            //Creates a new file if no file exists
+            settings = new SettingsData();
+        }
+    
+        //Apply settings to ui
+        music.value = Mathf.InverseLerp(0.0001f, 1f, musicSave);
+        sfx.value = Mathf.InverseLerp(0.0001f, 1f, sfxSave);
+    
+        musicMixer.SetFloat("volume", Mathf.Log10(musicSave) * 20);
+        sfxMixer.SetFloat("volume", Mathf.Log10(sfxSave) * 20);
+    }
+
     #endregion
 
     #region Audio
-    public void PauseMusic() => music.Pause();
-    public void UnPauseMusic() => music.UnPause();
+    public void PauseMusic() => musicSound.Pause();
+    public void UnPauseMusic() => musicSound.UnPause();
 
-    public void MuteAudio(bool mute)
+    public void MuteAudio(bool muteValue)
     {
-        Mute.isOn = mute;
-        muteTracker = mute;
+        this.mute.isOn = muteValue;
+        muteTracker = muteValue;
 
-        if (mute)
+        if (muteValue)
         {
             musicMixer.SetFloat("volume", -80);
             sfxMixer.SetFloat("volume", -80);
@@ -109,23 +114,21 @@ public class AudioManager : MonoBehaviour
     {
         musicSave = volume;
 
-        if (!muteTracker)
-        {
-            musicMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
+        if (muteTracker) return;
+        
+        musicMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
 
-            SaveAudioSettings();
-        }
+        SaveAudioSettings();
     }
-    public void SFXAudio(float volume)
+    public void SfxAudio(float volume)
     {
         sfxSave = volume;
 
-        if (!muteTracker)
-        {
-            sfxMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
+        if (muteTracker) return;
+        
+        sfxMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
 
-            SaveAudioSettings();
-        }
+        SaveAudioSettings();
     }
     #endregion
 
@@ -135,9 +138,9 @@ public class AudioManager : MonoBehaviour
         heartbeatSound.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
         heartbeatSound.Play();
     }
-    public void PlayWeaponSound(AudioClip SFX, float lowerPitch, float higherPitch)
+    public void PlayWeaponSound(AudioClip sfxValue, float lowerPitch, float higherPitch)
     {
-        weaponSound.clip = SFX;
+        weaponSound.clip = sfxValue;
         weaponSound.pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
         weaponSound.Play();
     }
@@ -207,9 +210,9 @@ public class AudioManager : MonoBehaviour
 
     public void PlayEquipmentSound(float lowerPitch, float higherPitch)
     {
-        int randomSFX = Mathf.RoundToInt(UnityEngine.Random.Range(0, equipmentSoundEffect.Length));
-        equipmentSoundEffect[randomSFX].pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
-        equipmentSoundEffect[randomSFX].Play();
+        int randomSfx = Mathf.RoundToInt(UnityEngine.Random.Range(0, equipmentSoundEffect.Length));
+        equipmentSoundEffect[randomSfx].pitch = UnityEngine.Random.Range(lowerPitch, higherPitch);
+        equipmentSoundEffect[randomSfx].Play();
     }
 
     public void StopHeartbeatSound() => heartbeatSound.Stop();

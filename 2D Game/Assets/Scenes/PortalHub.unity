@@ -11940,7 +11940,7 @@ PrefabInstance:
     - target: {fileID: 5520665435376549117, guid: a94fc4e3c70915d4dbe7ef62480845de,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SFXAudio
+      value: SfxAudio
       objectReference: {fileID: 0}
     - target: {fileID: 5969430991398424507, guid: a94fc4e3c70915d4dbe7ef62480845de,
         type: 3}
