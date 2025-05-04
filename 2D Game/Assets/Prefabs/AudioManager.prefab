@@ -63,11 +63,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicMixer: {fileID: 24100000, guid: 3233f6a7061631d45a0382399ba55a7e, type: 2}
   sfxMixer: {fileID: 24100000, guid: b0fc275326f5c7f479bc0b065bb3870f, type: 2}
-  Music: {fileID: 0}
-  SFX: {fileID: 0}
-  Mute: {fileID: 0}
+  environmentSfxMixer: {fileID: 24100000, guid: 8dd48c0c971cd5a4fa5da5ec1956c514,
+    type: 2}
+  music: {fileID: 0}
+  sfx: {fileID: 0}
+  environmentSfx: {fileID: 0}
+  mute: {fileID: 0}
   generalSound: {fileID: 8623021732987307272}
-  music: {fileID: 2690625510320772227}
+  musicSound: {fileID: 2690625510320772227}
   buttonSound: {fileID: 2262989942500180727}
   menuSound: {fileID: 675507419161049303}
   buySound: {fileID: 93545950424201655}

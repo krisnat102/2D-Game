@@ -9,7 +9,6 @@ using Inventory;
 using Pathfinding;
 using Spells;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -407,7 +406,7 @@ namespace Krisnat
 
                 if (damage > 0)
                 {
-                    if (GetComponentInChildren<Canvas>())
+                    if (canvas)
                     {
                         var popUpOffset = !multipleDamageSources ? new Vector3(damagePopupOffset.x + UnityEngine.Random.Range(-2f, 1f), damagePopupOffset.y) : Vector3.zero;
 
@@ -418,7 +417,7 @@ namespace Krisnat
 
                         if (data.stagger > 1) rb.velocity = new Vector2(rb.velocity.x / data.stagger, rb.velocity.y);
 
-                        if (hp <= 0)
+                        if (hp <= 0 && !Data.dummy)
                         {
                             dmgNumber.transform.localScale = new Vector2(Mathf.Abs(dmgNumber.transform.localScale.x), dmgNumber.transform.localScale.y);
                             hpBar?.gameObject.SetActive(false);

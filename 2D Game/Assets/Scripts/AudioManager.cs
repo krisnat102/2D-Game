@@ -14,8 +14,10 @@ public class AudioManager : MonoBehaviour
     [Header("Audio Settings")]
     [SerializeField] private AudioMixer musicMixer;
     [SerializeField] private AudioMixer sfxMixer;
+    [SerializeField] private AudioMixer environmentSfxMixer;
     [FormerlySerializedAs("Music")] [SerializeField] private Slider music;
     [FormerlySerializedAs("SFX")] [SerializeField] private Slider sfx;
+    [SerializeField] private Slider environmentSfx;
     [FormerlySerializedAs("Mute")] [SerializeField] private Toggle mute;
 
     [Header("Sounds")]
@@ -30,8 +32,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource[] equipmentSoundEffect;
 
     private bool muteTracker;
-    private float musicSave;
-    private float sfxSave;
+    private float musicSave, sfxSave, environmentSfxSave;
     
     private string SettingsFile => Path.Combine(Application.persistentDataPath, "settings.json");
 
@@ -56,6 +57,7 @@ public class AudioManager : MonoBehaviour
     {
         settings.musicVolume = musicSave;
         settings.sfxVolume = sfxSave;
+        settings.environmentSfx = environmentSfxSave;
         settings.mute = mute.isOn;
 
         string json = JsonUtility.ToJson(settings, true);
@@ -71,6 +73,7 @@ public class AudioManager : MonoBehaviour
     
             musicSave = settings.musicVolume;
             sfxSave = settings.sfxVolume;
+            environmentSfxSave = settings.environmentSfx;
             mute.isOn = settings.mute;
         }
         else
@@ -82,9 +85,11 @@ public class AudioManager : MonoBehaviour
         //Apply settings to ui
         music.value = Mathf.InverseLerp(0.0001f, 1f, musicSave);
         sfx.value = Mathf.InverseLerp(0.0001f, 1f, sfxSave);
+        environmentSfx.value = Mathf.InverseLerp(0.0001f, 1f, environmentSfxSave);
     
         musicMixer.SetFloat("volume", Mathf.Log10(musicSave) * 20);
         sfxMixer.SetFloat("volume", Mathf.Log10(sfxSave) * 20);
+        environmentSfxMixer.SetFloat("volume", Mathf.Log10(environmentSfxSave) * 20);
     }
 
     #endregion
@@ -102,11 +107,13 @@ public class AudioManager : MonoBehaviour
         {
             musicMixer.SetFloat("volume", -80);
             sfxMixer.SetFloat("volume", -80);
+            environmentSfxMixer.SetFloat("volume", -80);
         }
         else
         {
             musicMixer.SetFloat("volume", Mathf.Log10(musicSave) * 20);
             sfxMixer.SetFloat("volume", Mathf.Log10(sfxSave) * 20);
+            environmentSfxMixer.SetFloat("volume", Mathf.Log10(environmentSfxSave) * 20);
         }
 
         SaveAudioSettings();
@@ -128,6 +135,16 @@ public class AudioManager : MonoBehaviour
         if (muteTracker) return;
         
         sfxMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
+
+        SaveAudioSettings();
+    }
+    public void EnvironmentSfxAudio(float volume)
+    {
+        environmentSfxSave = volume;
+
+        if (muteTracker) return;
+        
+        environmentSfxMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
 
         SaveAudioSettings();
     }

@@ -320,6 +320,11 @@ PrefabInstance:
       objectReference: {fileID: 943362929}
     - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
         type: 3}
+      propertyPath: sfx
+      value: 
+      objectReference: {fileID: 943362929}
+    - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
+        type: 3}
       propertyPath: Mute
       value: 
       objectReference: {fileID: 294866890}
@@ -337,7 +342,7 @@ PrefabInstance:
         type: 3}
       propertyPath: music
       value: 
-      objectReference: {fileID: 1817940319}
+      objectReference: {fileID: 2065361463}
     - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
         type: 3}
       propertyPath: sfxSlider
@@ -348,6 +353,11 @@ PrefabInstance:
       propertyPath: musicSlider
       value: 
       objectReference: {fileID: 2065361463}
+    - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
+        type: 3}
+      propertyPath: environmentSfx
+      value: 
+      objectReference: {fileID: 1842574071}
     - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
         type: 3}
       propertyPath: coinPickupSound
@@ -25132,12 +25142,6 @@ AudioSource:
     type: 3}
   m_PrefabInstance: {fileID: 103014884}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &1817940319 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 2690625510320772227, guid: a8d9f80d457b1944f98af031b9a76d43,
-    type: 3}
-  m_PrefabInstance: {fileID: 103014884}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1817940325 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
@@ -25148,6 +25152,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed7177ebf52f9434d87d7ecba5a7b22b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1842574071 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4521676821623539451, guid: a94fc4e3c70915d4dbe7ef62480845de,
+    type: 3}
+  m_PrefabInstance: {fileID: 532231521}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1850200801

@@ -11978,19 +11978,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
         type: 3}
-      propertyPath: SFX
-      value: 
-      objectReference: {fileID: 212510815}
-    - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
-        type: 3}
       propertyPath: sfx
       value: 
       objectReference: {fileID: 212510815}
-    - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
-        type: 3}
-      propertyPath: Mute
-      value: 
-      objectReference: {fileID: 1683361152}
     - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
         type: 3}
       propertyPath: mute
@@ -11998,24 +11988,14 @@ PrefabInstance:
       objectReference: {fileID: 1683361152}
     - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
         type: 3}
-      propertyPath: Music
-      value: 
-      objectReference: {fileID: 1872581155}
-    - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
-        type: 3}
       propertyPath: music
       value: 
       objectReference: {fileID: 1872581155}
     - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
         type: 3}
-      propertyPath: sfxSlider
+      propertyPath: environmentSfx
       value: 
-      objectReference: {fileID: 212510815}
-    - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
-        type: 3}
-      propertyPath: musicSlider
-      value: 
-      objectReference: {fileID: 1872581155}
+      objectReference: {fileID: 2074608429}
     - target: {fileID: 2690625510320772286, guid: a8d9f80d457b1944f98af031b9a76d43,
         type: 3}
       propertyPath: m_Name
@@ -54275,6 +54255,18 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &2074608429 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4521676821623539451, guid: a94fc4e3c70915d4dbe7ef62480845de,
+    type: 3}
+  m_PrefabInstance: {fileID: 1129459339579947939}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2087803511
 GameObject:
   m_ObjectHideFlags: 0
@@ -56260,6 +56252,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
+    - target: {fileID: 3941070619452417692, guid: 984c1eb7c6209244ca29954bcf0817de,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4217819023112785769, guid: 984c1eb7c6209244ca29954bcf0817de,
         type: 3}
       propertyPath: TriggerModule.primitives.Array.data[0]
@@ -56333,11 +56330,6 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1057183206}
-    - target: {fileID: 732461252044449715, guid: a94fc4e3c70915d4dbe7ef62480845de,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1057183208}
     - target: {fileID: 1370739603199110335, guid: a94fc4e3c70915d4dbe7ef62480845de,
         type: 3}
       propertyPath: m_Name
@@ -56368,6 +56360,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1057183206}
+    - target: {fileID: 4521676821623539451, guid: a94fc4e3c70915d4dbe7ef62480845de,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 795319714}
     - target: {fileID: 4759619282602296648, guid: a94fc4e3c70915d4dbe7ef62480845de,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -56503,11 +56500,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9016016106812381119, guid: a94fc4e3c70915d4dbe7ef62480845de,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1057183208}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
