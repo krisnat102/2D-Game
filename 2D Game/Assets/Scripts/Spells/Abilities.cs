@@ -65,12 +65,8 @@ namespace Spells
             }
 
             #region Spell Casting
-            if (spellManager.SpellsBar.Count > activeSpell)
-            {
-                if (playerInputHandler.SpellInput && Stats.Instance.mana.CurrentValue >= spellManager.SpellsBar[activeSpell].cost && spellCooldown == false)
-                    Spell();
-            }
-
+            if (IsSpellCastable()) Spell();
+            
             if (playerInputHandler.SwitchSpell1Input)
             {
                 playerInputHandler.UseSwitchSpell1Input();
@@ -103,11 +99,7 @@ namespace Spells
             #endregion
 
             #region Ability Casting
-            if (spellManager.AbilitiesBar.Count > activeAbility)
-            {
-                if (playerInputHandler.AbilityInput && Stats.Instance.stam.CurrentValue >= spellManager.AbilitiesBar[activeAbility].cost && AbilityCooldownTracker == false)
-                    Ability();
-            }
+            if (IsAbilityCastable()) Ability();
 
             if (playerInputHandler.SwitchAbility1Input)
             {
@@ -232,7 +224,7 @@ namespace Spells
         {
             Spell spell = spellManager.SpellsBar[activeSpell];
 
-            if (spell != null && Stats.Instance.mana.CurrentValue >= spell.cost)
+            if (spell && Stats.Instance.mana.CurrentValue >= spell.cost)
             {
                 //Vector2 offset = new Vector2(OffsetX, OffsetY);
                 if (spell.useOffset)
@@ -268,16 +260,16 @@ namespace Spells
         {
             Spell ability = spellManager.AbilitiesBar[activeAbility];
 
-            if (ability != null)
+            if (ability)
             {
-                if (ability.name == "grappling hook")
+                /*if (ability.name == "grappling hook")
                 {
                     AbilityCooldownTracker = true;
                     Invoke("AbilityCooldown", ability.cooldown);
                     abilityCooldownImg.gameObject.SetActive(true);
                     abilityCooldownImg.fillAmount = 1;
-                }
-                else if (Stats.Instance.stam.CurrentValue >= ability.cost)
+                }*/
+                if (Stats.Instance.stam.CurrentValue >= ability.cost)
                 {
                     //Vector2 offset = new Vector2(OffsetX2, OffsetY2);
 
@@ -305,6 +297,9 @@ namespace Spells
             AbilityCooldownTracker = false;
             abilityCooldownImg.gameObject.SetActive(false);
         }
+        
+        public bool IsSpellCastable() => spellManager.SpellsBar.Count > activeSpell & playerInputHandler.SpellInput && Stats.Instance.mana.CurrentValue >= spellManager.SpellsBar[activeSpell].cost && spellCooldown == false;
+        public bool IsAbilityCastable() => spellManager.AbilitiesBar.Count > activeAbility & playerInputHandler.AbilityInput && Stats.Instance.stam.CurrentValue >= spellManager.AbilitiesBar[activeAbility].cost && AbilityCooldownTracker == false;
         #endregion
 
         #region UI Methods

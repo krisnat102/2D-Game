@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Bardent.CoreSystem;
+using Spells;
 using UnityEngine;
 
 public class PlayerGroundedState : PlayerState
@@ -80,6 +81,10 @@ public class PlayerGroundedState : PlayerState
         else if (player.InputHandler.AttackInputs[(int)CombatInputs.secondary] && !isTouchingCeiling && Stats.stam.CurrentValue > 0.5f)
         {
             stateMachine.ChangeState(player.SecondaryAttackState);
+        }
+        else if (Abilities.instance.IsSpellCastable() || player.InputHandler.SpellInput)
+        {
+            stateMachine.ChangeState(player.SpellcastState);
         }
         else if (jumpInput && player.JumpState.CanJump() && !isTouchingCeiling)
         {
