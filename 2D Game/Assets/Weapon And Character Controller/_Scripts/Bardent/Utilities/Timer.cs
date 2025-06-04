@@ -7,7 +7,6 @@ namespace Bardent.Utilities
     {
         public event Action OnTimerDone;
 
-
         private float startTime;
         private float duration;
         private float targetTime;

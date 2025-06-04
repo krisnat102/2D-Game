@@ -159,7 +159,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 500
-  m_Sprite: {fileID: 21300000, guid: 09eaf54b36b948244b92e077212a8257, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f3dc798315ce0234383f4a7efef7d47e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -217,11 +217,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 45056
   move: 1
-  destroyOnTouch: 1
-  doNotRotate: 0
   flip: 0
+  doNotRotate: 0
+  destroyOnTouch: 1
   shuriken: 1
+  spellHitSummon: 0
   collisionTimeOffset: 0
+  deathEffect: {fileID: 0}
+  hitBox:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
   rotationSpeed: 60
   stuckTime: 1
   fadeTimer: 1
@@ -261,7 +269,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.71875, y: 0.6875}
     newSize: {x: 0.48, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

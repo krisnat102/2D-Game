@@ -13,6 +13,8 @@ namespace Bardent.Weapons.Components
         private Vector2 offset;
 
         private Collider2D[] detected;
+        
+        private float delayTimer = -1f;
 
         private void HandleAttackAction()
         {
@@ -41,6 +43,10 @@ namespace Bardent.Weapons.Components
             movement = new CoreComp<CoreSystem.Movement>(Core);
 
             eventHandler.OnAttackAction += HandleAttackAction;
+        }
+        
+        protected void Update(){
+            
         }
 
         protected override void OnDestroy()

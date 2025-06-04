@@ -82,10 +82,14 @@ public class PlayerGroundedState : PlayerState
         {
             stateMachine.ChangeState(player.SecondaryAttackState);
         }
-        else if (Abilities.instance.IsSpellCastable() || player.InputHandler.SpellInput)
+        else if (Abilities.instance.IsSpellCastable())
         {
-            stateMachine.ChangeState(player.SpellcastState);
+            stateMachine.ChangeState(player.SpellCastState);
         }
+        else if (Abilities.instance.IsAbilityCastable())
+        {
+            stateMachine.ChangeState(player.AbilityCastState);
+        }            
         else if (jumpInput && player.JumpState.CanJump() && !isTouchingCeiling)
         {
             stateMachine.ChangeState(player.JumpState);

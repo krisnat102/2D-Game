@@ -65,7 +65,7 @@ namespace Spells
             }
 
             #region Spell Casting
-            if (IsSpellCastable()) Spell();
+            //if (IsSpellCastable()) Spell();
             
             if (playerInputHandler.SwitchSpell1Input)
             {
@@ -99,7 +99,7 @@ namespace Spells
             #endregion
 
             #region Ability Casting
-            if (IsAbilityCastable()) Ability();
+            //if (IsAbilityCastable()) Ability();
 
             if (playerInputHandler.SwitchAbility1Input)
             {

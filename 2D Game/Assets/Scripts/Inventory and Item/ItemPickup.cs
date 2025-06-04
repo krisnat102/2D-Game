@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Inventory
@@ -14,6 +15,7 @@ namespace Inventory
     {
         #region Variables
         #region Private Variables
+        [FormerlySerializedAs("portal")] [SerializeField] private bool arrowOnly;
         [SerializeField] private Item item;
         [SerializeField] private bool forSale;
         [SerializeField] private bool chest;
@@ -24,7 +26,6 @@ namespace Inventory
         [TextArea]
         [SerializeField] private string noteText;
         [SerializeField] private GameObject noteUIPreset;
-        [SerializeField] private bool portal;
         [SerializeField] private string itemId;
         [SerializeField] private Animator deathAnim;
         [SerializeField] private float animTime;
@@ -53,7 +54,7 @@ namespace Inventory
         #region Unity Methods
         private void Start()
         {
-            if (portal || note) return;
+            if (arrowOnly || note) return;
 
             if (string.IsNullOrEmpty(ItemId)) ItemId = gameObject.name;
 
@@ -87,7 +88,7 @@ namespace Inventory
 
         public void Pickup()
         {
-            if (portal) return;
+            if (arrowOnly) return;
             if (!UIManager.Instance.NoteOpen) PlayerInputHandler.Instance.UseUseInput();
 
             if (pickUpAudio && !UIManager.Instance.NoteOpen)

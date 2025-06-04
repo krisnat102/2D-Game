@@ -22,7 +22,8 @@ public class Player : MonoBehaviour
     public PlayerCrouchMoveState CrouchMoveState { get; private set; }
     public PlayerAttackState PrimaryAttackState { get; private set; }
     public PlayerAttackState SecondaryAttackState { get; private set; }
-    public PlayerSpellcastState SpellcastState { get; private set; }
+    public PlayerSpellCastState SpellCastState { get; private set; }
+    public PlayerAbilityCastState AbilityCastState { get; private set; }
 
     [SerializeField] private PlayerData playerData;
     #endregion
@@ -76,9 +77,10 @@ public class Player : MonoBehaviour
         RollState = new PlayerRollState(this, StateMachine, PlayerData, "roll");
         CrouchIdleState = new PlayerCrouchIdleState(this, StateMachine, PlayerData, "crouchIdle");
         CrouchMoveState = new PlayerCrouchMoveState(this, StateMachine, PlayerData, "crouchMove");
+        SpellCastState =  new PlayerSpellCastState(this, StateMachine, PlayerData, "spellCast");
+        AbilityCastState =  new PlayerAbilityCastState(this, StateMachine, PlayerData, "abilityCast");
         PrimaryAttackState = new PlayerAttackState(this, StateMachine, PlayerData, "attack", primaryWeapon, CombatInputs.primary);
         SecondaryAttackState = new PlayerAttackState(this, StateMachine, PlayerData, "attack", secondaryWeapon, CombatInputs.secondary);
-        SpellcastState =  new PlayerSpellcastState(this, StateMachine, PlayerData, "spellcast");
     }
 
     private void Start()

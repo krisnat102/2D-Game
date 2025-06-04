@@ -25,6 +25,11 @@ public class PlayerInputHandler : MonoBehaviour
 
     public bool StopAllInputs { get => stopAllInputs; set => stopAllInputs = value; }
     public bool StopAttack { get => stopAttack; set => stopAttack = value; }
+    public float MouseRelativeToPlayerPosition =>
+        Camera.main
+            .ScreenToWorldPoint(new Vector3(MousePosition.x, MousePosition.y, transform.position.z)).x -
+        Player.instance.transform.position.x;
+
     #endregion
 
     #region StartTimeVariables

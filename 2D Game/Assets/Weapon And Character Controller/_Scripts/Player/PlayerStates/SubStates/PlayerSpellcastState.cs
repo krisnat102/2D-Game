@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSpellcastState : PlayerAbilityState
+public class PlayerSpellCastState : PlayerAbilityState
 {
     private float spellcastDuration = 0.5f;
     private float spellcastTimer;
     
-    public PlayerSpellcastState(
+    public PlayerSpellCastState(
         Player player,
         PlayerStateMachine stateMachine,
         PlayerData playerData,
@@ -31,11 +31,15 @@ public class PlayerSpellcastState : PlayerAbilityState
         }
         
         spellcastTimer = spellcastDuration;
+        
+        if (Mathf.Sign(PlayerInputHandler.Instance.MouseRelativeToPlayerPosition) != Mathf.Sign(Movement.FacingDirection)) Movement.Flip();
     }
     
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        
+        Movement.SetVelocityX(Movement.CurrentVelocity.x * 0.9f);
 
         spellcastTimer -= Time.deltaTime;
         if (spellcastTimer <= 0f)
