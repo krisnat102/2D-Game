@@ -4826,7 +4826,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1379617353577674439}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: SfxAudio
+        m_MethodName: EnvironmentSfxAudio
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

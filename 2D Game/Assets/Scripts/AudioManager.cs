@@ -31,7 +31,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource eatSoundEffect, potionDrinkSoundEffect;
     [SerializeField] private AudioSource[] equipmentSoundEffect;
 
-    private bool muteTracker;
+    private bool muteTracker, muteSave;
     private float musicSave, sfxSave, environmentSfxSave;
     
     private string SettingsFile => Path.Combine(Application.persistentDataPath, "settings.json");
@@ -59,6 +59,7 @@ public class AudioManager : MonoBehaviour
         settings.sfxVolume = sfxSave;
         settings.environmentSfx = environmentSfxSave;
         settings.mute = mute.isOn;
+        Debug.Log(settings.environmentSfx + " 3");
 
         string json = JsonUtility.ToJson(settings, true);
         File.WriteAllText(SettingsFile, json);
@@ -70,11 +71,12 @@ public class AudioManager : MonoBehaviour
         {
             string json = File.ReadAllText(SettingsFile);
             settings = JsonUtility.FromJson<SettingsData>(json);
-    
+                
             musicSave = settings.musicVolume;
             sfxSave = settings.sfxVolume;
             environmentSfxSave = settings.environmentSfx;
-            mute.isOn = settings.mute;
+            muteSave = settings.mute;
+            Debug.Log(environmentSfxSave + " 1");
         }
         else
         {
@@ -86,10 +88,12 @@ public class AudioManager : MonoBehaviour
         music.value = Mathf.InverseLerp(0.0001f, 1f, musicSave);
         sfx.value = Mathf.InverseLerp(0.0001f, 1f, sfxSave);
         environmentSfx.value = Mathf.InverseLerp(0.0001f, 1f, environmentSfxSave);
-    
+        
         musicMixer.SetFloat("volume", Mathf.Log10(musicSave) * 20);
         sfxMixer.SetFloat("volume", Mathf.Log10(sfxSave) * 20);
         environmentSfxMixer.SetFloat("volume", Mathf.Log10(environmentSfxSave) * 20);
+        
+        if (muteSave) MuteAudio(true);
     }
 
     #endregion
@@ -100,7 +104,7 @@ public class AudioManager : MonoBehaviour
 
     public void MuteAudio(bool muteValue)
     {
-        this.mute.isOn = muteValue;
+        mute.isOn = muteValue;
         muteTracker = muteValue;
 
         if (muteValue)

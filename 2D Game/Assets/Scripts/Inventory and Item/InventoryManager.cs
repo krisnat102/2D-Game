@@ -268,6 +268,7 @@ namespace Inventory
         #endregion
 
         #region Item Management Methods
+        #region General 
         public void Add(Item item, bool uiSpawner)
         {
             Items.Add(item);
@@ -477,26 +478,7 @@ namespace Inventory
 
             return obj;
         }
-
-        public GameObject CreateShopItem(Item item, Transform transContent)
-        {
-            GameObject obj = Instantiate(inventoryShopItem, transContent);
-
-            obj.SetActive(true);
-
-            obj.name = item.name;
-
-            ItemController itemController = obj.GetComponent<ItemController>();
-            itemController.SetItem(item);
-
-            var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
-
-            itemName.text = item.itemName;
-            itemIcon.sprite = item.icon;
-
-            return obj;
-        }
-
+        
         private void EnableItemRemove()
         {
             if (enableRemove.isOn)
@@ -520,6 +502,26 @@ namespace Inventory
             }
             ListItems();
         }
+        #endregion
+
+        public GameObject CreateShopItem(Item item, Transform transContent)
+        {
+            GameObject obj = Instantiate(inventoryShopItem, transContent);
+
+            obj.SetActive(true);
+
+            obj.name = item.name;
+
+            ItemController itemController = obj.GetComponent<ItemController>();
+            itemController.SetItem(item);
+
+            var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
+
+            itemName.text = item.itemName;
+            itemIcon.sprite = item.icon;
+
+            return obj;
+        }
 
         public void DisableSelectedIndicators()
         {
@@ -538,8 +540,10 @@ namespace Inventory
                 }
             }
         }
+        #endregion
 
-        public int[] EquippedItemsIds()
+        #region Equipment Methods
+                public int[] EquippedItemsIds()
         {
             int[] ids = new int[6];
 
@@ -583,7 +587,7 @@ namespace Inventory
                     break;
 
                 case Item.EquipmentType.Chestplate:
-                    var bnChestplate = HelmetBn.GetComponent<ItemController>();
+                    var bnChestplate = ChestplateBn.GetComponent<ItemController>();
 
                     if (bnChestplate.GetItem() != null)
                     {
@@ -745,9 +749,7 @@ namespace Inventory
                     }
             }
         }
-        #endregion
-
-        #region Equipment Stat Methods
+        
         public void AddItemStats(Item item)
         {
             TotalArmor += item.armor;
