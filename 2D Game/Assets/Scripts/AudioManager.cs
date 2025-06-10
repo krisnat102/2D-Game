@@ -59,7 +59,6 @@ public class AudioManager : MonoBehaviour
         settings.sfxVolume = sfxSave;
         settings.environmentSfx = environmentSfxSave;
         settings.mute = mute.isOn;
-        Debug.Log(settings.environmentSfx + " 3");
 
         string json = JsonUtility.ToJson(settings, true);
         File.WriteAllText(SettingsFile, json);
@@ -76,7 +75,6 @@ public class AudioManager : MonoBehaviour
             sfxSave = settings.sfxVolume;
             environmentSfxSave = settings.environmentSfx;
             muteSave = settings.mute;
-            Debug.Log(environmentSfxSave + " 1");
         }
         else
         {

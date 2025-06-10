@@ -64,7 +64,7 @@ namespace Spells
 
                 if (pickUpAudio)
                 {
-                    if(!chest) pickUpAudio.gameObject.transform.parent = CoreClass.GameManager.instance.Audios;
+                    if(!chest) pickUpAudio.gameObject.transform.parent = CoreClass.GameManager.Instance.Audios;
                     pickUpAudio.pitch = Random.Range(0.8f, 1.2f);
                     pickUpAudio.Play();
                 }
@@ -108,7 +108,7 @@ namespace Spells
                 SpellManager.Instance.Add(spell);
             }
 
-            CoreClass.GameManager.instance.ItemsTaken.Add(ItemId);
+            CoreClass.GameManager.Instance.ItemsTaken.Add(ItemId);
 
             if (InventoryManager.Instance.UIPopUpCooldownTracker == 0) SpellManager.Instance.SpellTakenPopUp(spell);
             else StartCoroutine(SpellManager.Instance.SpellPopupRoutine(spell, InventoryManager.Instance.UIPopUpCooldownTracker));
@@ -121,7 +121,7 @@ namespace Spells
             if (pickUpEffect)
             {
                 pickUpEffect.SetActive(true);
-                pickUpEffect.transform.parent = CoreClass.GameManager.instance.Particles;
+                pickUpEffect.transform.parent = CoreClass.GameManager.Instance.Particles;
             }
 
             gameObject.SetActive(false);

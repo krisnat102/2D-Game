@@ -56,7 +56,7 @@ namespace Krisnat
 
                     return;
                 }
-                CoreClass.GameManager.checkpoint = CoreClass.GameManager.instance.SpawnPoint.position;
+                CoreClass.GameManager.Instance.Checkpoint = CoreClass.GameManager.Instance.SpawnPoint.position;
                 SaveSystem.SavePlayer(player);
 
                 if (loadNextScene)

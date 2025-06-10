@@ -7,6 +7,8 @@ namespace Krisnat
 {
     public class EnemyGroup : MonoBehaviour
     {
+        public bool Alerted { get; private set; }
+        
         private List<EnemyAttackAI> enemyAwareness;
 
         private void Start()
@@ -16,6 +18,8 @@ namespace Krisnat
 
         public void Alert()
         {
+            Alerted = true;
+            
             foreach (var enemyAI in enemyAwareness)
             {
                 enemyAI.Alerted = true;

@@ -22,7 +22,7 @@ namespace Krisnat
                 AddItems();
                 CoreClass.GameManager.levelStarted = true;
 
-                CoreClass.GameManager.instance.SavePlayer();
+                CoreClass.GameManager.Instance.SavePlayer();
             }
         }
 

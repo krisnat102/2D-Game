@@ -16,12 +16,13 @@ namespace CoreClass
 {
     public class GameManager : MonoBehaviour
     {
-        public static GameManager instance;
-        public static Vector3 checkpoint;
-        private bool gamePaused = false;
+        public static GameManager Instance;
 
         [SerializeField] private List<Item> startingItems;
 
+        [SerializeField] private float enemyPlayerFindingAICooldownDuration;
+        
+        [Header("References")]
         [SerializeField] private GameObject deathScreen;
         [SerializeField] private GameObject playerGO;
         [SerializeField] private Bardent.CoreSystem.Death death;
@@ -33,10 +34,13 @@ namespace CoreClass
         private InventoryManager inventoryManager;
         private SpellManager spellManager;
         private Stats stats;
+        private bool gamePaused = false;
 
         public static bool levelStarted = false;
+        public Vector3 Checkpoint { get; set; }
         public bool GamePaused { get => gamePaused; set => gamePaused = value; }
         // ReSharper disable once InconsistentNaming
+        public float EnemyPlayerFindingAICooldownDuration { get => enemyPlayerFindingAICooldownDuration; private set => enemyPlayerFindingAICooldownDuration = value; }
         public GameObject PlayerGO { get => playerGO; private set => playerGO = value; }
         public Transform SpawnPoint { get => spawnPoint; private set => spawnPoint = value; }
         public List<string> ItemsTaken { get; private set; }
@@ -58,7 +62,7 @@ namespace CoreClass
         }
         private void Awake()
         {
-            instance = this;
+            Instance = this;
 
             ItemsTaken = new List<string>();
             BossesKilled = new List<string>();
@@ -66,12 +70,12 @@ namespace CoreClass
             Battles = new List<string>();
 
             Player = playerGO?.GetComponent<Player>();
-            levelHandler = CoreClass.GameManager.instance.GetComponent<LevelHandler>();
+            levelHandler = CoreClass.GameManager.Instance.GetComponent<LevelHandler>();
             Particles = GameObject.FindGameObjectWithTag("ParticleContainer").transform;
             Audios = GameObject.FindGameObjectWithTag("AudioContainer")?.transform;
             UIs = GameObject.FindGameObjectWithTag("UIContainer")?.transform;
 
-            if (checkpoint == Vector3.zero) checkpoint = SpawnPoint.position;
+            if (Checkpoint == Vector3.zero) Checkpoint = SpawnPoint.position;
         }
 
         private void Start()
@@ -191,7 +195,7 @@ namespace CoreClass
 
             playerTransform.position = checkpointPosition;
             camera.position = checkpointPosition;
-            checkpoint = checkpointPosition;
+            Checkpoint = checkpointPosition;
             //checkpoint = spawnPoint.position;
 
             stats.UpdateStatBars();

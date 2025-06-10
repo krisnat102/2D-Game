@@ -27,7 +27,7 @@ namespace Krisnat
             {
                 if (string.IsNullOrEmpty(BattleId)) BattleId = gameObject.name;
 
-                if (CoreClass.GameManager.instance.Battles.Contains(BattleId))
+                if (CoreClass.GameManager.Instance.Battles.Contains(BattleId))
                 {
                     EndBattle(false);
                 }
@@ -37,7 +37,7 @@ namespace Krisnat
             {
                 Enemy boss = GetComponentInChildren<Enemy>();
 
-                if (CoreClass.GameManager.instance.BossesKilled.Contains(boss.BossId))
+                if (CoreClass.GameManager.Instance.BossesKilled.Contains(boss.BossId))
                 {
                     boss.gameObject.SetActive(false);
                     EndBattle(false);
@@ -95,7 +95,7 @@ namespace Krisnat
 
             if (!finalBattle)
             {
-                CoreClass.GameManager.instance.Battles.Add(BattleId);
+                CoreClass.GameManager.Instance.Battles.Add(BattleId);
             }
         }
     }

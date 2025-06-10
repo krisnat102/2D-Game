@@ -48,7 +48,7 @@ public class Death : MonoBehaviour
 
         if (childAudio.Length != 0)
         {
-            childAudio[0].transform.parent = CoreClass.GameManager.instance.Audios;
+            childAudio[0].transform.parent = CoreClass.GameManager.Instance.Audios;
         }
 
         foreach (var light in lights)

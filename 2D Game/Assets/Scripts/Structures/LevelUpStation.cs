@@ -57,11 +57,11 @@ namespace Krisnat
                     openSFX.Play();
                     fire.SetActive(true);
                     triggered = true;
-                    CoreClass.GameManager.instance.BonfiresLit.Add(BonfireId);
+                    CoreClass.GameManager.Instance.BonfiresLit.Add(BonfireId);
                 }
 
                 //Saving the game, position and level
-                CoreClass.GameManager.checkpoint = spawnPoint.position;
+                CoreClass.GameManager.Instance.Checkpoint = spawnPoint.position;
                 MenuManager.instance.CurrentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
                 SaveSystem.SavePlayer(player);
 

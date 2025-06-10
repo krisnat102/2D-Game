@@ -20,7 +20,7 @@ namespace Krisnat
 
             foreach (ItemPickup item in items)
             {
-                if (CoreClass.GameManager.instance.ItemsTaken.Contains(item.ItemId))
+                if (CoreClass.GameManager.Instance.ItemsTaken.Contains(item.ItemId))
                 {
                     item.gameObject.SetActive(false);
                 }
@@ -32,7 +32,7 @@ namespace Krisnat
 
             foreach (SpellPickup spell in spells)
             {
-                if (CoreClass.GameManager.instance.ItemsTaken.Contains(spell.ItemId))
+                if (CoreClass.GameManager.Instance.ItemsTaken.Contains(spell.ItemId))
                 {
                     spell.gameObject.SetActive(false);
                 }

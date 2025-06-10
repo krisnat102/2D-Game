@@ -1,4 +1,5 @@
-﻿using Krisnat;
+﻿using System.Collections;
+using Krisnat;
 using UnityEngine;
 
 public class EnemyAttackAI : MonoBehaviour
@@ -14,6 +15,7 @@ public class EnemyAttackAI : MonoBehaviour
     private Transform playerTrans;
     private Enemy enemy;
     private EnemyGroup group;
+    private bool cooldown = false;
 
     public bool InRange { get => inRange; private set => inRange = value; }
     public bool InSight { get => inSight; private set => inSight = value; }
@@ -50,6 +52,12 @@ public class EnemyAttackAI : MonoBehaviour
 
     private void Update()
     {
+        if (cooldown) return;
+
+        cooldown = true;
+        
+        StartCoroutine(CooldownCoroutine(CoreClass.GameManager.Instance.EnemyPlayerFindingAICooldownDuration));
+        
         if (InRangeOfSight)
         {
             RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, playerTrans.position - firePoint.position, Mathf.Infinity, ~IgnoreMe); //shoots a ray from the fire point to the player
@@ -58,12 +66,12 @@ public class EnemyAttackAI : MonoBehaviour
             if (hitInfo)
             {
                 Player player = hitInfo.transform.GetComponent<Player>(); //checks if it hit the player
-                if (player != null)
+                if (player)
                 {
                     InSight = true;
                     Alerted = true;
 
-                    if (group) group.Alert();
+                    if (group && !group.Alerted) group.Alert();
                 }
                 else InSight = false;
             }
@@ -80,5 +88,11 @@ public class EnemyAttackAI : MonoBehaviour
     {
         if (!flip) return;
         enemy.transform.localScale = new Vector3(-1 * enemy.transform.localScale.x, enemy.transform.localScale.y, enemy.transform.localScale.z);
+    }
+    
+    private IEnumerator CooldownCoroutine(float time)
+    {
+        yield return new WaitForSeconds(time);
+        cooldown = false;
     }
 }

@@ -360,7 +360,7 @@ namespace Krisnat
             isPatrolling = Data.patrol;
             cameraShake = CameraShake.instance;
             previousLocalScaleX = transform.localScale.x;
-            gameManager = CoreClass.GameManager.instance;
+            gameManager = CoreClass.GameManager.Instance;
             PlayerTrans = PlayerInputHandler.Instance.gameObject.transform;
             canvas = GetComponentInChildren<Canvas>().transform;
             player = Player.instance;

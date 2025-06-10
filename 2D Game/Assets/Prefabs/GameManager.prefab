@@ -53,6 +53,7 @@ MonoBehaviour:
   startingItems:
   - {fileID: 11400000, guid: 6b77790175636064bbca27a71ef04082, type: 2}
   - {fileID: 11400000, guid: e54dc2810f1b4c44389c39229cd6ca53, type: 2}
+  enemyPlayerFindingAICooldownDuration: 0.5
   deathScreen: {fileID: 0}
   playerGO: {fileID: 0}
   death: {fileID: 0}
@@ -163,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b89dd907e09bb45832bc815a2e7e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelUpModifier: 1.5
+  levelUpModifier: 1.2
   mainStatIncrease: 8
   subStatsIncrease: 2
 --- !u!114 &899934558910319828
