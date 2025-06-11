@@ -92,14 +92,17 @@ namespace Krisnat.Assets.Scripts
 
                 foreach (FileInfo file in directory.GetFiles())
                 {
-                    try
+                    if (file.Extension == "bob")
                     {
-                        file.Attributes = FileAttributes.Normal; // Remove read-only attribute
-                        file.Delete();
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.LogError($"Failed to delete file {file.Name}: {ex.Message}");
+                        try
+                        {
+                            file.Attributes = FileAttributes.Normal; // Remove read-only attribute
+                            file.Delete();
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.LogError($"Failed to delete file {file.Name}: {ex.Message}");
+                        }
                     }
                 }
 

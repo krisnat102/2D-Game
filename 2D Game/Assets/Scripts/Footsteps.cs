@@ -35,7 +35,6 @@ namespace Krisnat
                     clip = grassFS;
                     break;
                 default:
-                    Debug.Log(1);
                     break;
             }
 

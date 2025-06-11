@@ -238,12 +238,12 @@ namespace Inventory
                 ItemController useButtonItemController = useButton.GetComponent<ItemController>();
                 useButtonItemController.SetItem(item);
 
-                itemPrice.text = "PRICE - " + cost.ToString();
+                itemPrice.text = "PRICE - " + cost;
 
                 if (item.value != 0 && item.equipmentType != Item.EquipmentType.Weapon)
                 {
                     itemValue.gameObject.SetActive(true);
-                    itemValue.text = "VALUE - " + item.value.ToString();
+                    itemValue.text = "VALUE - " + item.value;
                 }
                 else itemValue.gameObject.SetActive(false);
 
@@ -259,10 +259,10 @@ namespace Inventory
                     switch (item.consumableType)
                     {
                         case Item.ConsumableType.Heal:
-                            itemValue.text = "HEAL - " + item.value.ToString();
+                            itemValue.text = "HEAL - " + item.value;
                             break;
                         case Item.ConsumableType.ManaHeal:
-                            itemValue.text = "HEAL - " + item.value.ToString();
+                            itemValue.text = "HEAL - " + item.value;
                             break;
                     }
                 }
@@ -271,7 +271,7 @@ namespace Inventory
                 {
                     itemWeight.gameObject.SetActive(true);
 
-                    itemWeight.text = "WEIGHT - " + item.weight.ToString();
+                    itemWeight.text = "WEIGHT - " + item.weight;
 
                     if (item.equipmentType != Item.EquipmentType.Weapon)
                     {
@@ -280,8 +280,8 @@ namespace Inventory
                         itemArmor.gameObject.SetActive(true);
                         itemMagicRes.gameObject.SetActive(true);
 
-                        itemArmor.text = "ARMOR - " + item.armor.ToString();
-                        itemMagicRes.text = "MAGIC RES - " + item.magicRes.ToString();
+                        itemArmor.text = "ARMOR - " + item.armor;
+                        itemMagicRes.text = "MAGIC RES - " + item.magicRes;
                     }
                     else
                     {
@@ -290,7 +290,7 @@ namespace Inventory
 
                         weaponAttack.gameObject.SetActive(true);
 
-                        weaponAttack.text = "ATTACK - " + item.value.ToString();
+                        weaponAttack.text = "ATTACK - " + item.value;
                     }
 
                     if (item.Equipped)
@@ -346,7 +346,6 @@ namespace Inventory
             catch
             {
                 Debug.LogWarning("Item not found");
-                Description();
             }
             
         }

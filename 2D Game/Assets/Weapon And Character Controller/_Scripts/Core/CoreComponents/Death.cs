@@ -33,10 +33,12 @@ namespace Bardent.CoreSystem
                 ParticleManager.StartParticles(particle, transform.position, transform.rotation);
             }
 
-            if (deathScreen != null)
+            if (deathScreen)
             {
                 deathScreen.SetActive(true);
             }
+            
+            Time.timeScale = 1f;
             InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins / 3, false);
             CoreClass.GameManager.Instance.SavePlayer();
             deathSFX.gameObject.transform.parent = CoreClass.GameManager.Instance.Audios;

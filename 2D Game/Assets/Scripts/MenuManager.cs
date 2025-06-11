@@ -144,13 +144,14 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    #endregion
+    
+    #region Other Methods
     public void DeleteSaves()
     {
         SaveSystem.DeleteAllSaveFiles();
     }
-    #endregion
 
-    #region Other Methods
     // ReSharper disable once InconsistentNaming
     public void PlayButtonSFX()
     {

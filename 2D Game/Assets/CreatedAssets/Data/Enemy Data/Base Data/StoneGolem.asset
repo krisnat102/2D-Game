@@ -13,27 +13,25 @@ MonoBehaviour:
   m_Name: StoneGolem
   m_EditorClassIdentifier: 
   enemyName: Stone Golem
-  maxHP: 500
+  maxHp: 500
   attackSpeed: 1.4
   speed: 200
   damage: 30
   actionCooldown: 0.5
   knockbackModifier: 0
   knockbackWeight: 10
-  offsetX: 1.2
-  offsetX2: 1.2
-  offsetY: -1
+  stagger: 1
   hpBarDelay: 0
   damageType: 0
   attackAnimationLength: 1.1
   damageTriggerTime: 0.92
-  HitBox:
+  hitBox:
     serializedVersion: 2
     x: -2.6
     y: -2.02
     width: 2.58
     height: 2.02
-  DetectableLayers:
+  detectableLayers:
     serializedVersion: 2
     m_Bits: 1024
   fixRotationWhenAttacking: 0
@@ -83,7 +81,7 @@ MonoBehaviour:
   bossSpecialProjectile: {fileID: 0}
   specialRangedAttackChargeTime: 1
   specialRangedAttackChargeExecutionTime: 1.2
-  specialRangedAttackCooldown: 25
+  specialRangedAttackCooldown: 12
   bossMusic: {fileID: 8300000, guid: 5aa633a9f33e07547b59e7bbd680ddbc, type: 3}
   bloodEffect: {fileID: 7515634647306772147, guid: 6dc9c141b46ffcc4b9a12f2f255fcf76,
     type: 3}

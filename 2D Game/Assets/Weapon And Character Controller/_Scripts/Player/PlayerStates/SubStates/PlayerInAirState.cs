@@ -101,6 +101,8 @@ public class PlayerInAirState : PlayerState
 
         CheckJumpMultiplier();
 
+        if (isTouchingLedge) Debug.Log(1);
+
         if (player.InputHandler.AttackInputs[(int)CombatInputs.primary] && Stats.stam.CurrentValue > 5)
         {
             stateMachine.ChangeState(player.PrimaryAttackState);

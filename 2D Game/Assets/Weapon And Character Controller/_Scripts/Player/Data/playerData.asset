@@ -16,7 +16,7 @@ MonoBehaviour:
   movementVelocity: 7
   jumpVelocity: 15
   amountOfJumps: 1
-  jumpCost: 10
+  jumpCost: 0
   wallJumpVelocity: 15
   wallJumpTime: 0.4
   wallJumpAngle: {x: 1, y: 2}

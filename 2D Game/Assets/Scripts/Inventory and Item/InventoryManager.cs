@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -299,6 +300,8 @@ namespace Inventory
 
         public void ClearInventory()
         {
+            if (!itemContent) return;
+            
             Items.Clear();
             foreach (Transform trans in itemContent)
             {
@@ -314,7 +317,7 @@ namespace Inventory
                 .Where(g => g.Count() > 1)
                 .SelectMany(g => g.Skip(1))
                 .ToList();
-            //clears the inventory before opening so that items dont duplicate
+            //clears the inventory before opening so that items don't duplicate
             if (currentItems != null)
             {
                 currentItems.Clear();
@@ -543,8 +546,10 @@ namespace Inventory
         #endregion
 
         #region Equipment Methods
-                public int[] EquippedItemsIds()
+        public int[] EquippedItemsIds()
         {
+            if (!HelmetBn || !ChestplateBn || !GlovesBn || !BootsBn || SwordBn || BowBn) return Array.Empty<int>();
+            
             int[] ids = new int[6];
 
             ids[0] = HelmetBn.GetComponent<ItemController>()?.GetItem()?.id ?? 0;

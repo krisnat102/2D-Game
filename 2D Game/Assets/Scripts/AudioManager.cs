@@ -75,6 +75,7 @@ public class AudioManager : MonoBehaviour
             sfxSave = settings.sfxVolume;
             environmentSfxSave = settings.environmentSfx;
             muteSave = settings.mute;
+            //Debug.Log($"{musicSave} {sfxSave} {environmentSfxSave}");
         }
         else
         {

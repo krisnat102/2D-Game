@@ -136,5 +136,4 @@ public class PlayerLedgeClimbState : PlayerState
         workspace.Set(CollisionSenses.WallCheck.position.x + (xDist * Movement.FacingDirection), CollisionSenses.LedgeCheckHorizontal.position.y - yDist);
         return workspace;
     }
-
 }
