@@ -1,3 +1,4 @@
+using System.Collections;
 using Bardent.CoreSystem;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace Krisnat
         #region Private Variables
         [SerializeField] private float stuckTime = 1f;
         [SerializeField] private float fadeTimer = 1f;
-        [SerializeField] private float range = 15f;  
+        [SerializeField] private float range = 15f;
 
         private float damage;
         private float speed;
@@ -17,7 +18,7 @@ namespace Krisnat
         private float transparency = 1f;
         private int chargeTier;
         private int direction;
-        private bool arrowStuck = false;
+        private bool startFade = false;
         private bool hitGround;
         private Vector2 offset;
         private Vector2 lastVelocity;
@@ -73,11 +74,11 @@ namespace Krisnat
                 rb.gravityScale = gravity;
             }
             
-            if (arrowStuck)
+            if (startFade)
             {
                 transparency -= Time.deltaTime * fadeTimer;
 
-                if(sprite != null) sprite.color = new Color(sprite.color.r, sprite.color.b, sprite.color.g, transparency);
+                if(sprite) sprite.color = new Color(sprite.color.r, sprite.color.b, sprite.color.g, transparency);
 
                 if(transparency <= 0f)
                 {
@@ -139,7 +140,7 @@ namespace Krisnat
 
         private void StartFade()
         {
-            arrowStuck = true;
+            startFade = true;
         }
         #endregion
     }

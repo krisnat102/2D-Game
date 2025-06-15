@@ -85,19 +85,5 @@ namespace Bardent.CoreSystem
         {
             get => Physics2D.Raycast(WallCheck.position, Vector2.right * -Movement.FacingDirection, wallCheckDistance, whatIsGround);
         }
-        
-        private void OnDrawGizmos()
-        {
-            if (LedgeCheckHorizontal == null || Movement == null)
-                return;
-
-            Vector3 origin = LedgeCheckHorizontal.position;
-            Vector3 direction = Vector2.right * Movement.FacingDirection;
-            float distance = wallCheckDistance;
-
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawLine(origin, origin + direction.normalized * distance);
-        }
-
     }
 }

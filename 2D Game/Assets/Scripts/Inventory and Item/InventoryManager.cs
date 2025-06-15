@@ -548,7 +548,7 @@ namespace Inventory
         #region Equipment Methods
         public int[] EquippedItemsIds()
         {
-            if (!HelmetBn || !ChestplateBn || !GlovesBn || !BootsBn || SwordBn || BowBn) return Array.Empty<int>();
+            if (!HelmetBn || !ChestplateBn || !GlovesBn || !BootsBn || !SwordBn || !BowBn) return Array.Empty<int>();
             
             int[] ids = new int[6];
 
@@ -558,7 +558,7 @@ namespace Inventory
             ids[3] = BootsBn.GetComponent<ItemController>()?.GetItem()?.id ?? 0;
             ids[4] = SwordBn.GetComponent<ItemController>()?.GetItem()?.id ?? 0;
             ids[5] = BowBn.GetComponent<ItemController>()?.GetItem()?.id ?? 0;
-
+            
             return ids;
         }
 

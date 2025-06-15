@@ -186,7 +186,6 @@ namespace Inventory
                     {
                         case "Equip":
                             InventoryManager.Instance.EquipItem(item);
-                            Debug.Log(1);
                             Description();
                             break;
 
