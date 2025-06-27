@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 3386894228497960102}
   - component: {fileID: 8028105860886730601}
   - component: {fileID: -7690693297168986500}
-  - component: {fileID: -3031449168293751300}
   - component: {fileID: -1697771105754723844}
+  - component: {fileID: -3031449168293751300}
+  - component: {fileID: 995291188510110170}
   m_Layer: 0
   m_Name: Bow Arrow
   m_TagString: Untagged
@@ -115,7 +116,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &-7690693297168986500
 MonoBehaviour:
@@ -132,7 +133,75 @@ MonoBehaviour:
   stuckTime: 1
   fadeTimer: 1
   range: 1
+  hittableLayers:
+    serializedVersion: 2
+    m_Bits: 45056
+--- !u!114 &-1697771105754723844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520525365201432645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51f3b9dbedd198143aa0ac9e1796d6b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationLength: 6
+  destroy: 1
+  adaptSize: 1
+  adaptDirection: 1
+  objectToSpawnBeforeDeath: {fileID: 0}
+  fadeTime: 0
+  ui: 0
+  uiCanvasGroup: 0
 --- !u!61 &-3031449168293751300
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520525365201432645}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 7818871
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.09977007, y: -0.015993595}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 2, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.45079327, y: 0.1479721}
+  m_EdgeRadius: 0
+--- !u!61 &995291188510110170
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,7 +233,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.19647741, y: -0.015993595}
+  m_Offset: {x: 0.106894016, y: -0.015993595}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -175,28 +244,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.25737858, y: 0.1479721}
+  m_Size: {x: 0.4543543, y: 0.1479721}
   m_EdgeRadius: 0
---- !u!114 &-1697771105754723844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 520525365201432645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51f3b9dbedd198143aa0ac9e1796d6b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationLength: 6
-  destroy: 1
-  adaptSize: 1
-  adaptDirection: 1
-  objectToSpawnBeforeDeath: {fileID: 0}
-  fadeTime: 0
-  ui: 0
-  uiCanvasGroup: 0
 --- !u!1 &6738790779447210884
 GameObject:
   m_ObjectHideFlags: 0

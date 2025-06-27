@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Bardent.CoreSystem;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Krisnat
         [SerializeField] private float stuckTime = 1f;
         [SerializeField] private float fadeTimer = 1f;
         [SerializeField] private float range = 15f;
+        [SerializeField] private LayerMask hittableLayers;
 
         private float damage;
         private float speed;
@@ -85,39 +87,36 @@ namespace Krisnat
                     gameObject.SetActive(false);
                 }
             }
+
+            DetectWall();
+        }
+
+        private void Update()
+        {
+            DetectWall();
+        }
+
+        private void DetectWall()
+        {
+            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y),Vector2.right, 0.5f, hittableLayers);
+
+            if (hit)
+            {
+                HitWall();
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
             var enemy = collision.GetComponent<Enemy>();
 
-            if(enemy != null && (!previousEnemy || previousEnemy != enemy))
+            if(enemy && (!previousEnemy || previousEnemy != enemy))
             {
-                previousEnemy = enemy;
-
-                enemy.TakeDamage(damage * levelHandler.DexterityDamage, 0, true);
-
-                if(enemy.Data.bloodEffect && damage != 0) Instantiate(enemy.Data.bloodEffect, transform.position, Quaternion.identity);
-
-                piercing--;
-
-                if (piercing == 0)
-                {
-                    gameObject.SetActive(false);
-                }
+                DamageEnemy(enemy);
             }
             if (collision.tag == "Ground" || collision.tag == "Door")
             {
-                float angle = Mathf.Atan2(lastVelocity.normalized.y, lastVelocity.normalized.x) * Mathf.Rad2Deg;
-
-                hitGround = true;
-
-                rb.velocity = Vector2.zero;
-                rb.simulated = false;
-
-                transform.rotation = Quaternion.Euler(0, 0, angle);
-
-                Invoke("StartFade", stuckTime);
+                HitWall();
             }
         }
         #endregion
@@ -141,6 +140,35 @@ namespace Krisnat
         private void StartFade()
         {
             startFade = true;
+        }
+
+        private void HitWall()
+        {
+            float angle = Mathf.Atan2(lastVelocity.normalized.y, lastVelocity.normalized.x) * Mathf.Rad2Deg;
+
+            hitGround = true;
+
+            rb.velocity = Vector2.zero;
+            rb.simulated = false;
+
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+
+            Invoke("StartFade", stuckTime);
+        }
+        
+        private void DamageEnemy(Enemy enemy) {
+            previousEnemy = enemy;
+
+            enemy.TakeDamage(damage * levelHandler.DexterityDamage, 0, true);
+
+            if(enemy.Data.bloodEffect && damage != 0) Instantiate(enemy.Data.bloodEffect, transform.position, Quaternion.identity);
+
+            piercing--;
+
+            if (piercing == 0)
+            {
+                gameObject.SetActive(false);
+            }
         }
         #endregion
     }

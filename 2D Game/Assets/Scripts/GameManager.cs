@@ -123,7 +123,6 @@ namespace CoreClass
             foreach (int id in data.equippedItemsId)
             {
                 loadEquippedItems.AddRange(inventoryManager.AllItems.Where(item => item.id == id).ToList());
-                Debug.Log(id);
             }
             foreach (int id in data.spellsId)
             {
