@@ -64,7 +64,7 @@ namespace Krisnat
         private void Start()
         {
             playerData = Player.instance.PlayerData;
-            levelHandler = CoreClass.GameManager.Instance.gameObject.GetComponent<LevelHandler>();
+            levelHandler = CoreClass.GameManager.instance.gameObject.GetComponent<LevelHandler>();
             NoteOpen = false;
         }
 

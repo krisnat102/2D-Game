@@ -61,7 +61,7 @@ namespace Spells
 
         private void Start()
         {
-            levelHandler = CoreClass.GameManager.Instance.GetComponent<LevelHandler>();
+            levelHandler = CoreClass.GameManager.instance.GetComponent<LevelHandler>();
             abilities = Abilities.instance;
 
             if (flip)

@@ -56,7 +56,7 @@ public class EnemyAttackAI : MonoBehaviour
 
         cooldown = true;
         
-        StartCoroutine(CooldownCoroutine(CoreClass.GameManager.Instance.EnemyPlayerFindingAICooldownDuration));
+        StartCoroutine(CooldownCoroutine(CoreClass.GameManager.instance.EnemyPlayerFindingAICooldownDuration));
         
         if (InRangeOfSight)
         {

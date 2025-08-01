@@ -33,7 +33,7 @@ namespace Bardent.Weapons.Components
             base.Start();
 
             hitBox = GetComponent<ActionHitBox>();
-            levelHandler = CoreClass.GameManager.Instance.gameObject.GetComponentInParent<LevelHandler>();
+            levelHandler = CoreClass.GameManager.instance.gameObject.GetComponentInParent<LevelHandler>();
 
             hitBox.OnDetectedCollider2D += HandleDetectCollider2D;
         }

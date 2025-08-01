@@ -73,14 +73,10 @@ public class PlayerGroundedState : PlayerState
         jumpInput = player.InputHandler.JumpInput;
         grabInput = player.InputHandler.GrabInput;
         dashInput = player.InputHandler.DashInput;
-
-        if (player.InputHandler.AttackInputs[(int)CombatInputs.primary] && !isTouchingCeiling && Stats.stam.CurrentValue > 0.5f)
+        
+        if (jumpInput && player.JumpState.CanJump() && !isTouchingCeiling)
         {
-            stateMachine.ChangeState(player.PrimaryAttackState);
-        }
-        else if (player.InputHandler.AttackInputs[(int)CombatInputs.secondary] && !isTouchingCeiling && Stats.stam.CurrentValue > 0.5f)
-        {
-            stateMachine.ChangeState(player.SecondaryAttackState);
+            stateMachine.ChangeState(player.JumpState);
         }
         else if (Abilities.instance.IsSpellCastable())
         {
@@ -90,10 +86,6 @@ public class PlayerGroundedState : PlayerState
         {
             stateMachine.ChangeState(player.AbilityCastState);
         }            
-        else if (jumpInput && player.JumpState.CanJump() && !isTouchingCeiling)
-        {
-            stateMachine.ChangeState(player.JumpState);
-        }
         else if (!isGrounded)
         {
             player.InAirState.StartCoyoteTime();
@@ -110,6 +102,14 @@ public class PlayerGroundedState : PlayerState
         else if (dashInput && player.RollState.CheckIfCanRoll() && player.InputHandler.DashDirectionInput.y == 0)
         {
             stateMachine.ChangeState(player.RollState);
+        }
+        else if (player.InputHandler.AttackInputs[(int)CombatInputs.primary] && !isTouchingCeiling && Stats.stam.CurrentValue > 0.5f)
+        {
+            stateMachine.ChangeState(player.PrimaryAttackState);
+        }
+        else if (player.InputHandler.AttackInputs[(int)CombatInputs.secondary] && !isTouchingCeiling && Stats.stam.CurrentValue > 0.5f)
+        {
+            stateMachine.ChangeState(player.SecondaryAttackState);
         }
     }
 

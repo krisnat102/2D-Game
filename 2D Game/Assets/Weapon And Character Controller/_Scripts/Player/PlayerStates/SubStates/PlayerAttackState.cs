@@ -35,11 +35,15 @@ public class PlayerAttackState : PlayerAbilityState
         base.Enter();
 
         weapon.Enter();
+        
+        if (inputIndex == 1) CoreClass.GameManager.instance.BowEnabled = true;
     }
 
     private void ExitHandler()
     {
         AnimationFinishTrigger();
         isAbilityDone = true;
+        
+        if (inputIndex == 1) CoreClass.GameManager.instance.BowEnabled = false;
     }
 }

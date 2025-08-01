@@ -23,7 +23,7 @@ namespace Krisnat.Assets.Scripts
 
         public PlayerSaveData(Player player)
         {
-            var levelHandler = CoreClass.GameManager.Instance.gameObject.GetComponent<LevelHandler>();
+            var levelHandler = CoreClass.GameManager.instance.gameObject.GetComponent<LevelHandler>();
             var stats = player.Core.GetCoreComponent<Stats>();
 
             level = player.PlayerData.PlayerLevel;
@@ -48,16 +48,16 @@ namespace Krisnat.Assets.Scripts
             activeAbilitiesId = SpellManager.Instance.AbilitiesBar.Select(spell => spell.id).ToArray();
             itemsId = InventoryManager.Instance.Items.Select(item => item.id).ToArray();
             equippedItemsId = InventoryManager.Instance.EquippedItemsIds();
-            itemsTakenId = CoreClass.GameManager.Instance.ItemsTaken.ToArray();
-            bossesKilledId = CoreClass.GameManager.Instance.BossesKilled.ToArray();
-            bonfiresLitId = CoreClass.GameManager.Instance.BonfiresLit.ToArray();
-            battlesId = CoreClass.GameManager.Instance.Battles.ToArray();
+            itemsTakenId = CoreClass.GameManager.instance.ItemsTaken.ToArray();
+            bossesKilledId = CoreClass.GameManager.instance.BossesKilled.ToArray();
+            bonfiresLitId = CoreClass.GameManager.instance.BonfiresLit.ToArray();
+            battlesId = CoreClass.GameManager.instance.Battles.ToArray();
             currentLevel = MenuManager.instance.CurrentLevel;
             position = new float[3];
 
-            position[0] = CoreClass.GameManager.Instance.Checkpoint.x;
-            position[1] = CoreClass.GameManager.Instance.Checkpoint.y;
-            position[2] = CoreClass.GameManager.Instance.Checkpoint.z;
+            position[0] = CoreClass.GameManager.instance.Checkpoint.x;
+            position[1] = CoreClass.GameManager.instance.Checkpoint.y;
+            position[2] = CoreClass.GameManager.instance.Checkpoint.z;
             //position[0] = CoreClass.GameManager.Instance.SpawnPoint.position.x;
             //position[1] = CoreClass.GameManager.Instance.SpawnPoint.position.y;
             //position[2] = CoreClass.GameManager.Instance.SpawnPoint.position.z;
@@ -118,13 +118,13 @@ namespace Krisnat.Assets.Scripts
         public static PlayerSaveData CreateDefault()
         {
             float[] spawnPosition;
-            if (CoreClass.GameManager.Instance)
+            if (CoreClass.GameManager.instance)
             {
                 spawnPosition = new float[]
                 {
-                    CoreClass.GameManager.Instance.SpawnPoint.position.x,
-                    CoreClass.GameManager.Instance.SpawnPoint.position.y,
-                    CoreClass.GameManager.Instance.SpawnPoint.position.z
+                    CoreClass.GameManager.instance.SpawnPoint.position.x,
+                    CoreClass.GameManager.instance.SpawnPoint.position.y,
+                    CoreClass.GameManager.instance.SpawnPoint.position.z
                 };
             }
             else

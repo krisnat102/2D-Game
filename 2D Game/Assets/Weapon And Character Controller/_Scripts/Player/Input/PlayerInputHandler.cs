@@ -105,7 +105,7 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.started && !StopAllInputs && !StopAttack && weapon != null)
         {
             AttackInputs[(int)CombatInputs.primary] = true;
-            OnAttackStarted?.Invoke(CombatInputs.primary);
+                OnAttackStarted?.Invoke(CombatInputs.primary);
         }
 
         if (context.canceled && !StopAllInputs && !StopAttack && weapon != null)

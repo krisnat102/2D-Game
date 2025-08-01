@@ -16,7 +16,8 @@ namespace CoreClass
 {
     public class GameManager : MonoBehaviour
     {
-        public static GameManager Instance;
+        #region Variables
+        public static GameManager instance;
 
         [SerializeField] private List<Item> startingItems;
 
@@ -35,9 +36,12 @@ namespace CoreClass
         private SpellManager spellManager;
         private Stats stats;
         private bool gamePaused = false;
+        public bool levelStarted = false;
+        #endregion
 
-        public static bool levelStarted = false;
-        public Vector3 Checkpoint { get; set; }
+        #region Properties
+
+        public bool BowEnabled { get; set; }
         public bool GamePaused { get => gamePaused; set => gamePaused = value; }
         // ReSharper disable once InconsistentNaming
         public float EnemyPlayerFindingAICooldownDuration { get => enemyPlayerFindingAICooldownDuration; private set => enemyPlayerFindingAICooldownDuration = value; }
@@ -51,6 +55,8 @@ namespace CoreClass
         public Transform Particles { get; private set; }
         public Transform Audios { get; private set; }
         public Transform UIs { get; private set; }
+        public Vector3 Checkpoint { get; set; }
+        #endregion
 
         #region Unity Methods
         private void Update()
@@ -62,7 +68,7 @@ namespace CoreClass
         }
         private void Awake()
         {
-            Instance = this;
+            instance = this;
 
             ItemsTaken = new List<string>();
             BossesKilled = new List<string>();
@@ -70,7 +76,7 @@ namespace CoreClass
             Battles = new List<string>();
 
             Player = playerGO?.GetComponent<Player>();
-            levelHandler = CoreClass.GameManager.Instance.GetComponent<LevelHandler>();
+            levelHandler = CoreClass.GameManager.instance.GetComponent<LevelHandler>();
             Particles = GameObject.FindGameObjectWithTag("ParticleContainer").transform;
             Audios = GameObject.FindGameObjectWithTag("AudioContainer")?.transform;
             UIs = GameObject.FindGameObjectWithTag("UIContainer")?.transform;

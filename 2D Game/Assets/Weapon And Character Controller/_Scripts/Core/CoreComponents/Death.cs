@@ -40,8 +40,8 @@ namespace Bardent.CoreSystem
             
             Time.timeScale = 1f;
             InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins / 3, false);
-            CoreClass.GameManager.Instance.SavePlayer();
-            deathSFX.gameObject.transform.parent = CoreClass.GameManager.Instance.Audios;
+            CoreClass.GameManager.instance.SavePlayer();
+            deathSFX.gameObject.transform.parent = CoreClass.GameManager.instance.Audios;
             deathSFX.Play();
             Core.transform.parent.gameObject.SetActive(false);
             IsDead = true;

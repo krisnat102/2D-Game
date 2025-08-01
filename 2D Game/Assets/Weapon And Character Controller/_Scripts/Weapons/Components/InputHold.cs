@@ -66,7 +66,11 @@ namespace Bardent.Weapons.Components
 
         private void Attack(CombatInputs combatInput)
         {
-            if (movement.IsHanging || (movement.IsCrouching && collisionSenses.Ceiling)) return;
+            if (movement.IsHanging || (movement.IsCrouching && collisionSenses.Ceiling))
+            {
+                EndHold();
+                return;
+            }
 
             if (currentAttackData != null && !cooldown && currentWeaponData.Type == WeaponType.Bow && Stats.stam.CurrentValue > 5)
             {
