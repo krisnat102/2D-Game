@@ -714,29 +714,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
         type: 3}
-      propertyPath: SFX
-      value: 
-      objectReference: {fileID: 212510815}
-    - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
-        type: 3}
       propertyPath: sfx
       value: 
       objectReference: {fileID: 212510815}
     - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
         type: 3}
-      propertyPath: Mute
-      value: 
-      objectReference: {fileID: 1683361152}
-    - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
-        type: 3}
       propertyPath: mute
       value: 
       objectReference: {fileID: 1683361152}
-    - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
-        type: 3}
-      propertyPath: Music
-      value: 
-      objectReference: {fileID: 1872581155}
     - target: {fileID: 2690625510320772285, guid: a8d9f80d457b1944f98af031b9a76d43,
         type: 3}
       propertyPath: music
@@ -130866,12 +130851,12 @@ PrefabInstance:
     - target: {fileID: 5378010185956696075, guid: 0fb3b8ae511d3944c83f9649e551c20f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -603.5154
+      value: -603.517
       objectReference: {fileID: 0}
     - target: {fileID: 5378010185956696075, guid: 0fb3b8ae511d3944c83f9649e551c20f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -565.8834
+      value: -565.882
       objectReference: {fileID: 0}
     - target: {fileID: 5378010185956696075, guid: 0fb3b8ae511d3944c83f9649e551c20f,
         type: 3}
@@ -142879,11 +142864,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2942618688319559364, guid: df025bf70c985294a9b5993f50d12878,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4419208575607903093, guid: df025bf70c985294a9b5993f50d12878,
         type: 3}
       propertyPath: mainSpell
@@ -142924,36 +142904,11 @@ PrefabInstance:
       propertyPath: abilityCooldownImg
       value: 
       objectReference: {fileID: 1056555726}
-    - target: {fileID: 4817204179201066334, guid: df025bf70c985294a9b5993f50d12878,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.001
-      objectReference: {fileID: 0}
     - target: {fileID: 5189916168622324991, guid: df025bf70c985294a9b5993f50d12878,
         type: 3}
       propertyPath: message
       value: 
       objectReference: {fileID: 1751550085}
-    - target: {fileID: 7823768926691505371, guid: df025bf70c985294a9b5993f50d12878,
-        type: 3}
-      propertyPath: groundCheckRadius
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7823768926691505371, guid: df025bf70c985294a9b5993f50d12878,
-        type: 3}
-      propertyPath: wallCheckDistance
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7823768926691505371, guid: df025bf70c985294a9b5993f50d12878,
-        type: 3}
-      propertyPath: ledgeCheckVertical
-      value: 
-      objectReference: {fileID: 2093949483}
-    - target: {fileID: 7823768926691505371, guid: df025bf70c985294a9b5993f50d12878,
-        type: 3}
-      propertyPath: whatIsGround.m_Bits
-      value: 45056
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -146396,11 +146351,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5390577634276650247, guid: 676fcd1753b21e24d90e790c12c43223,
-        type: 3}
-      propertyPath: distanceTravel.x
-      value: 128
-      objectReference: {fileID: 0}
     - target: {fileID: 5398766208917279995, guid: 676fcd1753b21e24d90e790c12c43223,
         type: 3}
       propertyPath: m_Name
@@ -147858,12 +147808,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7536bfc938882345a918d3a88122d6b, type: 3}
---- !u!4 &2093949483 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4977279974406180941, guid: df025bf70c985294a9b5993f50d12878,
-    type: 3}
-  m_PrefabInstance: {fileID: 1474426253}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2094522959
 GameObject:
   m_ObjectHideFlags: 0
