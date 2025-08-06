@@ -11,6 +11,7 @@ namespace Bardent.CoreSystem
         public bool CanSetVelocity { get; set; }
         public bool IsHanging { get; set; }
         public bool IsCrouching { get; set; }
+        public bool IsClimbing { get; set; }
 
         public Vector2 CurrentVelocity { get; private set; }
 

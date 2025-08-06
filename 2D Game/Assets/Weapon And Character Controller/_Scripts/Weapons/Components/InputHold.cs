@@ -128,7 +128,7 @@ namespace Bardent.Weapons.Components
 
         private void StartHold(CombatInputs combatInput)
         {
-            if (movement.IsHanging || (movement.IsCrouching && collisionSenses.Ceiling)) return;
+            if (movement.IsHanging || movement.IsClimbing || (movement.IsCrouching && collisionSenses.Ceiling) || CoreClass.GameManager.instance.Attacking1) return;
             if (combatInput == CombatInputs.primary)
             {
                 currentWeaponData = Core.transform.parent.Find("PrimaryWeapon").GetComponent<WeaponGenerator>().Data;
@@ -249,6 +249,7 @@ namespace Bardent.Weapons.Components
             weapon.OnCurrentInputChange -= HandleCurrentInputChange;
             eventHandler.OnMinHoldPassed -= HandleMinHoldPassed;
             PlayerInputHandler.Instance.OnAttackCancelled -= Attack;
+            PlayerInputHandler.Instance.OnAttackStarted -= StartHold;
         }
     }
 }

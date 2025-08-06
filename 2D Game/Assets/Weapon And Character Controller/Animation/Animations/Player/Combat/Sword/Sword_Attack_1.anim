@@ -7,7 +7,7 @@ AnimationClip:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Sword_Attack_1
-  serializedVersion: 6
+  serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
   m_UseHighQualityCurve: 1
@@ -18,7 +18,8 @@ AnimationClip:
   m_ScaleCurves: []
   m_FloatCurves: []
   m_PPtrCurves:
-  - curve:
+  - serializedVersion: 2
+    curve:
     - time: 0
       value: {fileID: 1433432307, guid: ff49514b12a55a74cba29030d074dec7, type: 3}
     - time: 0.2
@@ -33,6 +34,7 @@ AnimationClip:
     path: 
     classID: 212
     script: {fileID: 0}
+    flags: 2
   m_SampleRate: 15
   m_WrapMode: 0
   m_Bounds:
@@ -47,6 +49,8 @@ AnimationClip:
       typeID: 212
       customType: 23
       isPPtrCurve: 1
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     pptrCurveMapping:
     - {fileID: 1433432307, guid: ff49514b12a55a74cba29030d074dec7, type: 3}
     - {fileID: -160760381, guid: ff49514b12a55a74cba29030d074dec7, type: 3}
@@ -92,8 +96,8 @@ AnimationClip:
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
-  - time: 0.2
-    functionName: StartMovementTrigger
+  - time: 0
+    functionName: Attack1BeganTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -101,6 +105,20 @@ AnimationClip:
     messageOptions: 0
   - time: 0.2
     functionName: AttackActionTrigger
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.2
+    functionName: StartMovementTrigger
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.33333334
+    functionName: Attack1EndedTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

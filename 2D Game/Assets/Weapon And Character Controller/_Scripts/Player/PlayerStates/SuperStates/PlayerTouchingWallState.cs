@@ -54,11 +54,15 @@ public class PlayerTouchingWallState : PlayerState
     public override void Enter()
     {
         base.Enter();
+
+        Movement.IsClimbing = true;
     }
 
     public override void Exit()
     {
         base.Exit();
+
+        Movement.IsClimbing = false;
     }
 
     public override void LogicUpdate()

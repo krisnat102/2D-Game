@@ -56,6 +56,8 @@ namespace CoreClass
         public Transform Audios { get; private set; }
         public Transform UIs { get; private set; }
         public Vector3 Checkpoint { get; set; }
+        public bool Attacking1 { get; set; }
+        public bool SpellCasting { get; set; }
         #endregion
 
         #region Unity Methods

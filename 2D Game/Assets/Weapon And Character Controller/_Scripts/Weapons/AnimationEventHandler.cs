@@ -11,7 +11,6 @@ namespace Bardent.Weapons
         public event Action OnAttackAction;
         public event Action OnMinHoldPassed;
 
-
         public event Action<AttackPhases> OnEnterAttackPhase;
 
 
@@ -20,6 +19,8 @@ namespace Bardent.Weapons
         private void StopMovementTrigger() => OnStopMovement?.Invoke();
         private void AttackActionTrigger() => OnAttackAction?.Invoke();
         private void MinHoldPassedTrigger() => OnMinHoldPassed?.Invoke();
+        private void Attack1BeganTrigger() => CoreClass.GameManager.instance.Attacking1 = true;
+        private void Attack1EndedTrigger() => CoreClass.GameManager.instance.Attacking1 = false;
 
 
         private void EnterAttackPhase(AttackPhases phase) => OnEnterAttackPhase?.Invoke(phase);

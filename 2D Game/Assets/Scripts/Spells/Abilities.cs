@@ -288,6 +288,10 @@ namespace Spells
             }
         }
 
+        //private void SpellStartHandler() => CoreClass.GameManager.instance.Attacking1 = true;
+
+        //private void SpellEndHandler() CoreClass.GameManager.instance.Attacking1 = false;
+
         private void SpellCooldown()
         {
             spellCooldown = false;
