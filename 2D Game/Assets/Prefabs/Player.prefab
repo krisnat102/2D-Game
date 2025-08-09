@@ -1204,9 +1204,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   footstep: {fileID: 1815806213139417494}
-  groundFS: {fileID: 8300000, guid: cc153a4498d83944cbf4af11b959ade7, type: 3}
-  grassFS: {fileID: 8300000, guid: b142f589e056d8d4894e3b39d871e74e, type: 3}
-  rockFS: {fileID: 8300000, guid: 042364ac2b60a2646aa674285e59558f, type: 3}
+  groundFS: {fileID: 8300000, guid: c225794521ddec74e96b7ddbefda0891, type: 3}
+  grassFS: {fileID: 8300000, guid: b6cd1fb9675fe814d9dc0cb050109b3d, type: 3}
+  rockFS: {fileID: 8300000, guid: 905e1ed4361c22c4e986485ea8b530e0, type: 3}
   groundLayer:
     serializedVersion: 2
     m_Bits: 4096
@@ -1233,8 +1233,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   landAudio: {fileID: 962883219459775941}
-  lowerPitch: 0.8
-  higherPitch: 1.2
+  lowerPitch: 0.7
+  higherPitch: 1.3
 --- !u!82 &1815806213139417494
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1345,7 +1345,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 787d4982294b09b4e8b14ecc36b83dbd, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.372
+  m_Volume: 0.24
   m_Pitch: 1
   Loop: 0
   Mute: 0

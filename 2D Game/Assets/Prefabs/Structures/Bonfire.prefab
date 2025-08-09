@@ -79,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 354
+  m_SortingOrder: 334
   m_Sprite: {fileID: 21300000, guid: 518e73413003a5b4cae24e25fe8f4732, type: 3}
   m_Color: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 1}
   m_FlipX: 0
@@ -602,7 +602,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6093529210290462105
 Transform:
   m_ObjectHideFlags: 0
@@ -659,7 +659,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 398
+  m_SortingOrder: 335
   m_Sprite: {fileID: -1059627417, guid: 7e3223fc31cc5a14aa65f04421a597a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -703,9 +703,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 8dd48c0c971cd5a4fa5da5ec1956c514,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: f2c018d78f2150e49aabd5f226f4aff7, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f5ec7e25d40e6024ebf1d6a423612244, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.201
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0

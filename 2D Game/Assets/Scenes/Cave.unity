@@ -53280,25 +53280,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 716151079}
     m_Modifications:
-    - target: {fileID: 1088298223981036444, guid: fd2bd2af9cae3824fb6d6e99f54cea79,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 334
-      objectReference: {fileID: 0}
     - target: {fileID: 1573465042814976008, guid: fd2bd2af9cae3824fb6d6e99f54cea79,
         type: 3}
       propertyPath: m_Name
       value: Bonfire
-      objectReference: {fileID: 0}
-    - target: {fileID: 3879217363134483131, guid: fd2bd2af9cae3824fb6d6e99f54cea79,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 335
-      objectReference: {fileID: 0}
-    - target: {fileID: 7241469024253176641, guid: fd2bd2af9cae3824fb6d6e99f54cea79,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8099470415807236308, guid: fd2bd2af9cae3824fb6d6e99f54cea79,
         type: 3}
