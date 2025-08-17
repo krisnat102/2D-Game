@@ -518,7 +518,7 @@ RectTransform:
   m_Father: {fileID: 6784563209634557958}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -54, y: 43.029}
   m_SizeDelta: {x: 2.6, y: -25.19}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -587,7 +587,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4764510929919165433
 Transform:
   m_ObjectHideFlags: 0
@@ -1223,8 +1223,13 @@ MonoBehaviour:
   leftPatrolBarrier: {fileID: 5653518710810702047}
   rightPatrolBarrier: {fileID: 7381287319459819055}
   attackSound: {fileID: 4252676777875645981}
+  attackSounds:
+  - {fileID: 4252676777875645981}
   damageSound: {fileID: 8189470094076985330}
+  damageSounds:
+  - {fileID: 8189470094076985330}
   rangedAttackSound: {fileID: 0}
+  rangedAttackSounds: []
   bossMusicPlayer: {fileID: 0}
   data: {fileID: 11400000, guid: dd0eb91bc266a7b4786a685dd8d1459a, type: 2}
   deathEffect: {fileID: 8122934081789687665}

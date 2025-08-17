@@ -682,7 +682,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &516992671041194883
 Transform:
   m_ObjectHideFlags: 0
@@ -1318,8 +1318,13 @@ MonoBehaviour:
   leftPatrolBarrier: {fileID: 8661937444344185991}
   rightPatrolBarrier: {fileID: 7451294829710987069}
   attackSound: {fileID: 774144922539681805}
+  attackSounds:
+  - {fileID: 774144922539681805}
   damageSound: {fileID: 3095209950951488164}
+  damageSounds:
+  - {fileID: 3095209950951488164}
   rangedAttackSound: {fileID: 0}
+  rangedAttackSounds: []
   bossMusicPlayer: {fileID: 0}
   data: {fileID: 11400000, guid: 9972b22af0715d1408a556a245ecc72e, type: 2}
   deathEffect: {fileID: 5649038165207979259}

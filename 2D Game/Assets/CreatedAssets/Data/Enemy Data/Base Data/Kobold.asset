@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2121936274c14654a9abc6a3ee4178f7, type: 3}
   m_Name: Kobold
   m_EditorClassIdentifier: 
-  enemyName: Nightborne
-  maxHp: 40
+  enemyName: Kobold
+  maxHp: 60
   attackSpeed: 1.2
   speed: 150
   damage: 15
@@ -52,11 +52,11 @@ MonoBehaviour:
   dashCooldown: 0
   dashStrength: 0
   dashDuration: 0
-  minCoinsDropped: 16
-  maxCoinsDropped: 31
-  itemDropChance: 0
+  minCoinsDropped: 12
+  maxCoinsDropped: 23
+  itemDropChance: 0.225
   spellDropChance: 0
-  itemDrop: {fileID: 0}
+  itemDrop: {fileID: 11400000, guid: 13d00a2078f201747b00e801dd92ffdf, type: 2}
   spellDrop: {fileID: 0}
   pitchVarianceAttack:
   - 0.85
@@ -65,14 +65,14 @@ MonoBehaviour:
   - 0
   - 0
   pitchVarianceDamage:
-  - 0.6
-  - 1
+  - 0.9
+  - 1.1
   patrolPauseTime: 4
   patrolSpeed: 10
   dummy: 0
   lookAtPlayer: 1
   facingDirection: 1
-  patrol: 0
+  patrol: 1
   wakeUpTime: 0
   boss: 0
   bossProjectile: {fileID: 0}

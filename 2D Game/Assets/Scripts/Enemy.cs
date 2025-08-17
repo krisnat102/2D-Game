@@ -1,8 +1,6 @@
-// ReSharper disable Unity.PerformanceCriticalCodeInvocation
-
-// ReSharper disable PossibleLossOfFraction
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using Bardent.CoreSystem;
 using Inventory;
@@ -37,9 +35,11 @@ namespace Krisnat
         [SerializeField] private Transform leftPatrolBarrier, rightPatrolBarrier;
 
         [Header("Sound")]
-        [SerializeField] private AudioSource attackSound;
-        [SerializeField] private AudioSource damageSound;
-        [SerializeField] private AudioSource rangedAttackSound;
+        [SerializeField] private List<AudioSource> attackSounds;
+        [SerializeField] private List<AudioSource> damageSounds;
+
+        [SerializeField] private List<AudioSource> rangedAttackSounds;
+
         [SerializeField] private AudioSource bossMusicPlayer;
 
         [Header("Other")]
@@ -135,8 +135,8 @@ namespace Krisnat
             if (Data.dummy) return;
 
             if (DashAIRange && DashAIRange.InRange && Data.canDash && !dashCooldown && !AttackCooldown && !Data.boss) Dash();
-            else if (AttackAIRange.InRange && !Data.ranged && !Data.boss) 
-            { 
+            else if (AttackAIRange.InRange && !Data.ranged && !Data.boss)
+            {
                 Attack(true);
             }
             else if (AttackAIRange.InSight && Data.ranged && !Data.boss)
@@ -168,7 +168,7 @@ namespace Krisnat
             }
 
             //FacingDirection = transform.localScale.x > 0 ? 1 : -1;
-            FacingDirection = (int) Mathf.Sign(transform.localScale.x);
+            FacingDirection = (int)Mathf.Sign(transform.localScale.x);
 
             #endregion
 
@@ -190,7 +190,7 @@ namespace Krisnat
                 }
                 else aiPath.enabled = false;
             }
-        
+
             if (rooted)
             {
                 rb.velocity = Vector3.zero;
@@ -277,7 +277,7 @@ namespace Krisnat
                 {
                     rooted = true;
                 }
-                else if(PlayerTrans.transform.position.y > FirePoint.position.y)
+                else if (PlayerTrans.transform.position.y > FirePoint.position.y)
                 {
                     rb.velocity = new Vector2(0, 6);
                 }
@@ -307,7 +307,7 @@ namespace Krisnat
                             animator.SetBool(Idle, true);
                         }
                     }
-                
+
                     if (ContainsParam(animator, "jump"))
                     {
                         if (rb.velocity.y != 0)
@@ -323,7 +323,8 @@ namespace Krisnat
                     }
                 }
 
-                if (animator.GetBool(Attack1)) {
+                if (animator.GetBool(Attack1))
+                {
                     if (ContainsParam(animator, "jump")) animator.SetBool(Jump, false);
                     if (ContainsParam(animator, "run")) animator.SetBool(Run, false);
                     if (ContainsParam(animator, "idle")) animator.SetBool(Idle, false);
@@ -368,14 +369,14 @@ namespace Krisnat
             #endregion
 
             if (Data.dummy) return;
-        
+
             #region Calculations
             EnemyLevelScale = level * 0.1f + 0.9f;
 
             Sleeping = Data.wakeUpTime > 0;
 
             hp = Data.maxHp * EnemyLevelScale;
-            if(hpBar) hpBar.maxValue = Data.maxHp * EnemyLevelScale;
+            if (hpBar) hpBar.maxValue = Data.maxHp * EnemyLevelScale;
 
             coinsDropped = UnityEngine.Random.Range(Data.minCoinsDropped, Data.maxCoinsDropped);
 
@@ -440,10 +441,11 @@ namespace Krisnat
                         Die();
                         return;
                     }
-                    else if (damageSound)
+                    else if (damageSounds.Count > 0)
                     {
-                        damageSound.pitch = UnityEngine.Random.Range(Data.pitchVarianceDamage[0], Data.pitchVarianceDamage[1]);
-                        damageSound.Play();
+                        int n = UnityEngine.Random.Range(0, damageSounds.Count);
+                        damageSounds[n].pitch = UnityEngine.Random.Range(Data.pitchVarianceDamage[0], Data.pitchVarianceDamage[1]);
+                        damageSounds[n].Play();
                     }
 
                     if (ContainsParam(animator, "hurt")) animator.SetBool(Hurt, true);
@@ -460,7 +462,7 @@ namespace Krisnat
 
                     TakeKnockback(damage + knockback);
 
-                    if(DetectAIRange) DetectAIRange.Alerted = true;
+                    if (DetectAIRange) DetectAIRange.Alerted = true;
                 }
             }
         }
@@ -501,7 +503,7 @@ namespace Krisnat
             if (Data.itemDrop)
             {
                 var random = new System.Random();
-                if(random.NextDouble() <= Data.itemDropChance)
+                if (random.NextDouble() <= Data.itemDropChance)
                 {
                     InventoryManager.Instance.Add(Data.itemDrop, true);
                 }
@@ -511,10 +513,10 @@ namespace Krisnat
                 }
             }
 
-            if(Data.maxCoinsDropped > 0)
+            if (Data.maxCoinsDropped > 0)
             {
                 var coins = GetComponentInChildren<CoinPickup>()?.gameObject;
-                if(coins) coins.transform.parent = null;
+                if (coins) coins.transform.parent = null;
                 coins?.GetComponent<ParticleSystem>().Emit(coinsDropped);
             }
 
@@ -561,7 +563,7 @@ namespace Krisnat
                 StartCoroutine(AimDelayCoroutine(Data.aimDelay));
                 if (ContainsParam(animator, "ranged")) animator.SetBool(Ranged, true);
 
-                if (rangedAttackSound) StartCoroutine(PlayRangedAttackSoundCoroutine(Data.rangedAttackSoundDelay));
+                if (rangedAttackSounds.Count > 0) StartCoroutine(PlayRangedAttackSoundCoroutine(Data.rangedAttackSoundDelay));
             }
 
             if (Data.rootWhenAttacking)
@@ -652,7 +654,7 @@ namespace Krisnat
         }
 
         #endregion
-    
+
         #region Spawners
         private void AttackSpawn(bool bossMelee)
         {
@@ -676,7 +678,7 @@ namespace Krisnat
                     if (Data.fixRotationWhenAttacking) fixRotation = false;
 
                     return;
-                } 
+                }
 
                 GameObject attackProjectile = Instantiate(Data.bossProjectile, FirePoint2);
 
@@ -690,21 +692,21 @@ namespace Krisnat
 
                 return;
             }
-        
-            if(data.boss) cameraShake.ShakeCamera(0.5f, 1.2f);
+
+            if (data.boss) cameraShake.ShakeCamera(0.5f, 1.2f);
 
             int calibrate = 1;
             if (FacingDirection == 1 && Data.fixRotationWhenAttacking)
             {
                 calibrate = -1;
             }
-            else if(Data.fixRotationWhenAttacking)
+            else if (Data.fixRotationWhenAttacking)
             {
                 calibrate = 1;
             }
 
             offset.Set(
-                transform.position.x + (Data.hitBox.center.x * FacingDirection * calibrate * - 1),
+                transform.position.x + (Data.hitBox.center.x * FacingDirection * calibrate * -1),
                 transform.position.y + Data.hitBox.center.y
             );
 
@@ -795,7 +797,7 @@ namespace Krisnat
             yield return new WaitForSeconds(delay);
             AttackSpawn(type);
         }
-    
+
         private IEnumerator AimDelayCoroutine(float delay)
         {
             yield return new WaitForSeconds(delay);
@@ -823,14 +825,15 @@ namespace Krisnat
         {
             yield return new WaitForSeconds(delay);
 
-            rangedAttackSound.pitch = UnityEngine.Random.Range(Data.pitchVarianceRangedAttack[0], Data.pitchVarianceRangedAttack[1]);
-            rangedAttackSound.Play();
+            int n = UnityEngine.Random.Range(0, damageSounds.Count);
+            damageSounds[n].pitch = UnityEngine.Random.Range(Data.pitchVarianceDamage[0], Data.pitchVarianceDamage[1]);
+            damageSounds[n].Play();
         }
 
         private IEnumerator StartIdleCoroutine(float delay, string boolToDisable)
         {
             yield return new WaitForSeconds(delay);
-            if(ContainsParam(animator, "idle") && ContainsParam(animator, boolToDisable))
+            if (ContainsParam(animator, "idle") && ContainsParam(animator, boolToDisable))
             {
                 animator.SetBool(boolToDisable, false);
                 animator.SetBool(Idle, true);
@@ -853,10 +856,11 @@ namespace Krisnat
         #region Helper Methods
         private void AttackHelper()
         {
-            if (attackSound)
+            if (attackSounds.Count > 0)
             {
-                attackSound.pitch = UnityEngine.Random.Range(Data.pitchVarianceAttack[0], Data.pitchVarianceAttack[1]);
-                attackSound.Play();
+                int n = UnityEngine.Random.Range(0, attackSounds.Count);
+                attackSounds[n].pitch = UnityEngine.Random.Range(Data.pitchVarianceAttack[0], Data.pitchVarianceAttack[1]);
+                attackSounds[n].Play();
             }
 
             if (Data.fixRotationWhenAttacking) fixRotation = false;
@@ -876,7 +880,7 @@ namespace Krisnat
         public bool ContainsParam(Animator anim, string paramName)
         {
             if (!anim) return false;
-        
+
             foreach (AnimatorControllerParameter param in anim.parameters)
             {
                 if (param.name == paramName) return true;
