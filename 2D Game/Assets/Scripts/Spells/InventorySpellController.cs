@@ -15,7 +15,7 @@ namespace Spells
         private Image spellImage;
         private TMP_Text spellName, spellPrice, spellValue, spellDescription;
         private GameObject description;
-
+        
         public Image SelectedItemIndicator { get => selectedItemIndicator; private set => selectedItemIndicator = value; }
         public GameObject Description1 { get => description; private set => description = value; }
 
