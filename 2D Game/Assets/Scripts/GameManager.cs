@@ -51,6 +51,7 @@ namespace CoreClass
         public List<string> BossesKilled { get; private set; }
         public List<string> BonfiresLit { get; private set; }
         public List<string> Battles { get; private set; }
+        public List<string> TempPortalsUsed { get; private set; }
         public Player Player { get => player; private set => player = value; }
         public Transform Particles { get; private set; }
         public Transform Audios { get; private set; }
@@ -76,6 +77,7 @@ namespace CoreClass
             BossesKilled = new List<string>();
             BonfiresLit = new List<string>();
             Battles = new List<string>();
+            TempPortalsUsed = new List<string>();
 
             Player = playerGO?.GetComponent<Player>();
             levelHandler = CoreClass.GameManager.instance.GetComponent<LevelHandler>();
@@ -156,6 +158,9 @@ namespace CoreClass
 
             if (data.battlesId != null) Battles = data.battlesId.ToList();
             else Battles.Clear();
+
+            if (data.portalsId != null) TempPortalsUsed = data.portalsId.ToList();
+            else TempPortalsUsed.Clear();
 
             //stats.Health.SetCurrentStat(data.currentHealth);
             //stats.Mana.SetCurrentStat(data.currentMana);
@@ -254,6 +259,9 @@ namespace CoreClass
 
             if (data.battlesId != null) Battles = data.battlesId.ToList();
             else Battles.Clear();
+
+            if (data.portalsId != null) TempPortalsUsed = data.portalsId.ToList();
+            else TempPortalsUsed.Clear();
 
             Player.PlayerData.SetLevel(data.level);
             stats.health.SetMaxStat(data.maxHealth);

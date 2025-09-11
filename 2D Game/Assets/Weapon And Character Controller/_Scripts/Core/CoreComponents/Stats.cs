@@ -11,10 +11,10 @@ namespace Bardent.CoreSystem
     {
         public static Stats Instance;
 
-        [field: SerializeField] public Stat health { get; private set; }
+        [field: SerializeField] public Stat health { get; set; }
         [field: SerializeField] public Stat poise { get; private set; }
         [field: SerializeField] public Stat stam { get; private set; }
-        [field: SerializeField] public Stat mana { get; private set; }
+        [field: SerializeField] public Stat mana { get; set; }
         List<Stat> stats = new();
 
         [Header("UI")]

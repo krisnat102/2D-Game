@@ -18,7 +18,7 @@ namespace Krisnat.Assets.Scripts
         public float[] position;
         public int[] itemsId, equippedItemsId, spellsId;
         public int[] activeSpellsId, activeAbilitiesId;
-        public string[] itemsTakenId, bossesKilledId, bonfiresLitId, battlesId;
+        public string[] itemsTakenId, bossesKilledId, bonfiresLitId, battlesId, portalsId;
         public bool levelStarted;
 
         public PlayerSaveData(Player player)
@@ -52,6 +52,7 @@ namespace Krisnat.Assets.Scripts
             bossesKilledId = CoreClass.GameManager.instance.BossesKilled.ToArray();
             bonfiresLitId = CoreClass.GameManager.instance.BonfiresLit.ToArray();
             battlesId = CoreClass.GameManager.instance.Battles.ToArray();
+            portalsId = CoreClass.GameManager.instance.TempPortalsUsed.ToArray();
             currentLevel = MenuManager.instance.CurrentLevel;
             position = new float[3];
 
