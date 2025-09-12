@@ -518,7 +518,7 @@ RectTransform:
   m_Father: {fileID: 6784563209634557958}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -54, y: 43.029}
   m_SizeDelta: {x: 2.6, y: -25.19}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -573,7 +573,7 @@ GameObject:
   - component: {fileID: 4695980995886209105}
   - component: {fileID: 1487392233328447310}
   - component: {fileID: 2759915732603451811}
-  - component: {fileID: 5043809607806589971}
+  - component: {fileID: 7791374332399937363}
   - component: {fileID: 4252676777875645981}
   - component: {fileID: 8189470094076985330}
   - component: {fileID: 37509356564524837}
@@ -587,7 +587,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4764510929919165433
 Transform:
   m_ObjectHideFlags: 0
@@ -697,10 +697,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1.6
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 5
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -744,7 +744,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.13999999, y: -0.18856668}
+  m_Offset: {x: -0.13999999, y: -0.13782263}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -755,16 +755,16 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.401155, y: 0.7464094}
+  m_Size: {x: 0.401155, y: 0.6449213}
   m_EdgeRadius: 0
---- !u!58 &5043809607806589971
-CircleCollider2D:
+--- !u!70 &7791374332399937363
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8761566621068871777}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -789,9 +789,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.14, y: -0.3810299}
-  serializedVersion: 2
-  m_Radius: 0.20053959
+  m_Offset: {x: -0.1453247, y: -0.198493}
+  m_Size: {x: 0.40090942, y: 0.75536156}
+  m_Direction: 0
 --- !u!82 &4252676777875645981
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1222,13 +1222,10 @@ MonoBehaviour:
   dashAIRange: {fileID: 0}
   leftPatrolBarrier: {fileID: 5653518710810702047}
   rightPatrolBarrier: {fileID: 7381287319459819055}
-  attackSound: {fileID: 4252676777875645981}
   attackSounds:
   - {fileID: 4252676777875645981}
-  damageSound: {fileID: 8189470094076985330}
   damageSounds:
   - {fileID: 8189470094076985330}
-  rangedAttackSound: {fileID: 0}
   rangedAttackSounds: []
   bossMusicPlayer: {fileID: 0}
   data: {fileID: 11400000, guid: dd0eb91bc266a7b4786a685dd8d1459a, type: 2}

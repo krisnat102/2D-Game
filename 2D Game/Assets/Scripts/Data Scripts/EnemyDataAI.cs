@@ -10,6 +10,8 @@ public class EnemyDataAI : ScriptableObject
     [Header("AI Physics")]
     public float accelerationSpeed = 2000f;
     public float maxSpeed = 200f;
+    public float maxSpeedMultiplier = 1.1f;
+    public float minSpeedMultiplier = 0.9f;
     public float minimalFinalForceDistance = 0.3f;
     public float nextWaypointDistance = 3f;
     public float jumpNodeHeightRequirement = 0.8f;

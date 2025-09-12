@@ -445,10 +445,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1.6
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 5
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -970,9 +970,9 @@ MonoBehaviour:
   dashAIRange: {fileID: 0}
   leftPatrolBarrier: {fileID: 749469724392114241}
   rightPatrolBarrier: {fileID: 9194668936873596508}
-  attackSound: {fileID: 614326442051199814}
-  damageSound: {fileID: 7853345608928757355}
-  rangedAttackSound: {fileID: 0}
+  attackSounds: []
+  damageSounds: []
+  rangedAttackSounds: []
   bossMusicPlayer: {fileID: 0}
   data: {fileID: 11400000, guid: ca4662ee9749a7e4ca90ebb3fa360d05, type: 2}
   deathEffect: {fileID: 2573468536882115204}

@@ -12,7 +12,7 @@ public class AttackHit : MonoBehaviour
     {
         enemy = GetComponentInParent<Enemy>();
         Invoke(nameof(FinishAttack), 0.5f);
-        damage = enemy.Data.damage * enemy.EnemyLevelScale;
+        damage = Random.Range(enemy.Data.minDamage, enemy.Data.maxDamage) * enemy.EnemyLevelScale;
     }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)

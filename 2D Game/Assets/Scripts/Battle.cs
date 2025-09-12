@@ -12,7 +12,7 @@ namespace Krisnat
         [SerializeField] private string battleId;
         [SerializeField] private bool bossBattle;
         [SerializeField] private Battle previousBattle;
-        [SerializeField] private GameObject objectToEnable;
+        [SerializeField] private GameObject[] objectsToEnable;
         [SerializeField] private Door doorToUnlock;
         private List<Enemy> encounter;
 
@@ -87,7 +87,7 @@ namespace Krisnat
         private void EndBattle(bool playDoorAudio)
         {
             End = true;
-            if (objectToEnable) objectToEnable.SetActive(true);
+            if (objectsToEnable.Length > 0) foreach (var obj in objectsToEnable) obj.SetActive(true);
             if (doorToUnlock) doorToUnlock.Open(playDoorAudio);
 
             gameObject.SetActive(false);

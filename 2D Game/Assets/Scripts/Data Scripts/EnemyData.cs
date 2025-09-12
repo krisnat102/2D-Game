@@ -13,10 +13,11 @@ public class EnemyData : ScriptableObject
     [Header("General Stats")]
     public string enemyName;
     [FormerlySerializedAs("maxHP")] public float maxHp = 100f;
+    public float minHp = 99f;
     [Tooltip("Higher value is lower attack speed")]
     public float attackSpeed = 1f;
-    public float speed = 200f;
-    public float damage = 20f;
+    [FormerlySerializedAs("damage")] public float maxDamage = 20f;
+    public float minDamage = 20f;
     public float actionCooldown = 0.5f;
 
     [Header("Knockback")]

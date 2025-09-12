@@ -8,6 +8,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 819807250044186794, guid: 984c1eb7c6209244ca29954bcf0817de,
+        type: 3}
+      propertyPath: m_Mass
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 819807250044186794, guid: 984c1eb7c6209244ca29954bcf0817de,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 871494391406409998, guid: 984c1eb7c6209244ca29954bcf0817de,
         type: 3}
       propertyPath: fadeTime
@@ -43,7 +53,7 @@ PrefabInstance:
     - target: {fileID: 3941070619452417692, guid: 984c1eb7c6209244ca29954bcf0817de,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5547110955581693313, guid: 984c1eb7c6209244ca29954bcf0817de,
         type: 3}

@@ -697,10 +697,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1.6
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 5
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -902,7 +902,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: a74002b71fbe97641a08f0b8e571ed01, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.668
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -999,8 +999,8 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 8d702245957132d41bbf0fde4801798d, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.532
+  m_Pitch: 0.87
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -1168,14 +1168,11 @@ MonoBehaviour:
   dashAIRange: {fileID: 0}
   leftPatrolBarrier: {fileID: 8008197743966559140}
   rightPatrolBarrier: {fileID: 4823593313071726670}
-  attackSound: {fileID: 7805735606293865753}
   attackSounds:
   - {fileID: 7805735606293865753}
-  damageSound: {fileID: 6405919172529219812}
   damageSounds:
   - {fileID: 2017668532742687057}
   - {fileID: 6405919172529219812}
-  rangedAttackSound: {fileID: 0}
   rangedAttackSounds: []
   bossMusicPlayer: {fileID: 0}
   data: {fileID: 11400000, guid: 7546870716899794e8b6bcff3079f7d4, type: 2}
@@ -1195,7 +1192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9100671da9949654aa05b300dc0da08e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataAI: {fileID: 11400000, guid: 756e7b507f0206a4cb5b46f8c4ba4639, type: 2}
+  dataAI: {fileID: 11400000, guid: addcf790a4f70534fb1f3a8d7dd64872, type: 2}
   target: {fileID: 0}
   WhatIsGround:
     serializedVersion: 2

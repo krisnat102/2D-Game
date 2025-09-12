@@ -52,6 +52,7 @@ namespace Krisnat
 
         #region Other Variables
         private int coinsDropped;
+        private float damage;
         private float offsetXSave;
         private float hp;
         private bool immune;
@@ -375,10 +376,12 @@ namespace Krisnat
 
             Sleeping = Data.wakeUpTime > 0;
 
-            hp = Data.maxHp * EnemyLevelScale;
-            if (hpBar) hpBar.maxValue = Data.maxHp * EnemyLevelScale;
+            hp = UnityEngine.Random.Range(Data.minHp, Data.maxHp) * EnemyLevelScale;
+            if (hpBar) hpBar.maxValue = hp;
 
             coinsDropped = UnityEngine.Random.Range(Data.minCoinsDropped, Data.maxCoinsDropped);
+
+            damage = UnityEngine.Random.Range(Data.minDamage, Data.maxDamage);
 
             SpecialRangedAttackCooldown = true;
             StartCoroutine(ChangeBoolCoroutine(Data.specialRangedAttackCooldown, newValue => SpecialRangedAttackCooldown = newValue[0], new[] { false }));
@@ -722,7 +725,7 @@ namespace Krisnat
 
                 if (playerDetected)
                 {
-                    damageReceiver.Damage(Data.damage * EnemyLevelScale, Data.damageType);
+                    damageReceiver.Damage(damage * EnemyLevelScale, Data.damageType);
                 }
             }
         }

@@ -682,7 +682,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &516992671041194883
 Transform:
   m_ObjectHideFlags: 0
@@ -792,10 +792,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1.6
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 5
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1317,13 +1317,10 @@ MonoBehaviour:
   dashAIRange: {fileID: 0}
   leftPatrolBarrier: {fileID: 8661937444344185991}
   rightPatrolBarrier: {fileID: 7451294829710987069}
-  attackSound: {fileID: 774144922539681805}
   attackSounds:
   - {fileID: 774144922539681805}
-  damageSound: {fileID: 3095209950951488164}
   damageSounds:
   - {fileID: 3095209950951488164}
-  rangedAttackSound: {fileID: 0}
   rangedAttackSounds: []
   bossMusicPlayer: {fileID: 0}
   data: {fileID: 11400000, guid: 9972b22af0715d1408a556a245ecc72e, type: 2}
@@ -1404,8 +1401,8 @@ MonoBehaviour:
     m_Bits: 8192
   minVolume: 0.08
   maxVolume: 0.16
-  minPitch: 0.8
-  maxPitch: 1.2
+  minPitch: 0.75
+  maxPitch: 1.11
 --- !u!1001 &3004517011849606685
 PrefabInstance:
   m_ObjectHideFlags: 0

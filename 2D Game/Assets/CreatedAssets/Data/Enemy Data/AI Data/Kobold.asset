@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75c63c27f2ce35d4dbc9973d423228ad, type: 3}
-  m_Name: Skeleton
+  m_Name: Kobold
   m_EditorClassIdentifier: 
   activateDistance: 50
   pathUpdateTime: 0.5
-  accelerationSpeed: 1500
-  maxSpeed: 3
+  accelerationSpeed: 2200
+  maxSpeed: 25
   maxSpeedMultiplier: 1.1
   minSpeedMultiplier: 0.9
-  minimalFinalForceDistance: 2
+  minimalFinalForceDistance: 1.2
   nextWaypointDistance: 3
   jumpNodeHeightRequirement: 0.9
   jumpModifier: 0

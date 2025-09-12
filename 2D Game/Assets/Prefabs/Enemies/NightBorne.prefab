@@ -630,7 +630,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5208345444342046040
 Transform:
   m_ObjectHideFlags: 0
@@ -742,10 +742,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1.6
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 5
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1116,13 +1116,10 @@ MonoBehaviour:
   dashAIRange: {fileID: 0}
   leftPatrolBarrier: {fileID: 6481338355655135779}
   rightPatrolBarrier: {fileID: 6824778548687948625}
-  attackSound: {fileID: 8268307264847205086}
   attackSounds:
   - {fileID: 8268307264847205086}
-  damageSound: {fileID: 8043233464417672258}
   damageSounds:
   - {fileID: 8043233464417672258}
-  rangedAttackSound: {fileID: 0}
   rangedAttackSounds: []
   bossMusicPlayer: {fileID: 0}
   data: {fileID: 11400000, guid: 0ca51e952a305004c8caf9b2bec93d89, type: 2}

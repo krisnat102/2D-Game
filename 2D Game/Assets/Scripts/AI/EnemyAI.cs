@@ -3,7 +3,8 @@ using Pathfinding;
 using CoreClass;
 using Krisnat;
 
-public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl4I&ab_channel=Etredal
+//https://www.youtube.com/watch?v=sWqRfygpl4I&ab_channel=Etredal
+public class EnemyAI : MonoBehaviour
 {
     #region Init variables
     [SerializeField] private EnemyDataAI dataAI;
@@ -18,6 +19,9 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
     private Path path;
     private int currentWaypoint = 0;
     private bool isGrounded = false;
+    private float speedMult;
+    private float maxSpeed;
+    private float acccelerationSpeed;
     private Seeker seeker;
     private Rigidbody2D rb;
     private Animator animator;
@@ -32,6 +36,10 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
 
     public void Start()
     {
+        speedMult = Random.Range(dataAI.minSpeedMultiplier, dataAI.maxSpeedMultiplier);
+        maxSpeed = dataAI.maxSpeed * speedMult;
+        acccelerationSpeed = dataAI.accelerationSpeed * speedMult;
+
         enemy = GetComponent<Enemy>();
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
@@ -95,10 +103,10 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
         {
             Vector2 directionToTarget = ((Vector2)target.position - rb.position).normalized;
             Vector2 finalForce;
-            if (dataAI.minimalFinalForceDistance < Vector2.Distance(rb.position, target.position)) finalForce = directionToTarget * dataAI.accelerationSpeed * Time.deltaTime;
+            if (dataAI.minimalFinalForceDistance < Vector2.Distance(rb.position, target.position)) finalForce = directionToTarget * acccelerationSpeed * Time.deltaTime;
             else finalForce = Vector2.zero;
 
-            if (rb.velocity.magnitude < dataAI.maxSpeed)
+            if (rb.velocity.magnitude < maxSpeed)
             {
                 rb.AddForce(finalForce);
             }
@@ -109,17 +117,17 @@ public class EnemyAI : MonoBehaviour //https://www.youtube.com/watch?v=sWqRfygpl
         //isGrounded = Physics2D.Raycast(transform.position, -Vector3.up, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset); //check if colliding with smth
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized; // calculates direction
-        Vector2 force = direction * (dataAI.accelerationSpeed * Time.deltaTime);
+        Vector2 force = direction * (acccelerationSpeed * Time.deltaTime);
 
         if (dataAI.jumpEnabled && IsGrounded) //jump
         {
             if (direction.y > dataAI.jumpNodeHeightRequirement)
             {
-                rb.AddForce(Vector2.up * (dataAI.accelerationSpeed * dataAI.jumpModifier));
+                rb.AddForce(Vector2.up * (acccelerationSpeed * dataAI.jumpModifier));
             }
         }
 
-        if (rb.velocity.magnitude < dataAI.maxSpeed) //movement
+        if (rb.velocity.magnitude < maxSpeed) //movement
         {
             rb.AddForce(force);
         } 
