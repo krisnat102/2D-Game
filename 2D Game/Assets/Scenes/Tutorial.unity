@@ -765,6 +765,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightBandit
       objectReference: {fileID: 0}
+    - target: {fileID: 4499116942018295165, guid: 2594cf213d0bcfc449f7f40e0dc57516,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4840909459786244085, guid: 2594cf213d0bcfc449f7f40e0dc57516,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1457,11 +1462,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2005718070}
     m_Modifications:
-    - target: {fileID: -3302054197486751085, guid: 66313505770736a4cb2711993b6144ef,
-        type: 3}
-      propertyPath: footstep
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4077956901317807324, guid: 66313505770736a4cb2711993b6144ef,
         type: 3}
       propertyPath: target
@@ -1526,6 +1526,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NightBorne
+      objectReference: {fileID: 0}
+    - target: {fileID: 6873346824503441758, guid: 66313505770736a4cb2711993b6144ef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1622,6 +1627,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Skeleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8761566621068871777, guid: e9069d7f1d2540c48a55e75ff5c11a17,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -133213,12 +133223,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &766642072 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5398766208917279995, guid: 676fcd1753b21e24d90e790c12c43223,
-    type: 3}
-  m_PrefabInstance: {fileID: 800841527}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &766642073 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2023183523097383325, guid: 676fcd1753b21e24d90e790c12c43223,
@@ -137535,7 +137539,7 @@ MonoBehaviour:
   battleId: 
   bossBattle: 1
   previousBattle: {fileID: 0}
-  objectToEnable: {fileID: 1900760230}
+  objectsToEnable: []
   doorToUnlock: {fileID: 0}
 --- !u!50 &1198961161
 Rigidbody2D:
@@ -137791,7 +137795,7 @@ MonoBehaviour:
   battleId: 
   bossBattle: 0
   previousBattle: {fileID: 1867050458}
-  objectToEnable: {fileID: 0}
+  objectsToEnable: []
   doorToUnlock: {fileID: 0}
 --- !u!50 &1239892940
 Rigidbody2D:
@@ -145998,7 +146002,7 @@ MonoBehaviour:
   battleId: 
   bossBattle: 0
   previousBattle: {fileID: 1239892939}
-  objectToEnable: {fileID: 0}
+  objectsToEnable: []
   doorToUnlock: {fileID: 0}
 --- !u!50 &1681739041
 Rigidbody2D:
@@ -147003,7 +147007,7 @@ MonoBehaviour:
   battleId: 
   bossBattle: 0
   previousBattle: {fileID: 0}
-  objectToEnable: {fileID: 0}
+  objectsToEnable: []
   doorToUnlock: {fileID: 0}
 --- !u!61 &1862713503
 BoxCollider2D:
@@ -147129,7 +147133,7 @@ MonoBehaviour:
   battleId: 
   bossBattle: 0
   previousBattle: {fileID: 1862713502}
-  objectToEnable: {fileID: 0}
+  objectsToEnable: []
   doorToUnlock: {fileID: 0}
 --- !u!50 &1867050459
 Rigidbody2D:
@@ -147294,12 +147298,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5378010185956696075, guid: 0fb3b8ae511d3944c83f9649e551c20f,
     type: 3}
   m_PrefabInstance: {fileID: 16946908}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1900760230 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5398766208917279995, guid: 676fcd1753b21e24d90e790c12c43223,
-    type: 3}
-  m_PrefabInstance: {fileID: 1336449313}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1910416799 stripped
 MonoBehaviour:
@@ -148235,7 +148233,7 @@ MonoBehaviour:
   battleId: 
   bossBattle: 0
   previousBattle: {fileID: 1681739040}
-  objectToEnable: {fileID: 766642072}
+  objectsToEnable: []
   doorToUnlock: {fileID: 71175353}
 --- !u!50 &2140567248
 Rigidbody2D:
@@ -148456,6 +148454,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HeavyBandit
+      objectReference: {fileID: 0}
+    - target: {fileID: 8989253198140129543, guid: 03e556afcc2810e42bf5899a59d82108,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -148786,6 +148789,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 151194656}
     m_Modifications:
+    - target: {fileID: 2467019839527608889, guid: 17f9c64fe6f9547459b2f39f98b9f737,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2467019839527608889, guid: 17f9c64fe6f9547459b2f39f98b9f737,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -149591,11 +149599,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2005718070}
     m_Modifications:
-    - target: {fileID: 462718510449811318, guid: f625ae230875dfc4fa25f002ff6b4086,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1484303247555307131, guid: f625ae230875dfc4fa25f002ff6b4086,
         type: 3}
       propertyPath: TriggerModule.primitives.Array.data[0]
@@ -149606,16 +149609,6 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 653970885}
-    - target: {fileID: 3660722681134935234, guid: f625ae230875dfc4fa25f002ff6b4086,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3660722681134935234, guid: f625ae230875dfc4fa25f002ff6b4086,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7910976866335650398, guid: f625ae230875dfc4fa25f002ff6b4086,
         type: 3}
       propertyPath: m_Name

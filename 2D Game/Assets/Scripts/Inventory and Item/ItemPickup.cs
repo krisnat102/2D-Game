@@ -82,6 +82,7 @@ namespace Inventory
             if (chest)
             {
                 canvas = GetComponentInChildren<Canvas>();
+                animator = GetComponent<Animator>();
             }
         }
         #endregion
