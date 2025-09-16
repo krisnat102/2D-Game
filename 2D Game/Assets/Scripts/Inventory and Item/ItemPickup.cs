@@ -90,9 +90,9 @@ namespace Inventory
         public void Pickup()
         {
             if (arrowOnly) return;
-            if (!UIManager.Instance.NoteOpen) PlayerInputHandler.Instance.UseUseInput();
+            if (!UIManager.instance.NoteOpen) PlayerInputHandler.Instance.UseUseInput();
 
-            if (pickUpAudio && !UIManager.Instance.NoteOpen)
+            if (pickUpAudio && !UIManager.instance.NoteOpen)
             {
                 if (!chest && !Note) pickUpAudio.gameObject.transform.parent = CoreClass.GameManager.instance.Audios;
                 pickUpAudio.pitch = Random.Range(lowerPitchRange, higherPitchRange);
@@ -103,17 +103,17 @@ namespace Inventory
             {
                 if (noteUIPreset)
                 {
-                    UIManager.Instance.NoteUI.SetActive(true);
+                    UIManager.instance.NoteUI.SetActive(true);
                     noteUIPreset.SetActive(true);
                 }
                 else
                 {
-                    UIManager.Instance.NoteUI.SetActive(true);
-                    UIManager.Instance.NoteText.gameObject.SetActive(true);
-                    UIManager.Instance.NoteText.text = noteText;
+                    UIManager.instance.NoteUI.SetActive(true);
+                    UIManager.instance.NoteText.gameObject.SetActive(true);
+                    UIManager.instance.NoteText.text = noteText;
                 }
 
-                UIManager.Instance.NoteOpen = true;
+                UIManager.instance.NoteOpen = true;
                 return;
             }
             else if (item)

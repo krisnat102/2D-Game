@@ -33,23 +33,23 @@ namespace Krisnat
         public void OnTriggerStay2D(Collider2D collision)
         {
             var player = collision.GetComponent<Player>();
-            var levelUpUI = UIManager.Instance.LevelUpInterface;
+            var levelUpUI = UIManager.instance.LevelUpInterface;
             var scale = levelUpUI.transform.localScale.x;
 
             if (PlayerInputHandler.Instance.UseInput && player != null)
             {
                 if (triggered)
                 {
-                    if (!UIManager.Instance.LevelUpInterface.activeInHierarchy)
+                    if (!UIManager.instance.LevelUpInterface.activeInHierarchy)
                     {
                         levelUpUI.SetActive(true);
                         levelUpUI.transform.localScale = new Vector3(0.05f, 0.05f, levelUpUI.transform.localScale.z);
-                        UIManager.Instance.OpenCloseUIAnimation(levelUpUI, scale, openingAnimationDuration, true, true, false);
-                        UIManager.Instance.UpdateLevelUpUI();
+                        UIManager.instance.OpenCloseUIAnimation(levelUpUI, scale, openingAnimationDuration, true, true, false);
+                        UIManager.instance.UpdateLevelUpUI();
                     }
                     else
                     {
-                        UIManager.Instance.OpenCloseUIAnimation(levelUpUI, 0.05f, closingAnimationDuration, false, true, false);
+                        UIManager.instance.OpenCloseUIAnimation(levelUpUI, 0.05f, closingAnimationDuration, false, true, false);
                     }
                 }
                 else
@@ -72,11 +72,11 @@ namespace Krisnat
         private void OnTriggerExit2D(Collider2D collision)
         {
             var player = collision.GetComponent<Player>();
-            var levelUpUI = UIManager.Instance.LevelUpInterface;
+            var levelUpUI = UIManager.instance.LevelUpInterface;
 
             if (player && levelUpUI && levelUpUI.activeInHierarchy)
             {
-                UIManager.Instance.OpenCloseUIAnimation(levelUpUI, 0.05f, closingAnimationDuration, false, true, false);
+                UIManager.instance.OpenCloseUIAnimation(levelUpUI, 0.05f, closingAnimationDuration, false, true, false);
             }
         }
     }

@@ -101,7 +101,7 @@ namespace Krisnat
             LevelUpCost = CalculateLevelUpCost(playerData.PlayerLevel);
             InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - LevelUpCost, false);
             Stats.Instance.UpdateStatBars();
-            UIManager.Instance.UpdateLevelUpUI();
+            UIManager.instance.UpdateLevelUpUI();
         }
 
         public int CalculateLevelUpCost(int level) => (int)((Mathf.Floor(0.02f * Mathf.Pow(level, 3) + 3.06f * Mathf.Pow(level, 2))) * levelUpModifier);

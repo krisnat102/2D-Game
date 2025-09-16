@@ -77,7 +77,7 @@ namespace Spells
             inventory = InventoryManager.Instance.Inventory;
             spellInventory = InventoryManager.Instance.SpellInventory;
             characterTab = InventoryManager.Instance.CharacterTab;
-            levelUpUI = UIManager.Instance.LevelUpInterface;
+            levelUpUI = UIManager.instance.LevelUpInterface;
             spellInventoryScale = spellInventory.transform.localScale.x;
 
             oldSpellsBar = new();
@@ -245,14 +245,14 @@ namespace Spells
         {
             if (openClose)
             {
-                UIManager.Instance.OpenCloseUI(spellInventory, spellInventoryScale, inventoryOpenTime, true, false, true);
+                UIManager.instance.OpenCloseUI(spellInventory, spellInventoryScale, inventoryOpenTime, true, false, true);
                 ListSpells();
             }
             else
             {
                 GameObject[] uiToClose = new GameObject[2];
                 uiToClose[0] = inventory; uiToClose[1] = characterTab;
-                UIManager.Instance.OpenCloseUI(spellInventory, spellInventoryScale, inventoryCloseTime, true, false, false, uiToClose);
+                UIManager.instance.OpenCloseUI(spellInventory, spellInventoryScale, inventoryCloseTime, true, false, false, uiToClose);
                 description.SetActive(false);
             }
         }
@@ -292,8 +292,8 @@ namespace Spells
 
             StartCoroutine(InventoryManager.Instance.ReduceCooldownOverTime());
 
-            var canvasTransform = UIManager.Instance.Canvas.transform;
-            var itemPopUp = Instantiate(UIManager.Instance.ItemPickupPopUp, canvasTransform).GetComponent<PopUpUI>();
+            var canvasTransform = UIManager.instance.Canvas.transform;
+            var itemPopUp = Instantiate(UIManager.instance.ItemPickupPopUp, canvasTransform).GetComponent<PopUpUI>();
 
             foreach (var ui in ItemPickup.itemPopUps)
             {

@@ -80,7 +80,7 @@ namespace Bardent.Weapons.Components
                     return;
                 }
 
-                bowSlider = UIManager.Instance.BowChargeTimeSlider;
+                bowSlider = UIManager.instance.BowChargeTimeSlider;
 
                 StartCoroutine(CooldownCoroutine());
 
@@ -234,7 +234,7 @@ namespace Bardent.Weapons.Components
             animator = GetComponentInChildren<Animator>();
             movement = Core.GetCoreComponent<CoreSystem.Movement>();
             collisionSenses = Core.GetCoreComponent<CollisionSenses>();
-            bowSlider = UIManager.Instance.BowChargeTimeSlider;
+            bowSlider = UIManager.instance.BowChargeTimeSlider;
 
             weapon.OnCurrentInputChange += HandleCurrentInputChange;
             eventHandler.OnMinHoldPassed += HandleMinHoldPassed;

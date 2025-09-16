@@ -10,10 +10,11 @@ namespace Krisnat
     public class UIManager : MonoBehaviour
     {
         #region Variables
-        public static UIManager Instance;
+        public static UIManager instance;
 
         [Header("General")]
         [SerializeField] private GameObject canvas;
+        [SerializeField] private GameObject statBar;
 
         [Header("Character Tab")]
         [SerializeField] private GameObject characterTab;
@@ -43,6 +44,7 @@ namespace Krisnat
         private LevelHandler levelHandler;
 
         public GameObject LevelUpInterface { get => levelUpInterface; private set => levelUpInterface = value; }
+        public GameObject StatBar { get => statBar; private set => statBar = value; }
         public Slider BowChargeTimeSlider { get => bowChargeTimeSlider; private set => bowChargeTimeSlider = value; }
         public GameObject ItemPickupPopUp { get => itemPickupPopUp; private set => itemPickupPopUp = value; }
         public GameObject Canvas { get => canvas; private set => canvas = value; }
@@ -58,7 +60,7 @@ namespace Krisnat
         #region Unity Methods
         private void Awake()
         {
-            Instance = this;
+            instance = this;
         }
 
         private void Start()

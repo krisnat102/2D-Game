@@ -135,7 +135,7 @@ public class MenuManager : MonoBehaviour
             && !InventoryManager.Instance.InventoryActiveInHierarchy
             && !InventoryManager.Instance.SpellInventoryActiveInHierarchy
             && !InventoryManager.Instance.CharacterTabActiveInHierarchy
-            && !UIManager.Instance.LevelUpInterface.activeInHierarchy
+            && !UIManager.instance.LevelUpInterface.activeInHierarchy
             )
         {
             PlayerInputHandler.Instance.UseMenuInput();

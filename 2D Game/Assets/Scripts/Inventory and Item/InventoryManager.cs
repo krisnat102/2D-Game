@@ -141,7 +141,7 @@ namespace Inventory
             InventoryActiveInHierarchy = Inventory.activeInHierarchy;
             SpellInventoryActiveInHierarchy = SpellInventory.activeInHierarchy;
             CharacterTabActiveInHierarchy = CharacterTab.activeInHierarchy;
-            LevelUpUIActiveInHierarchy = UIManager.Instance.LevelUpInterface.activeInHierarchy;
+            LevelUpUIActiveInHierarchy = UIManager.instance.LevelUpInterface.activeInHierarchy;
 
             coinCounter.text = Coins.ToString();
             inventoryCoinCounter.text = Coins.ToString();
@@ -220,7 +220,7 @@ namespace Inventory
         {
             if (openOrClose)
             {
-                UIManager.Instance.OpenCloseUI(Inventory, inventoryScale, inventoryOpeningSpeed, true, false, true);
+                UIManager.instance.OpenCloseUI(Inventory, inventoryScale, inventoryOpeningSpeed, true, false, true);
 
                 if (Shop)
                 {
@@ -245,7 +245,7 @@ namespace Inventory
 
                 GameObject[] uiToClose = new GameObject[2];
                 uiToClose[0] = SpellInventory; uiToClose[1] = CharacterTab;
-                UIManager.Instance.OpenCloseUI(Inventory, inventoryScale, inventoryClosingSpeed, true, false, false, uiToClose);
+                UIManager.instance.OpenCloseUI(Inventory, inventoryScale, inventoryClosingSpeed, true, false, false, uiToClose);
 
                 if (shopInterface) shopInterface.SetActive(false);
                 if (equipmentButtons) equipmentButtons.SetActive(true);
@@ -256,13 +256,13 @@ namespace Inventory
         {
             if (openOrClose)
             {
-                UIManager.Instance.OpenCloseUI(CharacterTab, characterTabScale, characterTabOpeningSpeed, true, false, true);
+                UIManager.instance.OpenCloseUI(CharacterTab, characterTabScale, characterTabOpeningSpeed, true, false, true);
             }
             else
             {
                 GameObject[] uiToClose = new GameObject[2];
                 uiToClose[0] = SpellInventory; uiToClose[1] = Inventory;
-                UIManager.Instance.OpenCloseUI(CharacterTab, characterTabScale, characterTabClosingSpeed, true, false, false, uiToClose);
+                UIManager.instance.OpenCloseUI(CharacterTab, characterTabScale, characterTabClosingSpeed, true, false, false, uiToClose);
                 description.SetActive(false);
             }
         }
@@ -891,8 +891,8 @@ namespace Inventory
 
             StartCoroutine(ReduceCooldownOverTime());
 
-            var canvasTransform = UIManager.Instance.Canvas.transform;
-            var itemPopUp = Instantiate(UIManager.Instance.ItemPickupPopUp, canvasTransform).GetComponent<PopUpUI>();
+            var canvasTransform = UIManager.instance.Canvas.transform;
+            var itemPopUp = Instantiate(UIManager.instance.ItemPickupPopUp, canvasTransform).GetComponent<PopUpUI>();
 
             foreach (var ui in ItemPickup.itemPopUps)
             {

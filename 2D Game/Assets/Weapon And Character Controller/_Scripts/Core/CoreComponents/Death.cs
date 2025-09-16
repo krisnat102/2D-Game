@@ -1,4 +1,5 @@
 using Inventory;
+using Krisnat;
 using UnityEngine;
 
 namespace Bardent.CoreSystem
@@ -39,11 +40,18 @@ namespace Bardent.CoreSystem
             }
             
             Time.timeScale = 1f;
+
             InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins / 3, false);
+
             CoreClass.GameManager.instance.SavePlayer();
+
             deathSFX.gameObject.transform.parent = CoreClass.GameManager.instance.Audios;
             deathSFX.Play();
+
             Core.transform.parent.gameObject.SetActive(false);
+
+            UIManager.instance.StatBar.SetActive(false);
+
             IsDead = true;
         }
 

@@ -6,6 +6,6 @@ namespace Krisnat
 {
     public class PopUpUI : MonoBehaviour
     {
-        public void GoUp() => transform.LeanMove(new Vector2(transform.position.x, transform.position.y + UIManager.Instance.MoveDistance), UIManager.Instance.MoveDuration);
+        public void GoUp() => transform.LeanMove(new Vector2(transform.position.x, transform.position.y + UIManager.instance.MoveDistance), UIManager.instance.MoveDuration);
     }
 }

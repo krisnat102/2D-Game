@@ -483,6 +483,11 @@ PrefabInstance:
       objectReference: {fileID: 1679148603}
     - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
         type: 3}
+      propertyPath: statBar
+      value: 
+      objectReference: {fileID: 1935375355}
+    - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
+        type: 3}
       propertyPath: manaText
       value: 
       objectReference: {fileID: 1820796491}
@@ -26377,6 +26382,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1935375355 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1601843765518511362, guid: 3dadcf77769c13740974cc8bd4db4361,
+    type: 3}
+  m_PrefabInstance: {fileID: 1679148600}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1956224389 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2624010728045768107, guid: 3dadcf77769c13740974cc8bd4db4361,

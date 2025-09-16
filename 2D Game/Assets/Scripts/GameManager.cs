@@ -103,6 +103,8 @@ namespace CoreClass
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
 
+            UIManager.instance.StatBar.SetActive(true);
+
             death.IsDead = false;
         }
 

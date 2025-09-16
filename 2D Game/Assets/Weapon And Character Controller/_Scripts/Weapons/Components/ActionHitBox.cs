@@ -14,7 +14,7 @@ namespace Bardent.Weapons.Components
 
         private Collider2D[] detected;
         
-        private float delayTimer = -1f;
+        //private float delayTimer = -1f;
 
         private void HandleAttackAction()
         {

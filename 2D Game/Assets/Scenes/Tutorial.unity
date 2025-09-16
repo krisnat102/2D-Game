@@ -1231,6 +1231,11 @@ PrefabInstance:
       objectReference: {fileID: 1751550085}
     - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
         type: 3}
+      propertyPath: statBar
+      value: 
+      objectReference: {fileID: 2320524326609926087}
+    - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
+        type: 3}
       propertyPath: manaText
       value: 
       objectReference: {fileID: 948753313}
@@ -149215,6 +149220,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dadcf77769c13740974cc8bd4db4361, type: 3}
+--- !u!1 &2320524326609926087 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1601843765518511362, guid: 3dadcf77769c13740974cc8bd4db4361,
+    type: 3}
+  m_PrefabInstance: {fileID: 2320524326609926086}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4631539433974063898
 PrefabInstance:
   m_ObjectHideFlags: 0

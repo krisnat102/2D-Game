@@ -562,7 +562,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6469089151303263519
 Transform:
   m_ObjectHideFlags: 0
@@ -739,7 +739,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6645090618969865633}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -1197,8 +1197,10 @@ MonoBehaviour:
   dashAIRange: {fileID: 0}
   leftPatrolBarrier: {fileID: 7478158215374491669}
   rightPatrolBarrier: {fileID: 1021025374623760515}
-  attackSounds: []
-  damageSounds: []
+  attackSounds:
+  - {fileID: 2186747433409487411}
+  damageSounds:
+  - {fileID: 328779846036855596}
   rangedAttackSounds: []
   bossMusicPlayer: {fileID: 0}
   data: {fileID: 11400000, guid: 89324d27e25e5c540850195ae248e58c, type: 2}
