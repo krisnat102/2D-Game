@@ -364,7 +364,7 @@ namespace Krisnat
             previousLocalScaleX = transform.localScale.x;
             gameManager = CoreClass.GameManager.instance;
             PlayerTrans = PlayerInputHandler.Instance.gameObject.transform;
-            canvas = GetComponentInChildren<Canvas>().transform;
+            canvas = GetComponentInChildren<Canvas>()?.transform;
             player = Player.instance;
             damageReceiver = player.Core.GetCoreComponent<DamageReceiver>();
             #endregion
@@ -410,7 +410,7 @@ namespace Krisnat
 
                 if (damage > 0)
                 {
-                    if (canvas)
+                    if (canvas && damagePopup)
                     {
                         var popUpOffset = !multipleDamageSources ? new Vector3(damagePopupOffset.x + UnityEngine.Random.Range(-2f, 1f), damagePopupOffset.y) : Vector3.zero;
 
@@ -472,8 +472,6 @@ namespace Krisnat
 
         private void TakeKnockback(float damage)
         {
-            if (Data.dummy) return;
-
             float knockback = damage * Data.knockbackModifier / Mathf.Sqrt(level);
 
             if (PlayerTrans.position.x < transform.position.x)

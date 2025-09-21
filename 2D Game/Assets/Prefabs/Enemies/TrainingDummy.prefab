@@ -131,8 +131,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 26.83, y: 16.65, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4667600969643493722}
   m_Father: {fileID: 0}
@@ -267,6 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab9904e6a95017147a2295b5998719f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 1
   hpBar: {fileID: 0}
   hpBarGradient:
     serializedVersion: 2
@@ -339,10 +340,12 @@ MonoBehaviour:
   dashAIRange: {fileID: 0}
   leftPatrolBarrier: {fileID: 0}
   rightPatrolBarrier: {fileID: 0}
-  attackSound: {fileID: 0}
-  rangedAttackSound: {fileID: 0}
+  attackSounds: []
+  damageSounds: []
+  rangedAttackSounds: []
   bossMusicPlayer: {fileID: 0}
   data: {fileID: 11400000, guid: eb966cba6b88adb44841376678e1349f, type: 2}
+  deathEffect: {fileID: 0}
   bossSpecialProjectile: {fileID: 0}
-  playerTrans: {fileID: 0}
+  sleepingObj: {fileID: 0}
   groundCollider: {fileID: 0}

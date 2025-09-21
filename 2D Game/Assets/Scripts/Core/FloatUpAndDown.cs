@@ -15,7 +15,7 @@ namespace Krisnat
 
         private void Update()
         {
-            transform.position = new Vector3(initPos.x, Mathf.Sin(Time.time * frequency) * amp + initPos.y, 0);
+            transform.position = new Vector3(transform.position.x, Mathf.Sin(Time.time * frequency) * amp + initPos.y, 0);
         }
     }
 }

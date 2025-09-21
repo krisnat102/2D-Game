@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2121936274c14654a9abc6a3ee4178f7, type: 3}
-  m_Name: Dummy
+  m_Name: Chest
   m_EditorClassIdentifier: 
-  enemyName: Dummy
+  enemyName: Chest
   maxHp: 100
   minHp: 99
   attackSpeed: 1
   maxDamage: 20
   minDamage: 20
   actionCooldown: 0.5
-  knockbackModifier: 0
-  knockbackWeight: 2
+  knockbackModifier: 5
+  knockbackWeight: 0.5
   stagger: 1
   hpBarDelay: 0
   damageType: 0

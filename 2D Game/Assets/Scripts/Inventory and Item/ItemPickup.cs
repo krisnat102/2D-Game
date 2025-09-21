@@ -92,7 +92,7 @@ namespace Inventory
             if (arrowOnly) return;
             if (!UIManager.instance.NoteOpen) PlayerInputHandler.Instance.UseUseInput();
 
-            if (pickUpAudio && !UIManager.instance.NoteOpen)
+            if (pickUpAudio && !UIManager.instance.NoteOpen && !isPickedUp)
             {
                 if (!chest && !Note) pickUpAudio.gameObject.transform.parent = CoreClass.GameManager.instance.Audios;
                 pickUpAudio.pitch = Random.Range(lowerPitchRange, higherPitchRange);
@@ -132,6 +132,9 @@ namespace Inventory
                 {
                     animator?.SetTrigger("open");
                     canvas?.gameObject.SetActive(false);
+
+                    var rb = GetComponent<Rigidbody2D>();
+                    rb.mass = rb.mass / 2;
                 }
             }
         }
