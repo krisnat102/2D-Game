@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Slime
   m_EditorClassIdentifier: 
   enemyName: Slime
-  maxHP: 40
+  maxHp: 55
+  minHp: 45
   attackSpeed: 1.5
-  speed: 15
-  damage: 15
+  maxDamage: 15
+  minDamage: 15
   actionCooldown: 0.5
   knockbackModifier: 20
   knockbackWeight: 1.24
@@ -25,13 +26,13 @@ MonoBehaviour:
   damageType: 1
   attackAnimationLength: 0.6
   damageTriggerTime: 0.5
-  HitBox:
+  hitBox:
     serializedVersion: 2
     x: -0.31
     y: 0.62
     width: 1.13
     height: -0.98
-  DetectableLayers:
+  detectableLayers:
     serializedVersion: 2
     m_Bits: 1024
   fixRotationWhenAttacking: 0

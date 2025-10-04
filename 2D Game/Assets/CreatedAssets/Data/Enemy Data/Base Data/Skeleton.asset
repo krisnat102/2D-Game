@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Skeleton
   m_EditorClassIdentifier: 
   enemyName: Skeleton
-  maxHP: 30
+  maxHp: 50
+  minHp: 40
   attackSpeed: 1.9
-  speed: 300
-  damage: 20
+  maxDamage: 20
+  minDamage: 20
   actionCooldown: 0.5
   knockbackModifier: 20
   knockbackWeight: 1
@@ -25,13 +26,13 @@ MonoBehaviour:
   damageType: 1
   attackAnimationLength: 1
   damageTriggerTime: 0.7
-  HitBox:
+  hitBox:
     serializedVersion: 2
     x: -0.87
     y: 0.62
     width: 1.16
     height: -1.3
-  DetectableLayers:
+  detectableLayers:
     serializedVersion: 2
     m_Bits: 1024
   fixRotationWhenAttacking: 0

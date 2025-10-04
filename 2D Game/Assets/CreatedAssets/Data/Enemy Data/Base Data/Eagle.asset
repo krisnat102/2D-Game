@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Eagle
   m_EditorClassIdentifier: 
   enemyName: Eagle
-  maxHP: 45
+  maxHp: 45
+  minHp: 40
   attackSpeed: 1.4
-  speed: 200
-  damage: 20
+  maxDamage: 20
+  minDamage: 15
   actionCooldown: 0.5
   knockbackModifier: 25
   knockbackWeight: 1
@@ -25,13 +26,13 @@ MonoBehaviour:
   damageType: 1
   attackAnimationLength: 0.3
   damageTriggerTime: 0.3
-  HitBox:
+  hitBox:
     serializedVersion: 2
     x: 0
     y: -1.34
     width: 1.93
     height: 1.48
-  DetectableLayers:
+  detectableLayers:
     serializedVersion: 2
     m_Bits: 1024
   fixRotationWhenAttacking: 0

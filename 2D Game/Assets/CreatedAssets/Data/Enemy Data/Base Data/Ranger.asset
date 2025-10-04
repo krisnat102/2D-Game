@@ -13,26 +13,26 @@ MonoBehaviour:
   m_Name: Ranger
   m_EditorClassIdentifier: 
   enemyName: Ranger
-  maxHP: 70
+  maxHp: 70
+  minHp: 65
   attackSpeed: 2
-  speed: 200
-  damage: 20
+  maxDamage: 20
+  minDamage: 20
   actionCooldown: 0.5
   knockbackModifier: 18
   knockbackWeight: 1.5
-  offsetX: 1.2
-  offsetX2: 1.2
-  offsetY: -1
+  stagger: 1
+  hpBarDelay: 0
   damageType: 0
   attackAnimationLength: 0.9
   damageTriggerTime: 0.8
-  HitBox:
+  hitBox:
     serializedVersion: 2
     x: 0
     y: 0
     width: 0
     height: 0
-  DetectableLayers:
+  detectableLayers:
     serializedVersion: 2
     m_Bits: 0
   fixRotationWhenAttacking: 0
@@ -74,6 +74,7 @@ MonoBehaviour:
   lookAtPlayer: 1
   facingDirection: 1
   patrol: 0
+  wakeUpTime: 0
   boss: 0
   bossProjectile: {fileID: 0}
   rangedAttackSoundDelay: 0
@@ -82,7 +83,6 @@ MonoBehaviour:
   specialRangedAttackChargeExecutionTime: 0
   specialRangedAttackCooldown: 0
   bossMusic: {fileID: 0}
-  wakeUpTime: 0
   bloodEffect: {fileID: 7515634647306772147, guid: b6be51001a0800f4abd4e30fe133548b,
     type: 3}
   bloodOffset: {x: 0, y: 0}

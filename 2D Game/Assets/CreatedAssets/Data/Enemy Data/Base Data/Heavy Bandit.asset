@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Heavy Bandit
   m_EditorClassIdentifier: 
   enemyName: Heavy Bandit
-  maxHP: 100
+  maxHp: 100
+  minHp: 90
   attackSpeed: 1
-  speed: 125
-  damage: 20
+  maxDamage: 20
+  minDamage: 20
   actionCooldown: 0.5
   knockbackModifier: 15
   knockbackWeight: 2
@@ -25,13 +26,13 @@ MonoBehaviour:
   damageType: 1
   attackAnimationLength: 0.6
   damageTriggerTime: 0.45
-  HitBox:
+  hitBox:
     serializedVersion: 2
     x: -0.4
     y: 0.41
     width: 1.51
     height: 1.06
-  DetectableLayers:
+  detectableLayers:
     serializedVersion: 2
     m_Bits: 1024
   fixRotationWhenAttacking: 0

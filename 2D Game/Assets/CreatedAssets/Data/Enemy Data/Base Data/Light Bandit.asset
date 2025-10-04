@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Light Bandit
   m_EditorClassIdentifier: 
   enemyName: Light Bandit
-  maxHP: 60
+  maxHp: 65
+  minHp: 55
   attackSpeed: 1
-  speed: 140
-  damage: 15
+  maxDamage: 20
+  minDamage: 15
   actionCooldown: 0.5
   knockbackModifier: 16
   knockbackWeight: 1.7
@@ -25,13 +26,13 @@ MonoBehaviour:
   damageType: 1
   attackAnimationLength: 0.6
   damageTriggerTime: 0.45
-  HitBox:
+  hitBox:
     serializedVersion: 2
     x: -0.44
     y: 0.41
     width: 1.51
     height: 1.06
-  DetectableLayers:
+  detectableLayers:
     serializedVersion: 2
     m_Bits: 1024
   fixRotationWhenAttacking: 0

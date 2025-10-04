@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Kobold
   m_EditorClassIdentifier: 
   enemyName: Kobold
-  maxHp: 60
+  maxHp: 65
+  minHp: 55
   attackSpeed: 1.2
-  speed: 150
-  damage: 15
+  maxDamage: 20
+  minDamage: 15
   actionCooldown: 0.5
   knockbackModifier: 18
   knockbackWeight: 2.2

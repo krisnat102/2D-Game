@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: NightBorne
   m_EditorClassIdentifier: 
   enemyName: Nightborne
-  maxHP: 120
+  maxHp: 120
+  minHp: 110
   attackSpeed: 1.2
-  speed: 150
-  damage: 22
+  maxDamage: 22
+  minDamage: 22
   actionCooldown: 0.5
   knockbackModifier: 14
   knockbackWeight: 2.2
@@ -25,13 +26,13 @@ MonoBehaviour:
   damageType: 1
   attackAnimationLength: 0.5
   damageTriggerTime: 0.4
-  HitBox:
+  hitBox:
     serializedVersion: 2
     x: -1.36
     y: -1.02
     width: 1.56
     height: 2.08
-  DetectableLayers:
+  detectableLayers:
     serializedVersion: 2
     m_Bits: 1024
   fixRotationWhenAttacking: 0
