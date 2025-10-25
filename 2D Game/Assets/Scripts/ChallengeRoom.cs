@@ -13,28 +13,32 @@ namespace Krisnat
         {
             pStats = p.GetComponentInChildren<Stats>();
 
+            CoreClass.GameManager.instance.ActiveChallengeRoom = this;
+
             savedHp = pStats.health.CurrentValue;
             savedMana = pStats.mana.CurrentValue;
         }
 
-        public void ExitRoomFail()
+        public void ExitRoom(bool success)
         {
             if (!pStats) return;
 
-            pStats.health.CurrentValue = savedHp / 2;
-            pStats.mana.CurrentValue = savedMana / 2;
+            if (success)
+            {
+                pStats.health.CurrentValue = pStats.health.MaxValue;
+                pStats.mana.CurrentValue = pStats.mana.MaxValue;
+            }
+            else
+            {
+                pStats.health.CurrentValue = savedHp;
+                pStats.mana.CurrentValue = savedMana;
 
-            pStats.gameObject.transform.position = savedPos;
-        }
+                pStats.gameObject.transform.position = savedPos;
+            }
 
-        public void ExitRoomSuccess()
-        {
-            if (!pStats) return;
+            CoreClass.GameManager.instance.ActiveChallengeRoom = null;
 
-            pStats.health.CurrentValue = pStats.health.MaxValue;
-            pStats.mana.CurrentValue = pStats.mana.MaxValue;
-
-            pStats.gameObject.transform.position = savedPos;
+            gameObject.SetActive(false);
         }
     }
 }

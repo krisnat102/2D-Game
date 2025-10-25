@@ -11,6 +11,8 @@ namespace Krisnat
         [SerializeField] private float groundCheckRadius = 0.5f;
         [SerializeField] private LayerMask whatIsGround;
         [SerializeField] private LayerMask entitiesLayers;
+        [SerializeField] private AudioSource[] audioSources;
+        [SerializeField] private float pitchVariance;
 
         private bool grounded;
         private Animator anim;
@@ -53,6 +55,14 @@ namespace Krisnat
             if (((1 << collision.gameObject.layer) & whatIsGround) != 0)
             {
                 anim.SetTrigger("Land");
+
+                if (audioSources.Length > 0)
+                {
+                    int n = UnityEngine.Random.Range(0, audioSources.Length);
+                    float pitch = UnityEngine.Random.Range(audioSources[n].pitch - pitchVariance, audioSources[n].pitch + pitchVariance);
+                    audioSources[n].pitch = pitch;
+                    audioSources[n].Play();
+                }
             }
         }
     }

@@ -53,6 +53,7 @@ namespace CoreClass
         public List<string> Battles { get; private set; }
         public List<string> TempPortalsUsed { get; private set; }
         public Player Player { get => player; private set => player = value; }
+        public ChallengeRoom ActiveChallengeRoom { get; set; }
         public Transform Particles { get; private set; }
         public Transform Audios { get; private set; }
         public Transform UIs { get; private set; }
@@ -106,6 +107,8 @@ namespace CoreClass
             UIManager.instance.StatBar.SetActive(true);
 
             death.IsDead = false;
+
+            ActiveChallengeRoom?.ExitRoom(false);
         }
 
         public void SavePlayer()

@@ -16,6 +16,7 @@ namespace Krisnat
         [SerializeField] private bool oneTimeUse;
 
         private LevelLoader levelLoader;
+        private ChallengeRoom challengeRoom;
         private bool locked = true;
         private int buildIndexToLoad = 128;
 
@@ -24,6 +25,7 @@ namespace Krisnat
         private void Start()
         {
             levelLoader = GetComponent<LevelLoader>();
+            challengeRoom = GetComponent<ChallengeRoom>();
 
             if(int.TryParse(sceneToLoad, out _)){
                 buildIndexToLoad = int.Parse(sceneToLoad);
@@ -54,6 +56,12 @@ namespace Krisnat
         private void Teleport(Player player)
         {
             PlayerInputHandler.Instance.UseUseInput();
+
+            if (challengeRoom)
+            {
+                CoreClass.GameManager.instance.ActiveChallengeRoom = challengeRoom;
+                challengeRoom.EnterRoom(player);
+            }
 
             if (locked && key)
             {

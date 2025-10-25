@@ -15,6 +15,7 @@ namespace Krisnat
         [SerializeField] private GameObject[] objectsToEnable;
         [SerializeField] private Door doorToUnlock;
         private List<Enemy> encounter;
+        private ChallengeRoom challengeRoom;
 
         public bool End { get; private set; }
         public string BattleId { get => battleId; private set => battleId = value; }
@@ -61,6 +62,12 @@ namespace Krisnat
             {
                 if (previousBattle && !previousBattle.End) return;
 
+                if (!challengeRoom && finalBattle)
+                {
+                    challengeRoom = CoreClass.GameManager.instance.ActiveChallengeRoom;
+                    Debug.Log(challengeRoom);
+                }
+
                 IfBattleOver();
             }
         }
@@ -87,7 +94,15 @@ namespace Krisnat
         private void EndBattle(bool playDoorAudio)
         {
             End = true;
-            if (objectsToEnable.Length > 0) foreach (var obj in objectsToEnable) obj.SetActive(true);
+
+            if (objectsToEnable.Length > 0)
+            {
+                foreach (var obj in objectsToEnable)
+                { 
+                    obj.SetActive(true);
+                }
+            }
+
             if (doorToUnlock) doorToUnlock.Open(playDoorAudio);
 
             gameObject.SetActive(false);
@@ -96,6 +111,11 @@ namespace Krisnat
             if (!finalBattle)
             {
                 CoreClass.GameManager.instance.Battles.Add(BattleId);
+            }
+            if (finalBattle && challengeRoom)
+            {
+                Debug.Log(2);
+                challengeRoom.ExitRoom(true);
             }
         }
     }
