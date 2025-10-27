@@ -22,8 +22,8 @@ namespace Bardent.CoreSystem
                 ? stats.CalculatePhysicalDamageReduction(rawAmount)
                 : stats.CalculateMagicalDamageReduction(rawAmount));
 
-            damageAudio?.Play();
-            Krisnat.CameraShake.instance.ShakeCamera(0.15f, rawAmount / 10);
+            if (stats.health.CurrentValue > 0) damageAudio?.Play();
+            Krisnat.CameraShake.instance.ShakeCamera(0.2f, rawAmount / 5);
             particleManager.StartParticlesWithRandomRotation(damageParticles);
         }
 

@@ -13,6 +13,8 @@ namespace Krisnat
         [SerializeField] private Vector3 distanceTravel;
         [SerializeField] private Item key;
         [SerializeField] private GameObject uiPopUp;
+        [SerializeField] private AudioSource teleportSFX;
+        [SerializeField] private float pitchVariance;
         [SerializeField] private bool oneTimeUse;
 
         private LevelLoader levelLoader;
@@ -61,6 +63,13 @@ namespace Krisnat
             {
                 CoreClass.GameManager.instance.ActiveChallengeRoom = challengeRoom;
                 challengeRoom.EnterRoom(player);
+            }
+
+            if (teleportSFX)
+            {
+                float pitch = UnityEngine.Random.Range(teleportSFX.pitch - pitchVariance, teleportSFX.pitch + pitchVariance);
+                teleportSFX.pitch = pitch;
+                teleportSFX.Play();
             }
 
             if (locked && key)

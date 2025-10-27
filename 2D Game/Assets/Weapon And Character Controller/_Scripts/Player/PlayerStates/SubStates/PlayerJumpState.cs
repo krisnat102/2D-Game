@@ -22,6 +22,8 @@ public class PlayerJumpState : PlayerAbilityState
         player.InAirState.SetIsJumping();
 
         Stats.stam.Decrease(playerData.jumpCost);
+
+        AudioManager.instance.PlayJumpSound(0.7f, 1.0f);
     }
 
     public bool CanJump()

@@ -26,7 +26,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource buttonSound, menuSound;
     [SerializeField] private AudioSource buySound, coinPickupSound, tradeRefusedSound;
     [SerializeField] private AudioSource heartbeatSound;
-    [SerializeField] private AudioSource weaponSound, whooshSoundEffect, dodgeRollSoundEffect;
+    [SerializeField] private AudioSource weaponSound, whooshSoundEffect, dodgeRollSoundEffect, jumpSoundEffect;
     [SerializeField] private AudioSource fireballLaunchEffect, lightningEffect;
     [SerializeField] private AudioSource eatSoundEffect, potionDrinkSoundEffect;
     [SerializeField] private AudioSource[] equipmentSoundEffect;
@@ -197,6 +197,12 @@ public class AudioManager : MonoBehaviour
     {
         whooshSoundEffect.pitch = Random.Range(lowerPitch, higherPitch);
         whooshSoundEffect.Play();
+    }
+
+    public void PlayJumpSound(float lowerPitch, float higherPitch)
+    {
+        jumpSoundEffect.pitch = Random.Range(lowerPitch, higherPitch);
+        jumpSoundEffect.Play();
     }
 
     public void PlayDodgeRollSound(float lowerPitch, float higherPitch)

@@ -37,8 +37,6 @@ namespace Krisnat
             }
 
             CoreClass.GameManager.instance.ActiveChallengeRoom = null;
-
-            gameObject.SetActive(false);
         }
     }
 }

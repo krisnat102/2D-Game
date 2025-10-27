@@ -50,7 +50,7 @@ namespace Bardent.CoreSystem
 
             Core.transform.parent.gameObject.SetActive(false);
 
-            UIManager.instance.StatBar.SetActive(false);
+            UIManager.instance.Canvas.SetActive(false);
 
             IsDead = true;
         }

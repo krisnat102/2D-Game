@@ -62,11 +62,7 @@ namespace Krisnat
             {
                 if (previousBattle && !previousBattle.End) return;
 
-                if (!challengeRoom && finalBattle)
-                {
-                    challengeRoom = CoreClass.GameManager.instance.ActiveChallengeRoom;
-                    Debug.Log(challengeRoom);
-                }
+                if (!challengeRoom && finalBattle) challengeRoom = CoreClass.GameManager.instance.ActiveChallengeRoom;
 
                 IfBattleOver();
             }
@@ -79,10 +75,12 @@ namespace Krisnat
                 if (!enemy.Dead)
                 {
                     var alertness = GetComponentsInChildren<EnemyAttackAI>(true).ToList();
+
                     foreach (var alert in alertness)
                     {
                         alert.Alerted = true;
                     }
+
                     enemy.gameObject.SetActive(true);
                 }
             }
@@ -114,7 +112,6 @@ namespace Krisnat
             }
             if (finalBattle && challengeRoom)
             {
-                Debug.Log(2);
                 challengeRoom.ExitRoom(true);
             }
         }
