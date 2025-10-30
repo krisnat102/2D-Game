@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Serialization;
 using System.IO;
 using Krisnat;
-// ReSharper disable CheckNamespace
+using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
@@ -32,9 +32,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource[] equipmentSoundEffect;
 
     private bool muteTracker, muteSave;
-    private float musicSave, sfxSave, environmentSfxSave;
+    private float musicSave, sfxSave, environmentSfxSave, musicVolumeSave;
     
     private string SettingsFile => Path.Combine(Application.persistentDataPath, "settings.json");
+
+    public const float SOUND_FADE_TIME = 1.5f;
 
     private SettingsData settings = new SettingsData();
     #endregion
@@ -48,6 +50,7 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         LoadAudioSettings();
+        musicVolumeSave = musicSound.volume;
     }
     #endregion
 
@@ -98,9 +101,6 @@ public class AudioManager : MonoBehaviour
     #endregion
 
     #region Audio
-    public void PauseMusic() => musicSound.Pause();
-    public void UnPauseMusic() => musicSound.UnPause();
-
     public void MuteAudio(bool muteValue)
     {
         mute.isOn = muteValue;
@@ -150,6 +150,74 @@ public class AudioManager : MonoBehaviour
         environmentSfxMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
 
         SaveAudioSettings();
+    }
+    #endregion
+
+    #region Audio Methods
+    public void PauseMusic()
+    {
+        FadeOutSong(musicSound, SOUND_FADE_TIME);
+    }
+    public void UnPauseMusic()
+    {
+        FadeInSong(musicSound, SOUND_FADE_TIME, musicVolumeSave);
+    }
+
+    public void FadeOutSong(AudioSource song, float fadeOutTime)
+    {
+        StartCoroutine(FadeTrack(song, fadeOutTime));
+    }
+
+    public void FadeOutSong(AudioSource song)
+    {
+        StartCoroutine(FadeTrack(song, SOUND_FADE_TIME));
+    }
+
+    private IEnumerator FadeTrack(AudioSource song, float fadeOutTime)
+    {
+        if (song == null)
+            yield break;
+
+        float startVolume = song.volume;
+
+        //reduce volume over time
+        while (song.volume > 0)
+        {
+            song.volume -= startVolume * Time.deltaTime / fadeOutTime;
+            yield return null;
+        }
+
+        song.volume = 0f;
+        song.Pause();
+    }
+
+    public void FadeInSong(AudioSource song, float fadeOutTime, float volumeGoal)
+    {
+        StartCoroutine(FadeInTrack(song, fadeOutTime, volumeGoal));
+    }
+
+    public void FadeInSong(AudioSource song, float volumeGoal)
+    {
+        StartCoroutine(FadeInTrack(song, SOUND_FADE_TIME, volumeGoal));
+    }
+
+    private IEnumerator FadeInTrack(AudioSource song, float fadeOutTime, float songVolume)
+    {
+        if (song == null)
+            yield break;
+
+        song.UnPause();
+
+        song.volume = 0;
+
+        //increase volume over time
+        while (song.volume < songVolume)
+        {
+            song.volume += Time.deltaTime / fadeOutTime;
+            yield return null;
+        }
+       
+        song.volume = songVolume;
     }
     #endregion
 

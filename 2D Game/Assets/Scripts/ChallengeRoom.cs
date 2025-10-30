@@ -5,6 +5,7 @@ namespace Krisnat
 {
     public class ChallengeRoom : MonoBehaviour
     {
+        [SerializeField] private AudioSource challengeRoomMusicPlayer;
         private float savedHp, savedMana;
         private Vector3 savedPos;
         private Stats pStats;
@@ -12,6 +13,13 @@ namespace Krisnat
         public void EnterRoom(Player p)
         {
             pStats = p.GetComponentInChildren<Stats>();
+
+            if (challengeRoomMusicPlayer)
+            {
+                challengeRoomMusicPlayer.Play();
+                AudioManager.instance.FadeInSong(challengeRoomMusicPlayer, challengeRoomMusicPlayer.volume);
+            }
+            AudioManager.instance.PauseMusic();
 
             CoreClass.GameManager.instance.ActiveChallengeRoom = this;
 
@@ -21,6 +29,9 @@ namespace Krisnat
 
         public void ExitRoom(bool success)
         {
+            if (challengeRoomMusicPlayer) AudioManager.instance.FadeOutSong(challengeRoomMusicPlayer);
+            AudioManager.instance.UnPauseMusic();
+
             if (!pStats) return;
 
             if (success)

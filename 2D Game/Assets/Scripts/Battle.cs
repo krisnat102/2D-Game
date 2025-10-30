@@ -106,11 +106,11 @@ namespace Krisnat
             gameObject.SetActive(false);
             SaveSystem.LoadPlayer();
 
-            if (!finalBattle)
+            if (finalBattle != this || !previousBattle)
             {
                 CoreClass.GameManager.instance.Battles.Add(BattleId);
             }
-            if (finalBattle && challengeRoom)
+            if (finalBattle == this && challengeRoom)
             {
                 challengeRoom.ExitRoom(true);
             }

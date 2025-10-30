@@ -20,6 +20,8 @@ namespace Krisnat
         private Player player;
         private Rigidbody2D rb;
 
+        private float DAMAGE_MULT = 3f;
+
         private void Start()
         {
             anim = GetComponent<Animator>();
@@ -39,11 +41,11 @@ namespace Krisnat
                 enemy = collision.gameObject.GetComponent<Enemy>();
                 player = collision.gameObject.GetComponent<Player>();
 
-                if (rb.velocity.y > 0) return; 
+                if (rb.velocity.y >= 0) return; 
 
                 if (enemy)
                 {
-                    enemy.TakeDamage(damage * 3f * rb.mass, 0, false);
+                    enemy.TakeDamage(damage * rb.mass * DAMAGE_MULT, 0, false);
                 }
 
                 if (player)

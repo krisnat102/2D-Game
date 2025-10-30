@@ -212,6 +212,7 @@ namespace Krisnat
                     bossMusicTracker = false;
                     AudioManager.instance.PauseMusic();
                     bossMusicPlayer.Play();
+                    AudioManager.instance.FadeInSong(bossMusicPlayer, bossMusicPlayer.volume);
                 }
                 if (!alerted)
                 {
@@ -498,7 +499,7 @@ namespace Krisnat
                 gameManager.BossesKilled.Add(BossId);
 
                 AudioManager.instance.UnPauseMusic();
-                bossMusicPlayer.Stop();
+                AudioManager.instance.FadeOutSong(bossMusicPlayer);
             }
 
             if (Data.itemDrop)

@@ -15224,7 +15224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &542717191
 Transform:
   m_ObjectHideFlags: 0
@@ -61887,7 +61887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2127342478
 Transform:
   m_ObjectHideFlags: 0
@@ -65687,11 +65687,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChallengeRoomPortal1
       objectReference: {fileID: 0}
-    - target: {fileID: 3064410726614019155, guid: 88cd8b663688af643b33c39be3a698c1,
+    - target: {fileID: 3460698394507010834, guid: 88cd8b663688af643b33c39be3a698c1,
         type: 3}
-      propertyPath: oneTimeUse
-      value: 0
+      propertyPath: m_Volume
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3460698394507010834, guid: 88cd8b663688af643b33c39be3a698c1,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d449938eb93466b40a3b544c09df009e, type: 3}
     - target: {fileID: 3461546159406267040, guid: 88cd8b663688af643b33c39be3a698c1,
         type: 3}
       propertyPath: m_LocalPosition.x

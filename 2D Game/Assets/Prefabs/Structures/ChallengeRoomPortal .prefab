@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 2047519635835305128}
   - component: {fileID: 3540330615346480587}
   - component: {fileID: 1562990461970777175}
+  - component: {fileID: 3460698394507010834}
   m_Layer: 14
   m_Name: 'ChallengeRoomPortal '
   m_TagString: BackgroundObject
@@ -268,7 +269,7 @@ MonoBehaviour:
   uiPopUp: {fileID: 0}
   teleportSFX: {fileID: 1562990461970777175}
   pitchVariance: 0.1
-  oneTimeUse: 1
+  oneTimeUse: 0
 --- !u!114 &7655538843738402117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faf9ba99577b9c54bbe20b92c790e493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRoomMusicPlayer: {fileID: 3460698394507010834}
 --- !u!82 &3540330615346480587
 AudioSource:
   m_ObjectHideFlags: 0
@@ -421,6 +423,112 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 124
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 20
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.21635056
+      value: 0.8656006
+      inSlope: 0.09627803
+      outSlope: 0.09627803
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.61437154
+    - serializedVersion: 3
+      time: 0.44563264
+      value: 0.76257557
+      inSlope: -0.9408242
+      outSlope: -0.9408242
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.003540039
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.15104505
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &3460698394507010834
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2603703064669807929}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 3233f6a7061631d45a0382399ba55a7e,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: eb82217e59643f8409b559dfdec64522, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1.13
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 95
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 20
