@@ -93,7 +93,7 @@ namespace CoreClass
         {
             inventoryManager = InventoryManager.Instance;
             spellManager = SpellManager.Instance;
-            stats = Stats.Instance;
+            stats = Stats.instance;
 
             LoadPlayer();
         }

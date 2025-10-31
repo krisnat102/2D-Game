@@ -224,7 +224,7 @@ namespace Spells
         {
             Spell spell = spellManager.SpellsBar[activeSpell];
 
-            if (spell && Stats.Instance.mana.CurrentValue >= spell.cost)
+            if (spell && Stats.instance.mana.CurrentValue >= spell.cost)
             {
                 //Vector2 offset = new Vector2(OffsetX, OffsetY);
                 if (spell.useOffset)
@@ -246,7 +246,7 @@ namespace Spells
                     //new ObjectPool(spellsBar[activeSpell].spellEffect, castingPoint.position, castingPoint.rotation, 5, 10);
                 }
 
-                Stats.Instance.mana.CurrentValue -= spell.cost;
+                Stats.instance.mana.CurrentValue -= spell.cost;
 
                 spellCooldown = true;
                 lastCastSpell = spell;
@@ -269,14 +269,14 @@ namespace Spells
                     abilityCooldownImg.gameObject.SetActive(true);
                     abilityCooldownImg.fillAmount = 1;
                 }*/
-                if (Stats.Instance.stam.CurrentValue >= ability.cost)
+                if (Stats.instance.stam.CurrentValue >= ability.cost)
                 {
                     //Vector2 offset = new Vector2(OffsetX2, OffsetY2);
 
                     Instantiate(ability.spellEffect, castingPoint.position, castingPoint.rotation);
 
-                    Stats.Instance.stam.CurrentValue -= ability.cost;
-                    Stats.Instance.stam.StopRegen(playerData.stamRecoveryTime);
+                    Stats.instance.stam.CurrentValue -= ability.cost;
+                    Stats.instance.stam.StopRegen(playerData.stamRecoveryTime);
 
                     AbilityCooldownTracker = true;
                     lastCastAbility = ability;
@@ -302,8 +302,8 @@ namespace Spells
             abilityCooldownImg.gameObject.SetActive(false);
         }
         
-        public bool IsSpellCastable() => spellManager.SpellsBar.Count > activeSpell & playerInputHandler.SpellInput && Stats.Instance.mana.CurrentValue >= spellManager.SpellsBar[activeSpell].cost && spellCooldown == false;
-        public bool IsAbilityCastable() => spellManager.AbilitiesBar.Count > activeAbility & playerInputHandler.AbilityInput && Stats.Instance.stam.CurrentValue >= spellManager.AbilitiesBar[activeAbility].cost && AbilityCooldownTracker == false;
+        public bool IsSpellCastable() => spellManager.SpellsBar.Count > activeSpell & playerInputHandler.SpellInput && Stats.instance.mana.CurrentValue >= spellManager.SpellsBar[activeSpell].cost && spellCooldown == false;
+        public bool IsAbilityCastable() => spellManager.AbilitiesBar.Count > activeAbility & playerInputHandler.AbilityInput && Stats.instance.stam.CurrentValue >= spellManager.AbilitiesBar[activeAbility].cost && AbilityCooldownTracker == false;
         #endregion
 
         #region UI Methods

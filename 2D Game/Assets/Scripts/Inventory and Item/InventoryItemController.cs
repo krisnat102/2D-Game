@@ -142,11 +142,11 @@ namespace Inventory
                     switch (item.consumableType)
                     {
                         case Item.ConsumableType.Heal:
-                            if (Stats.Instance.health.CurrentValue != Stats.Instance.health.MaxValue)
+                            if (Stats.instance.health.CurrentValue != Stats.instance.health.MaxValue)
                             {
                                 DecreaseItem(item);
 
-                                Stats.Instance.health.Increase(item.value);
+                                Stats.instance.health.Increase(item.value);
 
                                 switch (item.consumableSoundEffect)
                                 {
@@ -160,11 +160,11 @@ namespace Inventory
                             }
                             break;
                         case Item.ConsumableType.ManaHeal:
-                            if (Stats.Instance.mana.CurrentValue != Stats.Instance.mana.MaxValue)
+                            if (Stats.instance.mana.CurrentValue != Stats.instance.mana.MaxValue)
                             {
                                 DecreaseItem(item);
 
-                                Stats.Instance.mana.Increase(item.value);
+                                Stats.instance.mana.Increase(item.value);
 
                                 switch (item.consumableSoundEffect)
                                 {

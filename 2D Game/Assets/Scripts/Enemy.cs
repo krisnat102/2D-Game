@@ -500,6 +500,9 @@ namespace Krisnat
 
                 AudioManager.instance.UnPauseMusic();
                 AudioManager.instance.FadeOutSong(bossMusicPlayer);
+
+                UIManager.instance.SmallNoteUI.SetActive(true);
+                UIManager.instance.SmallNoteUI.GetComponentInChildren<TMP_Text>().text = data.enemyName + " slayn!";
             }
 
             if (Data.itemDrop)

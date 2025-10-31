@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using System.Collections;
+using Bardent.CoreSystem;
 
 namespace Krisnat
 {
@@ -35,6 +36,25 @@ namespace Krisnat
         public void SetVignette(float targetIntensity)
         {
             if(vignette) vignette.intensity.value = targetIntensity;
+        }
+
+        public void BlinkVignetteEffect(float targetIntensity, float duration)
+        {
+            StartCoroutine(BlinkVignette(targetIntensity, duration));
+        }
+
+        private IEnumerator BlinkVignette(float targetIntensity, float duration)
+        {
+            if (Stats.instance.LowHP)
+            {
+                yield return StartCoroutine(IncreaseVignette(targetIntensity * 2, duration / 2));
+                yield return StartCoroutine(IncreaseVignette(0.5f, duration / 2));
+            }
+            else
+            {
+                yield return StartCoroutine(IncreaseVignette(targetIntensity, duration / 2));
+                yield return StartCoroutine(IncreaseVignette(0, duration / 2));
+            }
         }
 
         private IEnumerator IncreaseVignette(float targetIntensity, float duration)

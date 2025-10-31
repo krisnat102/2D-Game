@@ -60,9 +60,9 @@ public class Grappler : MonoBehaviour
         // Shot rope on mouse position
         if (hitInfo)
         {
-            if (Input.GetButton("Ability") && checker && hitInfo.collider.gameObject.tag == "Ground" && Stats.Instance.stam.CurrentValue >= grapplingHook.cost && abilities.AbilityCooldownTracker == false)
+            if (Input.GetButton("Ability") && checker && hitInfo.collider.gameObject.tag == "Ground" && Stats.instance.stam.CurrentValue >= grapplingHook.cost && abilities.AbilityCooldownTracker == false)
             {
-                Stats.Instance.stam.Decrease(grapplingHook.cost);
+                Stats.instance.stam.Decrease(grapplingHook.cost);
 
                 rope = gameObject.AddComponent<DistanceJoint2D>();
                 lineRenderer.enabled = true;

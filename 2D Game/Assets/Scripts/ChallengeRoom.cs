@@ -1,4 +1,5 @@
 using Bardent.CoreSystem;
+using TMPro;
 using UnityEngine;
 
 namespace Krisnat
@@ -38,6 +39,9 @@ namespace Krisnat
             {
                 pStats.health.CurrentValue = pStats.health.MaxValue;
                 pStats.mana.CurrentValue = pStats.mana.MaxValue;
+
+                UIManager.instance.SmallNoteUI.SetActive(true);
+                UIManager.instance.SmallNoteUI.GetComponentInChildren<TMP_Text>().text = "Challenge completed!";
             }
             else
             {

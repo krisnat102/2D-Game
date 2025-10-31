@@ -6713,7 +6713,7 @@ GameObject:
   - component: {fileID: 1721346987970958020}
   - component: {fileID: 6053503628867589825}
   m_Layer: 5
-  m_Name: LockedPopUp
+  m_Name: SmallPopUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6789,15 +6789,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f3b9dbedd198143aa0ac9e1796d6b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationLength: 3.5
+  animationLength: 2.5
   destroy: 0
   adaptSize: 1
   adaptDirection: 1
   objectToSpawnBeforeDeath: {fileID: 0}
   fadeTime: 1
-  animRandomSpeed: {fileID: 0}
-  upperAnimLimit: 0
-  lowerAnimLimit: 0
   ui: 1
   uiCanvasGroup: 0
 --- !u!1 &3068856546150382852

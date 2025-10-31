@@ -1,3 +1,4 @@
+using Krisnat;
 using UnityEngine;
 // ReSharper disable Unity.PerformanceCriticalCodeInvocation
 
@@ -23,7 +24,8 @@ namespace Bardent.CoreSystem
                 : stats.CalculateMagicalDamageReduction(rawAmount));
 
             if (stats.health.CurrentValue > 0) damageAudio?.Play();
-            Krisnat.CameraShake.instance.ShakeCamera(0.2f, rawAmount / 5);
+            CameraShake.instance.ShakeCamera(0.2f, rawAmount / 5);
+            VignetteController.instance.BlinkVignetteEffect(0.3f, 0.5f);
             particleManager.StartParticlesWithRandomRotation(damageParticles);
         }
 

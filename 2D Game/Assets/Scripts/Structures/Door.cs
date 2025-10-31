@@ -14,8 +14,9 @@ namespace Krisnat
         [Header("Variable References")]
         [SerializeField] private AudioSource openAudio;
         [SerializeField] private AudioSource lockedAudio;
-        [SerializeField] private GameObject uiPopUp;
 
+        private GameObject uiPopUp;
+        private TMP_Text uiPopUpText;
         private new BoxCollider2D collider;
         private Animator animator;
         private bool cooldown = false;
@@ -25,6 +26,8 @@ namespace Krisnat
         {
             animator = GetComponent<Animator>();
             collider = GetComponentInChildren<BoxCollider2D>();
+            uiPopUp = UIManager.instance.SmallNoteUI;
+            uiPopUpText = uiPopUp.GetComponentInChildren<TMP_Text>();
 
             if (openOnStart)
             {
@@ -49,17 +52,17 @@ namespace Krisnat
                     {
                         if (!InventoryManager.Instance.Items.Contains(key))
                         {
-                            uiPopUp.GetComponentInChildren<TMP_Text>().text = key.itemName + " Needed";
+                            uiPopUpText.text = key.itemName + " Needed";
                             lockedAudio.Play();
                             return;
                         }
 
                         //InventoryManager.Instance.Remove(key);
-                        uiPopUp.GetComponentInChildren<TMP_Text>().text = key.itemName + " Used";
+                        uiPopUpText.text = key.itemName + " Used";
                     }
                     else
                     {
-                        uiPopUp.GetComponentInChildren<TMP_Text>().text = "Locked";
+                        uiPopUpText.text = "Locked";
                         lockedAudio.Play();
                         return;
                     }

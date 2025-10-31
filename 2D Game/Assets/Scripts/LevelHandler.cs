@@ -38,7 +38,7 @@ namespace Krisnat
         {
             try
             {
-                stats = Stats.Instance;
+                stats = Stats.instance;
                 player = stats?.GetComponentInParent<Player>();
 
                 playerData = player?.PlayerData;
@@ -100,7 +100,7 @@ namespace Krisnat
             playerData.LevelUp();
             LevelUpCost = CalculateLevelUpCost(playerData.PlayerLevel);
             InventoryManager.Instance.SetCoins(InventoryManager.Instance.Coins - LevelUpCost, false);
-            Stats.Instance.UpdateStatBars();
+            Stats.instance.UpdateStatBars();
             UIManager.instance.UpdateLevelUpUI();
         }
 

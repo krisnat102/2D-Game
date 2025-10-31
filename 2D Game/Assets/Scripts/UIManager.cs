@@ -34,6 +34,7 @@ namespace Krisnat
         [SerializeField] private float moveDistance;
 
         [Header("Messages")]
+        [SerializeField] private GameObject smallNoteUI;
         [SerializeField] private GameObject noteUI;
         [SerializeField] private TMP_Text noteText;
         [SerializeField] private float noteScale;
@@ -50,6 +51,7 @@ namespace Krisnat
         public GameObject Canvas { get => canvas; private set => canvas = value; }
         public float MoveDuration { get => moveDuration; private set => moveDuration = value; }
         public float MoveDistance { get => moveDistance; private set => moveDistance = value; }
+        public GameObject SmallNoteUI { get => smallNoteUI; private set => smallNoteUI = value; }
         public GameObject NoteUI { get => noteUI; private set => noteUI = value; }
         public TMP_Text NoteText { get => noteText; private set => noteText = value; }
         public float NoteScale { get => noteScale; private set => noteScale = value; }
@@ -76,9 +78,9 @@ namespace Krisnat
             if (levelTextLevelUpInterface) levelTextLevelUpInterface.text = "Level - " + playerData?.PlayerLevel.ToString();
 
             levelText.text = playerData?.PlayerLevel.ToString();
-            hpText.text = Stats.Instance.health.MaxValue.ToString();
-            manaText.text = Stats.Instance.mana.MaxValue.ToString();
-            stamText.text = Stats.Instance.stam.MaxValue.ToString();
+            hpText.text = Stats.instance.health.MaxValue.ToString();
+            manaText.text = Stats.instance.mana.MaxValue.ToString();
+            stamText.text = Stats.instance.stam.MaxValue.ToString();
             armorText.text = InventoryManager.Instance.TotalArmor.ToString();
             magicResText.text = InventoryManager.Instance.TotalMagicRes.ToString();
             weightText.text = InventoryManager.Instance.TotalWeight.ToString() + "/50";
@@ -109,9 +111,9 @@ namespace Krisnat
         #region Update UI Methods
         public void UpdateLevelUpUI()
         {
-            hpLevelUpText.text = "HP - " + Stats.Instance.health.MaxValue;
-            manaLevelUpText.text = "Mana - " + Stats.Instance.mana.MaxValue;
-            stamLevelUpText.text = "Stam - " + Stats.Instance.stam.MaxValue;
+            hpLevelUpText.text = "HP - " + Stats.instance.health.MaxValue;
+            manaLevelUpText.text = "Mana - " + Stats.instance.mana.MaxValue;
+            stamLevelUpText.text = "Stam - " + Stats.instance.stam.MaxValue;
             strLevelUpText.text = "STR - " + levelHandler.StrengthCounter;
             dexLevelUpText.text = "DEX - " + levelHandler.DexterityCounter;
             intLevelUpText.text = "INT - " + levelHandler.IntelligenceCounter;

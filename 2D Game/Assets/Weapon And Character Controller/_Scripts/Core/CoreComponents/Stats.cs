@@ -9,12 +9,14 @@ namespace Bardent.CoreSystem
 {
     public class Stats : CoreComponent
     {
-        public static Stats Instance;
+        public static Stats instance;
 
         [field: SerializeField] public Stat health { get; set; }
         [field: SerializeField] public Stat poise { get; private set; }
         [field: SerializeField] public Stat stam { get; private set; }
         [field: SerializeField] public Stat mana { get; set; }
+        public bool LowHP { get => lowHP; private set => lowHP = value; }
+
         List<Stat> stats = new();
 
         [Header("UI")]
@@ -37,7 +39,7 @@ namespace Bardent.CoreSystem
         protected override void Awake()
         {
             base.Awake();
-            Instance = this;
+            instance = this;
 
             stats.AddRange(new List<Stat>
             {
@@ -76,16 +78,16 @@ namespace Bardent.CoreSystem
                 stat.Regen();
             }
 
-            if (health.CurrentValue < 20 && !lowHP)
+            if (health.CurrentValue < 20 && !LowHP)
             {
-                lowHP = true;
+                LowHP = true;
                 Invoke("StartHpRegen", 5f);
                 AudioManager.instance.PlayHeartbeatSound(0.8f, 0.8f);
                 Krisnat.VignetteController.instance.ChangeVignette(0.5f, 2);
             }
-            else if(health.CurrentValue >= 20 && lowHP)
+            else if(health.CurrentValue >= 20 && LowHP)
             {
-                lowHP = false;
+                LowHP = false;
                 health.StopRegen();
                 AudioManager.instance.StopHeartbeatSound();
                 Krisnat.VignetteController.instance.ChangeVignette(0, 1);
