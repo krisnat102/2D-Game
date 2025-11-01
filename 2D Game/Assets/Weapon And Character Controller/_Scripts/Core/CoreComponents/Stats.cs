@@ -145,6 +145,13 @@ namespace Bardent.CoreSystem
             stamBar.maxValue = stam.MaxValue;
         }
 
+        public void Replenish()
+        {
+           health.CurrentValue = health.MaxValue;
+           mana.CurrentValue = mana.MaxValue;
+           stam.CurrentValue = stam.MaxValue;
+        }
+
         private void StartHpRegen() => health.StartRegen();
     }
 }

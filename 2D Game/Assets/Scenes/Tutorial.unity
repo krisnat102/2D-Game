@@ -1144,6 +1144,11 @@ PrefabInstance:
       objectReference: {fileID: 282008635}
     - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
         type: 3}
+      propertyPath: smallNoteUI
+      value: 
+      objectReference: {fileID: 1636571392}
+    - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
+        type: 3}
       propertyPath: characterTab
       value: 
       objectReference: {fileID: 1875643398}

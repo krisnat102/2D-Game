@@ -37,9 +37,9 @@ namespace Krisnat
 
         public void OnTriggerStay2D(Collider2D collision)
         {
-            var player = collision.GetComponent<Player>();
+            var pickup = collision.GetComponent<Pickup>();
 
-            if (PlayerInputHandler.Instance.UseInput && !cooldown && !opened && player)
+            if (PlayerInputHandler.Instance.UseInput && !cooldown && !opened && pickup)
             {
                 cooldown = true;
                 Invoke(nameof(StopCooldown), 1.5f);
@@ -71,7 +71,7 @@ namespace Krisnat
                 PlayerInputHandler.Instance.UseUseInput();
                 Open(true);
 
-                if (player.transform.position.x + 0.3f > transform.position.x)
+                if (pickup.transform.parent.position.x + 0.3f > transform.position.x)
                 {
                     transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
                     transform.position += new Vector3(-1.5f, 0);

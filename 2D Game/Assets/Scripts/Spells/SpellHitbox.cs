@@ -28,8 +28,6 @@ namespace Spells
         private Rigidbody2D rb;
         private LevelHandler levelHandler;
         private Abilities abilities;
-        private bool stuckShuriken = false;
-        private float transparency = 1f;
         private float angle;
         private int spellDirection;
         private bool wallCollider = false;
@@ -81,16 +79,6 @@ namespace Spells
             if (shuriken)
             {
                 transform.Rotate(0f, 0f, rotationSpeed, Space.Self);
-                SpriteRenderer sprite = GetComponent<SpriteRenderer>();
-                if (stuckShuriken)
-                {
-                    transparency -= Time.deltaTime * fadeTimer;
-                    sprite.color = new Color(sprite.color.r, sprite.color.b, sprite.color.g, transparency);
-                }
-                if (sprite.color.a <= 0)
-                {
-                    gameObject.SetActive(false);
-                }
             }
         }
          
@@ -148,7 +136,7 @@ namespace Spells
         {
             rb.simulated = false;
             rotationSpeed = 0;
-            Invoke("DestroyObject", stuckTime);
+            FadeOutObject.instance.FadeOutObj(gameObject, fadeTimer, stuckTime, true);
         }
         private void DestroyObject()
         {
@@ -163,12 +151,7 @@ namespace Spells
                 Instantiate(spell.spellDeath, transform.position, Quaternion.identity);
             }
 
-            stuckShuriken = true;
-
-            if (spell.name != "Shuriken")
-            {
-                gameObject.SetActive(false);
-            }
+            gameObject.SetActive(false);
         }
 
         private void NullAngle() => angle = 0;

@@ -17,10 +17,8 @@ namespace Krisnat
         private float speed;
         private int piercing;
         private float gravity;
-        private float transparency = 1f;
         private int chargeTier;
         private int direction;
-        private bool startFade = false;
         private bool hitGround;
         private Vector2 offset;
         private Vector2 lastVelocity;
@@ -28,7 +26,6 @@ namespace Krisnat
         private Core core;
         private Player player;
         private Rigidbody2D rb;
-        private SpriteRenderer sprite;
         private LevelHandler levelHandler;
         #endregion
 
@@ -48,7 +45,6 @@ namespace Krisnat
         {
             rb = GetComponent<Rigidbody2D>();
             player = core?.GetComponentInParent<Player>();
-            sprite = GetComponent<SpriteRenderer>();
             levelHandler = CoreClass.GameManager.instance.gameObject.GetComponent<LevelHandler>();
 
             if(!player) gameObject.SetActive(false);
@@ -71,21 +67,9 @@ namespace Krisnat
                 lastVelocity = rb.velocity;
             }
 
-            if(DistanceTravelled() > range)
+            if (DistanceTravelled() > range)
             {
                 rb.gravityScale = gravity;
-            }
-            
-            if (startFade)
-            {
-                transparency -= Time.deltaTime * fadeTimer;
-
-                if(sprite) sprite.color = new Color(sprite.color.r, sprite.color.b, sprite.color.g, transparency);
-
-                if(transparency <= 0f)
-                {
-                    gameObject.SetActive(false);
-                }
             }
 
             DetectWall();
@@ -139,7 +123,7 @@ namespace Krisnat
 
         private void StartFade()
         {
-            startFade = true;
+            FadeOutObject.instance.FadeOutObj(gameObject, fadeTimer, stuckTime, true);
         }
 
         private void HitWall()
@@ -153,7 +137,7 @@ namespace Krisnat
 
             transform.rotation = Quaternion.Euler(0, 0, angle);
 
-            Invoke("StartFade", stuckTime);
+            StartFade();
         }
         
         private void DamageEnemy(Enemy enemy) {

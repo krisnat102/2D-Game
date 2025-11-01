@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4595693657260092099}
   - component: {fileID: 2924980856585170986}
   - component: {fileID: 899934558910319828}
+  - component: {fileID: 1552606470645809662}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -59,6 +60,7 @@ MonoBehaviour:
   death: {fileID: 0}
   camera: {fileID: 0}
   spawnPoint: {fileID: 0}
+  levelStarted: 0
 --- !u!114 &6684929901192448983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
+  statBar: {fileID: 0}
   characterTab: {fileID: 0}
   levelText: {fileID: 0}
   hpText: {fileID: 0}
@@ -119,6 +122,7 @@ MonoBehaviour:
     type: 3}
   moveDuration: 0.3
   moveDistance: 70
+  smallNoteUI: {fileID: 0}
   noteUI: {fileID: 0}
   noteText: {fileID: 0}
   noteScale: 1
@@ -180,3 +184,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volume: {fileID: 0}
+--- !u!114 &1552606470645809662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6684929901192448982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2262dd3c9cde69e408b188860f792928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

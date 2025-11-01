@@ -105,7 +105,6 @@ GameObject:
   - component: {fileID: 4131898620508957953}
   - component: {fileID: 3460558824427878581}
   - component: {fileID: 7869807657343585643}
-  - component: {fileID: 4894142566497888837}
   m_Layer: 14
   m_Name: Closed Door
   m_TagString: Untagged
@@ -126,7 +125,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1.4908122}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2374325060320207305}
   - {fileID: 8596292988813655073}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -235,8 +233,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.5927124, y: 0.1472907}
-  m_Size: {x: 3.171997, y: 3.1719983}
+  m_Offset: {x: -0.5617676, y: 0.17823553}
+  m_Size: {x: 3.1101074, y: 3.3267212}
   m_Direction: 0
 --- !u!114 &4131898620508957953
 MonoBehaviour:
@@ -448,35 +446,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4894142566497888837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3703769108504303355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 217b3edd82b356248885d77ce56d05bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arrowOnly: 1
-  item: {fileID: 0}
-  forSale: 0
-  chest: 0
-  openTime: 0
-  price: 0
-  offset: 0.2
-  note: 0
-  noteText: 
-  noteUIPreset: {fileID: 0}
-  itemId: 
-  deathAnim: {fileID: 0}
-  animTime: 0
-  pickUpEffect: {fileID: 0}
-  pickUpAudio: {fileID: 0}
-  lowerPitchRange: 0.75
-  higherPitchRange: 1.25
 --- !u!1 &4813060837413875971
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,15 +474,15 @@ RectTransform:
   m_GameObject: {fileID: 4813060837413875971}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -0.005, y: 0.0069999998, z: 0.67077535}
+  m_LocalScale: {x: -0.005, y: 0.0069999998, z: 0.6707754}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7580340618356794164}
-  m_Father: {fileID: 3073495095852578472}
+  m_Father: {fileID: 8596292988813655073}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.55, y: 0.1}
+  m_AnchoredPosition: {x: -0.37200624, y: 0.1}
   m_SizeDelta: {x: 567.5468, y: 455.3354}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1191708315008359069
@@ -590,6 +559,7 @@ GameObject:
   - component: {fileID: 8596292988813655073}
   - component: {fileID: 7992130514015519270}
   - component: {fileID: 4081992392987774526}
+  - component: {fileID: 8145299411680624896}
   m_Layer: 14
   m_Name: Collider
   m_TagString: Door
@@ -609,7 +579,8 @@ Transform:
   m_LocalPosition: {x: -0.178, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2374325060320207305}
   m_Father: {fileID: 3073495095852578472}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &7992130514015519270
@@ -684,3 +655,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &8145299411680624896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8021970913083265698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 217b3edd82b356248885d77ce56d05bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrowOnly: 1
+  item: {fileID: 0}
+  forSale: 0
+  chest: 0
+  openTime: 0
+  price: 0
+  offset: 0.2
+  note: 0
+  noteText: 
+  noteUIPreset: {fileID: 0}
+  itemId: 
+  deathAnim: {fileID: 0}
+  animTime: 0
+  pickUpEffect: {fileID: 0}
+  pickUpAudio: {fileID: 0}
+  lowerPitchRange: 0.75
+  higherPitchRange: 1.25

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using Bardent.CoreSystem;
+using Bardent.Weapons.Components;
 using Inventory;
 using Pathfinding;
 using Spells;
@@ -473,6 +474,8 @@ namespace Krisnat
 
         private void TakeKnockback(float damage)
         {
+            if (Data.knockbackModifier == 0) return;
+
             float knockback = damage * Data.knockbackModifier / Mathf.Sqrt(level);
 
             if (PlayerTrans.position.x < transform.position.x)

@@ -523,6 +523,11 @@ PrefabInstance:
       objectReference: {fileID: 1679148610}
     - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
         type: 3}
+      propertyPath: smallNoteUI
+      value: 
+      objectReference: {fileID: 1006461655}
+    - target: {fileID: 5051135755799443179, guid: 8ca25b3807d5df8439b2cac892605be7,
+        type: 3}
       propertyPath: characterTab
       value: 
       objectReference: {fileID: 1679148620}
@@ -11152,7 +11157,7 @@ MonoBehaviour:
   m_LightType: 4
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 0.8160377, b: 0.9334731, a: 1}
+  m_Color: {r: 1, g: 0.6556604, b: 0.87581193, a: 1}
   m_Intensity: 0.8
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
@@ -11367,7 +11372,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.150002, y: 14.1939}
+  m_AnchoredPosition: {x: 11.150002, y: 14.303901}
   m_SizeDelta: {x: 20.48, y: 15.1977}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &440286711
@@ -11925,7 +11930,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.028301895, g: 0.006808474, b: 0.026152544, a: 1}
+  m_BackGroundColor: {r: 0.105882354, g: 0.039215688, b: 0.105882354, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 1
@@ -25910,7 +25915,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.150002, y: 14.28}
+  m_AnchoredPosition: {x: 11.150002, y: 14.39}
   m_SizeDelta: {x: 20.48, y: 15.37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1731998100
@@ -26288,7 +26293,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.150002, y: 14.28}
+  m_AnchoredPosition: {x: 11.150002, y: 14.39}
   m_SizeDelta: {x: 20.48, y: 15.37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1857125451
@@ -26759,15 +26764,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 782730638952040653, guid: fd2bd2af9cae3824fb6d6e99f54cea79,
+    - target: {fileID: 731432830926874739, guid: fd2bd2af9cae3824fb6d6e99f54cea79,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.149
-      objectReference: {fileID: 0}
-    - target: {fileID: 782730638952040653, guid: fd2bd2af9cae3824fb6d6e99f54cea79,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.27
+      propertyPath: bonfireId
+      value: gsdgsdfggsddgsdgasdf11
       objectReference: {fileID: 0}
     - target: {fileID: 1573465042814976008, guid: fd2bd2af9cae3824fb6d6e99f54cea79,
         type: 3}
@@ -26867,7 +26867,7 @@ PrefabInstance:
     - target: {fileID: 653851477416518736, guid: 35e0d900138fa594b8896f066d87223f,
         type: 3}
       propertyPath: m_Name
-      value: BackgroundCave
+      value: BackgroundCosmos
       objectReference: {fileID: 0}
     - target: {fileID: 653851477416518736, guid: 35e0d900138fa594b8896f066d87223f,
         type: 3}
@@ -27067,7 +27067,7 @@ PrefabInstance:
     - target: {fileID: 7792499069159441236, guid: 35e0d900138fa594b8896f066d87223f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.98
+      value: 8.03
       objectReference: {fileID: 0}
     - target: {fileID: 7792499069159441236, guid: 35e0d900138fa594b8896f066d87223f,
         type: 3}

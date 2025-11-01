@@ -1,3 +1,4 @@
+using Bardent.CoreSystem;
 using Krisnat.Assets.Scripts;
 using System.Linq;
 using UnityEngine;
@@ -11,15 +12,13 @@ namespace Krisnat
         [SerializeField] private string bonfireId;
         [SerializeField] private GameObject fire;
         [SerializeField] private Transform spawnPoint;
+        [SerializeField] private AudioSource ignitingSFX, openSFX;
         private bool triggered;
-        private AudioSource openSFX;
 
         public string BonfireId { get => bonfireId; private set => bonfireId = value; }
 
         private void Start()
         {
-            openSFX = GetComponent<AudioSource>();
-
             if (string.IsNullOrEmpty(BonfireId)) BonfireId = gameObject.name;
 
             PlayerSaveData data = SaveSystem.LoadPlayer();
@@ -32,11 +31,11 @@ namespace Krisnat
 
         public void OnTriggerStay2D(Collider2D collision)
         {
-            var player = collision.GetComponent<Player>();
+            var pickup = collision.GetComponent<Pickup>();
             var levelUpUI = UIManager.instance.LevelUpInterface;
             var scale = levelUpUI.transform.localScale.x;
 
-            if (PlayerInputHandler.Instance.UseInput && player != null)
+            if (PlayerInputHandler.Instance.UseInput && pickup != null)
             {
                 if (triggered)
                 {
@@ -44,8 +43,11 @@ namespace Krisnat
                     {
                         levelUpUI.SetActive(true);
                         levelUpUI.transform.localScale = new Vector3(0.05f, 0.05f, levelUpUI.transform.localScale.z);
+
                         UIManager.instance.OpenCloseUIAnimation(levelUpUI, scale, openingAnimationDuration, true, true, false);
                         UIManager.instance.UpdateLevelUpUI();
+
+                        openSFX.Play();
                     }
                     else
                     {
@@ -54,7 +56,7 @@ namespace Krisnat
                 }
                 else
                 {
-                    openSFX.Play();
+                    ignitingSFX.Play();
                     fire.SetActive(true);
                     triggered = true;
                     CoreClass.GameManager.instance.BonfiresLit.Add(BonfireId);
@@ -63,6 +65,10 @@ namespace Krisnat
                 //Saving the game, position and level
                 CoreClass.GameManager.instance.Checkpoint = spawnPoint.position;
                 MenuManager.instance.CurrentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+
+                Stats.instance.Replenish();
+
+                var player = pickup.GetComponentInParent<Player>();
                 SaveSystem.SavePlayer(player);
 
                 PlayerInputHandler.Instance.UseUseInput();

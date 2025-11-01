@@ -25,9 +25,9 @@ namespace Krisnat
 
         public void OnTriggerStay2D(Collider2D collision)
         {
-            var player = collision.GetComponent<Player>();
+            var pickup = collision.GetComponent<Pickup>();
 
-            if (PlayerInputHandler.Instance.UseInput && player)
+            if (PlayerInputHandler.Instance.UseInput && pickup)
             {
                 PlayerInputHandler.Instance.UseUseInput();
 
