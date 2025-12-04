@@ -1,5 +1,4 @@
 using Krisnat.Assets.Scripts;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -45,6 +44,8 @@ namespace Krisnat
                 }
                 else boss.gameObject.SetActive(true);
             }
+
+            Player.instance.onRest.AddListener(ResetBattle);
         }
 
 
@@ -113,6 +114,15 @@ namespace Krisnat
             if (finalBattle == this && challengeRoom)
             {
                 challengeRoom.ExitRoom(true);
+            }
+        }
+
+        private void ResetBattle()
+        {
+            foreach (var enemy in encounter)
+            {
+                enemy.gameObject.SetActive(true);
+                enemy.ResetEnemy();
             }
         }
     }

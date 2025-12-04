@@ -24,6 +24,8 @@ public class EnemyAttackAI : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (enemy.Dead) return;
+
         var player = collision.GetComponent<Player>();
 
         if (player)
@@ -35,6 +37,8 @@ public class EnemyAttackAI : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (enemy.Dead) return;
+
         var player = collision.GetComponent<Player>();
 
         if (player)
@@ -52,7 +56,7 @@ public class EnemyAttackAI : MonoBehaviour
 
     private void Update()
     {
-        if (cooldown) return;
+        if (cooldown || enemy.Dead) return;
 
         cooldown = true;
         
@@ -60,21 +64,7 @@ public class EnemyAttackAI : MonoBehaviour
         
         if (InRangeOfSight)
         {
-            RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, playerTrans.position - firePoint.position, Mathf.Infinity, ~IgnoreMe); //shoots a ray from the fire point to the player
-            Debug.DrawRay(firePoint.position, playerTrans.position - firePoint.position, Color.cyan);
-
-            if (hitInfo)
-            {
-                Player player = hitInfo.transform.GetComponent<Player>(); //checks if it hit the player
-                if (player)
-                {
-                    InSight = true;
-                    Alerted = true;
-
-                    if (group && !group.Alerted) group.Alert();
-                }
-                else InSight = false;
-            }
+            TrackPlayer();
         }
     }
     private void Start()
@@ -84,10 +74,35 @@ public class EnemyAttackAI : MonoBehaviour
         group = GetComponentInParent<EnemyGroup>();
     }
 
+    private void OnEnable()
+    {
+        cooldown = false;
+    }
+
     private void Flip()
     {
         if (!flip) return;
         enemy.transform.localScale = new Vector3(-1 * enemy.transform.localScale.x, enemy.transform.localScale.y, enemy.transform.localScale.z);
+    }
+
+    private void TrackPlayer()
+    {
+        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, playerTrans.position - firePoint.position, Mathf.Infinity, ~IgnoreMe); //shoots a ray from the fire point to the player
+        Debug.DrawRay(firePoint.position, playerTrans.position - firePoint.position, Color.cyan);
+
+        if (hitInfo)
+        {
+            Player player = hitInfo.transform.GetComponent<Player>(); //checks if it hit the player
+            
+            if (player)
+            {
+                InSight = true;
+                Alerted = true;
+
+                if (group && !group.Alerted) group.Alert();
+            }
+            else InSight = false;
+        }
     }
     
     private IEnumerator CooldownCoroutine(float time)

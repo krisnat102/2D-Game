@@ -203,7 +203,7 @@ MonoBehaviour:
     m_Bits: 512
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 45056
+    m_Bits: 569344
   move: 1
   flip: 0
   doNotRotate: 0
@@ -212,6 +212,12 @@ MonoBehaviour:
   spellHitSummon: 0
   collisionTimeOffset: 0.03
   deathEffect: {fileID: 4775955312874959117}
+  hitBox:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
   rotationSpeed: 0.1
   stuckTime: 0
   fadeTimer: 1

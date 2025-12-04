@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
@@ -45,7 +46,7 @@ public class Player : MonoBehaviour
     private Bardent.Weapons.Weapon primaryWeapon;
     private Bardent.Weapons.Weapon secondaryWeapon;
 
-
+    public UnityEvent onRest;
     #endregion
 
     #region Unity Callback Functions

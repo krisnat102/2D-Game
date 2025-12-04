@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using Bardent.CoreSystem;
-using Bardent.Weapons.Components;
 using Inventory;
 using Pathfinding;
 using Spells;
@@ -75,11 +75,15 @@ namespace Krisnat
         private float previousLocalScaleX;
         private Vector2 offset;
         private Vector2 previousPosition;
+        private Vector2 startingPosition;
+        private Death death;
+        private SpriteRenderer sprite;
         private EnemyAI enemyAI;
         private AIPath aiPath;
         private Rigidbody2D rb;
         private Animator animator;
         private Collider2D[] detected;
+        private List<Collider2D> colliders;
         private Player player;
         private DamageReceiver damageReceiver;
         private Transform canvas;
@@ -369,6 +373,10 @@ namespace Krisnat
             canvas = GetComponentInChildren<Canvas>()?.transform;
             player = Player.instance;
             damageReceiver = player.Core.GetCoreComponent<DamageReceiver>();
+            startingPosition = transform.position;
+            sprite = GetComponent<SpriteRenderer>();
+            colliders = GetComponents<Collider2D>().ToList();
+            if (deathEffect) death = deathEffect.GetComponent<Death>();
             #endregion
 
             if (Data.dummy) return;
@@ -398,17 +406,13 @@ namespace Krisnat
         #region Takers
         public void TakeDamage(float rawDamage, float knockback, bool multipleDamageSources)
         {
+            if (Dead) return;
+
             float damage = Mathf.Round(rawDamage);
 
             if (immune == false)
             {
-                if (!Data.dummy) hp -= damage;
-
-                if (hpBar)
-                {
-                    hpBar.value = hp;
-                    hpBarFill.color = hpBarGradient.Evaluate(hpBar.normalizedValue);
-                }
+                if (!Data.dummy) ChangeHp(hp - damage);
 
                 if (damage > 0)
                 {
@@ -427,7 +431,7 @@ namespace Krisnat
                         {
                             dmgNumber.transform.localScale = new Vector2(Mathf.Abs(dmgNumber.transform.localScale.x), dmgNumber.transform.localScale.y);
                             hpBar?.gameObject.SetActive(false);
-                            canvas.transform.SetParent(gameManager.UIs);
+                            //canvas.transform.SetParent(gameManager.UIs);
                         }
                     }
                     if (Data.bloodEffect && !bloodCooldown)
@@ -474,7 +478,7 @@ namespace Krisnat
 
         private void TakeKnockback(float damage)
         {
-            if (Data.knockbackModifier == 0) return;
+            if (Data.knockbackModifier == 0 || Dead) return;
 
             float knockback = damage * Data.knockbackModifier / Mathf.Sqrt(level);
 
@@ -495,6 +499,7 @@ namespace Krisnat
         private void Die()
         {
             if (Dead) return;
+
             if (Data.boss)
             {
                 gameManager.DeactivateObject(4, hpBar.gameObject);
@@ -524,21 +529,22 @@ namespace Krisnat
             if (Data.maxCoinsDropped > 0)
             {
                 var coins = GetComponentInChildren<CoinPickup>()?.gameObject;
-                if (coins) coins.transform.parent = null;
+                //if (coins) coins.transform.parent = null;
                 coins?.GetComponent<ParticleSystem>().Emit(coinsDropped);
             }
 
             if (deathEffect)
             {
                 deathEffect.SetActive(true);
-                deathEffect.transform.parent = null;
-                if (deathEffect.GetComponent<Death>().AdaptSize) deathEffect.transform.localScale = transform.localScale;
-                if (deathEffect.GetComponent<Death>().AdaptDirection) deathEffect.transform.localScale = new Vector2(deathEffect.transform.localScale.y * FacingDirection, deathEffect.transform.localScale.y);
+                deathEffect.transform.position = transform.position;
+                if (death.AdaptSize) deathEffect.transform.localScale = transform.localScale;
+                if (death.AdaptDirection) deathEffect.transform.localScale = new Vector2(deathEffect.transform.localScale.y * FacingDirection, deathEffect.transform.localScale.y);
             }
 
             Dead = true;
 
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
+            TurnOffAfterDeath();
         }
 
         // ReSharper disable Unity.PerformanceAnalysis
@@ -791,6 +797,59 @@ namespace Krisnat
             rooted = true;
             animator.SetBool(Idle, false);
             if (ContainsParam(animator, "sleep")) animator.SetBool(Sleep, true);
+        }
+
+        private void ChangeHp(float value)
+        {
+            hp = value;
+
+            if (hpBar)
+            {
+                hpBar.value = hp;
+                hpBarFill.color = hpBarGradient.Evaluate(hpBar.normalizedValue);
+            }
+        }
+
+        private void ResetHealth() => ChangeHp(Data.maxHp);
+
+        private void TurnOffAfterDeath()
+        {
+            sprite.enabled = false;
+            enemyAI.enabled = false;
+            this.enabled = false;
+            detectAIRange.enabled = false;
+            attackAIRange.enabled = false;
+
+            foreach (var col in colliders)
+            {
+                col.enabled = false;
+            }
+        }
+
+        public void ResetEnemy()
+        {
+            ResetHealth();
+
+            Dead = false;
+            if (death) death.ResetDeath();
+
+            transform.position = startingPosition;
+
+            DetectAIRange.Alerted = false;
+            AttackAIRange.Alerted = false;
+
+            if (sprite) sprite.enabled = true;
+            if (enemyAI) enemyAI.enabled = true;
+            this.enabled = true;
+            detectAIRange.enabled = true;
+            attackAIRange.enabled = true;
+
+            if (colliders.Count == 0) return;
+
+            foreach (var col in colliders)
+            {
+                col.enabled = true;
+            }
         }
         #endregion
 

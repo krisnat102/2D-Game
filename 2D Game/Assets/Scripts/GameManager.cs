@@ -36,7 +36,7 @@ namespace CoreClass
         private SpellManager spellManager;
         private Stats stats;
         private bool gamePaused = false;
-        public bool levelStarted = false;
+        private bool levelStarted = false;
         #endregion
 
         #region Properties
@@ -60,6 +60,7 @@ namespace CoreClass
         public Vector3 Checkpoint { get; set; }
         public bool Attacking1 { get; set; }
         public bool SpellCasting { get; set; }
+        public bool LevelStarted { get => levelStarted; set => levelStarted = value; }
         #endregion
 
         #region Unity Methods
@@ -185,7 +186,7 @@ namespace CoreClass
             inventoryManager.Add(loadItems);
             spellManager.Add(loadSpells);
             MenuManager.instance.CurrentLevel = data.currentLevel;
-            levelStarted = data.levelStarted;
+            LevelStarted = data.levelStarted;
 
             foreach (int id in inventoryManager.EquippedItemsIds())
             {

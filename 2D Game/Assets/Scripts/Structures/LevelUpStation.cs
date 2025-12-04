@@ -14,7 +14,6 @@ namespace Krisnat
         [SerializeField] private Transform spawnPoint;
         [SerializeField] private AudioSource ignitingSFX, openSFX;
         private bool triggered;
-
         public string BonfireId { get => bonfireId; private set => bonfireId = value; }
 
         private void Start()
@@ -32,58 +31,76 @@ namespace Krisnat
         public void OnTriggerStay2D(Collider2D collision)
         {
             var pickup = collision.GetComponent<Pickup>();
-            var levelUpUI = UIManager.instance.LevelUpInterface;
-            var scale = levelUpUI.transform.localScale.x;
 
             if (PlayerInputHandler.Instance.UseInput && pickup != null)
             {
+                PlayerInputHandler.Instance.UseUseInput();
+
                 if (triggered)
                 {
-                    if (!UIManager.instance.LevelUpInterface.activeInHierarchy)
-                    {
-                        levelUpUI.SetActive(true);
-                        levelUpUI.transform.localScale = new Vector3(0.05f, 0.05f, levelUpUI.transform.localScale.z);
-
-                        UIManager.instance.OpenCloseUIAnimation(levelUpUI, scale, openingAnimationDuration, true, true, false);
-                        UIManager.instance.UpdateLevelUpUI();
-
-                        openSFX.Play();
-                    }
-                    else
-                    {
-                        UIManager.instance.OpenCloseUIAnimation(levelUpUI, 0.05f, closingAnimationDuration, false, true, false);
-                    }
+                    ActivateUI();
                 }
                 else
                 {
-                    ignitingSFX.Play();
-                    fire.SetActive(true);
-                    triggered = true;
-                    CoreClass.GameManager.instance.BonfiresLit.Add(BonfireId);
+                    IgniteBonfire();
                 }
 
-                //Saving the game, position and level
-                CoreClass.GameManager.instance.Checkpoint = spawnPoint.position;
-                MenuManager.instance.CurrentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+                Save(Player.instance);
 
-                Stats.instance.Replenish();
-
-                var player = pickup.GetComponentInParent<Player>();
-                SaveSystem.SavePlayer(player);
-
-                PlayerInputHandler.Instance.UseUseInput();
+                Player.instance.onRest.Invoke();
             }
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            var player = collision.GetComponent<Player>();
+            var pickup = collision.GetComponent<Pickup>();
             var levelUpUI = UIManager.instance.LevelUpInterface;
 
-            if (player && levelUpUI && levelUpUI.activeInHierarchy)
+            if (pickup && levelUpUI && levelUpUI.activeInHierarchy)
             {
                 UIManager.instance.OpenCloseUIAnimation(levelUpUI, 0.05f, closingAnimationDuration, false, true, false);
             }
+        }
+
+        private void ActivateUI()
+        {
+            var levelUpUI = UIManager.instance.LevelUpInterface;
+            var scale = levelUpUI.transform.localScale.x;
+
+            if (!levelUpUI.activeInHierarchy)
+            {
+                levelUpUI.SetActive(true);
+                levelUpUI.transform.localScale = new Vector3(0.05f, 0.05f, levelUpUI.transform.localScale.z);
+
+                UIManager.instance.OpenCloseUIAnimation(levelUpUI, scale, openingAnimationDuration, true, true, false);
+                UIManager.instance.UpdateLevelUpUI();
+
+                openSFX.Play();
+            }
+            else
+            {
+                UIManager.instance.OpenCloseUIAnimation(levelUpUI, 0.05f, closingAnimationDuration, false, true, false);
+            }
+        }
+
+        private void IgniteBonfire()
+        {
+            ignitingSFX.Play();
+            fire.SetActive(true);
+            triggered = true;
+            CoreClass.GameManager.instance.BonfiresLit.Add(BonfireId);
+        }
+
+        private void Save(Player player)
+        {
+            CoreClass.GameManager.instance.Checkpoint = spawnPoint.position;
+            MenuManager.instance.CurrentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+
+            Stats.instance.Replenish();
+
+            SaveSystem.SavePlayer(player);
+
+            PlayerInputHandler.Instance.UseUseInput();
         }
     }
 }

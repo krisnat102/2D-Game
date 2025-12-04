@@ -13,6 +13,7 @@ public class Death : MonoBehaviour
     [SerializeField] private float animationLength;
     [Header("Behaviour")]
     [SerializeField] private bool destroy = true;
+    [SerializeField] private bool dontDisable = false;
     [SerializeField] private bool adaptSize = true;
     [SerializeField] private bool adaptDirection = true;
     [SerializeField] private GameObject objectToSpawnBeforeDeath;
@@ -46,7 +47,7 @@ public class Death : MonoBehaviour
         childAudio = GetComponentsInChildren<AudioSource>();
         lights = GetComponentsInChildren<Light2D>().ToList();
 
-        if (childAudio.Length != 0)
+        if (!dontDisable && childAudio.Length != 0)
         {
             childAudio[0].transform.parent = CoreClass.GameManager.instance.Audios;
         }
@@ -124,8 +125,16 @@ public class Death : MonoBehaviour
             if (text) text.color = new Color(text.color.r, text.color.b, text.color.g, 1);
             startFade = false;
             transparency = 0;
-            gameObject.SetActive(false);
+            if (!dontDisable) gameObject.SetActive(false);
+            else sprite.enabled = false;
         }
+    }
+
+    public void ResetDeath()
+    {
+        transparency = 1;
+        if (sprite) sprite.enabled = true;
+        gameObject.SetActive(false);
     }
 
     private IEnumerator FadeLight(Light2D light ,float targetIntensity, float duration)
