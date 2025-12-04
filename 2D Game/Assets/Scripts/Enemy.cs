@@ -9,6 +9,7 @@ using Pathfinding;
 using Spells;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 namespace Krisnat
@@ -49,6 +50,7 @@ namespace Krisnat
         [SerializeField] private GameObject bossSpecialProjectile;
         [SerializeField] private GameObject sleepingObj;
         [SerializeField] private BoxCollider2D groundCollider;
+        [SerializeField] private Light2D[] enemyLights;
         #endregion
 
         #region Other Variables
@@ -136,7 +138,7 @@ namespace Krisnat
         #region Unity Methods
         private void Update()
         {
-            if (Dead) gameObject.SetActive(false);
+            //if (Dead) gameObject.SetActive(false);
 
             if (Data.dummy) return;
 
@@ -356,6 +358,7 @@ namespace Krisnat
         private void Start()
         {
             #region Variable Getting and Finding
+            colliders = new();
             enemyAI = GetComponentInChildren<EnemyAI>();
             aiPath = GetComponentInChildren<AIPath>();
             rb = GetComponent<Rigidbody2D>();
@@ -672,6 +675,8 @@ namespace Krisnat
         #region Spawners
         private void AttackSpawn(bool bossMelee)
         {
+            if (Dead) return;
+
             if (arrow && Data.ranged && FirePoint)
             {
                 GameObject attackProjectile = Instantiate(arrow, FirePoint);
@@ -814,16 +819,26 @@ namespace Krisnat
 
         private void TurnOffAfterDeath()
         {
-            sprite.enabled = false;
-            enemyAI.enabled = false;
+            if (sprite) sprite.enabled = false;
+            if (enemyAI) enemyAI.enabled = false;
+            if (rb) rb.simulated = false;
             this.enabled = false;
             detectAIRange.enabled = false;
             attackAIRange.enabled = false;
 
-            foreach (var col in colliders)
+            foreach (var light in enemyLights)
             {
-                col.enabled = false;
+                light.enabled = false;
             }
+
+            try
+            {
+                foreach (var col in colliders)
+                {
+                    col.enabled = false;
+                }
+            }
+            catch (Exception e) { throw e; }
         }
 
         public void ResetEnemy()
@@ -840,16 +855,24 @@ namespace Krisnat
 
             if (sprite) sprite.enabled = true;
             if (enemyAI) enemyAI.enabled = true;
+            if (rb) rb.simulated = true;
             this.enabled = true;
             detectAIRange.enabled = true;
             attackAIRange.enabled = true;
 
-            if (colliders.Count == 0) return;
-
-            foreach (var col in colliders)
+            foreach (var light in enemyLights)
             {
-                col.enabled = true;
+                light.enabled = true;
             }
+
+            try
+            {
+                foreach (var col in colliders)
+                {
+                    col.enabled = true;
+                }
+            }
+            catch (Exception) { }
         }
         #endregion
 
