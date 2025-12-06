@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1114835808212776212}
   - component: {fileID: 8286695302145092115}
   - component: {fileID: 3325152990326618482}
+  - component: {fileID: 8483616906944904894}
   m_Layer: 14
   m_Name: MessageHolder
   m_TagString: Item
@@ -170,6 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 217b3edd82b356248885d77ce56d05bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrowOnly: 0
   item: {fileID: 0}
   forSale: 0
   chest: 0
@@ -180,12 +182,13 @@ MonoBehaviour:
   noteText: Slay the great beast awaiting at the end of each realm to increase thy
     power
   noteUIPreset: {fileID: 0}
-  portal: 0
   itemId: 
   deathAnim: {fileID: 0}
   animTime: 0
   pickUpEffect: {fileID: 0}
   pickUpAudio: {fileID: 3325152990326618482}
+  lowerPitchRange: 0.75
+  higherPitchRange: 1.25
 --- !u!114 &8286695302145092115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +298,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8483616906944904894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124664724510274635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd9930aaa33b7ab458ce3dd1d27f287c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amp: 0.1
+  frequency: 2
 --- !u!1 &782800504700682683
 GameObject:
   m_ObjectHideFlags: 0

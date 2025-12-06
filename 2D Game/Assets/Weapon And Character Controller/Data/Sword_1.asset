@@ -172,13 +172,46 @@ MonoBehaviour:
         attackData:
         - name: Attack 1
           <Delay>k__BackingField: 0
-          <SFX>k__BackingField: {fileID: 8300000, guid: 3441214318a32754cb22f75059a0374b,
-            type: 3}
+          <LowPitchRange>k__BackingField: 0.8
+          <HighPitchRange>k__BackingField: 0.9
+          <SFX>k__BackingField:
+          - {fileID: 8300000, guid: c0c17d01ceb98a6478d605c20685fc85, type: 3}
+          - {fileID: 8300000, guid: ba9b786f22bb7c74a95228a073b324e9, type: 3}
+          - {fileID: 8300000, guid: cd9c4a604c5bef44aa1e64d5d6721aff, type: 3}
+          - {fileID: 8300000, guid: 8b6a17fb87f8e4b46a87fca44a2a0644, type: 3}
+          - {fileID: 8300000, guid: 4f745c70a6ce66844b478a32bbb14151, type: 3}
+          - {fileID: 8300000, guid: 50ee1921bd457ce4c85708573d367f3f, type: 3}
+          - {fileID: 8300000, guid: 37b5f2f3ebcf3f341a84139b9cc561a4, type: 3}
+          - {fileID: 8300000, guid: 09f85754e1926ab4e92d63b5c3993fc4, type: 3}
+          - {fileID: 8300000, guid: 5c35c5c40275aea4b814bee2f43b04a3, type: 3}
+          - {fileID: 8300000, guid: e2c6b476282e7134abdcaf9d51408573, type: 3}
         - name: Attack 2
           <Delay>k__BackingField: 0
-          <SFX>k__BackingField: {fileID: 8300000, guid: 3441214318a32754cb22f75059a0374b,
-            type: 3}
+          <LowPitchRange>k__BackingField: 0.8
+          <HighPitchRange>k__BackingField: 0.9
+          <SFX>k__BackingField:
+          - {fileID: 8300000, guid: c0c17d01ceb98a6478d605c20685fc85, type: 3}
+          - {fileID: 8300000, guid: ba9b786f22bb7c74a95228a073b324e9, type: 3}
+          - {fileID: 8300000, guid: cd9c4a604c5bef44aa1e64d5d6721aff, type: 3}
+          - {fileID: 8300000, guid: 8b6a17fb87f8e4b46a87fca44a2a0644, type: 3}
+          - {fileID: 8300000, guid: 4f745c70a6ce66844b478a32bbb14151, type: 3}
+          - {fileID: 8300000, guid: 50ee1921bd457ce4c85708573d367f3f, type: 3}
+          - {fileID: 8300000, guid: 37b5f2f3ebcf3f341a84139b9cc561a4, type: 3}
+          - {fileID: 8300000, guid: 09f85754e1926ab4e92d63b5c3993fc4, type: 3}
+          - {fileID: 8300000, guid: 5c35c5c40275aea4b814bee2f43b04a3, type: 3}
+          - {fileID: 8300000, guid: e2c6b476282e7134abdcaf9d51408573, type: 3}
         - name: Attack 3
           <Delay>k__BackingField: 0
-          <SFX>k__BackingField: {fileID: 8300000, guid: 3441214318a32754cb22f75059a0374b,
-            type: 3}
+          <LowPitchRange>k__BackingField: 0.8
+          <HighPitchRange>k__BackingField: 0.9
+          <SFX>k__BackingField:
+          - {fileID: 8300000, guid: c0c17d01ceb98a6478d605c20685fc85, type: 3}
+          - {fileID: 8300000, guid: ba9b786f22bb7c74a95228a073b324e9, type: 3}
+          - {fileID: 8300000, guid: cd9c4a604c5bef44aa1e64d5d6721aff, type: 3}
+          - {fileID: 8300000, guid: 8b6a17fb87f8e4b46a87fca44a2a0644, type: 3}
+          - {fileID: 8300000, guid: 4f745c70a6ce66844b478a32bbb14151, type: 3}
+          - {fileID: 8300000, guid: 50ee1921bd457ce4c85708573d367f3f, type: 3}
+          - {fileID: 8300000, guid: 37b5f2f3ebcf3f341a84139b9cc561a4, type: 3}
+          - {fileID: 8300000, guid: 09f85754e1926ab4e92d63b5c3993fc4, type: 3}
+          - {fileID: 8300000, guid: 5c35c5c40275aea4b814bee2f43b04a3, type: 3}
+          - {fileID: 8300000, guid: e2c6b476282e7134abdcaf9d51408573, type: 3}

@@ -104,7 +104,6 @@ namespace Krisnat
 
             if (doorToUnlock) doorToUnlock.Open(playDoorAudio);
 
-            gameObject.SetActive(false);
             SaveSystem.LoadPlayer();
 
             if (finalBattle != this || !previousBattle)

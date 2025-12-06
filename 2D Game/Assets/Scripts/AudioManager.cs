@@ -227,9 +227,10 @@ public class AudioManager : MonoBehaviour
         heartbeatSound.pitch = Random.Range(lowerPitch, higherPitch);
         heartbeatSound.Play();
     }
-    public void PlayWeaponSound(AudioClip sfxValue, float lowerPitch, float higherPitch)
+    public void PlayWeaponSound(AudioClip[] sfxValues, float lowerPitch, float higherPitch)
     {
-        weaponSound.clip = sfxValue;
+        int randomSfx = Mathf.RoundToInt(Random.Range(0, sfxValues.Length));
+        weaponSound.clip = sfxValues[randomSfx];
         weaponSound.pitch = Random.Range(lowerPitch, higherPitch);
         weaponSound.Play();
     }
